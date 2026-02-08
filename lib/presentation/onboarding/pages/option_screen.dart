@@ -7,6 +7,7 @@ import 'package:msh_checkbox/msh_checkbox.dart';
 
 import '../../../core/resources/font_manager.dart';
 import '../../../core/widget/custom_app_bar.dart';
+import '../widgets/selection_circle.dart';
 
 class OptionScreen extends StatefulWidget {
   const OptionScreen({super.key});
@@ -122,11 +123,11 @@ class OptionCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32.r),
           color: ColorManager.lightGray,
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: ColorManager.gray,
               blurRadius: 10,
-              offset: const Offset(0, 5),
+              offset: Offset(0, 5),
             ),
           ],
         ),
@@ -143,15 +144,7 @@ class OptionCard extends StatelessWidget {
                 ),
               ),
             ),
-            MSHCheckbox(
-              size: 17,
-              value: isSelected,
-              colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
-                checkedColor: Colors.blue,
-              ),
-              style: MSHCheckboxStyle.fillFade,
-              onChanged: (_) => onTap(),
-            ),
+            SelectionCircle(isSelected: isSelected),
           ],
         ),
       ),
