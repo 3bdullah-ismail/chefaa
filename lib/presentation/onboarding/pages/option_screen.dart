@@ -2,23 +2,18 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:msh_checkbox/msh_checkbox.dart';
-
 import '../../../core/resources/font_manager.dart';
 import '../../../core/widget/custom_app_bar.dart';
-import '../widgets/selection_circle.dart';
+import '../widgets/option_card.dart';
 
 class OptionScreen extends StatefulWidget {
   const OptionScreen({super.key});
-
   @override
   State<OptionScreen> createState() => _OptionScreenState();
 }
 
 class _OptionScreenState extends State<OptionScreen> {
   String? selectedRole;
-
   void onSelect(String role) {
     setState(() {
       selectedRole = role;
@@ -32,7 +27,6 @@ class _OptionScreenState extends State<OptionScreen> {
         preferredSize: Size.fromHeight(175),
         child: CustomAppBar(),
       ),
-
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -47,14 +41,12 @@ class _OptionScreenState extends State<OptionScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-
               OptionCard(
                 title: "Doctor",
                 image: "assets/images/doctor.png",
                 isSelected: selectedRole == "Doctor",
                 onTap: () => onSelect("Doctor"),
               ),
-
               const SizedBox(height: 32),
 
               OptionCard(
@@ -92,60 +84,6 @@ class _OptionScreenState extends State<OptionScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class OptionCard extends StatelessWidget {
-  final String title;
-  final String image;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  const OptionCard({
-    super.key,
-    required this.title,
-    required this.image,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 120,
-        width: 270,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32.r),
-          color: ColorManager.lightGray,
-          boxShadow: const [
-            BoxShadow(
-              color: ColorManager.gray,
-              blurRadius: 10,
-              offset: Offset(0, 5),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            Image.asset(image, height: 120),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Text(
-                title,
-                style: getBoldStyle(
-                  color: ColorManager.gray,
-                  fontSize: FontSize.s22,
-                ),
-              ),
-            ),
-            SelectionCircle(isSelected: isSelected),
-          ],
         ),
       ),
     );

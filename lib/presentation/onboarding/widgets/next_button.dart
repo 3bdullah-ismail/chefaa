@@ -1,10 +1,7 @@
-import 'package:chefaa/presentation/onboarding/models/onboarding_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
-import '../../../../core/routes/app_routes_names.dart';
-import '../../../core/services/share_service.dart';
 
 class NextButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -22,7 +19,7 @@ class NextButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: isEnabled
               ? ColorManager.primary
-              : ColorManager.gray.withOpacity(.4),
+              : ColorManager.gray.withValues(alpha: .4),
           shape: BoxShape.circle,
         ),
         child: const Center(
