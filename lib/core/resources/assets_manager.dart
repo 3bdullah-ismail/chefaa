@@ -4,27 +4,13 @@ const String iconsPath = "assets/icons";
 const String svgPath = "assets/svg_images";
 
 abstract class ImageAssets {
-  static const String authLogo = "$imagePath/auth_logo.png";
-  static const String onboarding1 = "$imagePath/Image.png";
-  static const String onboarding2 = "$imagePath/Image3.png";
-  static const String onboarding3 = "$imagePath/Image2.png";
-  static const String logout = "$imagePath/Question.png";
+  static const String onboarding1 = "$imagePath/onboarding_1.png";
+  static const String onboarding2 = "$imagePath/onboarding_2.png";
+  static const String onboarding3 = "$imagePath/onboarding_3.png";
 }
 
-class SvgAssets {
-  static const String homeIcon = "$svgPath/home.svg";
-  static const String searchIcon = "$svgPath/search.svg";
-  static const String favouriteIcon = "$svgPath/love.svg";
-  static const String profileIcon = "$svgPath/person.svg";
-  static const String editIcon = "$svgPath/Icon - Edit.svg";
-}
+class SvgAssets {}
 
-abstract class IconsAssets {
-  static const String icGoogle = "$iconsPath/google_icon.svg";
-  static const String icFacebook = "$iconsPath/facebook_icon.svg";
-  static const String icApple = "$iconsPath/apple_icon.svg";
-  static const String icSearch = "$iconsPath/search_Icon.svg";
-  static const String icLove = "$iconsPath/heart.svg";
-}
+abstract class IconsAssets {}
 
 class JsonAssets {}
