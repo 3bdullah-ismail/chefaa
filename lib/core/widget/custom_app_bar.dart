@@ -9,7 +9,8 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: ColorManager.primary,
-      elevation: 0,
+      shadowColor: ColorManager.black.withValues(alpha: .25),
+      elevation: 15,
       flexibleSpace: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 20, left: 50),
