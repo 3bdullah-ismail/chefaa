@@ -43,6 +43,7 @@ dependencies:
   flutter_screenutil:
   flutter_native_splash:
   msh_checkbox:
+  flutter_svg:
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,5 +1,6 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import '../../../core/resources/font_manager.dart';
@@ -72,7 +73,10 @@ class _OptionScreenState extends State<OptionScreen> {
                     isEnabled: selectedRole != null,
                     onTap: () {
                       if (selectedRole == "Doctor") {
-                        Navigator.pushNamed(context, "/doctor_onboarding");
+                        Navigator.pushReplacementNamed(
+                          context,
+                          AppRoutesNames.docSignUp,
+                        );
                       } else if (selectedRole == "Patient") {
                         Navigator.pushNamed(context, "/patient_onboarding");
                       } else if (selectedRole == "Facility") {
