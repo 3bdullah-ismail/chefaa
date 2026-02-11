@@ -13,7 +13,7 @@ class Routes {
       case AppRoutesNames.option:
         return MaterialPageRoute(builder: (_) => const OptionScreen());
       case AppRoutesNames.docSignUp:
-        return MaterialPageRoute(builder: (_) => DocSignUp());
+        return MaterialPageRoute(builder: (_) => const DocSignUp());
       default:
         return MaterialPageRoute(
           builder: (context) =>

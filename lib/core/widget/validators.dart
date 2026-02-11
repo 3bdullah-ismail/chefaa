@@ -13,6 +13,19 @@ class Validators {
     return null;
   }
 
+  static String? validateUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Username is required';
+    }
+    final usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
+
+    if (!usernameRegex.hasMatch(value)) {
+      return 'Use only letters, numbers, and underscores (3-20 chars)';
+    }
+
+    return null;
+  }
+
   static String? validateEmail(String? email) {
     if (email == null || email.isEmpty) return 'Email cannot be empty.';
     if (!EmailValidator.validate(email)) {

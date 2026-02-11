@@ -18,15 +18,15 @@ class AppTheme {
       contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.r),
-        borderSide: BorderSide(color: ColorManager.input, width: 1.0),
+        borderSide: const BorderSide(color: ColorManager.input, width: 1.0),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.r),
-        borderSide: BorderSide(color: ColorManager.input, width: 1.0),
+        borderSide: const BorderSide(color: ColorManager.input, width: 1.0),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.r),
-        borderSide: BorderSide(color: ColorManager.gray, width: 2.0),
+        borderSide: const BorderSide(color: ColorManager.gray, width: 2.0),
       ),
 
       errorBorder: OutlineInputBorder(
