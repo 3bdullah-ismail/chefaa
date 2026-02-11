@@ -1,6 +1,7 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField({
@@ -11,7 +12,6 @@ class CustomTextField extends StatefulWidget {
     this.isPass = false,
     this.keyboardType,
     this.prefixIcon,
-    this.activeIcon,
   });
 
   final TextEditingController controller;
@@ -19,8 +19,7 @@ class CustomTextField extends StatefulWidget {
   final String text;
   final bool isPass;
   final TextInputType? keyboardType;
-  final Widget? prefixIcon;
-  final Widget? activeIcon;
+  final String? prefixIcon;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -29,7 +28,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   late bool _isObscure;
 
-  final FocusNode _focusNode = FocusNode(); // ✅ FIX
+  final FocusNode _focusNode = FocusNode();
   bool _isFocused = false;
   String? _errorText;
 
@@ -54,18 +53,37 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildPrefixIcon() {
     if (_errorText != null) {
-      return const Padding(
-        padding: EdgeInsets.all(12),
-        child: Icon(Icons.error, color: Colors.red),
+      return Padding(
+        padding: const EdgeInsets.all(12),
+        child: SvgPicture.asset(
+          widget.prefixIcon!,
+          width: 22,
+          height: 22,
+          colorFilter: const ColorFilter.mode(
+            ColorManager.error,
+            BlendMode.srcIn,
+          ),
+        ),
       );
     }
     if (_isFocused) {
       return Padding(
         padding: const EdgeInsets.all(12),
-        child: widget.activeIcon,
+        child: SvgPicture.asset(
+          widget.prefixIcon!,
+          width: 22,
+          height: 22,
+          colorFilter: const ColorFilter.mode(
+            ColorManager.primary,
+            BlendMode.srcIn,
+          ),
+        ),
       );
     }
-    return Padding(padding: const EdgeInsets.all(12), child: widget.prefixIcon);
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: SvgPicture.asset(widget.prefixIcon!, width: 22, height: 22),
+    );
   }
 
   @override
@@ -87,15 +105,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return result;
       },
       onTapOutside: (_) => _focusNode.unfocus(),
-      style: getRegularStyle(color: ColorManager.gray, fontSize: 16),
+      style: getRegularStyle(color: ColorManager.black, fontSize: 16),
       decoration: InputDecoration(
         hintText: widget.text,
-        prefixIcon: AnimatedBuilder(
-          animation: _focusNode,
-          builder: (context, _) {
-            return _buildPrefixIcon();
-          },
-        ),
+        prefixIcon: widget.prefixIcon != null
+            ? AnimatedBuilder(
+                animation: _focusNode,
+                builder: (context, _) {
+                  return _buildPrefixIcon();
+                },
+              )
+            : null,
 
         suffixIcon: widget.isPass
             ? IconButton(
