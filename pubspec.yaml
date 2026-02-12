@@ -44,7 +44,14 @@ dependencies:
   flutter_native_splash:
   msh_checkbox:
   flutter_svg:
+  injectable:
+  get_it:
+  dart_either:
+  dropdown_button2:
+  table_calendar:
 dev_dependencies:
+  injectable_generator:
+  build_runner:
   flutter_test:
     sdk: flutter
 
@@ -70,7 +77,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/svg_images/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

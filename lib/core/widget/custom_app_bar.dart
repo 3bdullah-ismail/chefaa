@@ -13,13 +13,13 @@ class CustomAppBar extends StatelessWidget {
       elevation: 15,
       flexibleSpace: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20, left: 50),
+          padding: const EdgeInsets.only(top: 30, left: 50),
           child: Align(
             alignment: Alignment.centerLeft,
             child: Image.asset(
               "assets/images/chefaa.png",
               height: 70,
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
             ),
           ),
         ),

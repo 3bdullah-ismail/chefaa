@@ -4,17 +4,20 @@ import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import '../../../core/resources/font_manager.dart';
+import '../../../core/resources/values_manager.dart';
 import '../../../core/widget/custom_app_bar.dart';
 import '../widgets/option_card.dart';
 
 class OptionScreen extends StatefulWidget {
   const OptionScreen({super.key});
+
   @override
   State<OptionScreen> createState() => _OptionScreenState();
 }
 
 class _OptionScreenState extends State<OptionScreen> {
   String? selectedRole;
+
   void onSelect(String role) {
     setState(() {
       selectedRole = role;
@@ -65,26 +68,33 @@ class _OptionScreenState extends State<OptionScreen> {
                 isSelected: selectedRole == "Facility",
                 onTap: () => onSelect("Facility"),
               ),
-              const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  NextButton(
-                    isEnabled: selectedRole != null,
-                    onTap: () {
-                      if (selectedRole == "Doctor") {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          AppRoutesNames.docSignUp,
-                        );
-                      } else if (selectedRole == "Patient") {
-                        Navigator.pushNamed(context, "/patient_onboarding");
-                      } else if (selectedRole == "Facility") {
-                        Navigator.pushNamed(context, "/facility_onboarding");
-                      }
-                    },
-                  ),
-                ],
+              const SizedBox(height: 70),
+              Padding(
+                padding: const EdgeInsets.only(right: AppPadding.p32),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    NextButton(
+                      isEnabled: selectedRole != null,
+                      onTap: () {
+                        if (selectedRole == "Doctor") {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutesNames.docSignUp,
+                          );
+                        } else if (selectedRole == "Patient") {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutesNames.patientSignUp,
+                            arguments: "patient",
+                          );
+                        } else if (selectedRole == "Facility") {
+                          Navigator.pushNamed(context, "/facility_onboarding");
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
