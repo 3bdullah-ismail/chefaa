@@ -26,7 +26,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.r),
-        borderSide: BorderSide(color: ColorManager.gray, width: 2.0),
+        borderSide: const BorderSide(color: ColorManager.gray, width: 2.0),
       ),
 
       errorBorder: OutlineInputBorder(

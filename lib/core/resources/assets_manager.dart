@@ -9,9 +9,7 @@ abstract class ImageAssets {
   static const String onboarding3 = "$imagePath/onboarding_3.png";
 }
 
-class SvgAssets {
-
-}
+class SvgAssets {}
 
 abstract class IconsAssets {
   static const String userIconInactive = "$iconsPath/User_icon_Inactive.svg";
@@ -25,6 +23,7 @@ abstract class IconsAssets {
   static const String checkIconInactive = "$iconsPath/Checkbox_icon_Inactive.svg";
   static const String checkIconActive = "$iconsPath/Checkbox_active.svg";
   static const String doneIcon = "$iconsPath/Done.svg";
+  static const String stethoscopeIcon = "$iconsPath/stethoscnnnnope_.svg";
 
 }
 

@@ -13,6 +13,19 @@ class Validators {
     return null;
   }
 
+  static String? validateUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Username is required';
+    }
+    final usernameRegex = RegExp(r'^[a-zA-Z0-9_]{3,20}$');
+
+    if (!usernameRegex.hasMatch(value)) {
+      return 'Use only letters, numbers, and underscores (3-20 chars)';
+    }
+
+    return null;
+  }
+
   static String? validateEmail(String? email) {
     if (email == null || email.isEmpty) return 'Email cannot be empty.';
     if (!EmailValidator.validate(email)) {
@@ -50,4 +63,21 @@ class Validators {
     if (value != password) return 'Passwords do not match';
     return null;
   }
+
+  static String? validateMedicalLicense(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Medical license number is required';
+    }
+    final formatted = value.trim().toUpperCase();
+
+    final regex =
+    RegExp(r'^(ALP|LIC)-\d{2,3}-\d{2,3}$');
+
+    if (!regex.hasMatch(formatted)) {
+      return 'Format must be ALP-234-896 or LIC-67-78';
+    }
+
+    return null;
+  }
+
 }

@@ -1,4 +1,3 @@
-import 'package:chefaa/core/services/storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -9,14 +8,11 @@ class NetworkService {
   NetworkService() {
     intl();
   }
-  void intl() async {
+  void intl() {
     dio = Dio(
       BaseOptions(
         baseUrl: "https://shefaa-backend.vercel.app/api",
         followRedirects: false,
-        headers: {
-          if (StorageService.token != null) "token": StorageService.token,
-        },
       ),
     );
     dio.interceptors.add(

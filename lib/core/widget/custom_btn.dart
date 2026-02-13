@@ -6,10 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../extensions/build_ex.dart';
 
 class CustomBtn extends StatelessWidget {
-  const CustomBtn({super.key, required this.text, required this.onPressed});
+  const CustomBtn({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.isDisabled = false,
+  });
   final String text;
   final Function() onPressed;
-  final bool isDisabled = false;
+  final bool isDisabled;
   @override
   Widget build(BuildContext context) {
     return Center(

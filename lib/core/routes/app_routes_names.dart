@@ -8,5 +8,5 @@ class AppRoutesNames {
   static const String patientSignUpCompleteData = '/patientSignUpCompleteData';
   static const String patientSignUpCompleteChronicDiseases = '/patientSignUpCompleteChronicDiseases';
   static const String patientSignUpCompleteMedicines = '/patientSignUpCompleteMedicines';
-
+  static const String pharmacySignUp = '/pharmacySignUp';
 }
