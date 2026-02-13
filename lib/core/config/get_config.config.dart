@@ -21,6 +21,15 @@ import '../../presentation/doctor/auth/data/repositories/repo_imp.dart'
     as _i1023;
 import '../../presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart'
     as _i236;
+import '../../presentation/Facility/auth/data/data_sources/data_source.dart'
+    as _i377;
+import '../../presentation/Facility/auth/data/data_sources/data_source_imp.dart'
+    as _i120;
+import '../../presentation/Facility/auth/data/repositories/repo.dart' as _i829;
+import '../../presentation/Facility/auth/data/repositories/repo_imp.dart'
+    as _i92;
+import '../../presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart'
+    as _i621;
 import '../../presentation/patient/auth/data/data_sources/patient_data_source.dart'
     as _i1041;
 import '../../presentation/patient/auth/data/data_sources/patient_data_source_imp.dart'
@@ -69,6 +78,9 @@ extension GetItInjectableX on _i174.GetIt {
         networkService: gh<_i463.NetworkService>(),
       ),
     );
+    gh.factory<_i377.FacilityAuthDataSource>(
+      () => _i120.FacilityAuthDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i139.CompleteDataSource>(
       () => _i580.CompleteDataSourceImp(
         networkService: gh<_i463.NetworkService>(),
@@ -80,6 +92,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i551.DoctorAuthRepo>(
       () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()),
     );
+    gh.factory<_i829.FacilityAuthRepo>(
+      () => _i92.FacilityRepoImp(gh<_i377.FacilityAuthDataSource>()),
+    );
     gh.factory<_i530.CompletePatientRepo>(
       () => _i809.CompletePatientRepoImp(
         completeDataSource: gh<_i139.CompleteDataSource>(),
@@ -90,6 +105,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i930.PatientCubit>(
       () => _i930.PatientCubit(gh<_i128.PatientRepo>()),
+    );
+    gh.factory<_i621.FacilityAuthCubit>(
+      () => _i621.FacilityAuthCubit(gh<_i829.FacilityAuthRepo>()),
     );
     gh.factory<_i499.PharmacyRepo>(
       () => _i596.PharmacyRepoImp(

@@ -1,26 +1,27 @@
+import 'package:chefaa/core/manager/file_handler_cubit.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class UploadMembershipDialog extends StatefulWidget {
-  const  UploadMembershipDialog({super.key});
-
+class UploadDialog extends StatefulWidget {
+  const UploadDialog({super.key, this.text, this.fileName});
+  final String? text;
+  final String? fileName;
   @override
-  State< UploadMembershipDialog> createState() => _UploadMembershipDialogState();
+  State<UploadDialog> createState() => _UploadDialogState();
 }
 
-class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
+class _UploadDialogState extends State<UploadDialog> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DoctorAuthCubit, DoctorAuthState>(
+    return BlocBuilder<FileHandlerCubit, FileHandlerState>(
       builder: (context, state) {
-        final file = DoctorAuthCubit.get(context).membershipFile;
+        final file = FileHandlerCubit.get(context).pickedFile;
         return Dialog(
           backgroundColor: ColorManager.white,
           shape: RoundedRectangleBorder(
@@ -39,7 +40,7 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                       SvgPicture.asset("assets/icons/backup.svg"),
                       const SizedBox(width: 8),
                       Text(
-                        'Upload your Membership Card',
+                        widget.text ?? 'Upload your Membership Card',
                         style: getRegularStyle(
                           color: ColorManager.black,
                           fontSize: FontSize.s16,
@@ -87,8 +88,8 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                           const SizedBox(height: 12),
                           InkWell(
                             onTap: () {
-                              final cubit = DoctorAuthCubit.get(context);
-                              cubit.pickFile();
+                              final cubit = FileHandlerCubit.get(context);
+                              cubit.pickSingleFile();
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
@@ -143,7 +144,8 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                               Text(
                                 file != null
                                     ? file.name
-                                    : 'your_Membership_Card.pdf',
+                                    : widget.fileName ??
+                                          'your_Membership_Card.pdf',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                 ),

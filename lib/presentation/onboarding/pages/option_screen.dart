@@ -68,9 +68,9 @@ class _OptionScreenState extends State<OptionScreen> {
                 isSelected: selectedRole == "Facility",
                 onTap: () => onSelect("Facility"),
               ),
-              const SizedBox(height: 70),
+
               Padding(
-                padding: const EdgeInsets.only(right: AppPadding.p32),
+                padding: const EdgeInsets.all(24.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -89,7 +89,10 @@ class _OptionScreenState extends State<OptionScreen> {
                             arguments: "patient",
                           );
                         } else if (selectedRole == "Facility") {
-                          Navigator.pushNamed(context, "/facility_onboarding");
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.facilityOption,
+                          );
                         }
                       },
                     ),

@@ -1,37 +1,42 @@
-import 'package:chefaa/presentation/doctor/auth/data/data_sources/data_source.dart';
-import 'package:chefaa/presentation/doctor/auth/data/repositories/repo.dart';
+import 'package:chefaa/core/models/auth_response.dart';
+import 'package:chefaa/presentation/Facility/auth/data/data_sources/data_source.dart';
+import 'package:chefaa/presentation/Facility/auth/data/repositories/repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../core/error_handling/error_handler.dart';
 import '../../../../../core/services/storage_service.dart';
-import '../../../../../core/models/auth_response.dart';
 
-@Injectable(as: DoctorAuthRepo)
-class DoctorAuthRepoImp extends DoctorAuthRepo {
-  DoctorAuthDataSource doctorAuthDataSource;
-  DoctorAuthRepoImp(this.doctorAuthDataSource);
+@Injectable(as: FacilityAuthRepo)
+class FacilityRepoImp implements FacilityAuthRepo {
+  FacilityAuthDataSource facilityAuthDataSource;
+  FacilityRepoImp(this.facilityAuthDataSource);
   @override
-  Future<AuthResponse> signUp({
+  Future<AuthResponse> signUP({
     required String name,
-    required String email,
     required String username,
+    required String email,
     required String password,
-
+    required String commercialRegisterNumber,
+    required String facilityType,
+    required String medicalDirectorName,
+    required String directorProfessionalId,
     required String phoneNumber,
-    required String specialization,
-    required PlatformFile membership,
+    required PlatformFile medicalLicence,
   }) async {
     try {
-      var response = await doctorAuthDataSource.signUp(
+      var response = await facilityAuthDataSource.signUP(
         name: name,
+        username: username,
         email: email,
         password: password,
-        username: username,
-
+        commercialRegisterNumber: commercialRegisterNumber,
+        facilityType: facilityType,
+        medicalDirectorName: medicalDirectorName,
+        directorProfessionalId: directorProfessionalId,
         phoneNumber: phoneNumber,
-        specialization: specialization,
-        membership: membership,
+        medicalLicence: medicalLicence,
       );
       if (response.statusCode == 201) {
         AuthResponse data = AuthResponse.fromJson(response.data);

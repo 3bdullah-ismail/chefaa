@@ -1,3 +1,4 @@
+import 'package:chefaa/core/manager/file_handler_cubit.dart';
 import 'package:chefaa/core/widget/file_helper.dart';
 import 'package:chefaa/presentation/doctor/auth/data/repositories/repo.dart';
 import 'package:file_picker/file_picker.dart';
@@ -19,26 +20,12 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   static DoctorAuthCubit get(context) => BlocProvider.of(context);
-  PlatformFile? membershipFile;
 
-  Future<void> pickFile() async {
-    try {
-      final file = await FileHelper.pickSingleFile();
-
-      if (file != null) {
-        membershipFile = file;
-        emit(UploadMembershipState(file: file));
-      } else {
-        membershipFile = null;
-        emit(UploadMembershipState(file: null));
-      }
-    } catch (e) {
-      emit(SingUpFailure('Failed to pick file: $e'));
+  Future<void> signUp({required PlatformFile? membershipFile}) async {
+    if (membershipFile == null) {
+      emit(SingUpFailure("Please upload your membership file"));
+      return;
     }
-  }
-
-  Future<void> signUp() async {
-    print("object");
     emit(SingUpLoading());
     try {
       print(username.text);
@@ -49,7 +36,7 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
         password: password.text,
         phoneNumber: phoneNumber.text,
         specialization: specialization.text,
-        membership: membershipFile!,
+        membership: membershipFile,
       );
 
       emit(SingUpSuccess(userName: response.user!.name ?? ""));

@@ -12,13 +12,14 @@ class OptionCard extends StatelessWidget {
   final String image;
   final bool isSelected;
   final VoidCallback onTap;
-
+  final double? width;
   const OptionCard({
     super.key,
     required this.title,
     required this.image,
     required this.isSelected,
     required this.onTap,
+    this.width,
   });
 
   @override
@@ -27,7 +28,7 @@ class OptionCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 120,
-        width: 270,
+        width: width ?? 270,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(32.r),
@@ -42,7 +43,7 @@ class OptionCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image.asset(image, height: 120),
+            Image.asset(image, width: 75, fit: BoxFit.contain),
             const SizedBox(width: 20),
             Expanded(
               child: Text(
