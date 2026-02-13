@@ -11,6 +11,19 @@ abstract class ImageAssets {
 
 class SvgAssets {}
 
-abstract class IconsAssets {}
+abstract class IconsAssets {
+  static const String userIconInactive = "$iconsPath/User_icon_Inactive.svg";
+  static const String phoneIconInactive = "$iconsPath/call.svg";
+  static const String emailIconInactive = "$iconsPath/Email.svg";
+  static const String passwordIconInactive = "$iconsPath/Password.svg";
+  static const String userIconActive = "$iconsPath/User_active.svg";
+  static const String phoneIconActive = "$iconsPath/call_active.svg";
+  static const String emailIconActive = "$iconsPath/Email_active.svg";
+  static const String passwordIconActive = "$iconsPath/Password_active.svg";
+  static const String checkIconInactive = "$iconsPath/Checkbox_icon_Inactive.svg";
+  static const String checkIconActive = "$iconsPath/Checkbox_active.svg";
+  static const String doneIcon = "$iconsPath/Done.svg";
+
+}
 
 class JsonAssets {}

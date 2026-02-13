@@ -74,7 +74,7 @@ class _DocSignUpState extends State<DocSignUp> {
                             Expanded(
                               child: CustomTextField(
                                 validator: Validators.nameValidator,
-                                controller: cubit.name,
+                                controller: cubit.username,
                                 text: "First Name",
                                 prefixIcon:
                                     "assets/icons/User_icon_Inactive.svg",
