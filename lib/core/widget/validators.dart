@@ -63,4 +63,21 @@ class Validators {
     if (value != password) return 'Passwords do not match';
     return null;
   }
+
+  static String? validateMedicalLicense(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Medical license number is required';
+    }
+    final formatted = value.trim().toUpperCase();
+
+    final regex =
+    RegExp(r'^(ALP|LIC)-\d{2,3}-\d{2,3}$');
+
+    if (!regex.hasMatch(formatted)) {
+      return 'Format must be ALP-234-896 or LIC-67-78';
+    }
+
+    return null;
+  }
+
 }

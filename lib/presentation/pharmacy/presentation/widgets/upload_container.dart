@@ -1,26 +1,29 @@
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/widgets/upload_dialog.dart';
+import 'package:chefaa/presentation/pharmacy/presentation/widgets/upload_dialog.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UploadMembershipCard extends StatelessWidget {
-  const UploadMembershipCard({super.key});
+import '../manager/pharmacy_cubit.dart';
+import '../manager/pharmacy_state.dart';
+
+class UploadMedicalLicenseCard extends StatelessWidget {
+  final String text;
+  const UploadMedicalLicenseCard({super.key, required this.text});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DoctorAuthCubit, DoctorAuthState>(
+    return BlocBuilder<PharmacyCubit, PharmacyState>(
       builder: (context, state) {
-        final cubit = DoctorAuthCubit.get(context);
-        final file = cubit.membershipFile;
+        final cubit = PharmacyCubit.get(context);
+        final file = cubit.medicalLicenceFile;
         return InkWell(
           onTap: () {
-            final cubit = context.read<DoctorAuthCubit>();
+            final cubit = context.read<PharmacyCubit>();
             showDialog(
               context: context,
               builder: (context) => BlocProvider.value(
                 value: cubit,
-                child: const  UploadMembershipDialog(),
+                child: const UploadMedicalLicenseDialog(),
               ),
             );
           },
@@ -33,16 +36,16 @@ class UploadMembershipCard extends StatelessWidget {
             ),
             child: file == null
                 ? Container(
-                    height: 50,
+                    height: 45,
                     width: double.infinity,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: const Color(0xffF7F7F7),
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: const Text(
-                      "Upload your Membership Card",
-                      style: TextStyle(
+                    child:  Text(
+                      text,
+                      style: const TextStyle(
                         color: Color(0xff9AA0A6),
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

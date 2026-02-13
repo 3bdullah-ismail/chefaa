@@ -1,26 +1,29 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
+import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class UploadMembershipDialog extends StatefulWidget {
-  const  UploadMembershipDialog({super.key});
+import '../manager/pharmacy_cubit.dart';
+import '../manager/pharmacy_state.dart';
+
+class UploadMedicalLicenseDialog extends StatefulWidget {
+  const UploadMedicalLicenseDialog({super.key});
 
   @override
-  State< UploadMembershipDialog> createState() => _UploadMembershipDialogState();
+  State<UploadMedicalLicenseDialog> createState() => _UploadMedicalLicenseDialogState();
 }
 
-class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
+class _UploadMedicalLicenseDialogState extends State<UploadMedicalLicenseDialog> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DoctorAuthCubit, DoctorAuthState>(
+    return BlocBuilder<PharmacyCubit, PharmacyState>(
       builder: (context, state) {
-        final file = DoctorAuthCubit.get(context).membershipFile;
+        final file = PharmacyCubit.get(context).medicalLicenceFile;
         return Dialog(
           backgroundColor: ColorManager.white,
           shape: RoundedRectangleBorder(
@@ -33,13 +36,18 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.only(
+                    top: AppPadding.p16,
+                    left: AppPadding.p16,
+                    right: AppPadding.p16,
+                    bottom: AppPadding.p4,
+                  ),
                   child: Row(
                     children: [
                       SvgPicture.asset("assets/icons/backup.svg"),
                       const SizedBox(width: 8),
                       Text(
-                        'Upload your Membership Card',
+                        'Upload your Medical License',
                         style: getRegularStyle(
                           color: ColorManager.black,
                           fontSize: FontSize.s16,
@@ -48,7 +56,7 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                     ],
                   ),
                 ),
-                const Divider(color: ColorManager.gray, thickness: 1.2),
+                 Divider(color: ColorManager.gray.withOpacity(0.5), thickness: 1),
                 const SizedBox(height: 16),
 
                 Padding(
@@ -63,7 +71,10 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
 
                     child: Container(
                       width: 250.w,
-                      padding: const EdgeInsets.all(24),
+                      padding: const  EdgeInsets.symmetric(
+                        horizontal:AppPadding.p20,
+                        vertical: AppPadding.p8,
+                      ),
                       child: Column(
                         children: [
                           Image.asset("assets/images/backup.png"),
@@ -87,7 +98,7 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                           const SizedBox(height: 12),
                           InkWell(
                             onTap: () {
-                              final cubit = DoctorAuthCubit.get(context);
+                              final cubit = PharmacyCubit.get(context);
                               cubit.pickFile();
                             },
                             child: Container(
@@ -118,10 +129,13 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                   ),
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 10),
 
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p16,
+                    vertical: AppPadding.p8,
+                  ),
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
@@ -143,7 +157,7 @@ class _UploadMembershipDialogState extends State< UploadMembershipDialog> {
                               Text(
                                 file != null
                                     ? file.name
-                                    : 'your_Membership_Card.pdf',
+                                    : 'your_Medical_License.pdf',
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                 ),
