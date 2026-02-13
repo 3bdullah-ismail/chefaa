@@ -12,6 +12,8 @@ class CustomTextField extends StatefulWidget {
     this.isPass = false,
     this.keyboardType,
     this.prefixIcon,
+    this.completeData = false,
+    this.suffixText = "",
   });
 
   final TextEditingController controller;
@@ -20,6 +22,8 @@ class CustomTextField extends StatefulWidget {
   final bool isPass;
   final TextInputType? keyboardType;
   final String? prefixIcon;
+  final bool completeData;
+  final String? suffixText;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -53,17 +57,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildPrefixIcon() {
     if (_errorText != null) {
-      return Padding(
-        padding: const EdgeInsets.all(12),
-        child: SvgPicture.asset(
-          widget.prefixIcon!,
-          width: 22,
-          height: 22,
-          colorFilter: const ColorFilter.mode(
-            ColorManager.error,
-            BlendMode.srcIn,
-          ),
-        ),
+      return const Padding(
+        padding: EdgeInsets.all(12),
+        child: Icon(Icons.error, color: Colors.red),
       );
     }
     if (_isFocused) {
@@ -105,8 +101,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         return result;
       },
       onTapOutside: (_) => _focusNode.unfocus(),
-      style: getRegularStyle(color: ColorManager.black, fontSize: 16),
+      style: widget.completeData
+          ? getMediumStyle(color: ColorManager.gray, fontSize: 16)
+          : getRegularStyle(color: ColorManager.black, fontSize: 16),
       decoration: InputDecoration(
+        suffixText: widget.suffixText,
+        suffixStyle: getMediumStyle(color: ColorManager.gray, fontSize: 16),
         hintText: widget.text,
         prefixIcon: widget.prefixIcon != null
             ? AnimatedBuilder(

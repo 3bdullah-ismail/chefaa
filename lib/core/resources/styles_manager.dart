@@ -30,7 +30,6 @@ TextStyle getRegularStyle({
   return _getTextStyle(fontSize, FontWeightManager.regular, color);
 }
 
-// medium style
 
 TextStyle getMediumStyle({
   double fontSize = FontSize.s12,

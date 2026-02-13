@@ -12,7 +12,9 @@ import 'package:chefaa/core/widget/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../../../core/manager/file_handler_cubit.dart';
+import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/widget/already_have_account.dart';
 import '../../../../../core/widget/terms_of_service.dart';
 import '../../../../../core/widget/upload_container.dart';
@@ -147,8 +149,12 @@ class _DocSignUpState extends State<DocSignUp> {
                                 setState(() {});
                               },
                               child: isChecked
-                                  ? Image.asset("assets/images/checked.png")
-                                  : Image.asset("assets/images/unchecked.png"),
+                                  ? SvgPicture.asset(
+                                      IconsAssets.checkIconActive,
+                                    )
+                                  : SvgPicture.asset(
+                                      IconsAssets.checkIconInactive,
+                                    ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(child: TermsOfService()),

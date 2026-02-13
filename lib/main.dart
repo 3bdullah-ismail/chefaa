@@ -7,8 +7,9 @@ import 'chefaa.dart';
 import 'core/config/get_config.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
+  runApp(const Chefaa());
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiBlocProvider(
       providers: [BlocProvider(create: (_) => FileHandlerCubit())],

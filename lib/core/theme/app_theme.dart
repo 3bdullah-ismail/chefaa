@@ -22,7 +22,7 @@ class AppTheme {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.r),
-        borderSide: const BorderSide(color: ColorManager.input, width: 1.0),
+        borderSide:const BorderSide(color: ColorManager.input, width: 1.0),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(24.r),
