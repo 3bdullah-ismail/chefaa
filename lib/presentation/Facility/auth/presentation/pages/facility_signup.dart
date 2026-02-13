@@ -1,0 +1,351 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:chefaa/core/extensions/build_ex.dart';
+import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/core/widget/already_have_account.dart';
+import 'package:chefaa/core/widget/custom_btn.dart';
+import 'package:chefaa/core/widget/custom_text_field.dart';
+import 'package:chefaa/core/widget/terms_of_service.dart';
+import 'package:chefaa/core/widget/upload_container.dart';
+import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../core/config/get_config.dart';
+import '../../../../../core/manager/file_handler_cubit.dart';
+import '../../../../../core/widget/custom_app_bar.dart';
+import '../../../../../core/widget/loading_dialog.dart';
+
+class FacilitySignup extends StatefulWidget {
+  const FacilitySignup({super.key});
+
+  @override
+  State<FacilitySignup> createState() => _FacilitySignupState();
+}
+
+class _FacilitySignupState extends State<FacilitySignup> {
+  bool isChecked = false;
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<FacilityAuthCubit>(),
+      child: Scaffold(
+        backgroundColor: ColorManager.input,
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(175),
+          child: CustomAppBar(),
+        ),
+        body: BlocConsumer<FacilityAuthCubit, FacilityAuthState>(
+          listener: (context, state) {
+            if (state is SignUpLoading) {
+              showDialog(
+                context: context,
+                builder: (context) => const LoadingDialog(),
+              );
+            } else if (state is SingUpFailure) {
+              AnimatedSnackBar.rectangle(
+                'Error',
+                state.errorMessage,
+                type: AnimatedSnackBarType.error,
+                brightness: Brightness.dark,
+              ).show(context);
+            } else if (state is SingUpSuccess) {
+              AnimatedSnackBar.rectangle(
+                'Success',
+                "Welcome Dr. ${state.userName}!",
+                type: AnimatedSnackBarType.success,
+                brightness: Brightness.dark,
+              ).show(context);
+            } else {}
+          },
+          builder: (context, state) {
+            var cubit = FacilityAuthCubit.get(context);
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 48),
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(24),
+                          width: context.width * 0.9,
+                          decoration: BoxDecoration(
+                            color: ColorManager.white,
+                            borderRadius: BorderRadius.circular(18.r),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Facility Type",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ColorManager.lightGray,
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(color: ColorManager.input),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    dropdownColor: Colors.white,
+                                    value: cubit.facilityType,
+                                    isExpanded: true,
+
+                                    hint: Text(
+                                      "choose lab or radiology",
+                                      style: TextStyle(
+                                        color: Colors.blueGrey.shade300,
+                                      ),
+                                    ),
+                                    icon: const Icon(Icons.keyboard_arrow_down),
+                                    items: <String>['Lab', 'Radiology center']
+                                        .map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        })
+                                        .toList(),
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        cubit.facilityType = newValue;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                "Facility Name",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                controller: cubit.name,
+                                text: "e.g. Alpa Labs/Scan",
+                              ),
+                              Text(
+                                "user Name",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                controller: cubit.username,
+                                text: "user name",
+                              ),
+                              const SizedBox(height: 22),
+                              Text(
+                                "Phone Number",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                controller: cubit.phoneNumber,
+                                text: "+20  xxxxxxxx",
+                                prefixIcon: "assets/icons/call.svg",
+                              ),
+                              const SizedBox(height: 22),
+                              Text(
+                                "Work Email",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                controller: cubit.email,
+                                text: "contact@facility.com",
+                                prefixIcon: "assets/icons/Email.svg",
+                              ),
+                              const SizedBox(height: 22),
+                              Text(
+                                "Password",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                isPass: true,
+                                prefixIcon: "assets/icons/Password.svg",
+                                controller: cubit.password,
+                                text: "Enter your password",
+                              ),
+                              const SizedBox(height: 22),
+                              Text(
+                                "Confirm Password",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                isPass: true,
+                                prefixIcon: "assets/icons/Password.svg",
+                                controller: cubit.confirmPasswordController,
+                                text: "Re-enter your password",
+                              ),
+                              const SizedBox(height: 22),
+                              Text(
+                                "Commercial License Number",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              CustomTextField(
+                                controller: cubit.commercialRegisterNumber,
+                                text: "e.g. LIC-676-78",
+                              ),
+                              const SizedBox(height: 22),
+                              Text(
+                                "Medical  license Upload",
+                                style: getMediumStyle(
+                                  color: ColorManager.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              const UploadCard(
+                                text: "Upload your licence",
+                                dialogText: "Upload your Medical License",
+                                fileName: "My_ License.pdf",
+                              ),
+                              const SizedBox(height: 22),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Container(
+                        padding: const EdgeInsets.all(24),
+                        width: context.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: ColorManager.white,
+                          borderRadius: BorderRadius.circular(18.r),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(
+                                  "assets/images/Hospitalist.png",
+                                  width: 56,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  "Medical Leadership",
+                                  style: getSemiBoldStyle(
+                                    color: ColorManager.black,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 48),
+                            Text(
+                              "Medical Director Name",
+                              style: getMediumStyle(
+                                color: ColorManager.black,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            CustomTextField(
+                              controller: cubit.medicalDirectorName,
+                              text: "Doctor’s full name",
+                            ),
+                            const SizedBox(height: 48),
+                            Text(
+                              "Director’s Professional ID",
+                              style: getMediumStyle(
+                                color: ColorManager.black,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            CustomTextField(
+                              controller: cubit.directorProfessionalId,
+                              text: "ID number",
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 48),
+                      Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                isChecked = !isChecked;
+                                setState(() {});
+                              },
+                              child: isChecked
+                                  ? Image.asset("assets/images/checked.png")
+                                  : Image.asset("assets/images/unchecked.png"),
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(child: TermsOfService()),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      CustomBtn(
+                        isDisabled:
+                            !isChecked || !_formKey.currentState!.validate(),
+                        text: "Submit for Verification",
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            final file = context
+                                .read<FileHandlerCubit>()
+                                .pickedFile;
+
+                            cubit.signUp(medicalLicence: file);
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 32),
+                      const AlreadyHaveAccount(),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

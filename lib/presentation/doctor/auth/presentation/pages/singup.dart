@@ -8,11 +8,14 @@ import 'package:chefaa/core/widget/custom_text_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/widgets/loading_dialog.dart';
+import 'package:chefaa/core/widget/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../widgets/upload_container.dart';
+import '../../../../../core/manager/file_handler_cubit.dart';
+import '../../../../../core/widget/already_have_account.dart';
+import '../../../../../core/widget/terms_of_service.dart';
+import '../../../../../core/widget/upload_container.dart';
 
 class DocSignUp extends StatefulWidget {
   const DocSignUp({super.key});
@@ -23,7 +26,6 @@ class DocSignUp extends StatefulWidget {
 
 class _DocSignUpState extends State<DocSignUp> {
   bool isChecked = false;
-  bool _isFormValid = false;
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -133,7 +135,7 @@ class _DocSignUpState extends State<DocSignUp> {
                           prefixIcon: "assets/icons/stethoscnnnnope_.svg",
                         ),
                         SizedBox(height: 8.h),
-                        const UploadMembershipCard(),
+                        const UploadCard(),
                         SizedBox(height: 16.h),
 
                         Row(
@@ -149,78 +151,25 @@ class _DocSignUpState extends State<DocSignUp> {
                                   : Image.asset("assets/images/unchecked.png"),
                             ),
                             const SizedBox(width: 12),
-                            Expanded(
-                              child: RichText(
-                                text: TextSpan(
-                                  style: getMediumStyle(
-                                    color: ColorManager.black,
-                                    fontSize: 14,
-                                  ),
-                                  children: [
-                                    const TextSpan(
-                                      text: "I agree to the Docify ",
-                                    ),
-                                    TextSpan(
-                                      text: "Terms of Service",
-                                      style:
-                                          getBoldStyle(
-                                            color: ColorManager.primary,
-                                            fontSize: 14,
-                                          ).copyWith(
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                      // recognizer: TapGestureRecognizer()..onTap = () {},
-                                    ),
-                                    const TextSpan(text: " and "),
-                                    TextSpan(
-                                      text: "Privacy Policy",
-                                      style:
-                                          getBoldStyle(
-                                            color: ColorManager.primary,
-                                            fontSize: 14,
-                                          ).copyWith(
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                      // recognizer: TapGestureRecognizer()..onTap = () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            Expanded(child: TermsOfService()),
                           ],
                         ),
                         SizedBox(height: 16.h),
                         CustomBtn(
                           isDisabled:
-                              !isChecked ||
-                                  !_formKey.currentState!.validate() ??
-                              false,
+                              !isChecked || !_formKey.currentState!.validate(),
                           text: "Submit for Verification",
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              cubit.signUp();
+                              final file = context
+                                  .read<FileHandlerCubit>()
+                                  .pickedFile;
+
+                              cubit.signUp(membershipFile: file);
                             }
                           },
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Do you already have an account?",
-                              style: getMediumStyle(
-                                color: ColorManager.black,
-                                fontSize: 14,
-                              ),
-                            ),
-                            CustomTextBtn(
-                              text: "Login",
-                              onPressed: () {},
-                              fontSize: 14,
-                            ),
-                          ],
-                        ),
+                        AlreadyHaveAccount(),
                       ],
                     ),
                   ),

@@ -1,26 +1,29 @@
+import 'package:chefaa/core/manager/file_handler_cubit.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
-import 'package:chefaa/presentation/doctor/auth/presentation/widgets/upload_dialog.dart';
+import 'package:chefaa/core/widget/upload_dialog.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UploadMembershipCard extends StatelessWidget {
-  const UploadMembershipCard({super.key});
+class UploadCard extends StatelessWidget {
+  const UploadCard({super.key, this.text, this.dialogText, this.fileName});
+  final String? text;
+  final String? dialogText;
+  final String? fileName;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DoctorAuthCubit, DoctorAuthState>(
+    return BlocBuilder<FileHandlerCubit, FileHandlerState>(
       builder: (context, state) {
-        final cubit = DoctorAuthCubit.get(context);
-        final file = cubit.membershipFile;
+        final cubit = FileHandlerCubit.get(context);
+        final file = cubit.pickedFile;
         return InkWell(
           onTap: () {
-            final cubit = context.read<DoctorAuthCubit>();
+            final cubit = context.read<FileHandlerCubit>();
             showDialog(
               context: context,
               builder: (context) => BlocProvider.value(
                 value: cubit,
-                child: const UploadMembershipDialog(),
+                child: UploadDialog(text: dialogText, fileName: fileName),
               ),
             );
           },
@@ -40,9 +43,9 @@ class UploadMembershipCard extends StatelessWidget {
                       color: const Color(0xffF7F7F7),
                       borderRadius: BorderRadius.circular(24),
                     ),
-                    child: const Text(
-                      "Upload your Membership Card",
-                      style: TextStyle(
+                    child: Text(
+                      text ?? "Upload your Membership Card",
+                      style: const TextStyle(
                         color: Color(0xff9AA0A6),
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -55,7 +58,7 @@ class UploadMembershipCard extends StatelessWidget {
                       children: [
                         Image.asset("assets/images/pdf.png", height: 50),
                         const SizedBox(width: 8),
-                        Text(file.name),
+                        Expanded(child: Text(file.name)),
                       ],
                     ),
                   ),

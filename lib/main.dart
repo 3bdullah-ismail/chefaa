@@ -1,4 +1,5 @@
-import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
+import 'package:chefaa/core/manager/file_handler_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,8 +11,8 @@ void main() {
   configureDependencies();
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => getIt<DoctorAuthCubit>())],
-      child: Chefaa(),
+      providers: [BlocProvider(create: (_) => FileHandlerCubit())],
+      child: const Chefaa(),
     ),
   );
 }

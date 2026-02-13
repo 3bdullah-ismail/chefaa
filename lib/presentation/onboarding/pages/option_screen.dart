@@ -66,25 +66,31 @@ class _OptionScreenState extends State<OptionScreen> {
                 onTap: () => onSelect("Facility"),
               ),
               const SizedBox(height: 32),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  NextButton(
-                    isEnabled: selectedRole != null,
-                    onTap: () {
-                      if (selectedRole == "Doctor") {
-                        Navigator.pushReplacementNamed(
-                          context,
-                          AppRoutesNames.docSignUp,
-                        );
-                      } else if (selectedRole == "Patient") {
-                        Navigator.pushNamed(context, "/patient_onboarding");
-                      } else if (selectedRole == "Facility") {
-                        Navigator.pushNamed(context, "/facility_onboarding");
-                      }
-                    },
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    NextButton(
+                      isEnabled: selectedRole != null,
+                      onTap: () {
+                        if (selectedRole == "Doctor") {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutesNames.docSignUp,
+                          );
+                        } else if (selectedRole == "Patient") {
+                          Navigator.pushNamed(context, "/patient_onboarding");
+                        } else if (selectedRole == "Facility") {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.facilityOption,
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

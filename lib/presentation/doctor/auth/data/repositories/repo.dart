@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/doctor/auth/data/models/auth_response.dart';
+import 'package:chefaa/core/models/auth_response.dart';
 import 'package:file_picker/file_picker.dart';
 
 abstract class DoctorAuthRepo {
