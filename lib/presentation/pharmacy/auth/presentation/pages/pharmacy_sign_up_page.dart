@@ -6,16 +6,16 @@ import 'package:chefaa/core/widget/custom_app_bar.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/validators.dart';
-import 'package:chefaa/presentation/pharmacy/presentation/widgets/upload_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../core/config/get_config.dart';
-import '../../../../core/routes/app_routes_names.dart';
+import '../../../../../core/config/get_config.dart';
+import '../../../../../core/routes/app_routes_names.dart';
 import '../manager/pharmacy_cubit.dart';
 import '../manager/pharmacy_state.dart';
 import '../widgets/loading_dialog.dart';
+import '../widgets/upload_container.dart';
 
 class PharmacySignUpPage extends StatefulWidget {
   const PharmacySignUpPage({super.key});

@@ -1,11 +1,12 @@
-import 'package:chefaa/presentation/pharmacy/data/repositories/pharmacy_repo.dart';
-import 'package:chefaa/presentation/pharmacy/presentation/manager/pharmacy_state.dart';
+import 'package:chefaa/presentation/pharmacy/auth/presentation/manager/pharmacy_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/widget/file_helper.dart';
+import '../../../../../core/widget/file_helper.dart';
+import '../../data/repositories/pharmacy_repo.dart';
+
 
 @injectable
 class PharmacyCubit extends Cubit<PharmacyState> {

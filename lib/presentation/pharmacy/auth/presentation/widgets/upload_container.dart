@@ -1,5 +1,5 @@
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/presentation/pharmacy/presentation/widgets/upload_dialog.dart';
+import 'package:chefaa/presentation/pharmacy/auth/presentation/widgets/upload_dialog.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

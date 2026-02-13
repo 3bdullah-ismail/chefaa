@@ -1,5 +1,6 @@
-import 'package:chefaa/presentation/pharmacy/data/models/Pharmacy.dart';
 import 'package:file_picker/file_picker.dart';
+
+import '../../data/models/Pharmacy.dart';
 
 sealed class PharmacyState {}
 final class PharmacyInitial extends PharmacyState {}

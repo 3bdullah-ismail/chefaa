@@ -1,12 +1,15 @@
-import 'package:chefaa/presentation/pharmacy/data/data_sources/pharmacy_data_source.dart';
-import 'package:chefaa/presentation/pharmacy/data/models/PharmacyModel.dart';
-import 'package:chefaa/presentation/pharmacy/data/repositories/pharmacy_repo.dart';
+
+import 'package:chefaa/presentation/pharmacy/auth/data/repositories/pharmacy_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/src/platform_file.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/error_handling/error_handler.dart';
-import '../../../../core/services/storage_service.dart';
+import '../../../../../core/error_handling/error_handler.dart';
+import '../../../../../core/services/storage_service.dart';
+import '../data_sources/pharmacy_data_source.dart';
+import '../models/PharmacyModel.dart';
+
+
 
 @Injectable(as: PharmacyRepo)
 class PharmacyRepoImp implements PharmacyRepo {

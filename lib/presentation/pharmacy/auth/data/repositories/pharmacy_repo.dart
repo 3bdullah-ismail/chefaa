@@ -1,5 +1,6 @@
-import 'package:chefaa/presentation/pharmacy/data/models/PharmacyModel.dart';
 import 'package:file_picker/file_picker.dart';
+
+import '../models/PharmacyModel.dart';
 
 abstract class PharmacyRepo {
   Future<PharmacyModel>pharmacySignUp({

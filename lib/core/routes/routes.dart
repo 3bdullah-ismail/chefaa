@@ -10,7 +10,7 @@ import '../../presentation/layout/presentation/pages/layout_page.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/auth/presentation/pages/sign_up_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
-import '../../presentation/pharmacy/presentation/pages/pharmacy_sign_up_page.dart';
+import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
