@@ -1,4 +1,3 @@
-
 import 'package:chefaa/presentation/pharmacy/auth/data/repositories/pharmacy_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/src/platform_file.dart';
@@ -8,8 +7,6 @@ import '../../../../../core/error_handling/error_handler.dart';
 import '../../../../../core/services/storage_service.dart';
 import '../data_sources/pharmacy_data_source.dart';
 import '../models/PharmacyModel.dart';
-
-
 
 @Injectable(as: PharmacyRepo)
 class PharmacyRepoImp implements PharmacyRepo {
@@ -43,7 +40,7 @@ class PharmacyRepoImp implements PharmacyRepo {
         PharmacyModel data = PharmacyModel.fromJson(response.data);
         await StorageService.saveToken(data.accessToken!);
         return data;
-      }else {
+      } else {
         var error = ErrorHandler.fromJson(response.data);
         throw error.message ?? "";
       }

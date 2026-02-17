@@ -57,9 +57,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildPrefixIcon() {
     if (_errorText != null) {
-      return const Padding(
-        padding: EdgeInsets.all(12),
-        child: Icon(Icons.error, color: Colors.red),
+      return Padding(
+        padding: const EdgeInsets.all(12),
+        child: SvgPicture.asset(
+          widget.prefixIcon!,
+          width: 22,
+          height: 22,
+          colorFilter: const ColorFilter.mode(
+            ColorManager.error,
+            BlendMode.srcIn,
+          ),
+        ),
       );
     }
     if (_isFocused) {
@@ -78,7 +86,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
     return Padding(
       padding: const EdgeInsets.all(12),
-      child: SvgPicture.asset(widget.prefixIcon!, width: 22, height: 22),
+      child: SvgPicture.asset(
+        widget.prefixIcon!,
+        width: 22,
+        height: 22,
+        colorFilter: const ColorFilter.mode(ColorManager.gray, BlendMode.srcIn),
+      ),
     );
   }
 

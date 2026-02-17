@@ -33,7 +33,6 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
   List<String> selectedDiseases = [];
   final TextEditingController controller = TextEditingController();
 
-
   void _onSelectionChanged(String disease) {
     setState(() {
       if (selectedDiseases.contains(disease)) {
@@ -116,16 +115,16 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
             ),
             50.verticalSpace,
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppPadding.p28,
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28),
+              child: CustomTextField(
+                controller: controller,
+                text: "Enter the name of chronic diseases",
               ),
-              child: CustomTextField(controller: controller, text: "Enter the name of chronic diseases"),
             ),
             30.verticalSpace,
             CustomBtn(
               text: "Continue",
               onPressed: () {
-
                 final input = controller.text.trim();
                 final diseases = List<String>.from(selectedDiseases);
 
@@ -147,7 +146,6 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                 );
               },
             ),
-
           ],
         ),
       ),

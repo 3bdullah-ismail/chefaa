@@ -8,6 +8,5 @@ abstract class PatientDataSource {
     required String email,
     required String password,
     required String role,
-
   });
 }

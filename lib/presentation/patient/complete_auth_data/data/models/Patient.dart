@@ -1,19 +1,20 @@
 class PatientUpdate {
   PatientUpdate({
-      this.id, 
-      this.userId, 
-      this.phoneNumber, 
-      this.address, 
-      this.age, 
-      this.gender, 
-      this.height, 
-      this.weight, 
-      this.bloodType, 
-      this.allergies, 
-      this.chronicConditions, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.id,
+    this.userId,
+    this.phoneNumber,
+    this.address,
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.bloodType,
+    this.allergies,
+    this.chronicConditions,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   PatientUpdate.fromJson(dynamic json) {
     id = json['_id'];
@@ -25,12 +26,17 @@ class PatientUpdate {
     height = json['height'];
     weight = json['weight'];
     bloodType = json['bloodType'];
-    allergies = json['allergies'] != null ? json['allergies'].cast<String>() : [];
-    chronicConditions = json['chronicConditions'] != null ? json['chronicConditions'].cast<String>() : [];
+    allergies = json['allergies'] != null
+        ? json['allergies'].cast<String>()
+        : [];
+    chronicConditions = json['chronicConditions'] != null
+        ? json['chronicConditions'].cast<String>()
+        : [];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     v = json['__v'];
   }
+
   String? id;
   String? userId;
   String? phoneNumber;
@@ -64,5 +70,4 @@ class PatientUpdate {
     map['__v'] = v;
     return map;
   }
-
 }

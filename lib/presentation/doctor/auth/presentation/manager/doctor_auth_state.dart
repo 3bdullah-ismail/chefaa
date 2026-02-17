@@ -9,11 +9,13 @@ final class SingUpLoading extends DoctorAuthState {}
 
 final class SingUpSuccess extends DoctorAuthState {
   final String userName;
+
   SingUpSuccess({required this.userName});
 }
 
 final class SingUpFailure extends DoctorAuthState {
   final String errorMessage;
+
   SingUpFailure(this.errorMessage);
 }
 

@@ -6,6 +6,7 @@ import '../../../../core/resources/values_manager.dart';
 class NextButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool isEnabled;
+
   const NextButton({super.key, required this.onTap, this.isEnabled = true});
 
   @override

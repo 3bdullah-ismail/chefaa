@@ -1,15 +1,15 @@
-import 'package:chefaa/core/manager/file_handler_cubit.dart';
-import 'package:chefaa/core/widget/file_helper.dart';
 import 'package:chefaa/presentation/doctor/auth/data/repositories/repo.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
 part 'doctor_auth_state.dart';
 
 @injectable
 class DoctorAuthCubit extends Cubit<DoctorAuthState> {
   DoctorAuthRepo doctorAuthRepo;
+
   DoctorAuthCubit(this.doctorAuthRepo) : super(DoctorAuthInitial());
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -19,6 +19,7 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
   TextEditingController specialization = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
   static DoctorAuthCubit get(context) => BlocProvider.of(context);
 
   Future<void> signUp({required PlatformFile? membershipFile}) async {

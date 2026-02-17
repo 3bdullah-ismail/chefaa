@@ -1,14 +1,15 @@
 import 'Patient.dart';
 
 class CompletePatient {
-  CompletePatient({
-      this.message, 
-      this.patient,});
+  CompletePatient({this.message, this.patient});
 
   CompletePatient.fromJson(dynamic json) {
     message = json['message'];
-    patient = json['patient'] != null ? PatientUpdate.fromJson(json['patient']) : null;
+    patient = json['patient'] != null
+        ? PatientUpdate.fromJson(json['patient'])
+        : null;
   }
+
   String? message;
   PatientUpdate? patient;
 
@@ -20,5 +21,4 @@ class CompletePatient {
     }
     return map;
   }
-
 }

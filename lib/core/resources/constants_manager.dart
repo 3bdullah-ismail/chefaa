@@ -1,4 +1,35 @@
 class AppConstants {
+  static const String error = "Error";
+  static const String success = 'Success';
+  static const String firstName = "First Name";
+  static const String lastName = "Last Name";
+  static const String enterPhone = "Enter your phone number";
+  static const String enterEmail = "Enter your email";
+  static const String enterPassword = "Enter your password";
+  static const String reEnterPassword = "Re-enter your password";
+  static const String phoneHint = "+20  xxxxxxxx";
+  static const String emailFacilityHint = "contact@facility.com";
+  static const String emailPharmacyHint = "contact@pharmacy.com";
+  static const String licenseHint = "e.g. LIC-676-78";
+  static const String licensePdf = "My_ License.pdf";
+  static const String doctor = "Doctor";
+  static const String patient = "Patient";
+  static const String facility = "Facility";
+  static const String pharmacy = "Pharmacy";
+  static const String lab = "Lab";
+
+  static const String facilityType = "Facility Type";
+  static const String facilityName = "Facility Name";
+  static const String phoneNumber = "Phone Number";
+  static const String workEmail = "Work Email";
+  static const String password = "Password";
+  static const String confirmPassword = "Confirm Password";
+  static const String commercialLicenseNumber = "Commercial License Number";
+  static const String medicalLicenseUpload = "Medical  license Upload";
+  static const String uploadYourLicence = "Upload your licence";
+  static const String uploadYourMedicalLicence = "Upload your Medical License";
+  static const String submitForVerification = "Submit for Verification";
+  static const String acceptTerm = "Please accept the terms and conditions";
   static final List<String> chronicDiseases = [
     "Diabetes",
     "Hypertension",

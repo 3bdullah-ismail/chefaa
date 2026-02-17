@@ -22,14 +22,14 @@ class PatientDataSourceImp implements PatientDataSource {
   }) {
     return networkService.dio.post(
       "/auth/register",
-        data: {
-          "name": name,
-          "username": userName,
-          "email": email,
-          "password": password,
-          "phoneNumber": phone,
-          "role": role,
-        },
+      data: {
+        "name": name,
+        "username": userName,
+        "email": email,
+        "password": password,
+        "phoneNumber": phone,
+        "role": role,
+      },
       options: Options(headers: {"Content-Type": "application/json"}),
     );
   }

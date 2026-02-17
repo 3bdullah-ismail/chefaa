@@ -18,23 +18,26 @@ class SuccessItem extends StatelessWidget {
         spacing: 15,
         children: [
           SvgPicture.asset(IconsAssets.doneIcon),
-          Text("Success", style: TextStyle(
-            color: ColorManager.black,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w700,
-          ),),
           Text(
-            "Your account has been successfully registered", style: TextStyle(
-            color: ColorManager.gray,
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
+            "Success",
+            style: TextStyle(
+              color: ColorManager.black,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w700,
+            ),
           ),
+          Text(
+            "Your account has been successfully registered",
+            style: TextStyle(
+              color: ColorManager.gray,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w400,
+            ),
             textAlign: TextAlign.center,
           ),
-         70.verticalSpace
+          70.verticalSpace,
         ],
       ),
-
-        );
-    }
+    );
+  }
 }

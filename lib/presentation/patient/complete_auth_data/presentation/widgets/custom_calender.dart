@@ -37,7 +37,7 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
 
   final List<int> _years = List.generate(
     _maxYear - _minYear + 1,
-        (index) => _minYear + index,
+    (index) => _minYear + index,
   );
 
   @override
@@ -55,9 +55,7 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final currentYearIndex = _years.indexOf(DateTime.now().year);
       if (currentYearIndex != -1) {
-        _yearScrollController.jumpTo(
-          (currentYearIndex ~/ 4) * 56.0,
-        );
+        _yearScrollController.jumpTo((currentYearIndex ~/ 4) * 56.0);
       }
     });
   }
@@ -112,7 +110,9 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
 
   OverlayEntry _createCalendarOverlay() {
     final renderBox = context.findRenderObject() as RenderBox?;
-    if (renderBox == null) return OverlayEntry(builder: (_) => const SizedBox.shrink());
+    if (renderBox == null) {
+      return OverlayEntry(builder: (_) => const SizedBox.shrink());
+    }
 
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
@@ -153,10 +153,14 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12.w,
+                                vertical: 12.h,
+                              ),
                               color: ColorManager.primary,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   IconButton(
                                     icon: Icon(
@@ -226,22 +230,27 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
                                 firstDay: DateTime(_minYear),
                                 lastDay: DateTime(_maxYear),
                                 focusedDay: _focusedDay,
-                                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                                selectedDayPredicate: (day) =>
+                                    isSameDay(_selectedDay, day),
                                 onDaySelected: (selectedDay, focusedDay) {
                                   setState(() {
                                     _selectedDay = selectedDay;
                                     _focusedDay = focusedDay;
                                   });
                                   widget.onDateSelected(selectedDay);
-                                  widget.controller.text = _formatDate(selectedDay);
+                                  widget.controller.text = _formatDate(
+                                    selectedDay,
+                                  );
                                   _toggleCalendar();
                                 },
                                 calendarStyle: CalendarStyle(
                                   todayDecoration: BoxDecoration(
-                                    color: ColorManager.primary.withOpacity(0.25),
+                                    color: ColorManager.primary.withValues(
+                                      alpha: 0.25,
+                                    ),
                                     shape: BoxShape.circle,
                                   ),
-                                  selectedDecoration:const BoxDecoration(
+                                  selectedDecoration: const BoxDecoration(
                                     color: ColorManager.primary,
                                     shape: BoxShape.circle,
                                   ),
@@ -249,7 +258,9 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
                                   ),
-                                  weekendTextStyle: TextStyle(color: Colors.red.shade700),
+                                  weekendTextStyle: TextStyle(
+                                    color: Colors.red.shade700,
+                                  ),
                                 ),
                                 headerVisible: false,
                                 rowHeight: 34.h,
@@ -278,12 +289,14 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 border: Border.all(
-                                  color: ColorManager.primary.withOpacity(0.2),
+                                  color: ColorManager.primary.withValues(
+                                    alpha: 0.2,
+                                  ),
                                   width: 1,
                                 ),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.15),
+                                    color: Colors.black.withValues(alpha: 0.15),
                                     blurRadius: 12,
                                     spreadRadius: 0,
                                     offset: const Offset(0, 4),
@@ -300,7 +313,8 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
                                     ),
                                     color: ColorManager.primary,
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
                                           "Select Year",
@@ -329,27 +343,32 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
                                       padding: EdgeInsets.all(10.w),
                                       child: GridView.builder(
                                         controller: _yearScrollController,
-                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 4,
-                                          crossAxisSpacing: 6.w,
-                                          mainAxisSpacing: 6.h,
-                                          childAspectRatio: 2,
-                                        ),
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                              crossAxisSpacing: 6.w,
+                                              mainAxisSpacing: 6.h,
+                                              childAspectRatio: 2,
+                                            ),
                                         itemCount: _years.length,
                                         itemBuilder: (context, index) {
                                           final year = _years[index];
-                                          final isSelected = year == _focusedDay.year;
+                                          final isSelected =
+                                              year == _focusedDay.year;
 
                                           return InkWell(
                                             onTap: () => _selectYear(year),
-                                            borderRadius: BorderRadius.circular(6.r),
+                                            borderRadius: BorderRadius.circular(
+                                              6.r,
+                                            ),
                                             child: Container(
                                               alignment: Alignment.center,
                                               decoration: BoxDecoration(
                                                 color: isSelected
                                                     ? ColorManager.primary
                                                     : Colors.grey.shade100,
-                                                borderRadius: BorderRadius.circular(6.r),
+                                                borderRadius:
+                                                    BorderRadius.circular(6.r),
                                                 border: Border.all(
                                                   color: isSelected
                                                       ? ColorManager.primary
@@ -400,17 +419,23 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
         readOnly: true,
         onTap: _toggleCalendar,
         validator: widget.validator,
-        style:const  TextStyle(color: ColorManager.gray, fontWeight: FontWeight.w500),
+        style: const TextStyle(
+          color: ColorManager.gray,
+          fontWeight: FontWeight.w500,
+        ),
         decoration: InputDecoration(
           hintText: 'Select Your Birth Date',
-          hintStyle: TextStyle(color: ColorManager.gray.withOpacity(0.7)),
+          hintStyle: TextStyle(color: ColorManager.gray.withValues(alpha: 0.7)),
           filled: true,
           fillColor: ColorManager.lightGray,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12.r),
             borderSide: BorderSide.none,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 14.h,
+          ),
         ),
       ),
     );

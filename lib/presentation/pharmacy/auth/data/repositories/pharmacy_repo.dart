@@ -3,7 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import '../models/PharmacyModel.dart';
 
 abstract class PharmacyRepo {
-  Future<PharmacyModel>pharmacySignUp({
+  Future<PharmacyModel> pharmacySignUp({
     required String name,
     required String username,
     required String phoneNumber,
@@ -12,5 +12,5 @@ abstract class PharmacyRepo {
     required String password,
     required PlatformFile medicalLicence,
     required String commercialRegisterNumber,
-});
+  });
 }

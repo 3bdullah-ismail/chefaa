@@ -5,6 +5,7 @@ import 'dart:convert';
 
 ErrorHandler errorHandlerFromJson(String str) =>
     ErrorHandler.fromJson(json.decode(str));
+
 String errorHandlerToJson(ErrorHandler data) => json.encode(data.toJson());
 
 class ErrorHandler {
@@ -14,12 +15,15 @@ class ErrorHandler {
     statusMsg = json['statusMsg'];
     message = json['message'];
   }
+
   String? statusMsg;
   String? message;
+
   ErrorHandler copyWith({String? statusMsg, String? message}) => ErrorHandler(
     statusMsg: statusMsg ?? this.statusMsg,
     message: message ?? this.message,
   );
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['statusMsg'] = statusMsg;

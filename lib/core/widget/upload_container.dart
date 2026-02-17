@@ -7,9 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UploadCard extends StatelessWidget {
   const UploadCard({super.key, this.text, this.dialogText, this.fileName});
+
   final String? text;
   final String? dialogText;
   final String? fileName;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FileHandlerCubit, FileHandlerState>(

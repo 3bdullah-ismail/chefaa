@@ -1,11 +1,11 @@
-import 'package:chefaa/core/error_handling/error_handler.dart';
-import 'package:chefaa/presentation/patient/auth/data/data_sources/patient_data_source.dart';
+import 'package:chefaa/core/models/auth_response.dart';
 import 'package:chefaa/presentation/patient/auth/data/repositories/patient_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/error_handling/error_handler.dart';
 import '../../../../../core/services/storage_service.dart';
-import '../models/Potient_data.dart';
+import '../data_sources/patient_data_source.dart';
 
 @Injectable(as: PatientRepo)
 class PatientRepoImp implements PatientRepo {
@@ -14,7 +14,7 @@ class PatientRepoImp implements PatientRepo {
   PatientRepoImp(this.patientDataSource);
 
   @override
-  Future<PatientData> patientSignUp({
+  Future<AuthResponse> patientSignUp({
     required String name,
     required String userName,
     required String phone,
@@ -32,7 +32,7 @@ class PatientRepoImp implements PatientRepo {
         role: role,
       );
       if (response.statusCode == 201) {
-        PatientData data = PatientData.fromJson(response.data);
+        AuthResponse data = AuthResponse.fromJson(response.data);
         await StorageService.saveToken(data.accessToken!);
         return data;
       } else {

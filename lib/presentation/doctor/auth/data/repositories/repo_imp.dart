@@ -10,7 +10,9 @@ import '../../../../../core/models/auth_response.dart';
 @Injectable(as: DoctorAuthRepo)
 class DoctorAuthRepoImp extends DoctorAuthRepo {
   DoctorAuthDataSource doctorAuthDataSource;
+
   DoctorAuthRepoImp(this.doctorAuthDataSource);
+
   @override
   Future<AuthResponse> signUp({
     required String name,

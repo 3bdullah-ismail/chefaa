@@ -1,34 +1,34 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:chefaa/core/extensions/build_ex.dart';
+import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/widget/already_have_account.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
-import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/core/widget/upload_container.dart';
+import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_svg/svg.dart';
 import '../../../../../core/config/get_config.dart';
 import '../../../../../core/manager/file_handler_cubit.dart';
+import '../../../../../core/resources/constants_manager.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/loading_dialog.dart';
+import '../widgets/labeled_text_field.dart';
 
 class FacilitySignup extends StatefulWidget {
   const FacilitySignup({super.key});
-
   @override
   State<FacilitySignup> createState() => _FacilitySignupState();
 }
 
 class _FacilitySignupState extends State<FacilitySignup> {
   bool isChecked = false;
-
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -48,15 +48,15 @@ class _FacilitySignupState extends State<FacilitySignup> {
               );
             } else if (state is SingUpFailure) {
               AnimatedSnackBar.rectangle(
-                'Error',
+                AppConstants.error,
                 state.errorMessage,
                 type: AnimatedSnackBarType.error,
                 brightness: Brightness.dark,
               ).show(context);
             } else if (state is SingUpSuccess) {
               AnimatedSnackBar.rectangle(
-                'Success',
-                "Welcome Dr. ${state.userName}!",
+                AppConstants.success,
+                "Welcome  ${state.userName}!",
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
               ).show(context);
@@ -85,7 +85,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Facility Type",
+                                AppConstants.facilityType,
                                 style: getMediumStyle(
                                   color: ColorManager.black,
                                   fontSize: 16,
@@ -106,7 +106,6 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                     dropdownColor: Colors.white,
                                     value: cubit.facilityType,
                                     isExpanded: true,
-
                                     hint: Text(
                                       "choose lab or radiology",
                                       style: TextStyle(
@@ -131,104 +130,59 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Text(
-                                "Facility Name",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
+                              LabeledTextField(
+                                validator: Validators.nameValidator,
+                                label: AppConstants.facilityName,
                                 controller: cubit.name,
-                                text: "e.g. Alpa Labs/Scan",
+                                hint: "e.g. Alpa Labs/Scan",
                               ),
-                              Text(
-                                "user Name",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
+                              LabeledTextField(
+                                label: AppConstants.facilityName,
                                 controller: cubit.username,
-                                text: "user name",
+                                hint: "e.g. Alpa Labs/Scan",
                               ),
-                              const SizedBox(height: 22),
-                              Text(
-                                "Phone Number",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
+                              LabeledTextField(
+                                validator: Validators.validatePhone,
+                                label: AppConstants.phoneNumber,
                                 controller: cubit.phoneNumber,
-                                text: "+20  xxxxxxxx",
-                                prefixIcon: "assets/icons/call.svg",
+                                hint: AppConstants.phoneHint,
+                                prefixIcon: IconsAssets.phoneIcon,
                               ),
-                              const SizedBox(height: 22),
-                              Text(
-                                "Work Email",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
+                              LabeledTextField(
+                                validator: Validators.validateEmail,
+                                label: AppConstants.workEmail,
                                 controller: cubit.email,
-                                text: "contact@facility.com",
-                                prefixIcon: "assets/icons/Email.svg",
+                                hint: AppConstants.emailFacilityHint,
+                                prefixIcon: IconsAssets.emailIcon,
                               ),
-                              const SizedBox(height: 22),
-                              Text(
-                                "Password",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
-                                isPass: true,
-                                prefixIcon: "assets/icons/Password.svg",
+                              LabeledTextField(
+                                validator: Validators.validatePassword,
+                                label: AppConstants.password,
                                 controller: cubit.password,
-                                text: "Enter your password",
+                                hint: AppConstants.enterPassword,
+                                isPassword: true,
+                                prefixIcon: IconsAssets.passwordIcon,
                               ),
-                              const SizedBox(height: 22),
-                              Text(
-                                "Confirm Password",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
-                                isPass: true,
-                                prefixIcon: "assets/icons/Password.svg",
+                              LabeledTextField(
+                                validator: (value) =>
+                                    Validators.validateConfirmPassword(
+                                      value,
+                                      cubit.password.text,
+                                    ),
+                                label: AppConstants.confirmPassword,
                                 controller: cubit.confirmPasswordController,
-                                text: "Re-enter your password",
+                                hint: AppConstants.reEnterPassword,
+                                isPassword: true,
+                                prefixIcon: IconsAssets.passwordIcon,
                               ),
-                              const SizedBox(height: 22),
-                              Text(
-                                "Commercial License Number",
-                                style: getMediumStyle(
-                                  color: ColorManager.black,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              CustomTextField(
+                              LabeledTextField(
+                                label: AppConstants.commercialLicenseNumber,
                                 controller: cubit.commercialRegisterNumber,
-                                text: "e.g. LIC-676-78",
+                                hint: AppConstants.licenseHint,
                               ),
                               const SizedBox(height: 22),
                               Text(
-                                "Medical  license Upload",
+                                AppConstants.medicalLicenseUpload,
                                 style: getMediumStyle(
                                   color: ColorManager.black,
                                   fontSize: 16,
@@ -236,9 +190,10 @@ class _FacilitySignupState extends State<FacilitySignup> {
                               ),
                               const SizedBox(height: 16),
                               const UploadCard(
-                                text: "Upload your licence",
-                                dialogText: "Upload your Medical License",
-                                fileName: "My_ License.pdf",
+                                text: AppConstants.uploadYourLicence,
+                                dialogText:
+                                    AppConstants.uploadYourMedicalLicence,
+                                fileName: AppConstants.licensePdf,
                               ),
                               const SizedBox(height: 22),
                             ],
@@ -258,10 +213,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                           children: [
                             Row(
                               children: [
-                                Image.asset(
-                                  "assets/images/Hospitalist.png",
-                                  width: 56,
-                                ),
+                                Image.asset(ImageAssets.hospitalist, width: 56),
                                 const SizedBox(width: 8),
                                 Text(
                                   "Medical Leadership",
@@ -273,30 +225,16 @@ class _FacilitySignupState extends State<FacilitySignup> {
                               ],
                             ),
                             const SizedBox(height: 48),
-                            Text(
-                              "Medical Director Name",
-                              style: getMediumStyle(
-                                color: ColorManager.black,
-                                fontSize: 16,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            CustomTextField(
+                            LabeledTextField(
+                              label: "Medical Director Name",
                               controller: cubit.medicalDirectorName,
-                              text: "Doctor’s full name",
+                              hint: "Doctor’s full name",
                             ),
                             const SizedBox(height: 48),
-                            Text(
-                              "Director’s Professional ID",
-                              style: getMediumStyle(
-                                color: ColorManager.black,
-                                fontSize: 16,
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            CustomTextField(
+                            LabeledTextField(
+                              label: "Director’s Professional ID",
                               controller: cubit.directorProfessionalId,
-                              text: "ID number",
+                              hint: "ID number",
                             ),
                           ],
                         ),
@@ -313,8 +251,12 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 setState(() {});
                               },
                               child: isChecked
-                                  ? Image.asset("assets/images/checked.png")
-                                  : Image.asset("assets/images/unchecked.png"),
+                                  ? SvgPicture.asset(
+                                      IconsAssets.checkIconActive,
+                                    )
+                                  : SvgPicture.asset(
+                                      IconsAssets.checkIconInactive,
+                                    ),
                             ),
                             const SizedBox(width: 12),
                             const Expanded(child: TermsOfService()),
@@ -325,7 +267,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                       CustomBtn(
                         isDisabled:
                             !isChecked || !_formKey.currentState!.validate(),
-                        text: "Submit for Verification",
+                        text: AppConstants.submitForVerification,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             final file = context

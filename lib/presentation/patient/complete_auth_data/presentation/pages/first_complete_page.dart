@@ -27,7 +27,6 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
   String? gender;
   DateTime? birthDate;
 
-
   @override
   void dispose() {
     weightController.dispose();
@@ -73,18 +72,18 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         ),
                         12.verticalSpace,
                         CustomDropDownBtn(
-                            value: gender,
-                            onChanged: (value) {
-                              setState(() {
-                                gender = value;
-                              });
-                            },
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please select your gender';
-                              }
-                              return null;
+                          value: gender,
+                          onChanged: (value) {
+                            setState(() {
+                              gender = value;
+                            });
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select your gender';
                             }
+                            return null;
+                          },
                         ),
 
                         23.verticalSpace,
@@ -155,7 +154,6 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                           },
                           controller: heightController,
                           text: "Height",
-
                         ),
                         23.verticalSpace,
                         const Text(
@@ -183,19 +181,24 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                   ),
                 ),
                 50.verticalSpace,
-                CustomBtn(text: "Continue", onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pushReplacementNamed(context,
+                CustomBtn(
+                  text: "Continue",
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.pushReplacementNamed(
+                        context,
                         AppRoutesNames.patientSignUpCompleteChronicDiseases,
-                        arguments:[
+                        arguments: [
                           double.parse(weightController.text),
                           int.parse(heightController.text),
                           bloodTypeController.text,
                           gender?.toLowerCase(),
-                          birthDate
-                        ]);
-                  }
-                })
+                          birthDate,
+                        ],
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           ),

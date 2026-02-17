@@ -13,6 +13,7 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
   PageController controller = PageController();
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

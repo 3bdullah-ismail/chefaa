@@ -40,7 +40,6 @@ class _LastCompleteDataState extends State<LastCompleteData> {
   List<String> selectedAllergies = [];
   final TextEditingController allergiesController = TextEditingController();
 
-
   void _onSelectionChanged(String disease) {
     setState(() {
       if (selectedAllergies.contains(disease)) {
@@ -55,7 +54,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<CompleteCubit>()
-        ..AllData(
+        ..allData(
           widget.weight,
           widget.height,
           widget.bloodType,
@@ -126,17 +125,19 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                                 margin: EdgeInsets.symmetric(vertical: 3.h),
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? ColorManager.gray.withOpacity(0.2)
+                                      ? ColorManager.gray.withValues(alpha: 0.2)
                                       : ColorManager.transparent,
                                   borderRadius: BorderRadius.circular(12.r),
                                   boxShadow: isSelected
                                       ? [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
-                                      blurRadius: 4,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ]
+                                          BoxShadow(
+                                            color: Colors.black.withValues(
+                                              alpha: 0.2,
+                                            ),
+                                            blurRadius: 4,
+                                            offset: const Offset(0, 4),
+                                          ),
+                                        ]
                                       : [],
                                 ),
                                 child: Text(
@@ -160,21 +161,25 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppPadding.p28,
                     ),
-                    child: CustomTextField(controller: allergiesController, text: "Enter the name of Allergies"),
+                    child: CustomTextField(
+                      controller: allergiesController,
+                      text: "Enter the name of Allergies",
+                    ),
                   ),
                   30.verticalSpace,
                   CustomBtn(
                     text: "Finish Sign Up",
-                      onPressed: () {
-                        final input = allergiesController.text.trim();
-                        List<String> finalAllergies = List.from(selectedAllergies);
-                        if (input.isNotEmpty && !finalAllergies.contains(input)) {
-                          finalAllergies.add(input);
-                        }
-                        cubit.allergies = finalAllergies;
-                        cubit.CompleteSignUp();
+                    onPressed: () {
+                      final input = allergiesController.text.trim();
+                      List<String> finalAllergies = List.from(
+                        selectedAllergies,
+                      );
+                      if (input.isNotEmpty && !finalAllergies.contains(input)) {
+                        finalAllergies.add(input);
                       }
-
+                      cubit.allergies = finalAllergies;
+                      cubit.completeSignUp();
+                    },
                   ),
                 ],
               );

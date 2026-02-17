@@ -70,8 +70,7 @@ class Validators {
     }
     final formatted = value.trim().toUpperCase();
 
-    final regex =
-    RegExp(r'^(ALP|LIC)-\d{2,3}-\d{2,3}$');
+    final regex = RegExp(r'^(ALP|LIC)-\d{2,3}-\d{2,3}$');
 
     if (!regex.hasMatch(formatted)) {
       return 'Format must be ALP-234-896 or LIC-67-78';
@@ -79,5 +78,4 @@ class Validators {
 
     return null;
   }
-
 }

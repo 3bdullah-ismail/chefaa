@@ -27,7 +27,6 @@ class CustomDropDownBtn extends StatelessWidget {
       menuMaxHeight: 160.h,
       alignment: AlignmentDirectional.centerStart,
 
-
       icon: Padding(
         padding: EdgeInsets.only(right: 12.w),
         child: Icon(
@@ -58,9 +57,7 @@ class CustomDropDownBtn extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 16.w),
             decoration: BoxDecoration(
-              color: isSelected
-                  ? ColorManager.primary.withOpacity(0.08)
-                  : null,
+              color: isSelected ? ColorManager.primary.withOpacity(0.08) : null,
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Row(
@@ -70,7 +67,9 @@ class CustomDropDownBtn extends StatelessWidget {
                     item,
                     style: TextStyle(
                       fontSize: 15.5.sp,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.w500,
                       color: isSelected
                           ? ColorManager.primary
                           : ColorManager.black.withOpacity(0.85),

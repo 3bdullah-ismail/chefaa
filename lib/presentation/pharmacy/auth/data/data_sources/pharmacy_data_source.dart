@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 
 abstract class PharmacyDataSource {
-  Future<Response>pharmacySignUp({
+  Future<Response> pharmacySignUp({
     required String name,
     required String username,
     required String phoneNumber,
@@ -11,5 +11,5 @@ abstract class PharmacyDataSource {
     required String password,
     required PlatformFile medicalLicence,
     required String commercialRegisterNumber,
-});
+  });
 }

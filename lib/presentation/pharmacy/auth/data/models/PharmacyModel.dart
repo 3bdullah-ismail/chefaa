@@ -2,10 +2,11 @@ import 'Pharmacy.dart';
 
 class PharmacyModel {
   PharmacyModel({
-      this.message, 
-      this.accessToken, 
-      this.refreshToken, 
-      this.pharmacy,});
+    this.message,
+    this.accessToken,
+    this.refreshToken,
+    this.pharmacy,
+  });
 
   PharmacyModel.fromJson(dynamic json) {
     message = json['message'];
@@ -13,6 +14,7 @@ class PharmacyModel {
     refreshToken = json['refreshToken'];
     pharmacy = json['user'] != null ? Pharmacy.fromJson(json['user']) : null;
   }
+
   String? message;
   String? accessToken;
   String? refreshToken;
@@ -28,5 +30,4 @@ class PharmacyModel {
     }
     return map;
   }
-
 }

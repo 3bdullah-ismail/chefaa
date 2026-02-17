@@ -13,19 +13,21 @@ class CompleteCubit extends Cubit<CompleteState> {
   late final List<String> chronicDiseases = [];
 
   CompletePatientRepo completePatientRepo;
+
   CompleteCubit(this.completePatientRepo) : super(CompleteInitial());
 
   List<String> allergies = [];
 
-
   static CompleteCubit get(context) => BlocProvider.of(context);
 
-  void AllData( double? weight,
-  int? height,
-  String? bloodType,
-  String? gender,
-  DateTime? birthDate,
-  List<String> chronicDiseases ) {
+  void allData(
+    double? weight,
+    int? height,
+    String? bloodType,
+    String? gender,
+    DateTime? birthDate,
+    List<String> chronicDiseases,
+  ) {
     this.weight = weight;
     this.height = height;
     this.bloodType = bloodType!;
@@ -34,7 +36,7 @@ class CompleteCubit extends Cubit<CompleteState> {
     this.chronicDiseases.addAll(chronicDiseases);
   }
 
-  Future<void> CompleteSignUp() async {
+  Future<void> completeSignUp() async {
     emit(CompleteLoadingState());
     try {
       int age = birthDate != null ? calculateAge(birthDate!) : 0;
@@ -43,7 +45,7 @@ class CompleteCubit extends Cubit<CompleteState> {
         height: height!,
         bloodType: bloodType,
         gender: gender,
-       age: age,
+        age: age,
         chronicDiseases: chronicDiseases,
         allergies: allergies,
       );
@@ -57,6 +59,7 @@ class CompleteCubit extends Cubit<CompleteState> {
       emit(CompleteErrorState(e.toString()));
     }
   }
+
   int calculateAge(DateTime birthDate) {
     DateTime today = DateTime.now();
     int age = today.year - birthDate.year;
@@ -66,5 +69,4 @@ class CompleteCubit extends Cubit<CompleteState> {
     }
     return age;
   }
-
 }

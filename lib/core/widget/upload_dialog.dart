@@ -10,8 +10,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class UploadDialog extends StatefulWidget {
   const UploadDialog({super.key, this.text, this.fileName});
+
   final String? text;
   final String? fileName;
+
   @override
   State<UploadDialog> createState() => _UploadDialogState();
 }

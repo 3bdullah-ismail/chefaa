@@ -1,8 +1,7 @@
-
 import '../models/Complete_patient.dart';
 
 abstract class CompletePatientRepo {
-  Future<CompletePatient>completeSignUp({
+  Future<CompletePatient> completeSignUp({
     required double? weight,
     required int? height,
     required String? bloodType,
@@ -10,5 +9,5 @@ abstract class CompletePatientRepo {
     required int? age,
     required List<String>? chronicDiseases,
     required List<String>? allergies,
-});
+  });
 }

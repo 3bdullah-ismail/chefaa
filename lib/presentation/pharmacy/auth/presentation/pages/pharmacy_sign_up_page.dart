@@ -1,21 +1,24 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/custom_app_bar.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
+import 'package:chefaa/core/widget/loading_dialog.dart';
+import 'package:chefaa/core/widget/terms_of_service.dart';
+import 'package:chefaa/core/widget/upload_container.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/config/get_config.dart';
+import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../manager/pharmacy_cubit.dart';
 import '../manager/pharmacy_state.dart';
-import '../widgets/loading_dialog.dart';
-import '../widgets/upload_container.dart';
 
 class PharmacySignUpPage extends StatefulWidget {
   const PharmacySignUpPage({super.key});
@@ -43,37 +46,38 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
             if (state is PharmacyLoadingState) {
               showDialog(
                 context: context,
-                builder: (context) => const LoadingPharDialog(),
+                builder: (context) => const LoadingDialog(),
               );
-            }
-            else if (state is PharmacyErrorState) {
+            } else if (state is PharmacyErrorState) {
               AnimatedSnackBar.rectangle(
-                'Error',
+                AppConstants.error,
                 state.message,
                 type: AnimatedSnackBarType.error,
                 brightness: Brightness.dark,
               ).show(context);
-            }
-            else if (state is PharmacySuccessState) {
+            } else if (state is PharmacySuccessState) {
               AnimatedSnackBar.rectangle(
-                'Success',
+                AppConstants.success,
                 "Welcome Pharmacy. ${state.pharmacy.name}!",
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
               ).show(context);
               Navigator.pushNamedAndRemoveUntil(
-                  context, AppRoutesNames.layout, (route) => false);
+                context,
+                AppRoutesNames.layout,
+                (route) => false,
+              );
             } else {}
           },
           builder: (context, state) {
             var cubit = PharmacyCubit.get(context);
             return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p18,
-                  vertical: AppPadding.p16,
-                ),
-                child: SafeArea(
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p18,
+                    vertical: AppPadding.p16,
+                  ),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -104,7 +108,7 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               ),
                               20.verticalSpace,
                               const Text(
-                                "Phone Number",
+                                AppConstants.phoneNumber,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -113,13 +117,13 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               10.verticalSpace,
                               CustomTextField(
                                 validator: Validators.validatePhone,
-                                prefixIcon: IconsAssets.phoneIconInactive,
+                                prefixIcon: IconsAssets.phoneIcon,
                                 controller: cubit.phoneNumber,
-                                text: "+20  xxxxxxxx",
+                                text: AppConstants.phoneHint,
                               ),
                               20.verticalSpace,
                               const Text(
-                                "Work Email",
+                                AppConstants.workEmail,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -128,13 +132,13 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               10.verticalSpace,
                               CustomTextField(
                                 validator: Validators.validateEmail,
-                                prefixIcon: IconsAssets.emailIconInactive,
+                                prefixIcon: IconsAssets.emailIcon,
                                 controller: cubit.email,
-                                text: "contact@pharmacy.com",
+                                text: AppConstants.emailPharmacyHint,
                               ),
                               20.verticalSpace,
                               const Text(
-                                "Password",
+                                AppConstants.password,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -143,13 +147,13 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               10.verticalSpace,
                               CustomTextField(
                                 validator: Validators.validatePassword,
-                                prefixIcon: IconsAssets.passwordIconInactive,
+                                prefixIcon: IconsAssets.passwordIcon,
                                 controller: cubit.password,
-                                text: "Enter your password",
+                                text: AppConstants.enterPassword,
                               ),
                               20.verticalSpace,
                               const Text(
-                                "Confirm Password",
+                                AppConstants.confirmPassword,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -162,13 +166,13 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                                       value,
                                       cubit.password.text,
                                     ),
-                                prefixIcon: IconsAssets.passwordIconInactive,
+                                prefixIcon: IconsAssets.passwordIcon,
                                 controller: cubit.confirmPasswordController,
-                                text: "Re-enter your password",
+                                text: AppConstants.reEnterPassword,
                               ),
                               20.verticalSpace,
                               const Text(
-                                "Commercial License Number",
+                                AppConstants.commercialLicenseNumber,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
@@ -178,19 +182,22 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               CustomTextField(
                                 validator: Validators.validateMedicalLicense,
                                 controller: cubit.registerNumber,
-                                text: "e.g.LIC-676-78",
+                                text: AppConstants.licenseHint,
                               ),
                               20.verticalSpace,
                               const Text(
-                                "Medical license Upload",
+                                AppConstants.medicalLicenseUpload,
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               10.verticalSpace,
-                              const UploadMedicalLicenseCard(
-                                text: "Upload your Licence",
+                              const UploadCard(
+                                text: AppConstants.uploadYourLicence,
+                                dialogText:
+                                    AppConstants.uploadYourMedicalLicence,
+                                fileName: AppConstants.licensePdf,
                               ),
                             ],
                           ),
@@ -211,77 +218,34 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                                 },
                                 icon: isChecked
                                     ? SvgPicture.asset(
-                                  IconsAssets.checkIconActive,
-                                )
+                                        IconsAssets.checkIconActive,
+                                      )
                                     : SvgPicture.asset(
-                                  IconsAssets.checkIconInactive,
-                                ),
+                                        IconsAssets.checkIconInactive,
+                                      ),
                               ),
                             ),
                             14.horizontalSpace,
-                            Flexible(
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: " I agree to the Docify ",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: ColorManager.black,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " Terms of Service ",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: ColorManager.primary,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ColorManager.primary,
-                                        decorationThickness: 1.5,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " and ",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: ColorManager.black,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " Privacy Policy ",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: ColorManager.primary,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ColorManager.primary,
-                                        decorationThickness: 1.5,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            const Expanded(child: TermsOfService()),
                           ],
                         ),
                         25.verticalSpace,
                         CustomBtn(
-                          text: "Submit for Verification",
+                          text: AppConstants.submitForVerification,
                           onPressed: () {
                             if (!isChecked) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      "Please accept the terms and conditions",
-                                    ),
-                                  ));
+                                const SnackBar(
+                                  content: Text(AppConstants.acceptTerm),
+                                ),
+                              );
                             }
-                            if (_formKey.currentState!.validate() &&
-                                isChecked) {
-                              cubit.pharmacySignUp();
+                            if (_formKey.currentState!.validate()) {
+                              final file = context
+                                  .read<FileHandlerCubit>()
+                                  .pickedFile;
+
+                              cubit.pharmacySignUp(medicalLicence: file);
                             }
                           },
                         ),

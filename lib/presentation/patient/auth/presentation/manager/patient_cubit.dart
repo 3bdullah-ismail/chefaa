@@ -16,17 +16,18 @@ class PatientCubit extends Cubit<PatientState> {
   void setRole(String role) {
     this.role = role;
   }
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
-
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   static PatientCubit get(context) => BlocProvider.of(context);
 
-  Future<void> patientSignUp()async {
+  Future<void> patientSignUp() async {
     emit(SignUpLoadingState());
     print("patientSignUp called");
     try {
@@ -38,13 +39,15 @@ class PatientCubit extends Cubit<PatientState> {
         password: passwordController.text,
         role: role,
       );
-      if(response.patient != null) {
-      await StorageService.savePatient(response.patient!);
+      if (response.user != null) {
+        await StorageService.saveUser(response.user!);
       }
-      if(response.accessToken != null) {
+      if (response.accessToken != null) {
         await StorageService.saveToken(response.accessToken!);
       }
-      emit(SignUpSuccessState(message: response.message,patient: response.patient));
+      emit(
+        SignUpSuccessState(message: response.message, patient: response.user),
+      );
     } catch (e) {
       emit(SignUpErrorState(e.toString()));
     }

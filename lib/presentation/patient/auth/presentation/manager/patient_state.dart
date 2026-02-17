@@ -1,15 +1,20 @@
-import '../../data/models/patient.dart';
+import 'package:chefaa/core/models/auth_response.dart';
 
 sealed class PatientState {}
-final class PatientInitial extends PatientState{}
-final class SignUpSuccessState extends PatientState{
+
+final class PatientInitial extends PatientState {}
+
+final class SignUpSuccessState extends PatientState {
   final String? message;
-  final Patient? patient;
-  SignUpSuccessState({this.message,this.patient});
+  final User? patient;
+
+  SignUpSuccessState({this.message, this.patient});
 }
-final class SignUpErrorState extends PatientState{
+
+final class SignUpErrorState extends PatientState {
   final String message;
+
   SignUpErrorState(this.message);
 }
-final class SignUpLoadingState extends PatientState{}
 
+final class SignUpLoadingState extends PatientState {}

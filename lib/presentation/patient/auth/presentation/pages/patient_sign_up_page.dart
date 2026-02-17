@@ -1,7 +1,10 @@
 import 'package:chefaa/core/resources/assets_manager.dart';
-import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/constants_manager.dart';
+
+import 'package:chefaa/core/widget/already_have_account.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/loading.dart';
+import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/presentation/patient/auth/presentation/manager/patient_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,14 +22,14 @@ import '../manager/patient_state.dart';
 class PatientSignUpPage extends StatefulWidget {
   final String? role;
 
-  PatientSignUpPage({super.key, required this.role});
+  const PatientSignUpPage({super.key, required this.role});
 
   @override
   State<PatientSignUpPage> createState() => _PatientSignUpPageState();
 }
 
 class _PatientSignUpPageState extends State<PatientSignUpPage> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
 
   @override
@@ -77,15 +80,15 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                               child: CustomTextField(
                                 validator: Validators.nameValidator,
                                 controller: cubit.nameController,
-                                text: " First Name",
-                                prefixIcon: IconsAssets.userIconInactive,
+                                text: AppConstants.firstName,
+                                prefixIcon: IconsAssets.userIcon,
                               ),
                             ),
                             Expanded(
                               child: CustomTextField(
                                 validator: Validators.nameValidator,
                                 controller: cubit.userNameController,
-                                text: "Last Name",
+                                text: AppConstants.lastName,
                               ),
                             ),
                           ],
@@ -94,23 +97,23 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         CustomTextField(
                           validator: Validators.validatePhone,
                           controller: cubit.phoneController,
-                          text: " Enter your Phone Number ",
-                          prefixIcon: IconsAssets.phoneIconInactive,
+                          text: AppConstants.enterPhone,
+                          prefixIcon: IconsAssets.phoneIcon,
                         ),
 
                         15.verticalSpace,
                         CustomTextField(
                           validator: Validators.validateEmail,
                           controller: cubit.emailController,
-                          text: " Enter your Email",
-                          prefixIcon: IconsAssets.emailIconInactive,
+                          text: AppConstants.enterEmail,
+                          prefixIcon: IconsAssets.emailIcon,
                         ),
                         15.verticalSpace,
                         CustomTextField(
                           validator: Validators.validatePassword,
                           controller: cubit.passwordController,
-                          text: " Enter your Password",
-                          prefixIcon: IconsAssets.passwordIconInactive,
+                          text: AppConstants.enterPassword,
+                          prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
                         ),
                         15.verticalSpace,
@@ -122,7 +125,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                               ),
                           controller: cubit.confirmPasswordController,
                           text: " Confirm your Password",
-                          prefixIcon: IconsAssets.passwordIconInactive,
+                          prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
                         ),
                         27.verticalSpace,
@@ -135,63 +138,21 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                               child: IconButton(
                                 padding: EdgeInsets.zero,
                                 onPressed: () {
-                                 setState(() {
-                                   isChecked =!isChecked;
-                                 });
+                                  setState(() {
+                                    isChecked = !isChecked;
+                                  });
                                 },
-                                icon:
-                                isChecked
-                                    ?SvgPicture.asset(
-                                  IconsAssets.checkIconActive,
-                                )
-                                : SvgPicture.asset(
-                                  IconsAssets.checkIconInactive,
-                                ),
+                                icon: isChecked
+                                    ? SvgPicture.asset(
+                                        IconsAssets.checkIconActive,
+                                      )
+                                    : SvgPicture.asset(
+                                        IconsAssets.checkIconInactive,
+                                      ),
                               ),
                             ),
                             14.horizontalSpace,
-                            Flexible(
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: " I agree to the Docify ",
-                                      style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: ColorManager.black,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " Terms of Service ",
-                                      style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: ColorManager.primary,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ColorManager.primary,
-                                        decorationThickness: 1.5,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " and ",
-                                      style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: ColorManager.black,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " Privacy Policy ",
-                                      style: TextStyle(
-                                        fontSize: 13.sp,
-                                        color: ColorManager.primary,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ColorManager.primary,
-                                        decorationThickness: 1.5,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            const Expanded(child: TermsOfService()),
                           ],
                         ),
                         50.verticalSpace,
@@ -201,49 +162,18 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                             if (!isChecked) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text(
-                                    "Please accept the terms and conditions",
-                                  ),
-                              ));
+                                  content: Text(AppConstants.acceptTerm),
+                                ),
+                              );
                             }
-                            if (_formKey.currentState!.validate() && isChecked) {
+                            if (_formKey.currentState!.validate() &&
+                                isChecked) {
                               cubit.patientSignUp();
                             }
                           },
                         ),
                         12.verticalSpace,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Do you already have an account?",
-                              style: TextStyle(
-                                color: ColorManager.gray,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                minimumSize: Size.zero,
-                                tapTargetSize: MaterialTapTargetSize.padded,
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: ColorManager.primary,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: ColorManager.primary,
-                                  decorationThickness: 1.5,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        const AlreadyHaveAccount(),
                       ],
                     ),
                   ),

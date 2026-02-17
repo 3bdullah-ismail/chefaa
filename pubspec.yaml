@@ -38,7 +38,7 @@ dependencies:
   pretty_dio_logger:
   dio:
   shared_preferences:
-  flutter_secure_storage:
+  flutter_secure_storage: ^9.2.4
   email_validator:
   flutter_screenutil:
   flutter_native_splash:
@@ -105,5 +105,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-dependency_overrides:
-  flutter_secure_storage_windows: 4.0.0

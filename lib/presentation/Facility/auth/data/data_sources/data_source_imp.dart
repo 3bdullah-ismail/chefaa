@@ -8,7 +8,9 @@ import '../../../../../core/services/network_service.dart';
 @Injectable(as: FacilityAuthDataSource)
 class FacilityAuthDataSourceImp extends FacilityAuthDataSource {
   NetworkService networkService;
+
   FacilityAuthDataSourceImp(this.networkService);
+
   @override
   Future<Response> signUP({
     required String name,

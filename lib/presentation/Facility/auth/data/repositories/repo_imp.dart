@@ -11,7 +11,9 @@ import '../../../../../core/services/storage_service.dart';
 @Injectable(as: FacilityAuthRepo)
 class FacilityRepoImp implements FacilityAuthRepo {
   FacilityAuthDataSource facilityAuthDataSource;
+
   FacilityRepoImp(this.facilityAuthDataSource);
+
   @override
   Future<AuthResponse> signUP({
     required String name,

@@ -1,14 +1,20 @@
 import '../../data/models/Patient.dart';
 
 sealed class CompleteState {}
+
 final class CompleteInitial extends CompleteState {}
-final class CompleteLoadingState extends CompleteState{}
-final class CompleteSuccessState extends CompleteState{
+
+final class CompleteLoadingState extends CompleteState {}
+
+final class CompleteSuccessState extends CompleteState {
   final String? message;
   final PatientUpdate? patient;
-  CompleteSuccessState({this.message,this.patient});
+
+  CompleteSuccessState({this.message, this.patient});
 }
-final class CompleteErrorState extends CompleteState{
+
+final class CompleteErrorState extends CompleteState {
   final String? message;
+
   CompleteErrorState(this.message);
 }

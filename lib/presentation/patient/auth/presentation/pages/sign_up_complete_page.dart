@@ -26,11 +26,17 @@ class SignUpCompletePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             const  SuccessItem(),
+              const SuccessItem(),
               30.verticalSpace,
-              CustomBtn(text: "Complete Your Data", onPressed: () {
-                Navigator.pushReplacementNamed(context, AppRoutesNames.patientSignUpCompleteData);
-              }),
+              CustomBtn(
+                text: "Complete Your Data",
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    AppRoutesNames.patientSignUpCompleteData,
+                  );
+                },
+              ),
             ],
           ),
         ),

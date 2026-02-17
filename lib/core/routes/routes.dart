@@ -7,7 +7,7 @@ import 'package:chefaa/presentation/patient/complete_auth_data/presentation/page
 import 'package:chefaa/presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../presentation/doctor/auth/presentation/pages/singup.dart';
+import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
 import '../../presentation/layout/presentation/pages/layout_page.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/auth/presentation/pages/sign_up_complete_page.dart';

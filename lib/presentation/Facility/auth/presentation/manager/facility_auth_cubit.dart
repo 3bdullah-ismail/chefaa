@@ -26,6 +26,7 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
   TextEditingController specialization = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
   static FacilityAuthCubit get(context) => BlocProvider.of(context);
 
   Future<void> signUp({required PlatformFile? medicalLicence}) async {

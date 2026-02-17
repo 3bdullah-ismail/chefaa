@@ -38,9 +38,7 @@ class PharmacyDataSourceImp implements PharmacyDataSource {
     return networkService.dio.post(
       "/auth/register",
       data: formData,
-      options: Options(
-        contentType: "multipart/form-data"
-      ),
+      options: Options(contentType: "multipart/form-data"),
     );
   }
 }

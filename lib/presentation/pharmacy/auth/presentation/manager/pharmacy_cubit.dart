@@ -3,10 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../../core/widget/file_helper.dart';
 import '../../data/repositories/pharmacy_repo.dart';
-
 
 @injectable
 class PharmacyCubit extends Cubit<PharmacyState> {
@@ -22,27 +19,9 @@ class PharmacyCubit extends Cubit<PharmacyState> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  PlatformFile? medicalLicenceFile;
-
   static PharmacyCubit get(context) => BlocProvider.of(context);
 
-  Future<void> pickFile() async {
-    try {
-      final file = await FileHelper.pickSingleFile();
-
-      if (file != null) {
-        medicalLicenceFile = file;
-        emit(UploadMembershipState(file: file));
-      } else {
-        medicalLicenceFile = null;
-        emit(UploadMembershipState(file: null));
-      }
-    } catch (e) {
-      emit(PharmacyErrorState('Failed to pick file: $e'));
-    }
-  }
-
-  Future<void> pharmacySignUp() async {
+  Future<void> pharmacySignUp({required PlatformFile? medicalLicence}) async {
     emit(PharmacyLoadingState());
     try {
       final response = await pharmacyRepo.pharmacySignUp(
@@ -52,7 +31,7 @@ class PharmacyCubit extends Cubit<PharmacyState> {
         email: email.text,
         role: "pharmacy",
         password: password.text,
-        medicalLicence: medicalLicenceFile!,
+        medicalLicence: medicalLicence!,
         commercialRegisterNumber: registerNumber.text,
       );
       emit(PharmacySuccessState(response.pharmacy!, response.message!));

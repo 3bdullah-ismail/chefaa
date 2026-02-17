@@ -1,14 +1,12 @@
 class Pharmacy {
-  Pharmacy({
-      this.id, 
-      this.name, 
-      this.role,});
+  Pharmacy({this.id, this.name, this.role});
 
   Pharmacy.fromJson(dynamic json) {
     id = json['id'];
     name = json['name'];
     role = json['role'];
   }
+
   String? id;
   String? name;
   String? role;
@@ -20,5 +18,4 @@ class Pharmacy {
     map['role'] = role;
     return map;
   }
-
 }

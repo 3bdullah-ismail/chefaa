@@ -13,6 +13,7 @@ class OptionCard extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
   final double? width;
+
   const OptionCard({
     super.key,
     required this.title,

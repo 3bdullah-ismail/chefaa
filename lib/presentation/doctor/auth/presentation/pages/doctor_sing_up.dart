@@ -1,10 +1,8 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:chefaa/core/config/get_config.dart';
-import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/widget/custom_app_bar.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
-import 'package:chefaa/core/widget/custom_text_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
@@ -30,6 +28,7 @@ class _DocSignUpState extends State<DocSignUp> {
   bool isChecked = false;
 
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -48,14 +47,14 @@ class _DocSignUpState extends State<DocSignUp> {
               );
             } else if (state is SingUpFailure) {
               AnimatedSnackBar.rectangle(
-                'Error',
+                AppConstants.error,
                 state.errorMessage,
                 type: AnimatedSnackBarType.error,
                 brightness: Brightness.dark,
               ).show(context);
             } else if (state is SingUpSuccess) {
               AnimatedSnackBar.rectangle(
-                'Success',
+                AppConstants.success,
                 "Welcome Dr. ${state.userName}!",
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
@@ -72,52 +71,53 @@ class _DocSignUpState extends State<DocSignUp> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        SizedBox(height: 45.h),
+                        45.verticalSpace,
+
                         Row(
                           children: [
                             Expanded(
                               child: CustomTextField(
                                 validator: Validators.nameValidator,
                                 controller: cubit.name,
-                                text: "First Name",
-                                prefixIcon:
-                                    "assets/icons/User_icon_Inactive.svg",
+                                text: AppConstants.firstName,
+                                prefixIcon: IconsAssets.userIcon,
                               ),
                             ),
-                            const SizedBox(width: 4),
+                            8.horizontalSpace,
                             Expanded(
                               child: CustomTextField(
                                 validator: Validators.validateUsername,
                                 controller: cubit.username,
-                                text: "last Name",
+                                text: AppConstants.lastName,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 8.h),
+                        8.verticalSpace,
+
                         CustomTextField(
                           validator: Validators.validatePhone,
                           controller: cubit.phoneNumber,
-                          text: "Enter your phone number",
-                          prefixIcon: "assets/icons/call.svg",
+                          text: AppConstants.enterPhone,
+                          prefixIcon: IconsAssets.phoneIcon,
                         ),
-                        SizedBox(height: 8.h),
+                        8.verticalSpace,
                         CustomTextField(
                           validator: Validators.validateEmail,
                           controller: cubit.email,
-                          text: "Enter your email",
-                          prefixIcon: "assets/icons/Email.svg",
+                          text: AppConstants.enterEmail,
+                          prefixIcon: IconsAssets.emailIcon,
                         ),
-                        SizedBox(height: 8.h),
+                        8.verticalSpace,
                         CustomTextField(
                           validator: Validators.validatePassword,
                           controller: cubit.password,
-                          text: "Enter your password",
-                          prefixIcon: "assets/icons/Password.svg",
+                          text: AppConstants.enterPassword,
+                          prefixIcon: IconsAssets.passwordIcon,
 
                           isPass: true,
                         ),
-                        SizedBox(height: 8.h),
+                        8.verticalSpace,
                         CustomTextField(
                           validator: (value) =>
                               Validators.validateConfirmPassword(
@@ -125,20 +125,20 @@ class _DocSignUpState extends State<DocSignUp> {
                                 cubit.password.text,
                               ),
                           controller: cubit.confirmPasswordController,
-                          text: "Re-enter your password",
-                          prefixIcon: "assets/icons/Password.svg",
+                          text: AppConstants.reEnterPassword,
+                          prefixIcon: IconsAssets.passwordIcon,
 
                           isPass: true,
                         ),
-                        SizedBox(height: 8.h),
+                        8.verticalSpace,
                         CustomTextField(
                           controller: cubit.specialization,
                           text: "Enter your specialization",
                           prefixIcon: "assets/icons/stethoscnnnnope_.svg",
                         ),
-                        SizedBox(height: 8.h),
+                        8.verticalSpace,
                         const UploadCard(),
-                        SizedBox(height: 16.h),
+                        16.verticalSpace,
 
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,15 +156,15 @@ class _DocSignUpState extends State<DocSignUp> {
                                       IconsAssets.checkIconInactive,
                                     ),
                             ),
-                            const SizedBox(width: 12),
-                            Expanded(child: TermsOfService()),
+                            12.horizontalSpace,
+                            const Expanded(child: TermsOfService()),
                           ],
                         ),
                         SizedBox(height: 16.h),
                         CustomBtn(
                           isDisabled:
                               !isChecked || !_formKey.currentState!.validate(),
-                          text: "Submit for Verification",
+                          text: AppConstants.submitForVerification,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               final file = context
@@ -175,7 +175,7 @@ class _DocSignUpState extends State<DocSignUp> {
                             }
                           },
                         ),
-                        AlreadyHaveAccount(),
+                        const AlreadyHaveAccount(),
                       ],
                     ),
                   ),

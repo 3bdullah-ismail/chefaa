@@ -1,13 +1,13 @@
 import 'dart:convert';
 
+import 'package:chefaa/core/models/auth_response.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-import '../../presentation/patient/auth/data/models/patient.dart';
 
 class StorageService {
   static String? token;
-  static Patient? patient;
+  static User? patient;
   static const _storage = FlutterSecureStorage(aOptions: AndroidOptions());
+
   static Future<void> saveToken(String value) {
     token = value;
     return _storage.write(key: 'token', value: value);
@@ -18,7 +18,8 @@ class StorageService {
     token = value;
     return value;
   }
-  static Future<void> savePatient(Patient value) async {
+
+  static Future<void> saveUser(User value) async {
     final jsonString = jsonEncode(value.toJson());
     await _storage.write(key: 'patient', value: jsonString);
     patient = value;

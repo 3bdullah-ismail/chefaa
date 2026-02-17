@@ -1,4 +1,6 @@
+import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
@@ -10,12 +12,14 @@ import '../widgets/option_card.dart';
 
 class FacilityOptionScreen extends StatefulWidget {
   const FacilityOptionScreen({super.key});
+
   @override
   State<FacilityOptionScreen> createState() => _FacilityOptionScreenState();
 }
 
 class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
   String? selectedRole;
+
   void onSelect(String role) {
     setState(() {
       selectedRole = role;
@@ -50,18 +54,18 @@ class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
                   children: [
                     OptionCard(
                       width: 330,
-                      title: "Pharmacy",
-                      image: "assets/images/drugs.png",
-                      isSelected: selectedRole == "Pharmacy",
-                      onTap: () => onSelect("Pharmacy"),
+                      title: AppConstants.pharmacy,
+                      image: ImageAssets.drugs,
+                      isSelected: selectedRole == AppConstants.pharmacy,
+                      onTap: () => onSelect(AppConstants.pharmacy),
                     ),
 
                     OptionCard(
                       width: 330,
                       title: "Medical Lab /\nRadiology Center",
                       image: "assets/images/lab.png",
-                      isSelected: selectedRole == "Lab",
-                      onTap: () => onSelect("Lab"),
+                      isSelected: selectedRole == AppConstants.lab,
+                      onTap: () => onSelect(AppConstants.lab),
                     ),
 
                     Padding(
@@ -72,13 +76,17 @@ class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
                           NextButton(
                             isEnabled: selectedRole != null,
                             onTap: () {
-                              if (selectedRole == "Lab") {
+                              if (selectedRole == AppConstants.lab) {
                                 Navigator.pushReplacementNamed(
                                   context,
                                   AppRoutesNames.facilitySignUp,
                                 );
-                              } else if (selectedRole == "Pharmacy") {
-                                Navigator.pushNamed(context, "/");
+                              } else if (selectedRole ==
+                                  AppConstants.pharmacy) {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutesNames.pharmacySignUp,
+                                );
                               }
                             },
                           ),

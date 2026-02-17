@@ -7,7 +7,9 @@ import 'data_source.dart';
 @Injectable(as: DoctorAuthDataSource)
 class DoctorAuthDataSourceImp implements DoctorAuthDataSource {
   NetworkService networkService;
+
   DoctorAuthDataSourceImp(this.networkService);
+
   @override
   Future<Response> signUp({
     required String name,

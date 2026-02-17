@@ -17,10 +17,12 @@ class AuthResponse {
     _refreshToken = json['refreshToken'];
     _user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
+
   String? _message;
   String? _accessToken;
   String? _refreshToken;
   User? _user;
+
   AuthResponse copyWith({
     String? message,
     String? accessToken,
@@ -32,9 +34,13 @@ class AuthResponse {
     refreshToken: refreshToken ?? _refreshToken,
     user: user ?? _user,
   );
+
   String? get message => _message;
+
   String? get accessToken => _accessToken;
+
   String? get refreshToken => _refreshToken;
+
   User? get user => _user;
 
   Map<String, dynamic> toJson() {
@@ -61,13 +67,18 @@ class User {
     _name = json['name'];
     _role = json['role'];
   }
+
   String? _id;
   String? _name;
   String? _role;
+
   User copyWith({String? id, String? name, String? role}) =>
       User(id: id ?? _id, name: name ?? _name, role: role ?? _role);
+
   String? get id => _id;
+
   String? get name => _name;
+
   String? get role => _role;
 
   Map<String, dynamic> toJson() {

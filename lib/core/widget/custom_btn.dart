@@ -12,9 +12,11 @@ class CustomBtn extends StatelessWidget {
     required this.onPressed,
     this.isDisabled = false,
   });
+
   final String text;
   final Function() onPressed;
   final bool isDisabled;
+
   @override
   Widget build(BuildContext context) {
     return Center(
