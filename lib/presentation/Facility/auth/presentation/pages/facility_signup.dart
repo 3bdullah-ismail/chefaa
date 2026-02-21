@@ -10,6 +10,7 @@ import 'package:chefaa/core/widget/upload_container.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,6 +19,7 @@ import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/resources/constants_manager.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/loading_dialog.dart';
+import '../../../../../core/widget/license_formatter.dart';
 import '../widgets/labeled_text_field.dart';
 
 class FacilitySignup extends StatefulWidget {
@@ -130,12 +132,12 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              LabeledTextField(
-                                validator: Validators.nameValidator,
-                                label: AppConstants.facilityName,
-                                controller: cubit.name,
-                                hint: "e.g. Alpa Labs/Scan",
-                              ),
+                              // LabeledTextField(
+                              //   validator: Validators.nameValidator,
+                              //   label: AppConstants.facilityName,
+                              //   controller: cubit.name,
+                              //   hint: "e.g. Alpa Labs/Scan",
+                              // ),
                               LabeledTextField(
                                 label: AppConstants.facilityName,
                                 controller: cubit.username,
@@ -176,6 +178,11 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 prefixIcon: IconsAssets.passwordIcon,
                               ),
                               LabeledTextField(
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                                  LicenseFormatter(),
+                                ],
+                                validator: Validators.validateLicense,
                                 label: AppConstants.commercialLicenseNumber,
                                 controller: cubit.commercialRegisterNumber,
                                 hint: AppConstants.licenseHint,
@@ -239,7 +246,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 48),
+                      const SizedBox(height: 25),
                       Padding(
                         padding: const EdgeInsets.all(24),
                         child: Row(
@@ -278,8 +285,9 @@ class _FacilitySignupState extends State<FacilitySignup> {
                           }
                         },
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 15),
                       const AlreadyHaveAccount(),
+                      const SizedBox(height: 25),
                     ],
                   ),
                 ),

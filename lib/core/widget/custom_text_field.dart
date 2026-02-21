@@ -1,6 +1,7 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -14,6 +15,7 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.completeData = false,
     this.suffixText = "",
+    this.inputFormatters,
   });
 
   final TextEditingController controller;
@@ -24,6 +26,7 @@ class CustomTextField extends StatefulWidget {
   final String? prefixIcon;
   final bool completeData;
   final String? suffixText;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -102,6 +105,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       obscureText: _isObscure,
+      inputFormatters: widget.inputFormatters,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         final result = widget.validator?.call(value);

@@ -64,16 +64,17 @@ class Validators {
     return null;
   }
 
-  static String? validateMedicalLicense(String? value) {
+  static String? validateLicense(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Medical license number is required';
+      return 'License number is required';
     }
-    final formatted = value.trim().toUpperCase();
 
-    final regex = RegExp(r'^(ALP|LIC)-\d{2,3}-\d{2,3}$');
+    final cleaned = value.replaceAll('-', '');
 
-    if (!regex.hasMatch(formatted)) {
-      return 'Format must be ALP-234-896 or LIC-67-78';
+    final regex = RegExp(r'^[A-Z]{3}\d{6}$');
+
+    if (!regex.hasMatch(cleaned)) {
+      return 'Enter 3 letters followed by 6 numbers';
     }
 
     return null;

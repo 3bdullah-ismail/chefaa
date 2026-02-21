@@ -12,12 +12,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/config/get_config.dart';
+import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../../../../../core/widget/validators.dart';
 import '../manager/patient_state.dart';
+import '../widgets/success_dialog.dart';
 
 class PatientSignUpPage extends StatefulWidget {
   final String? role;
@@ -53,10 +55,14 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
             }
             if (state is SignUpSuccessState) {
               Loading.hide(context);
-              Navigator.pushReplacementNamed(
-                context,
-                AppRoutesNames.patientSignUpComplete,
-              );
+              showDialog(context: context, builder: (context)=>SuccessDialog(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutesNames.patientSignUpCompleteData,
+                          (route) => false,);
+                  }
+              ));
             }
           },
           builder: (context, state) {
@@ -157,17 +163,11 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         ),
                         50.verticalSpace,
                         CustomBtn(
-                          text: "Create Account",
+                          isDisabled:
+                          !isChecked || !_formKey.currentState!.validate(),
+                          text: AppConstants.createAccount,
                           onPressed: () {
-                            if (!isChecked) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(AppConstants.acceptTerm),
-                                ),
-                              );
-                            }
-                            if (_formKey.currentState!.validate() &&
-                                isChecked) {
+                            if (_formKey.currentState!.validate()) {
                               cubit.patientSignUp();
                             }
                           },

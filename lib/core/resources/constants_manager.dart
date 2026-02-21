@@ -28,6 +28,7 @@ class AppConstants {
   static const String medicalLicenseUpload = "Medical  license Upload";
   static const String uploadYourLicence = "Upload your licence";
   static const String uploadYourMedicalLicence = "Upload your Medical License";
+  static const String createAccount = "Create Account";
   static const String submitForVerification = "Submit for Verification";
   static const String acceptTerm = "Please accept the terms and conditions";
   static final List<String> chronicDiseases = [

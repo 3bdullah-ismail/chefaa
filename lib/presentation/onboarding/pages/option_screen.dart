@@ -6,6 +6,7 @@ import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import '../../../core/resources/font_manager.dart';
+import '../../../core/resources/values_manager.dart';
 import '../../../core/widget/custom_app_bar.dart';
 import '../widgets/option_card.dart';
 
@@ -71,7 +72,10 @@ class _OptionScreenState extends State<OptionScreen> {
               ),
 
               Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const  EdgeInsets.symmetric(
+                  horizontal: AppPadding.p60,
+                  vertical: AppPadding.p48,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

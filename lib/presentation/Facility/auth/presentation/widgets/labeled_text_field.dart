@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
@@ -11,6 +12,8 @@ class LabeledTextField extends StatelessWidget {
   final String? prefixIcon;
   final bool isPassword;
   final String? Function(String? value)? validator;
+  final List<TextInputFormatter>? inputFormatters;
+
   const LabeledTextField({
     super.key,
     required this.label,
@@ -19,6 +22,7 @@ class LabeledTextField extends StatelessWidget {
     this.prefixIcon,
     this.isPassword = false,
     this.validator,
+    this.inputFormatters,
   });
 
   @override
@@ -32,6 +36,8 @@ class LabeledTextField extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CustomTextField(
+          key: ValueKey(label),
+          inputFormatters: inputFormatters,
           validator: validator,
           controller: controller,
           text: hint,

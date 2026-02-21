@@ -11,6 +11,7 @@ import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/core/widget/upload_container.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,6 +20,7 @@ import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../manager/pharmacy_cubit.dart';
 import '../manager/pharmacy_state.dart';
+import '../../../../../core/widget/license_formatter.dart';
 
 class PharmacySignUpPage extends StatefulWidget {
   const PharmacySignUpPage({super.key});
@@ -180,7 +182,11 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               ),
                               10.verticalSpace,
                               CustomTextField(
-                                validator: Validators.validateMedicalLicense,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                                  LicenseFormatter(),
+                                ],
+                                validator: Validators.validateLicense,
                                 controller: cubit.registerNumber,
                                 text: AppConstants.licenseHint,
                               ),
@@ -230,16 +236,12 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                           ],
                         ),
                         25.verticalSpace,
+
                         CustomBtn(
+                          isDisabled:
+                          !isChecked || !_formKey.currentState!.validate(),
                           text: AppConstants.submitForVerification,
                           onPressed: () {
-                            if (!isChecked) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(AppConstants.acceptTerm),
-                                ),
-                              );
-                            }
                             if (_formKey.currentState!.validate()) {
                               final file = context
                                   .read<FileHandlerCubit>()

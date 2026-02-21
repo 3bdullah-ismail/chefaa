@@ -21,7 +21,7 @@ class FileHandlerCubit extends Cubit<FileHandlerState> {
         pickedFile = file;
         emit(FilePickedSuccess(file));
       } else {
-        emit(FileHandlerInitial()); // رجوع للحالة الأولى لو كنسل
+        emit(FileHandlerInitial());
       }
     } catch (e) {
       emit(FileError('Failed to pick file: $e'));

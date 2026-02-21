@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
 import '../../presentation/layout/presentation/pages/layout_page.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
-import '../../presentation/patient/auth/presentation/pages/sign_up_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
 
@@ -30,9 +29,6 @@ class Routes {
       case AppRoutesNames.patientSignUp:
         final role = settings.arguments as String;
         return MaterialPageRoute(builder: (_) => PatientSignUpPage(role: role));
-      case AppRoutesNames.patientSignUpComplete:
-        return MaterialPageRoute(builder: (_) => const SignUpCompletePage());
-
       case AppRoutesNames.patientSignUpCompleteChronicDiseases:
         final args = settings.arguments as List<dynamic>;
         final weight = args[0] as double;

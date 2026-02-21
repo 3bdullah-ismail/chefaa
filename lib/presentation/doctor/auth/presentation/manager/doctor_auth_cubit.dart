@@ -29,7 +29,6 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
     }
     emit(SingUpLoading());
     try {
-      print(username.text);
       final response = await doctorAuthRepo.signUp(
         name: name.text,
         email: email.text,
