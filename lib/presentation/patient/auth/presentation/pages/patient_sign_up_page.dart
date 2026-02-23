@@ -12,7 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/config/get_config.dart';
-import '../../../../../core/manager/file_handler_cubit.dart';
+
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/custom_app_bar.dart';

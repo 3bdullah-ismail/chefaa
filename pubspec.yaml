@@ -52,6 +52,8 @@ dependencies:
   dart_either:
   dropdown_button2:
   table_calendar:
+  animated_toggle: ^0.1.3
+  flutter_otp_text_field: ^1.5.1+1
 dev_dependencies:
   injectable_generator:
   build_runner:

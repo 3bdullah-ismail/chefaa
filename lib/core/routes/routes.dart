@@ -1,17 +1,21 @@
-import 'package:chefaa/core/routes/app_routes_names.dart';
-import 'package:chefaa/presentation/Facility/auth/presentation/pages/facility_signup.dart';
-import 'package:chefaa/presentation/onboarding/pages/Facility_option.dart';
-import 'package:chefaa/presentation/onboarding/pages/onboarding_page.dart';
-import 'package:chefaa/presentation/onboarding/pages/option_screen.dart';
-import 'package:chefaa/presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
-import 'package:chefaa/presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
+
+import '../../presentation/auth/presentation/pages/forget_password.dart';
+import '../../presentation/auth/presentation/pages/reset_code.dart';
+import '../../presentation/auth/presentation/pages/reset_password.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
 import '../../presentation/layout/presentation/pages/layout_page.dart';
+import '../../presentation/onboarding/pages/facility_option.dart';
+import '../../presentation/onboarding/pages/onboarding_page.dart';
+import '../../presentation/onboarding/pages/option_screen.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
+import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
+import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
 import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
+import 'app_routes_names.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -69,13 +73,18 @@ class Routes {
 
       case AppRoutesNames.layout:
         return MaterialPageRoute(builder: (_) => const LayoutPage());
-
+      case AppRoutesNames.resetCode:
+        int index = settings.arguments as int;
+        return MaterialPageRoute(builder: (_) => ResetCode(index: index));
+      case AppRoutesNames.resetPassword:
+        return MaterialPageRoute(builder: (_) => ResetPassword());
       case AppRoutesNames.patientSignUpCompleteData:
         return MaterialPageRoute(builder: (_) => const FirstCompletePage());
 
       case AppRoutesNames.pharmacySignUp:
         return MaterialPageRoute(builder: (_) => const PharmacySignUpPage());
-
+      case AppRoutesNames.forgetPassword:
+        return MaterialPageRoute(builder: (_) => const ForgetPassword());
       default:
         return MaterialPageRoute(
           builder: (context) =>

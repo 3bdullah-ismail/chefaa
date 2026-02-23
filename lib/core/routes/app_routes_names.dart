@@ -12,4 +12,7 @@ class AppRoutesNames {
   static const String pharmacySignUp = '/pharmacySignUp';
   static const String facilitySignUp = '/facilitySignUp';
   static const String facilityOption = '/facilityOption';
+  static const String forgetPassword = '/forgetPassword';
+  static const String resetCode = '/resetCode';
+  static const String resetPassword = '/resetPassword';
 }

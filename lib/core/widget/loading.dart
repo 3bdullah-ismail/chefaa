@@ -5,7 +5,7 @@ import '../resources/color_manager.dart';
 class Loading {
   static bool _isLoading = false;
 
-  static show(BuildContext context) {
+  static Future<void> show(BuildContext context) async {
     _isLoading = true;
     showDialog(
       context: context,
@@ -20,7 +20,7 @@ class Loading {
     );
   }
 
-  static hide(BuildContext context) {
+  static void hide(BuildContext context) {
     if (_isLoading) {
       Navigator.pop(context);
       _isLoading = false;

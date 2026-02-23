@@ -1,6 +1,5 @@
 import 'package:chefaa/presentation/patient/auth/data/data_sources/patient_data_source.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/response.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/services/network_service.dart';

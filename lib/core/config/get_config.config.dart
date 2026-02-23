@@ -12,6 +12,12 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../presentation/auth/data/data_sources/data_source.dart' as _i576;
+import '../../presentation/auth/data/data_sources/data_source_imp.dart'
+    as _i124;
+import '../../presentation/auth/data/repositories/repo.dart' as _i246;
+import '../../presentation/auth/data/repositories/repo_imp.dart' as _i49;
+import '../../presentation/auth/presentation/manager/auth_cubit.dart' as _i301;
 import '../../presentation/doctor/auth/data/data_sources/data_source.dart'
     as _i184;
 import '../../presentation/doctor/auth/data/data_sources/data_source_imp.dart'
@@ -89,6 +95,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i184.DoctorAuthDataSource>(
       () => _i964.DoctorAuthDataSourceImp(gh<_i463.NetworkService>()),
     );
+    gh.factory<_i576.AuthDataSource>(
+      () => _i124.AuthDataSourceImp(gh<_i463.NetworkService>()),
+    );
+    gh.factory<_i246.AuthRepo>(
+      () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()),
+    );
     gh.factory<_i551.DoctorAuthRepo>(
       () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()),
     );
@@ -113,6 +125,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i596.PharmacyRepoImp(
         pharmacyDataSource: gh<_i565.PharmacyDataSource>(),
       ),
+    );
+    gh.factory<_i301.AuthCubit>(
+      () => _i301.AuthCubit(repo: gh<_i246.AuthRepo>()),
     );
     gh.factory<_i236.DoctorAuthCubit>(
       () => _i236.DoctorAuthCubit(gh<_i551.DoctorAuthRepo>()),
