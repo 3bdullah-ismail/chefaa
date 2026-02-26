@@ -1,9 +1,8 @@
 import 'package:chefaa/presentation/patient/complete_auth_data/data/data_sources/complete_data_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../../../core/error_handling/error_handler.dart';
-import '../models/Complete_patient.dart';
+import '../models/complete_patient_data_response.dart';
 import 'complete_patient_repo.dart';
 
 @Injectable(as: CompletePatientRepo)
@@ -13,7 +12,7 @@ class CompletePatientRepoImp implements CompletePatientRepo {
   CompletePatientRepoImp({required this.completeDataSource});
 
   @override
-  Future<CompletePatient> completeSignUp({
+  Future<CompletePatientDataResponse> completeSignUp({
     required double? weight,
     required int? height,
     required String? bloodType,
@@ -34,7 +33,8 @@ class CompletePatientRepoImp implements CompletePatientRepo {
       );
 
       if (response.statusCode == 200) {
-        CompletePatient patient = CompletePatient.fromJson(response.data);
+        CompletePatientDataResponse patient =
+            CompletePatientDataResponse.fromJson(response.data);
         return patient;
       } else {
         var error = ErrorHandler.fromJson(response.data);

@@ -1,7 +1,6 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/presentation/pharmacy/auth/data/data_sources/pharmacy_data_source.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/response.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
 

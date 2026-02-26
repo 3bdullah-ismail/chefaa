@@ -1,30 +1,17 @@
-import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/presentation/patient/complete_auth_data/presentation/widgets/complete_data_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/constants_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
+import '../manager/complete_cubit.dart';
+import 'last_complete_data.dart';
 
 class SecondCompletePage extends StatefulWidget {
-  final double? weight;
-  final int? height;
-  final String? bloodType;
-  final String? gender;
-  final DateTime? birthDate;
-
-  const SecondCompletePage({
-    super.key,
-    required this.weight,
-    required this.height,
-    required this.bloodType,
-    required this.gender,
-    required this.birthDate,
-  });
-
+  const SecondCompletePage({super.key});
   @override
   State<SecondCompletePage> createState() => _SecondCompletePageState();
 }
@@ -32,7 +19,6 @@ class SecondCompletePage extends StatefulWidget {
 class _SecondCompletePageState extends State<SecondCompletePage> {
   List<String> selectedDiseases = [];
   final TextEditingController controller = TextEditingController();
-
   void _onSelectionChanged(String disease) {
     setState(() {
       if (selectedDiseases.contains(disease)) {
@@ -71,7 +57,6 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                     itemBuilder: (context, index) {
                       final disease = AppConstants.chronicDiseases[index];
                       final isSelected = selectedDiseases.contains(disease);
-
                       return GestureDetector(
                         onTap: () => _onSelectionChanged(disease),
                         child: Container(
@@ -84,13 +69,15 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                           margin: EdgeInsets.symmetric(vertical: 3.h),
                           decoration: BoxDecoration(
                             color: isSelected
-                                ? ColorManager.gray.withOpacity(0.35)
+                                ? ColorManager.gray.withValues(alpha: 0.35)
                                 : ColorManager.transparent,
                             borderRadius: BorderRadius.circular(12.r),
                             boxShadow: isSelected
                                 ? [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.2),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.2,
+                                      ),
                                       blurRadius: 4,
                                       offset: const Offset(0, 4),
                                     ),
@@ -125,24 +112,21 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
             CustomBtn(
               text: "Continue",
               onPressed: () {
+                final cubit = CompleteCubit.get(context);
                 final input = controller.text.trim();
                 final diseases = List<String>.from(selectedDiseases);
-
                 if (input.isNotEmpty && !diseases.contains(input)) {
                   diseases.add(input);
                 }
-
-                Navigator.pushReplacementNamed(
+                cubit.setChronicDiseases(diseases);
+                Navigator.push(
                   context,
-                  AppRoutesNames.patientSignUpCompleteMedicines,
-                  arguments: [
-                    widget.weight,
-                    widget.height,
-                    widget.bloodType,
-                    widget.gender,
-                    widget.birthDate,
-                    diseases,
-                  ],
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: CompleteCubit.get(context),
+                      child: const LastCompleteData(),
+                    ),
+                  ),
                 );
               },
             ),

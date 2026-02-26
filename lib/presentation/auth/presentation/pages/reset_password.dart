@@ -5,7 +5,6 @@ import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
-import '../../../../core/routes/app_routes_names.dart';
 import '../../../../core/widget/custom_app_bar.dart';
 import '../../../../core/widget/custom_btn.dart';
 import '../../../../core/widget/custom_text_field.dart';
@@ -16,7 +15,6 @@ import '../widgets/back_button.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
-
   void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,

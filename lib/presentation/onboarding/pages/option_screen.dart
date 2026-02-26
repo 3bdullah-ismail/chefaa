@@ -5,6 +5,7 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/resources/font_manager.dart';
 import '../../../core/resources/values_manager.dart';
 import '../../../core/widget/custom_app_bar.dart';
@@ -33,78 +34,80 @@ class _OptionScreenState extends State<OptionScreen> {
         preferredSize: Size.fromHeight(175),
         child: CustomAppBar(),
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 48),
-              Text(
-                "Choose who you are",
-                style: getBoldStyle(
-                  color: ColorManager.black,
-                  fontSize: FontSize.s24,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                48.verticalSpace,
+                Text(
+                  "Choose who you are",
+                  style: getBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: FontSize.s24,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              OptionCard(
-                title: AppConstants.doctor,
-                image: ImageAssets.doctor,
-                isSelected: selectedRole == AppConstants.doctor,
-                onTap: () => onSelect(AppConstants.doctor),
-              ),
-              const SizedBox(height: 32),
-
-              OptionCard(
-                title: AppConstants.patient,
-                image: ImageAssets.patient,
-                isSelected: selectedRole == AppConstants.patient,
-                onTap: () => onSelect(AppConstants.patient),
-              ),
-
-              const SizedBox(height: 32),
-
-              OptionCard(
-                title: AppConstants.facility,
-                image: ImageAssets.drugs,
-                isSelected: selectedRole == AppConstants.facility,
-                onTap: () => onSelect(AppConstants.facility),
-              ),
-
-              Padding(
-                padding: const  EdgeInsets.symmetric(
-                  horizontal: AppPadding.p60,
-                  vertical: AppPadding.p48,
+                24.verticalSpace,
+                OptionCard(
+                  title: AppConstants.doctor,
+                  image: ImageAssets.doctor,
+                  isSelected: selectedRole == AppConstants.doctor,
+                  onTap: () => onSelect(AppConstants.doctor),
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    NextButton(
-                      isEnabled: selectedRole != null,
-                      onTap: () {
-                        if (selectedRole == AppConstants.doctor) {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            AppRoutesNames.docSignUp,
-                          );
-                        } else if (selectedRole == AppConstants.patient) {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            AppRoutesNames.patientSignUp,
-                            arguments: AppConstants.patient.toLowerCase(),
-                          );
-                        } else if (selectedRole == AppConstants.facility) {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutesNames.facilityOption,
-                          );
-                        }
-                      },
-                    ),
-                  ],
+                32.verticalSpace,
+
+                OptionCard(
+                  title: AppConstants.patient,
+                  image: ImageAssets.patient,
+                  isSelected: selectedRole == AppConstants.patient,
+                  onTap: () => onSelect(AppConstants.patient),
                 ),
-              ),
-            ],
+
+                32.verticalSpace,
+
+                OptionCard(
+                  title: AppConstants.facility,
+                  image: ImageAssets.drugs,
+                  isSelected: selectedRole == AppConstants.facility,
+                  onTap: () => onSelect(AppConstants.facility),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p60,
+                    vertical: AppPadding.p48,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      NextButton(
+                        isEnabled: selectedRole != null,
+                        onTap: () {
+                          if (selectedRole == AppConstants.doctor) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutesNames.docSignUp,
+                            );
+                          } else if (selectedRole == AppConstants.patient) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutesNames.patientSignUp,
+                              arguments: AppConstants.patient.toLowerCase(),
+                            );
+                          } else if (selectedRole == AppConstants.facility) {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutesNames.facilityOption,
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

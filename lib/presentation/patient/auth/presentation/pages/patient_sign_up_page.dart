@@ -1,6 +1,5 @@
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/constants_manager.dart';
-
 import 'package:chefaa/core/widget/already_have_account.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/loading.dart';
@@ -10,22 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../../../core/config/get_config.dart';
-
 import '../../../../../core/resources/values_manager.dart';
-import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../../../../../core/widget/validators.dart';
+import '../../../complete_auth_data/presentation/manager/complete_cubit.dart';
+import '../../../complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../manager/patient_state.dart';
 import '../widgets/success_dialog.dart';
 
 class PatientSignUpPage extends StatefulWidget {
   final String? role;
-
   const PatientSignUpPage({super.key, required this.role});
-
   @override
   State<PatientSignUpPage> createState() => _PatientSignUpPageState();
 }
@@ -33,12 +29,10 @@ class PatientSignUpPage extends StatefulWidget {
 class _PatientSignUpPageState extends State<PatientSignUpPage> {
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<PatientCubit>()..setRole(widget.role!),
-
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: const PreferredSize(
@@ -55,19 +49,26 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
             }
             if (state is SignUpSuccessState) {
               Loading.hide(context);
-              showDialog(context: context, builder: (context)=>SuccessDialog(
+              showDialog(
+                context: context,
+                builder: (context) => SuccessDialog(
                   onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
+                    Navigator.push(
                       context,
-                      AppRoutesNames.patientSignUpCompleteData,
-                          (route) => false,);
-                  }
-              ));
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider(
+                          create: (_) => getIt<CompleteCubit>(),
+                          child: const FirstCompletePage(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
             }
           },
           builder: (context, state) {
             final cubit = PatientCubit.get(context);
-
             return SafeArea(
               child: SingleChildScrollView(
                 child: Padding(
@@ -92,7 +93,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                             ),
                             Expanded(
                               child: CustomTextField(
-                                validator: Validators.nameValidator,
+                                validator: Validators.validateUsername,
                                 controller: cubit.userNameController,
                                 text: AppConstants.lastName,
                               ),
@@ -164,7 +165,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         50.verticalSpace,
                         CustomBtn(
                           isDisabled:
-                          !isChecked || !_formKey.currentState!.validate(),
+                              !isChecked || !_formKey.currentState!.validate(),
                           text: AppConstants.createAccount,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

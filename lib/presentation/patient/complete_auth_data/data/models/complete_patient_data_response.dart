@@ -1,9 +1,9 @@
-import 'Patient.dart';
+import 'patient.dart';
 
-class CompletePatient {
-  CompletePatient({this.message, this.patient});
+class CompletePatientDataResponse {
+  CompletePatientDataResponse({this.message, this.patient});
 
-  CompletePatient.fromJson(dynamic json) {
+  CompletePatientDataResponse.fromJson(dynamic json) {
     message = json['message'];
     patient = json['patient'] != null
         ? PatientUpdate.fromJson(json['patient'])

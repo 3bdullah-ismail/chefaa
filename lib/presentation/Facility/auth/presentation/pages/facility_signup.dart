@@ -179,7 +179,9 @@ class _FacilitySignupState extends State<FacilitySignup> {
                               ),
                               LabeledTextField(
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'[a-zA-Z0-9]'),
+                                  ),
                                   LicenseFormatter(),
                                 ],
                                 validator: Validators.validateLicense,

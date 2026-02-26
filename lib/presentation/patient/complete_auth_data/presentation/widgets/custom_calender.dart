@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../../core/resources/color_manager.dart';
 
 class CustomCalendarField extends StatefulWidget {
@@ -10,7 +9,6 @@ class CustomCalendarField extends StatefulWidget {
   final DateTime? initialDate;
   final ValueChanged<DateTime> onDateSelected;
   final TextEditingController controller;
-
   const CustomCalendarField({
     required this.validator,
     super.key,
@@ -18,7 +16,6 @@ class CustomCalendarField extends StatefulWidget {
     required this.onDateSelected,
     required this.controller,
   });
-
   @override
   State<CustomCalendarField> createState() => _CustomCalendarFieldState();
 }

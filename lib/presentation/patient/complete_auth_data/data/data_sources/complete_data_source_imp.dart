@@ -1,6 +1,5 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/src/response.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/services/storage_service.dart';

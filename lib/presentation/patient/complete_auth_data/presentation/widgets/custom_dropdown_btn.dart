@@ -43,7 +43,7 @@ class CustomDropDownBtn extends StatelessWidget {
         hintStyle: TextStyle(
           fontSize: 16.sp,
           fontWeight: FontWeight.w500,
-          color: ColorManager.gray.withOpacity(0.7),
+          color: ColorManager.gray.withValues(alpha: 0.7),
         ),
       ),
 
@@ -57,7 +57,9 @@ class CustomDropDownBtn extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 16.w),
             decoration: BoxDecoration(
-              color: isSelected ? ColorManager.primary.withOpacity(0.08) : null,
+              color: isSelected
+                  ? ColorManager.primary.withValues(alpha: 0.08)
+                  : null,
               borderRadius: BorderRadius.circular(10.r),
             ),
             child: Row(
@@ -72,7 +74,7 @@ class CustomDropDownBtn extends StatelessWidget {
                           : FontWeight.w500,
                       color: isSelected
                           ? ColorManager.primary
-                          : ColorManager.black.withOpacity(0.85),
+                          : ColorManager.black.withValues(alpha: 0.85),
                       height: 1.35,
                     ),
                   ),

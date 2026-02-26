@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
-
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
 import '../../presentation/auth/presentation/pages/reset_password.dart';
@@ -34,53 +32,18 @@ class Routes {
         final role = settings.arguments as String;
         return MaterialPageRoute(builder: (_) => PatientSignUpPage(role: role));
       case AppRoutesNames.patientSignUpCompleteChronicDiseases:
-        final args = settings.arguments as List<dynamic>;
-        final weight = args[0] as double;
-        final height = args[1] as int;
-        final bloodType = args[2] as String;
-        final gender = args[3] as String;
-        final birthDate = args[4] as DateTime;
-
-        return MaterialPageRoute(
-          builder: (_) => SecondCompletePage(
-            weight: weight,
-            height: height,
-            bloodType: bloodType,
-            gender: gender,
-            birthDate: birthDate,
-          ),
-        );
-
+        return MaterialPageRoute(builder: (_) => const SecondCompletePage());
       case AppRoutesNames.patientSignUpCompleteMedicines:
-        final args = settings.arguments as List<dynamic>;
-        final weight = args[0] as double;
-        final height = args[1] as int;
-        final bloodType = args[2] as String;
-        final gender = args[3] as String;
-        final birthDate = args[4] as DateTime;
-        final chronicDiseases = args[5] as List<String>;
-
-        return MaterialPageRoute(
-          builder: (_) => LastCompleteData(
-            weight: weight,
-            height: height,
-            bloodType: bloodType,
-            gender: gender,
-            birthDate: birthDate,
-            chronicDiseases: chronicDiseases,
-          ),
-        );
-
+        return MaterialPageRoute(builder: (_) => const LastCompleteData());
       case AppRoutesNames.layout:
         return MaterialPageRoute(builder: (_) => const LayoutPage());
       case AppRoutesNames.resetCode:
         int index = settings.arguments as int;
         return MaterialPageRoute(builder: (_) => ResetCode(index: index));
       case AppRoutesNames.resetPassword:
-        return MaterialPageRoute(builder: (_) => ResetPassword());
+        return MaterialPageRoute(builder: (_) => const ResetPassword());
       case AppRoutesNames.patientSignUpCompleteData:
         return MaterialPageRoute(builder: (_) => const FirstCompletePage());
-
       case AppRoutesNames.pharmacySignUp:
         return MaterialPageRoute(builder: (_) => const PharmacySignUpPage());
       case AppRoutesNames.forgetPassword:

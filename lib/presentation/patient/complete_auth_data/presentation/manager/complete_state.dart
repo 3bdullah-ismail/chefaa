@@ -1,5 +1,6 @@
-import '../../data/models/Patient.dart';
+part of 'complete_cubit.dart';
 
+@immutable
 sealed class CompleteState {}
 
 final class CompleteInitial extends CompleteState {}

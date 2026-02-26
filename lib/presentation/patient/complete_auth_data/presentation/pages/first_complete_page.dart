@@ -1,18 +1,18 @@
 import 'package:chefaa/core/widget/custom_btn.dart';
+import 'package:chefaa/presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
-import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/custom_text_field.dart';
+import '../manager/complete_cubit.dart';
 import '../widgets/complete_data_container.dart';
 import '../widgets/custom_calender.dart';
 import '../widgets/custom_dropdown_btn.dart';
 
 class FirstCompletePage extends StatefulWidget {
   const FirstCompletePage({super.key});
-
   @override
   State<FirstCompletePage> createState() => _FirstCompletePageState();
 }
@@ -23,10 +23,8 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
   final TextEditingController heightController = TextEditingController();
   final TextEditingController bloodTypeController = TextEditingController();
   final TextEditingController birthController = TextEditingController();
-
   String? gender;
   DateTime? birthDate;
-
   @override
   void dispose() {
     weightController.dispose();
@@ -185,16 +183,24 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                   text: "Continue",
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.pushReplacementNamed(
+                      final cubit = CompleteCubit.get(context);
+
+                      cubit.setBasicInfo(
+                        weight: double.parse(weightController.text),
+                        height: int.parse(heightController.text),
+                        bloodType: bloodTypeController.text,
+                        gender: gender,
+                        birthDate: birthDate,
+                      );
+
+                      Navigator.push(
                         context,
-                        AppRoutesNames.patientSignUpCompleteChronicDiseases,
-                        arguments: [
-                          double.parse(weightController.text),
-                          int.parse(heightController.text),
-                          bloodTypeController.text,
-                          gender?.toLowerCase(),
-                          birthDate,
-                        ],
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: CompleteCubit.get(context),
+                            child: const SecondCompletePage(),
+                          ),
+                        ),
                       );
                     }
                   },

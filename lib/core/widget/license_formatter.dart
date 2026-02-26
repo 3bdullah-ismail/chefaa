@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 class LicenseFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     String text = newValue.text.replaceAll('-', '').toUpperCase();
 
     if (text.length > 9) {

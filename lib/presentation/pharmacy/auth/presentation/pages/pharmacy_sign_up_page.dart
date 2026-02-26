@@ -183,7 +183,9 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               10.verticalSpace,
                               CustomTextField(
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(r'[a-zA-Z0-9]'),
+                                  ),
                                   LicenseFormatter(),
                                 ],
                                 validator: Validators.validateLicense,
@@ -239,7 +241,7 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
 
                         CustomBtn(
                           isDisabled:
-                          !isChecked || !_formKey.currentState!.validate(),
+                              !isChecked || !_formKey.currentState!.validate(),
                           text: AppConstants.submitForVerification,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

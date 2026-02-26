@@ -13,14 +13,18 @@ class SuccessDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: ColorManager.white,
-        icon: SvgPicture.asset(IconsAssets.doneIcon),
-      title: Text("Success", style: TextStyle(
-        color: ColorManager.black,
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w700,
-      ),),
-      content: Text("Your account has been successfully registered"
-          ,  style: TextStyle(
+      icon: SvgPicture.asset(IconsAssets.doneIcon),
+      title: Text(
+        "Success",
+        style: TextStyle(
+          color: ColorManager.black,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+      content: Text(
+        "Your account has been successfully registered",
+        style: TextStyle(
           color: ColorManager.gray,
           fontSize: 16.sp,
           fontWeight: FontWeight.w400,
@@ -28,16 +32,21 @@ class SuccessDialog extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
       actions: [
-        TextButton(onPressed: (){
-          Navigator.pop(context);
-          onPressed();
-        }
-        ,child: Text("Complete Registration",style:TextStyle(
-          color: ColorManager.primary,
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w600,
-        )),)
-      ]
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+            onPressed();
+          },
+          child: Text(
+            "Complete Registration",
+            style: TextStyle(
+              color: ColorManager.primary,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

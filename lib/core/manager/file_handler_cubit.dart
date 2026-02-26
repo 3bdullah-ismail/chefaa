@@ -8,10 +8,8 @@ part 'file_handler_state.dart';
 
 class FileHandlerCubit extends Cubit<FileHandlerState> {
   FileHandlerCubit() : super(FileHandlerInitial());
-
   static FileHandlerCubit get(context) => BlocProvider.of(context);
   PlatformFile? pickedFile;
-
   Future<void> pickSingleFile() async {
     try {
       emit(FileLoading());

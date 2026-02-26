@@ -1,54 +1,91 @@
 import 'package:chefaa/presentation/patient/complete_auth_data/data/repositories/complete_patient_repo.dart';
-import 'package:chefaa/presentation/patient/complete_auth_data/presentation/manager/complete_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../data/models/patient.dart';
+part 'complete_state.dart';
+
 @injectable
 class CompleteCubit extends Cubit<CompleteState> {
-  late final double? weight;
-  late final int? height;
-  late final String bloodType;
-  late final String? gender;
-  late final DateTime? birthDate;
-  late final List<String> chronicDiseases = [];
-
-  CompletePatientRepo completePatientRepo;
+  final CompletePatientRepo completePatientRepo;
 
   CompleteCubit(this.completePatientRepo) : super(CompleteInitial());
+
+  double? weight;
+  int? height;
+  String? bloodType;
+  String? gender;
+  DateTime? birthDate;
+
+  List<String> chronicDiseases = [];
 
   List<String> allergies = [];
 
   static CompleteCubit get(context) => BlocProvider.of(context);
 
-  void allData(
-    double? weight,
-    int? height,
-    String? bloodType,
-    String? gender,
-    DateTime? birthDate,
-    List<String> chronicDiseases,
-  ) {
+  void setBasicInfo({
+    required double weight,
+    required int height,
+    required String bloodType,
+    required String? gender,
+    required DateTime? birthDate,
+  }) {
     this.weight = weight;
     this.height = height;
-    this.bloodType = bloodType!;
+    this.bloodType = bloodType;
     this.gender = gender;
     this.birthDate = birthDate;
-    this.chronicDiseases.addAll(chronicDiseases);
+  }
+
+  void setChronicDiseases(List<String> diseases) {
+    chronicDiseases = diseases;
+  }
+
+  void setAllergies(List<String> allergies) {
+    this.allergies = allergies;
+  }
+
+  bool get isStep1Completed {
+    return weight != null &&
+        height != null &&
+        bloodType != null &&
+        bloodType!.isNotEmpty &&
+        birthDate != null;
+  }
+
+  int calculateAge(DateTime birthDate) {
+    DateTime today = DateTime.now();
+    int age = today.year - birthDate.year;
+
+    if (today.month < birthDate.month ||
+        (today.month == birthDate.month && today.day < birthDate.day)) {
+      age--;
+    }
+    return age;
   }
 
   Future<void> completeSignUp() async {
+    if (!isStep1Completed) {
+      emit(CompleteErrorState("Please complete your basic information first"));
+      return;
+    }
+
     emit(CompleteLoadingState());
+
     try {
-      int age = birthDate != null ? calculateAge(birthDate!) : 0;
+      final age = calculateAge(birthDate!);
+
       final response = await completePatientRepo.completeSignUp(
         weight: weight!,
         height: height!,
-        bloodType: bloodType,
-        gender: gender,
+        bloodType: bloodType!,
+        gender: gender?.toLowerCase(),
         age: age,
         chronicDiseases: chronicDiseases,
         allergies: allergies,
       );
+
       emit(
         CompleteSuccessState(
           message: response.message,
@@ -60,13 +97,17 @@ class CompleteCubit extends Cubit<CompleteState> {
     }
   }
 
-  int calculateAge(DateTime birthDate) {
-    DateTime today = DateTime.now();
-    int age = today.year - birthDate.year;
-    if (today.month < birthDate.month ||
-        (today.month == birthDate.month && today.day < birthDate.day)) {
-      age--;
-    }
-    return age;
+  //========================================================
+  // RESET (اختياري لكن مهم)
+  //========================================================
+  void reset() {
+    weight = null;
+    height = null;
+    bloodType = null;
+    gender = null;
+    birthDate = null;
+    chronicDiseases.clear();
+    allergies.clear();
+    emit(CompleteInitial());
   }
 }
