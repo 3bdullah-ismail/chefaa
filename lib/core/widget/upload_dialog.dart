@@ -122,53 +122,55 @@ class _UploadDialogState extends State<UploadDialog> {
                 ),
 
                 const SizedBox(height: 16),
-
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: ColorManager.primary,
-                        width: 1.5,
-                      ),
-                      color: ColorManager.transparent,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.picture_as_pdf, color: Colors.red),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                file != null
+                    ? Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: ColorManager.primary,
+                              width: 1.5,
+                            ),
+                            color: ColorManager.transparent,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
                             children: [
-                              Text(
-                                file != null
-                                    ? file.name
-                                    : widget.fileName ??
-                                          'your_Membership_Card.pdf',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
+                              const Icon(
+                                Icons.picture_as_pdf,
+                                color: Colors.red,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      file.name,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      '${(file.size / 1024).toStringAsFixed(2)} KB',
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Text(
-                                file != null
-                                    ? '${(file.size / 1024).toStringAsFixed(2)} KB'
-                                    : '54 KB of 94 KB',
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
+                              const Icon(
+                                Icons.check_circle,
+                                color: Colors.green,
                               ),
                             ],
                           ),
                         ),
-                        const Icon(Icons.check_circle, color: Colors.green),
-                      ],
-                    ),
-                  ),
-                ),
+                      )
+                    : const SizedBox(),
 
                 const SizedBox(height: 20),
               ],
