@@ -52,6 +52,7 @@ dependencies:
   dart_either:
   dropdown_button2:
   table_calendar:
+  google_sign_in:
 dev_dependencies:
   injectable_generator:
   build_runner:
@@ -80,6 +81,8 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/svg_images/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

@@ -12,12 +12,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/config/get_config.dart';
-import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../../../../../core/widget/validators.dart';
+import '../../../../auth/login/presentation/widgets/role_based_nav.dart';
 import '../manager/patient_state.dart';
 import '../widgets/success_dialog.dart';
 
@@ -33,6 +33,13 @@ class PatientSignUpPage extends StatefulWidget {
 class _PatientSignUpPageState extends State<PatientSignUpPage> {
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
+  late RoleNavigationService _navigationService;
+
+  @override
+  void initState() {
+    super.initState();
+    _navigationService = RoleNavigationService(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +62,22 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
             }
             if (state is SignUpSuccessState) {
               Loading.hide(context);
-              showDialog(context: context, builder: (context)=>SuccessDialog(
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      AppRoutesNames.patientSignUpCompleteData,
-                          (route) => false,);
-                  }
-              ));
+              showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context){
+                    Future.microtask(() async {
+                      await Future.delayed(const Duration(milliseconds: 1500));
+                      if (mounted) {
+                        Navigator.of(context).pop();
+                        Navigator.pushReplacementNamed(context, AppRoutesNames.patientSignUpCompleteData);
+                      }
+                    });
+                    return const SuccessDialog(
+                        title: "Success",
+                        content: "Your account has been successfully registered",
+                    );
+                  });
             }
           },
           builder: (context, state) {
@@ -173,7 +188,9 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           },
                         ),
                         12.verticalSpace,
-                        const AlreadyHaveAccount(),
+                         AlreadyHaveAccount(onPressed: (){
+                           _navigationService.toLogin(widget.role);
+                        },),
                       ],
                     ),
                   ),

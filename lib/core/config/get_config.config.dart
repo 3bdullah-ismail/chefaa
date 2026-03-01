@@ -12,6 +12,26 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../presentation/auth/google_sign_in/data/datasources/googleSignIn_data_source.dart'
+    as _i851;
+import '../../presentation/auth/google_sign_in/data/datasources/googleSignIn_data_source_imp.dart'
+    as _i68;
+import '../../presentation/auth/google_sign_in/data/repositories/googleSignIn_repo.dart'
+    as _i106;
+import '../../presentation/auth/google_sign_in/data/repositories/googleSignIn_repo_imp.dart'
+    as _i345;
+import '../../presentation/auth/google_sign_in/presentation/manager/googleSignIn_cubit.dart'
+    as _i1032;
+import '../../presentation/auth/login/data/data_source/login_data_source.dart'
+    as _i464;
+import '../../presentation/auth/login/data/data_source/login_data_source_imp.dart'
+    as _i665;
+import '../../presentation/auth/login/data/repositories/login_repo.dart'
+    as _i950;
+import '../../presentation/auth/login/data/repositories/login_repo_imp.dart'
+    as _i1037;
+import '../../presentation/auth/login/presentation/manager/login_cubit.dart'
+    as _i0;
 import '../../presentation/doctor/auth/data/data_sources/data_source.dart'
     as _i184;
 import '../../presentation/doctor/auth/data/data_sources/data_source_imp.dart'
@@ -78,6 +98,9 @@ extension GetItInjectableX on _i174.GetIt {
         networkService: gh<_i463.NetworkService>(),
       ),
     );
+    gh.factory<_i464.LoginDataSource>(
+      () => _i665.LoginDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i377.FacilityAuthDataSource>(
       () => _i120.FacilityAuthDataSourceImp(gh<_i463.NetworkService>()),
     );
@@ -89,6 +112,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i184.DoctorAuthDataSource>(
       () => _i964.DoctorAuthDataSourceImp(gh<_i463.NetworkService>()),
     );
+    gh.factory<_i851.GoogleSignInDataSource>(
+      () => _i68.GoogleSignInDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i551.DoctorAuthRepo>(
       () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()),
     );
@@ -99,6 +125,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i809.CompletePatientRepoImp(
         completeDataSource: gh<_i139.CompleteDataSource>(),
       ),
+    );
+    gh.factory<_i950.LoginRepo>(
+      () => _i1037.LoginRepoImp(gh<_i464.LoginDataSource>()),
     );
     gh.factory<_i128.PatientRepo>(
       () => _i856.PatientRepoImp(gh<_i1041.PatientDataSource>()),
@@ -114,11 +143,18 @@ extension GetItInjectableX on _i174.GetIt {
         pharmacyDataSource: gh<_i565.PharmacyDataSource>(),
       ),
     );
+    gh.factory<_i0.LoginCubit>(() => _i0.LoginCubit(gh<_i950.LoginRepo>()));
     gh.factory<_i236.DoctorAuthCubit>(
       () => _i236.DoctorAuthCubit(gh<_i551.DoctorAuthRepo>()),
     );
     gh.factory<_i294.CompleteCubit>(
       () => _i294.CompleteCubit(gh<_i530.CompletePatientRepo>()),
+    );
+    gh.factory<_i106.GoogleSignInRepo>(
+      () => _i345.GoogleSignInRepoImp(gh<_i851.GoogleSignInDataSource>()),
+    );
+    gh.factory<_i1032.GoogleSignInCubit>(
+      () => _i1032.GoogleSignInCubit(gh<_i106.GoogleSignInRepo>()),
     );
     gh.factory<_i840.PharmacyCubit>(
       () => _i840.PharmacyCubit(gh<_i499.PharmacyRepo>()),

@@ -19,7 +19,6 @@ class TermsOfService extends StatelessWidget {
               color: ColorManager.primary,
               fontSize: 14,
             ).copyWith(decoration: TextDecoration.underline),
-            // recognizer: TapGestureRecognizer()..onTap = () {},
           ),
           const TextSpan(text: " and "),
           TextSpan(
@@ -28,7 +27,6 @@ class TermsOfService extends StatelessWidget {
               color: ColorManager.primary,
               fontSize: 14,
             ).copyWith(decoration: TextDecoration.underline),
-            // recognizer: TapGestureRecognizer()..onTap = () {},
           ),
         ],
       ),

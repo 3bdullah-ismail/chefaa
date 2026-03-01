@@ -76,7 +76,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                 Loading.hide(context);
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  AppRoutesNames.layout,
+                  AppRoutesNames.patientLayout,
                   (route) => false,
                 );
               }

@@ -1,3 +1,5 @@
+import '../routes/app_routes_names.dart';
+
 class AppConstants {
   static const String error = "Error";
   static const String success = 'Success';
@@ -174,4 +176,17 @@ class AppConstants {
     "Insect Allergy",
     "None",
   ];
+
+  static String getLayoutFromRole(String? role) {
+    switch (role) {
+      case "doctor":
+        return AppRoutesNames.doctorLayout;
+      case "pharmacy":
+        return AppRoutesNames.pharmacyLayout;
+      case "facility":
+        return AppRoutesNames.facilityLayout;
+      default:
+        return AppRoutesNames.patientLayout;
+    }
+  }
 }

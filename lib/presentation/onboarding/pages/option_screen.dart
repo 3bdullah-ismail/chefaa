@@ -85,12 +85,13 @@ class _OptionScreenState extends State<OptionScreen> {
                         if (selectedRole == AppConstants.doctor) {
                           Navigator.pushReplacementNamed(
                             context,
-                            AppRoutesNames.docSignUp,
+                            AppRoutesNames.login,
+                            arguments: AppConstants.doctor.toLowerCase(),
                           );
                         } else if (selectedRole == AppConstants.patient) {
                           Navigator.pushReplacementNamed(
                             context,
-                            AppRoutesNames.patientSignUp,
+                            AppRoutesNames.login,
                             arguments: AppConstants.patient.toLowerCase(),
                           );
                         } else if (selectedRole == AppConstants.facility) {

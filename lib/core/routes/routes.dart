@@ -7,11 +7,15 @@ import 'package:chefaa/presentation/patient/complete_auth_data/presentation/page
 import 'package:chefaa/presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../presentation/auth/login/presentation/pages/login_page.dart';
+import '../../presentation/chefaa_entry_page.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
-import '../../presentation/layout/presentation/pages/layout_page.dart';
+import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
+import '../../presentation/patient/layout/presentation/pages/patient_layout.dart';
 import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
+import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,6 +24,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const OnboardingPage());
       case AppRoutesNames.option:
         return MaterialPageRoute(builder: (_) => const OptionScreen());
+        case AppRoutesNames.appEntryRoute:
+        return MaterialPageRoute(builder: (_) => const ChefaaEntryPage());
       case AppRoutesNames.docSignUp:
         return MaterialPageRoute(builder: (_) => const DocSignUp());
       case AppRoutesNames.facilitySignUp:
@@ -67,14 +73,26 @@ class Routes {
           ),
         );
 
-      case AppRoutesNames.layout:
-        return MaterialPageRoute(builder: (_) => const LayoutPage());
+      case AppRoutesNames.login:
+        final role = settings.arguments as String?;
+        return MaterialPageRoute(
+          builder: (_) => LoginPage(role: role),
+        );
 
       case AppRoutesNames.patientSignUpCompleteData:
         return MaterialPageRoute(builder: (_) => const FirstCompletePage());
 
       case AppRoutesNames.pharmacySignUp:
         return MaterialPageRoute(builder: (_) => const PharmacySignUpPage());
+
+      case AppRoutesNames.patientLayout:
+        return MaterialPageRoute(builder: (_) => const PatientLayout());
+        case AppRoutesNames.doctorLayout:
+          return MaterialPageRoute(builder: (_) => const DoctorLayout());
+          case AppRoutesNames.pharmacyLayout:
+            return MaterialPageRoute(builder: (_) => const PharmacyLayout());
+
+
 
       default:
         return MaterialPageRoute(
