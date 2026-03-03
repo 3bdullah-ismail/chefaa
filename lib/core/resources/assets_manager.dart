@@ -11,9 +11,13 @@ abstract class ImageAssets {
   static const String doctor = "$imagePath/doctor.png";
   static const String patient = "$imagePath/patient.png";
   static const String drugs = "$imagePath/drugs.png";
+  static const String loginLogo = "$imagePath/login_logo.png";
 }
 
-class SvgAssets {}
+class SvgAssets {
+  static const String google = "$svgPath/Google.svg";
+  static const String biApple = "$svgPath/bi_apple.svg";
+}
 
 abstract class IconsAssets {
   static const String userIcon = "$iconsPath/User_icon_Inactive.svg";

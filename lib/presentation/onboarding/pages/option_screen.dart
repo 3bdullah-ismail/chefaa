@@ -73,41 +73,41 @@ class _OptionScreenState extends State<OptionScreen> {
                   onTap: () => onSelect(AppConstants.facility),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p60,
-                    vertical: AppPadding.p48,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      NextButton(
-                        isEnabled: selectedRole != null,
-                        onTap: () {
-                          if (selectedRole == AppConstants.doctor) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              AppRoutesNames.docSignUp,
-                            );
-                          } else if (selectedRole == AppConstants.patient) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              AppRoutesNames.patientSignUp,
-                              arguments: AppConstants.patient.toLowerCase(),
-                            );
-                          } else if (selectedRole == AppConstants.facility) {
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutesNames.facilityOption,
-                            );
-                          }
-                        },
-                      ),
-                    ],
-                  ),
+              Padding(
+                padding: const  EdgeInsets.symmetric(
+                  horizontal: AppPadding.p60,
+                  vertical: AppPadding.p48,
                 ),
-              ],
-            ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    NextButton(
+                      isEnabled: selectedRole != null,
+                      onTap: () {
+                        if (selectedRole == AppConstants.doctor) {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutesNames.login,
+                            arguments: AppConstants.doctor.toLowerCase(),
+                          );
+                        } else if (selectedRole == AppConstants.patient) {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutesNames.login,
+                            arguments: AppConstants.patient.toLowerCase(),
+                          );
+                        } else if (selectedRole == AppConstants.facility) {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.facilityOption,
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

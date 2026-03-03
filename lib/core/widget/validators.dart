@@ -79,4 +79,17 @@ class Validators {
 
     return null;
   }
+  static String? validateEmailOrPhone(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email or phone cannot be empty.';
+    }
+    if (EmailValidator.validate(value)) {
+      return null;
+    }
+    if (validatePhone(value) == null) {
+      return null;
+    }
+
+    return 'Enter a valid email or phone number';
+  }
 }

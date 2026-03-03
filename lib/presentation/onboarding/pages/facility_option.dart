@@ -79,13 +79,15 @@ class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
                               if (selectedRole == AppConstants.lab) {
                                 Navigator.pushReplacementNamed(
                                   context,
-                                  AppRoutesNames.facilitySignUp,
+                                  AppRoutesNames.login,
+                                  arguments: AppConstants.lab.toLowerCase(),
                                 );
                               } else if (selectedRole ==
                                   AppConstants.pharmacy) {
-                                Navigator.pushNamed(
+                                Navigator.pushReplacementNamed(
                                   context,
-                                  AppRoutesNames.pharmacySignUp,
+                                  AppRoutesNames.login,
+                                  arguments: AppConstants.pharmacy.toLowerCase(),
                                 );
                               }
                             },

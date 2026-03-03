@@ -7,7 +7,6 @@ import 'core/theme/app_theme.dart';
 
 class Chefaa extends StatelessWidget {
   const Chefaa({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -19,7 +18,7 @@ class Chefaa extends StatelessWidget {
           theme: AppTheme.theme,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: Routes.generateRoute,
-          initialRoute: AppRoutesNames.option,
+          initialRoute: AppRoutesNames.appEntryRoute,
         );
       },
     );

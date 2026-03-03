@@ -3,17 +3,23 @@ import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
 import '../../presentation/auth/presentation/pages/reset_password.dart';
+
+import '../../presentation/auth/login/presentation/pages/login_page.dart';
+import '../../presentation/chefaa_entry_page.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
 import '../../presentation/layout/presentation/pages/layout_page.dart';
 import '../../presentation/onboarding/pages/facility_option.dart';
 import '../../presentation/onboarding/pages/onboarding_page.dart';
 import '../../presentation/onboarding/pages/option_screen.dart';
+import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
+import '../../presentation/patient/layout/presentation/pages/patient_layout.dart';
 import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
 import 'app_routes_names.dart';
+import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -22,6 +28,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const OnboardingPage());
       case AppRoutesNames.option:
         return MaterialPageRoute(builder: (_) => const OptionScreen());
+        case AppRoutesNames.appEntryRoute:
+        return MaterialPageRoute(builder: (_) => const ChefaaEntryPage());
       case AppRoutesNames.docSignUp:
         return MaterialPageRoute(builder: (_) => const DocSignUp());
       case AppRoutesNames.facilitySignUp:
@@ -44,10 +52,21 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const ResetPassword());
       case AppRoutesNames.patientSignUpCompleteData:
         return MaterialPageRoute(builder: (_) => const FirstCompletePage());
+
       case AppRoutesNames.pharmacySignUp:
         return MaterialPageRoute(builder: (_) => const PharmacySignUpPage());
       case AppRoutesNames.forgetPassword:
         return MaterialPageRoute(builder: (_) => const ForgetPassword());
+
+      case AppRoutesNames.patientLayout:
+        return MaterialPageRoute(builder: (_) => const PatientLayout());
+        case AppRoutesNames.doctorLayout:
+          return MaterialPageRoute(builder: (_) => const DoctorLayout());
+          case AppRoutesNames.pharmacyLayout:
+            return MaterialPageRoute(builder: (_) => const PharmacyLayout());
+
+
+
       default:
         return MaterialPageRoute(
           builder: (context) =>
