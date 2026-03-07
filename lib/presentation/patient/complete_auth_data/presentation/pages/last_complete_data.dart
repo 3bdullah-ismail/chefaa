@@ -52,7 +52,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
 
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                AppRoutesNames.layout,
+                AppRoutesNames.patientLayout,
                 (route) => false,
               );
             }

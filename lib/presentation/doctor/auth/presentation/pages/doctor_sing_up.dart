@@ -82,6 +82,8 @@ class _DocSignUpState extends State<DocSignUp> {
                                 controller: cubit.name,
                                 text: AppConstants.firstName,
                                 prefixIcon: IconsAssets.userIcon,
+                               textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.name,
                               ),
                             ),
                             8.horizontalSpace,
@@ -90,6 +92,9 @@ class _DocSignUpState extends State<DocSignUp> {
                                 validator: Validators.validateUsername,
                                 controller: cubit.username,
                                 text: AppConstants.lastName,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.name,
+
                               ),
                             ),
                           ],
@@ -101,6 +106,9 @@ class _DocSignUpState extends State<DocSignUp> {
                           controller: cubit.phoneNumber,
                           text: AppConstants.enterPhone,
                           prefixIcon: IconsAssets.phoneIcon,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.phone,
+
                         ),
                         8.verticalSpace,
                         CustomTextField(
@@ -108,6 +116,9 @@ class _DocSignUpState extends State<DocSignUp> {
                           controller: cubit.email,
                           text: AppConstants.enterEmail,
                           prefixIcon: IconsAssets.emailIcon,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.emailAddress,
+
                         ),
                         8.verticalSpace,
                         CustomTextField(
@@ -115,11 +126,14 @@ class _DocSignUpState extends State<DocSignUp> {
                           controller: cubit.password,
                           text: AppConstants.enterPassword,
                           prefixIcon: IconsAssets.passwordIcon,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.visiblePassword,
 
                           isPass: true,
                         ),
                         8.verticalSpace,
                         CustomTextField(
+                          textInputAction: TextInputAction.next,
                           validator: (value) =>
                               Validators.validateConfirmPassword(
                                 value,
@@ -128,11 +142,14 @@ class _DocSignUpState extends State<DocSignUp> {
                           controller: cubit.confirmPasswordController,
                           text: AppConstants.reEnterPassword,
                           prefixIcon: IconsAssets.passwordIcon,
+                          keyboardType: TextInputType.visiblePassword,
 
                           isPass: true,
                         ),
                         8.verticalSpace,
                         CustomTextField(
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.number,
                           controller: cubit.specialization,
                           text: "Enter your specialization",
                           prefixIcon: "assets/icons/stethoscnnnnope_.svg",

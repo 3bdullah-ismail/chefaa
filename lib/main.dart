@@ -9,8 +9,8 @@ import 'core/config/get_config.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  await GoogleSignIn.instance.initialize(
-    serverClientId: "437264374965-9fs170cmqjtp67j0387nffs9dot3qdns.apps.googleusercontent.com");
+  // await GoogleSignIn.instance.initialize(
+  //   serverClientId: "437264374965-9fs170cmqjtp67j0387nffs9dot3qdns.apps.googleusercontent.com");
   runApp(
     MultiBlocProvider(
       providers: [

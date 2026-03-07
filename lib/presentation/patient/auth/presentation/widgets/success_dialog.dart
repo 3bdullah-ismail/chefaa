@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 
 class SuccessDialog extends StatelessWidget {
   final String title;
@@ -18,7 +19,7 @@ class SuccessDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h), // Added margin
+      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
       child: AlertDialog(
         backgroundColor: ColorManager.white,
         contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 25.h),

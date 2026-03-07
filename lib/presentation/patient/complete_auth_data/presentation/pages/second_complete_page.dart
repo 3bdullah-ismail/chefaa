@@ -119,7 +119,7 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                   diseases.add(input);
                 }
                 cubit.setChronicDiseases(diseases);
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (_) => BlocProvider.value(

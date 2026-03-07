@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/config/get_config.dart';
 import '../../../../../core/resources/values_manager.dart';
+import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../../../../../core/widget/validators.dart';
@@ -21,7 +22,9 @@ import '../widgets/success_dialog.dart';
 
 class PatientSignUpPage extends StatefulWidget {
   final String? role;
+
   const PatientSignUpPage({super.key, required this.role});
+
   @override
   State<PatientSignUpPage> createState() => _PatientSignUpPageState();
 }
@@ -29,6 +32,7 @@ class PatientSignUpPage extends StatefulWidget {
 class _PatientSignUpPageState extends State<PatientSignUpPage> {
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -51,20 +55,23 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
               Loading.hide(context);
               showDialog(
                 context: context,
-                builder: (context) => SuccessDialog(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => BlocProvider(
-                          create: (_) => getIt<CompleteCubit>(),
-                          child: const FirstCompletePage(),
-                        ),
-                      ),
-                    );
-                  },
+                builder: (context) => const SuccessDialog(
+                  title: "Success",
+                  content: "Account created successfully",
                 ),
+                barrierDismissible: false,
               );
+              Future.delayed(const Duration(seconds: 2), () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider(
+                      create: (_) => getIt<CompleteCubit>(),
+                      child: const FirstCompletePage(),
+                    ),
+                  ),
+                );
+              });
             }
           },
           builder: (context, state) {
@@ -89,6 +96,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                                 controller: cubit.nameController,
                                 text: AppConstants.firstName,
                                 prefixIcon: IconsAssets.userIcon,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.name,
                               ),
                             ),
                             Expanded(
@@ -96,6 +105,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                                 validator: Validators.validateUsername,
                                 controller: cubit.userNameController,
                                 text: AppConstants.lastName,
+                                textInputAction: TextInputAction.next,
+                                keyboardType: TextInputType.name,
                               ),
                             ),
                           ],
@@ -106,6 +117,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           controller: cubit.phoneController,
                           text: AppConstants.enterPhone,
                           prefixIcon: IconsAssets.phoneIcon,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.phone,
                         ),
 
                         15.verticalSpace,
@@ -114,6 +127,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           controller: cubit.emailController,
                           text: AppConstants.enterEmail,
                           prefixIcon: IconsAssets.emailIcon,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.emailAddress,
                         ),
                         15.verticalSpace,
                         CustomTextField(
@@ -122,6 +137,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           text: AppConstants.enterPassword,
                           prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.visiblePassword,
                         ),
                         15.verticalSpace,
                         CustomTextField(
@@ -134,6 +151,9 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           text: " Confirm your Password",
                           prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.visiblePassword,
+
                         ),
                         27.verticalSpace,
                         Row(
@@ -174,7 +194,14 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           },
                         ),
                         12.verticalSpace,
-                        const AlreadyHaveAccount(),
+                        AlreadyHaveAccount(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutesNames.login,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

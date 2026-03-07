@@ -16,6 +16,7 @@ class CustomTextField extends StatefulWidget {
     this.completeData = false,
     this.suffixText = "",
     this.inputFormatters,
+    this.textInputAction ,
   });
 
   final TextEditingController controller;
@@ -27,6 +28,8 @@ class CustomTextField extends StatefulWidget {
   final bool completeData;
   final String? suffixText;
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -102,6 +105,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: _focusNode,
+      textInputAction: widget.textInputAction,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       obscureText: _isObscure,

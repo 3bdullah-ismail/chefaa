@@ -17,7 +17,6 @@ import '../../presentation/auth/data/data_sources/data_source_imp.dart'
     as _i124;
 import '../../presentation/auth/data/repositories/repo.dart' as _i246;
 import '../../presentation/auth/data/repositories/repo_imp.dart' as _i49;
-import '../../presentation/auth/presentation/manager/auth_cubit.dart' as _i301;
 import '../../presentation/auth/google_sign_in/data/datasources/googleSignIn_data_source.dart'
     as _i851;
 import '../../presentation/auth/google_sign_in/data/datasources/googleSignIn_data_source_imp.dart'
@@ -38,6 +37,7 @@ import '../../presentation/auth/login/data/repositories/login_repo_imp.dart'
     as _i1037;
 import '../../presentation/auth/login/presentation/manager/login_cubit.dart'
     as _i0;
+import '../../presentation/auth/presentation/manager/auth_cubit.dart' as _i301;
 import '../../presentation/doctor/auth/data/data_sources/data_source.dart'
     as _i184;
 import '../../presentation/doctor/auth/data/data_sources/data_source_imp.dart'
@@ -121,11 +121,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i576.AuthDataSource>(
       () => _i124.AuthDataSourceImp(gh<_i463.NetworkService>()),
     );
-    gh.factory<_i246.AuthRepo>(
-      () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()),
-    );
     gh.factory<_i851.GoogleSignInDataSource>(
       () => _i68.GoogleSignInDataSourceImp(gh<_i463.NetworkService>()),
+    );
+    gh.factory<_i246.AuthRepo>(
+      () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()),
     );
     gh.factory<_i551.DoctorAuthRepo>(
       () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()),
@@ -155,10 +155,10 @@ extension GetItInjectableX on _i174.GetIt {
         pharmacyDataSource: gh<_i565.PharmacyDataSource>(),
       ),
     );
-    gh.factory<_i0.LoginCubit>(() => _i0.LoginCubit(gh<_i950.LoginRepo>()));
     gh.factory<_i301.AuthCubit>(
       () => _i301.AuthCubit(repo: gh<_i246.AuthRepo>()),
     );
+    gh.factory<_i0.LoginCubit>(() => _i0.LoginCubit(gh<_i950.LoginRepo>()));
     gh.factory<_i236.DoctorAuthCubit>(
       () => _i236.DoctorAuthCubit(gh<_i551.DoctorAuthRepo>()),
     );

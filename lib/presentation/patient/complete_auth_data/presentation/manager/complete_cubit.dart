@@ -97,9 +97,6 @@ class CompleteCubit extends Cubit<CompleteState> {
     }
   }
 
-  //========================================================
-  // RESET (اختياري لكن مهم)
-  //========================================================
   void reset() {
     weight = null;
     height = null;

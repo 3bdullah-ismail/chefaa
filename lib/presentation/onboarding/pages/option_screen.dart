@@ -87,17 +87,17 @@ class _OptionScreenState extends State<OptionScreen> {
                         if (selectedRole == AppConstants.doctor) {
                           Navigator.pushReplacementNamed(
                             context,
-                            AppRoutesNames.login,
+                            AppRoutesNames.docSignUp,
                             arguments: AppConstants.doctor.toLowerCase(),
                           );
                         } else if (selectedRole == AppConstants.patient) {
                           Navigator.pushReplacementNamed(
                             context,
-                            AppRoutesNames.login,
+                            AppRoutesNames.patientSignUp,
                             arguments: AppConstants.patient.toLowerCase(),
                           );
                         } else if (selectedRole == AppConstants.facility) {
-                          Navigator.pushNamed(
+                          Navigator.pushReplacementNamed(
                             context,
                             AppRoutesNames.facilityOption,
                           );
@@ -111,6 +111,6 @@ class _OptionScreenState extends State<OptionScreen> {
           ),
         ),
       ),
-    );
+      ));
   }
 }

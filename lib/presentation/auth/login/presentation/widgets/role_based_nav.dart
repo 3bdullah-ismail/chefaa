@@ -16,7 +16,7 @@ class RoleNavigationService {
   void toSignUp(String? role) {
     final navigationData = _getSignUpRoute(role);
     if (navigationData.route != null) {
-      Navigator.pushNamed(
+      Navigator.pushReplacementNamed(
         context,
         navigationData.route!,
         arguments: navigationData.arguments,

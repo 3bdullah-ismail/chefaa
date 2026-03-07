@@ -9,6 +9,7 @@ import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/core/widget/upload_container.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/core/widget/custom_dropdown_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ import '../widgets/labeled_text_field.dart';
 
 class FacilitySignup extends StatefulWidget {
   const FacilitySignup({super.key});
+
   @override
   State<FacilitySignup> createState() => _FacilitySignupState();
 }
@@ -31,6 +33,7 @@ class FacilitySignup extends StatefulWidget {
 class _FacilitySignupState extends State<FacilitySignup> {
   bool isChecked = false;
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -94,43 +97,58 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: ColorManager.lightGray,
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(color: ColorManager.input),
-                                ),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton<String>(
-                                    dropdownColor: Colors.white,
-                                    value: cubit.facilityType,
-                                    isExpanded: true,
-                                    hint: Text(
-                                      "choose lab or radiology",
-                                      style: TextStyle(
-                                        color: Colors.blueGrey.shade300,
-                                      ),
-                                    ),
-                                    icon: const Icon(Icons.keyboard_arrow_down),
-                                    items: <String>['Lab', 'Radiology center']
-                                        .map((String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        })
-                                        .toList(),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        cubit.facilityType = newValue;
-                                      });
-                                    },
-                                  ),
-                                ),
+                              CustomDropDownBtn(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please select The Type';
+                                  }
+                                  return null;
+                                },
+                                value: cubit.facilityType,
+                                onChanged: (value) {
+                                  setState(() {
+                                    cubit.facilityType = value;
+                                  });
+                                },
+                                items: const ["Lab", "Radiology center"],
                               ),
+                              // Container(
+                              //   padding: const EdgeInsets.symmetric(
+                              //     horizontal: 20,
+                              //   ),
+                              //   decoration: BoxDecoration(
+                              //     color: ColorManager.lightGray,
+                              //     borderRadius: BorderRadius.circular(50),
+                              //     border: Border.all(color: ColorManager.input),
+                              //   ),
+                              //   child: DropdownButtonHideUnderline(
+                              //     child: DropdownButton<String>(
+                              //       dropdownColor: Colors.white,
+                              //       value: cubit.facilityType,
+                              //       isExpanded: true,
+                              //       hint: Text(
+                              //         "choose lab or radiology",
+                              //         style: TextStyle(
+                              //           color: Colors.blueGrey.shade300,
+                              //         ),
+                              //       ),
+                              //       icon: const Icon(Icons.keyboard_arrow_down),
+                              //       items: <String>['Lab', 'Radiology center']
+                              //           .map((String value) {
+                              //             return DropdownMenuItem<String>(
+                              //               value: value,
+                              //               child: Text(value),
+                              //             );
+                              //           })
+                              //           .toList(),
+                              //       onChanged: (newValue) {
+                              //         setState(() {
+                              //           cubit.facilityType = newValue;
+                              //         });
+                              //       },
+                              //     ),
+                              //   ),
+                              // ),
                               const SizedBox(height: 16),
                               // LabeledTextField(
                               //   validator: Validators.nameValidator,
@@ -139,34 +157,46 @@ class _FacilitySignupState extends State<FacilitySignup> {
                               //   hint: "e.g. Alpa Labs/Scan",
                               // ),
                               LabeledTextField(
+                                keyboardType: TextInputType.name,
                                 label: AppConstants.facilityName,
                                 controller: cubit.username,
                                 hint: "e.g. Alpa Labs/Scan",
+                                textInputAction: TextInputAction.next,
                               ),
                               LabeledTextField(
+                                keyboardType: TextInputType.phone,
                                 validator: Validators.validatePhone,
                                 label: AppConstants.phoneNumber,
                                 controller: cubit.phoneNumber,
                                 hint: AppConstants.phoneHint,
                                 prefixIcon: IconsAssets.phoneIcon,
+                                textInputAction: TextInputAction.next,
+
                               ),
                               LabeledTextField(
+                                keyboardType: TextInputType.emailAddress,
                                 validator: Validators.validateEmail,
                                 label: AppConstants.workEmail,
                                 controller: cubit.email,
                                 hint: AppConstants.emailFacilityHint,
                                 prefixIcon: IconsAssets.emailIcon,
+                                textInputAction: TextInputAction.next,
                               ),
                               LabeledTextField(
+                                keyboardType: TextInputType.visiblePassword,
                                 validator: Validators.validatePassword,
                                 label: AppConstants.password,
                                 controller: cubit.password,
                                 hint: AppConstants.enterPassword,
                                 isPassword: true,
                                 prefixIcon: IconsAssets.passwordIcon,
+                                textInputAction: TextInputAction.next,
+
                               ),
                               LabeledTextField(
-                                validator: (value) =>
+                                keyboardType: TextInputType.visiblePassword,
+                                textInputAction: TextInputAction.next,
+                                  validator: (value) =>
                                     Validators.validateConfirmPassword(
                                       value,
                                       cubit.password.text,
@@ -178,7 +208,8 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 prefixIcon: IconsAssets.passwordIcon,
                               ),
                               LabeledTextField(
-                                inputFormatters: [
+                                  textInputAction: TextInputAction.done,
+                                  inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                     RegExp(r'[a-zA-Z0-9]'),
                                   ),
@@ -235,12 +266,16 @@ class _FacilitySignupState extends State<FacilitySignup> {
                             ),
                             const SizedBox(height: 48),
                             LabeledTextField(
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.next,
                               label: "Medical Director Name",
                               controller: cubit.medicalDirectorName,
                               hint: "Doctor’s full name",
                             ),
                             const SizedBox(height: 48),
                             LabeledTextField(
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.done,
                               label: "Director’s Professional ID",
                               controller: cubit.directorProfessionalId,
                               hint: "ID number",

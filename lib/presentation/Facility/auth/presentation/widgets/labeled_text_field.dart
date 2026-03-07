@@ -13,10 +13,16 @@ class LabeledTextField extends StatelessWidget {
   final bool isPassword;
   final String? Function(String? value)? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+
+
 
   const LabeledTextField({
     super.key,
     required this.label,
+    this.keyboardType,
+    this.textInputAction,
     required this.controller,
     required this.hint,
     this.prefixIcon,
@@ -36,6 +42,8 @@ class LabeledTextField extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CustomTextField(
+          textInputAction: textInputAction,
+          keyboardType: keyboardType,
           key: ValueKey(label),
           inputFormatters: inputFormatters,
           validator: validator,

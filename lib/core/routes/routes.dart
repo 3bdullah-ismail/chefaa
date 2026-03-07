@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
+import '../../presentation/auth/login/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
 import '../../presentation/auth/presentation/pages/reset_password.dart';
 
-import '../../presentation/auth/login/presentation/pages/login_page.dart';
 import '../../presentation/chefaa_entry_page.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
-import '../../presentation/layout/presentation/pages/layout_page.dart';
 import '../../presentation/onboarding/pages/facility_option.dart';
 import '../../presentation/onboarding/pages/onboarding_page.dart';
 import '../../presentation/onboarding/pages/option_screen.dart';
@@ -24,6 +23,8 @@ import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.da
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutesNames.login:
+        return MaterialPageRoute(builder: (_) =>const  LoginPage());
       case AppRoutesNames.onboardingRoute:
         return MaterialPageRoute(builder: (_) => const OnboardingPage());
       case AppRoutesNames.option:
@@ -43,8 +44,6 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const SecondCompletePage());
       case AppRoutesNames.patientSignUpCompleteMedicines:
         return MaterialPageRoute(builder: (_) => const LastCompleteData());
-      case AppRoutesNames.layout:
-        return MaterialPageRoute(builder: (_) => const LayoutPage());
       case AppRoutesNames.resetCode:
         int index = settings.arguments as int;
         return MaterialPageRoute(builder: (_) => ResetCode(index: index));

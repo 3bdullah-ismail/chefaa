@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
+import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/loading.dart';
 import '../../../../patient/auth/presentation/widgets/success_dialog.dart';
 import '../../../google_sign_in/presentation/manager/googleSignIn_cubit.dart';
@@ -50,199 +51,201 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: ColorManager.white,
         body: ScrollConfiguration(
           behavior: const ScrollBehavior()
-          .copyWith(overscroll: false), // تعطيل overscroll stretch effect
-      child: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p28,
-              vertical: AppPadding.p80,
-            ),
-            child: BlocConsumer<LoginCubit, LoginState>(
-              listener: (context, state) async {
-                if (state is LoginLoadingState) {
-                  Loading.show(context);
-                } else if (state is LoginErrorState) {
-                  Loading.hide(context);
-                  AnimatedSnackBar.rectangle(
-                    'Error',
-                    state.message,
-                    type: AnimatedSnackBarType.error,
-                    brightness: Brightness.dark,
-                    duration: const Duration(seconds: 3),
-                  ).show(context);
-                } else if (state is LoginSuccessState) {
-                  Loading.hide(context);
+              .copyWith(overscroll: false),
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p28,
+                  vertical: AppPadding.p80,
+                ),
+                child: BlocConsumer<LoginCubit, LoginState>(
+                  listener: (context, state) async {
+                    if (state is LoginLoadingState) {
+                      Loading.show(context);
+                    } else if (state is LoginErrorState) {
+                      Loading.hide(context);
+                      AnimatedSnackBar.rectangle(
+                        'Error',
+                        state.message,
+                        type: AnimatedSnackBarType.error,
+                        brightness: Brightness.dark,
+                        duration: const Duration(seconds: 3),
+                      ).show(context);
+                    } else if (state is LoginSuccessState) {
+                      Loading.hide(context);
 
-                  // نستخدم addPostFrameCallback عشان setState أو navigator يحصل بعد انتهاء build
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) {
-                        Future.microtask(() async {
-                          await Future.delayed(const Duration(milliseconds: 1500));
-                          if (mounted) {
-                            Navigator.of(context).pop();
-                            _navigationService.toLayout(state.user.role!);
-                          }
-                        });
-
-                        return SuccessDialog(
-                          title: "Yeah ! Welcome back ${state.user.name}",
-                          content:
-                          "Once again you login successfully into Chefaa app",
-                        );
-                      },
-                    );
-                  });
-                }
-              },
-              builder: (context, state) {
-                final loginCubit = LoginCubit.get(context);
-                final googleSignInCubit = GoogleSignInCubit.get(context);
-
-                return Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          ImageAssets.loginLogo,
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                        ),
-                      ),
-                      CustomTextField(
-                        controller: loginCubit.identityController,
-                        text: "Enter your Email or Phone",
-                        prefixIcon: IconsAssets.emailIcon,
-                        validator: Validators.validateEmailOrPhone,
-                      ),
-                      20.verticalSpace,
-                      CustomTextField(
-                        controller: loginCubit.passwordController,
-                        text: "Enter your Password",
-                        prefixIcon: IconsAssets.passwordIcon,
-                        isPass: true,
-                        validator: Validators.validatePassword,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                            color: ColorManager.primary,
-                            fontSize: 16,
-                            decoration: TextDecoration.underline,
-                            decorationColor: ColorManager.primary,
-                          ),
-                        ),
-                      ),
-                      50.verticalSpace,
-                      CustomBtn(
-                        text: "Login",
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            loginCubit.login();
-                          }
-                        },
-                      ),
-                      50.verticalSpace,
-                      // هنا Google Sign-In نفس الفكرة
-                      BlocConsumer<GoogleSignInCubit, GoogleSignInState>(
-                        listener: (context, state) {
-                          if (state is GoogleSignInLoadingState) {
-                            Loading.show(context);
-                          } else if (state is GoogleSignInErrorState) {
-                            Loading.hide(context);
-                            AnimatedSnackBar.rectangle(
-                              'Error',
-                              state.message!,
-                              type: AnimatedSnackBarType.error,
-                              brightness: Brightness.dark,
-                              duration: const Duration(seconds: 3),
-                            ).show(context);
-                          } else if (state is GoogleSignInSuccessState) {
-                            Loading.hide(context);
-
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (context) {
-                                  Future.microtask(() async {
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 1500));
-                                    if (mounted) {
-                                      Navigator.of(context).pop();
-                                      _navigationService
-                                          .toLayout(state.user.role!);
-                                    }
-                                  });
-
-                                  return SuccessDialog(
-                                    title: "Yeah ! Welcome back ${state.user.name}",
-                                    content:
-                                    "Once again you login successfully into Chefaa app",
-                                  );
-                                },
-                              );
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) {
+                            Future.microtask(() async {
+                              await Future.delayed(const Duration(milliseconds: 1500));
+                              if (mounted) {
+                                Navigator.of(context).pop();
+                                _navigationService.toLayout(state.user.role!);
+                              }
                             });
-                          }
-                        },
-                        builder: (context, state) {
-                          return CustomOutlineBtn(
-                            onPressed: () async {
-                              try {
-                                final result = await GoogleSignIn.instance.authenticate();
-                                final String? idToken = result.authentication.idToken;
 
-                                if (idToken != null) {
-                                  googleSignInCubit.signInWithGoogle(idToken);
-                                } else {
-                                  AnimatedSnackBar.rectangle(
-                                    'Error',
-                                    'Failed to retrieve Google ID token.',
-                                    type: AnimatedSnackBarType.error,
-                                    brightness: Brightness.dark,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                }
-                              } catch (e) {
-                                // authenticate() throws if user cancels — this is expected behavior in v7+
-                                if (e is! Exception || !e.toString().contains('cancel')) {
-                                  AnimatedSnackBar.rectangle(
-                                    'Error',
-                                    e.toString(),
-                                    type: AnimatedSnackBarType.error,
-                                    brightness: Brightness.dark,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                }
+                            return SuccessDialog(
+                              title: "Yeah ! Welcome back ${state.user.name}",
+                              content:
+                              "Once again you login successfully into Chefaa app",
+                            );
+                          },
+                        );
+                      });
+                    }
+                  },
+                  builder: (context, state) {
+                    final loginCubit = LoginCubit.get(context);
+                    final googleSignInCubit = GoogleSignInCubit.get(context);
+
+                    return Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Center(
+                            child: Image.asset(
+                              ImageAssets.loginLogo,
+                              fit: BoxFit.fill,
+                              width: double.infinity,
+                            ),
+                          ),
+                          CustomTextField(
+                            controller: loginCubit.identityController,
+                            text: "Enter your Email or Phone",
+                            prefixIcon: IconsAssets.emailIcon,
+                            validator: Validators.validateEmailOrPhone,
+                          ),
+                          20.verticalSpace,
+                          CustomTextField(
+                            controller: loginCubit.passwordController,
+                            text: "Enter your Password",
+                            prefixIcon: IconsAssets.passwordIcon,
+                            isPass: true,
+                            validator: Validators.validatePassword,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.forgetPassword,
+                              );
+                            },
+                            child: const Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                color: ColorManager.primary,
+                                fontSize: 16,
+                                decoration: TextDecoration.underline,
+                                decorationColor: ColorManager.primary,
+                              ),
+                            ),
+                          ),
+                          50.verticalSpace,
+                          CustomBtn(
+                            text: "Login",
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                loginCubit.login();
                               }
                             },
-                            prefixImage: SvgAssets.google,
-                            title: "Sign in with Google",
-                          );
-                        },
+                          ),
+                          50.verticalSpace,
+                          BlocConsumer<GoogleSignInCubit, GoogleSignInState>(
+                            listener: (context, state) {
+                              if (state is GoogleSignInLoadingState) {
+                                Loading.show(context);
+                              } else if (state is GoogleSignInErrorState) {
+                                Loading.hide(context);
+                                AnimatedSnackBar.rectangle(
+                                  'Error',
+                                  state.message!,
+                                  type: AnimatedSnackBarType.error,
+                                  brightness: Brightness.dark,
+                                  duration: const Duration(seconds: 3),
+                                ).show(context);
+                              } else if (state is GoogleSignInSuccessState) {
+                                Loading.hide(context);
+
+                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                  showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (context) {
+                                      Future.microtask(() async {
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 1500));
+                                        if (mounted) {
+                                          Navigator.of(context).pop();
+                                          _navigationService
+                                              .toLayout(state.user.role!);
+                                        }
+                                      });
+
+                                      return SuccessDialog(
+                                        title: "Yeah ! Welcome back ${state.user.name}",
+                                        content:
+                                        "Once again you login successfully into Chefaa app",
+                                      );
+                                    },
+                                  );
+                                });
+                              }
+                            },
+                            builder: (context, state) {
+                              return CustomOutlineBtn(
+                                onPressed: () async {
+                                  try {
+                                    final result = await GoogleSignIn.instance.authenticate();
+                                    final String? idToken = result.authentication.idToken;
+
+                                    if (idToken != null) {
+                                      googleSignInCubit.signInWithGoogle(idToken);
+                                    } else {
+                                      AnimatedSnackBar.rectangle(
+                                        'Error',
+                                        'Failed to retrieve Google ID token.',
+                                        type: AnimatedSnackBarType.error,
+                                        brightness: Brightness.dark,
+                                        duration: const Duration(seconds: 3),
+                                      ).show(context);
+                                    }
+                                  } catch (e) {
+                                    if (e is! Exception || !e.toString().contains('cancel')) {
+                                      AnimatedSnackBar.rectangle(
+                                        'Error',
+                                        e.toString(),
+                                        type: AnimatedSnackBarType.error,
+                                        brightness: Brightness.dark,
+                                        duration: const Duration(seconds: 3),
+                                      ).show(context);
+                                    }
+                                  }
+                                },
+                                prefixImage: SvgAssets.google,
+                                title: "Sign in with Google",
+                              );
+                            },
+                          ),
+                          30.verticalSpace,
+                          NotHaveAccount(
+                            onPressed: () {
+                              _navigationService.toSignUp(widget.role);
+                            },
+                          ),
+                        ],
                       ),
-                      30.verticalSpace,
-                      NotHaveAccount(
-                        onPressed: () {
-                          _navigationService.toSignUp(widget.role);
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ),
             ),
           ),
         ),
-      ),
-    ),
       ),
     );
   }

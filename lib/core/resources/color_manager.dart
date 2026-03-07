@@ -5,6 +5,7 @@ abstract class ColorManager {
 
   static const Color white = Color(0xffFFFFFF);
   static const Color gray = Color(0xff92929D);
+  static const Color darkGray = Color(0xff515154);
   static const Color lightGray = Color(0xffF9FAFB);
   static const Color input = Color(0xffE5E7EB);
   static const Color black = Color(0xff000000);

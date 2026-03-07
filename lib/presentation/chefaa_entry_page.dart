@@ -28,8 +28,8 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
 
     if (isFirst ?? true) {
       await SharedServices.saveBool("isFirst", false);
-      Navigator.pushReplacementNamed(context, AppRoutesNames.onboardingRoute);
-      return;
+      Navigator.pushReplacementNamed(
+          context, AppRoutesNames.onboardingRoute);
     }
 
     if (token == null || user == null) {

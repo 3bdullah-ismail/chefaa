@@ -91,7 +91,7 @@ class OnboardingContainer extends StatelessWidget {
                       OnboardingModel.onboardingData.length - 1) {
                     Navigator.pushReplacementNamed(
                       context,
-                      AppRoutesNames.option,
+                      AppRoutesNames.login,
                     );
                   } else {
                     next();

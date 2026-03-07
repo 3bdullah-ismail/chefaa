@@ -16,7 +16,7 @@ class BackBtn extends StatelessWidget {
           },
           icon: const Icon(
             CupertinoIcons.left_chevron,
-            size: 40,
+            size: 30,
             color: ColorManager.black,
           ),
         ),

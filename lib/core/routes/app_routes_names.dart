@@ -1,6 +1,6 @@
 class AppRoutesNames {
-  static const String layout = '/layout';
   static const String option = '/option';
+  static const String appEntryRoute = '/chefaaEntry';
   static const String onboardingRoute = '/onboarding';
   static const String docSignUp = '/docSignUp';
   static const String patientSignUp = '/patientSignUp';
