@@ -50,8 +50,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         backgroundColor: ColorManager.white,
         body: ScrollConfiguration(
-          behavior: const ScrollBehavior()
-              .copyWith(overscroll: false),
+          behavior: const ScrollBehavior().copyWith(overscroll: false),
           child: SingleChildScrollView(
             child: SafeArea(
               child: Padding(
@@ -81,7 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                           barrierDismissible: false,
                           builder: (context) {
                             Future.microtask(() async {
-                              await Future.delayed(const Duration(milliseconds: 1500));
+                              await Future.delayed(
+                                const Duration(milliseconds: 1500),
+                              );
                               if (mounted) {
                                 Navigator.of(context).pop();
                                 _navigationService.toLayout(state.user.role!);
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                             return SuccessDialog(
                               title: "Yeah ! Welcome back ${state.user.name}",
                               content:
-                              "Once again you login successfully into Chefaa app",
+                                  "Once again you login successfully into Chefaa app",
                             );
                           },
                         );
@@ -114,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                               width: double.infinity,
                             ),
                           ),
+                          70.verticalSpace,
                           CustomTextField(
                             controller: loginCubit.identityController,
                             text: "Enter your Email or Phone",
@@ -145,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          50.verticalSpace,
+                          45.verticalSpace,
                           CustomBtn(
                             text: "Login",
                             onPressed: () {
@@ -171,25 +173,30 @@ class _LoginPageState extends State<LoginPage> {
                               } else if (state is GoogleSignInSuccessState) {
                                 Loading.hide(context);
 
-                                WidgetsBinding.instance.addPostFrameCallback((_) {
+                                WidgetsBinding.instance.addPostFrameCallback((
+                                  _,
+                                ) {
                                   showDialog(
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (context) {
                                       Future.microtask(() async {
                                         await Future.delayed(
-                                            const Duration(milliseconds: 1500));
+                                          const Duration(milliseconds: 1500),
+                                        );
                                         if (mounted) {
                                           Navigator.of(context).pop();
-                                          _navigationService
-                                              .toLayout(state.user.role!);
+                                          _navigationService.toLayout(
+                                            state.user.role!,
+                                          );
                                         }
                                       });
 
                                       return SuccessDialog(
-                                        title: "Yeah ! Welcome back ${state.user.name}",
+                                        title:
+                                            "Yeah ! Welcome back ${state.user.name}",
                                         content:
-                                        "Once again you login successfully into Chefaa app",
+                                            "Once again you login successfully into Chefaa app",
                                       );
                                     },
                                   );
@@ -200,11 +207,15 @@ class _LoginPageState extends State<LoginPage> {
                               return CustomOutlineBtn(
                                 onPressed: () async {
                                   try {
-                                    final result = await GoogleSignIn.instance.authenticate();
-                                    final String? idToken = result.authentication.idToken;
+                                    final result = await GoogleSignIn.instance
+                                        .authenticate();
+                                    final String? idToken =
+                                        result.authentication.idToken;
 
                                     if (idToken != null) {
-                                      googleSignInCubit.signInWithGoogle(idToken);
+                                      googleSignInCubit.signInWithGoogle(
+                                        idToken,
+                                      );
                                     } else {
                                       AnimatedSnackBar.rectangle(
                                         'Error',
@@ -215,7 +226,8 @@ class _LoginPageState extends State<LoginPage> {
                                       ).show(context);
                                     }
                                   } catch (e) {
-                                    if (e is! Exception || !e.toString().contains('cancel')) {
+                                    if (e is! Exception ||
+                                        !e.toString().contains('cancel')) {
                                       AnimatedSnackBar.rectangle(
                                         'Error',
                                         e.toString(),
@@ -231,7 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             },
                           ),
-                          30.verticalSpace,
+                          20.verticalSpace,
                           NotHaveAccount(
                             onPressed: () {
                               _navigationService.toSignUp(widget.role);

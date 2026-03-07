@@ -6,10 +6,7 @@ class PatientLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Patient Layout"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text("Patient Layout"), centerTitle: true),
     );
   }
 }

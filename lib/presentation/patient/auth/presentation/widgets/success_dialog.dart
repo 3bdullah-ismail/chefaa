@@ -10,11 +10,7 @@ class SuccessDialog extends StatelessWidget {
   final String title;
   final String content;
 
-  const SuccessDialog({
-    super.key,
-    required this.title,
-    required this.content,
-  });
+  const SuccessDialog({super.key, required this.title, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +37,7 @@ class SuccessDialog extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         content: Container(
-          constraints: BoxConstraints(
-            minHeight: 100.h,
-            maxHeight: 100.h,
-          ),
+          constraints: BoxConstraints(minHeight: 100.h, maxHeight: 100.h),
           child: SingleChildScrollView(
             child: Text(
               content,

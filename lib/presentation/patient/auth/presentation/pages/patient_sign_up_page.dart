@@ -153,7 +153,6 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                           isPass: true,
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.visiblePassword,
-
                         ),
                         27.verticalSpace,
                         Row(

@@ -12,7 +12,6 @@ class RoleNavigationService {
     Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
   }
 
-
   void toSignUp(String? role) {
     final navigationData = _getSignUpRoute(role);
     if (navigationData.route != null) {
@@ -25,13 +24,8 @@ class RoleNavigationService {
   }
 
   void toLogin(String? role) {
-    Navigator.pushNamed(
-      context,
-      AppRoutesNames.login,
-      arguments: role,
-    );
+    Navigator.pushNamed(context, AppRoutesNames.login, arguments: role);
   }
-
 
   String _getLayoutRoute(String? role) {
     switch (role) {
@@ -51,8 +45,8 @@ class RoleNavigationService {
     switch (role) {
       case "patient":
         return (
-        route: AppRoutesNames.patientSignUp,
-        arguments: AppConstants.patient.toLowerCase()
+          route: AppRoutesNames.patientSignUp,
+          arguments: AppConstants.patient.toLowerCase(),
         );
       case "doctor":
         return (route: AppRoutesNames.docSignUp, arguments: null);

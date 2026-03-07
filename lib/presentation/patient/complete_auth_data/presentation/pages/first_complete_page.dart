@@ -61,7 +61,6 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         20.verticalSpace,
 
                         const Text(
@@ -76,7 +75,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         12.verticalSpace,
 
                         CustomDropDownBtn(
-                          items: const ["Male","Female"],
+                          items: const ["Male", "Female"],
                           value: gender,
                           onChanged: (value) {
                             setState(() {
@@ -199,9 +198,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                 CustomBtn(
                   text: "Continue",
                   onPressed: () {
-
                     if (_formKey.currentState!.validate()) {
-
                       final cubit = CompleteCubit.get(context);
 
                       cubit.setBasicInfo(

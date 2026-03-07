@@ -13,13 +13,10 @@ class LoginDataSourceImp implements LoginDataSource {
   Future<Response<dynamic>> login({
     required String identity,
     required String password,
-  })  {
+  }) {
     return networkService.dio.post(
       "/auth/login",
-      data: {
-        "identity": identity,
-        "password": password,
-      },
+      data: {"identity": identity, "password": password},
     );
   }
 }

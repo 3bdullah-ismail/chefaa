@@ -16,7 +16,7 @@ class CustomTextField extends StatefulWidget {
     this.completeData = false,
     this.suffixText = "",
     this.inputFormatters,
-    this.textInputAction ,
+    this.textInputAction,
   });
 
   final TextEditingController controller;
@@ -29,7 +29,6 @@ class CustomTextField extends StatefulWidget {
   final String? suffixText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
-
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();

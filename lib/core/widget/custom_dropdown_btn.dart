@@ -8,7 +8,6 @@ class CustomDropDownBtn extends StatelessWidget {
   final ValueChanged<String?> onChanged;
   final List<String> items;
 
-
   const CustomDropDownBtn({
     required this.validator,
     super.key,
@@ -23,9 +22,7 @@ class CustomDropDownBtn extends StatelessWidget {
     //final List<String> genderItems = ['Male', 'Female'];
 
     return Theme(
-      data: Theme.of(context).copyWith(
-        focusColor: ColorManager.white,
-      ),
+      data: Theme.of(context).copyWith(focusColor: ColorManager.white),
       child: DropdownButtonFormField<String>(
         isExpanded: true,
         elevation: 2,
@@ -46,7 +43,10 @@ class CustomDropDownBtn extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: ColorManager.lightGray,
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+            vertical: 16.h,
+          ),
           hintStyle: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
@@ -65,7 +65,7 @@ class CustomDropDownBtn extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 16.w),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                 color: isSelected ? ColorManager.primary.withAlpha(38) : null,
+                color: isSelected ? ColorManager.primary.withAlpha(38) : null,
               ),
               child: Row(
                 children: [
@@ -74,8 +74,12 @@ class CustomDropDownBtn extends StatelessWidget {
                       item,
                       style: TextStyle(
                         fontSize: 15.5.sp,
-                        fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
-                        color: isSelected ? ColorManager.primary : ColorManager.black,
+                        fontWeight: isSelected
+                            ? FontWeight.w800
+                            : FontWeight.w500,
+                        color: isSelected
+                            ? ColorManager.primary
+                            : ColorManager.black,
                         height: 1.35,
                       ),
                     ),
@@ -116,4 +120,5 @@ class CustomDropDownBtn extends StatelessWidget {
         ),
       ),
     );
-  }}
+  }
+}

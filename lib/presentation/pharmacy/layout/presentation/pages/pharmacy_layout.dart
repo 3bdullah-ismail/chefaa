@@ -5,10 +5,6 @@ class PharmacyLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Pharmacy Layout'),
-      ),
-    );
+    return Scaffold(appBar: AppBar(title: const Text('Pharmacy Layout')));
   }
 }

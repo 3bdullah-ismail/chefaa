@@ -15,9 +15,7 @@ class GoogleSignInDataSourceImp implements GoogleSignInDataSource {
   Future<Response<dynamic>> googleSignIn(String idToken) {
     return networkService.dio.get(
       "/auth/google",
-      queryParameters: {
-        "idToken": idToken,
-      },
+      queryParameters: {"idToken": idToken},
       options: Options(
         followRedirects: true,
         validateStatus: (status) {

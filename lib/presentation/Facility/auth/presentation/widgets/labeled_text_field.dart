@@ -16,8 +16,6 @@ class LabeledTextField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
 
-
-
   const LabeledTextField({
     super.key,
     required this.label,

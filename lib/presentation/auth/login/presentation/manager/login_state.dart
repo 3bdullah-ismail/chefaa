@@ -1,4 +1,3 @@
-
 import '../../../../../core/models/auth_response.dart';
 
 sealed class LoginState {}
@@ -11,10 +10,7 @@ final class LoginSuccessState extends LoginState {
   final User user;
   final String message;
 
-  LoginSuccessState({
-    required this.user,
-    required this.message,
-  });
+  LoginSuccessState({required this.user, required this.message});
 }
 
 final class LoginErrorState extends LoginState {

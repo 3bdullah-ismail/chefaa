@@ -6,7 +6,6 @@ import '../../../../../core/services/storage_service.dart';
 import '../../data/repositories/login_repo.dart';
 import 'login_state.dart';
 
-
 @injectable
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo loginRepo;
@@ -30,14 +29,14 @@ class LoginCubit extends Cubit<LoginState> {
       await StorageService.saveUser(res.user!);
       await StorageService.saveRole(res.user!.role!);
 
-      emit(LoginSuccessState(
-        user: res.user!,
-        message: res.message ?? 'Login successful',
-      ));
+      emit(
+        LoginSuccessState(
+          user: res.user!,
+          message: res.message ?? 'Login successful',
+        ),
+      );
     } catch (e) {
-      emit(LoginErrorState(
-        e.toString(),
-      ));
+      emit(LoginErrorState(e.toString()));
     }
   }
 

@@ -5,12 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 
-
 class CustomOutlineBtn extends StatelessWidget {
   final String prefixImage;
   final String title;
   final void Function() onPressed;
-
 
   const CustomOutlineBtn({
     super.key,
@@ -34,9 +32,10 @@ class CustomOutlineBtn extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(AppPadding.p18),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(prefixImage, width: 35, height: 35),
-            60.horizontalSpace,
+            SvgPicture.asset(prefixImage, width: 24, height: 24),
+            32.horizontalSpace,
             Text(
               title,
               style: const TextStyle(

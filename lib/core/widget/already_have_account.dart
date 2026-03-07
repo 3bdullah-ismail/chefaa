@@ -17,9 +17,13 @@ class AlreadyHaveAccount extends StatelessWidget {
           "Do you already have an account?",
           style: getMediumStyle(color: ColorManager.black, fontSize: 14),
         ),
-        CustomTextBtn(text: "Login", onPressed: () {
-          onPressed!();
-        }, fontSize: 14),
+        CustomTextBtn(
+          text: "Login",
+          onPressed: () {
+            onPressed!();
+          },
+          fontSize: 14,
+        ),
       ],
     );
   }

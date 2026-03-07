@@ -4,18 +4,17 @@ import 'package:chefaa/presentation/auth/google_sign_in/data/repositories/google
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: GoogleSignInRepo)
-class GoogleSignInRepoImp implements GoogleSignInRepo{
-
+class GoogleSignInRepoImp implements GoogleSignInRepo {
   GoogleSignInDataSource googleSignInDataSource;
   GoogleSignInRepoImp(this.googleSignInDataSource);
 
   @override
-  Future<AuthResponse> googleSignIn(String idToken)async {
-   try{
-     var res = await googleSignInDataSource.googleSignIn(idToken);
-     return AuthResponse.fromJson(res.data);
-   }catch(e){
-     rethrow;
-   }
+  Future<AuthResponse> googleSignIn(String idToken) async {
+    try {
+      var res = await googleSignInDataSource.googleSignIn(idToken);
+      return AuthResponse.fromJson(res.data);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
