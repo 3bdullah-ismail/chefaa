@@ -4,19 +4,16 @@ import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/validators.dart';
+import 'package:chefaa/presentation/auth/presentation/manager/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/resources/values_manager.dart';
-import '../../../../../core/routes/app_routes_names.dart';
-import '../../../../../core/widget/loading.dart';
-import '../../../../patient/auth/presentation/widgets/success_dialog.dart';
-import '../../../google_sign_in/presentation/manager/googleSignIn_cubit.dart';
-import '../../../google_sign_in/presentation/manager/googleSignIn_state.dart';
-import '../manager/login_cubit.dart';
-import '../manager/login_state.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/values_manager.dart';
+import '../../../../core/routes/app_routes_names.dart';
+import '../../../../core/widget/loading.dart';
+import '../../../patient/auth/presentation/widgets/success_dialog.dart';
 import '../widgets/custom_outline_btn.dart';
 import '../widgets/not_have_account.dart';
 import '../widgets/role_based_nav.dart';
@@ -42,11 +39,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<LoginCubit>()),
-        BlocProvider(create: (context) => getIt<GoogleSignInCubit>()),
-      ],
+    return BlocProvider(
+     create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         backgroundColor: ColorManager.white,
         body: ScrollConfiguration(
@@ -59,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                   horizontal: AppPadding.p28,
                   vertical: AppPadding.p80,
                 ),
-                child: BlocConsumer<LoginCubit, LoginState>(
+                child: BlocConsumer<AuthCubit, AuthState>(
                   listener: (context, state) async {
                     if (state is LoginLoadingState) {
                       Loading.show(context);
@@ -99,8 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                   builder: (context, state) {
-                    final loginCubit = LoginCubit.get(context);
-                    final googleSignInCubit = GoogleSignInCubit.get(context);
+                    final loginCubit = AuthCubit.get(context);
+                    final googleSignInCubit = AuthCubit.get(context);
 
                     return Form(
                       key: _formKey,
@@ -155,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           50.verticalSpace,
-                          BlocConsumer<GoogleSignInCubit, GoogleSignInState>(
+                          BlocConsumer<AuthCubit, AuthState>(
                             listener: (context, state) {
                               if (state is GoogleSignInLoadingState) {
                                 Loading.show(context);

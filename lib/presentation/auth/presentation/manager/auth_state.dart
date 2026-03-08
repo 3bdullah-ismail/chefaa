@@ -4,6 +4,35 @@ part of 'auth_cubit.dart';
 sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
+final class LoginLoadingState extends AuthState {}
+
+final class LoginSuccessState extends AuthState {
+  final User user;
+  final String message;
+
+  LoginSuccessState({
+    required this.user,
+    required this.message,
+  });
+}
+
+final class LoginErrorState extends AuthState {
+  final String message;
+
+  LoginErrorState(this.message);
+}
+
+final class GoogleSignInLoadingState extends AuthState{}
+final class GoogleSignInSuccessState extends AuthState{
+  final User user;
+  final String? message;
+  GoogleSignInSuccessState({required this.user,required this.message});
+}
+final class GoogleSignInErrorState extends AuthState{
+  final String? message;
+  GoogleSignInErrorState(this.message);
+
+}
 
 final class ForgotPassSuccessState extends AuthState {
   final String? message;

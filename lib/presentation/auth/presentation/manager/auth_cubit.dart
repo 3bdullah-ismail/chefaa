@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import '../../../../core/models/auth_response.dart';
+import '../../../../core/services/storage_service.dart';
 import '../../data/repositories/repo.dart';
 part 'auth_state.dart';
 
@@ -9,7 +11,8 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepo repo;
 
   AuthCubit({required this.repo}) : super(AuthInitial());
-
+  TextEditingController identityController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -32,6 +35,53 @@ class AuthCubit extends Cubit<AuthState> {
 
   String _getIdentity(int index) =>
       index == 0 ? emailController.text.trim() : phoneController.text.trim();
+
+
+  Future<void> login() async {
+    emit(LoginLoadingState());
+    try {
+      final res = await repo.login(
+        identity: identityController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      await StorageService.saveToken(res.accessToken!);
+      await StorageService.saveUser(res.user!);
+      await StorageService.saveRole(res.user!.role!);
+
+      emit(LoginSuccessState(
+        user: res.user!,
+        message: res.message ?? 'Login successful',
+      ));
+    } catch (e) {
+      emit(LoginErrorState(
+        e.toString(),
+      ));
+    }
+  }
+
+
+  Future<void> signInWithGoogle(String idToken) async {
+    emit(GoogleSignInLoadingState());
+
+    try {
+      final res = await repo.googleSignIn(idToken);
+
+      await StorageService.saveToken(res.accessToken!);
+      await StorageService.saveUser(res.user!);
+      await StorageService.saveRole(res.user!.role!);
+
+      emit(
+        GoogleSignInSuccessState(
+          user: res.user!,
+          message: res.message ?? "Login successful",
+        ),
+      );
+    } catch (e) {
+      emit(GoogleSignInErrorState(e.toString()));
+    }
+  }
+
 
   Future<void> forgotPass(int index) async {
     if (!forgotPassFormKey.currentState!.validate()) return;

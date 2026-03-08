@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../../core/resources/color_manager.dart';
-import '../../../../../core/resources/styles_manager.dart';
-import '../../../../../core/widget/custom_text_btn.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/styles_manager.dart';
+import '../../../../core/widget/custom_text_btn.dart';
 
 
 

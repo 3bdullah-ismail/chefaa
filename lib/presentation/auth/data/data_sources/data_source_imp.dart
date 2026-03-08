@@ -7,6 +7,37 @@ import 'package:injectable/injectable.dart';
 class AuthDataSourceImp implements AuthDataSource {
   NetworkService networkService;
   AuthDataSourceImp(this.networkService);
+
+  @override
+  Future<Response<dynamic>> login({
+    required String identity,
+    required String password,
+  })  {
+    return networkService.dio.post(
+      "/auth/login",
+      data: {
+        "identity": identity,
+        "password": password,
+      },
+    );
+  }
+
+  @override
+  Future<Response<dynamic>> googleSignIn(String idToken) {
+    return networkService.dio.get(
+      "/auth/google",
+      queryParameters: {
+        "idToken": idToken,
+      },
+      options: Options(
+        followRedirects: true,
+        validateStatus: (status) {
+          return status != null && status < 500;
+        },
+      ),
+    );
+  }
+
   @override
   Future<Response<dynamic>> forgotPass({required String identity}) {
     return networkService.dio.post(

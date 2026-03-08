@@ -17,6 +17,16 @@ abstract class ImageAssets {
 class SvgAssets {
   static const String google = "$svgPath/Google.svg";
   static const String biApple = "$svgPath/bi_apple.svg";
+  static const String home = "$svgPath/Home.svg";
+  static const String homeActive = "$svgPath/Home_active.svg";
+  static const String booking = "$svgPath/booking_inactive.svg";
+  static const String bookingActive = "$svgPath/booking.svg";
+  static const String chat = "$svgPath/chat.svg";
+  static const String chatActive = "$svgPath/chat_active.svg";
+  static const String profile = "$svgPath/profile.svg";
+  static const String profileActive = "$svgPath/profile_active.svg";
+  static const String aiLab = "$svgPath/ai_lab.svg";
+  static const String aiLabActive = "$svgPath/ai_lab_active.svg";
 }
 
 abstract class IconsAssets {
