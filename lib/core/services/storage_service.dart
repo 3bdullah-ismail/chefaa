@@ -36,7 +36,6 @@ class StorageService {
     return userData;
   }
 
-
   static Future<void> saveRole(String value) async {
     role = value;
     await _storage.write(key: 'role', value: value);

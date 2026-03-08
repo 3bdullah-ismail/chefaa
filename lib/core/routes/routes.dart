@@ -24,12 +24,12 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case AppRoutesNames.login:
-        return MaterialPageRoute(builder: (_) =>const  LoginPage());
+        return MaterialPageRoute(builder: (_) => const LoginPage());
       case AppRoutesNames.onboardingRoute:
         return MaterialPageRoute(builder: (_) => const OnboardingPage());
       case AppRoutesNames.option:
         return MaterialPageRoute(builder: (_) => const OptionScreen());
-        case AppRoutesNames.appEntryRoute:
+      case AppRoutesNames.appEntryRoute:
         return MaterialPageRoute(builder: (_) => const ChefaaEntryPage());
       case AppRoutesNames.docSignUp:
         return MaterialPageRoute(builder: (_) => const DocSignUp());
@@ -59,12 +59,10 @@ class Routes {
 
       case AppRoutesNames.patientLayout:
         return MaterialPageRoute(builder: (_) => const PatientLayout());
-        case AppRoutesNames.doctorLayout:
-          return MaterialPageRoute(builder: (_) => const DoctorLayout());
-          case AppRoutesNames.pharmacyLayout:
-            return MaterialPageRoute(builder: (_) => const PharmacyLayout());
-
-
+      case AppRoutesNames.doctorLayout:
+        return MaterialPageRoute(builder: (_) => const DoctorLayout());
+      case AppRoutesNames.pharmacyLayout:
+        return MaterialPageRoute(builder: (_) => const PharmacyLayout());
 
       default:
         return MaterialPageRoute(

@@ -82,7 +82,7 @@ class _DocSignUpState extends State<DocSignUp> {
                                 controller: cubit.name,
                                 text: AppConstants.firstName,
                                 prefixIcon: IconsAssets.userIcon,
-                               textInputAction: TextInputAction.next,
+                                textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
                               ),
                             ),
@@ -94,7 +94,6 @@ class _DocSignUpState extends State<DocSignUp> {
                                 text: AppConstants.lastName,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
-
                               ),
                             ),
                           ],
@@ -108,7 +107,6 @@ class _DocSignUpState extends State<DocSignUp> {
                           prefixIcon: IconsAssets.phoneIcon,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.phone,
-
                         ),
                         8.verticalSpace,
                         CustomTextField(
@@ -118,7 +116,6 @@ class _DocSignUpState extends State<DocSignUp> {
                           prefixIcon: IconsAssets.emailIcon,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
-
                         ),
                         8.verticalSpace,
                         CustomTextField(
@@ -193,9 +190,15 @@ class _DocSignUpState extends State<DocSignUp> {
                             }
                           },
                         ),
-                         AlreadyHaveAccount(onPressed: (){
-                          Navigator.pushNamed(context, AppRoutesNames.login,arguments: AppConstants.doctor.toLowerCase());
-                        },),
+                        AlreadyHaveAccount(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutesNames.login,
+                              arguments: AppConstants.doctor.toLowerCase(),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),

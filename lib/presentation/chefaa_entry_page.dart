@@ -14,7 +14,6 @@ class ChefaaEntryPage extends StatefulWidget {
 }
 
 class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
-
   @override
   void initState() {
     super.initState();
@@ -28,15 +27,13 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
 
     if (isFirst ?? true) {
       await SharedServices.saveBool("isFirst", false);
-      Navigator.pushReplacementNamed(
-          context, AppRoutesNames.onboardingRoute);
+      Navigator.pushReplacementNamed(context, AppRoutesNames.onboardingRoute);
     }
 
     if (token == null || user == null) {
       Navigator.pushReplacementNamed(context, AppRoutesNames.login);
       return;
     }
-
 
     final route = AppConstants.getLayoutFromRole(user.role);
     Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
@@ -46,7 +43,7 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(color: ColorManager.primary,),
+        child: CircularProgressIndicator(color: ColorManager.primary),
       ),
     );
   }

@@ -40,16 +40,15 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
         fontWeight: FontWeight.bold,
         fontSize: 16,
       ),
-      decoration:const InputDecoration(
-
+      decoration: const InputDecoration(
         hintText: "Select Birth Date",
         hintStyle: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
           color: ColorManager.darkGray,
         ),
-        suffixIcon:  Icon(Icons.calendar_month,color: ColorManager.gray,),
-        border:  OutlineInputBorder(),
+        suffixIcon: Icon(Icons.calendar_month, color: ColorManager.gray),
+        border: OutlineInputBorder(),
       ),
     );
   }

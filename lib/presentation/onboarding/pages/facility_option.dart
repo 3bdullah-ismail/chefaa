@@ -87,7 +87,8 @@ class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
                                 Navigator.pushReplacementNamed(
                                   context,
                                   AppRoutesNames.pharmacySignUp,
-                                  arguments: AppConstants.pharmacy.toLowerCase(),
+                                  arguments: AppConstants.pharmacy
+                                      .toLowerCase(),
                                 );
                               }
                             },

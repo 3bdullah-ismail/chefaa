@@ -171,7 +171,6 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 hint: AppConstants.phoneHint,
                                 prefixIcon: IconsAssets.phoneIcon,
                                 textInputAction: TextInputAction.next,
-
                               ),
                               LabeledTextField(
                                 keyboardType: TextInputType.emailAddress,
@@ -191,12 +190,11 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 isPassword: true,
                                 prefixIcon: IconsAssets.passwordIcon,
                                 textInputAction: TextInputAction.next,
-
                               ),
                               LabeledTextField(
                                 keyboardType: TextInputType.visiblePassword,
                                 textInputAction: TextInputAction.next,
-                                  validator: (value) =>
+                                validator: (value) =>
                                     Validators.validateConfirmPassword(
                                       value,
                                       cubit.password.text,
@@ -208,8 +206,8 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                 prefixIcon: IconsAssets.passwordIcon,
                               ),
                               LabeledTextField(
-                                  textInputAction: TextInputAction.done,
-                                  inputFormatters: [
+                                textInputAction: TextInputAction.done,
+                                inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                     RegExp(r'[a-zA-Z0-9]'),
                                   ),

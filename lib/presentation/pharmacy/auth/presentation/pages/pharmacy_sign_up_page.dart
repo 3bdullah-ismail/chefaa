@@ -109,7 +109,6 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                                 controller: cubit.username,
                                 text: "Full Pharmacy legal name",
                                 keyboardType: TextInputType.name,
-
                               ),
                               20.verticalSpace,
                               const Text(
@@ -127,7 +126,6 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                                 controller: cubit.phoneNumber,
                                 text: AppConstants.phoneHint,
                                 keyboardType: TextInputType.phone,
-
                               ),
                               20.verticalSpace,
                               const Text(
@@ -145,7 +143,6 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                                 controller: cubit.email,
                                 text: AppConstants.emailPharmacyHint,
                                 keyboardType: TextInputType.emailAddress,
-
                               ),
                               20.verticalSpace,
                               const Text(
@@ -163,7 +160,6 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                                 controller: cubit.password,
                                 text: AppConstants.enterPassword,
                                 keyboardType: TextInputType.visiblePassword,
-
                               ),
                               20.verticalSpace,
                               const Text(
@@ -197,8 +193,8 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               ),
                               10.verticalSpace,
                               CustomTextField(
-                                  textInputAction: TextInputAction.done,
-                                  inputFormatters: [
+                                textInputAction: TextInputAction.done,
+                                inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                     RegExp(r'[a-zA-Z0-9]'),
                                   ),

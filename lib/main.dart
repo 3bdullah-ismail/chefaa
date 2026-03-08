@@ -6,7 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'chefaa.dart';
 import 'core/config/get_config.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
   // await GoogleSignIn.instance.initialize(
