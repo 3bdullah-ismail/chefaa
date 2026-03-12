@@ -8,10 +8,6 @@ abstract class AuthDataSource {
     required String code,
     required String newPassword,
   });
-  Future<Response>login({
-    required String identity,
-    required String password,
-  });
-  Future<Response>googleSignIn(String idToken);
-
+  Future<Response> login({required String identity, required String password});
+  Future<Response> googleSignIn(String idToken);
 }

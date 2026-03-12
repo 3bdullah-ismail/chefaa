@@ -1,4 +1,6 @@
 import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/presentation/patient/profiile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -18,7 +20,7 @@ class _PatientLayoutState extends State<PatientLayout> {
     const Center(child: Text("Booking")),
     const Center(child: Text("AiLab")),
     const Center(child: Text("Chat")),
-    const Center(child: Text("Profile")),
+    const ProfilePage(),
   ];
 
   @override
@@ -27,19 +29,17 @@ class _PatientLayoutState extends State<PatientLayout> {
       body: tabs[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-       selectedLabelStyle: const TextStyle(
-         fontSize: 12,
-         fontWeight: FontWeight.w600,
-       ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
+        selectedLabelStyle: getSemiBoldStyle(color: ColorManager.darkGray),
+        unselectedLabelStyle: getSemiBoldStyle(color: ColorManager.darkGray),
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.home, width: 20, height: 20),
             label: 'Home',
-            activeIcon: SvgPicture.asset(SvgAssets.homeActive,width: 20, height: 20,),
+            activeIcon: SvgPicture.asset(
+              SvgAssets.homeActive,
+              width: 20,
+              height: 20,
+            ),
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.booking),
@@ -47,7 +47,7 @@ class _PatientLayoutState extends State<PatientLayout> {
             activeIcon: SvgPicture.asset(SvgAssets.bookingActive),
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(SvgAssets.aiLab,width: 25, height: 25),
+            icon: SvgPicture.asset(SvgAssets.aiLab, width: 25, height: 25),
             label: 'AILab',
             activeIcon: SvgPicture.asset(
               SvgAssets.aiLabActive,
@@ -63,7 +63,7 @@ class _PatientLayoutState extends State<PatientLayout> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.profile),
             label: 'Me',
-            activeIcon: SvgPicture.asset(SvgAssets.profileActive,),
+            activeIcon: SvgPicture.asset(SvgAssets.profileActive),
           ),
         ],
         backgroundColor: ColorManager.white,

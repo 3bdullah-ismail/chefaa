@@ -36,7 +36,6 @@ class AuthCubit extends Cubit<AuthState> {
   String _getIdentity(int index) =>
       index == 0 ? emailController.text.trim() : phoneController.text.trim();
 
-
   Future<void> login() async {
     emit(LoginLoadingState());
     try {
@@ -49,17 +48,16 @@ class AuthCubit extends Cubit<AuthState> {
       await StorageService.saveUser(res.user!);
       await StorageService.saveRole(res.user!.role!);
 
-      emit(LoginSuccessState(
-        user: res.user!,
-        message: res.message ?? 'Login successful',
-      ));
+      emit(
+        LoginSuccessState(
+          user: res.user!,
+          message: res.message ?? 'Login successful',
+        ),
+      );
     } catch (e) {
-      emit(LoginErrorState(
-        e.toString(),
-      ));
+      emit(LoginErrorState(e.toString()));
     }
   }
-
 
   Future<void> signInWithGoogle(String idToken) async {
     emit(GoogleSignInLoadingState());
@@ -81,7 +79,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(GoogleSignInErrorState(e.toString()));
     }
   }
-
 
   Future<void> forgotPass(int index) async {
     if (!forgotPassFormKey.currentState!.validate()) return;

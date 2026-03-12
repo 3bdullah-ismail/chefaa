@@ -7,7 +7,7 @@ abstract class AuthRepo {
     required String identity,
     required String password,
   });
-  Future<AuthResponse>googleSignIn(String idToken);
+  Future<AuthResponse> googleSignIn(String idToken);
 
   Future<ResetPasswordResponse> forgotPass({required String identity});
   Future<ResetPasswordResponse> resetCode({

@@ -40,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-     create: (context) => getIt<AuthCubit>(),
+      create: (context) => getIt<AuthCubit>(),
       child: Scaffold(
         backgroundColor: ColorManager.white,
         body: ScrollConfiguration(

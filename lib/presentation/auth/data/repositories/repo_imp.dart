@@ -13,7 +13,6 @@ class AuthRepoImp implements AuthRepo {
   AuthDataSource authDataSource;
   AuthRepoImp(this.authDataSource);
 
-
   @override
   Future<AuthResponse> login({
     required String identity,
@@ -43,18 +42,18 @@ class AuthRepoImp implements AuthRepo {
       print(s);
       rethrow;
     }
-
   }
 
   @override
-  Future<AuthResponse> googleSignIn(String idToken)async {
-    try{
+  Future<AuthResponse> googleSignIn(String idToken) async {
+    try {
       var res = await authDataSource.googleSignIn(idToken);
       return AuthResponse.fromJson(res.data);
-    }catch(e){
+    } catch (e) {
       rethrow;
     }
   }
+
   @override
   Future<ResetPasswordResponse> forgotPass({required String identity}) async {
     try {

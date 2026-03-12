@@ -12,13 +12,10 @@ class AuthDataSourceImp implements AuthDataSource {
   Future<Response<dynamic>> login({
     required String identity,
     required String password,
-  })  {
+  }) {
     return networkService.dio.post(
       "/auth/login",
-      data: {
-        "identity": identity,
-        "password": password,
-      },
+      data: {"identity": identity, "password": password},
     );
   }
 
@@ -26,9 +23,7 @@ class AuthDataSourceImp implements AuthDataSource {
   Future<Response<dynamic>> googleSignIn(String idToken) {
     return networkService.dio.get(
       "/auth/google",
-      queryParameters: {
-        "idToken": idToken,
-      },
+      queryParameters: {"idToken": idToken},
       options: Options(
         followRedirects: true,
         validateStatus: (status) {
