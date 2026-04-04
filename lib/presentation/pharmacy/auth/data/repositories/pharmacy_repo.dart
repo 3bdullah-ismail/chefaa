@@ -1,9 +1,8 @@
+import 'package:chefaa/core/models/auth_response.dart';
 import 'package:file_picker/file_picker.dart';
 
-import '../models/PharmacyModel.dart';
-
 abstract class PharmacyRepo {
-  Future<PharmacyModel> pharmacySignUp({
+  Future<AuthResponse> pharmacySignUp({
     required String name,
     required String username,
     required String phoneNumber,

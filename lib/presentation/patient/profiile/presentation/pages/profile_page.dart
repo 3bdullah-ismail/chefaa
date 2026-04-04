@@ -1,8 +1,13 @@
+import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/resources/color_manager.dart';
+import '../widgets/appointment_card.dart';
+import '../widgets/bottom_sheet.dart';
+import '../widgets/edit_medical_information.dart';
+import '../widgets/edit_user_details.dart';
 import '../widgets/item_column.dart';
 import '../widgets/item_container.dart';
 import '../widgets/item_content.dart';
@@ -26,8 +31,8 @@ class ProfilePage extends StatelessWidget {
               ClipOval(
                 child: Image.asset(
                   "assets/images/patient.png",
-                  width: 100,
-                  height: 100,
+                  width: 100.w,
+                  height: 100.h,
                   alignment: Alignment.topCenter,
                   fit: BoxFit.cover,
                 ),
@@ -36,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                 "user name",
                 style: getSemiBoldStyle(
                   color: ColorManager.white,
-                  fontSize: 20,
+                  fontSize: FontSize.s20.sp,
                 ),
               ),
             ],
@@ -50,7 +55,7 @@ class ProfilePage extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: REdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -68,31 +73,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       onTap: () => ProfileBottomSheet.show(
                         context,
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Basic DetailsBasic Details",
-                                  style: getSemiBoldStyle(
-                                    color: ColorManager.black,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: SvgPicture.asset(
-                                    "assets/svg_images/edit.svg",
-                                  ),
-                                ),
-                              ],
-                            ),
-                            ItemContainer(
-                              child: Column(children: [Text("data")]),
-                            ),
-                          ],
-                        ),
+                        const EditUserDetails(),
                       ),
                     ),
                     const Divider(color: ColorManager.input, thickness: 1),
@@ -102,7 +83,10 @@ class ProfilePage extends StatelessWidget {
                         text: "Medical Info.",
                         subText: "Blood type, Allergies,\n chronic conditions",
                       ),
-                      onTap: () {},
+                      onTap: () => ProfileBottomSheet.show(
+                        context,
+                        const EditMedicalInformation(),
+                      ),
                     ),
                   ],
                 ),
@@ -114,7 +98,22 @@ class ProfilePage extends StatelessWidget {
                 child: ItemContent(
                   image: "assets/svg_images/wallet.svg",
                   text: "Payments History",
-                  onTap: () {},
+                  onTap: () => ProfileBottomSheet.show(
+                    context,
+                    const AppointmentCard(),
+                    // const Column(
+                    //   mainAxisSize: MainAxisSize.min,
+                    //   children: [
+                    //     Text(
+                    //       "No payments yet",
+                    //       style: TextStyle(
+                    //         color: ColorManager.gray,
+                    //         fontSize: 16,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                  ),
                 ),
               ),
               32.verticalSpace,
@@ -133,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: REdgeInsets.symmetric(
                         horizontal: 23,
                         vertical: 17,
                       ),
@@ -144,26 +143,26 @@ class ProfilePage extends StatelessWidget {
                             'Version',
                             style: getSemiBoldStyle(
                               color: ColorManager.black,
-                              fontSize: 16,
+                              fontSize: FontSize.s16.sp,
                             ),
                           ),
                           Text(
                             '1.0.0',
                             style: getMediumStyle(
                               color: ColorManager.gray,
-                              fontSize: 13,
+                              fontSize: FontSize.s12.sp,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const Divider(
+                    Divider(
                       color: ColorManager.input,
-                      height: 1,
+                      height: 1.h,
                       thickness: 1,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding: REdgeInsets.symmetric(
                         horizontal: 23,
                         vertical: 17,
                       ),
@@ -174,7 +173,7 @@ class ProfilePage extends StatelessWidget {
                             'Terms and Privacy',
                             style: getSemiBoldStyle(
                               color: ColorManager.black,
-                              fontSize: 16,
+                              fontSize: FontSize.s16.sp,
                             ),
                           ),
                           Text(
@@ -182,7 +181,7 @@ class ProfilePage extends StatelessWidget {
                             style:
                                 getMediumStyle(
                                   color: ColorManager.primary,
-                                  fontSize: 13,
+                                  fontSize: FontSize.s12.sp,
                                 ).copyWith(
                                   decoration: TextDecoration.underline,
                                   decorationColor: ColorManager.primary,
@@ -197,7 +196,7 @@ class ProfilePage extends StatelessWidget {
               32.verticalSpace,
               ItemContainer(
                 child: Row(
-                  mainAxisAlignment: .center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SvgPicture.asset(
                       "assets/svg_images/Logout.svg",
@@ -211,7 +210,7 @@ class ProfilePage extends StatelessWidget {
                       "Logout",
                       style: getSemiBoldStyle(
                         color: ColorManager.error,
-                        fontSize: 20,
+                        fontSize: FontSize.s20.sp,
                       ),
                     ),
                   ],
@@ -222,7 +221,7 @@ class ProfilePage extends StatelessWidget {
                 "Delete account",
                 style: getSemiBoldStyle(
                   color: ColorManager.error,
-                  fontSize: 16,
+                  fontSize: FontSize.s16,
                 ),
               ),
             ],
@@ -237,62 +236,9 @@ class ProfilePage extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
-      ),
-    );
-  }
-}
-
-class ProfileBottomSheet extends StatelessWidget {
-  final Widget content;
-
-  const ProfileBottomSheet({super.key, required this.content});
-
-  static void show(BuildContext context, Widget content) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      showDragHandle: false,
-      backgroundColor: ColorManager.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-      ),
-      builder: (context) => ProfileBottomSheet(content: content),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: Container(
-        height: MediaQuery.of(context).size.height * .8,
-        width: double.infinity,
-        padding: const EdgeInsets.only(
-          top: 20,
-          left: 20,
-          right: 20,
-          bottom: 20,
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: 134,
-              height: 2.30,
-              decoration: ShapeDecoration(
-                color: const Color(0xFF232B43),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-              child: content,
-            ),
-          ],
+        style: getBoldStyle(
+          color: ColorManager.black,
+          fontSize: FontSize.s20.sp,
         ),
       ),
     );

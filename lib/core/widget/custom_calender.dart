@@ -1,16 +1,17 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' show DateFormat;
 
 class CustomCalendarField extends StatefulWidget {
   final TextEditingController controller;
   final Function(DateTime) onDateSelected;
-
+  final bool isReadOnly;
   const CustomCalendarField({
     super.key,
     required this.controller,
     required this.onDateSelected,
+    this.isReadOnly = false,
   });
 
   @override
@@ -34,7 +35,7 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
     return TextFormField(
       controller: widget.controller,
       readOnly: true,
-      onTap: _showCalendar,
+      onTap: widget.isReadOnly ? null : _showCalendar, // ✅
       style: const TextStyle(
         color: ColorManager.darkGray,
         fontWeight: FontWeight.bold,

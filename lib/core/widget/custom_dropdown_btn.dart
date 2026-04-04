@@ -5,15 +5,17 @@ import '../resources/color_manager.dart';
 class CustomDropDownBtn extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? value;
-  final ValueChanged<String?> onChanged;
+  final String hintText;
+  final ValueChanged<String?>? onChanged;
   final List<String> items;
 
   const CustomDropDownBtn({
-    required this.validator,
+    this.validator,
     super.key,
     required this.value,
     required this.onChanged,
     required this.items,
+    required this.hintText,
   });
 
   @override
@@ -42,7 +44,9 @@ class CustomDropDownBtn extends StatelessWidget {
 
         decoration: InputDecoration(
           filled: true,
-          fillColor: ColorManager.lightGray,
+          fillColor: onChanged == null
+              ? ColorManager.lightGray.withOpacity(0.5)
+              : ColorManager.lightGray,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 20.w,
             vertical: 16.h,
@@ -54,7 +58,7 @@ class CustomDropDownBtn extends StatelessWidget {
           ),
         ),
 
-        hint: const Text('Select Your Gender'),
+        hint: Text(hintText),
 
         items: items.map((item) {
           final bool isSelected = value == item;

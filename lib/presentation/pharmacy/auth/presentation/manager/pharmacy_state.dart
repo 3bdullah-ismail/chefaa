@@ -1,6 +1,4 @@
-import 'package:file_picker/file_picker.dart';
-
-import '../../data/models/Pharmacy.dart';
+part of 'pharmacy_cubit.dart';
 
 sealed class PharmacyState {}
 
@@ -9,7 +7,7 @@ final class PharmacyInitial extends PharmacyState {}
 final class PharmacyLoadingState extends PharmacyState {}
 
 final class PharmacySuccessState extends PharmacyState {
-  final Pharmacy pharmacy;
+  final User pharmacy;
   final String message;
 
   PharmacySuccessState(this.pharmacy, this.message);

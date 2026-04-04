@@ -17,12 +17,14 @@ class CustomTextField extends StatefulWidget {
     this.suffixText = "",
     this.inputFormatters,
     this.textInputAction,
+    this.isReadOnly = false,
   });
 
   final TextEditingController controller;
   final String? Function(String? value)? validator;
   final String text;
   final bool isPass;
+  final bool isReadOnly;
   final TextInputType? keyboardType;
   final String? prefixIcon;
   final bool completeData;
@@ -103,6 +105,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.isReadOnly,
       focusNode: _focusNode,
       textInputAction: widget.textInputAction,
       controller: widget.controller,

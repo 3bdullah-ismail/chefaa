@@ -111,6 +111,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                                   });
                                 },
                                 items: const ["Lab", "Radiology center"],
+                                hintText: 'choose lab or radiology',
                               ),
                               // Container(
                               //   padding: const EdgeInsets.symmetric(

@@ -8,7 +8,7 @@ import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../manager/complete_cubit.dart';
 import '../widgets/complete_data_container.dart';
-import '../widgets/custom_calender.dart';
+import '../../../../../core/widget/custom_calender.dart';
 import '../../../../../core/widget/custom_dropdown_btn.dart';
 
 class FirstCompletePage extends StatefulWidget {
@@ -76,6 +76,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
 
                         CustomDropDownBtn(
                           items: const ["Male", "Female"],
+                          hintText: "Select Your Gender",
                           value: gender,
                           onChanged: (value) {
                             setState(() {
