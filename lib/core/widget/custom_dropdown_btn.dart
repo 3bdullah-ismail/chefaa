@@ -45,7 +45,7 @@ class CustomDropDownBtn extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: onChanged == null
-              ? ColorManager.lightGray.withOpacity(0.5)
+              ? ColorManager.lightGray.withValues(alpha: 0.5)
               : ColorManager.lightGray,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 20.w,
