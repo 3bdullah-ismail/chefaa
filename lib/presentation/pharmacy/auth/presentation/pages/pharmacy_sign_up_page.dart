@@ -19,7 +19,7 @@ import '../../../../../core/config/get_config.dart';
 import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../manager/pharmacy_cubit.dart';
-import '../manager/pharmacy_state.dart';
+
 import '../../../../../core/widget/license_formatter.dart';
 
 class PharmacySignUpPage extends StatefulWidget {

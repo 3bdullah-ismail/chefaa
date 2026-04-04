@@ -1,9 +1,10 @@
-import 'package:chefaa/presentation/pharmacy/auth/presentation/manager/pharmacy_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import '../../../../../core/models/auth_response.dart';
 import '../../data/repositories/pharmacy_repo.dart';
+part 'pharmacy_state.dart';
 
 @injectable
 class PharmacyCubit extends Cubit<PharmacyState> {
@@ -34,7 +35,7 @@ class PharmacyCubit extends Cubit<PharmacyState> {
         medicalLicence: medicalLicence!,
         commercialRegisterNumber: registerNumber.text,
       );
-      emit(PharmacySuccessState(response.pharmacy!, response.message!));
+      emit(PharmacySuccessState(response.user!, response.message!));
     } catch (e) {
       emit(PharmacyErrorState(e.toString()));
     }
