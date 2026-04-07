@@ -42,7 +42,7 @@ class PharmacyRepoImp implements PharmacyRepo {
       return data;
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
-    } catch (e, s) {
+    } catch (e) {
       throw ServerFailure.unexpectedError;
     }
   }
