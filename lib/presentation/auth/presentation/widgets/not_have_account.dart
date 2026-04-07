@@ -6,6 +6,7 @@ import '../../../../core/widget/custom_text_btn.dart';
 
 class NotHaveAccount extends StatelessWidget {
   final void Function() onPressed;
+
   const NotHaveAccount({super.key, required this.onPressed});
 
   @override

@@ -13,10 +13,12 @@ class ItemContent extends StatelessWidget {
     this.widget,
     required this.onTap,
   });
+
   final String image;
   final String? text;
   final Widget? widget;
   final Function() onTap;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(

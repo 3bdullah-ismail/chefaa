@@ -5,6 +5,7 @@ import '../../../../../core/resources/color_manager.dart';
 
 class ItemContainer extends StatelessWidget {
   const ItemContainer({super.key, required this.child});
+
   final Widget child;
 
   @override
@@ -18,10 +19,10 @@ class ItemContainer extends StatelessWidget {
         border: Border.all(color: ColorManager.input),
         boxShadow: [
           BoxShadow(
-            color: ColorManager.black.withValues(alpha: 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-            spreadRadius: 2,
+            color: ColorManager.black.withValues(alpha: 0.25),
+            blurRadius: 4,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
           ),
         ],
       ),

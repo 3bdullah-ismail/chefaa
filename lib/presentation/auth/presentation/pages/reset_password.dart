@@ -15,6 +15,7 @@ import '../widgets/back_button.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({super.key});
+
   void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,

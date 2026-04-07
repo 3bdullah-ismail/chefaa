@@ -4,7 +4,9 @@ import '../../../../../core/resources/color_manager.dart';
 
 class ProfileBottomSheet extends StatelessWidget {
   final Widget content;
+
   const ProfileBottomSheet({super.key, required this.content});
+
   static void show(BuildContext context, Widget content) {
     showModalBottomSheet(
       context: context,

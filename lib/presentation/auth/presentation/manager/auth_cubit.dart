@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/models/auth_response.dart';
 import '../../../../core/services/storage_service.dart';
 import '../../data/repositories/repo.dart';
+
 part 'auth_state.dart';
 
 @injectable

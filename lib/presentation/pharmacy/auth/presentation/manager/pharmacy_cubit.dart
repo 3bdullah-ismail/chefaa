@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/models/auth_response.dart';
 import '../../data/repositories/pharmacy_repo.dart';
+
 part 'pharmacy_state.dart';
 
 @injectable

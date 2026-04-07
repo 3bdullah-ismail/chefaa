@@ -1,18 +1,16 @@
-import 'package:chefaa/presentation/auth/data/data_sources/data_source.dart';
-import 'package:chefaa/presentation/auth/data/models/reset_password_response.dart';
 import 'package:chefaa/presentation/auth/data/repositories/repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../core/error_handling/error_handler.dart';
+import '../../../../core/error_handling/failure.dart';
 import '../../../../core/models/auth_response.dart';
 import '../../../../core/services/storage_service.dart';
+import '../data_sources/data_source.dart';
+import '../models/reset_password_response.dart';
 
 @Injectable(as: AuthRepo)
 class AuthRepoImp implements AuthRepo {
-  AuthDataSource authDataSource;
+  final AuthDataSource authDataSource;
   AuthRepoImp(this.authDataSource);
-
   @override
   Future<AuthResponse> login({
     required String identity,
@@ -23,24 +21,13 @@ class AuthRepoImp implements AuthRepo {
         identity: identity,
         password: password,
       );
-      if (res.statusCode == 200) {
-        AuthResponse data = AuthResponse.fromJson(res.data);
-
-        await StorageService.saveToken(data.accessToken!);
-
-        return data;
-      } else {
-        var error = ErrorHandler.fromJson(res.data);
-        throw error.message ?? "";
-      }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
-    } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      AuthResponse data = AuthResponse.fromJson(res.data);
+      await StorageService.saveToken(data.accessToken!);
+      return data;
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
     }
   }
 
@@ -49,8 +36,10 @@ class AuthRepoImp implements AuthRepo {
     try {
       var res = await authDataSource.googleSignIn(idToken);
       return AuthResponse.fromJson(res.data);
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
     } catch (e) {
-      rethrow;
+      throw 'Social login failed';
     }
   }
 
@@ -58,23 +47,11 @@ class AuthRepoImp implements AuthRepo {
   Future<ResetPasswordResponse> forgotPass({required String identity}) async {
     try {
       var response = await authDataSource.forgotPass(identity: identity);
-      if (response.statusCode == 200) {
-        ResetPasswordResponse data = ResetPasswordResponse.fromJson(
-          response.data,
-        );
-        return data;
-      } else {
-        var error = ErrorHandler.fromJson(response.data);
-        throw error.message ?? "";
-      }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
-    } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      return ResetPasswordResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
     }
   }
 
@@ -88,23 +65,11 @@ class AuthRepoImp implements AuthRepo {
         code: code,
         identity: identity,
       );
-      if (response.statusCode == 200) {
-        ResetPasswordResponse data = ResetPasswordResponse.fromJson(
-          response.data,
-        );
-        return data;
-      } else {
-        var error = ErrorHandler.fromJson(response.data);
-        throw error.message ?? "";
-      }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
-    } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      return ResetPasswordResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
     }
   }
 
@@ -120,23 +85,11 @@ class AuthRepoImp implements AuthRepo {
         identity: identity,
         code: code,
       );
-      if (response.statusCode == 200) {
-        ResetPasswordResponse data = ResetPasswordResponse.fromJson(
-          response.data,
-        );
-        return data;
-      } else {
-        var error = ErrorHandler.fromJson(response.data);
-        throw error.message ?? "";
-      }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
-    } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      return ResetPasswordResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
     }
   }
 }

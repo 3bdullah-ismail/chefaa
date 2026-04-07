@@ -14,6 +14,7 @@ import '../widgets/back_button.dart';
 
 class ResetCode extends StatefulWidget {
   const ResetCode({super.key, required this.index});
+
   final int index;
 
   @override

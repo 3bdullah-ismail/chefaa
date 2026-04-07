@@ -7,6 +7,7 @@ import '../../../../../core/resources/assets_manager.dart';
 
 class AppointmentCard extends StatelessWidget {
   const AppointmentCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -7,6 +7,7 @@ class CustomCalendarField extends StatefulWidget {
   final TextEditingController controller;
   final Function(DateTime) onDateSelected;
   final bool isReadOnly;
+
   const CustomCalendarField({
     super.key,
     required this.controller,
@@ -35,7 +36,8 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
     return TextFormField(
       controller: widget.controller,
       readOnly: true,
-      onTap: widget.isReadOnly ? null : _showCalendar, // ✅
+      onTap: widget.isReadOnly ? null : _showCalendar,
+      // ✅
       style: const TextStyle(
         color: ColorManager.darkGray,
         fontWeight: FontWeight.bold,

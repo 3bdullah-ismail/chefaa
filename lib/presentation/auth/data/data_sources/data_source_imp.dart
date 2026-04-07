@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: AuthDataSource)
 class AuthDataSourceImp implements AuthDataSource {
   NetworkService networkService;
+
   AuthDataSourceImp(this.networkService);
 
   @override

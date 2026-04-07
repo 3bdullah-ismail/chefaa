@@ -25,16 +25,19 @@ final class GoogleSignInLoadingState extends AuthState {}
 final class GoogleSignInSuccessState extends AuthState {
   final User user;
   final String? message;
+
   GoogleSignInSuccessState({required this.user, required this.message});
 }
 
 final class GoogleSignInErrorState extends AuthState {
   final String? message;
+
   GoogleSignInErrorState(this.message);
 }
 
 final class ForgotPassSuccessState extends AuthState {
   final String? message;
+
   ForgotPassSuccessState({this.message});
 }
 
@@ -48,6 +51,7 @@ final class ForgotPassErrorState extends AuthState {
 
 final class ResetCodeSuccessState extends AuthState {
   final String? message;
+
   ResetCodeSuccessState({this.message});
 }
 
@@ -61,6 +65,7 @@ final class ResetCodeErrorState extends AuthState {
 
 final class ResetPassSuccessState extends AuthState {
   final String? message;
+
   ResetPassSuccessState({this.message});
 }
 

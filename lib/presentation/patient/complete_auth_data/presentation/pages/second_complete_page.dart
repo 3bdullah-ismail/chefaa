@@ -12,6 +12,7 @@ import 'last_complete_data.dart';
 
 class SecondCompletePage extends StatefulWidget {
   const SecondCompletePage({super.key});
+
   @override
   State<SecondCompletePage> createState() => _SecondCompletePageState();
 }
@@ -19,6 +20,7 @@ class SecondCompletePage extends StatefulWidget {
 class _SecondCompletePageState extends State<SecondCompletePage> {
   List<String> selectedDiseases = [];
   final TextEditingController controller = TextEditingController();
+
   void _onSelectionChanged(String disease) {
     setState(() {
       if (selectedDiseases.contains(disease)) {

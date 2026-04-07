@@ -4,8 +4,7 @@ import 'package:chefaa/presentation/Facility/auth/data/repositories/repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../../core/error_handling/error_handler.dart';
+import '../../../../../core/error_handling/failure.dart';
 import '../../../../../core/services/storage_service.dart';
 
 @Injectable(as: FacilityAuthRepo)
@@ -40,24 +39,15 @@ class FacilityRepoImp implements FacilityAuthRepo {
         phoneNumber: phoneNumber,
         medicalLicence: medicalLicence,
       );
-      if (response.statusCode == 201) {
-        AuthResponse data = AuthResponse.fromJson(response.data);
-
+      AuthResponse data = AuthResponse.fromJson(response.data);
+      if (data.accessToken != null) {
         await StorageService.saveToken(data.accessToken!);
-
-        return data;
-      } else {
-        var error = ErrorHandler.fromJson(response.data);
-        throw error.message ?? "";
       }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
-    } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      return data;
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
     }
   }
 }

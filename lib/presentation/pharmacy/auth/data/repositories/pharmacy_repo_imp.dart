@@ -2,10 +2,8 @@ import 'package:chefaa/core/models/auth_response.dart';
 import 'package:chefaa/presentation/pharmacy/auth/data/repositories/pharmacy_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
-
 import 'package:injectable/injectable.dart';
-
-import '../../../../../core/error_handling/error_handler.dart';
+import '../../../../../core/error_handling/failure.dart';
 import '../../../../../core/services/storage_service.dart';
 import '../data_sources/pharmacy_data_source.dart';
 
@@ -37,22 +35,15 @@ class PharmacyRepoImp implements PharmacyRepo {
       commercialRegisterNumber: commercialRegisterNumber,
     );
     try {
-      if (response.statusCode == 201) {
-        AuthResponse data = AuthResponse.fromJson(response.data);
+      AuthResponse data = AuthResponse.fromJson(response.data);
+      if (data.accessToken != null) {
         await StorageService.saveToken(data.accessToken!);
-        return data;
-      } else {
-        var error = ErrorHandler.fromJson(response.data);
-        throw error.message ?? "";
       }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
+      return data;
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
     } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      throw ServerFailure.unexpectedError;
     }
   }
 }

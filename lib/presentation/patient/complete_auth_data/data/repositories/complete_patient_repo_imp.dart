@@ -1,7 +1,7 @@
 import 'package:chefaa/presentation/patient/complete_auth_data/data/data_sources/complete_data_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../../core/error_handling/error_handler.dart';
+import '../../../../../core/error_handling/failure.dart';
 import '../models/complete_patient_data_response.dart';
 import 'complete_patient_repo.dart';
 
@@ -32,22 +32,11 @@ class CompletePatientRepoImp implements CompletePatientRepo {
         allergies: allergies,
       );
 
-      if (response.statusCode == 200) {
-        CompletePatientDataResponse patient =
-            CompletePatientDataResponse.fromJson(response.data);
-        return patient;
-      } else {
-        var error = ErrorHandler.fromJson(response.data);
-        throw error.message ?? "";
-      }
-    } on DioException catch (e, s) {
-      print(s);
-      var error = ErrorHandler.fromJson(e.response?.data);
-      throw error.message ?? "";
-    } catch (e, s) {
-      print(e);
-      print(s);
-      rethrow;
+      return CompletePatientDataResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
     }
   }
 }

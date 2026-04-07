@@ -6,6 +6,7 @@ import 'custom_text_btn.dart';
 
 class AlreadyHaveAccount extends StatelessWidget {
   final void Function()? onPressed;
+
   const AlreadyHaveAccount({super.key, this.onPressed});
 
   @override

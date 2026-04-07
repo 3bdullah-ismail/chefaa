@@ -6,9 +6,12 @@ class ResetPasswordResponse {
   ResetPasswordResponse.fromJson(dynamic json) {
     _message = json['message'];
   }
+
   String? _message;
+
   ResetPasswordResponse copyWith({String? message}) =>
       ResetPasswordResponse(message: message ?? _message);
+
   String? get message => _message;
 
   Map<String, dynamic> toJson() {
