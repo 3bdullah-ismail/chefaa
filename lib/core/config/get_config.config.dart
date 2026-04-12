@@ -56,6 +56,16 @@ import '../../presentation/patient/complete_auth_data/data/repositories/complete
     as _i809;
 import '../../presentation/patient/complete_auth_data/presentation/manager/complete_cubit.dart'
     as _i294;
+import '../../presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source.dart'
+    as _i183;
+import '../../presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source_imp.dart'
+    as _i1047;
+import '../../presentation/patient/profile/data/repositories/profile_repo.dart'
+    as _i851;
+import '../../presentation/patient/profile/data/repositories/profile_repo_imp.dart'
+    as _i371;
+import '../../presentation/patient/profile/presentation/manager/profile_cubit.dart'
+    as _i779;
 import '../../presentation/pharmacy/auth/data/data_sources/pharmacy_data_source.dart'
     as _i565;
 import '../../presentation/pharmacy/auth/data/data_sources/pharmacy_data_source_imp.dart'
@@ -84,6 +94,9 @@ extension GetItInjectableX on _i174.GetIt {
         networkService: gh<_i463.NetworkService>(),
       ),
     );
+    gh.factory<_i183.ProfileRemoteDataSource>(
+      () => _i1047.ProfileRemoteDataSourceImpl(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i377.FacilityAuthDataSource>(
       () => _i120.FacilityAuthDataSourceImp(gh<_i463.NetworkService>()),
     );
@@ -103,6 +116,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i551.DoctorAuthRepo>(
       () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()),
+    );
+    gh.factory<_i851.ProfileRepo>(
+      () => _i371.ProfileRepoImpl(gh<_i183.ProfileRemoteDataSource>()),
     );
     gh.factory<_i829.FacilityAuthRepo>(
       () => _i92.FacilityRepoImp(gh<_i377.FacilityAuthDataSource>()),
@@ -134,6 +150,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i294.CompleteCubit>(
       () => _i294.CompleteCubit(gh<_i530.CompletePatientRepo>()),
+    );
+    gh.factory<_i779.ProfileCubit>(
+      () => _i779.ProfileCubit(gh<_i851.ProfileRepo>()),
     );
     gh.factory<_i840.PharmacyCubit>(
       () => _i840.PharmacyCubit(gh<_i499.PharmacyRepo>()),
