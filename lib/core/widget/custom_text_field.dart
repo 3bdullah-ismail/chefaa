@@ -10,6 +10,7 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     this.validator,
     required this.text,
+    this.onChanged,
     this.isPass = false,
     this.keyboardType,
     this.prefixIcon,
@@ -17,7 +18,11 @@ class CustomTextField extends StatefulWidget {
     this.suffixText = "",
     this.inputFormatters,
     this.textInputAction,
+    this.rec = false,
+    this.onPressMic,
+    this.onPressSearch,
     this.isReadOnly = false,
+    this.isSearch = false,
   });
 
   final TextEditingController controller;
@@ -28,9 +33,16 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final String? prefixIcon;
   final bool completeData;
+  final bool rec;
   final String? suffixText;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? textInputAction;
+  final void Function()? onPressMic;
+  final void Function()? onPressSearch;
+  final bool isSearch;
+  final Function(String)? onChanged;
+
+
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -64,29 +76,32 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildPrefixIcon() {
     if (_errorText != null) {
-      return Padding(
-        padding: const EdgeInsets.all(12),
-        child: SvgPicture.asset(
-          widget.prefixIcon!,
-          width: 22,
-          height: 22,
-          colorFilter: const ColorFilter.mode(
-            ColorManager.error,
-            BlendMode.srcIn,
+      return  Padding(
+          padding: const EdgeInsets.all(12),
+          child: SvgPicture.asset(
+            widget.prefixIcon!,
+            width: 22,
+            height: 22,
+            colorFilter: const ColorFilter.mode(
+              ColorManager.error,
+              BlendMode.srcIn,
+            ),
           ),
-        ),
-      );
+        );
     }
     if (_isFocused) {
-      return Padding(
-        padding: const EdgeInsets.all(12),
-        child: SvgPicture.asset(
-          widget.prefixIcon!,
-          width: 22,
-          height: 22,
-          colorFilter: const ColorFilter.mode(
-            ColorManager.primary,
-            BlendMode.srcIn,
+      return IconButton(
+        onPressed: widget.onPressSearch,
+        icon: Padding(
+          padding: const EdgeInsets.all(12),
+          child: SvgPicture.asset(
+            widget.prefixIcon!,
+            width: 22,
+            height: 22,
+            colorFilter: const ColorFilter.mode(
+              ColorManager.primary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       );
@@ -111,6 +126,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       obscureText: _isObscure,
+      onChanged: widget.onChanged,
       inputFormatters: widget.inputFormatters,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
@@ -128,6 +144,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ? getMediumStyle(color: ColorManager.gray, fontSize: 16)
           : getRegularStyle(color: ColorManager.black, fontSize: 16),
       decoration: InputDecoration(
+        focusedBorder:  widget.isSearch? OutlineInputBorder(
+          borderRadius: BorderRadius.circular(25),
+          borderSide: const BorderSide(
+            color: ColorManager.primary,
+          ),
+        ):null,
         suffixText: widget.suffixText,
         suffixStyle: getMediumStyle(color: ColorManager.gray, fontSize: 16),
         hintText: widget.text,
@@ -148,7 +170,16 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
                 onPressed: _toggleObscure,
               )
-            : null,
+            : widget.rec? IconButton(
+          icon: const Icon(
+            Icons.mic_none_outlined,
+            color: ColorManager.primary,
+            size: 32,
+          ),
+          onPressed: (){
+            widget.onPressMic!();
+          },
+        ):null,
       ),
     );
   }

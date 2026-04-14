@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import 'auth_interceptor.dart';
+
 @lazySingleton
 class NetworkService {
   late Dio dio;
@@ -20,5 +22,6 @@ class NetworkService {
     dio.interceptors.add(
       PrettyDioLogger(requestBody: true, request: true, requestHeader: true),
     );
+    dio.interceptors.add(AuthInterceptor());
   }
 }

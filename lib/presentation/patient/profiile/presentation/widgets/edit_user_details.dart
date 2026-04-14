@@ -119,6 +119,7 @@ class _EditUserDetailsState extends State<EditUserDetails> {
                   ),
                   8.verticalSpace,
                   CustomCalendarField(
+                    hintText: "Select Date of Birth",
                     controller: dateController,
                     isReadOnly: isReadOnly,
                     onDateSelected: (date) {

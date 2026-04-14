@@ -5,7 +5,8 @@ class FileHelper {
   static Future<PlatformFile?> pickSingleFile({
     List<String> allowedExtensions = const ['jpg', 'png', 'jpeg', 'pdf'],
   }) async {
-    final result = await FilePicker.platform.pickFiles(
+    // In newer versions of file_picker, pickFiles is called directly on FilePicker
+    final result = await FilePicker.pickFiles(
       type: FileType.custom,
       allowedExtensions: allowedExtensions,
     );
@@ -19,13 +20,19 @@ class FileHelper {
 
   /// format file size
   static String formatFileSize(int bytes) {
-    final kb = bytes / 1024;
+    if (bytes <= 0) return '0 KB';
 
-    if (kb < 1024) {
-      return "${kb.toStringAsFixed(0)} KB";
+    const kb = 1024;
+    const mb = kb * 1024;
+
+    if (bytes < kb) {
+      return '$bytes B';
+    } else if (bytes < mb) {
+      final kbValue = bytes / kb;
+      return "${kbValue.toStringAsFixed(0)} KB";
+    } else {
+      final mbValue = bytes / mb;
+      return "${mbValue.toStringAsFixed(2)} MB";
     }
-
-    final mb = kb / 1024;
-    return "${mb.toStringAsFixed(2)} MB";
   }
 }

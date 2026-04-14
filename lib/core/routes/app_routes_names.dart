@@ -17,7 +17,10 @@ class AppRoutesNames {
   static const String resetPassword = '/resetPassword';
   static const String login = '/login';
   static const String patientLayout = '/patientLayout';
+  static const String patientSearch = '/patientSearch';
   static const String doctorLayout = '/doctorLayout';
   static const String pharmacyLayout = '/pharmacyLayout';
   static const String facilityLayout = '/facilityLayout';
+  static const String medicationPage = '/medicationPage';
+  static const String specialityPage = '/specialityPage';
 }

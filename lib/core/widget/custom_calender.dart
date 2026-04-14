@@ -7,12 +7,16 @@ class CustomCalendarField extends StatefulWidget {
   final TextEditingController controller;
   final Function(DateTime) onDateSelected;
   final bool isReadOnly;
+  final String hintText;
+  final bool isMedication;
 
   const CustomCalendarField({
     super.key,
+    required this.hintText,
     required this.controller,
     required this.onDateSelected,
     this.isReadOnly = false,
+    this.isMedication = false,
   });
 
   @override
@@ -33,25 +37,31 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget.controller,
-      readOnly: true,
-      onTap: widget.isReadOnly ? null : _showCalendar,
-      // ✅
-      style: const TextStyle(
-        color: ColorManager.darkGray,
-        fontWeight: FontWeight.bold,
-        fontSize: 16,
-      ),
-      decoration: const InputDecoration(
-        hintText: "Select Birth Date",
-        hintStyle: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
+    return SizedBox(
+      width:widget.isMedication? 150: double.infinity,
+      child: TextFormField(
+
+        controller: widget.controller,
+        readOnly: true,
+        onTap: widget.isReadOnly ? null : _showCalendar,
+
+        style: const TextStyle(
           color: ColorManager.darkGray,
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
         ),
-        suffixIcon: Icon(Icons.calendar_month, color: ColorManager.gray),
-        border: OutlineInputBorder(),
+        decoration:  InputDecoration(
+          isDense: widget.isMedication? true:false,
+          hintText: widget.hintText,
+          hintStyle:  TextStyle(
+            fontSize: widget.isMedication? 14: 16,
+            fontWeight: FontWeight.w600,
+            color: ColorManager.darkGray,
+          ),
+          suffixIcon: widget.isMedication
+              ? null
+              : const Icon(Icons.calendar_month, color: ColorManager.gray),          border: const OutlineInputBorder(),
+        ),
       ),
     );
   }

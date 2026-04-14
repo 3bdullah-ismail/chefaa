@@ -12,6 +12,20 @@ abstract class ImageAssets {
   static const String patient = "$imagePath/patient.png";
   static const String drugs = "$imagePath/drugs.png";
   static const String loginLogo = "$imagePath/login_logo.png";
+  static const String cardiology ="$imagePath/Cardiology.png";
+  static const String dentistry ="$imagePath/Dentistry.png";
+  static const String dermatology ="$imagePath/Dermatology.png";
+  static const String endocrinology ="$imagePath/Endocrinology.png";
+  static const String general ="$imagePath/general.png";
+  static const String ent ="$imagePath/ENT.png";
+  static const String internalMedicine ="$imagePath/Internal_Medicine.png";
+  static const String neurology ="$imagePath/Neurology.png";
+  static const String nutrition ="$imagePath/Nutrition.png";
+  static const String gynecologyObstetrics ="$imagePath/Gynecology&Obstetrics.png";
+  static const String ophthalmology ="$imagePath/Ophthalmology.png";
+  static const String orthopedics ="$imagePath/Orthopedics.png";
+  static const String   pulmonology ="$imagePath/Pulmonology.png";
+  static const String   urology ="$imagePath/Urology.png";
 }
 
 class SvgAssets {
@@ -27,6 +41,15 @@ class SvgAssets {
   static const String profileActive = "$svgPath/profile_active.svg";
   static const String aiLab = "$svgPath/ai_lab.svg";
   static const String aiLabActive = "$svgPath/ai_lab_active.svg";
+  static const String phone = "$svgPath/phone.svg";
+  static const String orderPharmacy = "$svgPath/order_pharmacy.svg";
+  static const String appointment = "$svgPath/appointment.svg";
+  static const String findLab = "$svgPath/find_lab.svg";
+  static const String filter = "$svgPath/fiter.svg";
+  static const String suggestIcon = "$svgPath/Icon.svg";
+  static const String medicationIcon = "$svgPath/icon_2.svg";
+
+
 }
 
 abstract class IconsAssets {
@@ -40,6 +63,11 @@ abstract class IconsAssets {
   static const String checkIconActive = "$iconsPath/Checkbox_active.svg";
   static const String doneIcon = "$iconsPath/Done.svg";
   static const String stethoscopeIcon = "$iconsPath/stethoscnnnnope_.svg";
+  static const String notification = "$iconsPath/notification.svg";
+  static const String searchIcon = "$iconsPath/search_normal.svg";
+  static const String drugIcon = "$iconsPath/drug.svg";
+
+
 }
 
 class JsonAssets {}
