@@ -11,8 +11,10 @@ class CustomBtn extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.isDisabled = false,
+    this.isSmall = false,
   });
 
+  final bool isSmall;
   final String text;
   final Function() onPressed;
   final bool isDisabled;
@@ -21,16 +23,18 @@ class CustomBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: context.width * .9,
+        width: isSmall ? context.width * .22 : context.width * .9,
         child: CupertinoButton(
           disabledColor: ColorManager.gray,
-          padding: EdgeInsets.symmetric(vertical: 16.h),
+          padding: EdgeInsets.symmetric(vertical: isSmall ? 8.h : 16.h),
           color: ColorManager.primary,
-          borderRadius: BorderRadius.circular(32.r),
+          borderRadius: BorderRadius.circular(isSmall?35.r:32.r),
           onPressed: isDisabled ? null : onPressed,
           child: Text(
             text,
-            style: getSemiBoldStyle(color: ColorManager.white, fontSize: 20),
+            style: isSmall
+                ? getMediumStyle(color: ColorManager.white,fontSize: 18)
+                : getSemiBoldStyle(color: ColorManager.white, fontSize: 20),
           ),
         ),
       ),

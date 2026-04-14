@@ -56,6 +56,28 @@ import '../../presentation/patient/complete_auth_data/data/repositories/complete
     as _i809;
 import '../../presentation/patient/complete_auth_data/presentation/manager/complete_cubit.dart'
     as _i294;
+import '../../presentation/patient/layout/home/data/data_sources/home_data_source.dart'
+    as _i888;
+import '../../presentation/patient/layout/home/data/data_sources/home_data_source_imp.dart'
+    as _i575;
+import '../../presentation/patient/layout/home/data/repositories/home_repo.dart'
+    as _i234;
+import '../../presentation/patient/layout/home/data/repositories/home_repo_imp.dart'
+    as _i454;
+import '../../presentation/patient/layout/home/data/users_domain/domain/user_usecase.dart'
+    as _i434;
+import '../../presentation/patient/layout/home/presentation/manager/users_cubit.dart'
+    as _i745;
+import '../../presentation/patient/layout/search/data/datasources/search_data_source.dart'
+    as _i1023;
+import '../../presentation/patient/layout/search/data/datasources/search_data_source_imp.dart'
+    as _i967;
+import '../../presentation/patient/layout/search/data/repositories/search_repo.dart'
+    as _i367;
+import '../../presentation/patient/layout/search/data/repositories/search_repo_imp.dart'
+    as _i650;
+import '../../presentation/patient/layout/search/presentation/manager/search_cubit.dart'
+    as _i791;
 import '../../presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source.dart'
     as _i183;
 import '../../presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source_imp.dart'
@@ -85,7 +107,11 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i434.UserUseCase>(() => _i434.UserUseCase());
     gh.lazySingleton<_i463.NetworkService>(() => _i463.NetworkService());
+    gh.factory<_i745.UsersCubit>(
+      () => _i745.UsersCubit(gh<_i434.UserUseCase>()),
+    );
     gh.factory<_i1041.PatientDataSource>(
       () => _i148.PatientDataSourceImp(gh<_i463.NetworkService>()),
     );
@@ -111,6 +137,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i576.AuthDataSource>(
       () => _i124.AuthDataSourceImp(gh<_i463.NetworkService>()),
     );
+    gh.factory<_i1023.SearchDataSource>(
+      () => _i967.SearchDataSourceImp(gh<_i463.NetworkService>()),
+    );
+    gh.factory<_i888.HomeDataSource>(
+      () => _i575.HomeDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i246.AuthRepo>(
       () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()),
     );
@@ -131,25 +163,37 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i128.PatientRepo>(
       () => _i856.PatientRepoImp(gh<_i1041.PatientDataSource>()),
     );
+    gh.factory<_i301.AuthCubit>(
+      () => _i301.AuthCubit(
+        repo: gh<_i246.AuthRepo>(),
+        usersCubit: gh<_i745.UsersCubit>(),
+      ),
+    );
     gh.factory<_i930.PatientCubit>(
       () => _i930.PatientCubit(gh<_i128.PatientRepo>()),
     );
     gh.factory<_i621.FacilityAuthCubit>(
       () => _i621.FacilityAuthCubit(gh<_i829.FacilityAuthRepo>()),
     );
+    gh.factory<_i367.SearchRepo>(
+      () => _i650.SearchRepoImp(gh<_i1023.SearchDataSource>()),
+    );
     gh.factory<_i499.PharmacyRepo>(
       () => _i596.PharmacyRepoImp(
         pharmacyDataSource: gh<_i565.PharmacyDataSource>(),
       ),
     );
-    gh.factory<_i301.AuthCubit>(
-      () => _i301.AuthCubit(repo: gh<_i246.AuthRepo>()),
+    gh.factory<_i234.HomeRepo>(
+      () => _i454.HomeRepoImp(gh<_i888.HomeDataSource>()),
     );
     gh.factory<_i236.DoctorAuthCubit>(
       () => _i236.DoctorAuthCubit(gh<_i551.DoctorAuthRepo>()),
     );
     gh.factory<_i294.CompleteCubit>(
       () => _i294.CompleteCubit(gh<_i530.CompletePatientRepo>()),
+    );
+    gh.factory<_i791.SearchCubit>(
+      () => _i791.SearchCubit(gh<_i367.SearchRepo>()),
     );
     gh.factory<_i779.ProfileCubit>(
       () => _i779.ProfileCubit(gh<_i851.ProfileRepo>()),

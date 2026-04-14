@@ -1,3 +1,5 @@
+import 'package:chefaa/core/resources/assets_manager.dart';
+
 import '../routes/app_routes_names.dart';
 
 class AppConstants {
@@ -42,82 +44,32 @@ class AppConstants {
     "Arrhythmia",
     "Stroke",
     "Peripheral Artery Disease",
-
-    "Asthma",
-    "COPD",
-    "Chronic Bronchitis",
-    "Emphysema",
-    "Sleep Apnea",
-
-    "Kidney Disease",
-    "Chronic Kidney Disease",
-    "Kidney Failure",
-
-    "Liver Disease",
-    "Hepatitis",
     "Cirrhosis",
-    "Fatty Liver Disease",
-
-    "Thyroid Disease",
-    "Hypothyroidism",
     "Hyperthyroidism",
     "Hashimoto's Disease",
-    "Graves' Disease",
-
-    "Arthritis",
-    "Osteoarthritis",
     "Rheumatoid Arthritis",
     "Osteoporosis",
-    "Gout",
-    "Back Pain",
-
-    "Migraine",
-    "Epilepsy",
     "Parkinson's Disease",
     "Alzheimer's Disease",
     "Multiple Sclerosis",
-    "Neuropathy",
-
-    "IBD",
-    "Crohn's Disease",
-    "Ulcerative Colitis",
     "Irritable Bowel Syndrome",
-    "GERD",
-    "Peptic Ulcer",
-
-    "Depression",
     "Anxiety Disorder",
     "Bipolar Disorder",
     "Schizophrenia",
-    "PTSD",
-
-    "Cancer",
-    "Breast Cancer",
-    "Lung Cancer",
     "Prostate Cancer",
     "Colon Cancer",
     "Skin Cancer",
-
     "Lupus",
     "Psoriasis",
     "Celiac Disease",
     "Type 1 Diabetes",
     "Rheumatoid Arthritis",
-
     "Obesity",
     "High Cholesterol",
     "Metabolic Syndrome",
     "Gout",
-
     "HIV/AIDS",
-    "Chronic Fatigue Syndrome",
-    "Fibromyalgia",
-    "Anemia",
-    "Glaucoma",
-    "Cataracts",
-    "Hearing Loss",
     "Vision Problems",
-
     "Other",
     "None",
   ];
@@ -130,45 +82,21 @@ class AppConstants {
     "Local Anesthetic Allergy",
     "NSAID Allergy",
     "Sulfa Drug Allergy",
-
-    "Shellfish Allergy",
-    "Egg Allergy",
-    "Milk Allergy",
-    "Soy Allergy",
-    "Wheat Allergy",
     "Sesame Allergy",
     "Strawberry Allergy",
     "Fish Allergy",
     "Seafood Allergy",
-    "Citrus Allergy",
-
-    "Mold Allergy",
-    "Animal Dander Allergy",
-    "Perfume Allergy",
     "Chemical Allergy",
     "Latex Allergy",
     "Metal Allergy",
     "Nickel Allergy",
     "Pollution Allergy",
-
-    "Histamine Intolerance",
-    "Fructose Intolerance",
-    "Sorbitol Intolerance",
     "MSG Sensitivity",
     "Food Coloring Allergy",
     "Preservative Allergy",
-
     "Exercise-Induced Allergy",
-    "Cold Urticaria",
-    "Heat Allergy",
-    "Water Allergy",
     "Pressure Allergy",
     "Vibration Allergy",
-
-    "Dust Allergy",
-    "Pollen Allergy",
-    "Food Allergy",
-    "Nut Allergy",
     "Lactose Intolerance",
     "Gluten Sensitivity",
     "Medication Allergy",
@@ -189,4 +117,63 @@ class AppConstants {
         return AppRoutesNames.patientLayout;
     }
   }
+
+  static final List<Map<String, String>> specialityItems = [
+    {
+      "specialityImage":ImageAssets.general,
+      "specialityName":"General"
+    },
+    {
+      "specialityImage":ImageAssets.cardiology,
+      "specialityName":"Cardiology"
+    },
+    {
+      "specialityImage":ImageAssets.dentistry,
+      "specialityName":"Dentistry"
+    },
+    {
+      "specialityImage":ImageAssets.dermatology,
+      "specialityName":"Dermatology"
+    },
+    {
+      "specialityImage":ImageAssets.endocrinology,
+      "specialityName":"Endocrinology"
+    },
+    {
+      "specialityImage":ImageAssets.gynecologyObstetrics,
+      "specialityName":"Gynecology & Obstetrics"
+    },
+    {
+      "specialityImage":ImageAssets.internalMedicine,
+      "specialityName":"InternalMedicine"
+    },
+    {
+      "specialityImage":ImageAssets.neurology,
+      "specialityName":"Neurology"
+    },
+    {
+      "specialityImage":ImageAssets.urology,
+      "specialityName":"Urology"
+    },
+    {
+      "specialityImage":ImageAssets.ent,
+      "specialityName":"ENT"
+    },
+    {
+      "specialityImage":ImageAssets.nutrition,
+      "specialityName":"Nutrition"
+    },
+    {
+      "specialityImage":ImageAssets.pulmonology,
+      "specialityName":"Pulmonology"
+    },
+    {
+      "specialityImage":ImageAssets.orthopedics,
+      "specialityName":"Orthopedics"
+    },
+    {
+      "specialityImage":ImageAssets.ophthalmology,
+      "specialityName":"Ophthalmology"
+    },
+  ];
 }

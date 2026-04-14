@@ -68,12 +68,15 @@ class CompleteCubit extends Cubit<CompleteState> {
 
   Future<void> completeSignUp() async {
     if (!isStep1Completed) {
-      emit(CompleteErrorState("Please complete your basic information first"));
+      if (!isClosed) {
+        emit(CompleteErrorState("Please complete your basic information first"));
+      }
       return;
     }
 
-    emit(CompleteLoadingState());
-
+    if (!isClosed) {
+      emit(CompleteLoadingState());
+    }
     try {
       final age = calculateAge(birthDate!);
 
@@ -87,25 +90,36 @@ class CompleteCubit extends Cubit<CompleteState> {
         allergies: allergies,
       );
 
-      emit(
-        CompleteSuccessState(
-          message: response.message,
-          patient: response.patient,
-        ),
-      );
-    } catch (e) {
-      emit(CompleteErrorState(e.toString()));
+      if (!isClosed) {
+        emit(
+          CompleteSuccessState(
+            message: response.message,
+            patient: response.patient,
+          ),
+        );
+      }
+    }catch (e) {
+      if (!isClosed) {
+        emit(CompleteErrorState(e.toString()));
+      }
     }
   }
 
   void reset() {
-    weight = null;
-    height = null;
-    bloodType = null;
-    gender = null;
-    birthDate = null;
-    chronicDiseases.clear();
-    allergies.clear();
-    emit(CompleteInitial());
+    if (!isClosed) {
+      weight = null;
+      height = null;
+      bloodType = null;
+      gender = null;
+      birthDate = null;
+      chronicDiseases.clear();
+      allergies.clear();
+      emit(CompleteInitial());
+    }
+  }
+
+  @override
+  Future<void> close() {
+    return super.close();
   }
 }

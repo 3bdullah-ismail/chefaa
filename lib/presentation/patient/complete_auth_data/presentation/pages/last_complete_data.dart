@@ -47,9 +47,8 @@ class _LastCompleteDataState extends State<LastCompleteData> {
             }
             if (state is CompleteSuccessState) {
               Loading.hide(context);
-
-              CompleteCubit.get(context).reset();
-
+              // final cubit = CompleteCubit.get(context);
+              // cubit.reset();
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutesNames.patientLayout,
@@ -144,9 +143,8 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                 30.verticalSpace,
                 CustomBtn(
                   text: "Finish Sign Up",
-                  onPressed: () {
+                  onPressed: () async{
                     final cubit = CompleteCubit.get(context);
-
                     final input = allergiesController.text.trim();
                     List<String> finalAllergies = List.from(selectedAllergies);
 
@@ -155,7 +153,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                     }
 
                     cubit.setAllergies(finalAllergies);
-                    cubit.completeSignUp();
+                   await  cubit.completeSignUp();
                   },
                 ),
               ],

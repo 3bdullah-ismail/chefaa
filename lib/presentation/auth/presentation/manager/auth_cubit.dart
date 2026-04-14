@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/models/auth_response.dart';
 import '../../../../core/services/storage_service.dart';
+import '../../../patient/layout/home/presentation/manager/users_cubit.dart';
 import '../../data/repositories/repo.dart';
 
 part 'auth_state.dart';
@@ -10,8 +11,12 @@ part 'auth_state.dart';
 @injectable
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepo repo;
+  final UsersCubit usersCubit;
 
-  AuthCubit({required this.repo}) : super(AuthInitial());
+  AuthCubit({required this.repo, required this.usersCubit})
+      : super(AuthInitial());
+
+  AuthCubit.initial({required this.repo, required this.usersCubit}) : super(AuthInitial());
   TextEditingController identityController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -48,6 +53,8 @@ class AuthCubit extends Cubit<AuthState> {
       await StorageService.saveToken(res.accessToken!);
       await StorageService.saveUser(res.user!);
       await StorageService.saveRole(res.user!.role!);
+      await usersCubit.setUser(res);
+
 
       emit(
         LoginSuccessState(
@@ -69,6 +76,7 @@ class AuthCubit extends Cubit<AuthState> {
       await StorageService.saveToken(res.accessToken!);
       await StorageService.saveUser(res.user!);
       await StorageService.saveRole(res.user!.role!);
+      await usersCubit.setUser(res);
 
       emit(
         GoogleSignInSuccessState(

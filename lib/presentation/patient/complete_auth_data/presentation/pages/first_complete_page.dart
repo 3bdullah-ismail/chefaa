@@ -105,6 +105,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         12.verticalSpace,
 
                         CustomCalendarField(
+                          hintText: "Select Date of Birth",
                           controller: birthController,
                           onDateSelected: (date) {
                             setState(() {
