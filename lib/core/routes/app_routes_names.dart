@@ -23,4 +23,5 @@ class AppRoutesNames {
   static const String facilityLayout = '/facilityLayout';
   static const String medicationPage = '/medicationPage';
   static const String specialityPage = '/specialityPage';
+  static const String chooseDoctor = '/chooseDoctor';
 }
