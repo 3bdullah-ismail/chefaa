@@ -1,3 +1,4 @@
+import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_doctor.dart';
 import 'package:flutter/material.dart';
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
 import '../../presentation/auth/presentation/pages/login_page.dart';
@@ -63,6 +64,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const DoctorLayout());
       case AppRoutesNames.pharmacyLayout:
         return MaterialPageRoute(builder: (_) => const PharmacyLayout());
+      case AppRoutesNames.chooseDoctor:
+        return MaterialPageRoute(builder: (_) => const ChooseDoctor());
 
       default:
         return MaterialPageRoute(

@@ -20,4 +20,5 @@ class AppRoutesNames {
   static const String doctorLayout = '/doctorLayout';
   static const String pharmacyLayout = '/pharmacyLayout';
   static const String facilityLayout = '/facilityLayout';
+  static const String chooseDoctor = '/chooseDoctor';
 }
