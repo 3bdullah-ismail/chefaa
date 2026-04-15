@@ -1,5 +1,4 @@
 import 'package:chefaa/presentation/patient/complete_auth_data/data/repositories/complete_patient_repo.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -69,7 +68,9 @@ class CompleteCubit extends Cubit<CompleteState> {
   Future<void> completeSignUp() async {
     if (!isStep1Completed) {
       if (!isClosed) {
-        emit(CompleteErrorState("Please complete your basic information first"));
+        emit(
+          CompleteErrorState("Please complete your basic information first"),
+        );
       }
       return;
     }
@@ -98,7 +99,7 @@ class CompleteCubit extends Cubit<CompleteState> {
           ),
         );
       }
-    }catch (e) {
+    } catch (e) {
       if (!isClosed) {
         emit(CompleteErrorState(e.toString()));
       }
