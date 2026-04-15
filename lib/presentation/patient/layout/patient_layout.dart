@@ -1,10 +1,13 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:chefaa/presentation/patient/layout/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../core/resources/assets_manager.dart';
+import 'package:provider/provider.dart';
+import '../../../../../core/resources/assets_manager.dart';
+import '../booking/presentation/manager/booking_provider.dart';
+import '../booking/presentation/pages/booking_page.dart';
 import '../profile/presentation/pages/profile_page.dart';
+import 'home/presentation/pages/home_page.dart';
 
 class PatientLayout extends StatefulWidget {
   const PatientLayout({super.key});
@@ -17,7 +20,11 @@ class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
     const HomePage(),
-    const Center(child: Text("Booking")),
+
+    ChangeNotifierProvider(
+      create: (_) => BookingProvider(),
+      child: const BookingPage(),
+    ),
     const Center(child: Text("AiLab")),
     const Center(child: Text("Chat")),
     const ProfilePage(),
