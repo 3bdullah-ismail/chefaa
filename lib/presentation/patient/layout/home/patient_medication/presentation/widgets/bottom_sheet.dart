@@ -10,7 +10,7 @@ import '../../../../../../../core/resources/values_manager.dart';
 import '../../../../../../../core/widget/custom_calender.dart';
 import '../../../../../../../core/widget/custom_dropdown_btn.dart';
 import '../../../../../../../core/widget/custom_text_field.dart';
-import '../../../../../profiile/presentation/widgets/item_container.dart';
+import '../../../../../profile/presentation/widgets/item_container.dart';
 
 class BottomSheetCard extends StatefulWidget {
   final String title;
@@ -19,7 +19,7 @@ class BottomSheetCard extends StatefulWidget {
 
   const BottomSheetCard({
     super.key,
-    this.edition=false,
+    this.edition = false,
     required this.title,
     required this.content,
   });
@@ -302,7 +302,9 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                             height: 28,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: isOn ? ColorManager.primary : ColorManager.input,
+                              color: isOn
+                                  ? ColorManager.primary
+                                  : ColorManager.input,
                             ),
                             child: AnimatedAlign(
                               duration: const Duration(milliseconds: 200),
@@ -327,15 +329,16 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                 ),
               ),
             ),
-           20.verticalSpace,
-            widget.edition?Column(
-              children: [
-                CustomBtn(text: "Save Medication", onPressed: (){}),
-                10.verticalSpace,
-                CustomBtn(text: "Delete", onPressed: (){}),
-
-              ],
-            ):AiSuggestion()
+            20.verticalSpace,
+            widget.edition
+                ? Column(
+                    children: [
+                      CustomBtn(text: "Save Medication", onPressed: () {}),
+                      10.verticalSpace,
+                      CustomBtn(text: "Delete", onPressed: () {}),
+                    ],
+                  )
+                : AiSuggestion(),
           ],
         ),
       ),

@@ -1,13 +1,9 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:chefaa/presentation/patient/profiile/presentation/pages/profile_page.dart';
 import 'package:chefaa/presentation/patient/layout/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../core/resources/assets_manager.dart';
-import '../../../../../core/resources/assets_manager.dart';
-import '../../../profile/presentation/pages/profile_page.dart';
 import '../profile/presentation/pages/profile_page.dart';
 
 class PatientLayout extends StatefulWidget {
