@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/resources/assets_manager.dart';
-import '../booking/presentation/manager/booking_provider.dart';
-import '../booking/presentation/pages/booking_page.dart';
-import '../profile/presentation/pages/profile_page.dart';
-import 'home/presentation/pages/home_page.dart';
+import '../../../booking/presentation/manager/booking_provider.dart';
+import '../../../booking/presentation/pages/booking_page.dart';
+import '../../../profile/presentation/pages/profile_page.dart';
 
 class PatientLayout extends StatefulWidget {
   const PatientLayout({super.key});
@@ -19,8 +18,7 @@ class PatientLayout extends StatefulWidget {
 class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-    const HomePage(),
-
+    const Center(child: Text("Home")),
     ChangeNotifierProvider(
       create: (_) => BookingProvider(),
       child: const BookingPage(),
