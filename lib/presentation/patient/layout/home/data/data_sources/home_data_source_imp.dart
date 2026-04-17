@@ -14,6 +14,4 @@ class HomeDataSourceImp implements HomeDataSource {
   Future<Response<dynamic>> getAppointments() async {
     return await networkService.dio.get("/appointments/my");
   }
-
-
 }

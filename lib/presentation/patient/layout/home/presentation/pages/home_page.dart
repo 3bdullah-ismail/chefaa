@@ -76,21 +76,21 @@ class _HomePageState extends State<HomePage> {
                     controller: _searchController,
                     text: "Search Doctor or specialty ",
                     prefixIcon: "assets/icons/search-normal.svg",
-                      onPressSearch: () {
-                        final cubit = context.read<SearchCubit>();
+                    onPressSearch: () {
+                      final cubit = context.read<SearchCubit>();
 
-                        cubit.setSearchTextAndSearch(_searchController.text);
+                      cubit.setSearchTextAndSearch(_searchController.text);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => BlocProvider.value(
-                              value: context.read<SearchCubit>(),
-                              child: const SearchPage(),
-                            ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: context.read<SearchCubit>(),
+                            child: const SearchPage(),
                           ),
-                        );
-                      },
+                        ),
+                      );
+                    },
                   ),
                   22.verticalSpace,
                   const SearchFilters(),
@@ -110,8 +110,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, AppRoutesNames.medicationPage);
-
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.medicationPage,
+                          );
                         },
 
                         child: Row(
@@ -151,9 +153,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
-                          
-                        },
+                        onPressed: () {},
                         child: Row(
                           children: [
                             Text(

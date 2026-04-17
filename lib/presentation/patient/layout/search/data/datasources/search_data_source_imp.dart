@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../../../../../../../core/services/network_service.dart';
 
 @Injectable(as: SearchDataSource)
-class SearchDataSourceImp implements SearchDataSource{
+class SearchDataSourceImp implements SearchDataSource {
   NetworkService networkService;
   SearchDataSourceImp(this.networkService);
 
@@ -14,14 +14,12 @@ class SearchDataSourceImp implements SearchDataSource{
     String? specialization,
     String? gender,
     String? location,
-  })  {
+  }) {
     final params = {
       if (specialization != null && specialization.isNotEmpty)
         "specialization": specialization,
-      if (gender != null && gender.isNotEmpty)
-        "gender": gender,
-      if (location != null && location.isNotEmpty)
-        "location": location,
+      if (gender != null && gender.isNotEmpty) "gender": gender,
+      if (location != null && location.isNotEmpty) "location": location,
     };
 
     return networkService.dio.get(

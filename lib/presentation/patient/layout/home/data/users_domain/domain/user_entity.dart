@@ -4,4 +4,3 @@ class UserEntity {
 
   const UserEntity({required this.id, required this.name});
 }
-

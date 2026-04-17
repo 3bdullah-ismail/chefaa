@@ -12,14 +12,14 @@ class CustomOutlineBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 12,horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
         side: BorderSide(color: color, width: 1.5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25.r),
         ),
       ),
       onPressed: () {},
-      child: Text(title, style: getMediumStyle(color: color,fontSize: 14)),
+      child: Text(title, style: getMediumStyle(color: color, fontSize: 14)),
     );
   }
 }

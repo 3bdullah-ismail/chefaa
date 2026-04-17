@@ -1,4 +1,3 @@
-
 import '../../data/models/search_query.dart';
 import '../../domain/entities/doctor_clinic.dart';
 
@@ -19,6 +18,7 @@ class SearchError extends SearchState {
 
   SearchError(this.message);
 }
+
 final class SearchDraftChanged extends SearchState {
   final SearchQuery draftQuery;
 

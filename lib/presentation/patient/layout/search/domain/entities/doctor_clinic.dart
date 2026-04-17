@@ -16,14 +16,13 @@ class DoctorClinic {
 
   factory DoctorClinic.fromJson(Map<String, dynamic> json) {
     return DoctorClinic(
-      user: json['userId'] != null
-          ? UserId.fromJson(json['userId'])
-          : null,
+      user: json['userId'] != null ? UserId.fromJson(json['userId']) : null,
       specialization: json['specialization'] ?? '',
       gender: json['gender'] ?? '',
-      clinics: (json['clinics'] as List<dynamic>?)
-          ?.map((e) => Clinics.fromJson(e))
-          .toList() ??
+      clinics:
+          (json['clinics'] as List<dynamic>?)
+              ?.map((e) => Clinics.fromJson(e))
+              .toList() ??
           [],
     );
   }

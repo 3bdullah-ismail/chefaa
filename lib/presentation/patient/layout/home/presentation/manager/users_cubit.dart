@@ -7,7 +7,6 @@ import '../../../../../../../core/models/auth_response.dart';
 import '../../data/repositories/home_repo.dart';
 import '../../data/users_domain/domain/user_usecase.dart';
 
-
 @injectable
 class UsersCubit extends Cubit<UsersState> {
   final UserUseCase _userUseCase;
@@ -44,8 +43,5 @@ class UsersCubit extends Cubit<UsersState> {
     emit(UserLoggedOut());
   }
 
-  Future<void> getAppointments() async {
-
-  }
-
+  Future<void> getAppointments() async {}
 }

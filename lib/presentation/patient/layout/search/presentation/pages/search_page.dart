@@ -43,11 +43,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(100),
-          child: CustomAppBar(
-            isSearch: true,
-            isLayout: true,
-            title1: "Search",
-          ),
+          child: CustomAppBar(isSearch: true, isLayout: true, title1: "Search"),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -78,40 +74,29 @@ class _SearchPageState extends State<SearchPage> {
                 child: BlocBuilder<SearchCubit, SearchState>(
                   builder: (context, state) {
                     if (state is SearchLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
+                      return const Center(child: CircularProgressIndicator());
                     }
 
                     if (state is SearchError) {
-                      return Center(
-                        child: Text(state.message),
-                      );
+                      return Center(child: Text(state.message));
                     }
 
                     if (state is SearchSuccess) {
                       if (state.clinics.isEmpty) {
-                        return const Center(
-                          child: Text("No results found"),
-                        );
+                        return const Center(child: Text("No results found"));
                       }
 
                       return ListView.separated(
                         padding: const EdgeInsets.all(10),
                         itemCount: state.clinics.length,
-                        separatorBuilder: (_, __) =>
-                        const SizedBox(height: 15),
+                        separatorBuilder: (_, _) => const SizedBox(height: 15),
                         itemBuilder: (_, index) {
-                          return SearchCard(
-                            clinic: state.clinics[index],
-                          );
+                          return SearchCard(clinic: state.clinics[index]);
                         },
                       );
                     }
 
-                    return const Center(
-                      child: Text("Start typing to search"),
-                    );
+                    return const Center(child: Text("Start typing to search"));
                   },
                 ),
               ),

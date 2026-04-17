@@ -11,9 +11,9 @@ class InsideAppBar extends StatelessWidget {
   final bool isSpeciality;
   const InsideAppBar({
     super.key,
-    this.isSpeciality=false,
+    this.isSpeciality = false,
     required this.title,
-     this.subtitle,
+    this.subtitle,
     this.height = 150,
   });
 
@@ -21,7 +21,9 @@ class InsideAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor:  isSpeciality? ColorManager.lightGray: ColorManager.primary,
+      backgroundColor: isSpeciality
+          ? ColorManager.lightGray
+          : ColorManager.primary,
       elevation: 15,
       shadowColor: ColorManager.lightGray,
       toolbarHeight: height,
@@ -32,9 +34,9 @@ class InsideAppBar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon:  Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new_outlined,
-              color: isSpeciality?ColorManager.black :ColorManager.white,
+              color: isSpeciality ? ColorManager.black : ColorManager.white,
               size: 27,
             ),
           ),
@@ -46,16 +48,21 @@ class InsideAppBar extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: getBoldStyle(color:isSpeciality?ColorManager.black: ColorManager.white)
-                      .copyWith(fontSize: 22),
+                  style: getBoldStyle(
+                    color: isSpeciality
+                        ? ColorManager.black
+                        : ColorManager.white,
+                  ).copyWith(fontSize: 22),
                 ),
                 const SizedBox(height: 4),
-                isSpeciality? const SizedBox(): Text(
-                  subtitle??"",
-                  style: getRegularStyle(
-                    color: ColorManager.white.withOpacity(0.80),
-                  ).copyWith(fontSize: 13),
-                ),
+                isSpeciality
+                    ? const SizedBox()
+                    : Text(
+                        subtitle ?? "",
+                        style: getRegularStyle(
+                          color: ColorManager.white.withOpacity(0.80),
+                        ).copyWith(fontSize: 13),
+                      ),
               ],
             ),
           ),

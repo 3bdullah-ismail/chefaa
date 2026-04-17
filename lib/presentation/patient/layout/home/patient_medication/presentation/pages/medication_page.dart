@@ -52,7 +52,7 @@ class MedicationPage extends StatelessWidget {
                 ],
               ),
               const SuggestCard(),
-             5.verticalSpace,
+              5.verticalSpace,
               Row(
                 children: [
                   Text(
@@ -68,72 +68,75 @@ class MedicationPage extends StatelessWidget {
                         context: context,
                         backgroundColor: ColorManager.lightGray,
                         isScrollControlled: true,
-                        builder: (BuildContext context) =>const  FractionallySizedBox(
-                          heightFactor: 0.92,
-                          child:  BottomSheetCard(
-                            title: "Edit Medication",
-                            content:
-                                "Update your medication details.",
-                          ),
-                        ),
+                        builder: (BuildContext context) =>
+                            const FractionallySizedBox(
+                              heightFactor: 0.92,
+                              child: BottomSheetCard(
+                                title: "Edit Medication",
+                                content: "Update your medication details.",
+                              ),
+                            ),
                       );
                     },
                   ),
                 ],
               ),
-               MedicationCard(onPressed: ()
-                 {
-                   showModalBottomSheet(
-                     context: context,
-                     backgroundColor: ColorManager.lightGray,
-                     isScrollControlled: true,
-                     builder: (BuildContext context) =>const  FractionallySizedBox(
-                       heightFactor: 0.92,
-                       child:  BottomSheetCard(
-                         edition: true,
-                         title: "Edit Medication",
-                         content:
-                         "Update your medication details.",
-                       ),
-                     ),
-                   );
-                 }
-               ,),
-               MedicationCard(onPressed: ()  {
-                 showModalBottomSheet(
-                   context: context,
-                   backgroundColor: ColorManager.lightGray,
-                   isScrollControlled: true,
-                   builder: (BuildContext context) =>const  FractionallySizedBox(
-                     heightFactor: 0.92,
-                     child:  BottomSheetCard(
-                       edition: true,
-                       title: "Edit Medication",
-                       content:
-                       "Update your medication details.",
-                     ),
-                   ),
-                 );
-               }),
+              MedicationCard(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: ColorManager.lightGray,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) =>
+                        const FractionallySizedBox(
+                          heightFactor: 0.92,
+                          child: BottomSheetCard(
+                            edition: true,
+                            title: "Edit Medication",
+                            content: "Update your medication details.",
+                          ),
+                        ),
+                  );
+                },
+              ),
+              MedicationCard(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: ColorManager.lightGray,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) =>
+                        const FractionallySizedBox(
+                          heightFactor: 0.92,
+                          child: BottomSheetCard(
+                            edition: true,
+                            title: "Edit Medication",
+                            content: "Update your medication details.",
+                          ),
+                        ),
+                  );
+                },
+              ),
               const AiSuggestion(),
-               MedicationCard(
-                   onPressed: ()  {
-                 showModalBottomSheet(
-                   context: context,
-                   backgroundColor: ColorManager.lightGray,
-                   isScrollControlled: true,
-                   builder: (BuildContext context) =>const  FractionallySizedBox(
-                     heightFactor: 0.92,
-                     child:  BottomSheetCard(
-                       edition: true,
-                       title: "Add Medication",
-                       content:
-                       "Enter your medication details for tracking and reminders",
-                     ),
-                   ),
-                 );
-               }),
-            5.verticalSpace,
+              MedicationCard(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    backgroundColor: ColorManager.lightGray,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) => const FractionallySizedBox(
+                      heightFactor: 0.92,
+                      child: BottomSheetCard(
+                        edition: true,
+                        title: "Add Medication",
+                        content:
+                            "Enter your medication details for tracking and reminders",
+                      ),
+                    ),
+                  );
+                },
+              ),
+              5.verticalSpace,
             ],
           ),
         ),

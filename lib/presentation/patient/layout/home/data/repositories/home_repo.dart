@@ -1,6 +1,1 @@
-
-
-abstract class HomeRepo {
-
-
-}
+abstract class HomeRepo {}

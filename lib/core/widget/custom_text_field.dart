@@ -42,8 +42,6 @@ class CustomTextField extends StatefulWidget {
   final bool isSearch;
   final Function(String)? onChanged;
 
-
-
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
 }
@@ -76,18 +74,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildPrefixIcon() {
     if (_errorText != null) {
-      return  Padding(
-          padding: const EdgeInsets.all(12),
-          child: SvgPicture.asset(
-            widget.prefixIcon!,
-            width: 22,
-            height: 22,
-            colorFilter: const ColorFilter.mode(
-              ColorManager.error,
-              BlendMode.srcIn,
-            ),
+      return Padding(
+        padding: const EdgeInsets.all(12),
+        child: SvgPicture.asset(
+          widget.prefixIcon!,
+          width: 22,
+          height: 22,
+          colorFilter: const ColorFilter.mode(
+            ColorManager.error,
+            BlendMode.srcIn,
           ),
-        );
+        ),
+      );
     }
     if (_isFocused) {
       return IconButton(
@@ -144,12 +142,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ? getMediumStyle(color: ColorManager.gray, fontSize: 16)
           : getRegularStyle(color: ColorManager.black, fontSize: 16),
       decoration: InputDecoration(
-        focusedBorder:  widget.isSearch? OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
-          borderSide: const BorderSide(
-            color: ColorManager.primary,
-          ),
-        ):null,
+        focusedBorder: widget.isSearch
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25),
+                borderSide: const BorderSide(color: ColorManager.primary),
+              )
+            : null,
         suffixText: widget.suffixText,
         suffixStyle: getMediumStyle(color: ColorManager.gray, fontSize: 16),
         hintText: widget.text,
@@ -170,16 +168,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
                 onPressed: _toggleObscure,
               )
-            : widget.rec? IconButton(
-          icon: const Icon(
-            Icons.mic_none_outlined,
-            color: ColorManager.primary,
-            size: 32,
-          ),
-          onPressed: (){
-            widget.onPressMic!();
-          },
-        ):null,
+            : widget.rec
+            ? IconButton(
+                icon: const Icon(
+                  Icons.mic_none_outlined,
+                  color: ColorManager.primary,
+                  size: 32,
+                ),
+                onPressed: () {
+                  widget.onPressMic!();
+                },
+              )
+            : null,
       ),
     );
   }

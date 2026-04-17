@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 class AuthInterceptor extends Interceptor {
   @override
   void onRequest(
-      RequestOptions options,
-      RequestInterceptorHandler handler,
-      ) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     final token = await StorageService.getToken();
 
     if (token != null && token.isNotEmpty) {

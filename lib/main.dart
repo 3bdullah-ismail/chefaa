@@ -16,10 +16,9 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => FileHandlerCubit()),
-       BlocProvider(create: (_) => getIt<UsersCubit>()..loadUserFromPrefs()),
+        BlocProvider(create: (_) => getIt<UsersCubit>()..loadUserFromPrefs()),
         BlocProvider(create: (_) => getIt<AuthCubit>()),
         BlocProvider(create: (_) => getIt<SearchCubit>()),
-
       ],
       child: const Chefaa(),
     ),

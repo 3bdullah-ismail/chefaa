@@ -3,24 +3,27 @@ import 'DaysOfWeek.dart';
 
 class Clinics {
   Clinics({
-      this.location, 
-      this.id, 
-      this.doctorId, 
-      this.name, 
-      this.city, 
-      this.address, 
-      this.availableDays, 
-      this.daysOfWeek, 
-      this.dailyCapacity, 
-      this.slotDuration, 
-      this.price, 
-      this.capacityPerSlot, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.location,
+    this.id,
+    this.doctorId,
+    this.name,
+    this.city,
+    this.address,
+    this.availableDays,
+    this.daysOfWeek,
+    this.dailyCapacity,
+    this.slotDuration,
+    this.price,
+    this.capacityPerSlot,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   Clinics.fromJson(dynamic json) {
-    location = json['location'] != null ? Location.fromJson(json['location']) : null;
+    location = json['location'] != null
+        ? Location.fromJson(json['location'])
+        : null;
     id = json['_id'];
     doctorId = json['doctorId'];
     name = json['name'];
@@ -89,5 +92,4 @@ class Clinics {
     map['__v'] = v;
     return map;
   }
-
 }

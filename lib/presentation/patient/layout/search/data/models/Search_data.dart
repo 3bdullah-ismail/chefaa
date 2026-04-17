@@ -3,25 +3,26 @@ import 'Clinics.dart';
 
 class SearchData {
   SearchData({
-      this.id, 
-      this.userId, 
-      this.specialization, 
-      this.image, 
-      this.about, 
-      this.membershipPdf, 
-      this.degrees, 
-      this.preOnlineConsultation, 
-      this.clinics, 
-      this.paymentOption, 
-      this.prePaymentNumbers, 
-      this.rating, 
-      this.videoConsultationPrice, 
-      this.clinicConsultationPrice, 
-      this.reviews, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v, 
-      this.gender,});
+    this.id,
+    this.userId,
+    this.specialization,
+    this.image,
+    this.about,
+    this.membershipPdf,
+    this.degrees,
+    this.preOnlineConsultation,
+    this.clinics,
+    this.paymentOption,
+    this.prePaymentNumbers,
+    this.rating,
+    this.videoConsultationPrice,
+    this.clinicConsultationPrice,
+    this.reviews,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.gender,
+  });
 
   SearchData.fromJson(dynamic json) {
     id = json['_id'];
@@ -105,7 +106,9 @@ class SearchData {
     }
     map['paymentOption'] = paymentOption;
     if (prePaymentNumbers != null) {
-      map['prePaymentNumbers'] = prePaymentNumbers?.map((v) => v.toJson()).toList();
+      map['prePaymentNumbers'] = prePaymentNumbers
+          ?.map((v) => v.toJson())
+          .toList();
     }
     map['rating'] = rating;
     map['videoConsultationPrice'] = videoConsultationPrice;
@@ -119,5 +122,4 @@ class SearchData {
     map['gender'] = gender;
     return map;
   }
-
 }

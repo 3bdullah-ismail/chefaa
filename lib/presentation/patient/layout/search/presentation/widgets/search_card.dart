@@ -10,7 +10,7 @@ import '../../../search/domain/entities/doctor_clinic.dart';
 
 class SearchCard extends StatelessWidget {
   final DoctorClinic clinic;
-  const SearchCard({super.key,required this.clinic});
+  const SearchCard({super.key, required this.clinic});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class SearchCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    clinic.user?.name??"",
+                    clinic.user?.name ?? "",
                     style: getMediumStyle(
                       color: ColorManager.black,
                       fontSize: 20,
@@ -86,14 +86,17 @@ class SearchCard extends StatelessWidget {
           20.verticalSpace,
           Row(
             children: [
-              const CustomOutlineBtn(title: "Decline", color: ColorManager.error),
+              const CustomOutlineBtn(
+                title: "Decline",
+                color: ColorManager.error,
+              ),
               13.horizontalSpace,
-              const   CustomOutlineBtn(
+              const CustomOutlineBtn(
                 title: "Reschedule",
                 color: ColorManager.primary,
               ),
               13.horizontalSpace,
-              CustomBtn(isSmall: true,text: "Join Now", onPressed: () {}),
+              CustomBtn(isSmall: true, text: "Join Now", onPressed: () {}),
             ],
           ),
         ],

@@ -1,10 +1,5 @@
 class DaysOfWeek {
-  DaysOfWeek({
-      this.day, 
-      this.open, 
-      this.close, 
-      this.id, 
-      this.breaks,});
+  DaysOfWeek({this.day, this.open, this.close, this.id, this.breaks});
 
   DaysOfWeek.fromJson(dynamic json) {
     day = json['day'];
@@ -37,5 +32,4 @@ class DaysOfWeek {
     }
     return map;
   }
-
 }

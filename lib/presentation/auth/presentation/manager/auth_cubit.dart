@@ -14,9 +14,10 @@ class AuthCubit extends Cubit<AuthState> {
   final UsersCubit usersCubit;
 
   AuthCubit({required this.repo, required this.usersCubit})
-      : super(AuthInitial());
+    : super(AuthInitial());
 
-  AuthCubit.initial({required this.repo, required this.usersCubit}) : super(AuthInitial());
+  AuthCubit.initial({required this.repo, required this.usersCubit})
+    : super(AuthInitial());
   TextEditingController identityController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -54,7 +55,6 @@ class AuthCubit extends Cubit<AuthState> {
       await StorageService.saveUser(res.user!);
       await StorageService.saveRole(res.user!.role!);
       await usersCubit.setUser(res);
-
 
       emit(
         LoginSuccessState(

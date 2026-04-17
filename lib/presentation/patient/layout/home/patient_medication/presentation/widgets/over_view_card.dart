@@ -22,9 +22,7 @@ class OverViewCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: ColorManager.lightGray,
-        border: Border.all(
-          color:  ColorManager.input
-        ),
+        border: Border.all(color: ColorManager.input),
         boxShadow: [
           BoxShadow(
             color: ColorManager.black.withAlpha(60),

@@ -27,7 +27,7 @@ class SearchQuery {
 
   bool get isEmpty =>
       searchText.isEmpty &&
-          specialization.isEmpty &&
-          gender.isEmpty &&
-          location.isEmpty;
+      specialization.isEmpty &&
+      gender.isEmpty &&
+      location.isEmpty;
 }

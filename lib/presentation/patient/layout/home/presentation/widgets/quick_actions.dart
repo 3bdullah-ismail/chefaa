@@ -11,7 +11,12 @@ class QuickActions extends StatelessWidget {
   final String title;
   final void Function() onTap;
 
-  const QuickActions({super.key,required this.onTap, required this.title, required this.image});
+  const QuickActions({
+    super.key,
+    required this.onTap,
+    required this.title,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class QuickActions extends StatelessWidget {
           borderRadius: BorderRadius.circular(25.r),
           splashColor: ColorManager.gray.withAlpha(90),
           highlightColor: ColorManager.gray.withAlpha(90),
-          onTap: (){
+          onTap: () {
             onTap();
           },
           child: Container(

@@ -1,9 +1,5 @@
 class UserId {
-  UserId({
-      this.id, 
-      this.name, 
-      this.email, 
-      this.phoneNumber,});
+  UserId({this.id, this.name, this.email, this.phoneNumber});
 
   UserId.fromJson(dynamic json) {
     id = json['_id'];
@@ -24,5 +20,4 @@ class UserId {
     map['phoneNumber'] = phoneNumber;
     return map;
   }
-
 }

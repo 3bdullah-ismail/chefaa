@@ -26,10 +26,7 @@ class DoseCard extends StatelessWidget {
           children: List.generate(selectedTimes.length, (index) {
             return Container(
               margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 14,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
               decoration: BoxDecoration(
                 color: Colors.grey.shade100,
                 borderRadius: BorderRadius.circular(14),
@@ -42,7 +39,6 @@ class DoseCard extends StatelessWidget {
                   ),
 
                   const Spacer(),
-
 
                   GestureDetector(
                     onTap: () => onPickTime(index),
@@ -59,15 +55,12 @@ class DoseCard extends StatelessWidget {
                         selectedTimes[index] == null
                             ? "Pick time"
                             : selectedTimes[index]!.format(context),
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
 
                   const SizedBox(width: 10),
-
 
                   GestureDetector(
                     onTap: () => deleteDose(index),
@@ -98,16 +91,19 @@ class DoseCard extends StatelessWidget {
               border: Border.all(color: Colors.black12),
               borderRadius: BorderRadius.circular(12),
             ),
-            child:  Center(
+            child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Icon(Icons.add, size: 18),
                   6.horizontalSpace,
-                  Text("Add Dose",style:getMediumStyle(
-                    color: ColorManager.black,
-                    fontSize: 16,
-                  )),
+                  Text(
+                    "Add Dose",
+                    style: getMediumStyle(
+                      color: ColorManager.black,
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
             ),

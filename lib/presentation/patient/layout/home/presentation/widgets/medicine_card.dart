@@ -16,10 +16,9 @@ class MedicineCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
         borderRadius: BorderRadius.circular(25.r),
-        boxShadow: [BoxShadow(
-          color: ColorManager.black.withAlpha(80),
-          blurRadius: 10,
-        )]
+        boxShadow: [
+          BoxShadow(color: ColorManager.black.withAlpha(80), blurRadius: 10),
+        ],
       ),
       child: Row(
         children: [

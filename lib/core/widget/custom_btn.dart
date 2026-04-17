@@ -28,12 +28,12 @@ class CustomBtn extends StatelessWidget {
           disabledColor: ColorManager.gray,
           padding: EdgeInsets.symmetric(vertical: isSmall ? 8.h : 16.h),
           color: ColorManager.primary,
-          borderRadius: BorderRadius.circular(isSmall?35.r:32.r),
+          borderRadius: BorderRadius.circular(isSmall ? 35.r : 32.r),
           onPressed: isDisabled ? null : onPressed,
           child: Text(
             text,
             style: isSmall
-                ? getMediumStyle(color: ColorManager.white,fontSize: 18)
+                ? getMediumStyle(color: ColorManager.white, fontSize: 18)
                 : getSemiBoldStyle(color: ColorManager.white, fontSize: 20),
           ),
         ),

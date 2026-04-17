@@ -38,9 +38,8 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width:widget.isMedication? 150: double.infinity,
+      width: widget.isMedication ? 150 : double.infinity,
       child: TextFormField(
-
         controller: widget.controller,
         readOnly: true,
         onTap: widget.isReadOnly ? null : _showCalendar,
@@ -50,17 +49,18 @@ class _CustomCalendarFieldState extends State<CustomCalendarField> {
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
-        decoration:  InputDecoration(
-          isDense: widget.isMedication? true:false,
+        decoration: InputDecoration(
+          isDense: widget.isMedication ? true : false,
           hintText: widget.hintText,
-          hintStyle:  TextStyle(
-            fontSize: widget.isMedication? 14: 16,
+          hintStyle: TextStyle(
+            fontSize: widget.isMedication ? 14 : 16,
             fontWeight: FontWeight.w600,
             color: ColorManager.darkGray,
           ),
           suffixIcon: widget.isMedication
               ? null
-              : const Icon(Icons.calendar_month, color: ColorManager.gray),          border: const OutlineInputBorder(),
+              : const Icon(Icons.calendar_month, color: ColorManager.gray),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

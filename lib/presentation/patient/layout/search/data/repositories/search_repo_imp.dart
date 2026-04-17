@@ -32,10 +32,7 @@ class SearchRepoImp implements SearchRepo {
         return [];
       }
 
-      return data
-          .map<DoctorClinic>((e) => DoctorClinic.fromJson(e))
-          .toList();
-
+      return data.map<DoctorClinic>((e) => DoctorClinic.fromJson(e)).toList();
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {

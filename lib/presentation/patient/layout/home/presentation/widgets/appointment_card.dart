@@ -85,14 +85,17 @@ class DoctorCard extends StatelessWidget {
           20.verticalSpace,
           Row(
             children: [
-              const CustomOutlineBtn(title: "Decline", color: ColorManager.error),
+              const CustomOutlineBtn(
+                title: "Decline",
+                color: ColorManager.error,
+              ),
               13.horizontalSpace,
-              const   CustomOutlineBtn(
+              const CustomOutlineBtn(
                 title: "Reschedule",
                 color: ColorManager.primary,
               ),
               13.horizontalSpace,
-              CustomBtn(isSmall: true,text: "Join Now", onPressed: () {}),
+              CustomBtn(isSmall: true, text: "Join Now", onPressed: () {}),
             ],
           ),
         ],

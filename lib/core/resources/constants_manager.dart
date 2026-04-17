@@ -119,61 +119,40 @@ class AppConstants {
   }
 
   static final List<Map<String, String>> specialityItems = [
+    {"specialityImage": ImageAssets.doctor, "specialityName": "General"},
+    {"specialityImage": ImageAssets.cardiology, "specialityName": "Cardiology"},
+    {"specialityImage": ImageAssets.dentistry, "specialityName": "Dentistry"},
     {
-      "specialityImage":ImageAssets.general,
-      "specialityName":"General"
+      "specialityImage": ImageAssets.dermatology,
+      "specialityName": "Dermatology",
     },
     {
-      "specialityImage":ImageAssets.cardiology,
-      "specialityName":"Cardiology"
+      "specialityImage": ImageAssets.endocrinology,
+      "specialityName": "Endocrinology",
     },
     {
-      "specialityImage":ImageAssets.dentistry,
-      "specialityName":"Dentistry"
+      "specialityImage": ImageAssets.gynecologyObstetrics,
+      "specialityName": "Gynecology & Obstetrics",
     },
     {
-      "specialityImage":ImageAssets.dermatology,
-      "specialityName":"Dermatology"
+      "specialityImage": ImageAssets.internalMedicine,
+      "specialityName": "InternalMedicine",
+    },
+    {"specialityImage": ImageAssets.neurology, "specialityName": "Neurology"},
+    {"specialityImage": ImageAssets.urology, "specialityName": "Urology"},
+    {"specialityImage": ImageAssets.ent, "specialityName": "ENT"},
+    {"specialityImage": ImageAssets.nutrition, "specialityName": "Nutrition"},
+    {
+      "specialityImage": ImageAssets.pulmonology,
+      "specialityName": "Pulmonology",
     },
     {
-      "specialityImage":ImageAssets.endocrinology,
-      "specialityName":"Endocrinology"
+      "specialityImage": ImageAssets.orthopedics,
+      "specialityName": "Orthopedics",
     },
     {
-      "specialityImage":ImageAssets.gynecologyObstetrics,
-      "specialityName":"Gynecology & Obstetrics"
-    },
-    {
-      "specialityImage":ImageAssets.internalMedicine,
-      "specialityName":"InternalMedicine"
-    },
-    {
-      "specialityImage":ImageAssets.neurology,
-      "specialityName":"Neurology"
-    },
-    {
-      "specialityImage":ImageAssets.urology,
-      "specialityName":"Urology"
-    },
-    {
-      "specialityImage":ImageAssets.ent,
-      "specialityName":"ENT"
-    },
-    {
-      "specialityImage":ImageAssets.nutrition,
-      "specialityName":"Nutrition"
-    },
-    {
-      "specialityImage":ImageAssets.pulmonology,
-      "specialityName":"Pulmonology"
-    },
-    {
-      "specialityImage":ImageAssets.orthopedics,
-      "specialityName":"Orthopedics"
-    },
-    {
-      "specialityImage":ImageAssets.ophthalmology,
-      "specialityName":"Ophthalmology"
+      "specialityImage": ImageAssets.ophthalmology,
+      "specialityName": "Ophthalmology",
     },
   ];
 }

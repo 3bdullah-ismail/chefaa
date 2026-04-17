@@ -5,9 +5,9 @@ import '../../data/models/search_query.dart';
 import '../../data/repositories/search_repo.dart';
 import 'search_state.dart';
 
-enum FilterType {filters, specialization, gender, location }
-@injectable
+enum FilterType { filters, specialization, gender, location }
 
+@injectable
 class SearchCubit extends Cubit<SearchState> {
   final SearchRepo searchRepo;
 
@@ -15,7 +15,6 @@ class SearchCubit extends Cubit<SearchState> {
 
   SearchQuery appliedQuery = const SearchQuery();
   SearchQuery draftQuery = const SearchQuery();
-
 
   void setSearchText(String value) {
     draftQuery = draftQuery.copyWith(searchText: value);
@@ -26,7 +25,6 @@ class SearchCubit extends Cubit<SearchState> {
     setSearchText(value);
     await applySearch();
   }
-
 
   void updateFilter({
     String? specialization,

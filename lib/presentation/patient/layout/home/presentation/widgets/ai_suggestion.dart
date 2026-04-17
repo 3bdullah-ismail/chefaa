@@ -10,18 +10,20 @@ class AiSuggestion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       height: 100.h,
       padding: const EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
         borderRadius: BorderRadius.circular(25.r),
-        border: Border.all(color: ColorManager.aiColor),
-          boxShadow: [BoxShadow(
+        border: Border.all(color: ColorManager.gold),
+        boxShadow: [
+          BoxShadow(
             color: ColorManager.black.withAlpha(60),
             blurRadius: 10,
-            offset:const  Offset(2, 10)
-          )]
+            offset: const Offset(2, 10),
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -35,10 +37,7 @@ class AiSuggestion extends StatelessWidget {
           Expanded(
             child: Text(
               '''Stay consistent with your medications—small daily habits make a big difference in your long-term health.''',
-              style: getRegularStyle(
-                color: ColorManager.black,
-                fontSize: 15,
-              ),
+              style: getRegularStyle(color: ColorManager.black, fontSize: 15),
               textAlign: TextAlign.start,
               maxLines: 10,
               softWrap: true,
@@ -46,7 +45,6 @@ class AiSuggestion extends StatelessWidget {
           ),
         ],
       ),
-    )
-    ;
+    );
   }
 }

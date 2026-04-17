@@ -9,7 +9,7 @@ import '../../../../../../../core/resources/values_manager.dart';
 
 class MedicationCard extends StatelessWidget {
   final void Function() onPressed;
-  const MedicationCard({super.key,required this.onPressed});
+  const MedicationCard({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,10 @@ class MedicationCard extends StatelessWidget {
           Row(
             spacing: 10,
             children: [
-              const Icon(Icons.calendar_today_outlined, color: ColorManager.gray),
+              const Icon(
+                Icons.calendar_today_outlined,
+                color: ColorManager.gray,
+              ),
               Text(
                 "Since Nov 1, 2025• Continuous",
                 style: getRegularStyle(
@@ -113,7 +116,7 @@ class MedicationCard extends StatelessWidget {
               const Spacer(),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap ,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppPadding.p16,
                     vertical: AppPadding.p2,

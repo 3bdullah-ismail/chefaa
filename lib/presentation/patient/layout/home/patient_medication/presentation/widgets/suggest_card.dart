@@ -16,14 +16,14 @@ class SuggestCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: ColorManager.lightGray,
-        border: Border.all(color: ColorManager.lightBlue,width: 4),
+        border: Border.all(color: ColorManager.lightBlue, width: 4),
         boxShadow: [
-        BoxShadow(
-          color: ColorManager.black.withAlpha(60),
-          blurRadius: 7,
-          offset: const Offset(1, 5),
-        ),
-      ],
+          BoxShadow(
+            color: ColorManager.black.withAlpha(60),
+            blurRadius: 7,
+            offset: const Offset(1, 5),
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.only(left: AppPadding.p12),

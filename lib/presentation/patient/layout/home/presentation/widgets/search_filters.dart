@@ -33,35 +33,28 @@ class SearchFilters extends StatelessWidget {
           final isFilterChip = filter == FilterType.filters;
           final value = isFilterChip ? "" : cubit.getFilterValue(filter);
 
-          final isSelected =
-              filter != FilterType.filters && value.isNotEmpty;
+          final isSelected = filter != FilterType.filters && value.isNotEmpty;
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: ChoiceChip(
               avatar: isFilterChip
-                  ? SvgPicture.asset(
-                SvgAssets.filter,
-                width: 20,
-                height: 20,
-              )
+                  ? SvgPicture.asset(SvgAssets.filter, width: 20, height: 20)
                   : null,
 
               labelStyle: getMediumStyle(
                 fontSize: 14,
                 color: isFilterChip
                     ? ColorManager.gray
-                    : (isSelected
-                    ? ColorManager.white
-                    : ColorManager.gray),
+                    : (isSelected ? ColorManager.white : ColorManager.gray),
               ).copyWith(fontWeight: FontWeight.w700),
 
               side: BorderSide(
                 color: isFilterChip
                     ? ColorManager.input
                     : (isSelected
-                    ? ColorManager.lightBlue
-                    : ColorManager.input),
+                          ? ColorManager.lightBlue
+                          : ColorManager.input),
               ),
 
               shape: RoundedRectangleBorder(
@@ -72,9 +65,7 @@ class SearchFilters extends StatelessWidget {
               selectedColor: ColorManager.primary,
               showCheckmark: false,
 
-              label: Text(
-                _getFilterTitle(filter, cubit),
-              ),
+              label: Text(_getFilterTitle(filter, cubit)),
 
               selected: isSelected,
 
@@ -86,7 +77,7 @@ class SearchFilters extends StatelessWidget {
                     cubit.clearFilters();
                     cubit.applySearch();
                     break;
-                    
+
                   case FilterType.specialization:
                     final result = await Navigator.pushNamed(
                       context,
@@ -191,9 +182,6 @@ class SearchFilters extends StatelessWidget {
   }
 
   Widget _item(String title, VoidCallback onTap) {
-    return ListTile(
-      title: Text(title),
-      onTap: onTap,
-    );
+    return ListTile(title: Text(title), onTap: onTap);
   }
 }

@@ -15,18 +15,16 @@ class SpecialityPage extends StatelessWidget {
       ),
       body: GridView.builder(
         itemCount: AppConstants.specialityItems.length,
-        gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: 8,
           mainAxisSpacing: 3,
           childAspectRatio: 0.75,
         ),
-        itemBuilder: (BuildContext context, int index){
+        itemBuilder: (BuildContext context, int index) {
           final item = AppConstants.specialityItems[index];
 
-          return SpecialityCard(
-            item: item,
-          );
+          return SpecialityCard(item: item);
         },
       ),
     );

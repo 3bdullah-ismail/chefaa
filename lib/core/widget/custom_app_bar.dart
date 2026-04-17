@@ -27,7 +27,9 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: isSearch ? ColorManager.input.withValues(alpha: 50) : ColorManager.primary,
+      backgroundColor: isSearch
+          ? ColorManager.input.withValues(alpha: 50)
+          : ColorManager.primary,
       shadowColor: isSearch
           ? ColorManager.transparent
           : ColorManager.black.withValues(alpha: .25),
@@ -54,19 +56,13 @@ class CustomAppBar extends StatelessWidget {
                           )
                         : Row(
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(50.r),
-                                child: Container(
-                                  height: 70.h,
-                                  width: 70.w,
-                                  decoration: BoxDecoration(
-                                    color: ColorManager.white,
-                                    borderRadius: BorderRadius.circular(30.r),
-                                  ),
-                                  child: Image.asset(
-                                    "assets/images/user.png",
-                                    fit: BoxFit.fill,
-                                  ),
+                              ClipOval(
+                                child: Image.asset(
+                                  "assets/images/patient.png",
+                                  width: 100.w,
+                                  height: 100.h,
+                                  alignment: Alignment.topCenter,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                               20.horizontalSpace,

@@ -1,5 +1,6 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/presentation/patient/layout/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class PatientLayout extends StatefulWidget {
 class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-    const Center(child: Text("Home")),
+    HomePage(),
     ChangeNotifierProvider(
       create: (_) => BookingProvider(),
       child: const BookingPage(),

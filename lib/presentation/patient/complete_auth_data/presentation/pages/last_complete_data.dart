@@ -143,7 +143,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                 30.verticalSpace,
                 CustomBtn(
                   text: "Finish Sign Up",
-                  onPressed: () async{
+                  onPressed: () async {
                     final cubit = CompleteCubit.get(context);
                     final input = allergiesController.text.trim();
                     List<String> finalAllergies = List.from(selectedAllergies);
@@ -153,7 +153,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                     }
 
                     cubit.setAllergies(finalAllergies);
-                   await  cubit.completeSignUp();
+                    await cubit.completeSignUp();
                   },
                 ),
               ],
