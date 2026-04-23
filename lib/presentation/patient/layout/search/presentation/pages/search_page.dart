@@ -41,7 +41,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(100),
-          child: CustomAppBar(isSearch: true, isLayout: true, title1: "Search"),
+          child: CustomAppBar(isSingleTitle: true, isLayout: true, title1: "Search"),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(

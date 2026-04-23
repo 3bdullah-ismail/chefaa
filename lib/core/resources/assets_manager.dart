@@ -27,7 +27,10 @@ abstract class ImageAssets {
   static const String orthopedics = "$imagePath/Orthopedics.png";
   static const String pulmonology = "$imagePath/Pulmonology.png";
   static const String urology = "$imagePath/Urology.png";
+  static const String healthIndicator = "$imagePath/health.png";
+  static const String riskLevel = "$imagePath/risk_level.png";
 }
+
 
 class SvgAssets {
   static const String google = "$svgPath/Google.svg";
