@@ -4,8 +4,12 @@ import '../../../../../core/resources/color_manager.dart';
 
 class ProfileBottomSheet extends StatelessWidget {
   final Widget content;
-
-  const ProfileBottomSheet({super.key, required this.content});
+  final double? heightFactor;
+  const ProfileBottomSheet({
+    super.key,
+    required this.content,
+    this.heightFactor,
+  });
 
   static void show(BuildContext context, Widget content) {
     showModalBottomSheet(
@@ -27,8 +31,12 @@ class ProfileBottomSheet extends StatelessWidget {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Container(
-        height: 0.85.sh,
+        height: heightFactor ?? 0.85.sh,
         width: 1.sw,
+        decoration: const BoxDecoration(
+          color: ColorManager.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+        ),
         padding: EdgeInsets.only(
           top: 20.h,
           left: 20.w,

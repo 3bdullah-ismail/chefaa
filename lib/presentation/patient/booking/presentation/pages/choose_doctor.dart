@@ -1,11 +1,14 @@
+import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/widgets/title_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../widgets/doctor_data_sard.dart';
+import '../widgets/doctor_model.dart';
 import '../widgets/sub_text.dart';
 
 class ChooseDoctor extends StatefulWidget {
@@ -24,6 +27,7 @@ class _ChooseDoctorState extends State<ChooseDoctor> {
     'Pediatrics',
   ];
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
@@ -49,20 +53,34 @@ class _ChooseDoctorState extends State<ChooseDoctor> {
               16.verticalSpace,
               const SmartFilterScreen(),
               16.verticalSpace,
-              const DoctorDataCard(
-                doctorName: 'DR. Ahmed Ali',
-                spaciality: 'Internal Medicine Specialist',
-                rating: '4.8',
-                price: '145',
-                ratingCount: '150',
+              DoctorDataCard(
+                doctorModel: DoctorModel(
+                  name: 'DR. Ahmed Ali',
+                  specialty: 'Internal Medicine Specialist',
+                  rating: '4.8',
+                  price: '145',
+                  ratingCount: '150',
+                  availableDays: [
+                    DateTime.now(),
+                    DateTime.now().add(const Duration(days: 2)),
+                    DateTime.now().add(const Duration(days: 5)),
+                  ],
+                ),
               ),
               32.verticalSpace,
-              const DoctorDataCard(
-                doctorName: 'DR. Abdallah Zalabia',
-                spaciality: 'Ophthalmology Specialist',
-                rating: '4.9',
-                price: '150',
-                ratingCount: '1700',
+              DoctorDataCard(
+                doctorModel: DoctorModel(
+                  name: 'DR. Abdallah Zalabia',
+                  specialty: 'Ophthalmology Specialist',
+                  rating: '4.9',
+                  price: '150',
+                  ratingCount: '1700',
+                  availableDays: [
+                    DateTime.now(),
+                    DateTime.now().add(const Duration(days: 2)),
+                    DateTime.now().add(const Duration(days: 5)),
+                  ],
+                ),
               ),
             ],
           ),
@@ -92,7 +110,7 @@ class SmartFilterScreen extends StatefulWidget {
 class _SmartFilterScreenState extends State<SmartFilterScreen> {
   final List<FilterItem> filterTabs = const [
     FilterItem(title: 'Filters', type: FilterType.navigation),
-    FilterItem(title: 'Specialty', type: FilterType.menu),
+    FilterItem(title: 'Specialty', type: FilterType.navigation),
     FilterItem(title: 'Gender', type: FilterType.menu),
     FilterItem(title: 'Location', type: FilterType.navigation),
   ];
@@ -125,7 +143,9 @@ class _SmartFilterScreenState extends State<SmartFilterScreen> {
                         : ColorManager.lightGray,
                     borderRadius: BorderRadius.circular(24),
                     border: Border.all(
-                      color: isSelected ? Colors.blue : ColorManager.input,
+                      color: isSelected
+                          ? ColorManager.primary
+                          : ColorManager.input,
                     ),
                   ),
                   child: Row(
@@ -166,7 +186,7 @@ class _SmartFilterScreenState extends State<SmartFilterScreen> {
     );
   }
 
-  void _handleTap(FilterItem item, BuildContext chipContext) {
+  void _handleTap(FilterItem item, BuildContext chipContext) async {
     switch (item.title) {
       case 'Filters':
         print("Open full filters screen");
@@ -176,20 +196,26 @@ class _SmartFilterScreenState extends State<SmartFilterScreen> {
         _showMenu(
           chipContext: chipContext,
           filterKey: item.title,
-          options: ["Male", "Female"],
+          options: ["Male", "Female", "Any"],
         );
         break;
 
       case 'Specialty':
-        _showMenu(
-          chipContext: chipContext,
-          filterKey: item.title,
-          options: ["Dentist", "Cardio", "Dermatology"],
+        final result = await Navigator.pushNamed(
+          context,
+          AppRoutesNames.specialityPage,
         );
+
+        if (result != null && result is String) {
+          setState(() {
+            selectedValues[item.title] = result;
+          });
+        }
+
         break;
 
       case 'Location':
-        print("Go to Location screen");
+        Navigator.pushNamed(context, AppRoutesNames.locationFilter);
         break;
     }
   }

@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/widget/custom_circle_avatar.dart';
+import '../manager/booking_provider.dart';
+import 'doctor_model.dart';
 
 class DoctorDataCard extends StatelessWidget {
-  const DoctorDataCard({
-    super.key,
-    required this.doctorName,
-    required this.spaciality,
-    required this.rating,
-    required this.ratingCount,
-    required this.price,
-  });
-  final String doctorName;
-  final String spaciality;
-  final String rating;
-  final String price;
-  final String ratingCount;
+  const DoctorDataCard({super.key, required this.doctorModel});
+  final DoctorModel doctorModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,18 +35,9 @@ class DoctorDataCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                radius: 27,
-                backgroundColor: Colors.transparent,
-                child: ClipOval(
-                  child: Image.asset(
-                    ImageAssets.doctor,
-                    width: 54,
-                    height: 54,
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                  ),
-                ),
+              const CustomCircleAvatar(
+                imagePath: ImageAssets.doctor,
+                radius: 30,
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -62,7 +45,7 @@ class DoctorDataCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      doctorName,
+                      doctorModel.name,
                       style: getSemiBoldStyle(
                         color: ColorManager.black,
                         fontSize: 18,
@@ -70,7 +53,7 @@ class DoctorDataCard extends StatelessWidget {
                     ),
                     4.verticalSpace,
                     Text(
-                      spaciality,
+                      doctorModel.specialty,
                       style: getMediumStyle(
                         color: ColorManager.gray,
                         fontSize: 14,
@@ -88,7 +71,7 @@ class DoctorDataCard extends StatelessWidget {
                         4.horizontalSpace,
 
                         Text(
-                          rating,
+                          doctorModel.rating,
                           style: getMediumStyle(
                             color: ColorManager.black,
                             fontSize: 14,
@@ -97,7 +80,7 @@ class DoctorDataCard extends StatelessWidget {
                         4.horizontalSpace,
 
                         Text(
-                          "($ratingCount)",
+                          "(${doctorModel.ratingCount})",
                           style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: 11,
@@ -109,7 +92,7 @@ class DoctorDataCard extends StatelessWidget {
                 ),
               ),
               Text(
-                '$price E£',
+                '${doctorModel.price} E£',
                 style: getSemiBoldStyle(
                   color: ColorManager.primary,
                   fontSize: 18,
@@ -121,18 +104,26 @@ class DoctorDataCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 12),
             child: Divider(color: ColorManager.input, height: 1),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Book Now',
-                style: getSemiBoldStyle(
-                  color: ColorManager.primary,
-                  fontSize: 18,
+          GestureDetector(
+            onTap: () {
+              context.read<BookingProvider>().selectDoctorAndNext(doctorModel);
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Book Now',
+                  style: getSemiBoldStyle(
+                    color: ColorManager.primary,
+                    fontSize: 18,
+                  ),
                 ),
-              ),
-              Icon(Icons.arrow_forward_ios, color: ColorManager.primary),
-            ],
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: ColorManager.primary,
+                ),
+              ],
+            ),
           ),
         ],
       ),

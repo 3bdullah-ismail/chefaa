@@ -4,11 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../../core/resources/values_manager.dart';
 import '../../../../../../../core/widget/custom_text_field.dart';
-import '../../../home/presentation/widgets/appointment_card.dart';
 import '../manager/search_cubit.dart';
 import '../manager/search_state.dart';
 import '../widgets/search_card.dart';
-import '../widgets/speciality_card.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

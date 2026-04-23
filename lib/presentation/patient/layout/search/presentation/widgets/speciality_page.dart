@@ -13,19 +13,22 @@ class SpecialityPage extends StatelessWidget {
         preferredSize: Size.fromHeight(100),
         child: InsideAppBar(title: "Doctor Speciality", isSpeciality: true),
       ),
-      body: GridView.builder(
-        itemCount: AppConstants.specialityItems.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 3,
-          childAspectRatio: 0.75,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          final item = AppConstants.specialityItems[index];
+      body: SafeArea(
+        child: GridView.builder(
+          padding: const EdgeInsets.all(24),
+          itemCount: AppConstants.specialityItems.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 3,
+            childAspectRatio: 0.75,
+          ),
+          itemBuilder: (BuildContext context, int index) {
+            final item = AppConstants.specialityItems[index];
 
-          return SpecialityCard(item: item);
-        },
+            return SpecialityCard(item: item);
+          },
+        ),
       ),
     );
   }

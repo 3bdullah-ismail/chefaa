@@ -24,4 +24,5 @@ class AppRoutesNames {
   static const String medicationPage = '/medicationPage';
   static const String specialityPage = '/specialityPage';
   static const String chooseDoctor = '/chooseDoctor';
+  static const String locationFilter = '/locationFilter';
 }

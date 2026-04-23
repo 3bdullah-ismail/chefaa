@@ -332,13 +332,13 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
             20.verticalSpace,
             widget.edition
                 ? Column(
-                    children: [
-                      CustomBtn(text: "Save Medication", onPressed: () {}),
-                      10.verticalSpace,
-                      CustomBtn(text: "Delete", onPressed: () {}),
-                    ],
-                  )
-                : AiSuggestion(),
+              children: [
+                CustomBtn(text: "Save Medication", onPressed: () {}),
+                10.verticalSpace,
+                CustomBtn(text: "Delete", onPressed: () {}),
+              ],
+            )
+                : const AiSuggestion(),
           ],
         ),
       ),

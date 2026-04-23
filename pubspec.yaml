@@ -57,6 +57,12 @@ dependencies:
   google_sign_in:
   syncfusion_flutter_datepicker: ^32.2.8
   bottom_sheet: ^4.0.4
+  google_maps_flutter:
+  permission_handler:
+  widget_to_marker:
+  provider:
+  easy_date_timeline:
+  intl:
 
 dev_dependencies:
   injectable_generator:
