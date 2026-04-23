@@ -1,5 +1,6 @@
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_doctor.dart';
+import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_visit_time.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_visit_type.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/widgets/stepper_header.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../../../../../core/extensions/build_ex.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../manager/booking_provider.dart';
+import 'confirm_booking.dart';
 
 class BookingPage extends StatelessWidget {
   const BookingPage({super.key});
@@ -18,12 +20,9 @@ class BookingPage extends StatelessWidget {
 
     final pages = [
       const ChooseVisitTypePage(),
-      if (provider.selectedVisitType == VisitType.clinic)
-        const Center(child: Text("Clinic Details Page"))
-      else if (provider.selectedVisitType == VisitType.online)
-        const ChooseDoctor(),
-      const Center(child: Text("Chat")),
-      const Center(child: Text("Chat")),
+      const ChooseDoctor(),
+      const ChooseVisitTime(),
+      const ConfirmBooking(),
     ];
 
     return Scaffold(
@@ -39,6 +38,15 @@ class BookingPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                InkWell(
+                  onTap: () {
+                    provider.previousStep();
+                  },
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: ColorManager.black,
+                  ),
+                ),
                 Text(
                   'Book Appointment',
                   style: getBoldStyle(color: ColorManager.black, fontSize: 24),

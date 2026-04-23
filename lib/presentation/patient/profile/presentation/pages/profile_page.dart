@@ -1,4 +1,5 @@
 import 'package:chefaa/core/config/get_config.dart';
+import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/services/storage_service.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/widget/custom_circle_avatar.dart';
 import '../manager/profile_cubit.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/bottom_sheet.dart';
@@ -41,17 +43,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 flexibleSpace: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ClipOval(
-                      child: Image.asset(
-                        "assets/images/patient.png",
-                        width: 100.w,
-                        height: 100.h,
-                        alignment: Alignment.topCenter,
-                        fit: BoxFit.cover,
-                      ),
+                    const CustomCircleAvatar(
+                      imagePath: ImageAssets.patient,
+                      radius: 50,
                     ),
                     Text(
-                      StorageService.user!.name ?? "user name",
+                      StorageService.user?.name ?? "user name",
                       style: getSemiBoldStyle(
                         color: ColorManager.white,
                         fontSize: FontSize.s20.sp,

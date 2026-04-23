@@ -9,6 +9,7 @@ class InsideAppBar extends StatelessWidget {
   final String? subtitle;
   final double height;
   final bool isSpeciality;
+
   const InsideAppBar({
     super.key,
     this.isSpeciality = false,
@@ -24,7 +25,7 @@ class InsideAppBar extends StatelessWidget {
       backgroundColor: isSpeciality
           ? ColorManager.lightGray
           : ColorManager.primary,
-      elevation: 15,
+      elevation: 3,
       shadowColor: ColorManager.lightGray,
       toolbarHeight: height,
       shape: const RoundedRectangleBorder(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../../core/widget/custom_btn.dart';
 import '../manager/booking_provider.dart';
 import '../widgets/sub_text.dart';
@@ -62,7 +63,7 @@ class _ChooseVisitTypePageState extends State<ChooseVisitTypePage> {
                         }
                       },
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ],
           ),
         ),

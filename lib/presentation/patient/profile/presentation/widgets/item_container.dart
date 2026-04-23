@@ -13,6 +13,7 @@ class ItemContainer extends StatelessWidget {
 
   final Widget child;
   final bool? isMedication;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +30,7 @@ class ItemContainer extends StatelessWidget {
           BoxShadow(
             color: ColorManager.black.withValues(alpha: 0.25),
             blurRadius: 4,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
             spreadRadius: 0,
           ),
         ],

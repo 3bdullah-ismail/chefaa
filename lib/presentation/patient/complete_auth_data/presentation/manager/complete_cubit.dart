@@ -119,8 +119,4 @@ class CompleteCubit extends Cubit<CompleteState> {
     }
   }
 
-  @override
-  Future<void> close() {
-    return super.close();
-  }
 }

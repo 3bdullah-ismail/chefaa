@@ -13,6 +13,7 @@ import '../../presentation/onboarding/pages/onboarding_page.dart';
 import '../../presentation/onboarding/pages/option_screen.dart';
 import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
+import '../../presentation/patient/booking/presentation/pages/location_filter.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
@@ -75,6 +76,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const PharmacyLayout());
       case AppRoutesNames.chooseDoctor:
         return MaterialPageRoute(builder: (_) => const ChooseDoctor());
+      case AppRoutesNames.locationFilter:
+        return MaterialPageRoute(builder: (_) => const LocationFilter());
 
       default:
         return MaterialPageRoute(

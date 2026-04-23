@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
-import '../../../search/domain/entities/doctor_clinic.dart';
 
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key});

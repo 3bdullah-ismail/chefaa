@@ -21,6 +21,7 @@ class VisitTypeCard extends StatelessWidget {
   final String subtitle;
   final VoidCallback? onTap;
   final bool isSelected;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -90,8 +91,8 @@ class VisitTypeCard extends StatelessWidget {
               ),
             ),
             isSelected
-                ? Icon(Icons.done, color: ColorManager.primary, size: 40)
-                : SizedBox(),
+                ? const Icon(Icons.done, color: ColorManager.primary, size: 40)
+                : const SizedBox(),
           ],
         ),
       ),

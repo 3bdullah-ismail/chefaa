@@ -34,6 +34,7 @@ class SpecialityCard extends StatelessWidget {
               item["specialityImage"]!,
               width: double.infinity,
               height: double.infinity,
+              alignment: Alignment.topCenter,
               fit: BoxFit.cover,
             ),
           ),

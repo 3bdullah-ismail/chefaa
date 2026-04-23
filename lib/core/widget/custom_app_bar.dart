@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
+import 'custom_circle_avatar.dart';
 
 class CustomAppBar extends StatelessWidget {
   final bool isLayout;
@@ -56,14 +57,9 @@ class CustomAppBar extends StatelessWidget {
                           )
                         : Row(
                             children: [
-                              ClipOval(
-                                child: Image.asset(
-                                  "assets/images/patient.png",
-                                  width: 100.w,
-                                  height: 100.h,
-                                  alignment: Alignment.topCenter,
-                                  fit: BoxFit.cover,
-                                ),
+                              CustomCircleAvatar(
+                                imagePath: ImageAssets.patient,
+                                radius: 50.r,
                               ),
                               20.horizontalSpace,
                               Column(
