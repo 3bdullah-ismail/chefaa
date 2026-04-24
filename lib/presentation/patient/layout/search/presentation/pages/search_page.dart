@@ -23,7 +23,6 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
 
     final cubit = context.read<SearchCubit>();
-    _searchController.text = cubit.draftQuery.searchText;
   }
 
   @override

@@ -10,7 +10,6 @@ class InsideAppBar extends StatelessWidget {
   final double height;
   final bool isSpeciality;
 
-
   const InsideAppBar({
     super.key,
     this.isSpeciality = false,
@@ -34,7 +33,7 @@ class InsideAppBar extends StatelessWidget {
       ),
       title: Row(
         children: [
-           IconButton(
+          IconButton(
             onPressed: () => Navigator.pop(context),
             icon: Icon(
               Icons.arrow_back_ios_new_outlined,
@@ -44,7 +43,7 @@ class InsideAppBar extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(left: AppPadding.p20),
+            padding: const EdgeInsets.only(left: AppPadding.p20, top: AppPadding.p16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -58,7 +57,7 @@ class InsideAppBar extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 isSpeciality
-                    ? const SizedBox()
+                    ? SizedBox.fromSize(size: Size.zero)
                     : Text(
                         subtitle ?? "",
                         style: getRegularStyle(
@@ -70,7 +69,6 @@ class InsideAppBar extends StatelessWidget {
           ),
         ],
       ),
-      titleSpacing: 20,
     );
   }
 }

@@ -26,4 +26,5 @@ class AppRoutesNames {
   static const String chooseDoctor = '/chooseDoctor';
   static const String locationFilter = '/locationFilter';
   static const String aiLabAnalysis = '/aiLabAnalysis';
+  static const String appointmentPage = '/appointmentPage';
 }

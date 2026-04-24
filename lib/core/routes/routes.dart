@@ -18,6 +18,7 @@ import '../../presentation/patient/booking/presentation/pages/location_filter.da
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
+import '../../presentation/patient/layout/home/patient_appointment/presentation/pages/appointment_page.dart';
 import '../../presentation/patient/layout/home/patient_medication/presentation/pages/medication_page.dart';
 import '../../presentation/patient/layout/patient_layout.dart';
 import '../../presentation/patient/layout/search/presentation/pages/search_page.dart';
@@ -67,6 +68,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const PatientLayout());
         case AppRoutesNames.aiLabAnalysis:
         return MaterialPageRoute(builder: (_) => const AILabAnalysis());
+        case AppRoutesNames.appointmentPage:
+        return MaterialPageRoute(builder: (_) => const AppointmentPage());
       case AppRoutesNames.specialityPage:
         return MaterialPageRoute(builder: (_) => const SpecialityPage());
       case AppRoutesNames.patientSearch:

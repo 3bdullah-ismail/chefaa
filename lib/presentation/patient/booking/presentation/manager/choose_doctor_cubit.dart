@@ -133,7 +133,7 @@ class ChooseDoctorCubit extends Cubit<ChooseDoctorState> {
   bool isSelected(DoctorFilterItem item, ChooseDoctorState state) {
     switch (item.title) {
       case 'Filters':
-        return hasActiveSelections(state);
+        return false;
       case 'Specialty':
         return state.selectedSpecialty != null;
       case 'Gender':
@@ -148,7 +148,7 @@ class ChooseDoctorCubit extends Cubit<ChooseDoctorState> {
   String labelFor(DoctorFilterItem item, ChooseDoctorState state) {
     switch (item.title) {
       case 'Filters':
-        return hasActiveSelections(state) ? 'Clear' : item.title;
+        return  item.title;
       case 'Specialty':
         return state.selectedSpecialty ?? item.title;
       case 'Gender':

@@ -153,7 +153,12 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.appointmentPage,
+                          );
+                        },
                         child: Row(
                           children: [
                             Text(

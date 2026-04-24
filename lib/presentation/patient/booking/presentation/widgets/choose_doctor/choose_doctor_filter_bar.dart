@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../core/resources/values_manager.dart';
 import '../../manager/choose_doctor_cubit.dart';
 import '../../manager/choose_doctor_state.dart';
 
@@ -21,7 +22,7 @@ class ChooseDoctorFilterBar extends StatelessWidget {
           height: 38,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
             itemCount: cubit.filterTabs.length,
             separatorBuilder: (_, _) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
@@ -59,26 +60,31 @@ class ChooseDoctorFilterBar extends StatelessWidget {
                           if (index == 0)
                             Row(
                               children: [
-                                SvgPicture.asset(
-                                  SvgAssets.filter,
-                                  width: 20,
-                                  height: 20,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: AppPadding.p8,
+                                    vertical: AppPadding.p2,
+                                  ),
+                                  child: SvgPicture.asset(
+                                    SvgAssets.filter,
+                                    width: 17,
+                                    height: 18,
+                                  ),
                                 ),
-                                const SizedBox(width: 6),
                               ],
                             ),
                           Expanded(
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(AppPadding.p4),
                                 child: Text(
                                   label,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     color: isSelected
                                         ? ColorManager.white
-                                        : ColorManager.black,
-                                    fontWeight: FontWeight.w500,
+                                        : ColorManager.gray,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
