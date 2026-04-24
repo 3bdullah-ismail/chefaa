@@ -10,6 +10,7 @@ class InsideAppBar extends StatelessWidget {
   final double height;
   final bool isSpeciality;
 
+
   const InsideAppBar({
     super.key,
     this.isSpeciality = false,
@@ -33,7 +34,7 @@ class InsideAppBar extends StatelessWidget {
       ),
       title: Row(
         children: [
-          IconButton(
+           IconButton(
             onPressed: () => Navigator.pop(context),
             icon: Icon(
               Icons.arrow_back_ios_new_outlined,

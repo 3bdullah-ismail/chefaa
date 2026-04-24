@@ -12,10 +12,10 @@ class CustomAppBar extends StatelessWidget {
   final String? title1;
   final String? title2;
   final void Function()? onPressed;
-  final bool isSearch;
+  final bool isSingleTitle;
 
   const CustomAppBar({
-    this.isSearch = false,
+    this.isSingleTitle = false,
     super.key,
     this.isLayout = false,
     this.title1,
@@ -28,10 +28,10 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: isSearch
+      backgroundColor: isSingleTitle
           ? ColorManager.input.withValues(alpha: 50)
           : ColorManager.primary,
-      shadowColor: isSearch
+      shadowColor: isSingleTitle
           ? ColorManager.transparent
           : ColorManager.black.withValues(alpha: .25),
       elevation: 15,
@@ -43,7 +43,7 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               isLayout
-                  ? isSearch
+                  ? isSingleTitle
                         ? Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: AppPadding.p18,
@@ -89,7 +89,7 @@ class CustomAppBar extends StatelessWidget {
                           )
                   : Image.asset("assets/images/chefaa.png", height: 50.h),
 
-              if (isLayout & !isSearch)
+              if (isLayout & !isSingleTitle)
                 IconButton(
                   onPressed: onPressed,
                   icon: Container(
