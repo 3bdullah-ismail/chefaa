@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
@@ -18,10 +19,14 @@ class LocationFilter extends StatefulWidget {
 }
 
 class _LocationFilterState extends State<LocationFilter> {
+  GoogleMapController? _mapController;
   BitmapDescriptor? customIcon;
   Set<Marker> markers = {};
+  LatLng? _currentPosition;
+  bool _isResolvingLocation = true;
+  bool _canShowMyLocation = false;
 
-  static const LatLng _initialPosition = LatLng(30.0444, 31.2357);
+  static const LatLng _fallbackPosition = LatLng(30.0444, 31.2357);
 
   @override
   void initState() {
@@ -30,8 +35,8 @@ class _LocationFilterState extends State<LocationFilter> {
   }
 
   Future<void> _initializePage() async {
-    await requestLocationPermission();
     await loadMarker();
+    await _resolveCurrentLocation();
   }
 
   Future<void> loadMarker() async {
@@ -48,6 +53,87 @@ class _LocationFilterState extends State<LocationFilter> {
     if (mounted) setState(() {});
   }
 
+  Future<void> _resolveCurrentLocation() async {
+    final hasPermission = await _requestLocationPermission();
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+    if (!hasPermission || !serviceEnabled) {
+      if (!mounted) return;
+
+      setState(() {
+        _currentPosition = _fallbackPosition;
+        _isResolvingLocation = false;
+        _canShowMyLocation = false;
+        markers.clear();
+      });
+
+      return;
+    }
+
+    try {
+      final lastKnownPosition = await Geolocator.getLastKnownPosition();
+      final position =
+          lastKnownPosition ??
+          await Geolocator.getCurrentPosition(
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.high,
+            ),
+          );
+      final currentLocation = LatLng(position.latitude, position.longitude);
+
+      if (!mounted) return;
+
+      setState(() {
+        _currentPosition = currentLocation;
+        _isResolvingLocation = false;
+        _canShowMyLocation = true;
+        markers = {
+          Marker(
+            markerId: const MarkerId('current-location'),
+            position: currentLocation,
+            icon: customIcon ?? BitmapDescriptor.defaultMarker,
+          ),
+        };
+      });
+
+      await _moveCamera(currentLocation);
+    } catch (_) {
+      if (!mounted) return;
+
+      setState(() {
+        _currentPosition = _fallbackPosition;
+        _isResolvingLocation = false;
+        _canShowMyLocation = false;
+        markers.clear();
+      });
+    }
+  }
+
+  Future<void> _moveCamera(LatLng position) async {
+    final controller = _mapController;
+    if (controller == null) return;
+
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: position, zoom: 15),
+      ),
+    );
+  }
+
+  Future<bool> _requestLocationPermission() async {
+    final status = await Permission.locationWhenInUse.request();
+
+    if (status.isGranted) {
+      return true;
+    }
+
+    if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,23 +142,29 @@ class _LocationFilterState extends State<LocationFilter> {
         children: [
           Positioned.fill(
             child: GoogleMap(
-              myLocationEnabled: true,
+              onMapCreated: (controller) {
+                _mapController = controller;
+                if (_currentPosition != null) {
+                  _moveCamera(_currentPosition!);
+                }
+              },
+              myLocationEnabled: _canShowMyLocation,
               myLocationButtonEnabled: false,
-              initialCameraPosition: const CameraPosition(
-                target: _initialPosition,
+              initialCameraPosition: CameraPosition(
+                target: _currentPosition ?? _fallbackPosition,
                 zoom: 14,
               ),
               markers: markers,
               onTap: (LatLng position) {
                 setState(() {
-                  markers.clear();
-                  markers.add(
+                  _currentPosition = position;
+                  markers = {
                     Marker(
                       markerId: const MarkerId("selected"),
                       position: position,
                       icon: customIcon ?? BitmapDescriptor.defaultMarker,
                     ),
-                  );
+                  };
                 });
               },
             ),
@@ -97,6 +189,17 @@ class _LocationFilterState extends State<LocationFilter> {
               ),
             ),
           ),
+          if (_isResolvingLocation)
+            const Positioned.fill(
+              child: IgnorePointer(
+                child: ColoredBox(
+                  color: Colors.transparent,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              ),
+            ),
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -183,14 +286,5 @@ class _LocationFilterState extends State<LocationFilter> {
         ],
       ),
     );
-  }
-}
-
-Future<void> requestLocationPermission() async {
-  var status = await Permission.location.request();
-  if (status.isGranted) {
-    debugPrint("Location Permission granted");
-  } else if (status.isPermanentlyDenied) {
-    openAppSettings();
   }
 }

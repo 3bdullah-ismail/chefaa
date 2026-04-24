@@ -45,6 +45,8 @@
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>We use your location to show nearby doctors and open the map at your current position.</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>
