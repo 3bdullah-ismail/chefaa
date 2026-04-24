@@ -5,6 +5,8 @@ class DoctorModel {
   final String ratingCount;
   final String price;
   final String? imageUrl;
+  final String? gender;
+  final String? location;
   final List<DateTime> availableDays;
 
   DoctorModel({
@@ -14,6 +16,8 @@ class DoctorModel {
     required this.ratingCount,
     required this.price,
     this.imageUrl,
+    this.gender,
+    this.location,
     required this.availableDays,
   });
 }

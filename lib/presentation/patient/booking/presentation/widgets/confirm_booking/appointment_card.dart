@@ -57,16 +57,15 @@ class AppointmentCard extends StatelessWidget {
           const Divider(color: ColorManager.input),
           8.verticalSpace,
 
-          TextRow(
-            firstText: 'Visit Type',
-            secondText: provider.getVisitType(),
-          ),
+          TextRow(firstText: 'Visit Type', secondText: provider.getVisitType()),
 
           8.verticalSpace,
 
           TextRow(
             firstText: 'Date',
-            secondText: DateFormat('MMMM d, yyyy').format(provider.selectedDate),
+            secondText: DateFormat(
+              'MMMM d, yyyy',
+            ).format(provider.selectedDate),
           ),
 
           8.verticalSpace,
@@ -101,4 +100,3 @@ class AppointmentCard extends StatelessWidget {
     );
   }
 }
-

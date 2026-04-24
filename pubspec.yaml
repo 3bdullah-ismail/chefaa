@@ -58,6 +58,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^32.2.8
   bottom_sheet: ^4.0.4
   google_maps_flutter:
+  geolocator:
   permission_handler:
   widget_to_marker:
   provider:
