@@ -68,14 +68,19 @@ class ChooseDoctorFilterBar extends StatelessWidget {
                               ],
                             ),
                           Expanded(
-                            child: Text(
-                              label,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: isSelected
-                                    ? ColorManager.white
-                                    : ColorManager.black,
-                                fontWeight: FontWeight.w500,
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  label,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: isSelected
+                                        ? ColorManager.white
+                                        : ColorManager.black,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
