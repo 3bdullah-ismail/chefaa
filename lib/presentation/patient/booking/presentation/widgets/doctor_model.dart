@@ -20,4 +20,6 @@ class DoctorModel {
     this.location,
     required this.availableDays,
   });
+
+ 
 }

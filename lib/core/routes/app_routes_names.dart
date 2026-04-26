@@ -27,4 +27,5 @@ class AppRoutesNames {
   static const String locationFilter = '/locationFilter';
   static const String aiLabAnalysis = '/aiLabAnalysis';
   static const String appointmentPage = '/appointmentPage';
+  static const String historyReportPage = '/historyReportPage';
 }

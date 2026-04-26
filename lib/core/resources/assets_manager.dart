@@ -29,6 +29,7 @@ abstract class ImageAssets {
   static const String urology = "$imagePath/Urology.png";
   static const String healthIndicator = "$imagePath/health.png";
   static const String riskLevel = "$imagePath/risk_level.png";
+  static const String historyReport = "$imagePath/history_report.png";
 }
 
 

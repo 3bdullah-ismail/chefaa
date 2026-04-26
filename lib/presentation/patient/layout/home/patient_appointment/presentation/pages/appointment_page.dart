@@ -18,8 +18,8 @@ class AppointmentPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20,vertical: AppPadding.p18),
         child: ListView.separated(
           shrinkWrap: true,
-          itemBuilder: (_, _) => const DoctorCard(),
-          separatorBuilder: (_, _) => const SizedBox(height: 20,),
+          itemBuilder: (_, __) => const DoctorCard(),
+          separatorBuilder: (_, __) => const SizedBox(height: 20,),
           itemCount: 3,
         ),
       ),

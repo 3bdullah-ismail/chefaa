@@ -24,7 +24,7 @@ class ChooseDoctorFilterBar extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
             itemCount: cubit.filterTabs.length,
-            separatorBuilder: (_, _) => const SizedBox(width: 8),
+            separatorBuilder: (_, __) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
               final item = cubit.filterTabs[index];
               final isSelected = cubit.isSelected(item, state);

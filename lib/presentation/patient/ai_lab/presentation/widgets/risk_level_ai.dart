@@ -1,56 +1,60 @@
+import 'package:chefaa/presentation/patient/ai_lab/presentation/widgets/risk_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 
 class RiskLevelAi extends StatelessWidget {
-  const RiskLevelAi({super.key});
+  final double dangerScore;
+
+  const RiskLevelAi({
+    super.key,
+    required this.dangerScore,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final riskLevel = RiskLevel.fromScore(dangerScore);
     return Container(
       height: 115.h,
       padding: const EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
+        boxShadow: [
+          BoxShadow(
+            color: ColorManager.black.withAlpha(80),
+            blurRadius: 10,
+            offset: const Offset(1, 2),
+          ),
+        ],
         borderRadius: BorderRadius.circular(25.r),
-
-        // left accent border
         border: const Border(
           left: BorderSide(
             color: ColorManager.gold,
             width: 12,
           ),
         ),
-
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.black.withAlpha(80),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
       ),
 
       child: Row(
         children: [
-          Image.asset(
-            ImageAssets.riskLevel,
-            height: 50.h,
-            width: 50.w,
+          Icon(
+            riskLevel.icon,
+            color: ColorManager.gold,
+            size: 45,
           ),
 
           15.horizontalSpace,
+
           Expanded(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Risk Level",
+                  riskLevel.title,
                   style: getSemiBoldStyle(
                     color: ColorManager.black,
                     fontSize: 18,
@@ -60,7 +64,7 @@ class RiskLevelAi extends StatelessWidget {
                 5.verticalSpace,
 
                 Text(
-                  '''Stay consistent with your medications—small daily habits make a big difference in your long-term health.''',
+                  riskLevel.description,
                   style: getRegularStyle(
                     color: ColorManager.black,
                     fontSize: 12,

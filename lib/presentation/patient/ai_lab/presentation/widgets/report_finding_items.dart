@@ -1,75 +1,90 @@
-import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 
 class ReportFindingItems extends StatelessWidget {
-  const ReportFindingItems({super.key});
+  final String testName;
+  final num value;
+  final String status;
+  final String unit;
+
+  const ReportFindingItems({
+    super.key,
+    required this.testName,
+    required this.value,
+    required this.status,
+    required this.unit,
+  });
+
+  Color getStatusColor() {
+    switch (status.toLowerCase()) {
+      case "normal":
+        return ColorManager.lightGreen;
+
+      case "low":
+        return ColorManager.lawAnalysis;
+
+      case "high":
+        return ColorManager.error;
+
+      default:
+        return Colors.grey;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 257.h,
-      padding: const EdgeInsets.all(AppPadding.p20),
-      decoration: BoxDecoration(
-        color: ColorManager.lightGray,
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: ColorManager.input, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.black.withAlpha(80),
-            blurRadius: 10,
+    final color = getStatusColor();
+
+    return Padding(
+      padding: const EdgeInsets.only(left: AppPadding.p16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  testName,
+                  style: getSemiBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ),
+
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p14,
+                  vertical: AppPadding.p8,
+                ),
+                decoration: BoxDecoration(
+                  color: color.withAlpha(40),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Text(
+                  status,
+                  style: getBoldStyle(color: color).copyWith(fontSize: 15),
+                ),
+              ),
+            ],
           ),
+
+          Text(
+            "$value  $unit",
+            style: getMediumStyle(
+              color: color,
+              fontSize: 14.sp,
+            ),
+          ),
+
+          5.verticalSpace,
         ],
-      ),
-      child: ListView.separated(
-        itemBuilder: (_, _) =>
-        Column(
-          spacing: 5,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    "Cholesterol",
-                    style: getRegularStyle(
-                      color: ColorManager.black,
-                      fontSize: 16.sp,
-                    ),
-                  ),
-                ),
-                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p14,
-                    vertical: AppPadding.p4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: ColorManager.lightGreen.withAlpha(90),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Text(
-                    "high",
-                    style: getBoldStyle(
-                      color: ColorManager.lightGreen,
-                    ).copyWith(fontSize: 15),
-                  ),
-                ),
-              ],
-            ),
-             Text(
-              "240 mg/dL",
-              style: getRegularStyle(
-                  color: ColorManager.error, fontSize: 14.sp),
-            ),
-            5.verticalSpace,
-          ],
-        ),
-        separatorBuilder: (_, _) =>
-        const Divider(color: ColorManager.input, thickness: 1),
-        itemCount: 3,
       ),
     );
   }

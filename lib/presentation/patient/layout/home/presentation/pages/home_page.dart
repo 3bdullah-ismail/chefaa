@@ -121,14 +121,14 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "Manage",
                               style:
-                                  getMediumStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: 18,
-                                  ).copyWith(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: ColorManager.primary,
-                                    decorationThickness: 2,
-                                  ),
+                              getMediumStyle(
+                                color: ColorManager.primary,
+                                fontSize: 18,
+                              ).copyWith(
+                                decoration: TextDecoration.underline,
+                                decorationColor: ColorManager.primary,
+                                decorationThickness: 2,
+                              ),
                             ),
                             SvgPicture.asset("assets/icons/drug.svg"),
                           ],
@@ -164,14 +164,14 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "ViewAll",
                               style:
-                                  getMediumStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: 18,
-                                  ).copyWith(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: ColorManager.primary,
-                                    decorationThickness: 2,
-                                  ),
+                              getMediumStyle(
+                                color: ColorManager.primary,
+                                fontSize: 18,
+                              ).copyWith(
+                                decoration: TextDecoration.underline,
+                                decorationColor: ColorManager.primary,
+                                decorationThickness: 2,
+                              ),
                             ),
                             SvgPicture.asset("assets/icons/drug.svg"),
                           ],

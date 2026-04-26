@@ -7,15 +7,12 @@ import 'user_entity.dart';
 @injectable
 class UserUseCase {
   UserEntity fromAuthResponse(AuthResponse authResponse) {
-    return UserEntity(
-      id: authResponse.user?.id ?? '',
-      name: authResponse.user?.name ?? '',
-    );
+    return UserEntity.fromAuthResponse(authResponse);
   }
 
   Future<void> saveUserToPrefs(UserEntity user) async {
-    await SharedServices.saveString('userId', user.id);
-    await SharedServices.saveString('userName', user.name);
+    await SharedServices.saveString('userId', user.id.trim());
+    await SharedServices.saveString('userName', user.name.trim());
   }
 
   Future<UserEntity?> loadUserFromPrefs() async {
@@ -26,7 +23,7 @@ class UserUseCase {
       return null;
     }
 
-    return UserEntity(id: id, name: name ?? '');
+    return UserEntity(id: id.trim(), name: name?.trim() ?? '');
   }
 
   Future<void> clearUserFromPrefs() async {
