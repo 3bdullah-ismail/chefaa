@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../profile/presentation/widgets/bottom_sheet.dart';
-import '../widgets/doctor_model.dart';
-import '../widgets/doctor_data_sard.dart';
+import '../../domain/entities/doctor_model.dart';
+import '../widgets/search_card.dart';
 
 class LocationFilter extends StatefulWidget {
   const LocationFilter({super.key});
@@ -194,9 +194,7 @@ class _LocationFilterState extends State<LocationFilter> {
               child: IgnorePointer(
                 child: ColoredBox(
                   color: Colors.transparent,
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: Center(child: CircularProgressIndicator()),
                 ),
               ),
             ),
@@ -267,7 +265,7 @@ class _LocationFilterState extends State<LocationFilter> {
             right: 0,
             child: ProfileBottomSheet(
               heightFactor: 0.3.sh,
-              content: DoctorDataCard(
+              content: SearchCard(
                 doctorModel: DoctorModel(
                   name: "doctorName",
                   specialty: "spaciality",
@@ -279,6 +277,9 @@ class _LocationFilterState extends State<LocationFilter> {
                     DateTime.now().add(const Duration(days: 2)), // بعد بكره
                     DateTime.now().add(const Duration(days: 5)), // بعد 5 أيام
                   ],
+                  clinkId:
+                      "clinkId"
+                      '',
                 ),
               ),
             ),

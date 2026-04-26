@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
@@ -92,6 +92,8 @@ class ChooseVisitTime extends StatelessWidget {
                     height: 110.h,
                     child: provider.selectedDoctor == null
                         ? const Center(child: Text("Select doctor first"))
+                        : provider.selectedDoctor!.availableDays.isEmpty
+                        ? const Center(child: Text("No available dates"))
                         : ListView.builder(
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
