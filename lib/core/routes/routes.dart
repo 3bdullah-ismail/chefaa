@@ -13,6 +13,7 @@ import '../../presentation/onboarding/pages/onboarding_page.dart';
 import '../../presentation/onboarding/pages/option_screen.dart';
 import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
 import '../../presentation/patient/ai_lab/presentation/pages/ai_lab_analysis.dart';
+import '../../presentation/patient/ai_lab/presentation/pages/history_report_page.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/booking/presentation/pages/location_filter.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
@@ -56,6 +57,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => ResetCode(index: index));
       case AppRoutesNames.resetPassword:
         return MaterialPageRoute(builder: (_) => const ResetPassword());
+      case AppRoutesNames.historyReportPage:
+        return MaterialPageRoute(builder: (_) => const ReportsHistoryPage());
       case AppRoutesNames.patientSignUpCompleteData:
         return MaterialPageRoute(builder: (_) => const FirstCompletePage());
 
@@ -66,8 +69,11 @@ class Routes {
 
       case AppRoutesNames.patientLayout:
         return MaterialPageRoute(builder: (_) => const PatientLayout());
-        case AppRoutesNames.aiLabAnalysis:
-        return MaterialPageRoute(builder: (_) => const AILabAnalysis());
+      case AppRoutesNames.aiLabAnalysis:
+
+        return MaterialPageRoute(
+          builder: (_) => AILabAnalysis(),
+        );
         case AppRoutesNames.appointmentPage:
         return MaterialPageRoute(builder: (_) => const AppointmentPage());
       case AppRoutesNames.specialityPage:

@@ -20,7 +20,7 @@ class PatientLayout extends StatefulWidget {
 class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-    HomePage(),
+   const  HomePage(),
     ChangeNotifierProvider(
       create: (_) => BookingProvider(),
       child: const BookingPage(),

@@ -23,6 +23,7 @@ class _SearchPageState extends State<SearchPage> {
     super.initState();
 
     final cubit = context.read<SearchCubit>();
+    _searchController.text = cubit.draftQuery.searchText;
   }
 
   @override
@@ -86,7 +87,7 @@ class _SearchPageState extends State<SearchPage> {
                       return ListView.separated(
                         padding: const EdgeInsets.all(10),
                         itemCount: state.clinics.length,
-                        separatorBuilder: (_, _) => const SizedBox(height: 15),
+                        separatorBuilder: (_,__) => const SizedBox(height: 15),
                         itemBuilder: (_, index) {
                           return SearchCard(clinic: state.clinics[index]);
                         },
