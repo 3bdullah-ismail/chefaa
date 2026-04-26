@@ -1,24 +1,22 @@
-import 'package:chefaa/core/resources/assets_manager.dart';
-import 'package:chefaa/core/resources/values_manager.dart';
-import 'package:chefaa/core/routes/app_routes_names.dart';
-import 'package:chefaa/core/widget/custom_text_field.dart';
-import 'package:chefaa/presentation/patient/layout/home/presentation/widgets/ai_suggestion.dart';
-import 'package:chefaa/presentation/patient/layout/home/presentation/widgets/search_filters.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chefaa/presentation/patient/layout/home/presentation/widgets/quick_actions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
+import '../../../../../../core/resources/values_manager.dart';
+import '../../../../../../core/routes/app_routes_names.dart';
 import '../../../../../../core/widget/custom_app_bar.dart';
-import '../../../search/presentation/manager/search_cubit.dart';
-import '../../../search/presentation/pages/search_page.dart';
+import '../../../../../../core/widget/custom_text_field.dart';
+import '../../../../search/presentation/manager/search_cubit.dart';
+import '../../../../search/presentation/pages/search_page.dart';
 import '../manager/users_cubit.dart';
-import '../manager/users_state.dart';
+import '../widgets/ai_suggestion.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/medicine_card.dart';
+import '../widgets/quick_actions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,6 +27,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+
+  void _openSearchPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BlocProvider.value(
+          value: context.read<SearchCubit>(),
+          child: const SearchPage(),
+        ),
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -70,30 +80,23 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomTextField(
-                    isSearch: true,
-                    rec: true,
-                    controller: _searchController,
-                    text: "Search Doctor or specialty ",
-                    prefixIcon: "assets/icons/search-normal.svg",
-                    onPressSearch: () {
-                      final cubit = context.read<SearchCubit>();
-
-                      cubit.setSearchTextAndSearch(_searchController.text);
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => BlocProvider.value(
-                            value: context.read<SearchCubit>(),
-                            child: const SearchPage(),
-                          ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      onTap: _openSearchPage,
+                      child: IgnorePointer(
+                        child: CustomTextField(
+                          isSearch: true,
+                          rec: true,
+                          controller: _searchController,
+                          text: "Search Doctor or specialty ",
+                          prefixIcon: "assets/icons/search-normal.svg",
                         ),
-                      );
-                    },
+                      ),
+                    ),
                   ),
                   22.verticalSpace,
-                  const SearchFilters(),
                   30.verticalSpace,
                   const AiSuggestion(),
                   40.verticalSpace,

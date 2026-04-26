@@ -1,5 +1,4 @@
-import '../../data/users_domain/domain/user_entity.dart';
-
+part of 'users_cubit.dart';
 sealed class UsersState {}
 
 final class UsersInitial extends UsersState {}
@@ -17,3 +16,5 @@ class UserLoaded extends UsersState {
 }
 
 class UserLoggedOut extends UsersState {}
+
+

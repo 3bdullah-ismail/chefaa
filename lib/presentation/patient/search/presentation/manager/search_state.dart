@@ -1,6 +1,4 @@
-import '../../data/models/search_query.dart';
-import '../../domain/entities/doctor_clinic.dart';
-
+part of "search_cubit.dart";
 sealed class SearchState {}
 
 class SearchInitial extends SearchState {}
@@ -8,7 +6,7 @@ class SearchInitial extends SearchState {}
 class SearchLoading extends SearchState {}
 
 class SearchSuccess extends SearchState {
-  final List<DoctorClinic> clinics;
+  final List<DoctorModel> clinics;
 
   SearchSuccess({required this.clinics});
 }

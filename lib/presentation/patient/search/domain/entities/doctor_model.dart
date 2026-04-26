@@ -8,8 +8,9 @@ class DoctorModel {
   final String? gender;
   final String? location;
   final List<DateTime> availableDays;
+  final String clinkId;
 
-  DoctorModel({
+  const DoctorModel({
     required this.name,
     required this.specialty,
     required this.rating,
@@ -19,6 +20,7 @@ class DoctorModel {
     this.gender,
     this.location,
     required this.availableDays,
+    required this.clinkId,
   });
 
  
