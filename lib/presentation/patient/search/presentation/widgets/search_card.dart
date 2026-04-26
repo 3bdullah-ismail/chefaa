@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
-import '../manager/booking_provider.dart';
-import 'doctor_model.dart';
+import '../../../booking/presentation/manager/booking_provider.dart';
+import '../../domain/entities/doctor_model.dart';
 
-class DoctorDataCard extends StatelessWidget {
-  const DoctorDataCard({super.key, required this.doctorModel});
+class SearchCard extends StatelessWidget {
+  const SearchCard({super.key, required this.doctorModel});
+
   final DoctorModel doctorModel;
+
   @override
   Widget build(BuildContext context) {
     return Container(

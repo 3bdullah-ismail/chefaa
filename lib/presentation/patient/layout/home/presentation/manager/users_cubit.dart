@@ -1,10 +1,12 @@
-import 'package:chefaa/presentation/patient/layout/home/presentation/manager/users_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../../core/models/auth_response.dart';
+import '../../data/users_domain/domain/user_entity.dart';
 import '../../data/users_domain/domain/user_usecase.dart';
+
+part 'users_state.dart';
 
 @injectable
 class UsersCubit extends Cubit<UsersState> {

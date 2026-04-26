@@ -5,17 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../manager/choose_doctor_cubit.dart';
-import '../../manager/choose_doctor_state.dart';
+import '../manager/search_cubit.dart';
 
-class ChooseDoctorFilterBar extends StatelessWidget {
-  const ChooseDoctorFilterBar({super.key});
+class FilterBar extends StatelessWidget {
+  const FilterBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ChooseDoctorCubit>();
+    final cubit = context.read<SearchCubit>();
 
-    return BlocBuilder<ChooseDoctorCubit, ChooseDoctorState>(
+    return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         return SizedBox(
           height: 38,
@@ -25,9 +24,9 @@ class ChooseDoctorFilterBar extends StatelessWidget {
             itemCount: cubit.filterTabs.length,
             separatorBuilder: (_, _) => const SizedBox(width: 8),
             itemBuilder: (context, index) {
-              final item = cubit.filterTabs[index];
-              final isSelected = cubit.isSelected(item, state);
-              final label = cubit.labelFor(item, state);
+              final filter = cubit.filterTabs[index];
+              final isSelected = cubit.isChipSelected(filter);
+              final label = cubit.labelFor(filter);
 
               return Builder(
                 builder: (chipContext) {
@@ -35,8 +34,7 @@ class ChooseDoctorFilterBar extends StatelessWidget {
                     onTap: () => _handleTap(
                       context: context,
                       chipContext: chipContext,
-                      item: item,
-                      state: state,
+                      filter: filter,
                     ),
                     child: Container(
                       width: 100,
@@ -100,42 +98,42 @@ class ChooseDoctorFilterBar extends StatelessWidget {
   Future<void> _handleTap({
     required BuildContext context,
     required BuildContext chipContext,
-    required DoctorFilterItem item,
-    required ChooseDoctorState state,
+    required FilterType filter,
   }) async {
-    final cubit = context.read<ChooseDoctorCubit>();
+    final cubit = context.read<SearchCubit>();
 
-    switch (item.title) {
-      case 'Filters':
-        if (cubit.hasActiveSelections(state)) {
+    switch (filter) {
+      case FilterType.filters:
+        if (cubit.hasActiveSelections()) {
           cubit.clearFilters();
+          await cubit.applySearch();
         }
         break;
-      case 'Gender':
+      case FilterType.gender:
         await _showGenderMenu(
           context: context,
           chipContext: chipContext,
           cubit: cubit,
         );
         break;
-      case 'Specialty':
+      case FilterType.specialization:
         final result = await Navigator.pushNamed(
           context,
           AppRoutesNames.specialityPage,
         );
 
         if (result is String && result.isNotEmpty) {
-          cubit.setSpecialty(result);
+          await cubit.updateAndSearch(specialization: result);
         }
         break;
-      case 'Location':
+      case FilterType.location:
         final result = await Navigator.pushNamed(
           context,
           AppRoutesNames.locationFilter,
         );
 
         if (result is String && result.isNotEmpty) {
-          cubit.setLocation(result);
+          await cubit.updateAndSearch(location: result);
         }
         break;
     }
@@ -144,7 +142,7 @@ class ChooseDoctorFilterBar extends StatelessWidget {
   Future<void> _showGenderMenu({
     required BuildContext context,
     required BuildContext chipContext,
-    required ChooseDoctorCubit cubit,
+    required SearchCubit cubit,
   }) async {
     final renderObject = chipContext.findRenderObject();
     if (renderObject is! RenderBox) return;
@@ -162,7 +160,11 @@ class ChooseDoctorFilterBar extends StatelessWidget {
       color: ColorManager.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       items: ['Male', 'Female', 'Any'].map((value) {
-        final isSelected = cubit.state.selectedGender == value;
+        final normalized = value.toLowerCase();
+        final selectedGender = cubit.draftQuery.gender.toLowerCase();
+        final isSelected =
+            (value == 'Any' && selectedGender.isEmpty) ||
+            selectedGender == normalized;
 
         return PopupMenuItem<String>(
           value: value,
@@ -177,8 +179,13 @@ class ChooseDoctorFilterBar extends StatelessWidget {
       }).toList(),
     );
 
-    if (selected != null) {
-      cubit.setGender(selected);
+    if (selected == null) return;
+
+    if (selected == 'Any') {
+      await cubit.updateAndSearch(gender: '');
+      return;
     }
+
+    await cubit.updateAndSearch(gender: selected.toLowerCase());
   }
 }

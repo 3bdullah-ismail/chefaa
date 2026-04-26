@@ -1,29 +1,29 @@
 import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_doctor.dart';
 import 'package:flutter/material.dart';
+
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
-import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
+import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
 import '../../presentation/auth/presentation/pages/reset_password.dart';
-
 import '../../presentation/chefaa_entry_page.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
+import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
 import '../../presentation/onboarding/pages/facility_option.dart';
 import '../../presentation/onboarding/pages/onboarding_page.dart';
 import '../../presentation/onboarding/pages/option_screen.dart';
-import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
-import '../../presentation/patient/booking/presentation/pages/location_filter.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
 import '../../presentation/patient/layout/home/patient_medication/presentation/pages/medication_page.dart';
 import '../../presentation/patient/layout/patient_layout.dart';
-import '../../presentation/patient/layout/search/presentation/pages/search_page.dart';
-import '../../presentation/patient/layout/search/presentation/widgets/speciality_page.dart';
+import '../../presentation/patient/search/presentation/pages/location_filter.dart';
+import '../../presentation/patient/search/presentation/pages/search_page.dart';
+import '../../presentation/patient/search/presentation/pages/speciality_page.dart';
 import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
-import 'app_routes_names.dart';
 import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
+import 'app_routes_names.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../pages/choose_visit_type.dart';
-import '../widgets/doctor_model.dart';
+import '../../../search/domain/entities/doctor_model.dart';
 
 enum PaymentMethod { creditCard, cash }
 
@@ -13,6 +13,10 @@ class BookingProvider extends ChangeNotifier {
 
   void selectDoctorAndNext(DoctorModel doctor) {
     selectedDoctor = doctor;
+    selectedTime = null;
+    if (doctor.availableDays.isNotEmpty) {
+      selectedDate = doctor.availableDays.first;
+    }
     nextStep();
   }
 

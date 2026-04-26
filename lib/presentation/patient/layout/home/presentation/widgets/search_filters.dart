@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
-import '../../../../../../core/resources/assets_manager.dart';
-import '../../../search/presentation/manager/search_cubit.dart';
+import '../../../../search/presentation/manager/search_cubit.dart';
 
 class SearchFilters extends StatelessWidget {
   const SearchFilters({super.key});
