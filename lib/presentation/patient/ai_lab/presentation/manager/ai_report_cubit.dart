@@ -1,12 +1,15 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../data/repositories/ai_report_repo.dart';
 import 'ai_report_state.dart';
 
+@injectable
 class AiReportCubit extends Cubit<AiReportState> {
   final AIReportRepo aiReportRepo;
+
   AiReportCubit(this.aiReportRepo) : super(InitialState());
 
   static AiReportCubit get(context) => BlocProvider.of(context);
@@ -34,5 +37,6 @@ class AiReportCubit extends Cubit<AiReportState> {
       emit(ErrorState(e.toString()));
     }
   }
+
   Future<void> deleteReport(dynamic key) async => box.delete(key);
 }

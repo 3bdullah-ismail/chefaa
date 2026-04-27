@@ -60,15 +60,91 @@ class SearchResponse extends DoctorModel {
        );
 
   static List<DateTime> _parseDays(List<Clinics>? clinics) {
-    if (clinics == null ||
-        clinics.isEmpty ||
-        clinics.first.availableDays == null) {
-      return [];
+    if (clinics == null || clinics.isEmpty) {
+      return const <DateTime>[];
     }
-    return clinics.first.availableDays!
-        .map((e) => DateTime.tryParse(e.toString()))
+
+    final explicitDays = clinics
+        .expand((clinic) => clinic.availableDays ?? const <dynamic>[])
+        .map(_parseDateValue)
         .whereType<DateTime>()
+        .toSet()
         .toList();
+
+    if (explicitDays.isNotEmpty) {
+      explicitDays.sort((a, b) => a.compareTo(b));
+      return explicitDays;
+    }
+
+    final weekDays = clinics
+        .expand((clinic) => clinic.daysOfWeek ?? const <DaysOfWeek>[])
+        .map((day) => _weekdayFromString(day.day))
+        .whereType<int>()
+        .toSet();
+
+    if (weekDays.isEmpty) {
+      return const <DateTime>[];
+    }
+
+    final now = DateTime.now();
+    final start = DateTime(now.year, now.month, now.day);
+    final generatedDays = <DateTime>[];
+
+    for (var i = 0; i < 14; i++) {
+      final date = start.add(Duration(days: i));
+      if (weekDays.contains(date.weekday)) {
+        generatedDays.add(date);
+      }
+    }
+
+    return generatedDays;
+  }
+
+  static DateTime? _parseDateValue(dynamic value) {
+    if (value is DateTime) return value.toLocal();
+
+    if (value is String) {
+      return DateTime.tryParse(value)?.toLocal();
+    }
+
+    if (value is int) {
+      final millis = value > 9999999999 ? value : value * 1000;
+      return DateTime.fromMillisecondsSinceEpoch(millis).toLocal();
+    }
+
+    if (value is Map<String, dynamic>) {
+      final nested = value[r'$date'] ?? value['date'] ?? value['value'];
+      return _parseDateValue(nested);
+    }
+
+    return null;
+  }
+
+  static int? _weekdayFromString(String? rawDay) {
+    if (rawDay == null || rawDay.trim().isEmpty) return null;
+
+    final normalized = rawDay.trim().toLowerCase();
+    const map = {
+      'mon': DateTime.monday,
+      'monday': DateTime.monday,
+      'tue': DateTime.tuesday,
+      'tues': DateTime.tuesday,
+      'tuesday': DateTime.tuesday,
+      'wed': DateTime.wednesday,
+      'wednesday': DateTime.wednesday,
+      'thu': DateTime.thursday,
+      'thur': DateTime.thursday,
+      'thurs': DateTime.thursday,
+      'thursday': DateTime.thursday,
+      'fri': DateTime.friday,
+      'friday': DateTime.friday,
+      'sat': DateTime.saturday,
+      'saturday': DateTime.saturday,
+      'sun': DateTime.sunday,
+      'sunday': DateTime.sunday,
+    };
+
+    return map[normalized];
   }
 
   factory SearchResponse.fromJson(Map<String, dynamic> json) {
