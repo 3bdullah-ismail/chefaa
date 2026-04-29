@@ -2,8 +2,8 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 enum _TextFieldVisualState { empty, valid, error }
 
@@ -75,9 +75,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   Color _resolveColor(_TextFieldVisualState state) {
+    if (widget.isReadOnly) {
+      return ColorManager.gray;
+    }
     switch (state) {
       case _TextFieldVisualState.empty:
-        return ColorManager.gray.withValues(alpha: 0.5);
+        return ColorManager.input;
       case _TextFieldVisualState.valid:
         return ColorManager.primary;
       case _TextFieldVisualState.error:
@@ -92,10 +95,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       builder: (context, value, _) {
         final visualState = _resolveState(value.text);
         final currentColor = _resolveColor(visualState);
-        final theme = Theme.of(context);
-        final decorationTheme = theme.inputDecorationTheme;
-        final borderRadius = BorderRadius.circular(24.r);
-        final isError = visualState == _TextFieldVisualState.error;
+        final borderRadius = BorderRadius.circular(50.r);
 
         return TextFormField(
           readOnly: widget.isReadOnly,
@@ -108,23 +108,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: widget.validator,
           onTapOutside: (_) => FocusScope.of(context).unfocus(),
-          style: getRegularStyle(color: ColorManager.black, fontSize: 16),
+          style: getRegularStyle(color: ColorManager.black, fontSize: 16.sp),
           decoration: InputDecoration(
-            filled: decorationTheme.filled,
-            fillColor: decorationTheme.fillColor ?? ColorManager.lightGray,
-            contentPadding: decorationTheme.contentPadding ??
-                EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            fillColor: ColorManager.white,
+            filled: true,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 18.h,
+            ),
             hintText: widget.text,
-            hintStyle:
-                decorationTheme.hintStyle ??
-                getSemiBoldStyle(color: ColorManager.gray, fontSize: 16),
+            hintStyle: getRegularStyle(
+              color: ColorManager.gray,
+              fontSize: 16.sp,
+            ),
             prefixIcon: widget.prefixIcon != null
                 ? Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: EdgeInsets.only(left: 20.w, right: 12.w),
                     child: SvgPicture.asset(
                       widget.prefixIcon!,
-                      width: 24,
-                      height: 24,
+                      width: 24.w,
+                      height: 24.h,
                       colorFilter: ColorFilter.mode(
                         currentColor,
                         BlendMode.srcIn,
@@ -132,42 +135,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ),
                   )
                 : null,
-            prefixIconConstraints: const BoxConstraints(
-              minWidth: 50,
-              minHeight: 0,
-            ),
+            prefixIconConstraints: BoxConstraints(minWidth: 50.w),
             enabledBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: BorderSide(
-                color: currentColor,
-                width: isError ? 1.5 : 1.0,
-              ),
+              borderSide: BorderSide(color: currentColor, width: 1.2.w),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: BorderSide(
-                color: currentColor,
-                width: isError ? 1.5 : 2.0,
-              ),
+              borderSide: BorderSide(color: currentColor, width: 1.5.w),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: const BorderSide(
-                color: ColorManager.error,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: ColorManager.error, width: 1.2.w),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: const BorderSide(
-                color: ColorManager.error,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: ColorManager.error, width: 1.5.w),
             ),
             errorStyle: const TextStyle(height: 0, fontSize: 0),
-            suffixText: widget.suffixText,
-            suffixStyle:
-                getSemiBoldStyle(color: ColorManager.gray, fontSize: 16),
             suffixIcon: widget.isPass
                 ? IconButton(
                     icon: Icon(
@@ -181,7 +166,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     icon: const Icon(
                       Icons.mic_none_outlined,
                       color: ColorManager.primary,
-                      size: 28,
                     ),
                     onPressed: widget.onPressMic,
                   )
