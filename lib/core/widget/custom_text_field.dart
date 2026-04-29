@@ -3,6 +3,7 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 enum _TextFieldVisualState { empty, valid, error }
 
@@ -76,7 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Color _resolveColor(_TextFieldVisualState state) {
     switch (state) {
       case _TextFieldVisualState.empty:
-        return ColorManager.gray.withOpacity(0.5);
+        return ColorManager.gray.withValues(alpha: 0.5);
       case _TextFieldVisualState.valid:
         return ColorManager.primary;
       case _TextFieldVisualState.error:
@@ -91,7 +92,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
       builder: (context, value, _) {
         final visualState = _resolveState(value.text);
         final currentColor = _resolveColor(visualState);
-        final borderRadius = BorderRadius.circular(35);
+        final theme = Theme.of(context);
+        final decorationTheme = theme.inputDecorationTheme;
+        final borderRadius = BorderRadius.circular(24.r);
+        final isError = visualState == _TextFieldVisualState.error;
 
         return TextFormField(
           readOnly: widget.isReadOnly,
@@ -106,15 +110,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
           onTapOutside: (_) => FocusScope.of(context).unfocus(),
           style: getRegularStyle(color: ColorManager.black, fontSize: 16),
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: 20,
-            ),
+            filled: decorationTheme.filled,
+            fillColor: decorationTheme.fillColor ?? ColorManager.lightGray,
+            contentPadding: decorationTheme.contentPadding ??
+                EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
             hintText: widget.text,
-            hintStyle: getRegularStyle(color: ColorManager.gray, fontSize: 16),
+            hintStyle:
+                decorationTheme.hintStyle ??
+                getSemiBoldStyle(color: ColorManager.gray, fontSize: 16),
             prefixIcon: widget.prefixIcon != null
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: SvgPicture.asset(
                       widget.prefixIcon!,
                       width: 24,
@@ -132,15 +138,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: BorderSide(color: currentColor, width: 1),
+              borderSide: BorderSide(
+                color: currentColor,
+                width: isError ? 1.5 : 1.0,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: BorderSide(color: currentColor, width: 1.5),
+              borderSide: BorderSide(
+                color: currentColor,
+                width: isError ? 1.5 : 2.0,
+              ),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: const BorderSide(color: ColorManager.error, width: 1),
+              borderSide: const BorderSide(
+                color: ColorManager.error,
+                width: 1.5,
+              ),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: borderRadius,
@@ -151,7 +166,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             errorStyle: const TextStyle(height: 0, fontSize: 0),
             suffixText: widget.suffixText,
-            suffixStyle: getMediumStyle(color: ColorManager.gray, fontSize: 16),
+            suffixStyle:
+                getSemiBoldStyle(color: ColorManager.gray, fontSize: 16),
             suffixIcon: widget.isPass
                 ? IconButton(
                     icon: Icon(
