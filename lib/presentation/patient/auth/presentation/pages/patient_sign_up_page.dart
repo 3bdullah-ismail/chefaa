@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/config/get_config.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
@@ -196,8 +197,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         ),
                         50.verticalSpace,
                         CustomBtn(
-                          isDisabled:
-                              state is SignUpLoadingState || !isChecked,
+                          isDisabled: state is SignUpLoadingState || !isChecked,
                           text: AppConstants.createAccount,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

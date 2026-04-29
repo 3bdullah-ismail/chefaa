@@ -5,22 +5,23 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/widget/already_have_account.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
+import 'package:chefaa/core/widget/custom_dropdown_btn.dart';
 import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/core/widget/upload_container.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
-import 'package:chefaa/core/widget/custom_dropdown_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/config/get_config.dart';
 import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/resources/constants_manager.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
-import '../../../../../core/widget/loading_dialog.dart';
 import '../../../../../core/widget/license_formatter.dart';
+import '../../../../../core/widget/loading_dialog.dart';
 import '../widgets/labeled_text_field.dart';
 
 class FacilitySignup extends StatefulWidget {
@@ -323,8 +324,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                       ),
                       const SizedBox(height: 16),
                       CustomBtn(
-                        isDisabled:
-                            !isChecked || state is SignUpLoading,
+                        isDisabled: !isChecked || state is SignUpLoading,
                         text: AppConstants.submitForVerification,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {

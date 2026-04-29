@@ -6,14 +6,8 @@ class FacilityLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Facility Layout'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text('Facility layout is ready'),
-      ),
+      appBar: AppBar(title: const Text('Facility Layout'), centerTitle: true),
+      body: const Center(child: Text('Facility layout is ready')),
     );
   }
 }
-

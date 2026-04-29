@@ -17,19 +17,21 @@ class ProfileResponse extends UserProfileEntity {
     required this.v,
     required this.medications,
   }) : super(
-          userName: userId?.name,
-          userAddress: address,
-          age: age,
-          userGender: gender,
-          userHeight: height,
-          userWeight: weight,
-          userBloodType: bloodType,
-          allergiesList: allergies,
-          chronicConditionsList: chronicConditions,
-        );
+         userName: userId?.name,
+         userAddress: address,
+         age: age,
+         userGender: gender,
+         userHeight: height,
+         userWeight: weight,
+         userBloodType: bloodType,
+         allergiesList: allergies,
+         chronicConditionsList: chronicConditions,
+       );
 
   factory ProfileResponse.fromJson(dynamic json) {
-    final userId = json['userId'] != null ? UserId.fromJson(json['userId']) : null;
+    final userId = json['userId'] != null
+        ? UserId.fromJson(json['userId'])
+        : null;
     return ProfileResponse(
       id: json['_id']?.toString(),
       userId: userId,

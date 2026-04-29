@@ -24,8 +24,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       "/patient/profile/medical-info",
       data: {
         "bloodType": bloodType,
-        "allergiesList": allergiesList,
-        "chronicConditionsList": chronicConditionsList,
+        "allergies": allergiesList,
+        "chronicConditions": chronicConditionsList,
       },
     );
   }

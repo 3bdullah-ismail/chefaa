@@ -148,6 +148,7 @@ class _EditMedicalInformationState extends State<EditMedicalInformation> {
             CustomBtn(
               text: "Save Changes",
               onPressed: () {
+                cubit.updateMedicalInformation();
                 setState(() {
                   isReadOnly = true;
                 });

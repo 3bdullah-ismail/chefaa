@@ -32,3 +32,17 @@ final class UpdateProfileDataFailureState extends ProfileState {
 
   UpdateProfileDataFailureState(this.message);
 }
+
+final class UpdateMedicalInformationLoadingState extends ProfileState {}
+
+final class UpdateMedicalInformationSuccessState extends ProfileState {
+  final UserProfileEntity profileData;
+
+  UpdateMedicalInformationSuccessState(this.profileData);
+}
+
+final class UpdateMedicalInformationFailureState extends ProfileState {
+  final String message;
+
+  UpdateMedicalInformationFailureState(this.message);
+}

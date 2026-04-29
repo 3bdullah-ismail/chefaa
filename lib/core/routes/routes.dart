@@ -102,24 +102,24 @@ class Routes {
             builder: (_) => _wrapWithCanPop(PatientSignUpPage(role: role)),
           );
         }
-       case AppRoutesNames.patientSignUpCompleteChronicDiseases:
-         return MaterialPageRoute(
-           builder: (context) => _wrapWithCanPop(
-             BlocProvider(
-               create: (_) => getIt<CompleteCubit>(),
-               child: const SecondCompletePage(),
-             ),
-           ),
-         );
-       case AppRoutesNames.patientSignUpCompleteMedicines:
-         return MaterialPageRoute(
-           builder: (context) => _wrapWithCanPop(
-             BlocProvider(
-               create: (_) => getIt<CompleteCubit>(),
-               child: const LastCompleteData(),
-             ),
-           ),
-         );
+      case AppRoutesNames.patientSignUpCompleteChronicDiseases:
+        return MaterialPageRoute(
+          builder: (context) => _wrapWithCanPop(
+            BlocProvider(
+              create: (_) => getIt<CompleteCubit>(),
+              child: const SecondCompletePage(),
+            ),
+          ),
+        );
+      case AppRoutesNames.patientSignUpCompleteMedicines:
+        return MaterialPageRoute(
+          builder: (context) => _wrapWithCanPop(
+            BlocProvider(
+              create: (_) => getIt<CompleteCubit>(),
+              child: const LastCompleteData(),
+            ),
+          ),
+        );
       case AppRoutesNames.resetCode:
         {
           final arg = settings.arguments;
@@ -147,15 +147,15 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const ReportsHistoryPage()),
         );
-       case AppRoutesNames.patientSignUpCompleteData:
-         return MaterialPageRoute(
-           builder: (context) => _wrapWithCanPop(
-             BlocProvider(
-               create: (_) => getIt<CompleteCubit>(),
-               child: const FirstCompletePage(),
-             ),
-           ),
-         );
+      case AppRoutesNames.patientSignUpCompleteData:
+        return MaterialPageRoute(
+          builder: (context) => _wrapWithCanPop(
+            BlocProvider(
+              create: (_) => getIt<CompleteCubit>(),
+              child: const FirstCompletePage(),
+            ),
+          ),
+        );
       case AppRoutesNames.pharmacySignUp:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const PharmacySignUpPage()),

@@ -187,17 +187,11 @@ class CompleteCubit extends Cubit<CompleteState> {
         ),
       );
     } catch (e) {
-      emit(
-        state.copyWith(
-          status: CompleteStatus.error,
-          message: e.toString(),
-        ),
-      );
+      emit(state.copyWith(status: CompleteStatus.error, message: e.toString()));
     }
   }
 
   void reset() {
     emit(const CompleteState());
   }
-
 }

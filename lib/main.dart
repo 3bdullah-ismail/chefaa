@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import 'chefaa.dart';
 import 'core/config/get_config.dart';
+import 'core/services/app_bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ void main() async {
   await Hive.openBox('reports');
 
   configureDependencies();
+  Bloc.observer = AppBlocObserver();
   // await GoogleSignIn.instance.initialize(
   //   serverClientId: "437264374965-9fs170cmqjtp67j0387nffs9dot3qdns.apps.googleusercontent.com");
   runApp(

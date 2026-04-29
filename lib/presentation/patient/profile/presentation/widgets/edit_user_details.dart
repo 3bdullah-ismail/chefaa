@@ -100,18 +100,20 @@ class _EditUserDetailsState extends State<EditUserDetails> {
                       isReadOnly = true;
                     });
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Profile updated successfully')),
+                      const SnackBar(
+                        content: Text('Profile updated successfully'),
+                      ),
                     );
                   } else if (state is GetProfileDataFailureState) {
                     Loading.hide(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.message)));
                   } else if (state is UpdateProfileDataFailureState) {
                     Loading.hide(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.message)));
                   }
                 },
                 child: Column(

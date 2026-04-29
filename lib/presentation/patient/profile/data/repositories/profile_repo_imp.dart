@@ -1,6 +1,7 @@
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/presentation/patient/profile/data/models/profile_response.dart';
 import 'package:chefaa/presentation/patient/profile/data/models/update_response.dart';
+import 'package:chefaa/presentation/patient/profile/data/models/update_medical_info_response.dart';
 import 'package:chefaa/presentation/patient/profile/data/repositories/profile_repo.dart';
 import 'package:chefaa/presentation/patient/profile/domain/entities/user_profile_entity.dart';
 import 'package:dart_either/dart_either.dart';
@@ -58,8 +59,19 @@ class ProfileRepoImpl implements ProfileRepo {
     required String bloodType,
     required List<String> allergiesList,
     required List<String> chronicConditionsList,
-  }) {
-    // TODO: implement updateMedicalData
-    throw UnimplementedError();
+  }) async {
+    try {
+      var response = await profileRemoteDataSource.updateMedicalData(
+        bloodType: bloodType,
+        allergiesList: allergiesList,
+        chronicConditionsList: chronicConditionsList,
+      );
+      var data = UpdateMedicalInfoResponse.fromJson(response.data);
+      return Right(data);
+    } on DioException catch (e) {
+      return Left(ServerFailure.fromDioError(e));
+    } catch (e) {
+      return Left(ServerFailure('Unexpected error: ${e.toString()}'));
+    }
   }
 }

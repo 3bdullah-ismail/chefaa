@@ -22,7 +22,6 @@ class FileHelper {
     return null;
   }
 
-
   static PlatformFile? _firstPickedFile(FilePickerResult? result) {
     if (result == null || result.files.isEmpty) return null;
     return result.files.first;

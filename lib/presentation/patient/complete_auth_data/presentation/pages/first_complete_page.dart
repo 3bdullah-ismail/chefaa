@@ -3,13 +3,14 @@ import 'package:chefaa/presentation/patient/complete_auth_data/presentation/page
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
+import '../../../../../core/widget/custom_calender.dart';
+import '../../../../../core/widget/custom_dropdown_btn.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../manager/complete_cubit.dart';
 import '../widgets/complete_data_container.dart';
-import '../../../../../core/widget/custom_calender.dart';
-import '../../../../../core/widget/custom_dropdown_btn.dart';
 
 class FirstCompletePage extends StatefulWidget {
   const FirstCompletePage({super.key});
@@ -80,7 +81,9 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                               hintText: "Select Your Gender",
                               value: state.gender,
                               onChanged: (value) {
-                                context.read<CompleteCubit>().updateGender(value);
+                                context.read<CompleteCubit>().updateGender(
+                                  value,
+                                );
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -212,12 +215,11 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                       );
 
                       if (error != null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(error)),
-                        );
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(error)));
                         return;
                       }
-
 
                       Navigator.push(
                         context,
