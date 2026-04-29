@@ -30,11 +30,26 @@ class _DocSignUpState extends State<DocSignUp> {
   bool isChecked = false;
 
   final _formKey = GlobalKey<FormState>();
+  late final DoctorAuthCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = getIt<DoctorAuthCubit>();
+    FileHandlerCubit.get(context).clearFile();
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    FileHandlerCubit.get(context).clearFile();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<DoctorAuthCubit>(),
+    return BlocProvider.value(
+      value: _cubit,
       child: Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(175),
@@ -178,8 +193,7 @@ class _DocSignUpState extends State<DocSignUp> {
                         ),
                         SizedBox(height: 16.h),
                         CustomBtn(
-                          isDisabled:
-                              !isChecked || !_formKey.currentState!.validate(),
+                          isDisabled: !isChecked || state is SingUpLoading,
                           text: AppConstants.submitForVerification,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

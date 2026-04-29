@@ -25,6 +25,12 @@ class _AiLabPageState extends State<AiLabPage> {
   }
 
   @override
+  void dispose() {
+    FileHandlerCubit.get(context).clearFile();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(

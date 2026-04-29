@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:isolate';
 import 'package:chefaa/core/models/auth_response.dart';
 import 'package:chefaa/presentation/Facility/auth/data/data_sources/data_source.dart';
 import 'package:chefaa/presentation/Facility/auth/data/repositories/repo.dart';
@@ -39,7 +41,10 @@ class FacilityRepoImp implements FacilityAuthRepo {
         phoneNumber: phoneNumber,
         medicalLicence: medicalLicence,
       );
-      AuthResponse data = AuthResponse.fromJson(response.data);
+      final body = response.data;
+      final AuthResponse data = body is String
+          ? AuthResponse.fromJson(await Isolate.run(() => jsonDecode(body)))
+          : AuthResponse.fromJson(body);
       if (data.accessToken != null) {
         await StorageService.saveToken(data.accessToken!);
       }

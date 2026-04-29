@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:isolate';
 import 'package:chefaa/core/models/auth_response.dart';
 import 'package:chefaa/presentation/pharmacy/auth/data/repositories/pharmacy_repo.dart';
 import 'package:dio/dio.dart';
@@ -35,7 +37,14 @@ class PharmacyRepoImp implements PharmacyRepo {
       commercialRegisterNumber: commercialRegisterNumber,
     );
     try {
-      AuthResponse data = AuthResponse.fromJson(response.data);
+      dynamic body = response.data;
+      AuthResponse data;
+      if (body is String) {
+        final decoded = await Isolate.run(() => jsonDecode(body));
+        data = AuthResponse.fromJson(decoded);
+      } else {
+        data = AuthResponse.fromJson(body);
+      }
       if (data.accessToken != null) {
         await StorageService.saveToken(data.accessToken!);
       }

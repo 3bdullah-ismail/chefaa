@@ -52,4 +52,16 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(UpdateProfileDataSuccessState(profileData)),
     );
   }
+
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    weightController.dispose();
+    heightController.dispose();
+    ageController.dispose();
+    bloodTypeController.dispose();
+    allergiesController.dispose();
+    chronicController.dispose();
+    return super.close();
+  }
 }

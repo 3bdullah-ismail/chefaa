@@ -10,6 +10,10 @@ class ResultsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchCubit, SearchState>(
+      buildWhen: (previous, current) =>
+          current is SearchLoading ||
+          current is SearchSuccess ||
+          current is SearchError,
       builder: (context, state) {
         final cubit = context.read<SearchCubit>();
 

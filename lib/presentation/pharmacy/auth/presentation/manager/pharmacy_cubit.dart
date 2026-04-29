@@ -23,7 +23,11 @@ class PharmacyCubit extends Cubit<PharmacyState> {
 
   static PharmacyCubit get(context) => BlocProvider.of(context);
 
+  bool _isSigningUp = false;
+
   Future<void> pharmacySignUp({required PlatformFile? medicalLicence}) async {
+    if (_isSigningUp) return;
+    _isSigningUp = true;
     emit(PharmacyLoadingState());
     try {
       final response = await pharmacyRepo.pharmacySignUp(
@@ -39,6 +43,19 @@ class PharmacyCubit extends Cubit<PharmacyState> {
       emit(PharmacySuccessState(response.user!, response.message!));
     } catch (e) {
       emit(PharmacyErrorState(e.toString()));
+    } finally {
+      _isSigningUp = false;
     }
+  }
+
+  @override
+  Future<void> close() {
+    email.dispose();
+    username.dispose();
+    password.dispose();
+    phoneNumber.dispose();
+    registerNumber.dispose();
+    confirmPasswordController.dispose();
+    return super.close();
   }
 }

@@ -27,10 +27,16 @@ class PatientCubit extends Cubit<PatientState> {
 
   static PatientCubit get(context) => BlocProvider.of(context);
 
+  bool _isSigningUp = false;
+
   Future<void> patientSignUp() async {
+    // Prevent multiple concurrent sign-up attempts which can cause repeated
+    // UI work and platform input churn (keyboard/input connection issues).
+    if (_isSigningUp) return;
+    _isSigningUp = true;
     emit(SignUpLoadingState());
-    print("patientSignUp called");
     try {
+      print("patientSignUp called");
       var response = await patientRepo.patientSignUp(
         name: nameController.text,
         userName: userNameController.text,
@@ -40,6 +46,7 @@ class PatientCubit extends Cubit<PatientState> {
         role: role,
       );
       if (response.user != null) {
+        // saveUser offloads JSON encoding internally (StorageService)
         await StorageService.saveUser(response.user!);
       }
       if (response.accessToken != null) {
@@ -50,6 +57,19 @@ class PatientCubit extends Cubit<PatientState> {
       );
     } catch (e) {
       emit(SignUpErrorState(e.toString()));
+    } finally {
+      _isSigningUp = false;
     }
+  }
+
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    userNameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    return super.close();
   }
 }

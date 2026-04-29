@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:isolate';
 import 'package:chefaa/presentation/doctor/auth/data/data_sources/data_source.dart';
 import 'package:chefaa/presentation/doctor/auth/data/repositories/repo.dart';
 import 'package:dio/dio.dart';
@@ -33,7 +35,10 @@ class DoctorAuthRepoImp extends DoctorAuthRepo {
         specialization: specialization,
         membership: membership,
       );
-      AuthResponse data = AuthResponse.fromJson(response.data);
+      final body = response.data;
+      final AuthResponse data = body is String
+          ? AuthResponse.fromJson(await Isolate.run(() => jsonDecode(body)))
+          : AuthResponse.fromJson(body);
       if (data.accessToken != null) {
         await StorageService.saveToken(data.accessToken!);
       }

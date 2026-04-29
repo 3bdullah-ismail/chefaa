@@ -24,17 +24,20 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
   TextEditingController specialization = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  bool _isSigningUp = false;
 
   static FacilityAuthCubit get(context) => BlocProvider.of(context);
 
   Future<void> signUp({required PlatformFile? medicalLicence}) async {
+    if (_isSigningUp) return;
+    _isSigningUp = true;
     if (medicalLicence == null) {
       emit(SingUpFailure("Please upload your membership file"));
+      _isSigningUp = false;
       return;
     }
     emit(SignUpLoading());
     try {
-      print(username.text);
       final response = await facilityRepo.signUP(
         name: name.text,
         username: username.text,
@@ -50,6 +53,23 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
       emit(SingUpSuccess(userName: response.user!.name ?? ""));
     } catch (e) {
       emit(SingUpFailure(e.toString()));
+    } finally {
+      _isSigningUp = false;
     }
+  }
+
+  @override
+  Future<void> close() {
+    name.dispose();
+    email.dispose();
+    username.dispose();
+    password.dispose();
+    phoneNumber.dispose();
+    commercialRegisterNumber.dispose();
+    medicalDirectorName.dispose();
+    directorProfessionalId.dispose();
+    specialization.dispose();
+    confirmPasswordController.dispose();
+    return super.close();
   }
 }

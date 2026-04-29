@@ -26,9 +26,6 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
   final TextEditingController bloodTypeController = TextEditingController();
   final TextEditingController birthController = TextEditingController();
 
-  String? gender;
-  DateTime? birthDate;
-
   @override
   void dispose() {
     weightController.dispose();
@@ -74,20 +71,24 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
 
                         12.verticalSpace,
 
-                        CustomDropDownBtn(
-                          items: const ["Male", "Female"],
-                          hintText: "Select Your Gender",
-                          value: gender,
-                          onChanged: (value) {
-                            setState(() {
-                              gender = value;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please select your gender';
-                            }
-                            return null;
+                        BlocBuilder<CompleteCubit, CompleteState>(
+                          buildWhen: (previous, current) =>
+                              previous.gender != current.gender,
+                          builder: (context, state) {
+                            return CustomDropDownBtn(
+                              items: const ["Male", "Female"],
+                              hintText: "Select Your Gender",
+                              value: state.gender,
+                              onChanged: (value) {
+                                context.read<CompleteCubit>().updateGender(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please select your gender';
+                                }
+                                return null;
+                              },
+                            );
                           },
                         ),
 
@@ -108,9 +109,11 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                           hintText: "Select Date of Birth",
                           controller: birthController,
                           onDateSelected: (date) {
-                            setState(() {
-                              birthDate = date;
-                            });
+                            // fill the controller so the field shows the chosen date
+                            final formatted =
+                                '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+                            context.read<CompleteCubit>().updateBirthDate(date);
+                            birthController.text = formatted;
                           },
                         ),
 
@@ -202,16 +205,21 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       final cubit = CompleteCubit.get(context);
-
-                      cubit.setBasicInfo(
-                        weight: double.parse(weightController.text),
-                        height: int.parse(heightController.text),
-                        bloodType: bloodTypeController.text,
-                        gender: gender,
-                        birthDate: birthDate,
+                      final error = cubit.captureBasicInfo(
+                        weightText: weightController.text,
+                        heightText: heightController.text,
+                        bloodTypeText: bloodTypeController.text,
                       );
 
-                      Navigator.pushReplacement(
+                      if (error != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(error)),
+                        );
+                        return;
+                      }
+
+
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (_) => BlocProvider.value(

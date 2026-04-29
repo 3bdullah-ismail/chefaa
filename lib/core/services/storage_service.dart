@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chefaa/core/models/auth_response.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class StorageService {
@@ -22,7 +23,7 @@ class StorageService {
   }
 
   static Future<void> saveUser(User value) async {
-    final jsonString = jsonEncode(value.toJson());
+    final jsonString = await compute(_encodeUser, value.toJson());
     await _storage.write(key: 'user', value: jsonString);
     user = value;
   }
@@ -31,10 +32,16 @@ class StorageService {
     final jsonString = await _storage.read(key: 'user');
     if (jsonString == null) return null;
 
-    final userData = User.fromJson(jsonDecode(jsonString));
+    final Map<String, dynamic> userMap = await compute(_decodeUser, jsonString);
+    final userData = User.fromJson(userMap);
     user = userData;
     return userData;
   }
+
+  static String _encodeUser(Map<String, dynamic> map) => jsonEncode(map);
+
+  static Map<String, dynamic> _decodeUser(String jsonString) =>
+      jsonDecode(jsonString) as Map<String, dynamic>;
 
   static Future<void> saveRole(String value) async {
     role = value;

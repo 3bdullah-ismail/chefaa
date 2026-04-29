@@ -1,4 +1,5 @@
 import 'package:chefaa/presentation/patient/complete_auth_data/data/repositories/complete_patient_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -10,48 +11,136 @@ part 'complete_state.dart';
 class CompleteCubit extends Cubit<CompleteState> {
   final CompletePatientRepo completePatientRepo;
 
-  CompleteCubit(this.completePatientRepo) : super(CompleteInitial());
+  CompleteCubit(this.completePatientRepo) : super(const CompleteState());
 
-  double? weight;
-  int? height;
-  String? bloodType;
-  String? gender;
-  DateTime? birthDate;
+  static CompleteCubit get(BuildContext context) =>
+      BlocProvider.of<CompleteCubit>(context);
 
-  List<String> chronicDiseases = [];
+  void updateGender(String? gender) {
+    emit(
+      state.copyWith(
+        status: CompleteStatus.initial,
+        gender: gender,
+        message: null,
+      ),
+    );
+  }
 
-  List<String> allergies = [];
+  void updateBirthDate(DateTime? birthDate) {
+    emit(
+      state.copyWith(
+        status: CompleteStatus.initial,
+        birthDate: birthDate,
+        message: null,
+      ),
+    );
+  }
 
-  static CompleteCubit get(context) => BlocProvider.of(context);
-
-  void setBasicInfo({
-    required double weight,
-    required int height,
-    required String bloodType,
-    required String? gender,
-    required DateTime? birthDate,
+  String? captureBasicInfo({
+    required String weightText,
+    required String heightText,
+    required String bloodTypeText,
   }) {
-    this.weight = weight;
-    this.height = height;
-    this.bloodType = bloodType;
-    this.gender = gender;
-    this.birthDate = birthDate;
+    final weight = double.tryParse(weightText.trim());
+    if (weight == null) {
+      return 'Please enter a valid weight';
+    }
+
+    final height = int.tryParse(heightText.trim());
+    if (height == null) {
+      return 'Please enter a valid height';
+    }
+
+    if (state.gender == null || state.gender!.isEmpty) {
+      return 'Please select your gender';
+    }
+
+    if (state.birthDate == null) {
+      return 'Please select your date of birth';
+    }
+
+    final bloodType = bloodTypeText.trim();
+    if (bloodType.isEmpty) {
+      return 'Please enter your blood type';
+    }
+
+    emit(
+      state.copyWith(
+        status: CompleteStatus.initial,
+        weight: weight,
+        height: height,
+        bloodType: bloodType,
+        message: null,
+      ),
+    );
+
+    return null;
   }
 
-  void setChronicDiseases(List<String> diseases) {
-    chronicDiseases = diseases;
+  void toggleChronicDisease(String disease) {
+    final updated = List<String>.from(state.chronicDiseases);
+    if (updated.contains(disease)) {
+      updated.remove(disease);
+    } else {
+      updated.add(disease);
+    }
+    emit(
+      state.copyWith(
+        status: CompleteStatus.initial,
+        chronicDiseases: updated,
+        message: null,
+      ),
+    );
   }
 
-  void setAllergies(List<String> allergies) {
-    this.allergies = allergies;
+  void addCustomChronicDisease(String input) {
+    final value = input.trim();
+    if (value.isEmpty) return;
+
+    final updated = List<String>.from(state.chronicDiseases);
+    if (!updated.contains(value)) {
+      updated.add(value);
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          chronicDiseases: updated,
+          message: null,
+        ),
+      );
+    }
   }
 
-  bool get isStep1Completed {
-    return weight != null &&
-        height != null &&
-        bloodType != null &&
-        bloodType!.isNotEmpty &&
-        birthDate != null;
+  void toggleAllergy(String allergy) {
+    final updated = List<String>.from(state.allergies);
+    if (updated.contains(allergy)) {
+      updated.remove(allergy);
+    } else {
+      updated.add(allergy);
+    }
+    emit(
+      state.copyWith(
+        status: CompleteStatus.initial,
+        allergies: updated,
+        message: null,
+      ),
+    );
+  }
+
+  void addCustomAllergy(String input) {
+    final value = input.trim();
+    if (value.isEmpty) return;
+
+    final updated = List<String>.from(state.allergies);
+    if (!updated.contains(value)) {
+      updated.add(value);
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          allergies: updated,
+          message: null,
+        ),
+      );
+    }
   }
 
   int calculateAge(DateTime birthDate) {
@@ -66,57 +155,49 @@ class CompleteCubit extends Cubit<CompleteState> {
   }
 
   Future<void> completeSignUp() async {
-    if (!isStep1Completed) {
-      if (!isClosed) {
-        emit(
-          CompleteErrorState("Please complete your basic information first"),
-        );
-      }
+    if (!state.isStep1Complete) {
+      emit(
+        state.copyWith(
+          status: CompleteStatus.error,
+          message: 'Please complete your basic information first',
+        ),
+      );
       return;
     }
 
-    if (!isClosed) {
-      emit(CompleteLoadingState());
-    }
+    emit(state.copyWith(status: CompleteStatus.loading, message: null));
     try {
-      final age = calculateAge(birthDate!);
+      final age = calculateAge(state.birthDate!);
 
       final response = await completePatientRepo.completeSignUp(
-        weight: weight!,
-        height: height!,
-        bloodType: bloodType!,
-        gender: gender?.toLowerCase(),
+        weight: state.weight!,
+        height: state.height!,
+        bloodType: state.bloodType!,
+        gender: state.gender?.toLowerCase(),
         age: age,
-        chronicDiseases: chronicDiseases,
-        allergies: allergies,
+        chronicDiseases: state.chronicDiseases,
+        allergies: state.allergies,
       );
 
-      if (!isClosed) {
-        emit(
-          CompleteSuccessState(
-            message: response.message,
-            patient: response.patient,
-          ),
-        );
-      }
+      emit(
+        state.copyWith(
+          status: CompleteStatus.success,
+          message: response.message,
+          patient: response.patient,
+        ),
+      );
     } catch (e) {
-      if (!isClosed) {
-        emit(CompleteErrorState(e.toString()));
-      }
+      emit(
+        state.copyWith(
+          status: CompleteStatus.error,
+          message: e.toString(),
+        ),
+      );
     }
   }
 
   void reset() {
-    if (!isClosed) {
-      weight = null;
-      height = null;
-      bloodType = null;
-      gender = null;
-      birthDate = null;
-      chronicDiseases.clear();
-      allergies.clear();
-      emit(CompleteInitial());
-    }
+    emit(const CompleteState());
   }
 
 }

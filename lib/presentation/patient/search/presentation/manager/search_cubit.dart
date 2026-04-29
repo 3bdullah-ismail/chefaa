@@ -21,6 +21,7 @@ class SearchCubit extends Cubit<SearchState> {
 
   SearchQuery appliedQuery = const SearchQuery();
   SearchQuery draftQuery = const SearchQuery();
+  bool _isSearching = false;
 
   // Keep latest API result so list widgets can still render while editing draft text.
   List<DoctorModel> _lastClinics = const [];
@@ -122,6 +123,8 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   Future<void> applySearch() async {
+    if (_isSearching) return;
+    _isSearching = true;
     appliedQuery = draftQuery;
     emit(SearchLoading());
 
@@ -142,6 +145,8 @@ class SearchCubit extends Cubit<SearchState> {
       emit(SearchSuccess(clinics: result));
     } catch (e) {
       emit(SearchError(e.toString()));
+    } finally {
+      _isSearching = false;
     }
   }
 

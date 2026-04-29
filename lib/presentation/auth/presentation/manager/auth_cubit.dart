@@ -30,6 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
   final GlobalKey<FormState> resetPassFormKey = GlobalKey<FormState>();
 
   List<TextEditingController?> otpControllers = [];
+  bool _isSubmitting = false;
 
   String _identity = '';
   String _verifiedCode = '';
@@ -44,6 +45,8 @@ class AuthCubit extends Cubit<AuthState> {
       index == 0 ? emailController.text.trim() : phoneController.text.trim();
 
   Future<void> login() async {
+    if (_isSubmitting) return;
+    _isSubmitting = true;
     emit(LoginLoadingState());
     try {
       final res = await repo.login(
@@ -64,10 +67,14 @@ class AuthCubit extends Cubit<AuthState> {
       );
     } catch (e) {
       emit(LoginErrorState(e.toString()));
+    } finally {
+      _isSubmitting = false;
     }
   }
 
   Future<void> signInWithGoogle(String idToken) async {
+    if (_isSubmitting) return;
+    _isSubmitting = true;
     emit(GoogleSignInLoadingState());
 
     try {
@@ -86,6 +93,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
     } catch (e) {
       emit(GoogleSignInErrorState(e.toString()));
+    } finally {
+      _isSubmitting = false;
     }
   }
 
@@ -156,6 +165,8 @@ class AuthCubit extends Cubit<AuthState> {
 
   @override
   Future<void> close() {
+    identityController.dispose();
+    passwordController.dispose();
     emailController.dispose();
     phoneController.dispose();
     password.dispose();

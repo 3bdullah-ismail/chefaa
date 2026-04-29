@@ -1,5 +1,4 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
@@ -39,9 +38,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<AuthCubit>(),
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: ColorManager.white,
         body: ScrollConfiguration(
           behavior: const ScrollBehavior().copyWith(overscroll: false),
@@ -252,7 +249,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      ),
     );
   }
 }

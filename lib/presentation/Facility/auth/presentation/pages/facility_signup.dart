@@ -33,11 +33,26 @@ class FacilitySignup extends StatefulWidget {
 class _FacilitySignupState extends State<FacilitySignup> {
   bool isChecked = false;
   final _formKey = GlobalKey<FormState>();
+  late final FacilityAuthCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = getIt<FacilityAuthCubit>();
+    FileHandlerCubit.get(context).clearFile();
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    FileHandlerCubit.get(context).clearFile();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<FacilityAuthCubit>(),
+    return BlocProvider.value(
+      value: _cubit,
       child: Scaffold(
         backgroundColor: ColorManager.input,
         appBar: const PreferredSize(
@@ -309,7 +324,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
                       const SizedBox(height: 16),
                       CustomBtn(
                         isDisabled:
-                            !isChecked || !_formKey.currentState!.validate(),
+                            !isChecked || state is SignUpLoading,
                         text: AppConstants.submitForVerification,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {

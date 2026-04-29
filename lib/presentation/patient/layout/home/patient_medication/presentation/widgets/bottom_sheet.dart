@@ -357,4 +357,13 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
       });
     }
   }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    dosageController.dispose();
+    startDateController.dispose();
+    endDateController.dispose();
+    super.dispose();
+  }
 }

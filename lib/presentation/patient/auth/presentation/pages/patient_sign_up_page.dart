@@ -32,11 +32,24 @@ class PatientSignUpPage extends StatefulWidget {
 class _PatientSignUpPageState extends State<PatientSignUpPage> {
   final _formKey = GlobalKey<FormState>();
   bool isChecked = false;
+  late final PatientCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = getIt<PatientCubit>()..setRole(widget.role!);
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<PatientCubit>()..setRole(widget.role!),
+    return BlocProvider.value(
+      value: _cubit,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         appBar: const PreferredSize(
@@ -184,7 +197,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         50.verticalSpace,
                         CustomBtn(
                           isDisabled:
-                              !isChecked || !_formKey.currentState!.validate(),
+                              state is SignUpLoadingState || !isChecked,
                           text: AppConstants.createAccount,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

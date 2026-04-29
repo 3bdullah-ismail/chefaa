@@ -15,6 +15,7 @@ class FilterBar extends StatelessWidget {
     final cubit = context.read<SearchCubit>();
 
     return BlocBuilder<SearchCubit, SearchState>(
+      buildWhen: (previous, current) => current is SearchDraftChanged,
       builder: (context, state) {
         return SizedBox(
           height: 38,

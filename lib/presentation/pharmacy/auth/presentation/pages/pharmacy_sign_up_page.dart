@@ -32,11 +32,26 @@ class PharmacySignUpPage extends StatefulWidget {
 class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
   bool isChecked = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  late final PharmacyCubit _cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _cubit = getIt<PharmacyCubit>();
+    FileHandlerCubit.get(context).clearFile();
+  }
+
+  @override
+  void dispose() {
+    _cubit.close();
+    FileHandlerCubit.get(context).clearFile();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<PharmacyCubit>(),
+    return BlocProvider.value(
+      value: _cubit,
       child: Scaffold(
         backgroundColor: const Color(0xffe1e3ec),
         appBar: const PreferredSize(
@@ -253,7 +268,7 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
 
                         CustomBtn(
                           isDisabled:
-                              !isChecked || !_formKey.currentState!.validate(),
+                              !isChecked || state is PharmacyLoadingState,
                           text: AppConstants.submitForVerification,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {

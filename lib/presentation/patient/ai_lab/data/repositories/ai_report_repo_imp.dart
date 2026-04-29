@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:isolate';
 import 'package:chefaa/presentation/patient/ai_lab/data/datasources/ai_report_data_source.dart';
 import 'package:chefaa/presentation/patient/ai_lab/data/models/Report_analysis.dart';
 import 'package:dio/dio.dart';
@@ -17,7 +19,12 @@ class AiReportRepoImp implements AIReportRepo {
   Future<ReportAnalysis> reportAnalysis(PlatformFile? report) async {
     try {
       var response = await aiReportDataSource.reportAnalysis(report);
-      return ReportAnalysis.fromJson(response.data);
+      final body = response.data;
+      if (body is String) {
+        final decoded = await Isolate.run(() => jsonDecode(body));
+        return ReportAnalysis.fromJson(decoded);
+      }
+      return ReportAnalysis.fromJson(body);
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {

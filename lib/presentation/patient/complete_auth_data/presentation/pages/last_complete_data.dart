@@ -20,18 +20,7 @@ class LastCompleteData extends StatefulWidget {
 }
 
 class _LastCompleteDataState extends State<LastCompleteData> {
-  List<String> selectedAllergies = [];
   final TextEditingController allergiesController = TextEditingController();
-
-  void _onSelectionChanged(String disease) {
-    setState(() {
-      if (selectedAllergies.contains(disease)) {
-        selectedAllergies.remove(disease);
-      } else {
-        selectedAllergies.add(disease);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +28,18 @@ class _LastCompleteDataState extends State<LastCompleteData> {
       body: SafeArea(
         child: BlocConsumer<CompleteCubit, CompleteState>(
           listener: (context, state) {
-            if (state is CompleteLoadingState) {
+            if (state.status == CompleteStatus.loading) {
               Loading.show(context);
             }
-            if (state is CompleteErrorState) {
+            if (state.status == CompleteStatus.error) {
               Loading.hide(context);
+              final message = state.message ?? 'Something went wrong';
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(message)),
+              );
             }
-            if (state is CompleteSuccessState) {
+            if (state.status == CompleteStatus.success) {
               Loading.hide(context);
-              // final cubit = CompleteCubit.get(context);
-              // cubit.reset();
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 AppRoutesNames.patientLayout,
@@ -74,59 +65,65 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                     isList: false,
                     child: Padding(
                       padding: const EdgeInsets.only(top: AppPadding.p8),
-                      child: ListView.separated(
-                        itemCount: AppConstants.allergies.length,
-                        separatorBuilder: (context, index) => Divider(
-                          color: Colors.grey.shade300,
-                          thickness: 2,
-                          height: 0.h,
-                        ),
-                        itemBuilder: (context, index) {
-                          final disease = AppConstants.allergies[index];
-                          final isSelected = selectedAllergies.contains(
-                            disease,
-                          );
-
-                          return GestureDetector(
-                            onTap: () => _onSelectionChanged(disease),
-                            child: Container(
-                              width: double.infinity,
-                              height: 50.h,
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10.h,
-                                horizontal: 16.w,
-                              ),
-                              margin: EdgeInsets.symmetric(vertical: 3.h),
-                              decoration: BoxDecoration(
-                                color: isSelected
-                                    ? ColorManager.gray.withValues(alpha: 0.2)
-                                    : ColorManager.transparent,
-                                borderRadius: BorderRadius.circular(12.r),
-                                boxShadow: isSelected
-                                    ? [
-                                        BoxShadow(
-                                          color: Colors.black.withValues(
-                                            alpha: 0.2,
-                                          ),
-                                          blurRadius: 4,
-                                          offset: const Offset(0, 4),
-                                        ),
-                                      ]
-                                    : [],
-                              ),
-                              child: Text(
-                                disease,
-                                style: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: ColorManager.black,
+                          child: BlocBuilder<CompleteCubit, CompleteState>(
+                            buildWhen: (previous, current) =>
+                                previous.allergies != current.allergies,
+                            builder: (context, state) {
+                              return ListView.separated(
+                                itemCount: AppConstants.allergies.length,
+                                separatorBuilder: (context, index) => Divider(
+                                  color: Colors.grey.shade300,
+                                  thickness: 2,
+                                  height: 0.h,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                                itemBuilder: (context, index) {
+                                  final allergy = AppConstants.allergies[index];
+                                  final isSelected = state.allergies.contains(allergy);
+
+                                  return GestureDetector(
+                                    onTap: () => context
+                                        .read<CompleteCubit>()
+                                        .toggleAllergy(allergy),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 50.h,
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 10.h,
+                                        horizontal: 16.w,
+                                      ),
+                                      margin: EdgeInsets.symmetric(vertical: 3.h),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? ColorManager.gray.withValues(alpha: 0.2)
+                                            : ColorManager.transparent,
+                                        borderRadius: BorderRadius.circular(12.r),
+                                        boxShadow: isSelected
+                                            ? [
+                                                BoxShadow(
+                                                  color: Colors.black.withValues(
+                                                    alpha: 0.2,
+                                                  ),
+                                                  blurRadius: 4,
+                                                  offset: const Offset(0, 4),
+                                                ),
+                                              ]
+                                            : [],
+                                      ),
+                                      child: Text(
+                                        allergy,
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w700,
+                                          color: ColorManager.black,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                     ),
                   ),
                 ),
@@ -145,14 +142,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                   text: "Finish Sign Up",
                   onPressed: () async {
                     final cubit = CompleteCubit.get(context);
-                    final input = allergiesController.text.trim();
-                    List<String> finalAllergies = List.from(selectedAllergies);
-
-                    if (input.isNotEmpty && !finalAllergies.contains(input)) {
-                      finalAllergies.add(input);
-                    }
-
-                    cubit.setAllergies(finalAllergies);
+                    cubit.addCustomAllergy(allergiesController.text);
                     await cubit.completeSignUp();
                   },
                 ),

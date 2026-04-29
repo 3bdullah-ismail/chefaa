@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/config/get_config.dart';
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
 import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
@@ -17,6 +19,7 @@ import '../../presentation/patient/ai_lab/presentation/pages/ai_lab_analysis.dar
 import '../../presentation/patient/ai_lab/presentation/pages/history_report_page.dart';
 import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
 import '../../presentation/patient/booking/presentation/pages/choose_doctor.dart';
+import '../../presentation/patient/complete_auth_data/presentation/manager/complete_cubit.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
@@ -99,14 +102,24 @@ class Routes {
             builder: (_) => _wrapWithCanPop(PatientSignUpPage(role: role)),
           );
         }
-      case AppRoutesNames.patientSignUpCompleteChronicDiseases:
-        return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const SecondCompletePage()),
-        );
-      case AppRoutesNames.patientSignUpCompleteMedicines:
-        return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const LastCompleteData()),
-        );
+       case AppRoutesNames.patientSignUpCompleteChronicDiseases:
+         return MaterialPageRoute(
+           builder: (context) => _wrapWithCanPop(
+             BlocProvider(
+               create: (_) => getIt<CompleteCubit>(),
+               child: const SecondCompletePage(),
+             ),
+           ),
+         );
+       case AppRoutesNames.patientSignUpCompleteMedicines:
+         return MaterialPageRoute(
+           builder: (context) => _wrapWithCanPop(
+             BlocProvider(
+               create: (_) => getIt<CompleteCubit>(),
+               child: const LastCompleteData(),
+             ),
+           ),
+         );
       case AppRoutesNames.resetCode:
         {
           final arg = settings.arguments;
@@ -134,10 +147,15 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const ReportsHistoryPage()),
         );
-      case AppRoutesNames.patientSignUpCompleteData:
-        return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const FirstCompletePage()),
-        );
+       case AppRoutesNames.patientSignUpCompleteData:
+         return MaterialPageRoute(
+           builder: (context) => _wrapWithCanPop(
+             BlocProvider(
+               create: (_) => getIt<CompleteCubit>(),
+               child: const FirstCompletePage(),
+             ),
+           ),
+         );
       case AppRoutesNames.pharmacySignUp:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const PharmacySignUpPage()),
