@@ -25,4 +25,3 @@ class TextRow extends StatelessWidget {
     );
   }
 }
-

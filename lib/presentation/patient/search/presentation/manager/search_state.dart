@@ -1,4 +1,5 @@
 part of "search_cubit.dart";
+
 sealed class SearchState {}
 
 class SearchInitial extends SearchState {}

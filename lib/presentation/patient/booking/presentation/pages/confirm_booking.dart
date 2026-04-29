@@ -44,9 +44,9 @@ class ConfirmBooking extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleText(text: "Payment Methods"),
+                    const TitleText(text: "Payment Methods"),
                     4.verticalSpace,
-                    SubText(text: "Choose the best way to pay"),
+                    const SubText(text: "Choose the best way to pay"),
                     16.verticalSpace,
                   ],
                 ),

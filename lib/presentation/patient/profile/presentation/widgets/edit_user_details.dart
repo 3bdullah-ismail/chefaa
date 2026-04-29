@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/widget/custom_btn.dart';
@@ -13,12 +14,14 @@ import 'item_container.dart';
 
 class EditUserDetails extends StatefulWidget {
   const EditUserDetails({super.key});
+
   @override
   State<EditUserDetails> createState() => _EditUserDetailsState();
 }
 
 class _EditUserDetailsState extends State<EditUserDetails> {
   bool isReadOnly = true;
+
   @override
   void initState() {
     super.initState();
@@ -60,37 +63,55 @@ class _EditUserDetailsState extends State<EditUserDetails> {
               padding: const EdgeInsets.all(16),
               child: BlocListener<ProfileCubit, ProfileState>(
                 listener: (context, state) {
-                  if (state is GetProfileDataLoadingState) {
+                  if (state is GetProfileDataLoadingState ||
+                      state is UpdateProfileDataLoadingState) {
                     Loading.show(context);
                   } else if (state is GetProfileDataSuccessState) {
                     Loading.hide(context);
-                    var user = state.profileData;
-                    cubit.nameController.text =
-                        cubit.nameController.text.isEmpty
-                        ? user.userName ?? ''
-                        : cubit.nameController.text;
-                    cubit.ageController.text = cubit.ageController.text.isEmpty
-                        ? user.age.toString()
-                        : cubit.ageController.text;
-                    cubit.gender = cubit.gender.isEmpty
-                        ? user.userGender ?? ""
-                        : cubit.gender;
+                    final user = state.profileData;
+                    if (cubit.nameController.text.isEmpty) {
+                      cubit.nameController.text = user.userName ?? '';
+                    }
+                    if (cubit.ageController.text.isEmpty) {
+                      cubit.ageController.text = user.age?.toString() ?? '';
+                    }
+                    if (cubit.weightController.text.isEmpty) {
+                      cubit.weightController.text =
+                          user.userWeight?.toString() ?? '';
+                    }
+                    if (cubit.heightController.text.isEmpty) {
+                      cubit.heightController.text =
+                          user.userHeight?.toString() ?? '';
+                    }
+                    if (cubit.gender.isEmpty) {
+                      cubit.gender = user.userGender ?? "";
+                    }
+                  } else if (state is UpdateProfileDataSuccessState) {
+                    Loading.hide(context);
+                    final user = state.profileData;
+                    cubit.nameController.text = user.userName ?? '';
+                    cubit.ageController.text = user.age?.toString() ?? '';
                     cubit.weightController.text =
-                        cubit.weightController.text.isEmpty
-                        ? user.userWeight.toString()
-                        : cubit.weightController.text;
+                        user.userWeight?.toString() ?? '';
                     cubit.heightController.text =
-                        cubit.heightController.text.isEmpty
-                        ? user.userHeight.toString()
-                        : cubit.heightController.text;
-                    cubit.ageController.text = cubit.ageController.text.isEmpty
-                        ? user.age.toString()
-                        : cubit.ageController.text;
+                        user.userHeight?.toString() ?? '';
+                    cubit.gender = user.userGender ?? "";
+                    setState(() {
+                      isReadOnly = true;
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Profile updated successfully')),
+                    );
                   } else if (state is GetProfileDataFailureState) {
                     Loading.hide(context);
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(state.message)));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
+                  } else if (state is UpdateProfileDataFailureState) {
+                    Loading.hide(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.message)),
+                    );
                   }
                 },
                 child: Column(
@@ -212,9 +233,7 @@ class _EditUserDetailsState extends State<EditUserDetails> {
             CustomBtn(
               text: "Save Changes",
               onPressed: () {
-                setState(() {
-                  isReadOnly = true;
-                });
+                cubit.updateProfileData();
               },
             ),
         ],

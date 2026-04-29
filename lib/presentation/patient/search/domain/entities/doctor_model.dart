@@ -22,6 +22,4 @@ class DoctorModel {
     required this.availableDays,
     required this.clinkId,
   });
-
- 
 }

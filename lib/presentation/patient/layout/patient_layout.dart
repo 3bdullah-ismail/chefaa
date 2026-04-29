@@ -84,7 +84,7 @@ class _PatientLayoutState extends State<PatientLayout> {
             _selectedIndex = value;
           });
         },
-      ),
+        ),
     );
   }
 }

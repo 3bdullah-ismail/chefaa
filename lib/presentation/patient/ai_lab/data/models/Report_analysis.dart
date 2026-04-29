@@ -6,12 +6,7 @@ class ReportAnalysis {
   bool? success;
   Data? data;
 
-  ReportAnalysis({
-    this.message,
-    this.error,
-    this.success,
-    this.data,
-  });
+  ReportAnalysis({this.message, this.error, this.success, this.data});
 
   factory ReportAnalysis.fromJson(Map<String, dynamic> json) {
     return ReportAnalysis(

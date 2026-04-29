@@ -32,7 +32,6 @@ abstract class ImageAssets {
   static const String historyReport = "$imagePath/history_report.png";
 }
 
-
 class SvgAssets {
   static const String google = "$svgPath/Google.svg";
   static const String biApple = "$svgPath/bi_apple.svg";

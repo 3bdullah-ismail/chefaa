@@ -20,8 +20,8 @@ class Data {
       patientName: json['patientName'],
       findings: json['findings'] != null
           ? List<Findings>.from(
-        json['findings'].map((x) => Findings.fromJson(x)),
-      )
+              json['findings'].map((x) => Findings.fromJson(x)),
+            )
           : [],
       dangerScore: json['dangerScore'],
       summary: json['summary'],

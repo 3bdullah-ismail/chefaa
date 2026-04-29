@@ -138,9 +138,7 @@ class PaymentCardForm extends StatelessWidget {
                         controller: expiryDateController,
                         text: "MM/YY",
                         keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(5),
-                        ],
+                        inputFormatters: [LengthLimitingTextInputFormatter(5)],
                         validator: _validateExpiry,
                       ),
                     ],
@@ -174,4 +172,3 @@ class PaymentCardForm extends StatelessWidget {
     );
   }
 }
-

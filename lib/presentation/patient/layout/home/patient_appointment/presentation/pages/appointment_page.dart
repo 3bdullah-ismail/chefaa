@@ -10,16 +10,19 @@ class AppointmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:const  PreferredSize(
-        preferredSize:  Size.fromHeight(120),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(120),
         child: InsideAppBar(title: "My Appointments"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20,vertical: AppPadding.p18),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p20,
+          vertical: AppPadding.p18,
+        ),
         child: ListView.separated(
           shrinkWrap: true,
           itemBuilder: (_, __) => const DoctorCard(),
-          separatorBuilder: (_, __) => const SizedBox(height: 20,),
+          separatorBuilder: (_, __) => const SizedBox(height: 20),
           itemCount: 3,
         ),
       ),

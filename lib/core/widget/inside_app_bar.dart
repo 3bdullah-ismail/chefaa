@@ -43,7 +43,10 @@ class InsideAppBar extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(left: AppPadding.p20, top: AppPadding.p16),
+            padding: const EdgeInsets.only(
+              left: AppPadding.p20,
+              top: AppPadding.p16,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

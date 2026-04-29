@@ -9,10 +9,7 @@ import '../../../../../core/resources/values_manager.dart';
 class RiskLevelAi extends StatelessWidget {
   final double dangerScore;
 
-  const RiskLevelAi({
-    super.key,
-    required this.dangerScore,
-  });
+  const RiskLevelAi({super.key, required this.dangerScore});
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +28,13 @@ class RiskLevelAi extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(25.r),
         border: const Border(
-          left: BorderSide(
-            color: ColorManager.gold,
-            width: 12,
-          ),
+          left: BorderSide(color: ColorManager.gold, width: 12),
         ),
       ),
 
       child: Row(
         children: [
-          Icon(
-            riskLevel.icon,
-            color: ColorManager.gold,
-            size: 45,
-          ),
+          Icon(riskLevel.icon, color: ColorManager.gold, size: 45),
 
           15.horizontalSpace,
 

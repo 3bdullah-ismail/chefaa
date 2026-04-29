@@ -10,11 +10,7 @@ class AiAppBar extends StatelessWidget {
   final String? title1;
   final void Function()? onPressed;
 
-  const AiAppBar({
-    super.key,
-    this.title1,
-    this.onPressed,
-  });
+  const AiAppBar({super.key, this.title1, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +21,8 @@ class AiAppBar extends StatelessWidget {
       shadowColor: ColorManager.transparent,
 
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30),
-        ),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       ),
-
 
       title: Padding(
         padding: const EdgeInsets.only(

@@ -28,17 +28,7 @@ class RoleNavigationService {
   }
 
   String _getLayoutRoute(String? role) {
-    switch (role) {
-      case 'doctor':
-        return AppRoutesNames.doctorLayout;
-      case 'pharmacy':
-        return AppRoutesNames.pharmacyLayout;
-      case 'facility':
-        return AppRoutesNames.facilityLayout;
-      case 'patient':
-      default:
-        return AppRoutesNames.patientLayout;
-    }
+    return AppConstants.getLayoutFromRole(role);
   }
 
   ({String? route, dynamic arguments}) _getSignUpRoute(String? role) {

@@ -66,7 +66,7 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
               ).show(context);
               Navigator.pushNamedAndRemoveUntil(
                 context,
-                AppRoutesNames.patientLayout,
+                AppRoutesNames.pharmacyLayout,
                 (route) => false,
               );
             } else {}

@@ -2,8 +2,8 @@ import 'package:chefaa/core/manager/file_handler_cubit.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,7 +11,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../resources/values_manager.dart';
 
 class UploadDialog extends StatefulWidget {
-  const UploadDialog({super.key,this.isReport=false, this.text, this.fileName});
+  const UploadDialog({
+    super.key,
+    this.isReport = false,
+    this.text,
+    this.fileName,
+  });
 
   final String? text;
   final String? fileName;
@@ -37,10 +42,7 @@ class _UploadDialogState extends State<UploadDialog> {
             decoration: BoxDecoration(
               color: ColorManager.lightGray.withValues(alpha: 50),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: ColorManager.input,
-                width: 1,
-              )
+              border: Border.all(color: ColorManager.input, width: 1),
             ),
             child: SizedBox(
               width: 300.w,
@@ -54,19 +56,25 @@ class _UploadDialogState extends State<UploadDialog> {
                     ),
                     child: Row(
                       children: [
-                        !widget.isReport? SvgPicture.asset("assets/icons/backup.svg"):const SizedBox.shrink(),
-                       10.horizontalSpace,
-                        Text(
-                          widget.text ?? 'Upload your Membership Card',
-                          style: getRegularStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s18,
+                        !widget.isReport
+                            ? SvgPicture.asset("assets/icons/backup.svg")
+                            : const SizedBox.shrink(),
+                        10.horizontalSpace,
+                        Expanded(
+                          child: Text(
+                            widget.text ?? 'Upload your Membership Card',
+                            style: getRegularStyle(
+                              color: ColorManager.black,
+                              fontSize: FontSize.s18,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  widget.isReport? const SizedBox(): const Divider(color: ColorManager.gray, thickness: 1),
+                  widget.isReport
+                      ? const SizedBox()
+                      : const Divider(color: ColorManager.gray, thickness: 1),
                   10.verticalSpace,
 
                   Padding(
@@ -85,7 +93,7 @@ class _UploadDialogState extends State<UploadDialog> {
                         child: Column(
                           children: [
                             Image.asset("assets/images/backup.png"),
-                           5.verticalSpace,
+                            5.verticalSpace,
                             Text(
                               'Choose a file',
                               style: getBoldStyle(
@@ -136,7 +144,6 @@ class _UploadDialogState extends State<UploadDialog> {
                     ),
                   ),
 
-
                   file != null
                       ? Padding(
                           padding: const EdgeInsets.all(16),
@@ -159,7 +166,8 @@ class _UploadDialogState extends State<UploadDialog> {
                                 10.horizontalSpace,
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         file.name,

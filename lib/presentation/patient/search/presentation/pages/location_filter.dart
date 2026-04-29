@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -25,8 +26,15 @@ class _LocationFilterState extends State<LocationFilter> {
   LatLng? _currentPosition;
   bool _isResolvingLocation = true;
   bool _canShowMyLocation = false;
-
+  final TextEditingController _searchController = TextEditingController();
   static const LatLng _fallbackPosition = LatLng(30.0444, 31.2357);
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _mapController?.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -39,6 +47,38 @@ class _LocationFilterState extends State<LocationFilter> {
     await _resolveCurrentLocation();
   }
 
+  void _searchLocation(String address) async {
+    try {
+      setState(() => _isResolvingLocation = true);
+      List<Location> locations = await locationFromAddress(address);
+
+      if (locations.isNotEmpty) {
+        LatLng newPos = LatLng(locations[0].latitude, locations[0].longitude);
+
+        setState(() {
+          _currentPosition = newPos;
+          _isResolvingLocation = false;
+          markers = {
+            Marker(
+              markerId: const MarkerId("selected"),
+              position: newPos,
+              icon: customIcon ?? BitmapDescriptor.defaultMarker,
+            ),
+          };
+        });
+
+        await _moveCamera(newPos);
+      }
+    } catch (e) {
+      setState(() => _isResolvingLocation = false);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("No results found for this address")),
+        );
+      }
+    }
+  }
+
   Future<void> loadMarker() async {
     customIcon =
         await const Icon(
@@ -49,40 +89,33 @@ class _LocationFilterState extends State<LocationFilter> {
           logicalSize: const Size(150, 150),
           imageSize: const Size(300, 300),
         );
-
     if (mounted) setState(() {});
   }
 
   Future<void> _resolveCurrentLocation() async {
+    setState(() => _isResolvingLocation = true);
     final hasPermission = await _requestLocationPermission();
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
     if (!hasPermission || !serviceEnabled) {
       if (!mounted) return;
-
       setState(() {
-        _currentPosition = _fallbackPosition;
+        _currentPosition ??= _fallbackPosition;
         _isResolvingLocation = false;
         _canShowMyLocation = false;
-        markers.clear();
       });
-
       return;
     }
 
     try {
-      final lastKnownPosition = await Geolocator.getLastKnownPosition();
-      final position =
-          lastKnownPosition ??
-          await Geolocator.getCurrentPosition(
-            locationSettings: const LocationSettings(
-              accuracy: LocationAccuracy.high,
-            ),
-          );
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
+      );
       final currentLocation = LatLng(position.latitude, position.longitude);
 
       if (!mounted) return;
-
       setState(() {
         _currentPosition = currentLocation;
         _isResolvingLocation = false;
@@ -95,24 +128,15 @@ class _LocationFilterState extends State<LocationFilter> {
           ),
         };
       });
-
       await _moveCamera(currentLocation);
     } catch (_) {
-      if (!mounted) return;
-
-      setState(() {
-        _currentPosition = _fallbackPosition;
-        _isResolvingLocation = false;
-        _canShowMyLocation = false;
-        markers.clear();
-      });
+      if (mounted) setState(() => _isResolvingLocation = false);
     }
   }
 
   Future<void> _moveCamera(LatLng position) async {
     final controller = _mapController;
     if (controller == null) return;
-
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(target: position, zoom: 15),
@@ -122,15 +146,8 @@ class _LocationFilterState extends State<LocationFilter> {
 
   Future<bool> _requestLocationPermission() async {
     final status = await Permission.locationWhenInUse.request();
-
-    if (status.isGranted) {
-      return true;
-    }
-
-    if (status.isPermanentlyDenied) {
-      openAppSettings();
-    }
-
+    if (status.isGranted) return true;
+    if (status.isPermanentlyDenied) openAppSettings();
     return false;
   }
 
@@ -142,12 +159,7 @@ class _LocationFilterState extends State<LocationFilter> {
         children: [
           Positioned.fill(
             child: GoogleMap(
-              onMapCreated: (controller) {
-                _mapController = controller;
-                if (_currentPosition != null) {
-                  _moveCamera(_currentPosition!);
-                }
-              },
+              onMapCreated: (controller) => _mapController = controller,
               myLocationEnabled: _canShowMyLocation,
               myLocationButtonEnabled: false,
               initialCameraPosition: CameraPosition(
@@ -169,35 +181,26 @@ class _LocationFilterState extends State<LocationFilter> {
               },
             ),
           ),
+
           Positioned(
             top: 0,
             left: 0,
             right: 0,
             child: Container(
-              height: 200.h,
+              height: 220.h,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  stops: const [0.0, 0.4, 1.0],
                   colors: [
                     ColorManager.white,
-                    ColorManager.white.withValues(alpha: 0.9),
+                    ColorManager.white.withValues(alpha: 0.92),
                     ColorManager.white.withValues(alpha: 0),
                   ],
                 ),
               ),
             ),
           ),
-          if (_isResolvingLocation)
-            const Positioned.fill(
-              child: IgnorePointer(
-                child: ColoredBox(
-                  color: Colors.transparent,
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-              ),
-            ),
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -225,37 +228,81 @@ class _LocationFilterState extends State<LocationFilter> {
                     ],
                   ),
                   12.verticalSpace,
-
                   Container(
-                    height: 55.h,
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 6.h,
+                    ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12.r),
-                      boxShadow: const [
+                      color: ColorManager.white,
+                      borderRadius: BorderRadius.circular(18.r),
+                      border: Border.all(
+                        color: ColorManager.input.withValues(alpha: 0.5),
+                      ),
+                      boxShadow: [
                         BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10,
-                          offset: Offset(0, 4),
+                          color: Colors.black.withValues(alpha: 0.06),
+                          blurRadius: 14,
+                          offset: const Offset(0, 4),
                         ),
                       ],
                     ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.search, color: Colors.grey),
-                        10.horizontalSpace,
-                        Text(
-                          "Search location",
-                          style: getRegularStyle(
-                            color: Colors.grey,
-                            fontSize: 14.sp,
+                    child: TextField(
+                      controller: _searchController,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (value) {
+                        final query = value.trim();
+                        if (query.isNotEmpty) _searchLocation(query);
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Search by area, street, or landmark",
+                        hintStyle: getRegularStyle(
+                          color: ColorManager.gray,
+                          fontSize: 14.sp,
+                        ),
+                        prefixIcon: const Icon(
+                          Icons.search_rounded,
+                          color: ColorManager.gray,
+                        ),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            final query = _searchController.text.trim();
+                            if (query.isEmpty) {
+                              _searchController.clear();
+                              return;
+                            }
+                            _searchLocation(query);
+                          },
+                          icon: const Icon(
+                            Icons.north_east,
+                            color: ColorManager.primary,
                           ),
                         ),
-                      ],
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 14.h),
+                      ),
                     ),
                   ),
                 ],
               ),
+            ),
+          ),
+
+          if (_isResolvingLocation)
+            const Positioned.fill(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+
+          Positioned(
+            bottom: 0.32.sh,
+            right: 16.w,
+            child: FloatingActionButton(
+              heroTag: "my_location_btn",
+              mini: true,
+              backgroundColor: ColorManager.white,
+              elevation: 4,
+              onPressed: _resolveCurrentLocation,
+              child: const Icon(Icons.my_location, color: ColorManager.primary),
             ),
           ),
 
@@ -267,19 +314,13 @@ class _LocationFilterState extends State<LocationFilter> {
               heightFactor: 0.3.sh,
               content: SearchCard(
                 doctorModel: DoctorModel(
-                  name: "doctorName",
-                  specialty: "spaciality",
-                  rating: "rating",
-                  ratingCount: "ratingCount",
-                  price: "price",
-                  availableDays: [
-                    DateTime.now(),
-                    DateTime.now().add(const Duration(days: 2)), // بعد بكره
-                    DateTime.now().add(const Duration(days: 5)), // بعد 5 أيام
-                  ],
-                  clinkId:
-                      "clinkId"
-                      '',
+                  name: "Dr. Ahmed",
+                  specialty: "Cardiology",
+                  rating: "4.8",
+                  ratingCount: "120",
+                  price: "500 EGP",
+                  availableDays: [DateTime.now()],
+                  clinkId: "1",
                 ),
               ),
             ),

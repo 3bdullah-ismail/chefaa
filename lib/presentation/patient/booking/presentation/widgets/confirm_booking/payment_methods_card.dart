@@ -61,7 +61,9 @@ class PaymentMethodsCard extends StatelessWidget {
                 width: 60,
                 height: 50,
                 padding: const EdgeInsets.all(4),
-                decoration: confirmBookingCardDecoration(isSelected: isSelected),
+                decoration: confirmBookingCardDecoration(
+                  isSelected: isSelected,
+                ),
                 child: Image.asset(image, fit: BoxFit.cover),
               ),
               24.horizontalSpace,
@@ -78,4 +80,3 @@ class PaymentMethodsCard extends StatelessWidget {
     );
   }
 }
-

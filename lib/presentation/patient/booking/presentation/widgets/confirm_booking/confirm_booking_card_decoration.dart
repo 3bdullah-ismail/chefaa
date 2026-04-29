@@ -16,4 +16,3 @@ BoxDecoration confirmBookingCardDecoration({bool isSelected = false}) =>
         ),
       ],
     );
-

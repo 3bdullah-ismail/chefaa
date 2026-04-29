@@ -9,14 +9,14 @@ android {
     namespace = "com.example.chefaa"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        // Use a string literal to avoid deprecation warning for jvmTarget assignment.
+        jvmTarget = "17"
     }
 
     defaultConfig {

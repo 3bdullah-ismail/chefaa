@@ -5,9 +5,18 @@ import '../../../../../core/error_handling/failure.dart';
 
 abstract class ProfileRepo {
   Future<Either<Failure, UserProfileEntity>> getProfileData();
-  // Future<> updateMedicalData({
-  //   required String bloodType,
-  //   required List<String> allergiesList,
-  //   required List<String> chronicConditionsList,
-  // });
+
+  Future<Either<Failure, UserProfileEntity>> updateProfileData(
+    String? name,
+    String? gender,
+    num? age,
+    num? height,
+    num? weight,
+  );
+
+  Future<Either<Failure, UserProfileEntity>> updateMedicalData({
+    required String bloodType,
+    required List<String> allergiesList,
+    required List<String> chronicConditionsList,
+  });
 }

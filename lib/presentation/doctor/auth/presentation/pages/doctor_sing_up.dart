@@ -4,13 +4,14 @@ import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/widget/custom_app_bar.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
+import 'package:chefaa/core/widget/loading_dialog.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
-import 'package:chefaa/core/widget/loading_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
@@ -146,7 +147,7 @@ class _DocSignUpState extends State<DocSignUp> {
                         8.verticalSpace,
                         CustomTextField(
                           textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           controller: cubit.specialization,
                           text: "Enter your specialization",
                           prefixIcon: "assets/icons/stethoscnnnnope_.svg",

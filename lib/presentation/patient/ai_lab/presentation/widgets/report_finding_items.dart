@@ -44,7 +44,6 @@ class ReportFindingItems extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
           Row(
             children: [
               Expanded(
@@ -77,10 +76,7 @@ class ReportFindingItems extends StatelessWidget {
 
           Text(
             "$value  $unit",
-            style: getMediumStyle(
-              color: color,
-              fontSize: 14.sp,
-            ),
+            style: getMediumStyle(color: color, fontSize: 14.sp),
           ),
 
           5.verticalSpace,

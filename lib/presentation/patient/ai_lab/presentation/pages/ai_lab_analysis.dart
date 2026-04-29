@@ -35,9 +35,8 @@ class _AILabAnalysisState extends State<AILabAnalysis> {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(100),
-        child: AnalysisAppBar(
-          title1: "AI Lab Report Analysis",
-        ),),
+        child: AnalysisAppBar(title1: "AI Lab Report Analysis"),
+      ),
 
       body: BlocBuilder<AiReportCubit, AiReportState>(
         builder: (context, state) {
@@ -63,7 +62,6 @@ class _AILabAnalysisState extends State<AILabAnalysis> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Text(
                       "Report Findings",
                       style: getSemiBoldStyle(
@@ -99,9 +97,7 @@ class _AILabAnalysisState extends State<AILabAnalysis> {
                         child: ListView.separated(
                           controller: _scrollController,
                           physics: const BouncingScrollPhysics(),
-                          padding: const EdgeInsets.only(
-                            right: AppPadding.p16,
-                          ),
+                          padding: const EdgeInsets.only(right: AppPadding.p16),
                           itemCount: findings.length,
 
                           separatorBuilder: (_, __) => const Divider(
@@ -142,8 +138,7 @@ class _AILabAnalysisState extends State<AILabAnalysis> {
                     20.verticalSpace,
 
                     RiskLevelAi(
-                      dangerScore:
-                      (report.data?.dangerScore ?? 0).toDouble(),
+                      dangerScore: (report.data?.dangerScore ?? 0).toDouble(),
                     ),
 
                     20.verticalSpace,

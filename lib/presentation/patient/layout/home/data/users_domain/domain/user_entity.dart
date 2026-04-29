@@ -16,10 +16,7 @@ class UserEntity {
   factory UserEntity.empty() => const UserEntity(id: '', name: '');
 
   UserEntity copyWith({String? id, String? name}) {
-    return UserEntity(
-      id: id ?? this.id,
-      name: name ?? this.name,
-    );
+    return UserEntity(id: id ?? this.id, name: name ?? this.name);
   }
 
   bool get isEmpty => id.isEmpty && name.isEmpty;
