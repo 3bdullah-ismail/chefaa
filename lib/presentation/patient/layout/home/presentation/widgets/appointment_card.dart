@@ -3,24 +3,32 @@ import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_outline_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  final bool isAppointments;
+
+  const DoctorCard({super.key, this.isAppointments = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 230.h,
-      padding: const EdgeInsets.all(AppPadding.p18),
+      height: 200.h,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p12,
+        vertical: AppPadding.p16,
+      ),
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
         borderRadius: BorderRadius.circular(25.r),
         boxShadow: [
-          BoxShadow(color: ColorManager.black.withAlpha(80), blurRadius: 10),
+          BoxShadow(
+            color: ColorManager.black.withAlpha(80),
+            blurRadius: isAppointments ? 1 : 10,
+            offset: isAppointments ? const Offset(0, 3) : const Offset(0, 2),
+          ),
         ],
       ),
       child: Column(
@@ -60,7 +68,7 @@ class DoctorCard extends StatelessWidget {
               ),
             ],
           ),
-          20.verticalSpace,
+          10.verticalSpace,
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -68,7 +76,7 @@ class DoctorCard extends StatelessWidget {
                 Icon(
                   Icons.calendar_today_outlined,
                   color: ColorManager.gray,
-                  size: 25.sp,
+                  size: 20.sp,
                 ),
                 12.horizontalSpace,
                 Text(
@@ -81,20 +89,20 @@ class DoctorCard extends StatelessWidget {
               ],
             ),
           ),
-          20.verticalSpace,
+          10.verticalSpace,
           Row(
             children: [
               const CustomOutlineBtn(
                 title: "Decline",
                 color: ColorManager.error,
               ),
-              13.horizontalSpace,
+              5.horizontalSpace,
               const CustomOutlineBtn(
                 title: "Reschedule",
                 color: ColorManager.primary,
               ),
-              13.horizontalSpace,
-              CustomBtn(isSmall: true, text: "Join Now", onPressed: () {}),
+              5.horizontalSpace,
+              CustomBtn(text: "Join Now", onPressed: () {}, isSmall: true),
             ],
           ),
         ],

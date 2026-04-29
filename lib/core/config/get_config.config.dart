@@ -172,8 +172,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i371.ProfileRepoImpl(gh<_i183.ProfileRemoteDataSource>()));
     gh.factory<_i246.AuthRepo>(
         () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()));
-    gh.factory<_i930.PatientCubit>(
-        () => _i930.PatientCubit(gh<_i128.PatientRepo>()));
+    gh.factory<_i930.PatientCubit>(() => _i930.PatientCubit(
+          patientRepo: gh<_i128.PatientRepo>(),
+          usersCubit: gh<_i745.UsersCubit>(),
+        ));
     gh.factory<_i301.AuthCubit>(() => _i301.AuthCubit(
           repo: gh<_i246.AuthRepo>(),
           usersCubit: gh<_i745.UsersCubit>(),

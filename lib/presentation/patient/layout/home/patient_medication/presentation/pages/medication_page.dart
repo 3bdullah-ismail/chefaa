@@ -72,8 +72,8 @@ class MedicationPage extends StatelessWidget {
                             const FractionallySizedBox(
                               heightFactor: 0.92,
                               child: BottomSheetCard(
-                                title: "Edit Medication",
-                                content: "Update your medication details.",
+                                title: "Add Medication",
+                                content: "Enter your medication details for tracking and reminders.",
                               ),
                             ),
                       );
@@ -118,24 +118,24 @@ class MedicationPage extends StatelessWidget {
                 },
               ),
               const AiSuggestion(),
-              MedicationCard(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    backgroundColor: ColorManager.lightGray,
-                    isScrollControlled: true,
-                    builder: (BuildContext context) => const FractionallySizedBox(
-                      heightFactor: 0.92,
-                      child: BottomSheetCard(
-                        edition: true,
-                        title: "Add Medication",
-                        content:
-                            "Enter your medication details for tracking and reminders",
-                      ),
-                    ),
-                  );
-                },
-              ),
+              // MedicationCard(
+              //   onPressed: () {
+              //     showModalBottomSheet(
+              //       context: context,
+              //       backgroundColor: ColorManager.lightGray,
+              //       isScrollControlled: true,
+              //       builder: (BuildContext context) => const FractionallySizedBox(
+              //         heightFactor: 0.92,
+              //         child: BottomSheetCard(
+              //           edition: true,
+              //           title: "Add Medication",
+              //           content:
+              //               "Enter your medication details for tracking and reminders",
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // ),
               5.verticalSpace,
             ],
           ),

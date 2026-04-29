@@ -31,8 +31,8 @@ class OverViewCard extends StatelessWidget {
           ),
         ],
       ),
-      height: 90,
-      width: 180,
+      height: 70,
+      width: 155,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p12,
@@ -46,13 +46,15 @@ class OverViewCard extends StatelessWidget {
               label,
               style: getRegularStyle(
                 color: ColorManager.black,
-              ).copyWith(fontSize: 17),
+                  fontSize: 16
+              )
             ),
             Text(
               title,
               style: getBoldStyle(
                 color: isActive ? ColorManager.black : ColorManager.lightGreen,
-              ).copyWith(fontSize: 20),
+                  fontSize: 18
+              )
             ),
           ],
         ),
