@@ -1,4 +1,5 @@
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,6 +10,7 @@ import '../../../../../../../core/resources/values_manager.dart';
 
 class MedicationCard extends StatelessWidget {
   final void Function() onPressed;
+
   const MedicationCard({super.key, required this.onPressed});
 
   @override
@@ -114,28 +116,33 @@ class MedicationCard extends StatelessWidget {
           Row(
             children: [
               const Spacer(),
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p16,
-                    vertical: AppPadding.p2,
-                  ),
-                  minimumSize: Size.zero,
-                  side: const BorderSide(color: ColorManager.primary),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                onPressed: () {
-                  onPressed();
-                },
-                child: Text(
-                  "Edit",
-                  style: getRegularStyle(
-                    color: ColorManager.primary,
-                  ).copyWith(fontSize: 16),
-                ),
+              // OutlinedButton(
+              //   style: OutlinedButton.styleFrom(
+              //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              //     padding: const EdgeInsets.symmetric(
+              //       horizontal: AppPadding.p16,
+              //       vertical: AppPadding.p2,
+              //     ),
+              //     minimumSize: Size.zero,
+              //     side: const BorderSide(color: ColorManager.primary),
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(25),
+              //     ),
+              //   ),
+              //   onPressed: () {
+              //     onPressed();
+              //   },
+              //   child: Text(
+              //     "Edit",
+              //     style: getRegularStyle(
+              //       color: ColorManager.primary,
+              //     ).copyWith(fontSize: 16),
+              //   ),
+              // ),
+              OutlineButton(
+                onPressed: onPressed,
+                title: "Edit",
+                color: ColorManager.primary,
               ),
             ],
           ),

@@ -17,7 +17,7 @@ class ItemContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: isMedication == true ? context.width * 0.87 : context.width * 0.8,
+      width: isMedication == true ? context.width * 0.9 : context.width * 0.8,
       padding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p14,
         vertical: AppPadding.p14,

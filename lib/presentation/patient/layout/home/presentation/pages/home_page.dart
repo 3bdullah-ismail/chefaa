@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: AppPadding.p32,
-                horizontal: AppPadding.p28,
+                horizontal: AppPadding.p20,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

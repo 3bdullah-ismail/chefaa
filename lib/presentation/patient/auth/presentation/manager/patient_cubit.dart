@@ -5,13 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/services/storage_service.dart';
+import '../../../layout/home/presentation/manager/users_cubit.dart';
 
 @injectable
 class PatientCubit extends Cubit<PatientState> {
   final PatientRepo patientRepo;
   late final String role;
+  final UsersCubit usersCubit;
 
-  PatientCubit(this.patientRepo) : super(PatientInitial());
+  PatientCubit({required this.patientRepo, required this.usersCubit})
+    : super(PatientInitial());
+  PatientCubit.initial({required this.patientRepo, required this.usersCubit})
+      : super(PatientInitial());
 
   void setRole(String role) {
     this.role = role;
@@ -52,6 +57,7 @@ class PatientCubit extends Cubit<PatientState> {
       if (response.accessToken != null) {
         await StorageService.saveToken(response.accessToken!);
       }
+      await usersCubit.setUser(response);
       emit(
         SignUpSuccessState(message: response.message, patient: response.user),
       );

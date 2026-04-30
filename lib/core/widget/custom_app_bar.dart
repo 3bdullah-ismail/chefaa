@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       children: [
                         CustomCircleAvatar(
                           imagePath: ImageAssets.patient,
-                          radius: 50.r,
+                          radius: 35.r,
                         ),
                         20.horizontalSpace,
                         Column(
@@ -87,8 +87,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     child: SvgPicture.asset(
                       IconsAssets.notification,
-                      height: 30.h,
-                      width: 30.w,
+                      height: 20.h,
+                      width: 20.w,
                     ),
                   ),
                 ),
