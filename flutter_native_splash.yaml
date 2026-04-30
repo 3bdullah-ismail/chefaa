@@ -1,5 +1,4 @@
 flutter_native_splash:
-  # Ios & Android below 12
   android: true
   ios: true
   web: false
