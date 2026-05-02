@@ -77,8 +77,8 @@ class CompleteCubit extends Cubit<CompleteState> {
     return null;
   }
 
-  void toggleChronicDisease(String disease) {
-    final updated = List<String>.from(state.chronicDiseases);
+  void toggleChronicConditions(String disease) {
+    final updated = List<String>.from(state.chronicConditions);
     if (updated.contains(disease)) {
       updated.remove(disease);
     } else {
@@ -87,7 +87,7 @@ class CompleteCubit extends Cubit<CompleteState> {
     emit(
       state.copyWith(
         status: CompleteStatus.initial,
-        chronicDiseases: updated,
+        chronicConditions: updated,
         message: null,
       ),
     );
@@ -97,13 +97,13 @@ class CompleteCubit extends Cubit<CompleteState> {
     final value = input.trim();
     if (value.isEmpty) return;
 
-    final updated = List<String>.from(state.chronicDiseases);
+    final updated = List<String>.from(state.chronicConditions);
     if (!updated.contains(value)) {
       updated.add(value);
       emit(
         state.copyWith(
           status: CompleteStatus.initial,
-          chronicDiseases: updated,
+          chronicConditions: updated,
           message: null,
         ),
       );
@@ -175,7 +175,7 @@ class CompleteCubit extends Cubit<CompleteState> {
         bloodType: state.bloodType!,
         gender: state.gender?.toLowerCase(),
         age: age,
-        chronicDiseases: state.chronicDiseases,
+        chronicConditions: state.chronicConditions,
         allergies: state.allergies,
       );
 

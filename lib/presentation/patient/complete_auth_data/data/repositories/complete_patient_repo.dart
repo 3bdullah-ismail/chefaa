@@ -7,7 +7,7 @@ abstract class CompletePatientRepo {
     required String? bloodType,
     required String? gender,
     required int? age,
-    required List<String>? chronicDiseases,
+    required List<String>? chronicConditions,
     required List<String>? allergies,
   });
 }

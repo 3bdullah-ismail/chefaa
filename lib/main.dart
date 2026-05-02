@@ -2,6 +2,7 @@ import 'package:chefaa/core/manager/file_handler_cubit.dart';
 import 'package:chefaa/presentation/auth/presentation/manager/auth_cubit.dart';
 import 'package:chefaa/presentation/patient/ai_lab/presentation/manager/ai_report_cubit.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_provider.dart';
+import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/layout/home/presentation/manager/users_cubit.dart';
 import 'package:chefaa/presentation/patient/search/presentation/manager/search_cubit.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ void main() async {
         BlocProvider(create: (_) => getIt<AuthCubit>()),
         BlocProvider(create: (_) => getIt<SearchCubit>()),
         BlocProvider(create: (_) => getIt<AiReportCubit>()),
+        BlocProvider(create: (_) => getIt<MedicationCubit>()..getMedicationList()),
         ChangeNotifierProvider(create: (_) => BookingProvider()),
       ],
       child: const Chefaa(),

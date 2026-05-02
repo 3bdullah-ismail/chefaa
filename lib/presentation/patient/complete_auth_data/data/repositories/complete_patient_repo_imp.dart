@@ -18,7 +18,7 @@ class CompletePatientRepoImp implements CompletePatientRepo {
     required String? bloodType,
     required String? gender,
     required int? age,
-    required List<String>? chronicDiseases,
+    required List<String>? chronicConditions,
     required List<String>? allergies,
   }) async {
     try {
@@ -28,7 +28,7 @@ class CompletePatientRepoImp implements CompletePatientRepo {
         bloodType: bloodType,
         gender: gender,
         age: age,
-        chronicDiseases: chronicDiseases,
+        chronicConditions: chronicConditions,
         allergies: allergies,
       );
 

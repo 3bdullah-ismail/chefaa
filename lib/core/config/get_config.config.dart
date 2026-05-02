@@ -75,6 +75,16 @@ import '../../presentation/patient/layout/home/data/repositories/home_repo_imp.d
     as _i454;
 import '../../presentation/patient/layout/home/data/users_domain/domain/user_usecase.dart'
     as _i434;
+import '../../presentation/patient/layout/home/patient_medication/data/data_sources/medication_data_source.dart'
+    as _i382;
+import '../../presentation/patient/layout/home/patient_medication/data/data_sources/medication_data_source_imp.dart'
+    as _i423;
+import '../../presentation/patient/layout/home/patient_medication/data/repositories/medication_repo.dart'
+    as _i966;
+import '../../presentation/patient/layout/home/patient_medication/data/repositories/medication_repo_imp.dart'
+    as _i689;
+import '../../presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart'
+    as _i481;
 import '../../presentation/patient/layout/home/presentation/manager/users_cubit.dart'
     as _i745;
 import '../../presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source.dart'
@@ -152,10 +162,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i745.UsersCubit(gh<_i434.UserUseCase>()));
     gh.factory<_i829.FacilityAuthRepo>(
         () => _i92.FacilityRepoImp(gh<_i377.FacilityAuthDataSource>()));
+    gh.factory<_i382.MedicationDataSource>(
+        () => _i423.MedicationDataSourceImp(gh<_i463.NetworkService>()));
     gh.factory<_i139.CompleteDataSource>(() => _i580.CompleteDataSourceImp(
         networkService: gh<_i463.NetworkService>()));
     gh.factory<_i128.PatientRepo>(
         () => _i856.PatientRepoImp(gh<_i1041.PatientDataSource>()));
+    gh.factory<_i966.MedicationRepo>(
+        () => _i689.MedicationRepoImp(gh<_i382.MedicationDataSource>()));
     gh.factory<_i530.CompletePatientRepo>(() => _i809.CompletePatientRepoImp(
         completeDataSource: gh<_i139.CompleteDataSource>()));
     gh.factory<_i499.PharmacyRepo>(() => _i596.PharmacyRepoImp(
@@ -170,6 +184,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()));
     gh.factory<_i851.ProfileRepo>(
         () => _i371.ProfileRepoImpl(gh<_i183.ProfileRemoteDataSource>()));
+    gh.factory<_i481.MedicationCubit>(
+        () => _i481.MedicationCubit(gh<_i966.MedicationRepo>()));
     gh.factory<_i246.AuthRepo>(
         () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()));
     gh.factory<_i930.PatientCubit>(() => _i930.PatientCubit(

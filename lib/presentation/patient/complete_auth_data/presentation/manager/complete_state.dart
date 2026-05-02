@@ -9,7 +9,7 @@ class CompleteState {
   final String? bloodType;
   final String? gender;
   final DateTime? birthDate;
-  final List<String> chronicDiseases;
+  final List<String> chronicConditions;
   final List<String> allergies;
   final String? message;
   final PatientUpdate? patient;
@@ -21,7 +21,7 @@ class CompleteState {
     this.bloodType,
     this.gender,
     this.birthDate,
-    this.chronicDiseases = const [],
+    this.chronicConditions = const [],
     this.allergies = const [],
     this.message,
     this.patient,
@@ -34,7 +34,7 @@ class CompleteState {
     String? bloodType,
     String? gender,
     DateTime? birthDate,
-    List<String>? chronicDiseases,
+    List<String>? chronicConditions,
     List<String>? allergies,
     String? message,
     PatientUpdate? patient,
@@ -46,7 +46,7 @@ class CompleteState {
       bloodType: bloodType ?? this.bloodType,
       gender: gender ?? this.gender,
       birthDate: birthDate ?? this.birthDate,
-      chronicDiseases: chronicDiseases ?? this.chronicDiseases,
+      chronicConditions: chronicConditions ?? this.chronicConditions,
       allergies: allergies ?? this.allergies,
       message: message,
       patient: patient ?? this.patient,
