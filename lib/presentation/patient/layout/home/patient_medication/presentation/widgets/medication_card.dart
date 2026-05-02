@@ -1,4 +1,6 @@
+import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/presentation/patient/layout/home/patient_medication/data/models/Medications.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,9 +11,16 @@ import '../../../../../../../core/resources/color_manager.dart';
 import '../../../../../../../core/resources/values_manager.dart';
 
 class MedicationCard extends StatelessWidget {
+  final List<Medications> medications;
+  final int index;
   final void Function() onPressed;
 
-  const MedicationCard({super.key, required this.onPressed});
+  const MedicationCard({
+    super.key,
+    required this.index,
+    required this.medications,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,13 +62,18 @@ class MedicationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Metformin",
+                   medications[index].name?.isNotEmpty == true
+                        ? medications[index].name![0].toUpperCase() +
+                       medications[index].name!
+                            .substring(1)
+                            .toLowerCase()
+                        : "Medication Name",
                     style: getSemiBoldStyle(
                       color: ColorManager.black,
                     ).copyWith(fontSize: 18),
                   ),
                   Text(
-                    "500 mg . Tablet",
+                    "${medications[index].dosage} - ${medications[index].form}",
                     style: getRegularStyle(
                       color: ColorManager.h2Color,
                     ).copyWith(fontSize: 14),
@@ -77,7 +91,7 @@ class MedicationCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Text(
-                  "92%",
+                  "${medications[index].adherencePercentage}%",
                   style: getBoldStyle(
                     color: ColorManager.lightGreen,
                   ).copyWith(fontSize: 15),
@@ -91,7 +105,7 @@ class MedicationCard extends StatelessWidget {
             children: [
               const Icon(Icons.access_time_rounded, color: ColorManager.gray),
               Text(
-                "2x daily:08:00 AM, 08:00 PM",
+                "${medications[index].timesPerDay}x daily - ${medications[index].schedule?.join(', ')}",
                 style: getRegularStyle(
                   color: ColorManager.gray,
                 ).copyWith(fontSize: 14),
@@ -105,8 +119,9 @@ class MedicationCard extends StatelessWidget {
                 Icons.calendar_today_outlined,
                 color: ColorManager.gray,
               ),
+
               Text(
-                "Since Nov 1, 2025• Continuous",
+                "${AppConstants.formatDate(medications[index].startDate)} - ${AppConstants.formatDate(medications[index].endDate)}",
                 style: getRegularStyle(
                   color: ColorManager.gray,
                 ).copyWith(fontSize: 14),
@@ -116,29 +131,6 @@ class MedicationCard extends StatelessWidget {
           Row(
             children: [
               const Spacer(),
-              // OutlinedButton(
-              //   style: OutlinedButton.styleFrom(
-              //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              //     padding: const EdgeInsets.symmetric(
-              //       horizontal: AppPadding.p16,
-              //       vertical: AppPadding.p2,
-              //     ),
-              //     minimumSize: Size.zero,
-              //     side: const BorderSide(color: ColorManager.primary),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(25),
-              //     ),
-              //   ),
-              //   onPressed: () {
-              //     onPressed();
-              //   },
-              //   child: Text(
-              //     "Edit",
-              //     style: getRegularStyle(
-              //       color: ColorManager.primary,
-              //     ).copyWith(fontSize: 16),
-              //   ),
-              // ),
               OutlineButton(
                 onPressed: onPressed,
                 title: "Edit",

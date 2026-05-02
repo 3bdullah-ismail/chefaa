@@ -1,4 +1,5 @@
 import 'package:chefaa/core/resources/assets_manager.dart';
+import 'package:intl/intl.dart';
 
 import '../routes/app_routes_names.dart';
 
@@ -35,7 +36,7 @@ class AppConstants {
   static const String createAccount = "Create Account";
   static const String submitForVerification = "Submit for Verification";
   static const String acceptTerm = "Please accept the terms and conditions";
-  static final List<String> chronicDiseases = [
+  static final List<String> chronicConditions = [
     "Diabetes",
     "Hypertension",
     "Heart Disease",
@@ -155,4 +156,70 @@ class AppConstants {
       "specialityName": "Ophthalmology",
     },
   ];
+
+  static String formatDate(String? date) {
+    if (date == null || date.isEmpty) return "-";
+
+    final parsed = DateTime.tryParse(date);
+    if (parsed == null) return date;
+
+    return DateFormat('dd MMM yyyy').format(parsed);
+  }
+
+  static const formItems = [
+    "Tablet",
+    "Capsule",
+    "Syrup",
+    "Injection",
+    "Cream",
+    "Drops",
+    "Inhaler",
+    "Suppository",
+  ];
+
+  static const timesPerDayItems = [
+    "Once a day (1)",
+    "Every 8 hours",
+    "Every 12 hours",
+    "As needed",
+  ];
+  static String formToDropdownLabel(String? value) {
+    switch ((value ?? '').toLowerCase().trim()) {
+      case 'tablet':
+      case 'powder':
+      case 'patch':
+        return 'Tablet';
+      case 'capsule':
+        return 'Capsule';
+      case 'syrup':
+      case 'liquid':
+        return 'Syrup';
+      case 'injection':
+        return 'Injection';
+      case 'cream':
+      case 'ointment':
+        return 'Cream';
+      case 'drops':
+        return 'Drops';
+      case 'inhaler':
+        return 'Inhaler';
+      case 'suppository':
+        return 'Suppository';
+      default:
+        return 'Tablet';
+    }
+  }
+
+  static String timesPerDayToLabel(num? value) {
+    switch ((value ?? 0).toInt()) {
+      case 1:
+        return 'Once a day (1)';
+      case 2:
+        return 'Every 12 hours';
+      case 3:
+        return 'Every 8 hours';
+      default:
+        return 'As needed';
+    }
+  }
 }

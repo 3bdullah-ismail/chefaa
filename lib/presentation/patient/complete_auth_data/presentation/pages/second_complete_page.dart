@@ -42,10 +42,10 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                     padding: const EdgeInsets.only(top: AppPadding.p8),
                         child: BlocBuilder<CompleteCubit, CompleteState>(
                           buildWhen: (previous, current) =>
-                              previous.chronicDiseases != current.chronicDiseases,
+                              previous.chronicConditions != current.chronicConditions,
                           builder: (context, state) {
                             return ListView.separated(
-                              itemCount: AppConstants.chronicDiseases.length,
+                              itemCount: AppConstants.chronicConditions.length,
                               separatorBuilder: (context, index) => Divider(
                                 indent: 10.w,
                                 endIndent: 12.w,
@@ -54,12 +54,12 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                                 height: 0.h,
                               ),
                               itemBuilder: (context, index) {
-                                final disease = AppConstants.chronicDiseases[index];
-                                final isSelected = state.chronicDiseases.contains(disease);
+                                final disease = AppConstants.chronicConditions[index];
+                                final isSelected = state.chronicConditions.contains(disease);
                                 return GestureDetector(
                                   onTap: () => context
                                       .read<CompleteCubit>()
-                                      .toggleChronicDisease(disease),
+                                      .toggleChronicConditions(disease),
                                   child: Container(
                                     width: double.infinity,
                                     height: 50.h,

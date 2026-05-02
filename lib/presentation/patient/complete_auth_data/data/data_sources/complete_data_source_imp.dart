@@ -18,7 +18,7 @@ class CompleteDataSourceImp implements CompleteDataSource {
     required String? bloodType,
     required String? gender,
     required int? age,
-    required List<String>? chronicDiseases,
+    required List<String>? chronicConditions,
     required List<String>? allergies,
   }) async {
     final token = await StorageService.getToken();
@@ -30,7 +30,7 @@ class CompleteDataSourceImp implements CompleteDataSource {
         "bloodType": bloodType,
         "gender": gender,
         "age": age,
-        "chronicDiseases": chronicDiseases,
+        "chronicConditions": chronicConditions,
         "allergies": allergies,
       },
       options: Options(headers: {"Authorization": "Bearer $token"}),

@@ -46,7 +46,6 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
         controller: widget.controller,
         readOnly: true,
         onTap: widget.isReadOnly ? null : _showCalendar,
-
         style: const TextStyle(
           color: ColorManager.darkGray,
           fontWeight: FontWeight.bold,
@@ -56,22 +55,28 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
           contentPadding: const EdgeInsets.all(AppPadding.p12),
           isDense: widget.isMedication ? true : false,
           hintText: widget.hintText,
-          hintStyle: getBoldStyle(color: ColorManager.darkGray,
-            fontSize: widget.isMedication ? 12 : 16,),
-        suffixIcon: widget.isMedication
-            ? null
-            : const Icon(Icons.calendar_month, color: ColorManager.gray),
-        border: const OutlineInputBorder(),
+          hintStyle: getBoldStyle(
+            color: ColorManager.darkGray,
+            fontSize: widget.isMedication ? 12 : 16,
+          ),
+          suffixIcon: widget.isMedication
+              ? null
+              : const Icon(Icons.calendar_month, color: ColorManager.gray),
+          border: const OutlineInputBorder(),
+        ),
       ),
-    ),);
+    );
   }
 
   Widget _buildCalendar() {
-    DateTime initialDate = DateTime.now();
+    final today = DateTime.now();
 
+    // Try to parse existing text; if invalid or in the past, fall back to today
+    DateTime initialDate = today;
     if (widget.controller.text.isNotEmpty) {
       try {
-        initialDate = DateFormat('yyyy-MM-dd').parse(widget.controller.text);
+        final parsed = DateFormat('yyyy-MM-dd').parse(widget.controller.text);
+        if (!parsed.isBefore(today)) initialDate = parsed;
       } catch (_) {}
     }
 
@@ -79,7 +84,10 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
       selectionMode: DateRangePickerSelectionMode.single,
       initialSelectedDate: initialDate,
       initialDisplayDate: initialDate,
-      maxDate: DateTime.now(),
+      // FIX: was DateTime.now().Duration(days: 365) — compile error
+      // Now: starts from today, allows selection up to 10 years in the future
+      minDate: DateTime(today.year, today.month, today.day),
+      maxDate: DateTime(today.year + 10, today.month, today.day),
       selectionColor: ColorManager.primary,
       todayHighlightColor: Colors.transparent,
       showNavigationArrow: true,
@@ -130,8 +138,8 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
         ),
       ),
       onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-        DateTime selectedDate = args.value;
-        widget.controller.text = DateFormat('dd-MM-yyyy').format(selectedDate);
+        final DateTime selectedDate = args.value;
+        widget.controller.text = DateFormat('yyyy-MM-dd').format(selectedDate);
         widget.onDateSelected(selectedDate);
         Navigator.pop(context);
       },

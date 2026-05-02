@@ -1,3 +1,5 @@
+import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart';
+import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,6 +29,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
+  final GlobalKey<MedicineCardState> _medicineCardKey =
+  GlobalKey<MedicineCardState>();
 
   void _openSearchPage() {
     Navigator.push(
@@ -38,6 +42,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<MedicationCubit>().getMedicationList();
   }
 
   @override
@@ -54,13 +64,11 @@ class _HomePageState extends State<HomePage> {
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (context, state) {
             String userName = "Patient";
-
             if (state is UserLoaded) {
               userName = state.user.name;
             } else if (state is UsersLoading) {
               userName = "...";
             }
-
             return CustomAppBar(
               isLayout: true,
               title1: "Good Morning !",
@@ -69,169 +77,243 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppPadding.p32,
-                horizontal: AppPadding.p20,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(16),
-                      onTap: _openSearchPage,
-                      child: IgnorePointer(
-                        child: CustomTextField(
-                          isSearch: true,
-                          rec: true,
-                          controller: _searchController,
-                          text: "Search Doctor or specialty ",
-                          prefixIcon: "assets/icons/search-normal.svg",
-                        ),
-                      ),
-                    ),
-                  ),
-                  22.verticalSpace,
-                  30.verticalSpace,
-                  const AiSuggestion(),
-                  40.verticalSpace,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Today’s Medication",
-                          style: getBoldStyle(
-                            color: ColorManager.black,
-                            fontSize: 22,
+      body: BlocListener<MedicationCubit, MedicationState>(
+        listener: (context, state) {
+          if (state is MedicationConfirmSuccessState) {
+            _medicineCardKey.currentState
+                ?.updateConfirmed(state.confirmMedication);
+          }
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppPadding.p32,
+                  horizontal: AppPadding.p20,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: _openSearchPage,
+                        child: IgnorePointer(
+                          child: CustomTextField(
+                            isSearch: true,
+                            rec: true,
+                            controller: _searchController,
+                            text: "Search Doctor or specialty ",
+                            prefixIcon: "assets/icons/search-normal.svg",
                           ),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutesNames.medicationPage,
-                          );
-                        },
+                    ),
+                    50.verticalSpace,
+                    const AiSuggestion(),
+                    40.verticalSpace,
 
-                        child: Row(
-                          children: [
-                            Text(
-                              "Manage",
-                              style:
-                                  getMediumStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: 18,
-                                  ).copyWith(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: ColorManager.primary,
-                                    decorationThickness: 2,
-                                  ),
+                    BlocBuilder<MedicationCubit, MedicationState>(
+                      buildWhen: (previous, current) =>
+                      current is MedicationListLoadingState ||
+                          current is MedicationListSuccessState ||
+                          current is MedicationListErrorState,
+                      builder: (context, state) {
+                        if (state is MedicationListLoadingState) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: ColorManager.primary,
                             ),
-                            SvgPicture.asset("assets/icons/drug.svg"),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  15.verticalSpace,
-                  const MedicineCard(),
-                  45.verticalSpace,
-                  const AiSuggestion(),
-                  40.verticalSpace,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Upcoming Appointment",
-                          style: getBoldStyle(
-                            color: ColorManager.black,
-                            fontSize: 22,
+                          );
+                        }
+
+                        if (state is MedicationListErrorState) {
+                          return Center(
+                            child: Text(
+                              state.errorMessage,
+                              style:
+                              getMediumStyle(color: ColorManager.error),
+                            ),
+                          );
+                        }
+
+                        if (state is MedicationListSuccessState) {
+                          final medications =
+                              state.medications.medications ?? [];
+
+                          return Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "Today's Medication",
+                                      style: getBoldStyle(
+                                        color: ColorManager.black,
+                                        fontSize: 22,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        AppRoutesNames.medicationPage,
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Manage",
+                                          style: getMediumStyle(
+                                            color: ColorManager.primary,
+                                            fontSize: 18,
+                                          ).copyWith(
+                                            decoration:
+                                            TextDecoration.underline,
+                                            decorationColor:
+                                            ColorManager.primary,
+                                            decorationThickness: 2,
+                                          ),
+                                        ),
+                                        SvgPicture.asset(
+                                          "assets/icons/drug.svg",
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              15.verticalSpace,
+                              if (medications.isEmpty)
+                                Container(
+                                  height: 100.h,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.lightGray,
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      "No medications for today.",
+                                      style: getMediumStyle(
+                                        color: ColorManager.black,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              else
+                                MedicineCard(
+                                  key: _medicineCardKey,
+                                  medications: medications,
+                                  onPressed: (med) {
+                                    context
+                                        .read<MedicationCubit>()
+                                        .confirmMedication(med.id ?? '');
+                                  },
+                                ),
+                            ],
+                          );
+                        }
+
+                        return const SizedBox();
+                      },
+                    ),
+
+                    45.verticalSpace,
+                    const AiSuggestion(),
+                    40.verticalSpace,
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Upcoming Appointment",
+                            style: getBoldStyle(
+                              color: ColorManager.black,
+                              fontSize: 22,
+                            ),
                           ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutesNames.appointmentPage,
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              "ViewAll",
-                              style:
-                                  getMediumStyle(
-                                    color: ColorManager.primary,
-                                    fontSize: 18,
-                                  ).copyWith(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: ColorManager.primary,
-                                    decorationThickness: 2,
-                                  ),
-                            ),
-                            SvgPicture.asset("assets/icons/drug.svg"),
-                          ],
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutesNames.appointmentPage,
+                            );
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "ViewAll",
+                                style: getMediumStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: 18,
+                                ).copyWith(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: ColorManager.primary,
+                                  decorationThickness: 2,
+                                ),
+                              ),
+                              SvgPicture.asset("assets/icons/drug.svg"),
+                            ],
+                          ),
                         ),
+                      ],
+                    ),
+                    20.verticalSpace,
+                    const DoctorCard(),
+                    50.verticalSpace,
+                    Text(
+                      "Quick Actions ",
+                      style: getSemiBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 22,
                       ),
-                    ],
-                  ),
-                  20.verticalSpace,
-                  const DoctorCard(),
-                  50.verticalSpace,
-                  Text(
-                    "Quick Actions ",
-                    style: getSemiBoldStyle(
-                      color: ColorManager.black,
-                      fontSize: 22,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: QuickActions(
-                      title: "Emergency",
-                      image: SvgAssets.phone,
-                      onTap: () {},
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: QuickActions(
+                        title: "Emergency",
+                        image: SvgAssets.phone,
+                        onTap: () {},
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: QuickActions(
-                      title: "Order Pharmacy",
-                      image: SvgAssets.orderPharmacy,
-                      onTap: () {},
+                    Expanded(
+                      child: QuickActions(
+                        title: "Order Pharmacy",
+                        image: SvgAssets.orderPharmacy,
+                        onTap: () {},
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: QuickActions(
-                      title: "Appointments",
-                      image: SvgAssets.appointment,
-                      onTap: () {},
+                    Expanded(
+                      child: QuickActions(
+                        title: "Appointments",
+                        image: SvgAssets.appointment,
+                        onTap: () {},
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: QuickActions(
-                      title: "Find Lab",
-                      image: SvgAssets.findLab,
-                      onTap: () {},
+                    Expanded(
+                      child: QuickActions(
+                        title: "Find Lab",
+                        image: SvgAssets.findLab,
+                        onTap: () {},
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
