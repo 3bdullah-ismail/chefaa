@@ -22,9 +22,9 @@ class AuthDataSourceImp implements AuthDataSource {
 
   @override
   Future<Response<dynamic>> googleSignIn(String idToken) {
-    return networkService.dio.get(
-      "/auth/google",
-      queryParameters: {"idToken": idToken},
+    return networkService.dio.post(
+      "/auth/google/mobile",
+      data: {"idToken": idToken},
       options: Options(
         followRedirects: true,
         validateStatus: (status) {
