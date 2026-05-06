@@ -29,17 +29,28 @@ class ResultsList extends StatelessWidget {
             ? state.clinics
             : cubit.lastClinics;
 
+        final isRefreshing = (state is SearchLoading && clinics.isNotEmpty) ||
+            (state is SearchSuccess && state.isRefreshing);
+
         if (clinics.isEmpty) {
           return const Center(child: Text('No doctors found'));
         }
 
-        return ListView.separated(
-          padding: EdgeInsets.zero,
-          itemCount: clinics.length,
-          separatorBuilder: (_, _) => const SizedBox(height: 16),
-          itemBuilder: (context, index) {
-            return SearchCard(doctorModel: clinics[index]);
-          },
+        return Column(
+          children: [
+            if (isRefreshing)
+              const LinearProgressIndicator(minHeight: 2),
+            Expanded(
+              child: ListView.separated(
+                padding: EdgeInsets.zero,
+                itemCount: clinics.length,
+                separatorBuilder: (_, _) => const SizedBox(height: 16),
+                itemBuilder: (context, index) {
+                  return SearchCard(doctorModel: clinics[index]);
+                },
+              ),
+            ),
+          ],
         );
       },
     );

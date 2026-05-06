@@ -4,12 +4,22 @@ sealed class SearchState {}
 
 class SearchInitial extends SearchState {}
 
-class SearchLoading extends SearchState {}
+class SearchLoading extends SearchState {
+  final bool isRefreshing;
+
+  SearchLoading({this.isRefreshing = false});
+}
 
 class SearchSuccess extends SearchState {
   final List<DoctorModel> clinics;
+  final bool isFromCache;
+  final bool isRefreshing;
 
-  SearchSuccess({required this.clinics});
+  SearchSuccess({
+    required this.clinics,
+    this.isFromCache = false,
+    this.isRefreshing = false,
+  });
 }
 
 class SearchError extends SearchState {

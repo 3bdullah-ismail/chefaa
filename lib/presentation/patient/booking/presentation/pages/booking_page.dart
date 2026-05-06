@@ -4,6 +4,7 @@ import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_vi
 import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_visit_type.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/widgets/stepper_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/extensions/build_ex.dart';
@@ -42,11 +43,28 @@ class BookingPage extends StatelessWidget {
                   onTap: () {
                     provider.previousStep();
                   },
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: ColorManager.black,
+                  child: Container(
+                    width: 40.w,
+                    height: 40.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.08),
+                          blurRadius: 6,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: ColorManager.black,
+                      size: 20.sp,
+                    ),
                   ),
                 ),
+                24.verticalSpace,
                 Text(
                   'Book Appointment',
                   style: getBoldStyle(color: ColorManager.black, fontSize: 24),

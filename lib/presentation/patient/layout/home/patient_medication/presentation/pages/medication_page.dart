@@ -24,20 +24,16 @@ class MedicationPage extends StatefulWidget {
 }
 
 class _MedicationPageState extends State<MedicationPage> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<MedicationCubit>().getMedicationList();
-  }
-
   void _openAddSheet(BuildContext context) {
-    context.read<MedicationCubit>().clearControllers();
+    final cubit = context.read<MedicationCubit>();
+    cubit.clearControllers();
+
     showModalBottomSheet(
       context: context,
       backgroundColor: ColorManager.lightGray,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
-        value: context.read<MedicationCubit>(),
+        value: cubit,
         child: const FractionallySizedBox(
           heightFactor: 0.92,
           child: BottomSheetCard(
@@ -47,17 +43,20 @@ class _MedicationPageState extends State<MedicationPage> {
         ),
       ),
     ).then((_) {
-      context.read<MedicationCubit>().getMedicationList();
+      if (!mounted) return;
+      cubit.getMedicationList(forceRefresh: true);
     });
   }
 
   void _openEditSheet(BuildContext context, String medicationId) {
+    final cubit = context.read<MedicationCubit>();
+
     showModalBottomSheet(
       context: context,
       backgroundColor: ColorManager.lightGray,
       isScrollControlled: true,
       builder: (_) => BlocProvider.value(
-        value: context.read<MedicationCubit>(),
+        value: cubit,
         child: FractionallySizedBox(
           heightFactor: 0.92,
           child: EditBottomSheet(
@@ -68,7 +67,8 @@ class _MedicationPageState extends State<MedicationPage> {
         ),
       ),
     ).then((_) {
-      context.read<MedicationCubit>().getMedicationList();
+      if (!mounted) return;
+      cubit.getMedicationList(forceRefresh: true);
     });
   }
 

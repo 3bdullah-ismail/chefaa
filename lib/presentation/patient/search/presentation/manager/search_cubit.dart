@@ -23,7 +23,7 @@ class SearchCubit extends Cubit<SearchState> {
   SearchQuery draftQuery = const SearchQuery();
   bool _isSearching = false;
 
-  // Keep latest API result so list widgets can still render while editing draft text.
+  // Keep latest result so list widgets can render through transitions.
   List<DoctorModel> _lastClinics = const [];
 
   List<DoctorModel> get lastClinics => _lastClinics;
@@ -126,7 +126,8 @@ class SearchCubit extends Cubit<SearchState> {
     if (_isSearching) return;
     _isSearching = true;
     appliedQuery = draftQuery;
-    emit(SearchLoading());
+
+    emit(SearchLoading(isRefreshing: _lastClinics.isNotEmpty));
 
     try {
       final result = await searchRepo.filterSearch(

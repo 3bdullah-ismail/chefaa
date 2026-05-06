@@ -1,11 +1,11 @@
-import 'package:chefaa/presentation/patient/search/data/datasources/search_data_source.dart';
+import 'package:chefaa/presentation/patient/search/data/datasources/remote_date_source/search_remote_data_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../../core/services/network_service.dart';
 
-@Injectable(as: SearchDataSource)
-class SearchDataSourceImp implements SearchDataSource {
+@Injectable(as: SearchRemoteDataSource)
+class SearchDataSourceImp implements SearchRemoteDataSource {
   NetworkService networkService;
 
   SearchDataSourceImp(this.networkService);

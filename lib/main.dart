@@ -13,10 +13,11 @@ import 'package:provider/provider.dart';
 import 'chefaa.dart';
 import 'core/config/get_config.dart';
 import 'core/services/app_bloc_observer.dart';
+import 'core/services/hive_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await HiveService.init();
   await Hive.initFlutter();
 
   await Hive.openBox('reports');
@@ -33,7 +34,9 @@ void main() async {
         BlocProvider(create: (_) => getIt<AuthCubit>()),
         BlocProvider(create: (_) => getIt<SearchCubit>()),
         BlocProvider(create: (_) => getIt<AiReportCubit>()),
-        BlocProvider(create: (_) => getIt<MedicationCubit>()..getMedicationList()),
+        BlocProvider(
+          create: (_) => getIt<MedicationCubit>()..getMedicationList(),
+        ),
         ChangeNotifierProvider(create: (_) => BookingProvider()),
       ],
       child: const Chefaa(),

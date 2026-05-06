@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    context.read<MedicationCubit>().getMedicationList();
   }
 
   @override
@@ -140,8 +139,7 @@ class _HomePageState extends State<HomePage> {
                         }
 
                         if (state is MedicationListSuccessState) {
-                          final medications =
-                              state.medications.medications ?? [];
+                          final medications = state.medications.medications ?? [];
 
                           return Column(
                             children: [

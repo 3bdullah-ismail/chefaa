@@ -22,6 +22,8 @@ class MedicationCubit extends Cubit<MedicationState> {
   TextEditingController endDateController = TextEditingController();
 
   bool isActive = false;
+  bool _isMedicationListLoading = false;
+  bool _hasLoadedMedicationList = false;
 
   int timesPerDay = 1;
 
@@ -49,7 +51,6 @@ class MedicationCubit extends Cubit<MedicationState> {
         timesPerDay = 1;
     }
   }
-
 
   // Add Medication
   Future<void> addMedication() async {
@@ -85,14 +86,17 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-
   // Get Medication List
+  Future<void> getMedicationList({bool forceRefresh = false}) async {
+    if (_isMedicationListLoading) return;
+    if (_hasLoadedMedicationList && !forceRefresh) return;
 
-  Future<void> getMedicationList() async {
+    _isMedicationListLoading = true;
     emit(MedicationListLoadingState());
 
     try {
       final medicationList = await medicationRepo.getMedicationList();
+      _hasLoadedMedicationList = true;
 
       emit(
         MedicationListSuccessState(
@@ -105,9 +109,10 @@ class MedicationCubit extends Cubit<MedicationState> {
           errorMessage: e.toString(),
         ),
       );
+    } finally {
+      _isMedicationListLoading = false;
     }
   }
-
 
   // Update Medication
 
@@ -146,7 +151,6 @@ class MedicationCubit extends Cubit<MedicationState> {
       );
     }
   }
-
 
   // Delete Medication
 
