@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../presentation/doctor/layout/presentation/pages/doctor_layout.dart';
+import '../../presentation/doctor/layout/doctor_layout.dart';
 import '../../presentation/patient/layout/patient_layout.dart';
 
 class LayoutFactory {

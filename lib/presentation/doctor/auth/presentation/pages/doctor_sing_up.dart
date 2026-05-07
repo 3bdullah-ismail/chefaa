@@ -76,6 +76,11 @@ class _DocSignUpState extends State<DocSignUp> {
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
               ).show(context);
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                AppRoutesNames.doctorLayout,
+                (_) => false,
+              );
             } else {}
           },
           builder: (context, state) {

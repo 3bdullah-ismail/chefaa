@@ -52,6 +52,10 @@ class SvgAssets {
   static const String filter = "$svgPath/fiter.svg";
   static const String suggestIcon = "$svgPath/Icon.svg";
   static const String medicationIcon = "$svgPath/icon_2.svg";
+  static const String patient = "$svgPath/patient.svg";
+  static const String patientActive = "$svgPath/patient_active.svg";
+  static const String clinic = "$svgPath/clinic.svg";
+  static const String clinicActive = "$svgPath/clinic_active.svg";
 }
 
 abstract class IconsAssets {
