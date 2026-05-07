@@ -1,6 +1,6 @@
 import 'package:chefaa/core/services/hive_service.dart';
 import 'package:chefaa/presentation/patient/search/data/datasources/local_data_source/search_local_data_source.dart';
-import 'package:chefaa/presentation/patient/search/domain/entities/doctor_model.dart';
+import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: SearchLocalDataSource)
@@ -46,7 +46,7 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
 
   @override
   Future<void> cacheDoctors({
-    required List<DoctorModel> doctors,
+    required List<ClinicModel> doctors,
     String? searchText,
     String? specialization,
     String? gender,
@@ -68,7 +68,7 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
   }
 
   @override
-  Future<List<DoctorModel>?> getCachedDoctors({
+  Future<List<ClinicModel>?> getCachedDoctors({
     String? searchText,
     String? specialization,
     String? gender,
@@ -81,13 +81,16 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
       location: location,
     );
 
-    final dynamic raw = await HiveService.get<dynamic>(HiveBoxes.doctorsBox, key);
+    final dynamic raw = await HiveService.get<dynamic>(
+      HiveBoxes.doctorsBox,
+      key,
+    );
     if (raw is! Map) return null;
 
     final dynamic items = raw['items'];
     if (items is! List) return null;
 
-    return items.whereType<DoctorModel>().toList(growable: false);
+    return items.whereType<ClinicModel>().toList(growable: false);
   }
 
   @override
@@ -105,7 +108,10 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
       location: location,
     );
 
-    final dynamic raw = await HiveService.get<dynamic>(HiveBoxes.doctorsBox, key);
+    final dynamic raw = await HiveService.get<dynamic>(
+      HiveBoxes.doctorsBox,
+      key,
+    );
     if (raw is! Map) return false;
 
     final updatedAtMillis = raw['updatedAt'];
@@ -129,7 +135,10 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
       location: location,
     );
 
-    final dynamic raw = await HiveService.get<dynamic>(HiveBoxes.doctorsBox, key);
+    final dynamic raw = await HiveService.get<dynamic>(
+      HiveBoxes.doctorsBox,
+      key,
+    );
     if (raw is! Map) return;
 
     final existingItems = raw['items'];

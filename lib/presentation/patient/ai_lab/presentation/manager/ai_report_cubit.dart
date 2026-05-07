@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/services/hive_service.dart';
 import '../../data/repositories/ai_report_repo.dart';
 import 'ai_report_state.dart';
 
@@ -13,7 +14,7 @@ class AiReportCubit extends Cubit<AiReportState> {
   AiReportCubit(this.aiReportRepo) : super(InitialState());
 
   static AiReportCubit get(context) => BlocProvider.of(context);
-  final box = Hive.box('reports');
+  final Box<dynamic> box = Hive.box(HiveBoxes.reportsBox);
 
   Future<void> reportAnalysis(PlatformFile? file) async {
     if (file == null) return emit(ErrorState("Please upload your report file"));

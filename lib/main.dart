@@ -7,7 +7,6 @@ import 'package:chefaa/presentation/patient/layout/home/presentation/manager/use
 import 'package:chefaa/presentation/patient/search/presentation/manager/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'chefaa.dart';
@@ -18,9 +17,7 @@ import 'core/services/hive_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService.init();
-  await Hive.initFlutter();
-
-  await Hive.openBox('reports');
+  await HiveService.openBox(HiveBoxes.reportsBox);
 
   configureDependencies();
   Bloc.observer = AppBlocObserver();
