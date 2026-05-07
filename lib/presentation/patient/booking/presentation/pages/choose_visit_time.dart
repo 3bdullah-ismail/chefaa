@@ -55,15 +55,15 @@ class ChooseVisitTime extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              provider.selectedDoctor?.name ??
-                                  "No Doctor Selected",
+                              provider.selectedClinic?.doctorName ??
+                                  "No Clinic Selected",
                               style: getBoldStyle(
                                 color: ColorManager.black,
                                 fontSize: 16,
                               ),
                             ),
                             Text(
-                              provider.selectedDoctor?.specialty ?? "",
+                              provider.selectedClinic?.doctorSpecialty ?? "",
                               style: getMediumStyle(
                                 color: ColorManager.gray,
                                 fontSize: 13,
@@ -72,13 +72,13 @@ class ChooseVisitTime extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text(
-                        '${provider.selectedDoctor?.price ?? ""} E£',
-                        style: getSemiBoldStyle(
-                          color: ColorManager.primary,
-                          fontSize: 18,
-                        ),
-                      ),
+                       Text(
+                         '${provider.selectedClinic?.clinicPrice ?? ""} E£',
+                         style: getSemiBoldStyle(
+                           color: ColorManager.primary,
+                           fontSize: 18,
+                         ),
+                       ),
                     ],
                   ),
                 ),
@@ -90,19 +90,19 @@ class ChooseVisitTime extends StatelessWidget {
                   alignment: Alignment.center,
                   child: SizedBox(
                     height: 110.h,
-                    child: provider.selectedDoctor == null
-                        ? const Center(child: Text("Select doctor first"))
-                        : provider.selectedDoctor!.availableDays.isEmpty
+                    child: provider.selectedClinic == null
+                        ? const Center(child: Text("Select a clinic first"))
+                        : !provider.canChooseTime
                         ? const Center(child: Text("No available dates"))
                         : ListView.builder(
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             physics: const ClampingScrollPhysics(),
                             itemCount:
-                                provider.selectedDoctor!.availableDays.length,
+                                provider.selectedClinic!.availableDays.length,
                             itemBuilder: (context, index) {
                               final date =
-                                  provider.selectedDoctor!.availableDays[index];
+                                  provider.selectedClinic!.availableDays[index];
                               final isSelected = DateUtils.isSameDay(
                                 date,
                                 provider.selectedDate,
@@ -194,67 +194,70 @@ class ChooseVisitTime extends StatelessWidget {
                 32.verticalSpace,
                 const TitleText(text: "Available time"),
                 16.verticalSpace,
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16.w,
-                    mainAxisSpacing: 12.h,
-                    childAspectRatio: 2.8,
-                  ),
+                if (!provider.canChooseTime)
+                  const Center(child: Text("Select a clinic with available dates"))
+                else
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16.w,
+                      mainAxisSpacing: 12.h,
+                      childAspectRatio: 2.8,
+                    ),
 
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                    final List<String> times = [
-                      "08:00 AM",
-                      "09:00 AM",
-                      "10:00 AM",
-                      "11:00 AM",
-                      "12:00 AM",
-                      "01:00 PM",
-                    ];
-                    final String time = times[index];
-                    final bool isSelected = provider.selectedTime == time;
+                    itemCount: 6,
+                    itemBuilder: (context, index) {
+                      final List<String> times = [
+                        "08:00 AM",
+                        "09:00 AM",
+                        "10:00 AM",
+                        "11:00 AM",
+                        "12:00 AM",
+                        "01:00 PM",
+                      ];
+                      final String time = times[index];
+                      final bool isSelected = provider.selectedTime == time;
 
-                    return GestureDetector(
-                      onTap: () => provider.updateSelectedTime(time),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? ColorManager.primary
-                              : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
+                      return GestureDetector(
+                        onTap: () => provider.updateSelectedTime(time),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
                             color: isSelected
                                 ? ColorManager.primary
-                                : ColorManager.input.withValues(alpha: 0.5),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.03),
-                              blurRadius: 5,
-                              offset: const Offset(0, 2),
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: isSelected
+                                  ? ColorManager.primary
+                                  : ColorManager.input.withValues(alpha: 0.5),
                             ),
-                          ],
-                        ),
-                        child: Text(
-                          time,
-                          style: getMediumStyle(
-                            color: isSelected
-                                ? Colors.white
-                                : ColorManager.gray,
-                            fontSize: 16.sp,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.03),
+                                blurRadius: 5,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            time,
+                            style: getMediumStyle(
+                              color: isSelected
+                                  ? Colors.white
+                                  : ColorManager.gray,
+                              fontSize: 16.sp,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  ),
                 32.verticalSpace,
-                if (provider.selectedTime != null)
+                if (provider.canChooseTime && provider.selectedTime != null)
                   CustomBtn(
                     text: "Continue",
                     onPressed: () {

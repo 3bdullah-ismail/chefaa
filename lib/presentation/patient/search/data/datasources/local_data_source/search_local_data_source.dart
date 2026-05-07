@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/search/domain/entities/doctor_model.dart';
+import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 
 abstract class SearchLocalDataSource {
   Future<List<String>> getSearchHistory();
@@ -7,7 +7,7 @@ abstract class SearchLocalDataSource {
 
   Future<void> clearSearchHistory();
 
-  Future<List<DoctorModel>?> getCachedDoctors({
+  Future<List<ClinicModel>?> getCachedDoctors({
     String? searchText,
     String? specialization,
     String? gender,
@@ -15,7 +15,7 @@ abstract class SearchLocalDataSource {
   });
 
   Future<void> cacheDoctors({
-    required List<DoctorModel> doctors,
+    required List<ClinicModel> doctors,
     String? searchText,
     String? specialization,
     String? gender,

@@ -55,6 +55,10 @@ import '../../presentation/patient/auth/data/repositories/patient_repo_imp.dart'
     as _i856;
 import '../../presentation/patient/auth/presentation/manager/patient_cubit.dart'
     as _i930;
+import '../../presentation/patient/booking/data/data_sources/remote_date_source/remote_data_source.dart'
+    as _i372;
+import '../../presentation/patient/booking/data/data_sources/remote_date_source/remote_data_source_impl.dart'
+    as _i1020;
 import '../../presentation/patient/complete_auth_data/data/data_sources/complete_data_source.dart'
     as _i139;
 import '../../presentation/patient/complete_auth_data/data/data_sources/complete_data_source_imp.dart'
@@ -138,6 +142,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i463.NetworkService>(() => _i463.NetworkService());
     gh.factory<_i181.SearchLocalDataSource>(
         () => _i150.SearchDoctorLocalDataSourceImp());
+    gh.factory<_i372.BookingRemoteDataSource>(
+        () => _i1020.BookingRemoteDataSourceImpl(gh<_i463.NetworkService>()));
     gh.factory<_i183.ProfileRemoteDataSource>(
         () => _i1047.ProfileRemoteDataSourceImpl(gh<_i463.NetworkService>()));
     gh.factory<_i565.PharmacyDataSource>(() => _i176.PharmacyDataSourceImp(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../search/domain/entities/clinic_model.dart';
 import '../pages/choose_visit_type.dart';
-import '../../../search/domain/entities/doctor_model.dart';
 
 enum PaymentMethod { creditCard, cash }
 
@@ -9,15 +9,30 @@ class BookingProvider extends ChangeNotifier {
   int activeStep = 0;
 
   final PageController pageController = PageController();
-  DoctorModel? selectedDoctor;
+  ClinicModel? selectedClinic;
 
-  void selectDoctorAndNext(DoctorModel doctor) {
-    selectedDoctor = doctor;
+  bool selectClinicAndNext(ClinicModel clinic) {
+    selectedClinic = clinic;
     selectedTime = null;
-    if (doctor.availableDays.isNotEmpty) {
-      selectedDate = doctor.availableDays.first;
+    selectedVisitType = null;
+    selectedPaymentMethod = null;
+    showCardForm = false;
+    selectedDate = clinic.availableDays.isNotEmpty
+        ? clinic.availableDays.first
+        : DateTime.now();
+
+    notifyListeners();
+
+    if (clinic.availableDays.isEmpty) {
+      return false;
     }
+
     nextStep();
+    return true;
+  }
+
+  void selectDoctorAndNext(ClinicModel doctor) {
+    selectClinicAndNext(doctor);
   }
 
   String? selectedTime;
@@ -29,7 +44,16 @@ class BookingProvider extends ChangeNotifier {
 
   DateTime selectedDate = DateTime.now();
 
+  bool get hasAvailableDates => selectedClinic?.availableDays.isNotEmpty ?? false;
+
+  bool get canChooseTime => selectedClinic != null && hasAvailableDates;
+
   void updateSelectedDate(DateTime date) {
+    if (!hasAvailableDates) return;
+    final availableDays = selectedClinic!.availableDays;
+    final isAllowed = availableDays.any((day) => DateUtils.isSameDay(day, date));
+    if (!isAllowed) return;
+
     selectedDate = date;
     notifyListeners();
   }
@@ -44,6 +68,7 @@ class BookingProvider extends ChangeNotifier {
       );
       notifyListeners();
     }
+            if (!canChooseTime) return;
   }
 
   void previousStep() {

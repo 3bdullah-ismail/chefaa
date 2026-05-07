@@ -80,7 +80,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
     }
     switch (state) {
       case _TextFieldVisualState.empty:
-        return ColorManager.input;
+        return ColorManager.gray;
       case _TextFieldVisualState.valid:
         return ColorManager.primary;
       case _TextFieldVisualState.error:

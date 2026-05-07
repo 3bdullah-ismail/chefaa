@@ -32,7 +32,8 @@ class AppointmentCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      provider.selectedDoctor?.name ?? "No Doctor Selected",
+                      provider.selectedClinic?.doctorName ??
+                          "No Clinic Selected",
                       style: getBoldStyle(
                         color: ColorManager.black,
                         fontSize: 16,
@@ -42,7 +43,7 @@ class AppointmentCard extends StatelessWidget {
                     ),
                     4.verticalSpace,
                     Text(
-                      provider.selectedDoctor?.specialty ?? "",
+                      provider.selectedClinic?.doctorSpecialty ?? "",
                       style: getMediumStyle(
                         color: ColorManager.gray,
                         fontSize: 13,
@@ -63,9 +64,9 @@ class AppointmentCard extends StatelessWidget {
 
           TextRow(
             firstText: 'Date',
-            secondText: DateFormat(
-              'MMMM d, yyyy',
-            ).format(provider.selectedDate),
+            secondText: provider.hasAvailableDates
+                ? DateFormat('MMMM d, yyyy').format(provider.selectedDate)
+                : '--',
           ),
 
           8.verticalSpace,
@@ -86,13 +87,13 @@ class AppointmentCard extends StatelessWidget {
                 'Consultation Fee',
                 style: getMediumStyle(color: ColorManager.black, fontSize: 16),
               ),
-              Text(
-                '${provider.selectedDoctor?.price ?? 0} E£',
-                style: getMediumStyle(
-                  color: ColorManager.primary,
-                  fontSize: 16,
-                ),
-              ),
+               Text(
+                 '${provider.selectedClinic?.clinicPrice ?? 0} E£',
+                 style: getMediumStyle(
+                   color: ColorManager.primary,
+                   fontSize: 16,
+                 ),
+               ),
             ],
           ),
         ],

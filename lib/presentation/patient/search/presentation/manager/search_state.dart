@@ -11,7 +11,7 @@ class SearchLoading extends SearchState {
 }
 
 class SearchSuccess extends SearchState {
-  final List<DoctorModel> clinics;
+  final List<ClinicModel> clinics;
   final bool isFromCache;
   final bool isRefreshing;
 

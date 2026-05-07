@@ -1,8 +1,7 @@
 import 'dart:developer' as developer;
 
+import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-import '../../presentation/patient/search/domain/entities/doctor_model.dart';
 
 class HiveService {
   HiveService._();
@@ -12,7 +11,10 @@ class HiveService {
   static Future<void> init() async {
     try {
       await Hive.initFlutter();
-      Hive.registerAdapter(DoctorModelAdapter());
+      if (!Hive.isAdapterRegistered(ClinicModelAdapter().typeId)) {
+        Hive.registerAdapter(ClinicModelAdapter());
+      }
+      
       developer.log('Hive initialized successfully', name: _logTag);
     } catch (e) {
       developer.log(
@@ -24,11 +26,57 @@ class HiveService {
     }
   }
 
-  static Future<Box> _openBox(String boxName) async {
+  static Future<Box<dynamic>> openBox(String boxName) {
+    return _openBox(boxName);
+  }
+
+  static Future<Box<dynamic>> _openBox(String boxName) async {
     if (!Hive.isBoxOpen(boxName)) {
-      return await Hive.openBox(boxName);
+      try {
+        return await Hive.openBox<dynamic>(boxName);
+      } catch (e) {
+        if (_shouldResetBox(e)) {
+          await _deleteBoxFromDisk(boxName);
+          return await Hive.openBox<dynamic>(boxName);
+        }
+
+        rethrow;
+      }
     }
-    return Hive.box(boxName);
+
+    return Hive.box<dynamic>(boxName);
+  }
+
+  static bool _shouldResetBox(Object error) {
+    final message = error.toString().toLowerCase();
+    return message.contains('unknown typeid') ||
+        message.contains("type 'null' is not a subtype") ||
+        message.contains('corrupt');
+  }
+
+  static Future<void> _deleteBoxFromDisk(String boxName) async {
+    try {
+      if (Hive.isBoxOpen(boxName)) {
+        await Hive.box<dynamic>(boxName).close();
+      }
+    } catch (e) {
+      developer.log(
+        'Error closing box before reset ($boxName): $e',
+        name: _logTag,
+        level: 1000,
+      );
+    }
+
+    try {
+      await Hive.deleteBoxFromDisk(boxName);
+      developer.log('Deleted incompatible box from disk: $boxName', name: _logTag);
+    } catch (e) {
+      developer.log(
+        'Error deleting box from disk ($boxName): $e',
+        name: _logTag,
+        level: 1000,
+      );
+    }
   }
 
   /// Retrieve a value from Hive
@@ -142,5 +190,6 @@ class HiveService {
 }
 
 class HiveBoxes {
-  static const String doctorsBox = 'doctors_box';
+  static const String doctorsBox = 'search_cache_v2';
+  static const String reportsBox = 'reports';
 }

@@ -100,7 +100,7 @@ class _AILabAnalysisState extends State<AILabAnalysis> {
                           padding: const EdgeInsets.only(right: AppPadding.p16),
                           itemCount: findings.length,
 
-                          separatorBuilder: (_, __) => const Divider(
+                          separatorBuilder: (_, _) => const Divider(
                             color: ColorManager.input,
                             thickness: 1,
                           ),
