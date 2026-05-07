@@ -46,7 +46,8 @@ class SearchResponse extends ClinicModel {
              (clinics != null && clinics.isNotEmpty
                  ? clinics.first.address
                  : null),
-         availableDays: availableDaysOverride ??
+         availableDays:
+             availableDaysOverride ??
              _parseDaysStatic(
                specificClinic != null ? [specificClinic] : clinics,
              ),
