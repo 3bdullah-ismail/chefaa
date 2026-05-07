@@ -9,7 +9,7 @@ import 'package:widget_to_marker/widget_to_marker.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../profile/presentation/widgets/bottom_sheet.dart';
-import '../../domain/entities/doctor_model.dart';
+import '../../domain/entities/clinic_model.dart';
 import '../widgets/search_card.dart';
 
 class LocationFilter extends StatefulWidget {
@@ -313,14 +313,15 @@ class _LocationFilterState extends State<LocationFilter> {
             child: ProfileBottomSheet(
               heightFactor: 0.3.sh,
               content: SearchCard(
-                doctorModel: DoctorModel(
-                  name: "Dr. Ahmed",
-                  specialty: "Cardiology",
-                  rating: "4.8",
-                  ratingCount: "120",
-                  price: "500 EGP",
+                clinicModel: ClinicModel(
+                  doctorName: "Dr. Ahmed",
+                  doctorSpecialty: "Cardiology",
+                  doctorRating: "4.8",
+                  doctorRatingCount: "120",
+                  clinicPrice: "500",
                   availableDays: [DateTime.now()],
-                  clinkId: "1",
+                  clinicId: "1",
+                  clinicName: "Main Clinic",
                 ),
               ),
             ),

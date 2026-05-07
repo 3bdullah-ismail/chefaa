@@ -2,7 +2,7 @@ import 'package:chefaa/presentation/patient/search/data/datasources/local_data_s
 import 'package:chefaa/presentation/patient/search/data/datasources/remote_date_source/search_remote_data_source.dart';
 import 'package:chefaa/presentation/patient/search/data/models/search_response.dart';
 import 'package:chefaa/presentation/patient/search/data/repositories/search_repo.dart';
-import 'package:chefaa/presentation/patient/search/domain/entities/doctor_model.dart';
+import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,7 +16,7 @@ class SearchRepoImp implements SearchRepo {
   SearchRepoImp(this.searchDataSource, this.searchLocalDataSource);
 
   @override
-  Future<List<DoctorModel>?> filterSearch({
+  Future<List<ClinicModel>?> filterSearch({
     String? searchText,
     String? specialization,
     String? gender,
@@ -51,13 +51,12 @@ class SearchRepoImp implements SearchRepo {
 
       final listPayload = _extractListPayload(response.data);
       if (listPayload == null) {
-        return cached ?? <DoctorModel>[];
+        return cached ?? <ClinicModel>[];
       }
 
-      final doctors = listPayload
-          .whereType<Map<String, dynamic>>()
-          .map<DoctorModel>((e) => SearchResponse.fromJson(e))
-          .toList(growable: false);
+      final doctors = SearchResponse.fromJsonList(
+        listPayload,
+      ).map<ClinicModel>((e) => e).toList(growable: false);
 
       if (_areDoctorsEquivalent(cached, doctors)) {
         await searchLocalDataSource.touchCacheTimestamp(
@@ -112,7 +111,10 @@ class SearchRepoImp implements SearchRepo {
     return null;
   }
 
-  bool _areDoctorsEquivalent(List<DoctorModel>? oldList, List<DoctorModel> newList) {
+  bool _areDoctorsEquivalent(
+    List<ClinicModel>? oldList,
+    List<ClinicModel> newList,
+  ) {
     if (oldList == null || oldList.length != newList.length) {
       return false;
     }
@@ -121,11 +123,11 @@ class SearchRepoImp implements SearchRepo {
       final oldDoctor = oldList[i];
       final newDoctor = newList[i];
 
-      if (oldDoctor.clinkId != newDoctor.clinkId ||
-          oldDoctor.name != newDoctor.name ||
-          oldDoctor.price != newDoctor.price ||
-          oldDoctor.rating != newDoctor.rating ||
-          oldDoctor.location != newDoctor.location) {
+      if (oldDoctor.clinicId != newDoctor.clinicId ||
+          oldDoctor.doctorName != newDoctor.doctorName ||
+          oldDoctor.clinicPrice != newDoctor.clinicPrice ||
+          oldDoctor.doctorRating != newDoctor.doctorRating ||
+          oldDoctor.clinicLocation != newDoctor.clinicLocation) {
         return false;
       }
     }
