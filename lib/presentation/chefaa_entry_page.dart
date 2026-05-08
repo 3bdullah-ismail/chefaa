@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../core/resources/color_manager.dart';
 import '../core/resources/constants_manager.dart';
 import '../core/routes/app_routes_names.dart';
-import '../core/services/share_service.dart';
 import '../core/services/storage_service.dart';
 
 class ChefaaEntryPage extends StatefulWidget {
@@ -21,21 +20,27 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
   }
 
   Future<void> _checkAuth() async {
-    final token = await StorageService.getToken();
-    final user = await StorageService.getUser();
-    final isFirst = await SharedServices.getBool("isFirst");
+    if (!mounted) return;
 
-    if (isFirst ?? true) {
-      await SharedServices.saveBool("isFirst", false);
+    final hasSeenOnboarding = await StorageService.hasSeenOnboarding();
+
+    if (!hasSeenOnboarding) {
+      if (!mounted) return;
       Navigator.pushReplacementNamed(context, AppRoutesNames.onboardingRoute);
+      return;
     }
 
+    final token = await StorageService.getToken();
+    final user = await StorageService.getUser();
+
     if (token == null || user == null) {
+      if (!mounted) return;
       Navigator.pushReplacementNamed(context, AppRoutesNames.login);
       return;
     }
 
     final route = AppConstants.getLayoutFromRole(user.role);
+    if (!mounted) return;
     Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
   }
 

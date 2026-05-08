@@ -8,7 +8,7 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../core/routes/app_routes_names.dart';
-import '../../../core/services/share_service.dart' show SharedServices;
+import '../../../core/services/storage_service.dart';
 import 'next_button.dart';
 
 class OnboardingContainer extends StatelessWidget {
@@ -69,8 +69,8 @@ class OnboardingContainer extends StatelessWidget {
                 children: List.generate(onboarding.length, (index) {
                   bool isActive = screenIndex == index;
                   return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
+                    duration: const Duration(milliseconds: 200),
+                    curve: Curves.easeOut,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     width: isActive ? 28 : 10,
                     height: 10,
@@ -86,16 +86,19 @@ class OnboardingContainer extends StatelessWidget {
               const Spacer(),
               NextButton(
                 onTap: () async {
-                  await SharedServices.saveBool("isFirst", true);
-                  if (screenIndex ==
-                      OnboardingModel.onboardingData.length - 1) {
-                    Navigator.pushReplacementNamed(
-                      context,
-                      AppRoutesNames.login,
-                    );
-                  } else {
+                  final isLastPage =
+                      screenIndex == OnboardingModel.onboardingData.length - 1;
+
+                  if (!isLastPage) {
                     next();
+                    return;
                   }
+
+                  if (!context.mounted) return;
+                  await StorageService.markOnboardingSeen();
+                  if (!context.mounted) return;
+
+                  Navigator.pushReplacementNamed(context, AppRoutesNames.login);
                 },
               ),
             ],
