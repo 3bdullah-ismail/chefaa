@@ -28,8 +28,10 @@ class CustomBtn extends StatelessWidget {
         child: CupertinoButton(
           disabledColor: ColorManager.gray,
           minimumSize: Size.zero,
-          padding: EdgeInsets.symmetric(vertical: isSmall ?AppPadding.p12 : 16.h,
-          horizontal: isSmall ? AppPadding.p10 : 0),
+          padding: EdgeInsets.symmetric(
+            vertical: isSmall ? AppPadding.p12 : 16.h,
+            horizontal: isSmall ? AppPadding.p10 : 0,
+          ),
           color: ColorManager.primary,
           borderRadius: BorderRadius.circular(isSmall ? 35.r : 32.r),
           onPressed: isDisabled ? null : onPressed,

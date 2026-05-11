@@ -18,10 +18,7 @@ class ClinicDaysAvailable extends StatelessWidget {
       ),
       child: Text(
         day.substring(0, 3),
-        style: getBoldStyle(
-          color: ColorManager.gray,
-          fontSize: 12,
-        ),
+        style: getBoldStyle(color: ColorManager.gray, fontSize: 12),
       ),
     );
   }

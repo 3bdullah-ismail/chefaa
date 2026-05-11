@@ -38,42 +38,39 @@ class OnboardingContainer extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: Text(
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              onboarding[screenIndex].title,
-              style: getBoldStyle(
-                color: ColorManager.black,
-                fontSize: FontSize.s24,
-              ),
-            ),
-          ),
-          const SizedBox(height: AppSize.s32),
           Text(
+            onboarding[screenIndex].title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            style: getBoldStyle(
+              color: ColorManager.black,
+              fontSize: FontSize.s24.sp,
+            ),
+          ),
+          SizedBox(height: AppSize.s16.h),
+          Text(
             onboarding[screenIndex].description,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
             style: getSemiBoldStyle(
               color: ColorManager.gray,
-              fontSize: FontSize.s16,
+              fontSize: FontSize.s16.sp,
             ),
           ),
           const Spacer(),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: List.generate(onboarding.length, (index) {
                   bool isActive = screenIndex == index;
                   return AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.easeOut,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
-                    width: isActive ? 28 : 10,
-                    height: 10,
+                    width: isActive ? 28.w : 10.w,
+                    height: 10.h,
                     decoration: BoxDecoration(
                       color: isActive
                           ? ColorManager.primary
@@ -83,22 +80,21 @@ class OnboardingContainer extends StatelessWidget {
                   );
                 }),
               ),
-              const Spacer(),
               NextButton(
                 onTap: () async {
-                  final isLastPage =
-                      screenIndex == OnboardingModel.onboardingData.length - 1;
+                  final isLastPage = screenIndex == onboarding.length - 1;
 
                   if (!isLastPage) {
                     next();
-                    return;
+                  } else {
+                    if (!context.mounted) return;
+                    await StorageService.markOnboardingSeen();
+                    if (!context.mounted) return;
+                    Navigator.pushReplacementNamed(
+                      context,
+                      AppRoutesNames.login,
+                    );
                   }
-
-                  if (!context.mounted) return;
-                  await StorageService.markOnboardingSeen();
-                  if (!context.mounted) return;
-
-                  Navigator.pushReplacementNamed(context, AppRoutesNames.login);
                 },
               ),
             ],

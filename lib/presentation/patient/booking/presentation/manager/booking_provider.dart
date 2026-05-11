@@ -44,14 +44,17 @@ class BookingProvider extends ChangeNotifier {
 
   DateTime selectedDate = DateTime.now();
 
-  bool get hasAvailableDates => selectedClinic?.availableDays.isNotEmpty ?? false;
+  bool get hasAvailableDates =>
+      selectedClinic?.availableDays.isNotEmpty ?? false;
 
   bool get canChooseTime => selectedClinic != null && hasAvailableDates;
 
   void updateSelectedDate(DateTime date) {
     if (!hasAvailableDates) return;
     final availableDays = selectedClinic!.availableDays;
-    final isAllowed = availableDays.any((day) => DateUtils.isSameDay(day, date));
+    final isAllowed = availableDays.any(
+      (day) => DateUtils.isSameDay(day, date),
+    );
     if (!isAllowed) return;
 
     selectedDate = date;
@@ -68,7 +71,7 @@ class BookingProvider extends ChangeNotifier {
       );
       notifyListeners();
     }
-            if (!canChooseTime) return;
+    if (!canChooseTime) return;
   }
 
   void previousStep() {

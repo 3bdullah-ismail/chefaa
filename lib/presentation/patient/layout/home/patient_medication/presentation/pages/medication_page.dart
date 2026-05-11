@@ -38,7 +38,8 @@ class _MedicationPageState extends State<MedicationPage> {
           heightFactor: 0.92,
           child: BottomSheetCard(
             title: "Add Medication",
-            content: "Enter your medication details for tracking and reminders.",
+            content:
+                "Enter your medication details for tracking and reminders.",
           ),
         ),
       ),
@@ -85,7 +86,7 @@ class _MedicationPageState extends State<MedicationPage> {
       ),
       body: BlocBuilder<MedicationCubit, MedicationState>(
         buildWhen: (previous, current) =>
-        current is MedicationListLoadingState ||
+            current is MedicationListLoadingState ||
             current is MedicationListSuccessState ||
             current is MedicationListErrorState,
         builder: (context, state) {
@@ -132,7 +133,7 @@ class _MedicationPageState extends State<MedicationPage> {
                         OverViewCard(
                           label: "Active Medications",
                           title:
-                          "${medicationList.stats?.activeMedications ?? 0}",
+                              "${medicationList.stats?.activeMedications ?? 0}",
                           isActive: true,
                         ),
                       ],
@@ -148,9 +149,7 @@ class _MedicationPageState extends State<MedicationPage> {
                           ).copyWith(fontSize: 20),
                         ),
                         const Spacer(),
-                        AddMedication(
-                          onTap: () => _openAddSheet(context),
-                        ),
+                        AddMedication(onTap: () => _openAddSheet(context)),
                       ],
                     ),
                     ListView.separated(

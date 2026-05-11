@@ -2,16 +2,17 @@ import 'package:chefaa/presentation/patient/layout/home/patient_medication/data/
 
 class Medication {
   Medication({
-      this.name, 
-      this.dosage, 
-      this.form, 
-      this.timesPerDay, 
-      this.schedule, 
-      this.startDate, 
-      this.endDate, 
-      this.isActive, 
-      this.id, 
-      this.adherenceHistory,});
+    this.name,
+    this.dosage,
+    this.form,
+    this.timesPerDay,
+    this.schedule,
+    this.startDate,
+    this.endDate,
+    this.isActive,
+    this.id,
+    this.adherenceHistory,
+  });
 
   Medication.fromJson(dynamic json) {
     name = json['name'];
@@ -30,6 +31,7 @@ class Medication {
       });
     }
   }
+
   String? name;
   String? dosage;
   String? form;
@@ -53,9 +55,10 @@ class Medication {
     map['isActive'] = isActive;
     map['_id'] = id;
     if (adherenceHistory != null) {
-      map['adherenceHistory'] = adherenceHistory?.map((v) => v.toJson()).toList();
+      map['adherenceHistory'] = adherenceHistory
+          ?.map((v) => v.toJson())
+          .toList();
     }
     return map;
   }
-
 }

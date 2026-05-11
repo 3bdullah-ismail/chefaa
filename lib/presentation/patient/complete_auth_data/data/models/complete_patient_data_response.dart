@@ -6,12 +6,12 @@ class CompletePatientDataResponse {
   CompletePatientDataResponse.fromJson(dynamic json) {
     message = json['message'];
     patient = json['patient'] != null
-        ? PatientUpdate.fromJson(json['patient'])
+        ? Patient.fromJson(json['patient'])
         : null;
   }
 
   String? message;
-  PatientUpdate? patient;
+  Patient? patient;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

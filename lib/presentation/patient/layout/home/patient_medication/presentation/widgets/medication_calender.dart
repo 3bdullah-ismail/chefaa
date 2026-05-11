@@ -1,8 +1,8 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../../../../../core/resources/styles_manager.dart';
 
@@ -92,10 +92,7 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
       todayHighlightColor: Colors.transparent,
       showNavigationArrow: true,
       headerStyle: DateRangePickerHeaderStyle(
-        textStyle: getBoldStyle(
-          color: ColorManager.primary,
-          fontSize: 20,
-        ),
+        textStyle: getBoldStyle(color: ColorManager.primary, fontSize: 20),
         textAlign: TextAlign.center,
       ),
       monthViewSettings: const DateRangePickerMonthViewSettings(

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../core/resources/color_manager.dart';
 import '../core/resources/constants_manager.dart';
 import '../core/routes/app_routes_names.dart';
+import '../core/services/permissions_service.dart';
 import '../core/services/storage_service.dart';
+import '../core/widget/permissions_request_dialog.dart';
 
 class ChefaaEntryPage extends StatefulWidget {
   const ChefaaEntryPage({super.key});
@@ -38,10 +41,33 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
       Navigator.pushReplacementNamed(context, AppRoutesNames.login);
       return;
     }
-
-    final route = AppConstants.getLayoutFromRole(user.role);
     if (!mounted) return;
+    await _requestPermissionsIfNeeded();
+
+    if (!mounted) return;
+    final route = AppConstants.getLayoutFromRole(user.role);
     Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
+  }
+
+  Future<void> _requestPermissionsIfNeeded() async {
+    final allPermissionsGranted =
+        await PermissionsService.areCriticalPermissionsGranted();
+
+    if (allPermissionsGranted) {
+      return;
+    }
+
+    if (!mounted) return;
+
+    final result = await showDialog<Map<String, PermissionStatus>>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const PermissionsRequestDialog(),
+    );
+
+    if (result != null && mounted) {
+      debugPrint('Permissions requested: $result');
+    }
   }
 
   @override

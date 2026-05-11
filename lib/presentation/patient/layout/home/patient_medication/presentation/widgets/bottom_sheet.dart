@@ -6,9 +6,9 @@ import 'package:chefaa/presentation/patient/layout/home/patient_medication/prese
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/medication_calender.dart';
 import 'package:chefaa/presentation/patient/layout/home/presentation/widgets/ai_suggestion.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../../core/resources/color_manager.dart';
 import '../../../../../../../core/resources/styles_manager.dart';
@@ -195,7 +195,7 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                       ? null
                                       : cubit.formController.text,
                                   onChanged: (value) => setState(
-                                        () => cubit.formController.text = value!,
+                                    () => cubit.formController.text = value!,
                                   ),
                                 ),
                               ],
@@ -231,7 +231,8 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                 CustomDropDownBtn(
                                   items: AppConstants.timesPerDayItems,
                                   hintText: "Select frequency",
-                                  value: cubit.timesPerDayController.text.isEmpty
+                                  value:
+                                      cubit.timesPerDayController.text.isEmpty
                                       ? null
                                       : cubit.timesPerDayController.text,
                                   onChanged: (value) {
@@ -262,7 +263,8 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                   children: [
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Start Date",
@@ -275,11 +277,16 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                           MedicationCalender(
                                             isMedication: true,
                                             hintText: "Select start date",
-                                            controller: cubit.startDateController,
-                                            onDateSelected: (date) => setState(() {
-                                              cubit.startDateController.text =
-                                                  DateFormat('yyyy-MM-dd').format(date);
-                                            }),
+                                            controller:
+                                                cubit.startDateController,
+                                            onDateSelected: (date) => setState(
+                                              () {
+                                                cubit.startDateController.text =
+                                                    DateFormat(
+                                                      'yyyy-MM-dd',
+                                                    ).format(date);
+                                              },
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -287,7 +294,8 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                     12.horizontalSpace,
                                     Expanded(
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "End Date",
@@ -301,10 +309,13 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                             isMedication: true,
                                             hintText: "Select end date",
                                             controller: cubit.endDateController,
-                                            onDateSelected: (date) => setState(() {
-                                              cubit.endDateController.text =
-                                                  DateFormat('yyyy-MM-dd').format(date);
-                                            }),
+                                            onDateSelected: (date) =>
+                                                setState(() {
+                                                  cubit.endDateController.text =
+                                                      DateFormat(
+                                                        'yyyy-MM-dd',
+                                                      ).format(date);
+                                                }),
                                           ),
                                         ],
                                       ),
@@ -315,7 +326,8 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                 20.verticalSpace,
 
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "Continuous medication",
@@ -326,20 +338,26 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                                     ),
                                     GestureDetector(
                                       onTap: () => setState(
-                                            () => cubit.isActive = !cubit.isActive,
+                                        () => cubit.isActive = !cubit.isActive,
                                       ),
                                       child: AnimatedContainer(
-                                        duration: const Duration(milliseconds: 200),
+                                        duration: const Duration(
+                                          milliseconds: 200,
+                                        ),
                                         width: 55,
                                         height: 28,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
                                           color: cubit.isActive
                                               ? ColorManager.primary
                                               : ColorManager.input,
                                         ),
                                         child: AnimatedAlign(
-                                          duration: const Duration(milliseconds: 200),
+                                          duration: const Duration(
+                                            milliseconds: 200,
+                                          ),
                                           alignment: cubit.isActive
                                               ? Alignment.centerRight
                                               : Alignment.centerLeft,
@@ -367,7 +385,7 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                         10.verticalSpace,
                         CustomBtn(
                           text: "Add Medication",
-                          onPressed:() {
+                          onPressed: () {
                             _syncScheduleToCubit(cubit);
                             cubit.addMedication();
                           },
@@ -382,13 +400,16 @@ class _BottomSheetCardState extends State<BottomSheetCard> {
                   Container(
                     color: Colors.white.withAlpha(180),
                     child: const Center(
-                      child: CircularProgressIndicator(color: ColorManager.primary),
+                      child: CircularProgressIndicator(
+                        color: ColorManager.primary,
+                      ),
                     ),
                   ),
               ],
             ),
           ),
         );
-      },    );
+      },
+    );
   }
 }

@@ -14,7 +14,7 @@ class HiveService {
       if (!Hive.isAdapterRegistered(ClinicModelAdapter().typeId)) {
         Hive.registerAdapter(ClinicModelAdapter());
       }
-      
+
       developer.log('Hive initialized successfully', name: _logTag);
     } catch (e) {
       developer.log(
@@ -69,7 +69,10 @@ class HiveService {
 
     try {
       await Hive.deleteBoxFromDisk(boxName);
-      developer.log('Deleted incompatible box from disk: $boxName', name: _logTag);
+      developer.log(
+        'Deleted incompatible box from disk: $boxName',
+        name: _logTag,
+      );
     } catch (e) {
       developer.log(
         'Error deleting box from disk ($boxName): $e',

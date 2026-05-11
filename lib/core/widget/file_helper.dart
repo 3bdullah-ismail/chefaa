@@ -7,7 +7,8 @@ class FileHelper {
   }) async {
     try {
       final result = await FilePicker.pickFiles(
-        type: FileType.any,
+        type: FileType.custom,
+        allowedExtensions: allowedExtensions,
         allowMultiple: false,
         withData: true,
       );

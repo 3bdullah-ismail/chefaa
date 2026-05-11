@@ -15,7 +15,7 @@ class DoctorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200.h,
+      constraints: BoxConstraints(minHeight: 200.h),
       padding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p12,
         vertical: AppPadding.p16,
@@ -32,6 +32,8 @@ class DoctorCard extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -45,26 +47,32 @@ class DoctorCard extends StatelessWidget {
                 child: const Icon(Icons.person, color: ColorManager.white),
               ),
               15.horizontalSpace,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "DR.Ahmed Ali",
-                    style: getMediumStyle(
-                      color: ColorManager.black,
-                      fontSize: 20,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "DR.Ahmed Ali",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: getMediumStyle(
+                        color: ColorManager.black,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  7.verticalSpace,
+                    7.verticalSpace,
 
-                  Text(
-                    "Specialized Psychiatrist",
-                    style: getSemiBoldStyle(
-                      color: ColorManager.gray,
-                      fontSize: 16,
+                    Text(
+                      "Specialized Psychiatrist",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: getSemiBoldStyle(
+                        color: ColorManager.gray,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -79,11 +87,15 @@ class DoctorCard extends StatelessWidget {
                   size: 20.sp,
                 ),
                 12.horizontalSpace,
-                Text(
-                  "11 Feb 2026 – 10:45 AM",
-                  style: getSemiBoldStyle(
-                    color: ColorManager.gray,
-                    fontSize: 16,
+                Expanded(
+                  child: Text(
+                    "11 Feb 2026 – 10:45 AM",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: getSemiBoldStyle(
+                      color: ColorManager.gray,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
               ],

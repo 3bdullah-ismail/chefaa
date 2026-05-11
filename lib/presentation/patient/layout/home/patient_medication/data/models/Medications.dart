@@ -2,17 +2,18 @@ import 'AdherenceHistory.dart';
 
 class Medications {
   Medications({
-      this.id, 
-      this.name, 
-      this.dosage, 
-      this.form, 
-      this.timesPerDay, 
-      this.schedule, 
-      this.startDate,
-      this.endDate,
-      this.isActive, 
-      this.adherencePercentage, 
-      this.adherenceHistory,});
+    this.id,
+    this.name,
+    this.dosage,
+    this.form,
+    this.timesPerDay,
+    this.schedule,
+    this.startDate,
+    this.endDate,
+    this.isActive,
+    this.adherencePercentage,
+    this.adherenceHistory,
+  });
 
   Medications.fromJson(dynamic json) {
     id = json['_id'];
@@ -32,6 +33,7 @@ class Medications {
       });
     }
   }
+
   String? id;
   String? name;
   String? dosage;
@@ -57,10 +59,13 @@ class Medications {
     map['isActive'] = isActive;
     map['adherencePercentage'] = adherencePercentage;
     if (adherenceHistory != null) {
-      map['adherenceHistory'] = adherenceHistory?.map((v) => v.toJson()).toList();
+      map['adherenceHistory'] = adherenceHistory
+          ?.map((v) => v.toJson())
+          .toList();
     }
     return map;
   }
+
   Medications copyWith({
     String? id,
     String? name,
@@ -89,4 +94,3 @@ class Medications {
     );
   }
 }
-

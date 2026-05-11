@@ -1,5 +1,3 @@
-import 'package:chefaa/core/resources/values_manager.dart';
-import 'package:chefaa/core/widget/custom_app_bar.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/doctor_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,13 +15,11 @@ class DoctorLayout extends StatefulWidget {
 }
 
 class _DoctorLayoutState extends State<DoctorLayout> {
-
   int _selectedIndex = 0;
   List<Widget> tabs = [
     const DoctorHome(),
     const Center(child: Text("Patient")),
     const Center(child: Text("Profile")),
-
   ];
 
   @override
@@ -45,9 +41,17 @@ class _DoctorLayoutState extends State<DoctorLayout> {
             ),
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(SvgAssets.patient, width: 32.w, height: 32.h),
+            icon: SvgPicture.asset(
+              SvgAssets.patient,
+              width: 32.w,
+              height: 32.h,
+            ),
             label: 'Patients',
-            activeIcon: SvgPicture.asset(SvgAssets.patientActive, width: 32.w, height: 32.h),
+            activeIcon: SvgPicture.asset(
+              SvgAssets.patientActive,
+              width: 32.w,
+              height: 32.h,
+            ),
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.profile),

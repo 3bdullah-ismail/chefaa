@@ -58,26 +58,26 @@ class MedicationRepoImp implements MedicationRepo {
 
   @override
   Future<MedicationResponse> deleteMedication(String medicationId) async {
-   try{
+    try {
       var response = await medicationDataSource.deleteMedication(medicationId);
       return MedicationResponse.fromJson(response.data);
-   } on DioException catch (e) {
-     throw ServerFailure.fromDioError(e).message;
-   } catch (e) {
-     throw ServerFailure.unexpectedError;
-   }
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
+    }
   }
 
   @override
-  Future<MedicationList> getMedicationList()async {
-   try{
+  Future<MedicationList> getMedicationList() async {
+    try {
       var response = await medicationDataSource.getMedicationList();
       return MedicationList.fromJson(response.data);
-   }on DioException catch (e) {
-     throw ServerFailure.fromDioError(e).message;
-   } catch (e) {
-     throw ServerFailure.unexpectedError;
-   }
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
+    }
   }
 
   @override
@@ -91,8 +91,8 @@ class MedicationRepoImp implements MedicationRepo {
     required String startDate,
     required String endDate,
     required bool isActive,
-  }) async{
-    try{
+  }) async {
+    try {
       var response = await medicationDataSource.updateMedication(
         medicationId: medicationId,
         name: name,

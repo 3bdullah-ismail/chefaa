@@ -45,17 +45,14 @@ class OverViewCard extends StatelessWidget {
           children: [
             Text(
               label,
-              style: getRegularStyle(
-                color: ColorManager.black,
-                  fontSize: 16
-              )
+              style: getRegularStyle(color: ColorManager.black, fontSize: 16),
             ),
             Text(
               title,
               style: getBoldStyle(
                 color: isActive ? ColorManager.black : ColorManager.lightGreen,
-                  fontSize: 18
-              )
+                fontSize: 18,
+              ),
             ),
           ],
         ),

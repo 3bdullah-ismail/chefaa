@@ -16,7 +16,8 @@ class ResultsList extends StatelessWidget {
           current is SearchSuccess ||
           current is SearchError,
       listener: (context, state) {
-        if (state is SearchLoading && context.read<SearchCubit>().lastClinics.isEmpty) {
+        if (state is SearchLoading &&
+            context.read<SearchCubit>().lastClinics.isEmpty) {
           Loading.show(context);
         } else if (state is SearchSuccess || state is SearchError) {
           Loading.hide(context);
@@ -33,7 +34,9 @@ class ResultsList extends StatelessWidget {
           return Center(child: Text(state.message));
         }
 
-        final clinics = state is SearchSuccess ? state.clinics : cubit.lastClinics;
+        final clinics = state is SearchSuccess
+            ? state.clinics
+            : cubit.lastClinics;
 
         final isRefreshing =
             (state is SearchLoading && clinics.isNotEmpty) ||

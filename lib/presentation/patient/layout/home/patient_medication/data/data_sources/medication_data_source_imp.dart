@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: MedicationDataSource)
 class MedicationDataSourceImp implements MedicationDataSource {
   NetworkService networkService;
+
   MedicationDataSourceImp(this.networkService);
 
   @override
@@ -19,7 +20,7 @@ class MedicationDataSourceImp implements MedicationDataSource {
     required String endDate,
     required bool isActive,
   }) {
-    return  networkService.dio.post(
+    return networkService.dio.post(
       '/patient/medications',
       data: {
         'name': name,
@@ -36,23 +37,19 @@ class MedicationDataSourceImp implements MedicationDataSource {
 
   @override
   Future<Response<dynamic>> confirmMedication(String medicationId) {
-   return  networkService.dio.post(
+    return networkService.dio.post(
       '/patient/medications/$medicationId/confirm',
     );
   }
 
   @override
   Future<Response<dynamic>> deleteMedication(String medicationId) {
-    return  networkService.dio.delete(
-      '/patient/medications/$medicationId',
-    );
+    return networkService.dio.delete('/patient/medications/$medicationId');
   }
 
   @override
   Future<Response<dynamic>> getMedicationList() {
-    return  networkService.dio.get(
-      '/patient/my-medications',
-    );
+    return networkService.dio.get('/patient/my-medications');
   }
 
   @override
@@ -67,7 +64,7 @@ class MedicationDataSourceImp implements MedicationDataSource {
     required String endDate,
     required bool isActive,
   }) {
-    return  networkService.dio.put(
+    return networkService.dio.put(
       '/patient/medications/$medicationId',
       data: {
         'name': name,
@@ -80,6 +77,5 @@ class MedicationDataSourceImp implements MedicationDataSource {
         'isActive': isActive,
       },
     );
-
   }
 }

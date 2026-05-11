@@ -35,14 +35,17 @@ class DoctorHome extends StatelessWidget {
                 children: [
                   Text(
                     "My Clinics",
-                    style: getBoldStyle(color: ColorManager.black, fontSize: 22),
+                    style: getBoldStyle(
+                      color: ColorManager.black,
+                      fontSize: 22,
+                    ),
                   ),
                   const Spacer(),
                   CustomOutlineButton(text: "Add Clinic", onPressed: () {}),
                 ],
               ),
-               10.verticalSpace,
-              ClinicCard()
+              10.verticalSpace,
+              ClinicCard(),
             ],
           ),
         ),

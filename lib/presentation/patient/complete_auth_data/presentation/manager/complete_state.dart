@@ -12,7 +12,7 @@ class CompleteState {
   final List<String> chronicConditions;
   final List<String> allergies;
   final String? message;
-  final PatientUpdate? patient;
+  final Patient? patient;
 
   const CompleteState({
     this.status = CompleteStatus.initial,
@@ -37,7 +37,7 @@ class CompleteState {
     List<String>? chronicConditions,
     List<String>? allergies,
     String? message,
-    PatientUpdate? patient,
+    Patient? patient,
   }) {
     return CompleteState(
       status: status ?? this.status,

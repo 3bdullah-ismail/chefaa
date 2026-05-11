@@ -87,13 +87,13 @@ class AppointmentCard extends StatelessWidget {
                 'Consultation Fee',
                 style: getMediumStyle(color: ColorManager.black, fontSize: 16),
               ),
-               Text(
-                 '${provider.selectedClinic?.clinicPrice ?? 0} E£',
-                 style: getMediumStyle(
-                   color: ColorManager.primary,
-                   fontSize: 16,
-                 ),
-               ),
+              Text(
+                '${provider.selectedClinic?.clinicPrice ?? 0} E£',
+                style: getMediumStyle(
+                  color: ColorManager.primary,
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         ],

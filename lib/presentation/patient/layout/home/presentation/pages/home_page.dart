@@ -30,7 +30,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<MedicineCardState> _medicineCardKey =
-  GlobalKey<MedicineCardState>();
+      GlobalKey<MedicineCardState>();
 
   void _openSearchPage() {
     Navigator.push(
@@ -79,8 +79,9 @@ class _HomePageState extends State<HomePage> {
       body: BlocListener<MedicationCubit, MedicationState>(
         listener: (context, state) {
           if (state is MedicationConfirmSuccessState) {
-            _medicineCardKey.currentState
-                ?.updateConfirmed(state.confirmMedication);
+            _medicineCardKey.currentState?.updateConfirmed(
+              state.confirmMedication,
+            );
           }
         },
         child: SingleChildScrollView(
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
 
                     BlocBuilder<MedicationCubit, MedicationState>(
                       buildWhen: (previous, current) =>
-                      current is MedicationListLoadingState ||
+                          current is MedicationListLoadingState ||
                           current is MedicationListSuccessState ||
                           current is MedicationListErrorState,
                       builder: (context, state) {
@@ -132,14 +133,14 @@ class _HomePageState extends State<HomePage> {
                           return Center(
                             child: Text(
                               state.errorMessage,
-                              style:
-                              getMediumStyle(color: ColorManager.error),
+                              style: getMediumStyle(color: ColorManager.error),
                             ),
                           );
                         }
 
                         if (state is MedicationListSuccessState) {
-                          final medications = state.medications.medications ?? [];
+                          final medications =
+                              state.medications.medications ?? [];
 
                           return Column(
                             children: [
@@ -165,16 +166,17 @@ class _HomePageState extends State<HomePage> {
                                       children: [
                                         Text(
                                           "Manage",
-                                          style: getMediumStyle(
-                                            color: ColorManager.primary,
-                                            fontSize: 18,
-                                          ).copyWith(
-                                            decoration:
-                                            TextDecoration.underline,
-                                            decorationColor:
-                                            ColorManager.primary,
-                                            decorationThickness: 2,
-                                          ),
+                                          style:
+                                              getMediumStyle(
+                                                color: ColorManager.primary,
+                                                fontSize: 18,
+                                              ).copyWith(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                decorationColor:
+                                                    ColorManager.primary,
+                                                decorationThickness: 2,
+                                              ),
                                         ),
                                         SvgPicture.asset(
                                           "assets/icons/drug.svg",
@@ -246,14 +248,15 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 "ViewAll",
-                                style: getMediumStyle(
-                                  color: ColorManager.primary,
-                                  fontSize: 18,
-                                ).copyWith(
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: ColorManager.primary,
-                                  decorationThickness: 2,
-                                ),
+                                style:
+                                    getMediumStyle(
+                                      color: ColorManager.primary,
+                                      fontSize: 18,
+                                    ).copyWith(
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: ColorManager.primary,
+                                      decorationThickness: 2,
+                                    ),
                               ),
                               SvgPicture.asset("assets/icons/drug.svg"),
                             ],

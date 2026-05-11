@@ -62,11 +62,11 @@ class MedicationCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                   medications[index].name?.isNotEmpty == true
+                    medications[index].name?.isNotEmpty == true
                         ? medications[index].name![0].toUpperCase() +
-                       medications[index].name!
-                            .substring(1)
-                            .toLowerCase()
+                              medications[index].name!
+                                  .substring(1)
+                                  .toLowerCase()
                         : "Medication Name",
                     style: getSemiBoldStyle(
                       color: ColorManager.black,

@@ -31,18 +31,20 @@ class _DocSignUpState extends State<DocSignUp> {
 
   final _formKey = GlobalKey<FormState>();
   late final DoctorAuthCubit _cubit;
+  late final FileHandlerCubit _fileHandlerCubit;
 
   @override
   void initState() {
     super.initState();
     _cubit = getIt<DoctorAuthCubit>();
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit = context.read<FileHandlerCubit>();
+    _fileHandlerCubit.clearFile();
   }
 
   @override
   void dispose() {
     _cubit.close();
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit.clearFile();
     super.dispose();
   }
 
@@ -170,7 +172,7 @@ class _DocSignUpState extends State<DocSignUp> {
                           keyboardType: TextInputType.text,
                           controller: cubit.specialization,
                           text: "Enter your specialization",
-                          prefixIcon: "assets/icons/stethoscnnnnope_.svg",
+                          prefixIcon: IconsAssets.drugIcon,
                         ),
                         8.verticalSpace,
                         const UploadCard(),

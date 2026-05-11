@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                           text: "Enter your Password",
                           prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
-                          validator: Validators.validatePassword,
+                          validator: Validators.validateLoginPassword,
                         ),
                         TextButton(
                           onPressed: () {

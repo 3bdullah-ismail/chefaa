@@ -118,19 +118,27 @@ class ClinicCard extends StatelessWidget {
             10.verticalSpace,
             const ClinicStatus(status: "close"),
             10.verticalSpace,
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ClinicInfoCard(title: "Consultation", value: "120"),
-                ClinicInfoCard(title: "Slot Duration", value: "120"),
+            Row(
+              children: const [
+                Expanded(
+                  child: ClinicInfoCard(title: "Consultation", value: "120"),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: ClinicInfoCard(title: "Slot Duration", value: "120"),
+                ),
               ],
             ),
             10.verticalSpace,
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ClinicInfoCard(title: "Max Cases /Day ", value: "120"),
-                ClinicInfoCard(title: "PER/Slot", value: "120"),
+            Row(
+              children: const [
+                Expanded(
+                  child: ClinicInfoCard(title: "Max Cases /Day ", value: "120"),
+                ),
+                SizedBox(width: 8),
+                Expanded(
+                  child: ClinicInfoCard(title: "PER/Slot", value: "120"),
+                ),
               ],
             ),
             10.verticalSpace,
@@ -154,7 +162,6 @@ class ClinicCard extends StatelessWidget {
             const ScheduleCard(day: "Sunday", time: "08:00 AM - 02:00 PM"),
             10.verticalSpace,
             const ScheduleCard(day: "Sunday", time: "08:00 AM - 02:00 PM"),
-
           ],
         ),
       ),

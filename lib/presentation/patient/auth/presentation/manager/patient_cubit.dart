@@ -15,8 +15,9 @@ class PatientCubit extends Cubit<PatientState> {
 
   PatientCubit({required this.patientRepo, required this.usersCubit})
     : super(PatientInitial());
+
   PatientCubit.initial({required this.patientRepo, required this.usersCubit})
-      : super(PatientInitial());
+    : super(PatientInitial());
 
   void setRole(String role) {
     this.role = role;
