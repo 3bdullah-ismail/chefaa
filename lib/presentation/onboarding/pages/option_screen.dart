@@ -6,8 +6,10 @@ import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/resources/font_manager.dart';
 import '../../../core/resources/values_manager.dart';
+import '../../../core/widget/app_bar_content.dart';
 import '../../../core/widget/custom_app_bar.dart';
 import '../widgets/option_card.dart';
 
@@ -30,9 +32,10 @@ class _OptionScreenState extends State<OptionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(175),
-        child: CustomAppBar(),
+      appBar: CustomAppBar(
+        preferredHeight: 150.h,
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+        child: AppBarContent(),
       ),
       body: SingleChildScrollView(
         child: Center(

@@ -29,7 +29,7 @@ class _PatientLayoutState extends State<PatientLayout> {
     ),
     const AiLabPage(),
     ChatPage(),
-    const ProfilePage(),
+    const PatientProfilePage(),
   ];
 
   @override

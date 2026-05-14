@@ -18,14 +18,14 @@ import '../widgets/item_column.dart';
 import '../widgets/item_container.dart';
 import '../widgets/item_content.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class PatientProfilePage extends StatefulWidget {
+  const PatientProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<PatientProfilePage> createState() => _PatientProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _PatientProfilePageState extends State<PatientProfilePage> {
   late final ProfileCubit _profileCubit;
 
   @override

@@ -13,6 +13,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../../core/config/get_config.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
+import '../../../../../core/widget/app_bar_content.dart';
 import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../core/widget/custom_text_field.dart';
 import '../../../../../core/widget/validators.dart';
@@ -53,9 +54,10 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
       value: _cubit,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(175),
-          child: CustomAppBar(),
+        appBar: CustomAppBar(
+          preferredHeight: 150.h,
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+          child: AppBarContent(),
         ),
         body: BlocConsumer<PatientCubit, PatientState>(
           listener: (context, state) {
