@@ -56,9 +56,11 @@ class _FacilitySignupState extends State<FacilitySignup> {
       value: _cubit,
       child: Scaffold(
         backgroundColor: ColorManager.input,
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(175),
-          child: CustomAppBar(),
+        appBar: CustomAppBar(
+          preferredHeight: 175.h,
+          child: Center(
+            child: Image.asset("assets/images/chefaa.png", height: 50.h),
+          ),
         ),
         body: BlocConsumer<FacilityAuthCubit, FacilityAuthState>(
           listener: (context, state) {

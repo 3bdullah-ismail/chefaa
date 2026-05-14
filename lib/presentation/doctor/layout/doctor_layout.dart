@@ -1,4 +1,5 @@
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/doctor_home.dart';
+import 'package:chefaa/presentation/doctor/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -19,7 +20,7 @@ class _DoctorLayoutState extends State<DoctorLayout> {
   List<Widget> tabs = [
     const DoctorHome(),
     const Center(child: Text("Patient")),
-    const Center(child: Text("Profile")),
+    const DoctorProfile(),
   ];
 
   @override

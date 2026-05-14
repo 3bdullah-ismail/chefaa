@@ -1,3 +1,4 @@
+import 'package:chefaa/core/widget/custom_circle_avatar.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_state.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +59,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(175),
+      appBar: CustomAppBar(
+        preferredHeight: 175.h,
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (context, state) {
             String userName = "Patient";
@@ -68,10 +69,38 @@ class _HomePageState extends State<HomePage> {
             } else if (state is UsersLoading) {
               userName = "...";
             }
-            return CustomAppBar(
-              isLayout: true,
-              title1: "Good Morning !",
-              title2: userName,
+            return Row(
+              children: [
+                CustomCircleAvatar(imagePath: ImageAssets.patient, radius: 40),
+                20.horizontalSpace,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Good Morning !",
+                      style: getSemiBoldStyle(
+                        color: ColorManager.white,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    4.verticalSpace,
+                    Text(
+                      userName,
+                      style: getBoldStyle(
+                        color: ColorManager.white,
+                        fontSize: 18.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                45.horizontalSpace,
+                Icon(
+                  Icons.notifications_active,
+                  color: ColorManager.white,
+                  size: 28.sp,
+                ),
+              ],
             );
           },
         ),

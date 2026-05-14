@@ -3,6 +3,7 @@ import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/cust
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
@@ -14,12 +15,38 @@ class DoctorHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(170),
-        child: CustomAppBar(
-          isLayout: true,
-          title1: "Good Morning !",
-          title2: "Dr. Ahmed",
+      appBar: CustomAppBar(
+        preferredHeight: 170.h,
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 28,
+              backgroundImage: AssetImage(ImageAssets.doctor),
+              backgroundColor: const Color(0xFFE8EFF7),
+            ),
+            20.horizontalSpace,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Good Morning !",
+                  style: getSemiBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 16.sp,
+                  ),
+                ),
+                4.verticalSpace,
+                Text(
+                  "Dr. Ahmed",
+                  style: getBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 18.sp,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
       body: SingleChildScrollView(
