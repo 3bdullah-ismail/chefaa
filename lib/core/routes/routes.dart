@@ -1,3 +1,5 @@
+import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinic_details_page.dart';
+import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinics_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,6 +64,15 @@ class Routes {
       case AppRoutesNames.onboardingRoute:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const OnboardingPage()),
+        );
+      case AppRoutesNames.clinicsPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const ClinicsPage()),
+        );
+      case AppRoutesNames.clinicsDetailsPage:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => _wrapWithCanPop(const ClinicDetailsPage()),
         );
       case AppRoutesNames.option:
         return MaterialPageRoute(

@@ -6,10 +6,12 @@ import '../../../../../../core/resources/values_manager.dart';
 
 class CustomOutlineButton extends StatelessWidget {
   final String text;
+  final bool isAdd;
   final VoidCallback onPressed;
 
   const CustomOutlineButton({
     super.key,
+    this.isAdd = true,
     required this.text,
     required this.onPressed,
   });
@@ -30,8 +32,11 @@ class CustomOutlineButton extends StatelessWidget {
         onPressed();
       },
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.add, color: ColorManager.primary, size: 23),
+          isAdd
+              ? const Icon(Icons.add, color: ColorManager.primary, size: 23)
+              : const SizedBox.shrink(),
           Text(
             text,
             style: getMediumStyle(color: ColorManager.primary, fontSize: 18),

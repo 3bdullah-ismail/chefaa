@@ -13,7 +13,7 @@ class ScheduleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55.h,
+      height: 45.h,
       decoration: BoxDecoration(
         color: ColorManager.input.withAlpha(100),
         borderRadius: BorderRadius.circular(25.r),
@@ -21,17 +21,17 @@ class ScheduleCard extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p18,
-          vertical: AppPadding.p12,
+          horizontal: AppPadding.p20,
+          vertical: AppPadding.p8,
         ),
         child: Row(
           children: [
             Text(
               day,
-              style: getBoldStyle(color: ColorManager.gray, fontSize: 18),
+              style: getBoldStyle(color: ColorManager.gray, fontSize: 16),
             ),
             15.horizontalSpace,
-            Text(time, style: getSemiBoldStyle(color: ColorManager.gray)),
+            Text(time, style: getSemiBoldStyle(color: ColorManager.gray, fontSize: 14)),
           ],
         ),
       ),

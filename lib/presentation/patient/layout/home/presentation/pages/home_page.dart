@@ -1,5 +1,3 @@
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart';
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,9 +12,12 @@ import '../../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
 import '../../../../search/presentation/manager/search_cubit.dart';
 import '../../../../search/presentation/pages/search_page.dart';
+import '../../patient_medication/presentation/manager/medication_cubit.dart';
+import '../../patient_medication/presentation/manager/medication_state.dart';
 import '../manager/users_cubit.dart';
 import '../widgets/ai_suggestion.dart';
 import '../widgets/appointment_card.dart';
+import '../widgets/empty_medication_state.dart';
 import '../widgets/medicine_card.dart';
 import '../widgets/quick_actions.dart';
 
@@ -29,8 +30,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
-  final GlobalKey<MedicineCardState> _medicineCardKey =
-  GlobalKey<MedicineCardState>();
+  final GlobalKey<MedicineCardState> _medicineCardKey = GlobalKey<MedicineCardState>();
 
   void _openSearchPage() {
     Navigator.push(
@@ -42,11 +42,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -63,11 +58,9 @@ class _HomePageState extends State<HomePage> {
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (context, state) {
             String userName = "Patient";
-            if (state is UserLoaded) {
-              userName = state.user.name;
-            } else if (state is UsersLoading) {
-              userName = "...";
-            }
+            if (state is UserLoaded) userName = state.user.name;
+            if (state is UsersLoading) userName = "...";
+
             return CustomAppBar(
               isLayout: true,
               title1: "Good Morning !",
@@ -79,8 +72,7 @@ class _HomePageState extends State<HomePage> {
       body: BlocListener<MedicationCubit, MedicationState>(
         listener: (context, state) {
           if (state is MedicationConfirmSuccessState) {
-            _medicineCardKey.currentState
-                ?.updateConfirmed(state.confirmMedication);
+            _medicineCardKey.currentState?.updateConfirmed(state.confirmMedication);
           }
         },
         child: SingleChildScrollView(
@@ -110,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
+
                     50.verticalSpace,
                     const AiSuggestion(),
                     40.verticalSpace,
@@ -122,9 +115,7 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, state) {
                         if (state is MedicationListLoadingState) {
                           return const Center(
-                            child: CircularProgressIndicator(
-                              color: ColorManager.primary,
-                            ),
+                            child: CircularProgressIndicator(color: ColorManager.primary),
                           );
                         }
 
@@ -132,8 +123,7 @@ class _HomePageState extends State<HomePage> {
                           return Center(
                             child: Text(
                               state.errorMessage,
-                              style:
-                              getMediumStyle(color: ColorManager.error),
+                              style: getMediumStyle(color: ColorManager.error),
                             ),
                           );
                         }
@@ -154,54 +144,35 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
+                                  if (medications.isNotEmpty)
+                                    TextButton(
+                                      onPressed: () => Navigator.pushNamed(
                                         context,
                                         AppRoutesNames.medicationPage,
-                                      );
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "Manage",
-                                          style: getMediumStyle(
-                                            color: ColorManager.primary,
-                                            fontSize: 18,
-                                          ).copyWith(
-                                            decoration:
-                                            TextDecoration.underline,
-                                            decorationColor:
-                                            ColorManager.primary,
-                                            decorationThickness: 2,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Manage",
+                                            style: getMediumStyle(
+                                              color: ColorManager.primary,
+                                              fontSize: 18,
+                                            ).copyWith(
+                                              decoration: TextDecoration.underline,
+                                              decorationColor: ColorManager.primary,
+                                              decorationThickness: 2,
+                                            ),
                                           ),
-                                        ),
-                                        SvgPicture.asset(
-                                          "assets/icons/drug.svg",
-                                        ),
-                                      ],
+                                          SvgPicture.asset("assets/icons/drug.svg"),
+                                        ],
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                               15.verticalSpace,
+
                               if (medications.isEmpty)
-                                Container(
-                                  height: 100.h,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: ColorManager.lightGray,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      "No medications for today.",
-                                      style: getMediumStyle(
-                                        color: ColorManager.black,
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                const EmptyMedicationState()
                               else
                                 MedicineCard(
                                   key: _medicineCardKey,
@@ -216,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                           );
                         }
 
-                        return const SizedBox();
+                        return const SizedBox.shrink();
                       },
                     ),
 
@@ -236,12 +207,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutesNames.appointmentPage,
-                            );
-                          },
+                          onPressed: () => Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.appointmentPage,
+                          ),
                           child: Row(
                             children: [
                               Text(
@@ -252,7 +221,6 @@ class _HomePageState extends State<HomePage> {
                                 ).copyWith(
                                   decoration: TextDecoration.underline,
                                   decorationColor: ColorManager.primary,
-                                  decorationThickness: 2,
                                 ),
                               ),
                               SvgPicture.asset("assets/icons/drug.svg"),
@@ -274,39 +242,16 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: QuickActions(
-                        title: "Emergency",
-                        image: SvgAssets.phone,
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: QuickActions(
-                        title: "Order Pharmacy",
-                        image: SvgAssets.orderPharmacy,
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: QuickActions(
-                        title: "Appointments",
-                        image: SvgAssets.appointment,
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: QuickActions(
-                        title: "Find Lab",
-                        image: SvgAssets.findLab,
-                        onTap: () {},
-                      ),
-                    ),
+                    Expanded(child: QuickActions(title: "Emergency", image: SvgAssets.phone, onTap: () {})),
+                    Expanded(child: QuickActions(title: "Order Pharmacy", image: SvgAssets.orderPharmacy, onTap: () {})),
+                    Expanded(child: QuickActions(title: "Appointments", image: SvgAssets.appointment, onTap: () {})),
+                    Expanded(child: QuickActions(title: "Find Lab", image: SvgAssets.findLab, onTap: () {})),
                   ],
                 ),
               ),

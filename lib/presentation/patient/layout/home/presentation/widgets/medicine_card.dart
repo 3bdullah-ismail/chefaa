@@ -63,7 +63,7 @@ class MedicineCardState extends State<MedicineCard> {
             itemCount: widget.medications.length,
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(right: AppPadding.p8),
-            separatorBuilder: (_, __) => const Divider(),
+            separatorBuilder: (_, _) => const Divider(),
             itemBuilder: (_, index) {
               final med = widget.medications[index];
               final confirmed = _confirmed[med.id ?? ''];

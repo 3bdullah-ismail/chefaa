@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../../core/resources/values_manager.dart';
 
@@ -25,7 +26,7 @@ class OutlineButton extends StatelessWidget {
           horizontal: isEditSheet?AppPadding.p100: AppPadding.p16,
           vertical:isEditSheet?AppPadding.p14: AppPadding.p2,
         ),
-        minimumSize: Size.zero,
+        minimumSize: Size(double.infinity, 50.h),
         side:  BorderSide(color: color),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       ),
