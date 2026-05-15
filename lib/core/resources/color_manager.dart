@@ -15,5 +15,6 @@ abstract class ColorManager {
   static const Color gold = Color(0xffF8DC21);
   static const Color h2Color = Color(0xff707784);
   static const Color lawAnalysis = Color(0xffFBBC05);
+  static const Color cyan = Color(0xff05f3fb);
   static const Color transparent = Colors.transparent;
 }

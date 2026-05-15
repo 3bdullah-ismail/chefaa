@@ -12,12 +12,14 @@ class ItemContainer extends StatelessWidget {
   });
 
   final Widget child;
-  final bool? isMedication;
+  final bool isMedication;
 
   @override
   Widget build(BuildContext context) {
+    final widthFactor = isMedication ? 0.9 : 0.8;
+
     return Container(
-      width: isMedication == true ? context.width * 0.9 : context.width * 0.8,
+      width: context.width * widthFactor,
       padding: const EdgeInsets.symmetric(
         horizontal: AppPadding.p14,
         vertical: AppPadding.p14,

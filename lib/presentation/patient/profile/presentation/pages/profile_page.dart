@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
 import '../manager/profile_cubit.dart';
@@ -163,103 +164,11 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                       ),
                     ),
                     32.verticalSpace,
-                    ItemContainer(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: REdgeInsets.symmetric(
-                              horizontal: 23,
-                              vertical: 17,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Version',
-                                  style: getSemiBoldStyle(
-                                    color: ColorManager.black,
-                                    fontSize: FontSize.s16.sp,
-                                  ),
-                                ),
-                                Text(
-                                  '1.0.0',
-                                  style: getMediumStyle(
-                                    color: ColorManager.gray,
-                                    fontSize: FontSize.s12.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: ColorManager.input,
-                            height: 1.h,
-                            thickness: 1,
-                          ),
-                          Padding(
-                            padding: REdgeInsets.symmetric(
-                              horizontal: 23,
-                              vertical: 17,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Terms and Privacy',
-                                  style: getSemiBoldStyle(
-                                    color: ColorManager.black,
-                                    fontSize: FontSize.s16.sp,
-                                  ),
-                                ),
-                                Text(
-                                  'View',
-                                  style:
-                                      getMediumStyle(
-                                        color: ColorManager.primary,
-                                        fontSize: FontSize.s12.sp,
-                                      ).copyWith(
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: ColorManager.primary,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    VersionContainer(),
                     32.verticalSpace,
-                    ItemContainer(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            "assets/svg_images/Logout.svg",
-                            colorFilter: const ColorFilter.mode(
-                              ColorManager.error,
-                              BlendMode.srcIn,
-                            ),
-                          ),
-                          24.horizontalSpace,
-                          Text(
-                            "Logout",
-                            style: getSemiBoldStyle(
-                              color: ColorManager.error,
-                              fontSize: FontSize.s20.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                    LogOutBtn(),
                     24.verticalSpace,
-                    Text(
-                      "Delete account",
-                      style: getSemiBoldStyle(
-                        color: ColorManager.error,
-                        fontSize: FontSize.s16,
-                      ),
-                    ),
+                    DeleteAccount(),
                   ],
                 ),
               ),
@@ -279,6 +188,115 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
           color: ColorManager.black,
           fontSize: FontSize.s20.sp,
         ),
+      ),
+    );
+  }
+}
+
+class DeleteAccount extends StatelessWidget {
+  const DeleteAccount({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "Delete account",
+      style: getSemiBoldStyle(
+        color: ColorManager.error,
+        fontSize: FontSize.s16,
+      ),
+    );
+  }
+}
+
+class LogOutBtn extends StatelessWidget {
+  const LogOutBtn({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ItemContainer(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            "assets/svg_images/Logout.svg",
+            colorFilter: const ColorFilter.mode(
+              ColorManager.error,
+              BlendMode.srcIn,
+            ),
+          ),
+          24.horizontalSpace,
+          Text(
+            "Logout",
+            style: getSemiBoldStyle(
+              color: ColorManager.error,
+              fontSize: FontSize.s20.sp,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class VersionContainer extends StatelessWidget {
+  const VersionContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ItemContainer(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: REdgeInsets.symmetric(horizontal: 23, vertical: 17),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Version',
+                  style: getSemiBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: FontSize.s16.sp,
+                  ),
+                ),
+                Text(
+                  '1.0.0',
+                  style: getMediumStyle(
+                    color: ColorManager.gray,
+                    fontSize: FontSize.s12.sp,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(color: ColorManager.input, height: 1.h, thickness: 1),
+          Padding(
+            padding: REdgeInsets.symmetric(horizontal: 23, vertical: 17),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Terms and Privacy',
+                  style: getSemiBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: FontSize.s16.sp,
+                  ),
+                ),
+                Text(
+                  'View',
+                  style:
+                      getMediumStyle(
+                        color: ColorManager.primary,
+                        fontSize: FontSize.s12.sp,
+                      ).copyWith(
+                        decoration: TextDecoration.underline,
+                        decorationColor: ColorManager.primary,
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:chefaa/core/widget/custom_circle_avatar.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/clinic_card.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/custom_outline_button.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,9 @@ class DoctorHome extends StatelessWidget {
         preferredHeight: 170.h,
         child: Row(
           children: [
-            CircleAvatar(
-              radius: 28,
-              backgroundImage: AssetImage(ImageAssets.doctor),
-              backgroundColor: const Color(0xFFE8EFF7),
+            const CustomCircleAvatar(
+              imagePath: ImageAssets.doctor,
+              backgroundColor: ColorManager.white,
             ),
             20.horizontalSpace,
             Column(
