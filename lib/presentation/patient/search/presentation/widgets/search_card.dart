@@ -7,12 +7,12 @@ import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
 import '../../../booking/presentation/manager/booking_provider.dart';
-import '../../domain/entities/doctor_model.dart';
+import '../../domain/entities/clinic_model.dart';
 
 class SearchCard extends StatelessWidget {
-  const SearchCard({super.key, required this.doctorModel});
+  const SearchCard({super.key, required this.clinicModel});
 
-  final DoctorModel doctorModel;
+  final ClinicModel clinicModel;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class SearchCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      doctorModel.name,
+                      clinicModel.doctorName,
                       style: getSemiBoldStyle(
                         color: ColorManager.black,
                         fontSize: 18,
@@ -56,7 +56,7 @@ class SearchCard extends StatelessWidget {
                     ),
                     4.verticalSpace,
                     Text(
-                      doctorModel.specialty,
+                      clinicModel.doctorSpecialty,
                       style: getMediumStyle(
                         color: ColorManager.gray,
                         fontSize: 14,
@@ -74,7 +74,7 @@ class SearchCard extends StatelessWidget {
                         4.horizontalSpace,
 
                         Text(
-                          doctorModel.rating,
+                          clinicModel.doctorRating,
                           style: getMediumStyle(
                             color: ColorManager.black,
                             fontSize: 14,
@@ -83,7 +83,7 @@ class SearchCard extends StatelessWidget {
                         4.horizontalSpace,
 
                         Text(
-                          "(${doctorModel.ratingCount})",
+                          "(${clinicModel.doctorRatingCount})",
                           style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: 11,
@@ -95,7 +95,7 @@ class SearchCard extends StatelessWidget {
                 ),
               ),
               Text(
-                '${doctorModel.price} E£',
+                '${clinicModel.clinicPrice} E£',
                 style: getSemiBoldStyle(
                   color: ColorManager.primary,
                   fontSize: 18,
@@ -109,7 +109,16 @@ class SearchCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              context.read<BookingProvider>().selectDoctorAndNext(doctorModel);
+              final provider = context.read<BookingProvider>();
+              final canProceed = provider.selectClinicAndNext(clinicModel);
+
+              if (!canProceed) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('This clinic has no available dates right now'),
+                  ),
+                );
+              }
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

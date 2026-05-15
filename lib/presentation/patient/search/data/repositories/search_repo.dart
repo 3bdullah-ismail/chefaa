@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/patient/search/domain/entities/doctor_model.dart';
+import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 
 abstract class SearchRepo {
-  Future<List<DoctorModel>?> filterSearch({
+  Future<List<ClinicModel>?> filterSearch({
     String? searchText,
     String? specialization,
     String? gender,

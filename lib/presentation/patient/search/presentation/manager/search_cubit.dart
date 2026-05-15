@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../data/models/search_query.dart';
 import '../../data/repositories/search_repo.dart';
-import '../../domain/entities/doctor_model.dart';
+import '../../domain/entities/clinic_model.dart';
 
 part 'search_state.dart';
 
@@ -24,9 +24,9 @@ class SearchCubit extends Cubit<SearchState> {
   bool _isSearching = false;
 
   // Keep latest result so list widgets can render through transitions.
-  List<DoctorModel> _lastClinics = const [];
+  List<ClinicModel> _lastClinics = const [];
 
-  List<DoctorModel> get lastClinics => _lastClinics;
+  List<ClinicModel> get lastClinics => _lastClinics;
 
   final List<FilterType> filterTabs = const [
     FilterType.filters,

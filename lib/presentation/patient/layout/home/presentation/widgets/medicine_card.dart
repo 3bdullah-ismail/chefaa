@@ -43,10 +43,7 @@ class MedicineCardState extends State<MedicineCard> {
           color: ColorManager.lightGray,
           borderRadius: BorderRadius.circular(25.r),
           boxShadow: [
-            BoxShadow(
-              color: ColorManager.black.withAlpha(80),
-              blurRadius: 10,
-            ),
+            BoxShadow(color: ColorManager.black.withAlpha(80), blurRadius: 10),
           ],
         ),
         child: RawScrollbar(
@@ -71,7 +68,6 @@ class MedicineCardState extends State<MedicineCard> {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +75,7 @@ class MedicineCardState extends State<MedicineCard> {
                         Text(
                           med.name?.isNotEmpty == true
                               ? med.name![0].toUpperCase() +
-                              med.name!.substring(1).toLowerCase()
+                                    med.name!.substring(1).toLowerCase()
                               : 'Medication Name',
                           style: getBoldStyle(
                             color: ColorManager.black,
@@ -98,9 +94,7 @@ class MedicineCardState extends State<MedicineCard> {
                   12.horizontalSpace,
                   confirmed != null
                       ? _ConfirmedStatus(confirmed: confirmed)
-                      : _ConfirmActions(
-                    onConfirm: () => widget.onPressed(med),
-                  ),
+                      : _ConfirmActions(onConfirm: () => widget.onPressed(med)),
                 ],
               );
             },
@@ -113,6 +107,7 @@ class MedicineCardState extends State<MedicineCard> {
 
 class _ConfirmActions extends StatelessWidget {
   final VoidCallback onConfirm;
+
   const _ConfirmActions({required this.onConfirm});
 
   @override
@@ -133,10 +128,7 @@ class _ConfirmActions extends StatelessWidget {
           ),
         ),
         20.horizontalSpace,
-        ElevateButton(
-          text: 'Confirm',
-          onPressed: onConfirm,
-        ),
+        ElevateButton(text: 'Confirm', onPressed: onConfirm),
       ],
     );
   }
@@ -144,6 +136,7 @@ class _ConfirmActions extends StatelessWidget {
 
 class _ConfirmedStatus extends StatelessWidget {
   final ConfirmMedication confirmed;
+
   const _ConfirmedStatus({required this.confirmed});
 
   @override
@@ -159,11 +152,7 @@ class _ConfirmedStatus extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(
-          Icons.check_outlined,
-          color: Colors.green,
-          size: 22,
-        ),
+        const Icon(Icons.check_outlined, color: Colors.green, size: 22),
         8.horizontalSpace,
         Text(
           displayStatus,

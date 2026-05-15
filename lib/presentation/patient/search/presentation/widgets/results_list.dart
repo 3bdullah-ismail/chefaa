@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/widget/loading.dart';
 import '../manager/search_cubit.dart';
 import 'search_card.dart';
 
@@ -9,7 +10,18 @@ class ResultsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchCubit, SearchState>(
+    return BlocConsumer<SearchCubit, SearchState>(
+      listenWhen: (previous, current) =>
+          current is SearchLoading ||
+          current is SearchSuccess ||
+          current is SearchError,
+      listener: (context, state) {
+        if (state is SearchLoading && context.read<SearchCubit>().lastClinics.isEmpty) {
+          Loading.show(context);
+        } else if (state is SearchSuccess || state is SearchError) {
+          Loading.hide(context);
+        }
+      },
       buildWhen: (previous, current) =>
           current is SearchLoading ||
           current is SearchSuccess ||
@@ -17,19 +29,14 @@ class ResultsList extends StatelessWidget {
       builder: (context, state) {
         final cubit = context.read<SearchCubit>();
 
-        if (state is SearchLoading && cubit.lastClinics.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
         if (state is SearchError && cubit.lastClinics.isEmpty) {
           return Center(child: Text(state.message));
         }
 
-        final clinics = state is SearchSuccess
-            ? state.clinics
-            : cubit.lastClinics;
+        final clinics = state is SearchSuccess ? state.clinics : cubit.lastClinics;
 
-        final isRefreshing = (state is SearchLoading && clinics.isNotEmpty) ||
+        final isRefreshing =
+            (state is SearchLoading && clinics.isNotEmpty) ||
             (state is SearchSuccess && state.isRefreshing);
 
         if (clinics.isEmpty) {
@@ -38,15 +45,14 @@ class ResultsList extends StatelessWidget {
 
         return Column(
           children: [
-            if (isRefreshing)
-              const LinearProgressIndicator(minHeight: 2),
+            if (isRefreshing) const LinearProgressIndicator(minHeight: 2),
             Expanded(
               child: ListView.separated(
                 padding: EdgeInsets.zero,
                 itemCount: clinics.length,
                 separatorBuilder: (_, _) => const SizedBox(height: 16),
                 itemBuilder: (context, index) {
-                  return SearchCard(doctorModel: clinics[index]);
+                  return SearchCard(clinicModel: clinics[index]);
                 },
               ),
             ),
