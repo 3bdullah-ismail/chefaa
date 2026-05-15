@@ -20,12 +20,18 @@ class Data {
       patientName: json['patientName'],
       findings: json['findings'] != null
           ? List<Findings>.from(
-              json['findings'].map((x) => Findings.fromJson(x)),
-            )
+        (json['findings'] as List).map(
+              (x) => Findings.fromJson(
+            x is Map<String, dynamic> ? x : Map<String, dynamic>.from(x as Map),
+          ),
+        ),
+      )
           : [],
       dangerScore: json['dangerScore'],
       summary: json['summary'],
-      tips: List<String>.from(json['tips'] ?? []),
+      tips: json['tips'] != null
+          ? List<String>.from((json['tips'] as List).map((e) => e.toString()))
+          : [],
     );
   }
 

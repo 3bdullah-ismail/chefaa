@@ -7,30 +7,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ScheduleCard extends StatelessWidget {
   final String day;
   final String time;
-
   const ScheduleCard({super.key, required this.day, required this.time});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55.h,
+      height: 45.h,
       decoration: BoxDecoration(
         color: ColorManager.input.withAlpha(100),
         borderRadius: BorderRadius.circular(25.r),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p18,
-          vertical: AppPadding.p12,
+          horizontal: AppPadding.p20,
+          vertical: AppPadding.p8,
         ),
         child: Row(
           children: [
             Text(
               day,
-              style: getBoldStyle(color: ColorManager.gray, fontSize: 18),
+              style: getBoldStyle(color: ColorManager.gray, fontSize: 16),
             ),
             15.horizontalSpace,
-            Text(time, style: getSemiBoldStyle(color: ColorManager.gray)),
+            Text(time, style: getSemiBoldStyle(color: ColorManager.gray, fontSize: 14)),
           ],
         ),
       ),

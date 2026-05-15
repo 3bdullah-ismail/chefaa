@@ -8,7 +8,6 @@ class DoseCard extends StatelessWidget {
   final List<TimeOfDay?> selectedTimes;
   final Function(int) deleteDose;
   final Function(int) onPickTime;
-
   const DoseCard({
     super.key,
     required this.selectedTimes,

@@ -21,6 +21,7 @@ class AppRoutesNames {
   static const String doctorLayout = '/doctorLayout';
   static const String pharmacyLayout = '/pharmacyLayout';
   static const String facilityLayout = '/facilityLayout';
+
   static const String medicationPage = '/medicationPage';
   static const String specialityPage = '/specialityPage';
   static const String chooseDoctor = '/chooseDoctor';
@@ -28,4 +29,8 @@ class AppRoutesNames {
   static const String aiLabAnalysis = '/aiLabAnalysis';
   static const String appointmentPage = '/appointmentPage';
   static const String historyReportPage = '/historyReportPage';
+
+  static const String clinicsPage = '/clinicsPage';
+
+  static const String clinicsDetailsPage = '/clinicsDetailsPage';
 }

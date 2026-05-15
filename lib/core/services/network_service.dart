@@ -18,8 +18,8 @@ class NetworkService {
     dio = Dio(
       BaseOptions(
         baseUrl: "https://shefaa-backend.vercel.app/api",
-        connectTimeout: const Duration(seconds: 20),
-        receiveTimeout: const Duration(seconds: 20),
+        connectTimeout: const Duration(seconds: 50),
+        receiveTimeout: const Duration(seconds: 50),
         followRedirects: false,
         headers: {"Accept": "application/json"},
       ),

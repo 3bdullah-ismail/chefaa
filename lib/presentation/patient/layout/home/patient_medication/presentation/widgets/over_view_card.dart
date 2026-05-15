@@ -16,7 +16,6 @@ class OverViewCard extends StatelessWidget {
     required this.label,
     required this.title,
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,15 +32,15 @@ class OverViewCard extends StatelessWidget {
         ],
       ),
       height: 80.h,
-      width: 155.w,
+      width: 175.w,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p12,
           vertical: AppPadding.p12,
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               label,

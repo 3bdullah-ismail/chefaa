@@ -36,13 +36,12 @@ class PatientCubit extends Cubit<PatientState> {
   bool _isSigningUp = false;
 
   Future<void> patientSignUp() async {
-    // Prevent multiple concurrent sign-up attempts which can cause repeated
-    // UI work and platform input churn (keyboard/input connection issues).
+
     if (_isSigningUp) return;
     _isSigningUp = true;
     emit(SignUpLoadingState());
     try {
-      print("patientSignUp called");
+
       var response = await patientRepo.patientSignUp(
         name: nameController.text,
         userName: userNameController.text,
@@ -52,7 +51,6 @@ class PatientCubit extends Cubit<PatientState> {
         role: role,
       );
       if (response.user != null) {
-        // saveUser offloads JSON encoding internally (StorageService)
         await StorageService.saveUser(response.user!);
       }
       if (response.accessToken != null) {

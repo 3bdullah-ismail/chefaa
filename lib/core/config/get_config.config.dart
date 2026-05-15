@@ -26,6 +26,16 @@ import '../../presentation/doctor/auth/data/repositories/repo_imp.dart'
     as _i1023;
 import '../../presentation/doctor/auth/presentation/manager/doctor_auth_cubit.dart'
     as _i236;
+import '../../presentation/doctor/layout/home/data/data_sources/clinic_data_source.dart'
+    as _i808;
+import '../../presentation/doctor/layout/home/data/data_sources/clinic_data_source_imp.dart'
+    as _i637;
+import '../../presentation/doctor/layout/home/data/repositories/clinic_repo.dart'
+    as _i114;
+import '../../presentation/doctor/layout/home/data/repositories/clinic_repo_imp.dart'
+    as _i334;
+import '../../presentation/doctor/layout/home/presentation/manager/clinic_cubit.dart'
+    as _i243;
 import '../../presentation/Facility/auth/data/data_sources/data_source.dart'
     as _i377;
 import '../../presentation/Facility/auth/data/data_sources/data_source_imp.dart'
@@ -144,6 +154,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i150.SearchDoctorLocalDataSourceImp());
     gh.factory<_i372.BookingRemoteDataSource>(
         () => _i1020.BookingRemoteDataSourceImpl(gh<_i463.NetworkService>()));
+    gh.factory<_i808.ClinicDataSource>(
+        () => _i637.ClinicDataSourceImp(gh<_i463.NetworkService>()));
     gh.factory<_i183.ProfileRemoteDataSource>(
         () => _i1047.ProfileRemoteDataSourceImpl(gh<_i463.NetworkService>()));
     gh.factory<_i565.PharmacyDataSource>(() => _i176.PharmacyDataSourceImp(
@@ -180,6 +192,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i856.PatientRepoImp(gh<_i1041.PatientDataSource>()));
     gh.factory<_i966.MedicationRepo>(
         () => _i689.MedicationRepoImp(gh<_i382.MedicationDataSource>()));
+    gh.factory<_i114.ClinicRepo>(
+        () => _i334.ClinicRepoImp(gh<_i808.ClinicDataSource>()));
     gh.factory<_i530.CompletePatientRepo>(() => _i809.CompletePatientRepoImp(
         completeDataSource: gh<_i139.CompleteDataSource>()));
     gh.factory<_i499.PharmacyRepo>(() => _i596.PharmacyRepoImp(
@@ -194,6 +208,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i294.CompleteCubit(gh<_i530.CompletePatientRepo>()));
     gh.factory<_i551.DoctorAuthRepo>(
         () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()));
+    gh.factory<_i243.ClinicCubit>(
+        () => _i243.ClinicCubit(gh<_i114.ClinicRepo>()));
     gh.factory<_i851.ProfileRepo>(
         () => _i371.ProfileRepoImpl(gh<_i183.ProfileRemoteDataSource>()));
     gh.factory<_i481.MedicationCubit>(
@@ -210,12 +226,14 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i840.PharmacyCubit>(
         () => _i840.PharmacyCubit(gh<_i499.PharmacyRepo>()));
+    gh.factory<_i236.DoctorAuthCubit>(() => _i236.DoctorAuthCubit(
+          doctorAuthRepo: gh<_i551.DoctorAuthRepo>(),
+          usersCubit: gh<_i745.UsersCubit>(),
+        ));
     gh.factory<_i1023.SearchCubit>(
         () => _i1023.SearchCubit(gh<_i269.SearchRepo>()));
     gh.factory<_i779.ProfileCubit>(
         () => _i779.ProfileCubit(gh<_i851.ProfileRepo>()));
-    gh.factory<_i236.DoctorAuthCubit>(
-        () => _i236.DoctorAuthCubit(gh<_i551.DoctorAuthRepo>()));
     return this;
   }
 }

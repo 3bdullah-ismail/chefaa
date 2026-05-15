@@ -1,35 +1,35 @@
-import 'package:chefaa/core/resources/constants_manager.dart';
-import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/data/models/Medications.dart';
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../../core/resources/color_manager.dart';
-import '../../../../../../../core/resources/values_manager.dart';
+import '../../../../../../../core/resources/constants_manager.dart';
+import '../../../../../../../core/resources/styles_manager.dart';
+import '../../data/models/Medications.dart';
+import 'outline_button.dart';
 
 class MedicationCard extends StatelessWidget {
   final List<Medications> medications;
   final int index;
-  final void Function() onPressed;
+  final VoidCallback onPressed;
 
   const MedicationCard({
     super.key,
-    required this.index,
     required this.medications,
+    required this.index,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
+    final med = medications[index];
+
     return Container(
-      padding: const EdgeInsets.all(AppPadding.p16),
-      height: 200,
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
         color: ColorManager.lightGray,
+        borderRadius: BorderRadius.circular(25.r),
         border: Border.all(color: ColorManager.input),
         boxShadow: [
           BoxShadow(
@@ -41,10 +41,8 @@ class MedicationCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Row(
-            spacing: 20,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -58,85 +56,98 @@ class MedicationCard extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(SvgAssets.medicationIcon),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    medications[index].name?.isNotEmpty == true
-                        ? medications[index].name![0].toUpperCase() +
-                              medications[index].name!
-                                  .substring(1)
-                                  .toLowerCase()
-                        : "Medication Name",
-                    style: getSemiBoldStyle(
-                      color: ColorManager.black,
-                    ).copyWith(fontSize: 18),
-                  ),
-                  Text(
-                    "${medications[index].dosage} - ${medications[index].form}",
-                    style: getRegularStyle(
-                      color: ColorManager.h2Color,
-                    ).copyWith(fontSize: 14),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p8,
-                  vertical: AppPadding.p4,
+              16.horizontalSpace,
+
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      (med.name?.isNotEmpty == true)
+                          ? med.name![0].toUpperCase() +
+                                med.name!.substring(1).toLowerCase()
+                          : "Medication Name",
+                      style: getSemiBoldStyle(
+                        fontSize: 18.sp,
+                        color: ColorManager.black,
+                      ),
+                    ),
+                    4.verticalSpace,
+                    Text(
+                      "${med.dosage} - ${med.form}",
+                      style: getRegularStyle(
+                        color: ColorManager.h2Color,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
                 decoration: BoxDecoration(
-                  color: ColorManager.lightGreen.withAlpha(90),
-                  borderRadius: BorderRadius.circular(25),
+                  color: ColorManager.lightGreen.withAlpha(30),
+                  borderRadius: BorderRadius.circular(25.r),
                 ),
                 child: Text(
-                  "${medications[index].adherencePercentage}%",
+                  "${med.adherencePercentage}%",
                   style: getBoldStyle(
                     color: ColorManager.lightGreen,
-                  ).copyWith(fontSize: 15),
+                    fontSize: 15.sp,
+                  ),
                 ),
               ),
             ],
           ),
-          30.verticalSpace,
+
+          24.verticalSpace,
+
           Row(
-            spacing: 10,
             children: [
               const Icon(Icons.access_time_rounded, color: ColorManager.gray),
-              Text(
-                "${medications[index].timesPerDay}x daily - ${medications[index].schedule?.join(', ')}",
-                style: getRegularStyle(
-                  color: ColorManager.gray,
-                ).copyWith(fontSize: 14),
+              8.horizontalSpace,
+              Expanded(
+                child: Text(
+                  "${med.timesPerDay}x daily - ${med.schedule?.join(', ') ?? ''}",
+                  style: getRegularStyle(
+                    color: ColorManager.gray,
+                    fontSize: 14.sp,
+                  ),
+                ),
               ),
             ],
           ),
+
+          12.verticalSpace,
+
           Row(
-            spacing: 10,
             children: [
               const Icon(
                 Icons.calendar_today_outlined,
                 color: ColorManager.gray,
               ),
-
-              Text(
-                "${AppConstants.formatDate(medications[index].startDate)} - ${AppConstants.formatDate(medications[index].endDate)}",
-                style: getRegularStyle(
-                  color: ColorManager.gray,
-                ).copyWith(fontSize: 14),
+              8.horizontalSpace,
+              Expanded(
+                child: Text(
+                  "${AppConstants.formatDate(med.startDate)} - ${AppConstants.formatDate(med.endDate)}",
+                  style: getRegularStyle(
+                    color: ColorManager.gray,
+                    fontSize: 14.sp,
+                  ),
+                ),
               ),
             ],
           ),
-          Row(
-            children: [
-              const Spacer(),
-              OutlineButton(
-                onPressed: onPressed,
-                title: "Edit",
-                color: ColorManager.primary,
-              ),
-            ],
+
+          24.verticalSpace,
+
+          Align(
+            alignment: Alignment.centerRight,
+            child: OutlineButton(
+              onPressed: onPressed,
+              title: "Edit",
+              color: ColorManager.primary,
+            ),
           ),
         ],
       ),

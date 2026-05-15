@@ -5,7 +5,6 @@ import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_state.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/add_medication.dart';
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/edit_bottom_sheet.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/medication_card.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/over_view_card.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/suggest_card.dart';
@@ -14,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../widgets/bottom_sheet.dart';
+import '../../data/models/Medications.dart';
+import '../widgets/empty_medication_list_state.dart';
+import '../widgets/medication_bottom_sheet.dart';
 
 class MedicationPage extends StatefulWidget {
   const MedicationPage({super.key});
@@ -24,6 +25,18 @@ class MedicationPage extends StatefulWidget {
 }
 
 class _MedicationPageState extends State<MedicationPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMedications();
+  }
+
+  void _loadMedications() {
+    final cubit = context.read<MedicationCubit>();
+    cubit.getMedicationList(forceRefresh: true);
+  }
+
   void _openAddSheet(BuildContext context) {
     final cubit = context.read<MedicationCubit>();
     cubit.clearControllers();
@@ -36,20 +49,20 @@ class _MedicationPageState extends State<MedicationPage> {
         value: cubit,
         child: const FractionallySizedBox(
           heightFactor: 0.92,
-          child: BottomSheetCard(
+          child: MedicationBottomSheet(
             title: "Add Medication",
-            content:
-                "Enter your medication details for tracking and reminders.",
+            content: "Enter your medication details for tracking and reminders.",
+            isEdit: false,
           ),
         ),
       ),
     ).then((_) {
       if (!mounted) return;
-      cubit.getMedicationList(forceRefresh: true);
+      _loadMedications();
     });
   }
 
-  void _openEditSheet(BuildContext context, String medicationId) {
+  void _openEditSheet(BuildContext context, Medications med) {
     final cubit = context.read<MedicationCubit>();
 
     showModalBottomSheet(
@@ -60,16 +73,17 @@ class _MedicationPageState extends State<MedicationPage> {
         value: cubit,
         child: FractionallySizedBox(
           heightFactor: 0.92,
-          child: EditBottomSheet(
-            medicationId: medicationId,
+          child: MedicationBottomSheet(
+            medication: med,
             title: "Edit Medication",
             content: "Update your medication details.",
+            isEdit: true,
           ),
         ),
       ),
     ).then((_) {
       if (!mounted) return;
-      cubit.getMedicationList(forceRefresh: true);
+      _loadMedications();
     });
   }
 
@@ -79,40 +93,59 @@ class _MedicationPageState extends State<MedicationPage> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(130),
         child: InsideAppBar(
-          title: "My Medications ",
+          title: "My Medications",
           subtitle: "Track and manage your medication schedule",
           height: 130,
         ),
       ),
-      body: BlocBuilder<MedicationCubit, MedicationState>(
-        buildWhen: (previous, current) =>
-            current is MedicationListLoadingState ||
-            current is MedicationListSuccessState ||
-            current is MedicationListErrorState,
+
+      body: BlocConsumer<MedicationCubit, MedicationState>(
+        listener: (context, state) {
+          if (state is MedicationDeleteSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Medication deleted")),
+            );
+            _loadMedications();
+          }
+
+          if (state is MedicationDeleteErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.errorMessage)),
+            );
+          }
+        },
         builder: (context, state) {
           if (state is MedicationListLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(color: ColorManager.primary),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (state is MedicationListErrorState) {
             return Center(
-              child: Text(
-                state.errorMessage,
-                style: getMediumStyle(color: ColorManager.error),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.error_outline, size: 70, color: Colors.red),
+                    20.verticalSpace,
+                    Text(state.errorMessage, textAlign: TextAlign.center),
+                    20.verticalSpace,
+                    ElevatedButton(
+                      onPressed: _loadMedications,
+                      child: const Text("Try Again"),
+                    ),
+                  ],
+                ),
               ),
             );
           }
 
           if (state is MedicationListSuccessState) {
-            final medicationList = state.medications;
             final medications = state.medications.medications ?? [];
+            final bool isEmpty = medications.isEmpty;
 
             return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
-              ),
+              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: AppPadding.p32,
@@ -121,60 +154,62 @@ class _MedicationPageState extends State<MedicationPage> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 20,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        OverViewCard(
-                          label: "Avg.Adherence",
-                          title: "${medicationList.stats?.avgAdherence ?? 0}",
-                        ),
-                        OverViewCard(
-                          label: "Active Medications",
-                          title:
-                              "${medicationList.stats?.activeMedications ?? 0}",
-                          isActive: true,
-                        ),
-                      ],
-                    ),
-                    const SuggestCard(),
-                    5.verticalSpace,
-                    Row(
-                      children: [
-                        Text(
-                          "Medications",
-                          style: getMediumStyle(
-                            color: ColorManager.black,
-                          ).copyWith(fontSize: 20),
-                        ),
-                        const Spacer(),
-                        AddMedication(onTap: () => _openAddSheet(context)),
-                      ],
-                    ),
-                    ListView.separated(
-                      itemBuilder: (_, index) => MedicationCard(
-                        medications: medications,
-                        index: index,
-                        onPressed: () {
-                          final id = medications[index].id ?? '';
-                          _openEditSheet(context, id);
-                        },
+                    if (!isEmpty) ...[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          OverViewCard(
+                            label: "Avg.Adherence",
+                            title: "${state.medications.stats?.avgAdherence ?? 0}",
+                          ),
+                          OverViewCard(
+                            label: "Active Medications",
+                            title: "${state.medications.stats?.activeMedications ?? 0}",
+                            isActive: true,
+                          ),
+                        ],
                       ),
-                      separatorBuilder: (_, _) => const SizedBox(height: 20),
-                      itemCount: medications.length,
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                    ),
-                    const AiSuggestion(),
-                    5.verticalSpace,
+                      20.verticalSpace,
+                      const SuggestCard(),
+                      25.verticalSpace,
+
+                      Row(
+                        children: [
+                          Text("Medications", style: getMediumStyle(color: ColorManager.black, fontSize: 20.sp)),
+                          const Spacer(),
+                          AddMedication(onTap: () => _openAddSheet(context)),
+                        ],
+                      ),
+                      20.verticalSpace,
+                    ],
+
+                    if (isEmpty)
+                      EmptyMedicationListState(onAddPressed: () => _openAddSheet(context))
+                    else
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: medications.length,
+                        separatorBuilder: (_, _) => const SizedBox(height: 20),
+                        itemBuilder: (_, index) => MedicationCard(
+                          medications: medications,
+                          index: index,
+                          onPressed: () => _openEditSheet(context, medications[index]),
+                        ),
+                      ),
+
+                    if (!isEmpty) ...[
+                      30.verticalSpace,
+                      const AiSuggestion(),
+                    ],
                   ],
                 ),
               ),
             );
           }
 
-          return const SizedBox();
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

@@ -8,7 +8,6 @@ class ClinicInfoCard extends StatelessWidget {
   final String title;
   final bool isInfinity;
   final String value;
-
   const ClinicInfoCard({
     super.key,
     this.isInfinity = false,
@@ -20,7 +19,7 @@ class ClinicInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 70.h,
-      width: isInfinity ? double.infinity : null,
+      width: isInfinity ? double.infinity : 160.w,
       decoration: BoxDecoration(
         color: ColorManager.input,
         borderRadius: BorderRadius.circular(20.r),
@@ -32,23 +31,15 @@ class ClinicInfoCard extends StatelessWidget {
           vertical: AppPadding.p8,
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: getBoldStyle(color: ColorManager.gray, fontSize: 12),
+              style: getBoldStyle(color: ColorManager.gray, fontSize: 16),
             ),
             2.verticalSpace,
             Text(
               value,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: getBoldStyle(color: ColorManager.black, fontSize: 13),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 16),
             ),
           ],
         ),

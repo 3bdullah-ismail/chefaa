@@ -8,161 +8,197 @@ import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/sche
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/resources/color_manager.dart';
+import '../../../../../../core/resources/styles_manager.dart';
+import '../../../../../../core/resources/values_manager.dart';
+import '../../data/models/Clinics.dart';
+import 'clinic_days_avaliable.dart';
+import 'clinic_status.dart';
+
+
 class ClinicCard extends StatelessWidget {
-  const ClinicCard({super.key});
+
+  final Clinics clinic;
+  final VoidCallback onPressed;
+
+  const ClinicCard({
+    super.key,
+    required this.onPressed,
+    required this.clinic,
+  });
+
 
   @override
   Widget build(BuildContext context) {
-    final List<String> days = [
-      // "Saturday",
-      // "Sunday",
-      // "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-    ];
-    return Container(
-      height: 900.h,
-      decoration: BoxDecoration(
-        color: ColorManager.lightGray,
-        borderRadius: BorderRadius.circular(25.r),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.gray.withAlpha(100),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p18,
-          vertical: AppPadding.p20,
+
+    final availableDays =
+        clinic.defaultSchedule?.days ?? [];
+
+    return InkWell(
+
+      splashColor: ColorManager.transparent,
+      highlightColor: ColorManager.transparent,
+
+      onTap: onPressed,
+
+      child: Container(
+
+        decoration: BoxDecoration(
+          color: ColorManager.lightGray,
+
+          borderRadius: BorderRadius.circular(25.r),
+
+          boxShadow: [
+            BoxShadow(
+              color:
+              ColorManager.gray.withAlpha(100),
+
+              blurRadius: 10,
+
+              offset: const Offset(0, 5),
+            ),
+          ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Down Town Clinic",
-                      style: getBoldStyle(
-                        color: ColorManager.primary,
-                        fontSize: 18,
-                      ),
-                    ),
-                    5.verticalSpace,
-                    Row(
+
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppPadding.p18,
+            vertical: AppPadding.p20,
+          ),
+
+          child: Column(
+            children: [
+              Row(
+                children: [
+
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+
                       children: [
-                        const Icon(
-                          Icons.location_on,
-                          color: ColorManager.gray,
-                          size: 16,
-                        ),
+
                         Text(
-                          "Cairo, Egypt",
-                          style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: 14,
+                          clinic.name ??
+                              "Clinic Name",
+
+                          style: getBoldStyle(
+                            color:
+                            ColorManager.primary,
+
+                            fontSize: 18,
                           ),
+                        ),
+
+                        5.verticalSpace,
+
+                        Row(
+                          children: [
+
+                            const Icon(
+                              Icons.location_on,
+                              color:
+                              ColorManager.gray,
+                              size: 16,
+                            ),
+
+                            Expanded(
+                              child: Text(
+                                clinic.address ??
+                                    "Clinic Address",
+
+                                overflow:
+                                TextOverflow.ellipsis,
+
+                                style:
+                                getMediumStyle(
+                                  color:
+                                  ColorManager.gray,
+
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-                const Spacer(),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p12,
-                    vertical: AppPadding.p6,
                   ),
-                  width: 70.w,
-                  height: 30.h,
-                  decoration: BoxDecoration(
-                    color: ColorManager.lawAnalysis,
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  child: Text(
-                    "Pending",
-                    style: getMediumStyle(
-                      color: ColorManager.black,
-                      fontSize: 12,
+
+                  12.horizontalSpace,
+
+                  Container(
+                    padding:
+                    const EdgeInsets.symmetric(
+                      horizontal:
+                      AppPadding.p12,
+
+                      vertical: AppPadding.p6,
+                    ),
+
+                    decoration: BoxDecoration(
+                      color:
+                      ColorManager.lawAnalysis,
+
+                      borderRadius:
+                      BorderRadius.circular(
+                        15.r,
+                      ),
+                    ),
+
+                    child: Text(
+                      clinic.status ?? "Pending",
+
+                      style: getMediumStyle(
+                        color: ColorManager.black,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                ),
-                10.verticalSpace,
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  height: 30.h,
-                  child: ListView.separated(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) =>
-                        ClinicDaysAvailable(day: days[index]),
-                    separatorBuilder: (_, _) => const SizedBox(width: 7),
+                ],
+              ),
 
-                    itemCount: days.length,
-                  ),
+              15.verticalSpace,
+
+              Align(
+                alignment: Alignment.centerRight,
+
+                child: SizedBox(
+                  height: 30.h,
+
+                  child: ListView.separated(
+
+                    shrinkWrap: true,
+
+                    scrollDirection:
+                    Axis.horizontal,
+
+                    itemCount: availableDays.length,
+                    separatorBuilder: (_, _) => 7.horizontalSpace,
+
+                    itemBuilder: (_, index) {
+
+                      final scheduleDay = availableDays[index];
+
+                      if (scheduleDay.isActive != true) {
+                        return const SizedBox.shrink();
+                      }
+                      return ClinicDaysAvailable(
+                        day: scheduleDay.day
+                            ?.substring(0, 3) ??
+                            "",
+                        isAvailable: true,
+                      );
+                    }
                 ),
-                10.verticalSpace,
-              ],
-            ),
-            10.verticalSpace,
-            const ClinicStatus(status: "close"),
-            10.verticalSpace,
-            Row(
-              children: const [
-                Expanded(
-                  child: ClinicInfoCard(title: "Consultation", value: "120"),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: ClinicInfoCard(title: "Slot Duration", value: "120"),
-                ),
-              ],
-            ),
-            10.verticalSpace,
-            Row(
-              children: const [
-                Expanded(
-                  child: ClinicInfoCard(title: "Max Cases /Day ", value: "120"),
-                ),
-                SizedBox(width: 8),
-                Expanded(
-                  child: ClinicInfoCard(title: "PER/Slot", value: "120"),
-                ),
-              ],
-            ),
-            10.verticalSpace,
-            const ClinicInfoCard(
-              title: "Today's Hours",
-              value: "08:00 AM - 02:00 PM",
-              isInfinity: true,
-            ),
-            10.verticalSpace,
-            const ClinicInfoCard(
-              title: "License",
-              value: "1234567890",
-              isInfinity: true,
-            ),
-            20.verticalSpace,
-            Text(
-              "Schedule",
-              style: getBoldStyle(color: ColorManager.gray, fontSize: 18),
-            ),
-            20.verticalSpace,
-            const ScheduleCard(day: "Sunday", time: "08:00 AM - 02:00 PM"),
-            10.verticalSpace,
-            const ScheduleCard(day: "Sunday", time: "08:00 AM - 02:00 PM"),
-          ],
+              ),
+              ),
+              15.verticalSpace,
+              ClinicStatus(
+                days: clinic.defaultSchedule?.days ?? [],
+              ),
+            ],
+          ),
         ),
       ),
     );
