@@ -21,7 +21,7 @@ class AppointmentPage extends StatelessWidget {
         ),
         child: ListView.separated(
           shrinkWrap: true,
-          itemBuilder: (_, _) => const DoctorCard(isAppointments: true,),
+          itemBuilder: (_, _) => const DoctorCard(isAppointments: true),
           separatorBuilder: (_, _) => const SizedBox(height: 20),
           itemCount: 3,
         ),

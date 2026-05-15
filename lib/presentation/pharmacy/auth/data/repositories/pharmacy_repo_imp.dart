@@ -26,17 +26,17 @@ class PharmacyRepoImp implements PharmacyRepo {
     required PlatformFile medicalLicence,
     required String commercialRegisterNumber,
   }) async {
-    var response = await pharmacyDataSource.pharmacySignUp(
-      name: name,
-      username: username,
-      phoneNumber: phoneNumber,
-      email: email,
-      role: role,
-      password: password,
-      medicalLicence: medicalLicence,
-      commercialRegisterNumber: commercialRegisterNumber,
-    );
     try {
+      var response = await pharmacyDataSource.pharmacySignUp(
+        name: name,
+        username: username,
+        phoneNumber: phoneNumber,
+        email: email,
+        role: role,
+        password: password,
+        medicalLicence: medicalLicence,
+        commercialRegisterNumber: commercialRegisterNumber,
+      );
       dynamic body = response.data;
       AuthResponse data;
       if (body is String) {

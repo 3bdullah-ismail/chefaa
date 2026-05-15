@@ -15,12 +15,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/config/get_config.dart';
 import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/routes/app_routes_names.dart';
-import '../manager/pharmacy_cubit.dart';
-
+import '../../../../../core/widget/app_bar_content.dart';
 import '../../../../../core/widget/license_formatter.dart';
+import '../manager/pharmacy_cubit.dart';
 
 class PharmacySignUpPage extends StatefulWidget {
   const PharmacySignUpPage({super.key});
@@ -54,9 +55,10 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
       value: _cubit,
       child: Scaffold(
         backgroundColor: const Color(0xffe1e3ec),
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(170),
-          child: CustomAppBar(),
+        appBar: CustomAppBar(
+          preferredHeight: 150.h,
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+          child: AppBarContent(),
         ),
         body: BlocConsumer<PharmacyCubit, PharmacyState>(
           listener: (context, state) {

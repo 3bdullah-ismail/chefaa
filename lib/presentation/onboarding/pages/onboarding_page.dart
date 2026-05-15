@@ -11,7 +11,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  PageController controller = PageController();
+  final PageController controller = PageController();
   int currentIndex = 0;
 
   @override
@@ -21,14 +21,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
         children: [
           Expanded(
             child: PageView.builder(
-              physics: const ScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller: controller,
+              onPageChanged: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
               itemBuilder: (context, index) => Stack(
                 alignment: Alignment.center,
                 children: [
                   Positioned.fill(
                     child: Image.asset(
                       OnboardingModel.onboardingData[index].image,
+                      cacheHeight: 1200,
+                      cacheWidth: 1200,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -53,9 +60,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
   void nextPage() {
     if (currentIndex < OnboardingModel.onboardingData.length - 1) {
       controller.nextPage(
-        duration: const Duration(milliseconds: 400),
+        duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
       );
     }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

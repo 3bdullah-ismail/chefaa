@@ -33,6 +33,14 @@ class DoctorAuthDataSourceImp implements DoctorAuthDataSource {
         filename: membership.name,
       ),
     });
-    return networkService.dio.post("/auth/register", data: formData);
+    return networkService.dio.post(
+      "/auth/register",
+      data: formData,
+      options: Options(
+        contentType: Headers.multipartFormDataContentType,
+        sendTimeout: const Duration(seconds: 60),
+        receiveTimeout: const Duration(seconds: 60),
+      ),
+    );
   }
 }

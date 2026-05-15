@@ -10,9 +10,11 @@ import 'package:chefaa/presentation/auth/presentation/manager/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/constants_manager.dart';
 import '../../../../core/routes/app_routes_names.dart';
+import '../../../../core/widget/app_bar_content.dart';
 import '../../../../core/widget/custom_text_field.dart';
 import '../../../../core/widget/loading.dart';
 import '../widgets/back_button.dart';
@@ -44,9 +46,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return BlocProvider.value(
       value: cubit,
       child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(175),
-          child: CustomAppBar(),
+        appBar: CustomAppBar(
+          preferredHeight: 150.h,
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+          child: AppBarContent(),
         ),
         body: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {

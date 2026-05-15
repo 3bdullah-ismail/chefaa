@@ -16,6 +16,7 @@ import '../../../../../core/manager/file_handler_cubit.dart';
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widget/already_have_account.dart';
+import '../../../../../core/widget/app_bar_content.dart';
 import '../../../../../core/widget/terms_of_service.dart';
 import '../../../../../core/widget/upload_container.dart';
 
@@ -31,18 +32,20 @@ class _DocSignUpState extends State<DocSignUp> {
 
   final _formKey = GlobalKey<FormState>();
   late final DoctorAuthCubit _cubit;
+  late final FileHandlerCubit _fileHandlerCubit;
 
   @override
   void initState() {
     super.initState();
     _cubit = getIt<DoctorAuthCubit>();
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit = context.read<FileHandlerCubit>();
+    _fileHandlerCubit.clearFile();
   }
 
   @override
   void dispose() {
     _cubit.close();
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit.clearFile();
     super.dispose();
   }
 
@@ -51,9 +54,10 @@ class _DocSignUpState extends State<DocSignUp> {
     return BlocProvider.value(
       value: _cubit,
       child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(175),
-          child: CustomAppBar(),
+        appBar: CustomAppBar(
+          preferredHeight: 150.h,
+          padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+          child: AppBarContent(),
         ),
         body: BlocConsumer<DoctorAuthCubit, DoctorAuthState>(
           listener: (context, state) {
@@ -170,7 +174,7 @@ class _DocSignUpState extends State<DocSignUp> {
                           keyboardType: TextInputType.text,
                           controller: cubit.specialization,
                           text: "Enter your specialization",
-                          prefixIcon: "assets/icons/stethoscnnnnope_.svg",
+                          prefixIcon: IconsAssets.drugIcon,
                         ),
                         8.verticalSpace,
                         const UploadCard(),

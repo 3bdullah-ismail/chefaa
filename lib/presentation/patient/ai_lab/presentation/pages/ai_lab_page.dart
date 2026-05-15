@@ -18,15 +18,18 @@ class AiLabPage extends StatefulWidget {
 }
 
 class _AiLabPageState extends State<AiLabPage> {
+  late FileHandlerCubit _fileHandlerCubit;
+
   @override
   void initState() {
     super.initState();
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit = context.read<FileHandlerCubit>();
+    _fileHandlerCubit.clearFile();
   }
 
   @override
   void dispose() {
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit.clearFile();
     super.dispose();
   }
 

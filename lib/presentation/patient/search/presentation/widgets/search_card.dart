@@ -115,7 +115,9 @@ class SearchCard extends StatelessWidget {
               if (!canProceed) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('This clinic has no available dates right now'),
+                    content: Text(
+                      'This clinic has no available dates right now',
+                    ),
                   ),
                 );
               }

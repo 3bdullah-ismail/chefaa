@@ -1,10 +1,8 @@
-import 'Stats.dart';
 import 'Medications.dart';
+import 'Stats.dart';
 
 class MedicationList {
-  MedicationList({
-      this.stats, 
-      this.medications,});
+  MedicationList({this.stats, this.medications});
 
   MedicationList.fromJson(dynamic json) {
     stats = json['stats'] != null ? Stats.fromJson(json['stats']) : null;
@@ -15,6 +13,7 @@ class MedicationList {
       });
     }
   }
+
   Stats? stats;
   List<Medications>? medications;
 
@@ -28,14 +27,11 @@ class MedicationList {
     }
     return map;
   }
-  MedicationList copyWith({
-    Stats? stats,
-    List<Medications>? medications,
-  }) {
+
+  MedicationList copyWith({Stats? stats, List<Medications>? medications}) {
     return MedicationList(
       stats: stats ?? this.stats,
       medications: medications ?? this.medications,
     );
   }
 }
-

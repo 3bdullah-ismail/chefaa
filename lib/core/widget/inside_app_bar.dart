@@ -65,7 +65,7 @@ class InsideAppBar extends StatelessWidget {
                         subtitle ?? "",
                         style: getRegularStyle(
                           color: ColorManager.white.withAlpha(200),
-                            fontSize: 13
+                          fontSize: 13,
                         ),
                       ),
               ],

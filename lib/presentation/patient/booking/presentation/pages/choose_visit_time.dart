@@ -72,13 +72,13 @@ class ChooseVisitTime extends StatelessWidget {
                           ],
                         ),
                       ),
-                       Text(
-                         '${provider.selectedClinic?.clinicPrice ?? ""} E£',
-                         style: getSemiBoldStyle(
-                           color: ColorManager.primary,
-                           fontSize: 18,
-                         ),
-                       ),
+                      Text(
+                        '${provider.selectedClinic?.clinicPrice ?? ""} E£',
+                        style: getSemiBoldStyle(
+                          color: ColorManager.primary,
+                          fontSize: 18,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -195,7 +195,9 @@ class ChooseVisitTime extends StatelessWidget {
                 const TitleText(text: "Available time"),
                 16.verticalSpace,
                 if (!provider.canChooseTime)
-                  const Center(child: Text("Select a clinic with available dates"))
+                  const Center(
+                    child: Text("Select a clinic with available dates"),
+                  )
                 else
                   GridView.builder(
                     shrinkWrap: true,

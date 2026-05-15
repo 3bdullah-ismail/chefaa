@@ -16,7 +16,6 @@ class ScheduleCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorManager.input.withAlpha(100),
         borderRadius: BorderRadius.circular(25.r),
-
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(

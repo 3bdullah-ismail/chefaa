@@ -4,6 +4,7 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../data/models/Report_analysis.dart';
 import '../widgets/ai_summary.dart';
 import '../widgets/ai_tips.dart';
@@ -23,7 +24,7 @@ class ReportDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(100),
-        child: InsideAppBar(title: "AI Lab Report Analysis")
+        child: InsideAppBar(title: "AI Lab Report Analysis"),
       ),
 
       body: SingleChildScrollView(

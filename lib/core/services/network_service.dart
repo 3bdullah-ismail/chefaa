@@ -21,10 +21,7 @@ class NetworkService {
         connectTimeout: const Duration(seconds: 50),
         receiveTimeout: const Duration(seconds: 50),
         followRedirects: false,
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
+        headers: {"Accept": "application/json"},
       ),
     );
 

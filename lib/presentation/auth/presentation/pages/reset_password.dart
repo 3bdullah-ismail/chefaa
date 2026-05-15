@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/resources/assets_manager.dart';
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/font_manager.dart';
 import '../../../../core/resources/styles_manager.dart';
 import '../../../../core/routes/app_routes_names.dart';
+import '../../../../core/widget/app_bar_content.dart';
 import '../../../../core/widget/custom_app_bar.dart';
 import '../../../../core/widget/custom_btn.dart';
 import '../../../../core/widget/custom_text_field.dart';
@@ -30,9 +32,10 @@ class ResetPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(175),
-        child: CustomAppBar(),
+      appBar: CustomAppBar(
+        preferredHeight: 150.h,
+        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+        child: AppBarContent(),
       ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

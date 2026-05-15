@@ -1,12 +1,11 @@
 class Stats {
-  Stats({
-      this.avgAdherence, 
-      this.activeMedications,});
+  Stats({this.avgAdherence, this.activeMedications});
 
   Stats.fromJson(dynamic json) {
     avgAdherence = json['avgAdherence'];
     activeMedications = json['activeMedications'];
   }
+
   String? avgAdherence;
   num? activeMedications;
 
@@ -16,5 +15,4 @@ class Stats {
     map['activeMedications'] = activeMedications;
     return map;
   }
-
 }

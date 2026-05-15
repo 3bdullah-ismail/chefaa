@@ -172,7 +172,7 @@ class CompleteCubit extends Cubit<CompleteState> {
       final response = await completePatientRepo.completeSignUp(
         weight: state.weight!,
         height: state.height!,
-        bloodType: state.bloodType!,
+        bloodType: state.bloodType!.toUpperCase(),
         gender: state.gender?.toLowerCase(),
         age: age,
         chronicConditions: state.chronicConditions,

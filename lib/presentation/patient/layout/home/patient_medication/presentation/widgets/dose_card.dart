@@ -28,10 +28,7 @@ class DoseCard extends StatelessWidget {
         child: Center(
           child: Text(
             "Select Times Per Day first",
-            style: getMediumStyle(
-              color: ColorManager.gray,
-              fontSize: 14,
-            ),
+            style: getMediumStyle(color: ColorManager.gray, fontSize: 14),
           ),
         ),
       );
@@ -50,9 +47,7 @@ class DoseCard extends StatelessWidget {
             children: [
               Text(
                 "Dose ${index + 1}",
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
+                style: const TextStyle(fontWeight: FontWeight.w600),
               ),
 
               const Spacer(),
@@ -72,9 +67,7 @@ class DoseCard extends StatelessWidget {
                     selectedTimes[index] == null
                         ? "Pick time"
                         : selectedTimes[index]!.format(context),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -89,11 +82,7 @@ class DoseCard extends StatelessWidget {
                     color: Colors.red.withAlpha(70),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.close,
-                    color: Colors.red,
-                    size: 18,
-                  ),
+                  child: const Icon(Icons.close, color: Colors.red, size: 18),
                 ),
               ),
             ],

@@ -52,6 +52,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           emit(UpdateProfileDataSuccessState(profileData)),
     );
   }
+
   Future<void> updateMedicalInformation() async {
     emit(UpdateMedicalInformationLoadingState());
 
@@ -60,18 +61,18 @@ class ProfileCubit extends Cubit<ProfileState> {
     final allergiesList = allergiesController.text.trim().isEmpty
         ? <String>[]
         : allergiesController.text
-            .split(',')
-            .map((e) => e.trim())
-            .where((e) => e.isNotEmpty)
-            .toList();
+              .split(',')
+              .map((e) => e.trim())
+              .where((e) => e.isNotEmpty)
+              .toList();
 
     final chronicConditionsList = chronicController.text.trim().isEmpty
         ? <String>[]
         : chronicController.text
-            .split(',')
-            .map((e) => e.trim())
-            .where((e) => e.isNotEmpty)
-            .toList();
+              .split(',')
+              .map((e) => e.trim())
+              .where((e) => e.isNotEmpty)
+              .toList();
 
     final result = await profileRepo.updateMedicalData(
       bloodType: bloodType,

@@ -1,14 +1,12 @@
 class AdherenceHistory {
-  AdherenceHistory({
-      this.date, 
-      this.status, 
-      this.id,});
+  AdherenceHistory({this.date, this.status, this.id});
 
   AdherenceHistory.fromJson(dynamic json) {
     date = json['date'];
     status = json['status'];
     id = json['_id'];
   }
+
   String? date;
   String? status;
   String? id;
@@ -20,5 +18,4 @@ class AdherenceHistory {
     map['_id'] = id;
     return map;
   }
-
 }

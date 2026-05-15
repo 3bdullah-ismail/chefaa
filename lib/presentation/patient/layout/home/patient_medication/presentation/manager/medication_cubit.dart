@@ -73,16 +73,10 @@ class MedicationCubit extends Cubit<MedicationState> {
       );
 
       emit(
-        MedicationAdditionSuccessState(
-          medicationResponse: medicationResponse,
-        ),
+        MedicationAdditionSuccessState(medicationResponse: medicationResponse),
       );
     } catch (e) {
-      emit(
-        MedicationAdditionErrorState(
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(MedicationAdditionErrorState(errorMessage: e.toString()));
     }
   }
 
@@ -98,17 +92,9 @@ class MedicationCubit extends Cubit<MedicationState> {
       final medicationList = await medicationRepo.getMedicationList();
       _hasLoadedMedicationList = true;
 
-      emit(
-        MedicationListSuccessState(
-          medications: medicationList,
-        ),
-      );
+      emit(MedicationListSuccessState(medications: medicationList));
     } catch (e) {
-      emit(
-        MedicationListErrorState(
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(MedicationListErrorState(errorMessage: e.toString()));
     } finally {
       _isMedicationListLoading = false;
     }
@@ -116,9 +102,7 @@ class MedicationCubit extends Cubit<MedicationState> {
 
   // Update Medication
 
-  Future<void> updateMedication({
-    required String medicationId,
-  }) async {
+  Future<void> updateMedication({required String medicationId}) async {
     emit(MedicationUpdateLoadingState());
 
     try {
@@ -139,16 +123,10 @@ class MedicationCubit extends Cubit<MedicationState> {
       );
 
       emit(
-        MedicationUpdateSuccessState(
-          medicationResponse: medicationResponse,
-        ),
+        MedicationUpdateSuccessState(medicationResponse: medicationResponse),
       );
     } catch (e) {
-      emit(
-        MedicationUpdateErrorState(
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(MedicationUpdateErrorState(errorMessage: e.toString()));
     }
   }
 
@@ -158,23 +136,17 @@ class MedicationCubit extends Cubit<MedicationState> {
     emit(MedicationDeleteLoadingState());
 
     try {
-      final medicationResponse =
-      await medicationRepo.deleteMedication(medicationId);
+      final medicationResponse = await medicationRepo.deleteMedication(
+        medicationId,
+      );
 
       emit(
-        MedicationDeleteSuccessState(
-          medicationResponse: medicationResponse,
-        ),
+        MedicationDeleteSuccessState(medicationResponse: medicationResponse),
       );
     } catch (e) {
-      emit(
-        MedicationDeleteErrorState(
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(MedicationDeleteErrorState(errorMessage: e.toString()));
     }
   }
-
 
   // Confirm Medication
 
@@ -182,18 +154,22 @@ class MedicationCubit extends Cubit<MedicationState> {
     emit(MedicationConfirmLoadingState());
 
     try {
-      final confirmResult = await medicationRepo.confirmMedication(medicationId);
+      final confirmResult = await medicationRepo.confirmMedication(
+        medicationId,
+      );
 
       final currentState = state;
       if (currentState is MedicationListSuccessState) {
         final updatedMedications = currentState.medications.medications
-            ?.map((med) => med.id == medicationId
-            ? med.copyWith(
-          adherencePercentage: num.tryParse(
-            confirmResult.adherenceRate ?? '',
-          ),
-        )
-            : med)
+            ?.map(
+              (med) => med.id == medicationId
+                  ? med.copyWith(
+                      adherencePercentage: num.tryParse(
+                        confirmResult.adherenceRate ?? '',
+                      ),
+                    )
+                  : med,
+            )
             .toList();
 
         emit(
@@ -210,6 +186,7 @@ class MedicationCubit extends Cubit<MedicationState> {
       emit(MedicationConfirmErrorState(errorMessage: e.toString()));
     }
   }
+
   void clearControllers() {
     nameController.clear();
     dosageController.clear();

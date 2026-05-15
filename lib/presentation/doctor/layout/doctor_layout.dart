@@ -23,7 +23,7 @@ class _DoctorLayoutState extends State<DoctorLayout> {
   final List<Widget> _tabs = const [
     DoctorHome(),
     Center(child: Text("Patient")),
-    Center(child: Text("Profile")),
+    const DoctorProfile(),
   ];
 
   @override
