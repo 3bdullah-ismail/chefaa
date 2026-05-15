@@ -17,7 +17,7 @@ class ItemContent extends StatelessWidget {
   final String image;
   final String? text;
   final Widget? widget;
-  final Function() onTap;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,18 @@ class ItemContent extends StatelessWidget {
         children: [
           SvgPicture.asset(image, height: 40, width: 40),
           16.horizontalSpace,
-          widget ??
-              Text(
-                text!,
-                style: getMediumStyle(color: ColorManager.black, fontSize: 16),
-              ),
+          Expanded(
+            child: widget ??
+                Text(
+                  text ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: getMediumStyle(
+                    color: ColorManager.black,
+                    fontSize: 16,
+                  ),
+                ),
+          ),
           const Spacer(),
           const Icon(
             Icons.arrow_forward_ios_rounded,

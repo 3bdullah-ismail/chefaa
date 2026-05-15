@@ -17,13 +17,16 @@ class CustomCircleAvatar extends StatelessWidget {
     return CircleAvatar(
       radius: radius,
       backgroundColor: backgroundColor,
-      child: ClipOval(
-        child: Image.asset(
-          imagePath,
-          width: radius * 2,
-          height: radius * 2,
-          fit: BoxFit.cover,
-          alignment: Alignment.topCenter,
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: ClipOval(
+          child: Image.asset(
+            imagePath,
+            width: radius * 2,
+            height: radius * 2,
+            fit: BoxFit.cover,
+            alignment: Alignment.topCenter,
+          ),
         ),
       ),
     );

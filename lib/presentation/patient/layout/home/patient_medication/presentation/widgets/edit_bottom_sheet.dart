@@ -1,18 +1,19 @@
 import 'package:chefaa/core/widget/custom_btn.dart';
+import 'package:chefaa/presentation/patient/layout/home/patient_medication/data/models/Medications.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/manager/medication_state.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/dose_card.dart';
 import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/medication_calender.dart';
 import 'package:chefaa/presentation/patient/layout/home/presentation/widgets/ai_suggestion.dart';
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/data/models/Medications.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+
 import '../../../../../../../core/resources/color_manager.dart';
+import '../../../../../../../core/resources/constants_manager.dart';
 import '../../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../../core/resources/values_manager.dart';
-import '../../../../../../../core/resources/constants_manager.dart';
 import '../../../../../../../core/widget/custom_dropdown_btn.dart';
 import '../../../../../../../core/widget/custom_text_field.dart';
 import '../../../../../../../core/widget/loading.dart';
