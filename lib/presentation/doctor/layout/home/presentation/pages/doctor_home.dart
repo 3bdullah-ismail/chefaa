@@ -15,6 +15,7 @@ import '../widgets/clinic_card.dart';
 
 class DoctorHome extends StatelessWidget {
   const DoctorHome({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +27,10 @@ class DoctorHome extends StatelessWidget {
               context.read<ClinicCubit>().getClinics(doctorID: state.user.id);
             }
 
-            return CustomAppBar(
-              isLayout: true,
-              title1: "Good Morning !",
+            return  CustomAppBar.layout(
+              title1: "Hello Memo",
               title2: state is UserLoaded ? state.user.name : "Doctor",
+              onPressed: () {},
             );
           },
         ),
@@ -89,8 +90,6 @@ class DoctorHome extends StatelessWidget {
                             ],
                           ),
                         ),
-
-
                     ],
                   );
                 },
@@ -100,9 +99,11 @@ class DoctorHome extends StatelessWidget {
               BlocBuilder<ClinicCubit, ClinicState>(
                 builder: (context, state) {
                   if (state is ClinicLoadingState) {
-                    return const Center(child: CircularProgressIndicator(
-                      color: ColorManager.primary,
-                    ));
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: ColorManager.primary,
+                      ),
+                    );
                   }
 
                   if (state is ClinicErrorState) {

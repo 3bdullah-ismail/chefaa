@@ -30,16 +30,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
-  final GlobalKey<MedicineCardState> _medicineCardKey = GlobalKey<MedicineCardState>();
+  final GlobalKey<MedicineCardState> _medicineCardKey =
+  GlobalKey<MedicineCardState>();
 
   void _openSearchPage() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-          value: context.read<SearchCubit>(),
-          child: const SearchPage(),
-        ),
+        builder: (_) =>
+            BlocProvider.value(
+              value: context.read<SearchCubit>(),
+              child: const SearchPage(),
+            ),
       ),
     );
   }
@@ -61,10 +63,10 @@ class _HomePageState extends State<HomePage> {
             if (state is UserLoaded) userName = state.user.name;
             if (state is UsersLoading) userName = "...";
 
-            return CustomAppBar(
-              isLayout: true,
-              title1: "Good Morning !",
-              title2: userName,
+            return  CustomAppBar.layout(
+            title1: "Hello Memo",
+            title2: userName,
+            onPressed: () {},
             );
           },
         ),
@@ -72,7 +74,9 @@ class _HomePageState extends State<HomePage> {
       body: BlocListener<MedicationCubit, MedicationState>(
         listener: (context, state) {
           if (state is MedicationConfirmSuccessState) {
-            _medicineCardKey.currentState?.updateConfirmed(state.confirmMedication);
+            _medicineCardKey.currentState?.updateConfirmed(
+              state.confirmMedication,
+            );
           }
         },
         child: SingleChildScrollView(
@@ -115,7 +119,9 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, state) {
                         if (state is MedicationListLoadingState) {
                           return const Center(
-                            child: CircularProgressIndicator(color: ColorManager.primary),
+                            child: CircularProgressIndicator(
+                              color: ColorManager.primary,
+                            ),
                           );
                         }
 
@@ -129,7 +135,8 @@ class _HomePageState extends State<HomePage> {
                         }
 
                         if (state is MedicationListSuccessState) {
-                          final medications = state.medications.medications ?? [];
+                          final medications =
+                              state.medications.medications ?? [];
 
                           return Column(
                             children: [
@@ -146,24 +153,30 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   if (medications.isNotEmpty)
                                     TextButton(
-                                      onPressed: () => Navigator.pushNamed(
-                                        context,
-                                        AppRoutesNames.medicationPage,
-                                      ),
+                                      onPressed: () =>
+                                          Navigator.pushNamed(
+                                            context,
+                                            AppRoutesNames.medicationPage,
+                                          ),
                                       child: Row(
                                         children: [
                                           Text(
                                             "Manage",
-                                            style: getMediumStyle(
+                                            style:
+                                            getMediumStyle(
                                               color: ColorManager.primary,
                                               fontSize: 18,
                                             ).copyWith(
-                                              decoration: TextDecoration.underline,
-                                              decorationColor: ColorManager.primary,
+                                              decoration:
+                                              TextDecoration.underline,
+                                              decorationColor:
+                                              ColorManager.primary,
                                               decorationThickness: 2,
                                             ),
                                           ),
-                                          SvgPicture.asset("assets/icons/drug.svg"),
+                                          SvgPicture.asset(
+                                            "assets/icons/drug.svg",
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -206,15 +219,17 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () => Navigator.pushNamed(
-                            context,
-                            AppRoutesNames.appointmentPage,
-                          ),
+                          onPressed: () =>
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.appointmentPage,
+                              ),
                           child: Row(
                             children: [
                               Text(
                                 "ViewAll",
-                                style: getMediumStyle(
+                                style:
+                                getMediumStyle(
                                   color: ColorManager.primary,
                                   fontSize: 18,
                                 ).copyWith(
@@ -247,10 +262,34 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: QuickActions(title: "Emergency", image: SvgAssets.phone, onTap: () {})),
-                    Expanded(child: QuickActions(title: "Order Pharmacy", image: SvgAssets.orderPharmacy, onTap: () {})),
-                    Expanded(child: QuickActions(title: "Appointments", image: SvgAssets.appointment, onTap: () {})),
-                    Expanded(child: QuickActions(title: "Find Lab", image: SvgAssets.findLab, onTap: () {})),
+                    Expanded(
+                      child: QuickActions(
+                        title: "Emergency",
+                        image: SvgAssets.phone,
+                        onTap: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: QuickActions(
+                        title: "Order Pharmacy",
+                        image: SvgAssets.orderPharmacy,
+                        onTap: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: QuickActions(
+                        title: "Appointments",
+                        image: SvgAssets.appointment,
+                        onTap: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: QuickActions(
+                        title: "Find Lab",
+                        image: SvgAssets.findLab,
+                        onTap: () {},
+                      ),
+                    ),
                   ],
                 ),
               ),

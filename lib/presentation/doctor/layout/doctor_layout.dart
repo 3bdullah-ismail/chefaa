@@ -9,6 +9,7 @@ import '../../../core/config/get_config.dart';
 import '../../../core/resources/assets_manager.dart';
 import '../../../core/resources/color_manager.dart';
 import '../../../core/resources/styles_manager.dart';
+import '../profile/presentation/pages/profile_page.dart';
 
 class DoctorLayout extends StatefulWidget {
   const DoctorLayout({super.key});
@@ -23,7 +24,7 @@ class _DoctorLayoutState extends State<DoctorLayout> {
   final List<Widget> _tabs = const [
     DoctorHome(),
     Center(child: Text("Patient")),
-    const DoctorProfile(),
+     DoctorProfile(),
   ];
 
   @override

@@ -10,10 +10,16 @@ class ReportAnalysis {
 
   factory ReportAnalysis.fromJson(Map<String, dynamic> json) {
     return ReportAnalysis(
-      message: json['message'],
-      error: json['error'],
-      success: json['success'],
-      data: json['data'] != null ? Data.fromJson(json['data']) : null,
+      message: json['message'] as String?,
+      error: json['error'] as String?,
+      success: json['success'] as bool?,
+      data: json['data'] != null
+          ? Data.fromJson(
+        json['data'] is Map<String, dynamic>
+            ? json['data'] as Map<String, dynamic>
+            : Map<String, dynamic>.from(json['data'] as Map),
+      )
+          : null,
     );
   }
 
