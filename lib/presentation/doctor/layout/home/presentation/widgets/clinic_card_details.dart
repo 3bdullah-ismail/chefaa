@@ -38,7 +38,6 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
       ),
     );
   }
-
   @override
   Widget build(BuildContext context) {
     final availableDays = widget.clinic.defaultSchedule?.days ?? [];

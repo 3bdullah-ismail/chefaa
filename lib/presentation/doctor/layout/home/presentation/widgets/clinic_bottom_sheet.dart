@@ -195,7 +195,6 @@ class _ClinicBottomSheetState extends State<ClinicBottomSheet> {
                         ],
                       )
                     : CustomBtn(text: "Add Clinic", onPressed: () {}),
-
                 20.verticalSpace,
               ],
             ),

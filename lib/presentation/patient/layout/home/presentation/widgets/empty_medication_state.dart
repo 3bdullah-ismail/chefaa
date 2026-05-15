@@ -8,7 +8,6 @@ import '../../../../../../core/routes/app_routes_names.dart';
 
 class EmptyMedicationState extends StatelessWidget {
   const EmptyMedicationState({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(

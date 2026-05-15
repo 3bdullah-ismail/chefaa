@@ -18,7 +18,6 @@ class ClinicStatus extends StatelessWidget {
 
     final today =
     _getTodayName();
-
     final isOpen = days.any(
           (day) =>
       day.day == today &&

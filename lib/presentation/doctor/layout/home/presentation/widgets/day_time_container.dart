@@ -9,7 +9,6 @@ class DayTimeContainer extends StatelessWidget {
   final String title;
   final TimeOfDay? time;
   final VoidCallback onTap;
-
   const DayTimeContainer({
     super.key,
     required this.title,

@@ -52,7 +52,6 @@ class WorkingDaysSection extends StatelessWidget {
             ),
 
             20.verticalSpace,
-
             WorkingDayItems(
               weekDays: weekDays,
               selectedDays: selectedDays,

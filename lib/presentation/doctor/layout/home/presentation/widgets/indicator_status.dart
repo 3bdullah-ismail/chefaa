@@ -8,7 +8,6 @@ class IndicatorStatus extends StatelessWidget {
   final Color color;
   final String title;
   final String value;
-
   const IndicatorStatus({
     super.key,
     required this.color,

@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ScheduleCard extends StatelessWidget {
   final String day;
   final String time;
-
   const ScheduleCard({super.key, required this.day, required this.time});
 
   @override

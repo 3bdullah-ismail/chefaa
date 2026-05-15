@@ -16,7 +16,6 @@ class OutlineButton extends StatelessWidget {
     required this.title,
     required this.color,
   });
-
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(

@@ -5,7 +5,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart' show DateFormat;
 
 import '../../../../../../../core/resources/styles_manager.dart';
-
 class MedicationCalender extends StatefulWidget {
   final TextEditingController controller;
   final Function(DateTime) onDateSelected;

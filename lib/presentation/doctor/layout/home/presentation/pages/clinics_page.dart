@@ -17,7 +17,6 @@ import '../widgets/custom_outline_button.dart';
 
 class ClinicsPage extends StatelessWidget {
   const ClinicsPage({super.key});
-
   void _openAddSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,

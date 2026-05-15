@@ -114,7 +114,6 @@ class _MedicationPageState extends State<MedicationPage> {
             );
           }
         },
-
         builder: (context, state) {
           if (state is MedicationListLoadingState) {
             return const Center(child: CircularProgressIndicator());

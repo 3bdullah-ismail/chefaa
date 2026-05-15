@@ -7,7 +7,6 @@ import '../../../../../../../../core/resources/styles_manager.dart';
 
 class EmptyMedicationListState extends StatelessWidget {
   final VoidCallback onAddPressed;
-
   const EmptyMedicationListState({
     super.key,
     required this.onAddPressed,

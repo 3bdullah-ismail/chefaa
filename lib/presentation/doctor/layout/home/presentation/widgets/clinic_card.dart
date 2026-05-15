@@ -187,7 +187,6 @@ class ClinicCard extends StatelessWidget {
               ),
               ),
               15.verticalSpace,
-
               ClinicStatus(
                 days: clinic.defaultSchedule?.days ?? [],
               ),

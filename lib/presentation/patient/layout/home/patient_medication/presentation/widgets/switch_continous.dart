@@ -11,7 +11,6 @@ class SwitchContinous extends StatelessWidget {
     required this.alignment,
     required this.onTap,
   });
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

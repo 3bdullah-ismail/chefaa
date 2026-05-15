@@ -22,7 +22,6 @@ class BottomSheetTextFieldItem extends StatelessWidget {
           title,
           style: getMediumStyle(color: ColorManager.black, fontSize: 16.sp),
         ),
-
         8.verticalSpace,
 
         CustomTextField(controller: controller, text: hint),

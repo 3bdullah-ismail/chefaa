@@ -15,7 +15,6 @@ class CustomOutlineButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
   });
-
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(

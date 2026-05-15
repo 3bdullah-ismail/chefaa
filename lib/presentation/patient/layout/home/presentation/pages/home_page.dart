@@ -170,7 +170,6 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                               15.verticalSpace,
-
                               if (medications.isEmpty)
                                 const EmptyMedicationState()
                               else

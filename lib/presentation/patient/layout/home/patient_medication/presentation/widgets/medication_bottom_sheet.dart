@@ -23,7 +23,6 @@ class MedicationBottomSheet extends StatefulWidget {
   final String content;
   final Medications? medication;
   final bool isEdit;
-
   const MedicationBottomSheet({
     super.key,
     required this.title,
