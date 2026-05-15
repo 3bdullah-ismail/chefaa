@@ -11,7 +11,6 @@ import '../widgets/clinic_card_details.dart';
 
 class ClinicDetailsPage extends StatelessWidget {
   const ClinicDetailsPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     final clinic = ModalRoute.of(context)!.settings.arguments as Clinics;

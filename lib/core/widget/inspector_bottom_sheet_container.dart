@@ -4,7 +4,6 @@ import '../resources/color_manager.dart';
 
 class InspectorBottomSheetContainer extends StatelessWidget {
   const InspectorBottomSheetContainer({super.key});
-
   @override
   Widget build(BuildContext context) {
     return  Center(

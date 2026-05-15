@@ -119,7 +119,6 @@ class _MedicationPageState extends State<MedicationPage> {
           if (state is MedicationListLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
-
           if (state is MedicationListErrorState) {
             return Center(
               child: Padding(

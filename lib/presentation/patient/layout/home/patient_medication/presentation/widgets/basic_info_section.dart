@@ -25,7 +25,6 @@ class BasicInfoSection extends StatelessWidget {
     required this.dosageController,
     required this.formController,
   });
-
   @override
   Widget build(BuildContext context) {
     return ItemContainer(

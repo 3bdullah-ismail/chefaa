@@ -288,15 +288,10 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
     }
 
     final hour = minutes ~/ 60;
-
     final minute = minutes % 60;
-
     final period = hour >= 12 ? "PM" : "AM";
-
     final formattedHour = hour > 12 ? hour - 12 : hour;
-
     final formattedMinute = minute.toString().padLeft(2, '0');
-
     return "$formattedHour:$formattedMinute $period";
   }
 }

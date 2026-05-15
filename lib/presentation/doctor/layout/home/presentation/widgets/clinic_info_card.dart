@@ -15,7 +15,6 @@ class ClinicInfoCard extends StatelessWidget {
     required this.title,
     required this.value,
   });
-
   @override
   Widget build(BuildContext context) {
     return Container(

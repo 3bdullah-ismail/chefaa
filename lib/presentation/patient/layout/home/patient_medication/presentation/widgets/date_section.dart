@@ -9,7 +9,6 @@ class DateSection extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final void Function(DateTime) onDateSelected;
-
   const DateSection({
     super.key,
     required this.label,

@@ -24,7 +24,6 @@ class MedicationScheduleSection extends StatelessWidget {
   final Alignment alignment ;
   final void Function() onTap;
 
-
   const MedicationScheduleSection({
     super.key,
     required this.selectedTimes,

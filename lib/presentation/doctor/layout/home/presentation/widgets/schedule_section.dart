@@ -19,7 +19,6 @@ class ScheduleSection extends StatelessWidget {
     required this.maxPatientsController,
     required this.patientPerSlotController,
   });
-
   @override
   Widget build(BuildContext context) {
     return ItemContainer(

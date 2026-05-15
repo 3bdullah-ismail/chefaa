@@ -3,7 +3,6 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 class ScheduleCard extends StatelessWidget {
   final String day;
   final String time;

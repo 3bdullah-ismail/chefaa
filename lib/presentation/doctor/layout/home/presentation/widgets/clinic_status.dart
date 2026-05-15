@@ -28,7 +28,6 @@ class ClinicStatus extends StatelessWidget {
     return Container(
 
       height: 35.h,
-
       decoration: BoxDecoration(
 
         color: isOpen

@@ -15,7 +15,6 @@ import '../widgets/clinic_card.dart';
 
 class DoctorHome extends StatelessWidget {
   const DoctorHome({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -75,7 +75,6 @@ class DayActiveContainer extends StatelessWidget {
                     onCloseTap();
                   }),
                 ),
-
             ],
           ),
         ],

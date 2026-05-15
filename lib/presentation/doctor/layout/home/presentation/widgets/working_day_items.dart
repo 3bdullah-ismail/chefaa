@@ -48,7 +48,6 @@ class WorkingDayItems extends StatelessWidget {
                     : ColorManager.lightGray,
               ),
             ),
-
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
