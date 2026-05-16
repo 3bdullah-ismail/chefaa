@@ -7,8 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../resources/color_manager.dart';
 
-class CustomAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget child;
   final Color? backgroundColor;
   final double? elevation;
@@ -34,20 +33,13 @@ class CustomAppBar extends StatelessWidget
   }) {
     return CustomAppBar(
       key: key,
-      padding: EdgeInsets.only(
-        top: 30.sp,
-        left: 20.sp,
-        right: 20.sp,
-      ),
+      padding: EdgeInsets.only(top: 30.sp, left: 20.sp, right: 20.sp),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              CustomCircleAvatar(
-                imagePath: ImageAssets.patient,
-                radius: 35.r,
-              ),
+              CustomCircleAvatar(imagePath: ImageAssets.patient, radius: 35.r),
 
               20.horizontalSpace,
 
@@ -99,29 +91,19 @@ class CustomAppBar extends StatelessWidget
     );
   }
 
-  factory CustomAppBar.logo({
-    Key? key,
-  }) {
+  factory CustomAppBar.logo({Key? key}) {
     return CustomAppBar(
       key: key,
-      padding: EdgeInsets.only(
-        top: 30.sp,
-        left: 50.sp,
-        right: 20.sp,
-      ),
+      padding: EdgeInsets.only(top: 30.sp, left: 50.sp, right: 20.sp),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Image.asset(
-          "assets/images/chefaa.png",
-          height: 50.h,
-        ),
+        child: Image.asset("assets/images/chefaa.png", height: 50.h),
       ),
     );
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(preferredHeight ?? 110.h);
+  Size get preferredSize => Size.fromHeight(preferredHeight ?? 110.h);
 
   @override
   Widget build(BuildContext context) {
@@ -133,19 +115,14 @@ class CustomAppBar extends StatelessWidget
       elevation: elevation ?? 15,
       flexibleSpace: SafeArea(
         child: Padding(
-          padding: padding ??
-              EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 14.h,
-              ),
+          padding:
+              padding ?? EdgeInsets.symmetric(horizontal: 20.w, vertical: 14.h),
           child: child,
         ),
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(
-            borderRadiusValue ?? 30.r,
-          ),
+          bottom: Radius.circular(borderRadiusValue ?? 30.r),
         ),
       ),
     );

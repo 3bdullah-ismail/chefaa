@@ -28,7 +28,8 @@ class ItemContent extends StatelessWidget {
           SvgPicture.asset(image, height: 40, width: 40),
           16.horizontalSpace,
           Expanded(
-            child: widget ??
+            child:
+                widget ??
                 Text(
                   text ?? '',
                   maxLines: 2,

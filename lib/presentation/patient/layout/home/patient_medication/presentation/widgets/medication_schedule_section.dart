@@ -20,8 +20,8 @@ class MedicationScheduleSection extends StatelessWidget {
   final TextEditingController startDateController;
   final TextEditingController endDateController;
   final void Function(DateTime) onDateSelected;
-  final Color color ;
-  final Alignment alignment ;
+  final Color color;
+  final Alignment alignment;
   final void Function() onTap;
 
   const MedicationScheduleSection({
@@ -121,7 +121,11 @@ class MedicationScheduleSection extends StatelessWidget {
                     color: ColorManager.black,
                   ),
                 ),
-                SwitchContinous(color: color, alignment: alignment, onTap: onTap),
+                SwitchContinous(
+                  color: color,
+                  alignment: alignment,
+                  onTap: onTap,
+                ),
               ],
             ),
           ],

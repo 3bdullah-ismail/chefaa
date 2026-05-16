@@ -108,7 +108,6 @@ class ClinicRepoImp implements ClinicRepo {
       } else {
         throw Exception('Failed to update clinic');
       }
-
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {

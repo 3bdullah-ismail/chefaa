@@ -42,7 +42,7 @@ class AppointmentStatusCart extends StatelessWidget {
           ),
         ),
         30.horizontalSpace,
-       const  Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             IndicatorStatus(

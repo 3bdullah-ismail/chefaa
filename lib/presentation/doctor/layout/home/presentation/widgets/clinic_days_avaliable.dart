@@ -18,7 +18,9 @@ class ClinicDaysAvailable extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: isAvailable ? ColorManager.primary.withAlpha(30) : ColorManager.input,
+        color: isAvailable
+            ? ColorManager.primary.withAlpha(30)
+            : ColorManager.input,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(

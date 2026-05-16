@@ -9,6 +9,7 @@ class DayTimeContainer extends StatelessWidget {
   final String title;
   final TimeOfDay? time;
   final VoidCallback onTap;
+
   const DayTimeContainer({
     super.key,
     required this.title,
@@ -30,20 +31,13 @@ class DayTimeContainer extends StatelessWidget {
         decoration: BoxDecoration(
           color: ColorManager.gray.withAlpha(35),
           borderRadius: BorderRadius.circular(25.r),
-          border: Border.all(
-            color: ColorManager.lightGray,
-          ),
+          border: Border.all(color: ColorManager.lightGray),
         ),
 
         child: Center(
           child: Text(
-            time != null
-                ? time!.format(context)
-                : title,
-            style: getBoldStyle(
-              color: ColorManager.gray,
-              fontSize: 15.sp,
-            ),
+            time != null ? time!.format(context) : title,
+            style: getBoldStyle(color: ColorManager.gray, fontSize: 15.sp),
           ),
         ),
       ),

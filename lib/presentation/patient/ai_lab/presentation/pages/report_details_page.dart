@@ -62,7 +62,7 @@ class ReportDetailsPage extends StatelessWidget {
 
                 child: ListView.separated(
                   itemCount: findings.length,
-                  separatorBuilder: (_, __) =>
+                  separatorBuilder: (_, _) =>
                       const Divider(color: ColorManager.input),
                   itemBuilder: (context, index) {
                     final item = findings[index];

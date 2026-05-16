@@ -35,7 +35,7 @@ class ProfileStatItem extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: getBoldStyle(
-            color: textColor.withOpacity(0.6),
+            color: textColor.withValues(alpha: 0.6),
             fontSize: 12.sp,
           ),
         ),

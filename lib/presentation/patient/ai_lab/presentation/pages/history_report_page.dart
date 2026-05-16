@@ -19,9 +19,7 @@ class ReportsHistoryPage extends StatelessWidget {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(100),
-        child: AnalysisAppBar(
-          title1: "AI Lab Report History",
-        ),
+        child: AnalysisAppBar(title1: "AI Lab Report History"),
       ),
 
       body: ValueListenableBuilder(
@@ -31,16 +29,13 @@ class ReportsHistoryPage extends StatelessWidget {
           final reports = box.toMap().entries.toList().reversed.toList();
 
           if (reports.isEmpty) {
-            return const Center(
-              child: Text("No reports yet"),
-            );
+            return const Center(child: Text("No reports yet"));
           }
 
           return ListView.separated(
             padding: const EdgeInsets.all(16),
             itemCount: reports.length,
-            separatorBuilder: (_, _) =>
-            const SizedBox(height: 12),
+            separatorBuilder: (_, _) => const SizedBox(height: 12),
 
             itemBuilder: (context, index) {
               final item = reports[index];
@@ -56,9 +51,7 @@ class ReportsHistoryPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ReportDetailsPage(
-                        report: report,
-                      ),
+                      builder: (_) => ReportDetailsPage(report: report),
                     ),
                   );
                 },
@@ -69,9 +62,7 @@ class ReportsHistoryPage extends StatelessWidget {
                   if (!context.mounted) return;
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Deleted successfully"),
-                    ),
+                    const SnackBar(content: Text("Deleted successfully")),
                   );
                 },
               );

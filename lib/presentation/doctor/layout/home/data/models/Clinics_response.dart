@@ -1,10 +1,7 @@
 import 'Clinics.dart';
 
 class ClinicsResponse {
-  ClinicsResponse({
-      this.doctorId, 
-      this.totalClinics, 
-      this.clinics,});
+  ClinicsResponse({this.doctorId, this.totalClinics, this.clinics});
 
   ClinicsResponse.fromJson(dynamic json) {
     doctorId = json['doctorId'];
@@ -16,6 +13,7 @@ class ClinicsResponse {
       });
     }
   }
+
   String? doctorId;
   num? totalClinics;
   List<Clinics>? clinics;
@@ -29,5 +27,4 @@ class ClinicsResponse {
     }
     return map;
   }
-
 }

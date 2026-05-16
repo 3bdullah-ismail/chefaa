@@ -42,7 +42,7 @@ class UpperProfileSection extends StatelessWidget {
           10.verticalSpace,
           CircleAvatar(
             radius: 50.r,
-            backgroundColor: ColorManager.white.withOpacity(0.3),
+            backgroundColor: ColorManager.white.withValues(alpha: 0.3),
             child: CustomCircleAvatar(
               imagePath: ImageAssets.doctor,
               radius: 45.r,
@@ -67,7 +67,9 @@ class UpperProfileSection extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 6.h),
             decoration: BoxDecoration(
-              border: Border.all(color: ColorManager.white.withOpacity(0.5)),
+              border: Border.all(
+                color: ColorManager.white.withValues(alpha: 0.5),
+              ),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Text(
@@ -83,9 +85,11 @@ class UpperProfileSection extends StatelessWidget {
               vertical: _statsContainerVerticalPadding.h,
             ),
             decoration: BoxDecoration(
-              color: ColorManager.white.withOpacity(0.1),
+              color: ColorManager.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20.r),
-              border: Border.all(color: ColorManager.white.withOpacity(0.2)),
+              border: Border.all(
+                color: ColorManager.white.withValues(alpha: 0.2),
+              ),
             ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -112,7 +116,7 @@ class _VerticalDivider extends StatelessWidget {
     return Container(
       height: 30.h,
       width: 1,
-      color: ColorManager.white.withOpacity(0.3),
+      color: ColorManager.white.withValues(alpha: 0.3),
     );
   }
 }
