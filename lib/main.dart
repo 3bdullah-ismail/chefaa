@@ -7,6 +7,7 @@ import 'package:chefaa/presentation/patient/layout/home/presentation/manager/use
 import 'package:chefaa/presentation/patient/search/presentation/manager/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import 'chefaa.dart';
@@ -21,8 +22,10 @@ void main() async {
 
   configureDependencies();
   Bloc.observer = AppBlocObserver();
-  // await GoogleSignIn.instance.initialize(
-  //   serverClientId: "437264374965-9fs170cmqjtp67j0387nffs9dot3qdns.apps.googleusercontent.com");
+  await GoogleSignIn.instance.initialize(
+    serverClientId:
+        "50620876414-hfv5genejr18gdoi522k6gb9t5ajt43o.apps.googleusercontent.com",
+  );
   runApp(
     MultiBlocProvider(
       providers: [
