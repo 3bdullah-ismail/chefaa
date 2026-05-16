@@ -24,12 +24,16 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
   bool _isSigningUp = false;
 
   final UsersCubit usersCubit;
+
   static DoctorAuthCubit get(context) => BlocProvider.of(context);
 
   DoctorAuthCubit({required this.doctorAuthRepo, required this.usersCubit})
-      : super(DoctorAuthInitial());
-  DoctorAuthCubit.initial({required this.doctorAuthRepo, required this.usersCubit})
-      : super(DoctorAuthInitial());
+    : super(DoctorAuthInitial());
+
+  DoctorAuthCubit.initial({
+    required this.doctorAuthRepo,
+    required this.usersCubit,
+  }) : super(DoctorAuthInitial());
 
   Future<void> signUp({required PlatformFile? membershipFile}) async {
     if (_isSigningUp) return;

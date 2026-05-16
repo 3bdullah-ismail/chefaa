@@ -28,7 +28,7 @@ class _PatientLayoutState extends State<PatientLayout> {
       child: const BookingPage(),
     ),
     const AiLabPage(),
-    ChatPage(),
+    const ChatPage(),
     const PatientProfilePage(),
   ];
 

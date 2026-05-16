@@ -30,17 +30,12 @@ class WorkingDayItems extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 220),
 
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 10,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
 
-              color: isSelected
-                  ? ColorManager.primary
-                  : ColorManager.input,
+              color: isSelected ? ColorManager.primary : ColorManager.input,
 
               border: Border.all(
                 color: isSelected
@@ -54,9 +49,7 @@ class WorkingDayItems extends StatelessWidget {
                 Text(
                   day,
                   style: getBoldStyle(
-                    color: isSelected
-                        ? Colors.white
-                        : ColorManager.gray,
+                    color: isSelected ? Colors.white : ColorManager.gray,
                     fontSize: 14,
                   ),
                 ),

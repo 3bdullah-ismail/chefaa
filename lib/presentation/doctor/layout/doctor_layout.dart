@@ -24,7 +24,7 @@ class _DoctorLayoutState extends State<DoctorLayout> {
   final List<Widget> _tabs = const [
     DoctorHome(),
     Center(child: Text("Patient")),
-     DoctorProfile(),
+    DoctorProfile(),
   ];
 
   @override
@@ -46,12 +46,24 @@ class _DoctorLayoutState extends State<DoctorLayout> {
           items: [
             BottomNavigationBarItem(
               icon: SvgPicture.asset(SvgAssets.home, width: 20, height: 20),
-              activeIcon: SvgPicture.asset(SvgAssets.homeActive, width: 20, height: 20),
+              activeIcon: SvgPicture.asset(
+                SvgAssets.homeActive,
+                width: 20,
+                height: 20,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(SvgAssets.patient, width: 32.w, height: 32.h),
-              activeIcon: SvgPicture.asset(SvgAssets.patientActive, width: 32.w, height: 32.h),
+              icon: SvgPicture.asset(
+                SvgAssets.patient,
+                width: 32.w,
+                height: 32.h,
+              ),
+              activeIcon: SvgPicture.asset(
+                SvgAssets.patientActive,
+                width: 32.w,
+                height: 32.h,
+              ),
               label: 'Patients',
             ),
             BottomNavigationBarItem(

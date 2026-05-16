@@ -138,102 +138,148 @@ import '../../presentation/pharmacy/auth/presentation/manager/pharmacy_cubit.dar
 import '../services/network_service.dart' as _i463;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
+  // initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
   }) {
-    final gh = _i526.GetItHelper(
-      this,
-      environment,
-      environmentFilter,
-    );
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i434.UserUseCase>(() => _i434.UserUseCase());
     gh.lazySingleton<_i463.NetworkService>(() => _i463.NetworkService());
     gh.factory<_i181.SearchLocalDataSource>(
-        () => _i150.SearchDoctorLocalDataSourceImp());
+      () => _i150.SearchDoctorLocalDataSourceImp(),
+    );
     gh.factory<_i372.BookingRemoteDataSource>(
-        () => _i1020.BookingRemoteDataSourceImpl(gh<_i463.NetworkService>()));
+      () => _i1020.BookingRemoteDataSourceImpl(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i808.ClinicDataSource>(
-        () => _i637.ClinicDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i637.ClinicDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i183.ProfileRemoteDataSource>(
-        () => _i1047.ProfileRemoteDataSourceImpl(gh<_i463.NetworkService>()));
-    gh.factory<_i565.PharmacyDataSource>(() => _i176.PharmacyDataSourceImp(
-        networkService: gh<_i463.NetworkService>()));
+      () => _i1047.ProfileRemoteDataSourceImpl(gh<_i463.NetworkService>()),
+    );
+    gh.factory<_i565.PharmacyDataSource>(
+      () => _i176.PharmacyDataSourceImp(
+        networkService: gh<_i463.NetworkService>(),
+      ),
+    );
     gh.factory<_i758.AIReportDataSource>(
-        () => _i178.AIReportDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i178.AIReportDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i1041.PatientDataSource>(
-        () => _i148.PatientDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i148.PatientDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i888.HomeDataSource>(
-        () => _i575.HomeDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i575.HomeDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i425.AIReportRepo>(
-        () => _i779.AiReportRepoImp(gh<_i758.AIReportDataSource>()));
+      () => _i779.AiReportRepoImp(gh<_i758.AIReportDataSource>()),
+    );
     gh.factory<_i158.AiReportCubit>(
-        () => _i158.AiReportCubit(gh<_i425.AIReportRepo>()));
+      () => _i158.AiReportCubit(gh<_i425.AIReportRepo>()),
+    );
     gh.factory<_i184.DoctorAuthDataSource>(
-        () => _i964.DoctorAuthDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i964.DoctorAuthDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i377.SearchRemoteDataSource>(
-        () => _i873.SearchDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i873.SearchDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i377.FacilityAuthDataSource>(
-        () => _i120.FacilityAuthDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i120.FacilityAuthDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i576.AuthDataSource>(
-        () => _i124.AuthDataSourceImp(gh<_i463.NetworkService>()));
+      () => _i124.AuthDataSourceImp(gh<_i463.NetworkService>()),
+    );
     gh.factory<_i234.HomeRepo>(
-        () => _i454.HomeRepoImp(gh<_i888.HomeDataSource>()));
+      () => _i454.HomeRepoImp(gh<_i888.HomeDataSource>()),
+    );
     gh.factory<_i745.UsersCubit>(
-        () => _i745.UsersCubit(gh<_i434.UserUseCase>()));
+      () => _i745.UsersCubit(gh<_i434.UserUseCase>()),
+    );
     gh.factory<_i829.FacilityAuthRepo>(
-        () => _i92.FacilityRepoImp(gh<_i377.FacilityAuthDataSource>()));
+      () => _i92.FacilityRepoImp(gh<_i377.FacilityAuthDataSource>()),
+    );
     gh.factory<_i382.MedicationDataSource>(
-        () => _i423.MedicationDataSourceImp(gh<_i463.NetworkService>()));
-    gh.factory<_i139.CompleteDataSource>(() => _i580.CompleteDataSourceImp(
-        networkService: gh<_i463.NetworkService>()));
+      () => _i423.MedicationDataSourceImp(gh<_i463.NetworkService>()),
+    );
+    gh.factory<_i139.CompleteDataSource>(
+      () => _i580.CompleteDataSourceImp(
+        networkService: gh<_i463.NetworkService>(),
+      ),
+    );
     gh.factory<_i128.PatientRepo>(
-        () => _i856.PatientRepoImp(gh<_i1041.PatientDataSource>()));
+      () => _i856.PatientRepoImp(gh<_i1041.PatientDataSource>()),
+    );
     gh.factory<_i966.MedicationRepo>(
-        () => _i689.MedicationRepoImp(gh<_i382.MedicationDataSource>()));
+      () => _i689.MedicationRepoImp(gh<_i382.MedicationDataSource>()),
+    );
     gh.factory<_i114.ClinicRepo>(
-        () => _i334.ClinicRepoImp(gh<_i808.ClinicDataSource>()));
-    gh.factory<_i530.CompletePatientRepo>(() => _i809.CompletePatientRepoImp(
-        completeDataSource: gh<_i139.CompleteDataSource>()));
-    gh.factory<_i499.PharmacyRepo>(() => _i596.PharmacyRepoImp(
-        pharmacyDataSource: gh<_i565.PharmacyDataSource>()));
-    gh.factory<_i269.SearchRepo>(() => _i216.SearchRepoImp(
-          gh<_i377.SearchRemoteDataSource>(),
-          gh<_i181.SearchLocalDataSource>(),
-        ));
+      () => _i334.ClinicRepoImp(gh<_i808.ClinicDataSource>()),
+    );
+    gh.factory<_i530.CompletePatientRepo>(
+      () => _i809.CompletePatientRepoImp(
+        completeDataSource: gh<_i139.CompleteDataSource>(),
+      ),
+    );
+    gh.factory<_i499.PharmacyRepo>(
+      () => _i596.PharmacyRepoImp(
+        pharmacyDataSource: gh<_i565.PharmacyDataSource>(),
+      ),
+    );
+    gh.factory<_i269.SearchRepo>(
+      () => _i216.SearchRepoImp(
+        gh<_i377.SearchRemoteDataSource>(),
+        gh<_i181.SearchLocalDataSource>(),
+      ),
+    );
     gh.factory<_i621.FacilityAuthCubit>(
-        () => _i621.FacilityAuthCubit(gh<_i829.FacilityAuthRepo>()));
+      () => _i621.FacilityAuthCubit(gh<_i829.FacilityAuthRepo>()),
+    );
     gh.factory<_i294.CompleteCubit>(
-        () => _i294.CompleteCubit(gh<_i530.CompletePatientRepo>()));
+      () => _i294.CompleteCubit(gh<_i530.CompletePatientRepo>()),
+    );
     gh.factory<_i551.DoctorAuthRepo>(
-        () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()));
+      () => _i1023.DoctorAuthRepoImp(gh<_i184.DoctorAuthDataSource>()),
+    );
     gh.factory<_i243.ClinicCubit>(
-        () => _i243.ClinicCubit(gh<_i114.ClinicRepo>()));
+      () => _i243.ClinicCubit(gh<_i114.ClinicRepo>()),
+    );
     gh.factory<_i851.ProfileRepo>(
-        () => _i371.ProfileRepoImpl(gh<_i183.ProfileRemoteDataSource>()));
+      () => _i371.ProfileRepoImpl(gh<_i183.ProfileRemoteDataSource>()),
+    );
     gh.factory<_i481.MedicationCubit>(
-        () => _i481.MedicationCubit(gh<_i966.MedicationRepo>()));
+      () => _i481.MedicationCubit(gh<_i966.MedicationRepo>()),
+    );
     gh.factory<_i246.AuthRepo>(
-        () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()));
-    gh.factory<_i930.PatientCubit>(() => _i930.PatientCubit(
-          patientRepo: gh<_i128.PatientRepo>(),
-          usersCubit: gh<_i745.UsersCubit>(),
-        ));
-    gh.factory<_i301.AuthCubit>(() => _i301.AuthCubit(
-          repo: gh<_i246.AuthRepo>(),
-          usersCubit: gh<_i745.UsersCubit>(),
-        ));
+      () => _i49.AuthRepoImp(gh<_i576.AuthDataSource>()),
+    );
+    gh.factory<_i930.PatientCubit>(
+      () => _i930.PatientCubit(
+        patientRepo: gh<_i128.PatientRepo>(),
+        usersCubit: gh<_i745.UsersCubit>(),
+      ),
+    );
+    gh.factory<_i301.AuthCubit>(
+      () => _i301.AuthCubit(
+        repo: gh<_i246.AuthRepo>(),
+        usersCubit: gh<_i745.UsersCubit>(),
+      ),
+    );
     gh.factory<_i840.PharmacyCubit>(
-        () => _i840.PharmacyCubit(gh<_i499.PharmacyRepo>()));
-    gh.factory<_i236.DoctorAuthCubit>(() => _i236.DoctorAuthCubit(
-          doctorAuthRepo: gh<_i551.DoctorAuthRepo>(),
-          usersCubit: gh<_i745.UsersCubit>(),
-        ));
+      () => _i840.PharmacyCubit(gh<_i499.PharmacyRepo>()),
+    );
+    gh.factory<_i236.DoctorAuthCubit>(
+      () => _i236.DoctorAuthCubit(
+        doctorAuthRepo: gh<_i551.DoctorAuthRepo>(),
+        usersCubit: gh<_i745.UsersCubit>(),
+      ),
+    );
     gh.factory<_i1023.SearchCubit>(
-        () => _i1023.SearchCubit(gh<_i269.SearchRepo>()));
+      () => _i1023.SearchCubit(gh<_i269.SearchRepo>()),
+    );
     gh.factory<_i779.ProfileCubit>(
-        () => _i779.ProfileCubit(gh<_i851.ProfileRepo>()));
+      () => _i779.ProfileCubit(gh<_i851.ProfileRepo>()),
+    );
     return this;
   }
 }

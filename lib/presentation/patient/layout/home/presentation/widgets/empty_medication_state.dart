@@ -8,6 +8,7 @@ import '../../../../../../core/routes/app_routes_names.dart';
 
 class EmptyMedicationState extends StatelessWidget {
   const EmptyMedicationState({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,20 +29,14 @@ class EmptyMedicationState extends StatelessWidget {
           24.verticalSpace,
           Text(
             "No Medications Yet",
-            style: getBoldStyle(
-              color: ColorManager.black,
-              fontSize: 20.sp,
-            ),
+            style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
           ),
           8.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.w),
             child: Text(
               "Add your medications to track them daily",
-              style: getMediumStyle(
-                color: ColorManager.gray,
-                fontSize: 15.sp,
-              ),
+              style: getMediumStyle(color: ColorManager.gray, fontSize: 15.sp),
               textAlign: TextAlign.center,
             ),
           ),
@@ -59,10 +54,7 @@ class EmptyMedicationState extends StatelessWidget {
             },
             child: Text(
               "Add Medication",
-              style: getBoldStyle(
-                color: Colors.white,
-                fontSize: 16.sp,
-              ),
+              style: getBoldStyle(color: Colors.white, fontSize: 16.sp),
             ),
           ),
         ],

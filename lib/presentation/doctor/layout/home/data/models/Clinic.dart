@@ -3,23 +3,24 @@ import 'DefaultSchedule.dart';
 
 class Clinic {
   Clinic({
-      this.id, 
-      this.doctorId, 
-      this.name, 
-      this.city, 
-      this.address, 
-      this.location, 
-      this.color, 
-      this.defaultSchedule, 
-      this.price, 
-      this.operatingLicense, 
-      this.status, 
-      this.activatedAt, 
-      this.activatedBy, 
-      this.rejectionReason, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.id,
+    this.doctorId,
+    this.name,
+    this.city,
+    this.address,
+    this.location,
+    this.color,
+    this.defaultSchedule,
+    this.price,
+    this.operatingLicense,
+    this.status,
+    this.activatedAt,
+    this.activatedBy,
+    this.rejectionReason,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   Clinic.fromJson(dynamic json) {
     id = json['_id'];
@@ -27,9 +28,13 @@ class Clinic {
     name = json['name'];
     city = json['city'];
     address = json['address'];
-    location = json['location'] != null ? Location.fromJson(json['location']) : null;
+    location = json['location'] != null
+        ? Location.fromJson(json['location'])
+        : null;
     color = json['color'];
-    defaultSchedule = json['defaultSchedule'] != null ? DefaultSchedule.fromJson(json['defaultSchedule']) : null;
+    defaultSchedule = json['defaultSchedule'] != null
+        ? DefaultSchedule.fromJson(json['defaultSchedule'])
+        : null;
     price = json['price'];
     operatingLicense = json['operatingLicense'];
     status = json['status'];
@@ -40,6 +45,7 @@ class Clinic {
     updatedAt = json['updatedAt'];
     v = json['__v'];
   }
+
   String? id;
   String? doctorId;
   String? name;
@@ -83,5 +89,4 @@ class Clinic {
     map['__v'] = v;
     return map;
   }
-
 }

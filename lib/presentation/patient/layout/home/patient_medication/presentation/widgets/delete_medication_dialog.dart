@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../../core/resources/color_manager.dart';
 import '../../../../../../../core/resources/styles_manager.dart';
+
 class DeleteMedicationDialog {
   static Future<void> show({
     required BuildContext context,

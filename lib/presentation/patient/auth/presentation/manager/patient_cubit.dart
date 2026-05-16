@@ -36,12 +36,10 @@ class PatientCubit extends Cubit<PatientState> {
   bool _isSigningUp = false;
 
   Future<void> patientSignUp() async {
-
     if (_isSigningUp) return;
     _isSigningUp = true;
     emit(SignUpLoadingState());
     try {
-
       var response = await patientRepo.patientSignUp(
         name: nameController.text,
         userName: userNameController.text,

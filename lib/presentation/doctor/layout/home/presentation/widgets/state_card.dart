@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
+
 class StateCard extends StatelessWidget {
   final String title;
   final String value;
@@ -36,10 +37,7 @@ class StateCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: getBoldStyle(
-                    color: ColorManager.black,
-                    fontSize: 16,
-                  ),
+                  style: getBoldStyle(color: ColorManager.black, fontSize: 16),
                 ),
                 5.verticalSpace,
                 Text(
@@ -55,10 +53,7 @@ class StateCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: getBoldStyle(
-                    color: ColorManager.black,
-                    fontSize: 16,
-                  ),
+                  style: getBoldStyle(color: ColorManager.black, fontSize: 16),
                 ),
                 5.verticalSpace,
                 Text(
@@ -69,11 +64,10 @@ class StateCard extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
-
   }
 }

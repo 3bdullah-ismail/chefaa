@@ -5,46 +5,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/resources/color_manager.dart';
 
 class ClinicStatus extends StatelessWidget {
-
   final List<dynamic> days;
 
-  const ClinicStatus({
-    super.key,
-    required this.days,
-  });
+  const ClinicStatus({super.key, required this.days});
 
   @override
   Widget build(BuildContext context) {
-
-    final today =
-    _getTodayName();
-    final isOpen = days.any(
-          (day) =>
-      day.day == today &&
-          day.isActive == true,
-    );
+    final today = _getTodayName();
+    final isOpen = days.any((day) => day.day == today && day.isActive == true);
 
     return Container(
-
       height: 35.h,
 
       decoration: BoxDecoration(
+        color: isOpen ? ColorManager.lightGreen : ColorManager.error,
 
-        color: isOpen
-            ? ColorManager.lightGreen
-            : ColorManager.error,
-
-        borderRadius:
-        BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20),
       ),
 
       child: Row(
-
-        mainAxisAlignment:
-        MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
 
         children: [
-
           const Icon(
             Icons.timelapse_outlined,
             color: ColorManager.white,
@@ -54,15 +36,9 @@ class ClinicStatus extends StatelessWidget {
           10.horizontalSpace,
 
           Text(
+            isOpen ? "Clinic Open Today" : "Clinic Closed Today",
 
-            isOpen
-                ? "Clinic Open Today"
-                : "Clinic Closed Today",
-
-            style: getBoldStyle(
-              color: ColorManager.white,
-              fontSize: 14,
-            ),
+            style: getBoldStyle(color: ColorManager.white, fontSize: 14),
           ),
         ],
       ),
@@ -70,11 +46,9 @@ class ClinicStatus extends StatelessWidget {
   }
 
   String _getTodayName() {
-
     final now = DateTime.now();
 
     switch (now.weekday) {
-
       case 1:
         return "Monday";
 

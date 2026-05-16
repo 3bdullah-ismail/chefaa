@@ -16,29 +16,24 @@ class OutlineButton extends StatelessWidget {
     required this.title,
     required this.color,
   });
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        padding:  EdgeInsets.symmetric(
-          horizontal: isEditSheet?AppPadding.p100: AppPadding.p16,
-          vertical:isEditSheet?AppPadding.p14: AppPadding.p2,
+        padding: EdgeInsets.symmetric(
+          horizontal: isEditSheet ? AppPadding.p100 : AppPadding.p16,
+          vertical: isEditSheet ? AppPadding.p14 : AppPadding.p2,
         ),
         minimumSize: Size(double.infinity, 50.h),
-        side:  BorderSide(color: color),
+        side: BorderSide(color: color),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       ),
       onPressed: () {
         onPressed();
       },
-      child: Text(
-        title,
-        style: getRegularStyle(
-          color: color,
-          fontSize: 16,
-        )
-      ),
+      child: Text(title, style: getRegularStyle(color: color, fontSize: 16)),
     );
   }
 }

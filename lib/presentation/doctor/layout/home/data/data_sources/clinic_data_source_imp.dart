@@ -6,9 +6,10 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: ClinicDataSource)
 class ClinicDataSourceImp implements ClinicDataSource {
   NetworkService networkService;
-    ClinicDataSourceImp(this.networkService);
-  @override
 
+  ClinicDataSourceImp(this.networkService);
+
+  @override
   //Add clinic data source
   Future<Response<dynamic>> addClinics({
     required String? name,
@@ -19,8 +20,8 @@ class ClinicDataSourceImp implements ClinicDataSource {
     required Map<String, dynamic>? location,
     required Map<String, dynamic>? schedule,
   }) {
-   return networkService.dio.post(
-     "/clinic/",
+    return networkService.dio.post(
+      "/clinic/",
       data: {
         "name": name,
         "address": address,
@@ -33,13 +34,11 @@ class ClinicDataSourceImp implements ClinicDataSource {
     );
   }
 
-
   //Delete clinic data source
   @override
   Future<Response<dynamic>> deleteClinics({required String clinicID}) {
-  return networkService.dio.delete("/clinic/$clinicID");
+    return networkService.dio.delete("/clinic/$clinicID");
   }
-
 
   //Get clinic by ID data source
   @override
@@ -47,13 +46,11 @@ class ClinicDataSourceImp implements ClinicDataSource {
     return networkService.dio.get("/clinic/$clinicID");
   }
 
-
   //Get clinics data source
   @override
   Future<Response<dynamic>> getClinics({required String doctorID}) {
- return networkService.dio.get("/doctor/$doctorID/clinics");
+    return networkService.dio.get("/doctor/$doctorID/clinics");
   }
-
 
   //
   @override
