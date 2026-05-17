@@ -61,20 +61,21 @@ class DayActiveContainer extends StatelessWidget {
                 child: DayTimeContainer(
                   title: "Open Time",
                   time: openTime,
-                  onTap: (){
+                  onTap: () {
                     onOpenTap();
-                  }),
+                  },
+                ),
               ),
               12.horizontalSpace,
               Expanded(
                 child: DayTimeContainer(
                   title: "Close Time",
                   time: closeTime,
-                  onTap: (){
+                  onTap: () {
                     onCloseTap();
-                  }),
+                  },
                 ),
-
+              ),
             ],
           ),
         ],

@@ -57,7 +57,7 @@ class _DocSignUpState extends State<DocSignUp> {
         appBar: CustomAppBar(
           preferredHeight: 150.h,
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-          child: AppBarContent(),
+          child: const AppBarContent(),
         ),
         body: BlocConsumer<DoctorAuthCubit, DoctorAuthState>(
           listener: (context, state) {

@@ -5,11 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class ClinicCubit  extends Cubit<ClinicState>{
+class ClinicCubit extends Cubit<ClinicState> {
   ClinicRepo clinicRepo;
-  ClinicCubit(this.clinicRepo):super(ClinicInitialState());
 
-  static ClinicCubit get(context)=> BlocProvider.of(context);
+  ClinicCubit(this.clinicRepo) : super(ClinicInitialState());
+
+  static ClinicCubit get(context) => BlocProvider.of(context);
 
   Future<void> getClinicByID({required String clinicID}) async {
     emit(ClinicLoadingState());
@@ -26,15 +27,14 @@ class ClinicCubit  extends Cubit<ClinicState>{
       emit(ClinicErrorState(message: e.toString()));
     }
   }
+
   Future<void> getClinics({required String doctorID}) async {
     emit(ClinicLoadingState());
-    try{
+    try {
       final clinics = await clinicRepo.getClinics(doctorID: doctorID);
       emit(ClinicsSuccessState(clinics: clinics.clinics ?? const <Clinics>[]));
-    }catch(e){
+    } catch (e) {
       emit(ClinicErrorState(message: e.toString()));
     }
   }
-
-
 }

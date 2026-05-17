@@ -17,6 +17,7 @@ import '../widgets/custom_outline_button.dart';
 
 class ClinicsPage extends StatelessWidget {
   const ClinicsPage({super.key});
+
   void _openAddSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -51,8 +52,8 @@ class ClinicsPage extends StatelessWidget {
           ),
           child: BlocBuilder<ClinicCubit, ClinicState>(
             builder: (context, state) {
-              final bool isLoadedWithClinics = state is ClinicsSuccessState &&
-                  state.clinics.isNotEmpty;
+              final bool isLoadedWithClinics =
+                  state is ClinicsSuccessState && state.clinics.isNotEmpty;
 
               return Column(
                 children: [
@@ -64,9 +65,7 @@ class ClinicsPage extends StatelessWidget {
 
                   if (isLoadedWithClinics) 20.verticalSpace,
 
-                  Expanded(
-                    child: _buildContent(context, state),
-                  ),
+                  Expanded(child: _buildContent(context, state)),
                 ],
               );
             },
@@ -111,5 +110,4 @@ class ClinicsPage extends StatelessWidget {
 
     return const Center(child: CircularProgressIndicator());
   }
-
 }

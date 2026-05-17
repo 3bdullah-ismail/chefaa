@@ -23,6 +23,7 @@ class MedicationBottomSheet extends StatefulWidget {
   final String content;
   final Medications? medication;
   final bool isEdit;
+
   const MedicationBottomSheet({
     super.key,
     required this.title,
@@ -230,10 +231,10 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
                           hintText: cubit.timesPerDayController.text.isEmpty
                               ? "Select times per day"
                               : cubit.timesPerDayController.text,
-                          value:cubit.timesPerDayController.text.isEmpty
+                          value: cubit.timesPerDayController.text.isEmpty
                               ? null
-                              : cubit.timesPerDayController.text ,
-                          onChanged:  (value) {
+                              : cubit.timesPerDayController.text,
+                          onChanged: (value) {
                             if (value != null) {
                               cubit.setTimesPerDay(value);
                               _generateDoses(value);
@@ -242,11 +243,15 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
                           startDateController: cubit.startDateController,
                           endDateController: cubit.endDateController,
                           onDateSelected: (date) {
-                            cubit.startDateController.text =
-                                DateFormat('yyyy-MM-dd').format(date);
+                            cubit.startDateController.text = DateFormat(
+                              'yyyy-MM-dd',
+                            ).format(date);
                           },
-                          onTap:  () => setState(() => cubit.isActive = !cubit.isActive),
-                          color:cubit.isActive ? ColorManager.primary : ColorManager.input,
+                          onTap: () =>
+                              setState(() => cubit.isActive = !cubit.isActive),
+                          color: cubit.isActive
+                              ? ColorManager.primary
+                              : ColorManager.input,
                           alignment: cubit.isActive
                               ? Alignment.centerRight
                               : Alignment.centerLeft,
@@ -309,7 +314,4 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
       },
     );
   }
-
-
-
 }

@@ -64,10 +64,11 @@ dependencies:
   easy_date_timeline:
   intl:
   syncfusion_flutter_gauges: ^32.2.9
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  geocoding: ^4.0.0
-  fl_chart: ^1.2.0
+  hive:
+  hive_flutter:
+  geocoding:
+  fl_chart:
+  material_symbols_icons:
 
 dev_dependencies:
   flutter_native_splash:

@@ -11,12 +11,14 @@ import '../widgets/clinic_card_details.dart';
 
 class ClinicDetailsPage extends StatelessWidget {
   const ClinicDetailsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final clinic = ModalRoute.of(context)!.settings.arguments as Clinics;
 
     return BlocProvider(
-      create: (_) => getIt<ClinicCubit>()..getClinicByID(clinicID: clinic.id ?? ""),
+      create: (_) =>
+          getIt<ClinicCubit>()..getClinicByID(clinicID: clinic.id ?? ""),
       child: Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(100),
@@ -38,9 +40,7 @@ class ClinicDetailsPage extends StatelessWidget {
                     vertical: AppPadding.p32,
                   ),
                   child: Column(
-                    children: [
-                      ClinicCardDetails(clinic: state.clinic),
-                    ],
+                    children: [ClinicCardDetails(clinic: state.clinic)],
                   ),
                 ),
               );

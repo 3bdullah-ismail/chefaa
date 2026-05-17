@@ -25,7 +25,6 @@ class MedicationPage extends StatefulWidget {
 }
 
 class _MedicationPageState extends State<MedicationPage> {
-
   @override
   void initState() {
     super.initState();
@@ -51,7 +50,8 @@ class _MedicationPageState extends State<MedicationPage> {
           heightFactor: 0.92,
           child: MedicationBottomSheet(
             title: "Add Medication",
-            content: "Enter your medication details for tracking and reminders.",
+            content:
+                "Enter your medication details for tracking and reminders.",
             isEdit: false,
           ),
         ),
@@ -102,16 +102,16 @@ class _MedicationPageState extends State<MedicationPage> {
       body: BlocConsumer<MedicationCubit, MedicationState>(
         listener: (context, state) {
           if (state is MedicationDeleteSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("Medication deleted")),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text("Medication deleted")));
             _loadMedications();
           }
 
           if (state is MedicationDeleteErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
           }
         },
         builder: (context, state) {
@@ -126,7 +126,11 @@ class _MedicationPageState extends State<MedicationPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.error_outline, size: 70, color: Colors.red),
+                    const Icon(
+                      Icons.error_outline,
+                      size: 70,
+                      color: Colors.red,
+                    ),
                     20.verticalSpace,
                     Text(state.errorMessage, textAlign: TextAlign.center),
                     20.verticalSpace,
@@ -145,7 +149,9 @@ class _MedicationPageState extends State<MedicationPage> {
             final bool isEmpty = medications.isEmpty;
 
             return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: AppPadding.p32,
@@ -161,11 +167,13 @@ class _MedicationPageState extends State<MedicationPage> {
                         children: [
                           OverViewCard(
                             label: "Avg.Adherence",
-                            title: "${state.medications.stats?.avgAdherence ?? 0}",
+                            title:
+                                "${state.medications.stats?.avgAdherence ?? 0}",
                           ),
                           OverViewCard(
                             label: "Active Medications",
-                            title: "${state.medications.stats?.activeMedications ?? 0}",
+                            title:
+                                "${state.medications.stats?.activeMedications ?? 0}",
                             isActive: true,
                           ),
                         ],
@@ -176,7 +184,13 @@ class _MedicationPageState extends State<MedicationPage> {
 
                       Row(
                         children: [
-                          Text("Medications", style: getMediumStyle(color: ColorManager.black, fontSize: 20.sp)),
+                          Text(
+                            "Medications",
+                            style: getMediumStyle(
+                              color: ColorManager.black,
+                              fontSize: 20.sp,
+                            ),
+                          ),
                           const Spacer(),
                           AddMedication(onTap: () => _openAddSheet(context)),
                         ],
@@ -185,7 +199,9 @@ class _MedicationPageState extends State<MedicationPage> {
                     ],
 
                     if (isEmpty)
-                      EmptyMedicationListState(onAddPressed: () => _openAddSheet(context))
+                      EmptyMedicationListState(
+                        onAddPressed: () => _openAddSheet(context),
+                      )
                     else
                       ListView.separated(
                         shrinkWrap: true,
@@ -195,14 +211,12 @@ class _MedicationPageState extends State<MedicationPage> {
                         itemBuilder: (_, index) => MedicationCard(
                           medications: medications,
                           index: index,
-                          onPressed: () => _openEditSheet(context, medications[index]),
+                          onPressed: () =>
+                              _openEditSheet(context, medications[index]),
                         ),
                       ),
 
-                    if (!isEmpty) ...[
-                      30.verticalSpace,
-                      const AiSuggestion(),
-                    ],
+                    if (!isEmpty) ...[30.verticalSpace, const AiSuggestion()],
                   ],
                 ),
               ),

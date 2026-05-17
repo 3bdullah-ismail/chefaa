@@ -58,7 +58,7 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
         appBar: CustomAppBar(
           preferredHeight: 150.h,
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-          child: AppBarContent(),
+          child: const AppBarContent(),
         ),
         body: BlocConsumer<PharmacyCubit, PharmacyState>(
           listener: (context, state) {

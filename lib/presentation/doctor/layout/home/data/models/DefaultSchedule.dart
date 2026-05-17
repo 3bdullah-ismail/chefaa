@@ -2,10 +2,11 @@ import 'Days.dart';
 
 class DefaultSchedule {
   DefaultSchedule({
-      this.days, 
-      this.slotDuration, 
-      this.dailyCapacity, 
-      this.patientsPerSlot,});
+    this.days,
+    this.slotDuration,
+    this.dailyCapacity,
+    this.patientsPerSlot,
+  });
 
   DefaultSchedule.fromJson(dynamic json) {
     if (json['days'] != null) {
@@ -18,6 +19,7 @@ class DefaultSchedule {
     dailyCapacity = json['dailyCapacity'];
     patientsPerSlot = json['patientsPerSlot'];
   }
+
   List<Days>? days;
   num? slotDuration;
   num? dailyCapacity;
@@ -33,5 +35,4 @@ class DefaultSchedule {
     map['patientsPerSlot'] = patientsPerSlot;
     return map;
   }
-
 }

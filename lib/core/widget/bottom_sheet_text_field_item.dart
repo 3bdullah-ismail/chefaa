@@ -9,9 +9,13 @@ class BottomSheetTextFieldItem extends StatelessWidget {
   final String title;
   final TextEditingController controller;
   final String hint;
-  const BottomSheetTextFieldItem({super.key, required this.title,
+
+  const BottomSheetTextFieldItem({
+    super.key,
+    required this.title,
     required this.controller,
-    required this.hint,});
+    required this.hint,
+  });
 
   @override
   Widget build(BuildContext context) {

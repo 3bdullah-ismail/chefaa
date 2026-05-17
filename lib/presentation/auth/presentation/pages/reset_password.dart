@@ -35,7 +35,7 @@ class ResetPassword extends StatelessWidget {
       appBar: CustomAppBar(
         preferredHeight: 150.h,
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
-        child: AppBarContent(),
+        child: const AppBarContent(),
       ),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

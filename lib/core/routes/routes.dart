@@ -68,12 +68,10 @@ class Routes {
         );
       case AppRoutesNames.clinicsPage:
         return MaterialPageRoute(
-
           builder: (_) => _wrapWithCanPop(const ClinicsPage()),
         );
       case AppRoutesNames.clinicsDetailsPage:
         return MaterialPageRoute(
-
           settings: settings,
           builder: (_) => _wrapWithCanPop(const ClinicDetailsPage()),
         );
@@ -201,7 +199,6 @@ class Routes {
         );
       case AppRoutesNames.medicationPage:
         return MaterialPageRoute(
-
           builder: (_) => _wrapWithCanPop(const MedicationPage()),
         );
       case AppRoutesNames.doctorLayout:

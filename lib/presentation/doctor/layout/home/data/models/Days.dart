@@ -1,15 +1,16 @@
 class Days {
   Days({
-      this.day, 
-      this.isActive, 
-      this.open, 
-      this.close, 
-      this.breaks, 
-      this.slotDuration, 
-      this.dailyCapacity, 
-      this.patientsPerSlot, 
-      this.isDayLocked, 
-      this.isBookingLocked,});
+    this.day,
+    this.isActive,
+    this.open,
+    this.close,
+    this.breaks,
+    this.slotDuration,
+    this.dailyCapacity,
+    this.patientsPerSlot,
+    this.isDayLocked,
+    this.isBookingLocked,
+  });
 
   Days.fromJson(dynamic json) {
     day = json['day'];
@@ -18,8 +19,7 @@ class Days {
     close = json['close'];
     if (json['breaks'] != null) {
       breaks = [];
-      json['breaks'].forEach((v) {
-      });
+      json['breaks'].forEach((v) {});
     }
     slotDuration = json['slotDuration'];
     dailyCapacity = json['dailyCapacity'];
@@ -27,6 +27,7 @@ class Days {
     isDayLocked = json['isDayLocked'];
     isBookingLocked = json['isBookingLocked'];
   }
+
   String? day;
   bool? isActive;
   num? open;
@@ -54,5 +55,4 @@ class Days {
     map['isBookingLocked'] = isBookingLocked;
     return map;
   }
-
 }

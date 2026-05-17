@@ -1,4 +1,3 @@
-import 'package:chefaa/core/services/storage_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -25,17 +24,7 @@ class NetworkService {
       ),
     );
 
-    dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) {
-          final token = StorageService.token;
-          if (token != null && token.isNotEmpty) {
-            options.headers["Authorization"] = "Bearer $token";
-          }
-          return handler.next(options);
-        },
-      ),
-    );
+    dio.interceptors.add(AuthInterceptor());
 
     if (kDebugMode) {
       dio.interceptors.add(
@@ -44,14 +33,13 @@ class NetworkService {
           requestHeader: true,
           requestBody: true,
           responseBody: true,
-          responseHeader: false,
+          responseHeader: true,
           error: true,
-          compact: true,
+          compact: false,
+          maxWidth: 120,
           logPrint: (obj) => debugPrint(obj.toString()),
         ),
       );
     }
-
-    dio.interceptors.add(AuthInterceptor());
   }
 }

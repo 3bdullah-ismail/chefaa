@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,10 +6,8 @@ import '../../../../../../../../core/resources/styles_manager.dart';
 
 class EmptyMedicationListState extends StatelessWidget {
   final VoidCallback onAddPressed;
-  const EmptyMedicationListState({
-    super.key,
-    required this.onAddPressed,
-  });
+
+  const EmptyMedicationListState({super.key, required this.onAddPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +33,13 @@ class EmptyMedicationListState extends StatelessWidget {
             32.verticalSpace,
             Text(
               "No Medications Added Yet",
-              style: getBoldStyle(
-                color: ColorManager.black,
-                fontSize: 24.sp,
-              ),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 24.sp),
               textAlign: TextAlign.center,
             ),
             12.verticalSpace,
             Text(
               "Start adding your medications to track\nyour daily schedule and get reminders",
-              style: getMediumStyle(
-                color: ColorManager.gray,
-                fontSize: 16.sp,
-              ),
+              style: getMediumStyle(color: ColorManager.gray, fontSize: 16.sp),
               textAlign: TextAlign.center,
             ),
             50.verticalSpace,
@@ -60,10 +51,7 @@ class EmptyMedicationListState extends StatelessWidget {
                 icon: const Icon(Icons.add),
                 label: Text(
                   "Add First Medication",
-                  style: getBoldStyle(
-                    color: Colors.white,
-                    fontSize: 17.sp,
-                  ),
+                  style: getBoldStyle(color: Colors.white, fontSize: 17.sp),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorManager.primary,
