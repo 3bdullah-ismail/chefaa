@@ -19,7 +19,7 @@ class ClinicInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 70.h,
-      width: isInfinity ? double.infinity : 160.w,
+      width: isInfinity ? double.infinity : 137.w,
       decoration: BoxDecoration(
         color: ColorManager.input,
         borderRadius: BorderRadius.circular(20.r),

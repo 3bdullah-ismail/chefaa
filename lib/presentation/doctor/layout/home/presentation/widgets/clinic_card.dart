@@ -2,18 +2,11 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/clinic_days_avaliable.dart';
-import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/clinic_info_card.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/clinic_status.dart';
-import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/resources/color_manager.dart';
-import '../../../../../../core/resources/styles_manager.dart';
-import '../../../../../../core/resources/values_manager.dart';
 import '../../data/models/Clinics.dart';
-import 'clinic_days_avaliable.dart';
-import 'clinic_status.dart';
 
 
 class ClinicCard extends StatelessWidget {

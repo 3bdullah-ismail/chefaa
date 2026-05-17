@@ -13,11 +13,11 @@ class AppointmentStatusCart extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          height: 150.h,
-          width: 150.w,
+          height: 120.h,
+          width: 120.w,
           child: PieChart(
             PieChartData(
-              centerSpaceRadius: 50,
+              centerSpaceRadius: 50.r,
               sections: [
                 PieChartSectionData(
                   showTitle: false,
@@ -29,13 +29,13 @@ class AppointmentStatusCart extends StatelessWidget {
                   showTitle: false,
                   value: 25,
                   color: ColorManager.error,
-                  radius: 20,
+                  radius: 20.r,
                 ),
                 PieChartSectionData(
                   showTitle: false,
                   value: 15,
                   color: ColorManager.primary,
-                  radius: 20,
+                  radius: 20.r,
                 ),
               ],
             ),

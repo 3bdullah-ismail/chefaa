@@ -20,19 +20,19 @@ class IndicatorStatus extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 14,
-          height: 14,
+          width: 12.w,
+          height: 12.h,
           decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         7.horizontalSpace,
         Text(
           title,
-          style: getBoldStyle(color: ColorManager.darkGray, fontSize: 20),
+          style: getBoldStyle(color: ColorManager.darkGray, fontSize: 18.sp),
         ),
         15.horizontalSpace,
         Text(
           value,
-          style: getBoldStyle(color: ColorManager.gray, fontSize: 18),
+          style: getBoldStyle(color: ColorManager.gray, fontSize: 18.sp),
         ),
       ],
     );

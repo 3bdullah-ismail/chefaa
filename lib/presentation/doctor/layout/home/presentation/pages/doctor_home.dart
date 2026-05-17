@@ -27,10 +27,8 @@ class DoctorHome extends StatelessWidget {
               context.read<ClinicCubit>().getClinics(doctorID: state.user.id);
             }
 
-            return  CustomAppBar.layout(
-              title1: "Hello Memo",
-              title2: state is UserLoaded ? state.user.name : "Doctor",
-              onPressed: () {},
+            return  CustomAppBar(
+              child: Text(""),
             );
           },
         ),

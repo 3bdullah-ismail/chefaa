@@ -86,7 +86,7 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
                         style: getBoldStyle(
                           color: ColorManager.primary,
 
-                          fontSize: 18,
+                          fontSize: 18.sp,
                         ),
                       ),
 
@@ -109,7 +109,7 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
                               style: getMediumStyle(
                                 color: ColorManager.gray,
 
-                                fontSize: 14,
+                                fontSize: 14.sp,
                               ),
                             ),
                           ),

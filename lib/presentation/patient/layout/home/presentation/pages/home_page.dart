@@ -63,10 +63,8 @@ class _HomePageState extends State<HomePage> {
             if (state is UserLoaded) userName = state.user.name;
             if (state is UsersLoading) userName = "...";
 
-            return  CustomAppBar.layout(
-            title1: "Hello Memo",
-            title2: userName,
-            onPressed: () {},
+            return  CustomAppBar(
+              child: Text(""),
             );
           },
         ),

@@ -9,9 +9,11 @@ class InsideAppBar extends StatelessWidget {
   final String? subtitle;
   final double height;
   final bool isSpeciality;
+  final bool isLayout;
 
   const InsideAppBar({
     super.key,
+    this.isLayout=false,
     this.isSpeciality = false,
     required this.title,
     this.subtitle,
@@ -35,11 +37,11 @@ class InsideAppBar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: Icon(
+            icon: isLayout? Icon(
               Icons.arrow_back_ios_new_outlined,
               color: isSpeciality ? ColorManager.black : ColorManager.white,
               size: 27,
-            ),
+            ): const SizedBox(),
           ),
 
           Padding(
