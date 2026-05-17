@@ -39,7 +39,7 @@ class _PatientsPageState extends State<PatientsPage> {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(100),
-        child: InsideAppBar(title: ' My Patients '),
+        child: InsideAppBar(title: ' My Patients ',isLayout: true,),
       ),
       body: Padding(
         padding: const EdgeInsets.only(

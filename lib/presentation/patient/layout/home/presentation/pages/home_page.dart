@@ -10,6 +10,7 @@ import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/routes/app_routes_names.dart';
 import '../../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
+import '../../../../../../core/widget/layout_app_bar.dart';
 import '../../../../search/presentation/manager/search_cubit.dart';
 import '../../../../search/presentation/pages/search_page.dart';
 import '../../patient_medication/presentation/manager/medication_cubit.dart';
@@ -31,17 +32,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<MedicineCardState> _medicineCardKey =
-  GlobalKey<MedicineCardState>();
+      GlobalKey<MedicineCardState>();
 
   void _openSearchPage() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) =>
-            BlocProvider.value(
-              value: context.read<SearchCubit>(),
-              child: const SearchPage(),
-            ),
+        builder: (_) => BlocProvider.value(
+          value: context.read<SearchCubit>(),
+          child: const SearchPage(),
+        ),
       ),
     );
   }
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
 
                     BlocBuilder<MedicationCubit, MedicationState>(
                       buildWhen: (previous, current) =>
-                      current is MedicationListLoadingState ||
+                          current is MedicationListLoadingState ||
                           current is MedicationListSuccessState ||
                           current is MedicationListErrorState,
                       builder: (context, state) {
@@ -149,26 +149,25 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   if (medications.isNotEmpty)
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.pushNamed(
-                                            context,
-                                            AppRoutesNames.medicationPage,
-                                          ),
+                                      onPressed: () => Navigator.pushNamed(
+                                        context,
+                                        AppRoutesNames.medicationPage,
+                                      ),
                                       child: Row(
                                         children: [
                                           Text(
                                             "Manage",
                                             style:
-                                            getMediumStyle(
-                                              color: ColorManager.primary,
-                                              fontSize: 18,
-                                            ).copyWith(
-                                              decoration:
-                                              TextDecoration.underline,
-                                              decorationColor:
-                                              ColorManager.primary,
-                                              decorationThickness: 2,
-                                            ),
+                                                getMediumStyle(
+                                                  color: ColorManager.primary,
+                                                  fontSize: 18,
+                                                ).copyWith(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  decorationColor:
+                                                      ColorManager.primary,
+                                                  decorationThickness: 2,
+                                                ),
                                           ),
                                           SvgPicture.asset(
                                             "assets/icons/drug.svg",
@@ -215,23 +214,22 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () =>
-                              Navigator.pushNamed(
-                                context,
-                                AppRoutesNames.appointmentPage,
-                              ),
+                          onPressed: () => Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.appointmentPage,
+                          ),
                           child: Row(
                             children: [
                               Text(
                                 "ViewAll",
                                 style:
-                                getMediumStyle(
-                                  color: ColorManager.primary,
-                                  fontSize: 18,
-                                ).copyWith(
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: ColorManager.primary,
-                                ),
+                                    getMediumStyle(
+                                      color: ColorManager.primary,
+                                      fontSize: 18,
+                                    ).copyWith(
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: ColorManager.primary,
+                                    ),
                               ),
                               SvgPicture.asset("assets/icons/drug.svg"),
                             ],

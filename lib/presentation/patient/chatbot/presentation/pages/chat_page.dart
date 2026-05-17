@@ -1,7 +1,6 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
-
 import '../widgets/bot_message.dart';
 import '../widgets/chat_header.dart';
 import '../widgets/chat_input_bar.dart';

@@ -37,7 +37,7 @@ class InsideAppBar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () => Navigator.pop(context),
-            icon: isLayout? Icon(
+            icon: !isLayout? Icon(
               Icons.arrow_back_ios_new_outlined,
               color: isSpeciality ? ColorManager.black : ColorManager.white,
               size: 27,
