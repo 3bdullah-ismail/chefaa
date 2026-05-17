@@ -10,8 +10,10 @@ abstract class Failure {
 
 class ServerFailure extends Failure {
   ServerFailure(super.message);
+
   static const String unexpectedError =
       'An unexpected error occurred. Please try again later.';
+
   factory ServerFailure.fromDioError(DioException e) {
     switch (e.type) {
       case DioExceptionType.connectionTimeout:

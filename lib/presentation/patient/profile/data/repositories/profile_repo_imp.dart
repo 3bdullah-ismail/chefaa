@@ -1,7 +1,7 @@
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/presentation/patient/profile/data/models/profile_response.dart';
-import 'package:chefaa/presentation/patient/profile/data/models/update_response.dart';
 import 'package:chefaa/presentation/patient/profile/data/models/update_medical_info_response.dart';
+import 'package:chefaa/presentation/patient/profile/data/models/update_response.dart';
 import 'package:chefaa/presentation/patient/profile/data/repositories/profile_repo.dart';
 import 'package:chefaa/presentation/patient/profile/domain/entities/user_profile_entity.dart';
 import 'package:dart_either/dart_either.dart';

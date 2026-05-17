@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 

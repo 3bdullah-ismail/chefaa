@@ -16,7 +16,9 @@ abstract class MedicationRepo {
   });
 
   Future<ConfirmMedication> confirmMedication(String medicationId);
+
   Future<MedicationList> getMedicationList();
+
   Future<MedicationResponse> updateMedication({
     required String medicationId,
     required String name,
@@ -28,5 +30,6 @@ abstract class MedicationRepo {
     required String endDate,
     required bool isActive,
   });
+
   Future<MedicationResponse> deleteMedication(String medicationId);
 }

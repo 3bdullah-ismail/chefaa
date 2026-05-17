@@ -16,6 +16,7 @@ class OverViewCard extends StatelessWidget {
     required this.label,
     required this.title,
   });
+
   @override
   Widget build(BuildContext context) {
     return Container(

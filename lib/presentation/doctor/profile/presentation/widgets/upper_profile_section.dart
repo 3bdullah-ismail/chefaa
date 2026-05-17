@@ -3,12 +3,17 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/widget/custom_circle_avatar.dart';
 import 'package:chefaa/presentation/doctor/profile/presentation/widgets/profile_stat_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/resources/assets_manager.dart';
+import '../../../../patient/layout/home/presentation/manager/users_cubit.dart';
+import '../../domain/entities/doctor_profile_entity.dart';
 
 class UpperProfileSection extends StatelessWidget {
-  const UpperProfileSection({super.key});
+  final DoctorProfileEntity? doctorData;
+
+  const UpperProfileSection({super.key, this.doctorData});
 
   static const double _headerSpacing = 30;
   static const double _statsContainerVerticalPadding = 15;
@@ -24,41 +29,33 @@ class UpperProfileSection extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 30.h),
       child: Column(
         children: [
-          Align(
-            alignment: Alignment.topRight,
-            child: OutlinedButton(
-              onPressed: () {},
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: ColorManager.white),
-                shape: const StadiumBorder(),
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-              ),
-              child: Text(
-                "Edit profile",
-                style: getBoldStyle(color: ColorManager.white, fontSize: 12.sp),
-              ),
-            ),
-          ),
-          10.verticalSpace,
           CircleAvatar(
             radius: 50.r,
             backgroundColor: ColorManager.white.withValues(alpha: 0.3),
             child: CustomCircleAvatar(
-              imagePath: ImageAssets.doctor,
+              imagePath:
+                  doctorData?.imageUrl != null &&
+                      doctorData!.imageUrl!.isNotEmpty
+                  ? doctorData!.imageUrl!
+                  : ImageAssets.doctor,
               radius: 45.r,
               backgroundColor: ColorManager.white,
             ),
           ),
           16.verticalSpace,
-          Text(
-            "Dr. Sara Ahmed",
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: getBoldStyle(color: ColorManager.white, fontSize: 22.sp),
+          BlocBuilder<UsersCubit, UsersState>(
+            builder: (context, state) {
+              return Text(
+                "Dr.${doctorData?.name ?? (state is UserLoaded ? state.user.name : "Doctor")}",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: getBoldStyle(color: ColorManager.white, fontSize: 22.sp),
+              );
+            },
           ),
           4.verticalSpace,
           Text(
-            "Cardiology",
+            doctorData?.specialization ?? "Specialization",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: getSemiBoldStyle(color: ColorManager.white, fontSize: 16.sp),
@@ -73,7 +70,7 @@ class UpperProfileSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Text(
-              "Cairo",
+              doctorData?.location ?? "Location",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: getBoldStyle(color: ColorManager.white, fontSize: 14.sp),
@@ -91,14 +88,23 @@ class UpperProfileSection extends StatelessWidget {
                 color: ColorManager.white.withValues(alpha: 0.2),
               ),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ProfileStatItem(value: "1", label: "Clinics"),
-                _VerticalDivider(),
-                ProfileStatItem(value: "0", label: "Rating"),
-                _VerticalDivider(),
-                ProfileStatItem(value: "0", label: "Reviews"),
+                ProfileStatItem(
+                  value: "${doctorData?.clinics ?? 0}",
+                  label: "Clinics",
+                ),
+                const _VerticalDivider(),
+                ProfileStatItem(
+                  value: "${doctorData?.rating ?? 0.0}",
+                  label: "Rating",
+                ),
+                const _VerticalDivider(),
+                ProfileStatItem(
+                  value: "${doctorData?.reviews ?? 0}",
+                  label: "Reviews",
+                ),
               ],
             ),
           ),

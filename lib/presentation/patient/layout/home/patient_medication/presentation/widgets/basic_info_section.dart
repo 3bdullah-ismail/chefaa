@@ -15,6 +15,7 @@ class BasicInfoSection extends StatelessWidget {
   final String hintText;
   final String? values;
   final void Function(String?) onChanged;
+
   const BasicInfoSection({
     super.key,
     required this.hintText,
