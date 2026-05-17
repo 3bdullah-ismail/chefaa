@@ -14,6 +14,7 @@ import '../../presentation/auth/presentation/pages/reset_password.dart';
 import '../../presentation/chefaa_entry_page.dart';
 import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
 import '../../presentation/doctor/layout/doctor_layout.dart';
+import '../../presentation/doctor/layout/patients/presentation/pages/patient_details.dart';
 import '../../presentation/onboarding/pages/facility_option.dart';
 import '../../presentation/onboarding/pages/onboarding_page.dart';
 import '../../presentation/onboarding/pages/option_screen.dart';
@@ -203,6 +204,10 @@ class Routes {
       case AppRoutesNames.doctorLayout:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const DoctorLayout()),
+        );
+      case AppRoutesNames.patientDetailsPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const PatientDetailsPage()),
         );
       case AppRoutesNames.pharmacyLayout:
         return MaterialPageRoute(

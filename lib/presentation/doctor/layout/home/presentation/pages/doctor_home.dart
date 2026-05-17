@@ -13,8 +13,32 @@ import '../manager/clinic_cubit.dart';
 import '../manager/clinic_state.dart';
 import '../widgets/clinic_card.dart';
 
-class DoctorHome extends StatelessWidget {
+class DoctorHome extends StatefulWidget {
   const DoctorHome({super.key});
+
+  @override
+  State<DoctorHome> createState() => _DoctorHomeState();
+}
+
+class _DoctorHomeState extends State<DoctorHome> {
+  bool _isLoaded = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_isLoaded) {
+      final userState = context.read<UsersCubit>().state;
+
+      if (userState is UserLoaded) {
+        context.read<ClinicCubit>().getClinics(
+          doctorID: userState.user.id,
+        );
+
+        _isLoaded = true;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +47,15 @@ class DoctorHome extends StatelessWidget {
         preferredSize: const Size.fromHeight(170),
         child: BlocBuilder<UsersCubit, UsersState>(
           builder: (context, state) {
+            String doctorName = "Doctor";
+
             if (state is UserLoaded) {
-              context.read<ClinicCubit>().getClinics(doctorID: state.user.id);
+              doctorName = state.user.name;
             }
 
             return CustomAppBarLayout(
-              title1: "Hello Memo",
-              title2: state is UserLoaded ? state.user.name : "Doctor",
+              title1: "Hello",
+              title2: doctorName,
             );
           },
         ),
@@ -95,6 +121,7 @@ class DoctorHome extends StatelessWidget {
               ),
 
               10.verticalSpace,
+
               BlocBuilder<ClinicCubit, ClinicState>(
                 builder: (context, state) {
                   if (state is ClinicLoadingState) {
@@ -106,7 +133,9 @@ class DoctorHome extends StatelessWidget {
                   }
 
                   if (state is ClinicErrorState) {
-                    return Center(child: Text(state.message));
+                    return Center(
+                      child: Text(state.message),
+                    );
                   }
 
                   if (state is ClinicsSuccessState) {
@@ -120,9 +149,11 @@ class DoctorHome extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: clinics.length > 2 ? 2 : clinics.length,
-                      separatorBuilder: (_, _) => const SizedBox(height: 15),
+                      separatorBuilder: (_, _) =>
+                      const SizedBox(height: 15),
                       itemBuilder: (_, index) {
                         final clinic = clinics[index];
+
                         return ClinicCard(
                           clinic: clinic,
                           onPressed: () => Navigator.pushNamed(

@@ -1,5 +1,6 @@
 import 'package:chefaa/presentation/doctor/layout/home/presentation/manager/clinic_cubit.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/doctor_home.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/presentation/pages/patients_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,8 +24,8 @@ class _DoctorLayoutState extends State<DoctorLayout> {
 
   final List<Widget> _tabs = const [
     DoctorHome(),
-    Center(child: Text("Patient")),
-    DoctorProfile(),
+    PatientsPage(),
+     DoctorProfile(),
   ];
 
   @override
@@ -46,24 +47,12 @@ class _DoctorLayoutState extends State<DoctorLayout> {
           items: [
             BottomNavigationBarItem(
               icon: SvgPicture.asset(SvgAssets.home, width: 20, height: 20),
-              activeIcon: SvgPicture.asset(
-                SvgAssets.homeActive,
-                width: 20,
-                height: 20,
-              ),
+              activeIcon: SvgPicture.asset(SvgAssets.homeActive, width: 20, height: 20),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                SvgAssets.patient,
-                width: 32.w,
-                height: 32.h,
-              ),
-              activeIcon: SvgPicture.asset(
-                SvgAssets.patientActive,
-                width: 32.w,
-                height: 32.h,
-              ),
+              icon: SvgPicture.asset(SvgAssets.patient, width: 32.w, height: 32.h),
+              activeIcon: SvgPicture.asset(SvgAssets.patientActive, width: 32.w, height: 32.h),
               label: 'Patients',
             ),
             BottomNavigationBarItem(

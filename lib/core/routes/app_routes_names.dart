@@ -29,7 +29,7 @@ class AppRoutesNames {
   static const String aiLabAnalysis = '/aiLabAnalysis';
   static const String appointmentPage = '/appointmentPage';
   static const String historyReportPage = '/historyReportPage';
-
+ static const String patientDetailsPage = '/patientDetailsPage';
   static const String clinicsPage = '/clinicsPage';
 
   static const String clinicsDetailsPage = '/clinicsDetailsPage';

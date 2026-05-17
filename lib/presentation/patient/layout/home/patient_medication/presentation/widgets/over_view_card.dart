@@ -20,7 +20,7 @@ class OverViewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(25.r),
         color: ColorManager.lightGray,
         border: Border.all(color: ColorManager.input),
         boxShadow: [
@@ -32,7 +32,7 @@ class OverViewCard extends StatelessWidget {
         ],
       ),
       height: 80.h,
-      width: 175.w,
+      width: 155.w,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p12,
@@ -44,13 +44,13 @@ class OverViewCard extends StatelessWidget {
           children: [
             Text(
               label,
-              style: getRegularStyle(color: ColorManager.black, fontSize: 16),
+              style: getRegularStyle(color: ColorManager.black, fontSize: 16.sp),
             ),
             Text(
               title,
               style: getBoldStyle(
                 color: isActive ? ColorManager.black : ColorManager.lightGreen,
-                fontSize: 18,
+                fontSize: 18.sp,
               ),
             ),
           ],
