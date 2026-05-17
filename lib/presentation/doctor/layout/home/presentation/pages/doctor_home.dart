@@ -7,7 +7,7 @@ import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/routes/app_routes_names.dart';
-import '../../../../../../core/widget/custom_app_bar.dart';
+import '../../../../../../core/widget/layout_app_bar.dart';
 import '../../../../../patient/layout/home/presentation/manager/users_cubit.dart';
 import '../manager/clinic_cubit.dart';
 import '../manager/clinic_state.dart';
@@ -27,10 +27,9 @@ class DoctorHome extends StatelessWidget {
               context.read<ClinicCubit>().getClinics(doctorID: state.user.id);
             }
 
-            return CustomAppBar.layout(
+            return CustomAppBarLayout(
               title1: "Hello Memo",
               title2: state is UserLoaded ? state.user.name : "Doctor",
-              onPressed: () {},
             );
           },
         ),
