@@ -1,0 +1,174 @@
+import 'package:chefaa/presentation/doctor/profile/data/models/update_doctor_profile_request.dart';
+import 'package:chefaa/presentation/doctor/profile/data/repositories/repo.dart';
+import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
+part 'doctor_profile_state.dart';
+
+@injectable
+class DoctorProfileCubit extends Cubit<DoctorProfileState> {
+  final DoctorProfileRepo doctorProfileRepo;
+
+  DoctorProfileCubit({required this.doctorProfileRepo})
+    : super(DoctorProfileInitial());
+
+  final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final specializationController = TextEditingController();
+  final aboutController = TextEditingController();
+  final ageController = TextEditingController();
+  final yearsOfExperienceController = TextEditingController();
+  final contactNumberController = TextEditingController();
+  final clinicConsultationPriceController = TextEditingController();
+
+  String? selectedGender;
+  String? selectedPaymentOption;
+
+  List<TextEditingController> degreeControllers = [];
+  List<TextEditingController> prePaymentNumberControllers = [];
+
+  void initializeControllers(DoctorProfileEntity? d) {
+    nameController.text = d?.name ?? '';
+    specializationController.text = d?.specialization ?? '';
+    aboutController.text = d?.about ?? '';
+    ageController.text = d?.age?.toString() ?? '';
+    yearsOfExperienceController.text = d?.yearsOfExperience?.toString() ?? '';
+    contactNumberController.text = d?.contactNumber ?? '';
+    clinicConsultationPriceController.text =
+        d?.clinicConsultationPrice?.toString() ?? '';
+
+    final rawGender = d?.gender?.toLowerCase();
+    selectedGender = (rawGender == 'female') ? 'Female' : 'Male';
+
+    final rawPayment = d?.paymentOption?.toLowerCase();
+    selectedPaymentOption = (rawPayment == 'postpayment')
+        ? 'Postpayment'
+        : 'Prepayment';
+
+    final degrees = d?.degrees ?? [];
+    degreeControllers = degrees.isEmpty
+        ? [TextEditingController()]
+        : degrees
+              .map((e) => TextEditingController(text: e.toString()))
+              .toList();
+
+    final preNums = d?.prePaymentNumbers ?? [];
+    prePaymentNumberControllers = preNums.isEmpty
+        ? [TextEditingController()]
+        : preNums
+              .map((e) => TextEditingController(text: e.toString()))
+              .toList();
+
+    emit(DoctorProfileControllersInitializedState());
+  }
+
+  void changeGender(String? value) {
+    selectedGender = value;
+    emit(DoctorProfileUIUpdatedState());
+  }
+
+  void changePaymentOption(String? value) {
+    selectedPaymentOption = value;
+    emit(DoctorProfileUIUpdatedState());
+  }
+
+  void addDegreeField() {
+    degreeControllers.add(TextEditingController());
+    emit(DoctorProfileUIUpdatedState());
+  }
+
+  void removeDegreeField(int index) {
+    if (degreeControllers.length > 1) {
+      degreeControllers[index].dispose();
+      degreeControllers.removeAt(index);
+      emit(DoctorProfileUIUpdatedState());
+    }
+  }
+
+  void addPrePaymentField() {
+    prePaymentNumberControllers.add(TextEditingController());
+    emit(DoctorProfileUIUpdatedState());
+  }
+
+  void removePrePaymentField(int index) {
+    if (prePaymentNumberControllers.length > 1) {
+      prePaymentNumberControllers[index].dispose();
+      prePaymentNumberControllers.removeAt(index);
+      emit(DoctorProfileUIUpdatedState());
+    }
+  }
+
+  Future<void> getDoctorData() async {
+    emit(GetDoctorDataLoadingState());
+    final result = await doctorProfileRepo.getDoctorData();
+    result.fold(
+      ifLeft: (failure) => emit(GetDoctorDataErrorState(failure.message)),
+      ifRight: (data) {
+        initializeControllers(data);
+        emit(GetDoctorDataSuccessState(data));
+      },
+    );
+  }
+
+  Future<void> saveProfileChanges() async {
+    if (formKey.currentState?.validate() ?? false) {
+      emit(UpdateDoctorDataLoadingState());
+
+      final request = UpdateDoctorProfileRequest(
+        name: nameController.text.trim(),
+        specialization: specializationController.text.trim(),
+        about: aboutController.text.trim().isEmpty
+            ? null
+            : aboutController.text.trim(),
+        age: int.tryParse(ageController.text.trim()),
+        yearsOfExperience: int.tryParse(
+          yearsOfExperienceController.text.trim(),
+        ),
+        contactNumber: contactNumberController.text.trim().isEmpty
+            ? null
+            : contactNumberController.text.trim(),
+        clinicConsultationPrice: num.tryParse(
+          clinicConsultationPriceController.text.trim(),
+        ),
+        gender: selectedGender?.toLowerCase(),
+        // paymentOption: selectedPaymentOption!.toLowerCase(),
+        degrees: degreeControllers
+            .map((c) => c.text.trim())
+            .where((s) => s.isNotEmpty)
+            .toList(),
+        // prePaymentNumbers: selectedPaymentOption == 'Prepayment'
+        //     ? prePaymentNumberControllers
+        //           .map((c) => c.text.trim())
+        //           .where((s) => s.isNotEmpty)
+        //           .toList()
+        //     : [],
+      );
+
+      final result = await doctorProfileRepo.upDateDoctorData(request);
+      result.fold(
+        ifLeft: (failure) => emit(UpdateDoctorDataErrorState(failure.message)),
+        ifRight: (data) => emit(UpdateDoctorDataSuccessState(data)),
+      );
+    }
+  }
+
+  @override
+  Future<void> close() {
+    nameController.dispose();
+    specializationController.dispose();
+    aboutController.dispose();
+    ageController.dispose();
+    yearsOfExperienceController.dispose();
+    contactNumberController.dispose();
+    clinicConsultationPriceController.dispose();
+    for (final c in degreeControllers) {
+      c.dispose();
+    }
+    for (final c in prePaymentNumberControllers) {
+      c.dispose();
+    }
+    return super.close();
+  }
+}

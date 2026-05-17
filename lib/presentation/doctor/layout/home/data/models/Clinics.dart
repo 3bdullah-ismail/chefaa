@@ -1,5 +1,5 @@
-import 'Location.dart';
 import 'DefaultSchedule.dart';
+import 'Location.dart';
 
 class Clinics {
   Clinics({

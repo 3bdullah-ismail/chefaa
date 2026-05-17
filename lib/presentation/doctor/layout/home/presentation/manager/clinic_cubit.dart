@@ -1,5 +1,5 @@
-import 'package:chefaa/presentation/doctor/layout/home/data/repositories/clinic_repo.dart';
 import 'package:chefaa/presentation/doctor/layout/home/data/models/Clinics.dart';
+import 'package:chefaa/presentation/doctor/layout/home/data/repositories/clinic_repo.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/manager/clinic_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

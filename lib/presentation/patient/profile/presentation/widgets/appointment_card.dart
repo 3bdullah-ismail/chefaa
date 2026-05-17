@@ -3,6 +3,7 @@ import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/resources/assets_manager.dart';
 
 class AppointmentCard extends StatelessWidget {

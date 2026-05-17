@@ -2,6 +2,7 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../patient/profile/presentation/widgets/item_container.dart';
 import 'profile_stat_item.dart';
 
 class LowerStatsGrid extends StatelessWidget {
@@ -9,20 +10,7 @@ class LowerStatsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24.w),
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: ColorManager.white,
-        borderRadius: BorderRadius.circular(25.r),
-        boxShadow: [
-          BoxShadow(
-            color: ColorManager.black.withValues(alpha: 0.05),
-            blurRadius: 15,
-            offset: const Offset(0, 5),
-          ),
-        ],
-      ),
+    return ItemContainer(
       child: Column(
         children: [
           Row(
@@ -52,13 +40,6 @@ class LowerStatsGrid extends StatelessWidget {
                 ColorManager.cyan,
               ),
             ],
-          ),
-          const Divider(height: 32, thickness: 1, color: ColorManager.input),
-          const ProfileStatItem(
-            value: "0",
-            label: "Rating",
-            textColor: ColorManager.black,
-            icon: Icon(Icons.star_border, color: ColorManager.gold, size: 35),
           ),
         ],
       ),

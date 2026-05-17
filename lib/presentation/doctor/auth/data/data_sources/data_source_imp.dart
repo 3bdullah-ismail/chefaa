@@ -2,6 +2,7 @@ import 'package:chefaa/core/services/network_service.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
+
 import 'data_source.dart';
 
 @Injectable(as: DoctorAuthDataSource)

@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:isolate';
+
 import 'package:chefaa/core/models/auth_response.dart';
 import 'package:chefaa/presentation/pharmacy/auth/data/repositories/pharmacy_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../core/error_handling/failure.dart';
 import '../../../../../core/services/storage_service.dart';
 import '../data_sources/pharmacy_data_source.dart';

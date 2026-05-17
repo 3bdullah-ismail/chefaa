@@ -20,13 +20,23 @@ class CustomCircleAvatar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: ClipOval(
-          child: Image.asset(
-            imagePath,
-            width: radius * 2,
-            height: radius * 2,
-            fit: BoxFit.cover,
-            alignment: Alignment.topCenter,
-          ),
+          child: imagePath.startsWith('http')
+              ? Image.network(
+                  imagePath,
+                  width: radius * 2,
+                  height: radius * 2,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.person),
+                )
+              : Image.asset(
+                  imagePath,
+                  width: radius * 2,
+                  height: radius * 2,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
         ),
       ),
     );

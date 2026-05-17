@@ -64,6 +64,11 @@ abstract class IconsAssets {
   static const String phoneIcon = "$iconsPath/Phone_icon_Inactive.svg";
   static const String emailIcon = "$iconsPath/Email_icon_Inactive.svg";
   static const String passwordIcon = "$iconsPath/Password_icon_Inactive.svg";
+  static const String aboutIcon = "$iconsPath/ix_about.svg";
+  static const String specializationIcon = "$iconsPath/medical.svg";
+  static const String cashIcon = "$iconsPath/money.svg";
+  static const String appointmentIcon = "$iconsPath/appointment.svg";
+  static const String degreeIcon = "$iconsPath/degree.svg";
 
   static const String checkIconInactive =
       "$iconsPath/Checkbox_icon_Inactive.svg";

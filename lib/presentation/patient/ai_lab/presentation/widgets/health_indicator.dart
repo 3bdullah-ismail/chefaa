@@ -1,6 +1,7 @@
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+
 import '../../../../../core/resources/color_manager.dart';
 
 class HealthIndicator extends StatelessWidget {

@@ -152,7 +152,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderRadius: borderRadius,
               borderSide: BorderSide(color: ColorManager.error, width: 1.5.w),
             ),
-            errorStyle: const TextStyle(height: 0, fontSize: 0),
+            errorStyle: getMediumStyle(
+              color: ColorManager.error,
+              fontSize: 12.sp,
+            ),
             suffixIcon: widget.isPass
                 ? IconButton(
                     icon: Icon(

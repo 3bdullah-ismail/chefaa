@@ -8,6 +8,7 @@ class ClinicInfoCard extends StatelessWidget {
   final String title;
   final bool isInfinity;
   final String value;
+
   const ClinicInfoCard({
     super.key,
     this.isInfinity = false,

@@ -1,6 +1,7 @@
 import 'package:chefaa/presentation/auth/data/repositories/repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/error_handling/failure.dart';
 import '../../../../core/models/auth_response.dart';
 import '../../../../core/services/storage_service.dart';
@@ -10,7 +11,9 @@ import '../models/reset_password_response.dart';
 @Injectable(as: AuthRepo)
 class AuthRepoImp implements AuthRepo {
   final AuthDataSource authDataSource;
+
   AuthRepoImp(this.authDataSource);
+
   @override
   Future<AuthResponse> login({
     required String identity,
