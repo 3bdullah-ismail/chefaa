@@ -6,9 +6,12 @@ class DoctorData extends DoctorProfileEntity {
   DoctorData({
     this.id,
     this.specialization,
+    this.age,
+    this.yearsOfExperience,
     this.image,
     this.about,
     this.degrees,
+    this.gender,
     this.rating,
     this.paymentOption,
     this.prePaymentNumbers,
@@ -23,70 +26,64 @@ class DoctorData extends DoctorProfileEntity {
          name: name,
          specialization: specialization,
          location: clinicsData != null && clinicsData.isNotEmpty
-             ? clinicsData.first.address
+             ? clinicsData.first.address ?? ''
              : '',
          imageUrl: image,
          clinics: clinicsData?.length ?? 0,
          rating: rating ?? 0.0,
          reviews: reviewsData?.length ?? 0,
+         yearsOfExperience: yearsOfExperience,
+         about: about,
+         age: age,
+         paymentOption: paymentOption,
+         gender: gender,
+         contactNumber: contactNumber,
+         degrees: degrees,
+         prePaymentNumbers: prePaymentNumbers,
+         clinicConsultationPrice: clinicConsultationPrice,
        );
 
   DoctorData.fromJson(dynamic json)
-    : super(
-        name: json['name'],
-        specialization: json['specialization'],
-        location:
-            (json['clinics'] != null && (json['clinics'] as List).isNotEmpty)
-            ? json['clinics'][0]['address']
-            : '',
-        imageUrl: json['image'],
-        clinics: json['clinics'] != null ? (json['clinics'] as List).length : 0,
-        rating: json['rating']?.toDouble() ?? 0.0,
-        reviews: json['reviews'] != null ? (json['reviews'] as List).length : 0,
-      ) {
-    id = json['_id'];
-    specialization = json['specialization'];
-    image = json['image'];
-    about = json['about'];
-    if (json['degrees'] != null) {
-      degrees = [];
-      json['degrees'].forEach((v) {
-        degrees?.add(v);
-      });
-    }
-    rating = json['rating']?.toDouble();
-    paymentOption = json['paymentOption'];
-    if (json['prePaymentNumbers'] != null) {
-      prePaymentNumbers = [];
-      json['prePaymentNumbers'].forEach((v) {
-        prePaymentNumbers?.add(v);
-      });
-    }
-    clinicConsultationPrice = json['clinicConsultationPrice'];
-    if (json['clinics'] != null) {
-      clinicsData = [];
-      json['clinics'].forEach((v) {
-        clinicsData?.add(Clinics.fromJson(v));
-      });
-    }
-    if (json['reviews'] != null) {
-      reviewsData = [];
-      json['reviews'].forEach((v) {
-        reviewsData?.add(v);
-      });
-    }
-    contactNumber = json['contactNumber'];
-    membershipPdf = json['membershipPdf'];
-    name = json['name'];
-    email = json['email'];
-  }
+    : this(
+        id: json['_id'] as String?,
+        specialization: json['specialization'] as String?,
+        age: json['age'] as int?,
+        yearsOfExperience: json['yearsOfExperience'] as int?,
+        image: json['image'] as String?,
+        about: json['about'] as String?,
+        degrees: json['degrees'] != null
+            ? List<dynamic>.from(json['degrees'] as List)
+            : null,
+        gender: json['gender'] as String?,
+        rating: (json['rating'] as num?)?.toDouble(),
+        paymentOption: json['paymentOption'] as String?,
+        prePaymentNumbers: json['prePaymentNumbers'] != null
+            ? List<dynamic>.from(json['prePaymentNumbers'] as List)
+            : null,
+        clinicConsultationPrice: json['clinicConsultationPrice'] as num?,
+        clinicsData: json['clinics'] != null
+            ? (json['clinics'] as List)
+                .map((v) => Clinics.fromJson(v))
+                .toList()
+            : null,
+        reviewsData: json['reviews'] != null
+            ? List<dynamic>.from(json['reviews'] as List)
+            : null,
+        contactNumber: json['contactNumber'] as String?,
+        membershipPdf: json['membershipPdf'] as String?,
+        name: json['name'] as String?,
+        email: json['email'] as String?,
+      );
 
   String? id;
   @override
   String? specialization;
+  int? age;
+  int? yearsOfExperience;
   String? image;
   String? about;
   List<dynamic>? degrees;
+  String? gender;
   @override
   double? rating;
   String? paymentOption;
@@ -104,11 +101,14 @@ class DoctorData extends DoctorProfileEntity {
     final map = <String, dynamic>{};
     map['_id'] = id;
     map['specialization'] = specialization;
+    map['age'] = age;
+    map['yearsOfExperience'] = yearsOfExperience;
     map['image'] = image;
     map['about'] = about;
     if (degrees != null) {
       map['degrees'] = degrees;
     }
+    map['gender'] = gender;
     map['rating'] = rating;
     map['paymentOption'] = paymentOption;
     if (prePaymentNumbers != null) {
