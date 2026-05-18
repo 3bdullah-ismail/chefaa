@@ -115,7 +115,7 @@ class _ClinicBottomSheetState extends State<ClinicBottomSheet> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * .92,
+        height: MediaQuery.of(context).size.height * .85,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),

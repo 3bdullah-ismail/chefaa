@@ -1,6 +1,5 @@
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/presentation/doctor/profile/data/models/Doctor_data.dart';
-import 'package:chefaa/presentation/doctor/profile/data/models/update_doctor_profile_request.dart';
 import 'package:chefaa/presentation/doctor/profile/data/repositories/repo.dart';
 import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
 import 'package:dart_either/dart_either.dart';
@@ -31,7 +30,7 @@ class DoctorProfileRepoImp implements DoctorProfileRepo {
 
   @override
   Future<Either<Failure, DoctorProfileEntity>> upDateDoctorData(
-    UpdateDoctorProfileRequest request,
+    DoctorProfileEntity request,
   ) async {
     try {
       // Pass the typed request directly — DataSource handles Map construction

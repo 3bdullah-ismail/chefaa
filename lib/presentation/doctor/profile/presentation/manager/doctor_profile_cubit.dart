@@ -1,4 +1,3 @@
-import 'package:chefaa/presentation/doctor/profile/data/models/update_doctor_profile_request.dart';
 import 'package:chefaa/presentation/doctor/profile/data/repositories/repo.dart';
 import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +27,12 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
 
   List<TextEditingController> degreeControllers = [];
   List<TextEditingController> prePaymentNumberControllers = [];
+  DoctorProfileEntity? currentDoctor;
+  bool profileCompleted = false;
 
-  void initializeControllers(DoctorProfileEntity? d) {
+  void initializeControllers(DoctorProfileEntity? d, {bool emitState = true}) {
+    currentDoctor = d;
+    profileCompleted = d?.isProfileCompleted() ?? false;
     nameController.text = d?.name ?? '';
     specializationController.text = d?.specialization ?? '';
     aboutController.text = d?.about ?? '';
@@ -61,7 +64,9 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
               .map((e) => TextEditingController(text: e.toString()))
               .toList();
 
-    emit(DoctorProfileControllersInitializedState());
+    if (emitState) {
+      emit(DoctorProfileControllersInitializedState());
+    }
   }
 
   void changeGender(String? value) {
@@ -106,8 +111,13 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
     result.fold(
       ifLeft: (failure) => emit(GetDoctorDataErrorState(failure.message)),
       ifRight: (data) {
-        initializeControllers(data);
-        emit(GetDoctorDataSuccessState(data));
+        initializeControllers(data, emitState: false);
+        emit(
+          GetDoctorDataSuccessState(
+            data,
+            profileCompleted: data.isProfileCompleted(),
+          ),
+        );
       },
     );
   }
@@ -116,9 +126,14 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
     if (formKey.currentState?.validate() ?? false) {
       emit(UpdateDoctorDataLoadingState());
 
-      final request = UpdateDoctorProfileRequest(
+      final request = DoctorProfileEntity(
         name: nameController.text.trim(),
         specialization: specializationController.text.trim(),
+        location: currentDoctor?.location ?? '',
+        imageUrl: currentDoctor?.imageUrl ?? '',
+        clinics: currentDoctor?.clinics ?? 0,
+        rating: currentDoctor?.rating ?? 0,
+        reviews: currentDoctor?.reviews ?? 0,
         about: aboutController.text.trim().isEmpty
             ? null
             : aboutController.text.trim(),
@@ -149,7 +164,15 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
       final result = await doctorProfileRepo.upDateDoctorData(request);
       result.fold(
         ifLeft: (failure) => emit(UpdateDoctorDataErrorState(failure.message)),
-        ifRight: (data) => emit(UpdateDoctorDataSuccessState(data)),
+        ifRight: (data) {
+          initializeControllers(data, emitState: false);
+          emit(
+            UpdateDoctorDataSuccessState(
+              data,
+              profileCompleted: data.isProfileCompleted(),
+            ),
+          );
+        },
       );
     }
   }

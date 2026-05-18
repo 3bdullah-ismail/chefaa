@@ -1,6 +1,6 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/presentation/doctor/profile/data/data_sources/remote_data_source/remote_data_source.dart';
-import 'package:chefaa/presentation/doctor/profile/data/models/update_doctor_profile_request.dart';
+import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -17,14 +17,14 @@ class DoctorProfileRemoteDataSourceImp extends DoctorProfileRemoteDataSource {
 
   @override
   Future<Response<dynamic>> upDateDoctorData(
-    UpdateDoctorProfileRequest request,
+    DoctorProfileEntity request,
   ) {
     return networkService.dio.put("/doctor/profile", data: _buildBody(request));
   }
 
   /// Converts the typed request into the raw Map that the API expects.
   /// All serialisation logic lives here — not in the UI, Cubit, or Repo.
-  Map<String, dynamic> _buildBody(UpdateDoctorProfileRequest request) {
+  Map<String, dynamic> _buildBody(DoctorProfileEntity request) {
     return {
       if (request.name != null) 'name': request.name,
       if (request.specialization != null)

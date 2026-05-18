@@ -36,4 +36,24 @@ class DoctorProfileEntity {
     this.prePaymentNumbers,
     this.clinicConsultationPrice,
   });
+
+  bool isProfileCompleted() {
+    return _hasValue(name) &&
+        _hasValue(contactNumber) &&
+        _hasValue(specialization);
+  }
+
+  List<String> getMissingRequiredFields() {
+    final missing = <String>[];
+
+    if (!_hasValue(name)) missing.add('Full name');
+    if (!_hasValue(contactNumber)) missing.add('Phone number');
+    if (!_hasValue(specialization)) missing.add('Specialization');
+
+    return missing;
+  }
+
+  static bool _hasValue(String? value) {
+    return value != null && value.trim().isNotEmpty;
+  }
 }

@@ -14,8 +14,12 @@ final class GetDoctorDataLoadingState extends DoctorProfileState {}
 
 final class GetDoctorDataSuccessState extends DoctorProfileState {
   final DoctorProfileEntity doctorProfileEntity;
+  final bool? profileCompleted;
 
-  GetDoctorDataSuccessState(this.doctorProfileEntity);
+  GetDoctorDataSuccessState(
+    this.doctorProfileEntity, {
+    this.profileCompleted = false,
+  });
 }
 
 final class GetDoctorDataErrorState extends DoctorProfileState {
@@ -28,8 +32,12 @@ final class UpdateDoctorDataLoadingState extends DoctorProfileState {}
 
 final class UpdateDoctorDataSuccessState extends DoctorProfileState {
   final DoctorProfileEntity doctorProfileEntity;
+  final bool? profileCompleted;
 
-  UpdateDoctorDataSuccessState(this.doctorProfileEntity);
+  UpdateDoctorDataSuccessState(
+    this.doctorProfileEntity, {
+    this.profileCompleted = false,
+  });
 }
 
 final class UpdateDoctorDataErrorState extends DoctorProfileState {
