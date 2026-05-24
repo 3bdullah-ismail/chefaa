@@ -1,3 +1,4 @@
+// ignore_for_file: overridden_fields
 import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
 
 import 'clinics.dart';
@@ -62,9 +63,7 @@ class DoctorData extends DoctorProfileEntity {
             : null,
         clinicConsultationPrice: json['clinicConsultationPrice'] as num?,
         clinicsData: json['clinics'] != null
-            ? (json['clinics'] as List)
-                .map((v) => Clinics.fromJson(v))
-                .toList()
+            ? (json['clinics'] as List).map((v) => Clinics.fromJson(v)).toList()
             : null,
         reviewsData: json['reviews'] != null
             ? List<dynamic>.from(json['reviews'] as List)
@@ -78,19 +77,28 @@ class DoctorData extends DoctorProfileEntity {
   String? id;
   @override
   String? specialization;
+  @override
   int? age;
+  @override
   int? yearsOfExperience;
   String? image;
+  @override
   String? about;
+  @override
   List<dynamic>? degrees;
+  @override
   String? gender;
   @override
   double? rating;
+  @override
   String? paymentOption;
+  @override
   List<dynamic>? prePaymentNumbers;
+  @override
   num? clinicConsultationPrice;
   List<Clinics>? clinicsData;
   List<dynamic>? reviewsData;
+  @override
   String? contactNumber;
   String? membershipPdf;
   @override

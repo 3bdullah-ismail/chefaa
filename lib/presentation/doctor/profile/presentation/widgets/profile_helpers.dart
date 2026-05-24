@@ -1,5 +1,3 @@
-
-
 String formatReviews(int? reviews) {
   final value = reviews ?? 1200;
   if (value >= 1000) {

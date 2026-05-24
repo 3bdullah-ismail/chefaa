@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/resources/values_manager.dart';
 import '../../domain/entities/doctor_profile_entity.dart';
 import 'profile_helpers.dart';
 import 'stat_card.dart';
-import 'stat_data.dart';
 
 class QuickStatsRow extends StatelessWidget {
   final DoctorProfileEntity doctor;
@@ -13,26 +13,52 @@ class QuickStatsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = [
-      StatData('Clinics', '${doctor.clinics ?? 0}', Icons.home_work_outlined),
-      StatData('Score', '98%', Icons.thumb_up_alt_outlined),
-      StatData('Reviews', formatReviews(doctor.reviews), Icons.forum_outlined),
-      StatData(
-        'Years',
-        '${doctor.yearsOfExperience ?? 0}+',
-        Icons.event_available_outlined,
-      ),
-    ];
-
     return Padding(
-      padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 20.h),
+      padding: EdgeInsets.fromLTRB(
+        AppPadding.p16.w,
+        AppSize.s0,
+        AppPadding.p16.w,
+        AppPadding.p20.h,
+      ),
       child: SizedBox(
-        height: 92.h,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemCount: items.length,
-          separatorBuilder: (_, __) => SizedBox(width: 10.w),
-          itemBuilder: (context, index) => StatCard(data: items[index]),
+        height: AppSize.s92.h,
+        child: Row(
+          children: [
+            Expanded(
+              child: StatCard(
+                label: 'Clinics',
+
+                value: '${doctor.clinics ?? 0}',
+                icon: Icons.home_work_outlined,
+              ),
+            ),
+            SizedBox(width: AppSize.s10.w),
+            Expanded(
+              child: StatCard(
+                label: 'Score',
+
+                value: '98%',
+                icon: Icons.thumb_up_alt_outlined,
+              ),
+            ),
+            SizedBox(width: AppSize.s10.w),
+            Expanded(
+              child: StatCard(
+                label: 'Reviews',
+
+                value: formatReviews(doctor.reviews),
+                icon: Icons.forum_outlined,
+              ),
+            ),
+            SizedBox(width: AppSize.s10.w),
+            Expanded(
+              child: StatCard(
+                label: 'Years',
+                value: '${doctor.yearsOfExperience ?? 0}+',
+                icon: Icons.event_available_outlined,
+              ),
+            ),
+          ],
         ),
       ),
     );
