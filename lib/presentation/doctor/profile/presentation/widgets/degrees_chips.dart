@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 import '../../domain/entities/doctor_profile_entity.dart';
 
 class DegreesChips extends StatelessWidget {
@@ -27,22 +29,28 @@ class DegreesChips extends StatelessWidget {
         : degrees;
 
     return SizedBox(
-      height: 48.h,
+      height: AppSize.s48.h,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.w),
         itemCount: chips.length,
-        separatorBuilder: (_, __) => SizedBox(width: 8.w),
+        separatorBuilder: (context, index) => SizedBox(width: AppSize.s8.w),
         itemBuilder: (context, index) => Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppPadding.p16.w,
+            vertical: AppPadding.p10.h,
+          ),
           decoration: BoxDecoration(
             color: ColorManager.white,
-            borderRadius: BorderRadius.circular(9999.r),
+            borderRadius: BorderRadius.circular(AppRadius.r9999.r),
             border: Border.all(color: ColorManager.primary),
           ),
           child: Text(
             chips[index],
-            style: getMediumStyle(color: ColorManager.primary, fontSize: 13.sp),
+            style: getMediumStyle(
+              color: ColorManager.primary,
+              fontSize: FontSize.s13.sp,
+            ),
           ),
         ),
       ),

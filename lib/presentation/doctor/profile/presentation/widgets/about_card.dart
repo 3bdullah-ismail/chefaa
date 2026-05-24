@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 import '../../domain/entities/doctor_profile_entity.dart';
 
 class AboutCard extends StatefulWidget {
@@ -23,13 +25,13 @@ class _AboutCardState extends State<AboutCard> {
         widget.doctor.about ??
         'Dr. Sarah Johnson is a distinguished Consultant Cardiologist with over 15 years of experience.';
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.w),
       child: Container(
         decoration: BoxDecoration(
           color: ColorManager.lightBlue,
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(AppRadius.r18.r),
         ),
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(AppPadding.p16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,17 +43,17 @@ class _AboutCardState extends State<AboutCard> {
                   : TextOverflow.ellipsis,
               style: getRegularStyle(
                 color: ColorManager.darkGray,
-                fontSize: 14.sp,
+                fontSize: FontSize.s14.sp,
               ),
             ),
-            8.verticalSpace,
+            AppSize.s8.verticalSpace,
             GestureDetector(
               onTap: () => setState(() => _expanded = !_expanded),
               child: Text(
                 _expanded ? 'Show less' : 'Read more',
                 style: getMediumStyle(
                   color: ColorManager.primary,
-                  fontSize: 13.sp,
+                  fontSize: FontSize.s13.sp,
                 ),
               ),
             ),

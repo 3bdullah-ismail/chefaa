@@ -8,6 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
+import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widget/custom_dropdown_btn.dart';
 import '../../domain/entities/doctor_profile_entity.dart';
 import '../manager/doctor_profile_cubit.dart';
@@ -22,7 +25,6 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  // Store reference early — context.read() is unsafe inside dispose()
   late DoctorProfileCubit _cubit;
 
   @override
@@ -85,19 +87,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 const InsideAppBar(
                   title: "Edit Profile",
                   subtitle: "Update your personal details",
-                  height: 120,
+                  height: AppSize.s120,
                 ),
-                SizedBox(height: 32.h),
+                SizedBox(height: AppSize.s32.h),
 
                 Center(
                   child: Stack(
                     children: [
                       CircleAvatar(
-                        radius: 50.r,
+                        radius: AppSize.s50.r,
                         backgroundColor: ColorManager.lightGray,
                         child: Icon(
                           Icons.person,
-                          size: 50.r,
+                          size: AppSize.s50.r,
                           color: ColorManager.gray,
                         ),
                       ),
@@ -107,7 +109,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         child: GestureDetector(
                           onTap: () {},
                           child: Container(
-                            padding: EdgeInsets.all(6.r),
+                            padding: EdgeInsets.all(AppPadding.p6.r),
                             decoration: const BoxDecoration(
                               color: ColorManager.primary,
                               shape: BoxShape.circle,
@@ -115,7 +117,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: Icon(
                               Icons.edit,
                               color: ColorManager.white,
-                              size: 20.r,
+                              size: AppSize.s20.r,
                             ),
                           ),
                         ),
@@ -123,10 +125,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 32.h),
+                SizedBox(height: AppSize.s32.h),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  padding: EdgeInsets.symmetric(horizontal: AppPadding.p24.w),
                   child: BlocBuilder<DoctorProfileCubit, DoctorProfileState>(
                     buildWhen: (previous, current) =>
                         current is DoctorProfileUIUpdatedState ||
@@ -145,7 +147,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ? 'Name is required'
                                 : null,
                           ),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: AppSize.s16.h),
 
                           CustomTextField(
                             controller: cubit.specializationController,
@@ -156,7 +158,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ? 'Specialization is required'
                                 : null,
                           ),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: AppSize.s16.h),
 
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,7 +175,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       : null,
                                 ),
                               ),
-                              SizedBox(width: 12.w),
+                              SizedBox(width: AppSize.s12.w),
                               Expanded(
                                 child: CustomTextField(
                                   controller: cubit.ageController,
@@ -194,7 +196,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: AppSize.s16.h),
 
                           CustomTextField(
                             controller: cubit.yearsOfExperienceController,
@@ -210,7 +212,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               return null;
                             },
                           ),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: AppSize.s16.h),
 
                           CustomTextField(
                             controller: cubit.aboutController,
@@ -219,7 +221,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             keyboardType: TextInputType.multiline,
                             textInputAction: TextInputAction.newline,
                           ),
-                          SizedBox(height: 24.h),
+                          SizedBox(height: AppSize.s24.h),
 
                           _sectionLabel('Contact'),
                           CustomTextField(
@@ -230,7 +232,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.phone,
                           ),
-                          SizedBox(height: 24.h),
+                          SizedBox(height: AppSize.s24.h),
 
                           _sectionLabel('Payment'),
                           CustomDropDownBtn(
@@ -243,7 +245,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ? 'Select payment option'
                                 : null,
                           ),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: AppSize.s16.h),
 
                           CustomTextField(
                             controller: cubit.clinicConsultationPriceController,
@@ -259,7 +261,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               return null;
                             },
                           ),
-                          SizedBox(height: 24.h),
+                          SizedBox(height: AppSize.s24.h),
 
                           if (cubit.selectedPaymentOption == 'Prepayment') ...[
                             _buildDynamicList(
@@ -272,7 +274,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               onAdd: cubit.addPrePaymentField,
                               onRemove: cubit.removePrePaymentField,
                             ),
-                            SizedBox(height: 24.h),
+                            SizedBox(height: AppSize.s24.h),
                           ],
 
                           _buildDynamicList(
@@ -284,13 +286,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             onAdd: cubit.addDegreeField,
                             onRemove: cubit.removeDegreeField,
                           ),
-                          SizedBox(height: 48.h),
+                          SizedBox(height: AppSize.s48.h),
 
                           CustomBtn(
                             text: 'Save Changes',
                             onPressed: cubit.saveProfileChanges,
                           ),
-                          SizedBox(height: 24.h),
+                          SizedBox(height: AppSize.s24.h),
                         ],
                       );
                     },
@@ -308,15 +310,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: Padding(
-        padding: EdgeInsets.only(bottom: 8.h),
+        padding: EdgeInsets.only(bottom: AppPadding.p8.h),
         child: Text(
           label,
-          style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
+          style: getSemiBoldStyle(
             color: ColorManager.primary,
-            letterSpacing: 0.4,
-          ),
+            fontSize: FontSize.s13.sp,
+          ).copyWith(letterSpacing: 0.4),
         ),
       ),
     );
@@ -342,7 +342,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           itemCount: controllers.length,
           itemBuilder: (context, i) {
             return Padding(
-              padding: EdgeInsets.only(bottom: 10.h),
+              padding: EdgeInsets.only(bottom: AppPadding.p10.h),
               key: ObjectKey(controllers[i]),
               child: Row(
                 children: [
@@ -358,11 +358,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   ),
                   if (controllers.length > 1) ...[
-                    SizedBox(width: 8.w),
+                    SizedBox(width: AppSize.s8.w),
                     GestureDetector(
                       onTap: () => onRemove(i),
                       child: Container(
-                        padding: EdgeInsets.all(8.r),
+                        padding: EdgeInsets.all(AppPadding.p8.r),
                         decoration: BoxDecoration(
                           color: ColorManager.error.withValues(alpha: 0.1),
                           shape: BoxShape.circle,
@@ -370,7 +370,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         child: Icon(
                           Icons.remove,
                           color: ColorManager.error,
-                          size: 18.r,
+                          size: AppSize.s18.r,
                         ),
                       ),
                     ),
@@ -380,7 +380,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             );
           },
         ),
-        SizedBox(height: 4.h),
+        SizedBox(height: AppSize.s4.h),
         GestureDetector(
           onTap: onAdd,
           child: Row(
@@ -389,15 +389,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Icon(
                 Icons.add_circle_outline,
                 color: ColorManager.primary,
-                size: 20.r,
+                size: AppSize.s20.r,
               ),
-              SizedBox(width: 6.w),
+              SizedBox(width: AppSize.s6.w),
               Text(
                 addLabel,
-                style: TextStyle(
+                style: getSemiBoldStyle(
                   color: ColorManager.primary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 13.sp,
+                  fontSize: FontSize.s13.sp,
                 ),
               ),
             ],

@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 import '../../domain/entities/doctor_profile_entity.dart';
 import 'profile_helpers.dart';
 
@@ -17,7 +19,12 @@ class HeroSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: ColorManager.white,
-      padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 24.h),
+      padding: EdgeInsets.fromLTRB(
+        AppPadding.p16.w,
+        AppPadding.p12.h,
+        AppPadding.p16.w,
+        AppPadding.p24.h,
+      ),
       child: Column(
         children: [
           Stack(
@@ -25,12 +32,15 @@ class HeroSection extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: ColorManager.input, width: 2),
+                  border: Border.all(
+                    color: ColorManager.input,
+                    width: AppSize.s2,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: ColorManager.gray.withValues(alpha: 0.2),
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
+                      blurRadius: AppSize.s8,
+                      offset: const Offset(AppSize.s0, AppSize.s4),
                     ),
                   ],
                 ),
@@ -38,48 +48,57 @@ class HeroSection extends StatelessWidget {
                   imagePath: (doctor.imageUrl ?? "").trim().isNotEmpty
                       ? doctor.imageUrl!
                       : ImageAssets.doctor,
-                  radius: 62.r,
+                  radius: AppSize.s62.r,
                 ),
               ),
               Positioned(
-                bottom: 8,
-                right: 8,
+                bottom: AppSize.s8,
+                right: AppSize.s8,
                 child: Container(
-                  padding: EdgeInsets.all(6.r),
+                  padding: EdgeInsets.all(AppPadding.p6.r),
                   decoration: BoxDecoration(
                     color: ColorManager.lightGreen,
                     shape: BoxShape.circle,
-                    border: Border.all(color: ColorManager.white, width: 2),
+                    border: Border.all(
+                      color: ColorManager.white,
+                      width: AppSize.s2,
+                    ),
                   ),
                   child: Icon(
                     Icons.verified,
                     color: ColorManager.white,
-                    size: 14.r,
+                    size: AppSize.s14.r,
                   ),
                 ),
               ),
             ],
           ),
-          16.verticalSpace,
+          AppSize.s16.verticalSpace,
           Text(
             doctor.name ?? 'Dr. Sarah Johnson',
-            style: getBoldStyle(color: ColorManager.black, fontSize: 24.sp),
+            style: getBoldStyle(
+              color: ColorManager.black,
+              fontSize: FontSize.s24.sp,
+            ),
           ),
-          4.verticalSpace,
+          AppSize.s4.verticalSpace,
           Text(
             doctor.specialization ?? 'Consultant Cardiologist',
-            style: getMediumStyle(color: ColorManager.primary, fontSize: 16.sp),
+            style: getMediumStyle(
+              color: ColorManager.primary,
+              fontSize: FontSize.s16.sp,
+            ),
           ),
-          8.verticalSpace,
+          AppSize.s8.verticalSpace,
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 Icons.location_on_outlined,
                 color: ColorManager.gray,
-                size: 18.r,
+                size: AppSize.s18.r,
               ),
-              4.horizontalSpace,
+              AppSize.s4.horizontalSpace,
               Flexible(
                 child: Text(
                   (doctor.location != null && doctor.location!.isNotEmpty)
@@ -87,46 +106,49 @@ class HeroSection extends StatelessWidget {
                       : 'Cleveland Clinic, Abu Dhabi',
                   style: getMediumStyle(
                     color: ColorManager.gray,
-                    fontSize: 12.sp,
+                    fontSize: FontSize.s12.sp,
                   ),
                 ),
               ),
             ],
           ),
-          14.verticalSpace,
+          AppSize.s14.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppPadding.p12.w,
+                  vertical: AppPadding.p8.h,
+                ),
                 decoration: BoxDecoration(
                   color: ColorManager.input,
-                  borderRadius: BorderRadius.circular(9999.r),
+                  borderRadius: BorderRadius.circular(AppRadius.r9999.r),
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.star,
                       color: ColorManager.lightGreen,
-                      size: 18.r,
+                      size: AppSize.s18.r,
                     ),
-                    4.horizontalSpace,
+                    AppSize.s4.horizontalSpace,
                     Text(
                       (doctor.rating ?? 4.9).toStringAsFixed(1),
                       style: getBoldStyle(
                         color: ColorManager.black,
-                        fontSize: 13.sp,
+                        fontSize: FontSize.s13.sp,
                       ),
                     ),
                   ],
                 ),
               ),
-              10.horizontalSpace,
+              AppSize.s10.horizontalSpace,
               Text(
                 '(${formatReviews(doctor.reviews)} Reviews)',
                 style: getRegularStyle(
                   color: ColorManager.gray,
-                  fontSize: 13.sp,
+                  fontSize: FontSize.s13.sp,
                 ),
               ),
             ],

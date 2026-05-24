@@ -1,5 +1,6 @@
-import 'package:chefaa/presentation/doctor/profile/data/repositories/repo.dart';
 import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
+import 'package:chefaa/presentation/doctor/profile/domain/use_cases/get_doctor_data_use_case.dart';
+import 'package:chefaa/presentation/doctor/profile/domain/use_cases/update_doctor_data_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -8,10 +9,13 @@ part 'doctor_profile_state.dart';
 
 @injectable
 class DoctorProfileCubit extends Cubit<DoctorProfileState> {
-  final DoctorProfileRepo doctorProfileRepo;
+  final GetDoctorDataUseCase getDoctorDataUseCase;
+  final UpdateDoctorDataUseCase updateDoctorDataUseCase;
 
-  DoctorProfileCubit({required this.doctorProfileRepo})
-    : super(DoctorProfileInitial());
+  DoctorProfileCubit({
+    required this.getDoctorDataUseCase,
+    required this.updateDoctorDataUseCase,
+  }) : super(DoctorProfileInitial());
 
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
@@ -107,7 +111,7 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
 
   Future<void> getDoctorData() async {
     emit(GetDoctorDataLoadingState());
-    final result = await doctorProfileRepo.getDoctorData();
+    final result = await getDoctorDataUseCase();
     result.fold(
       ifLeft: (failure) => emit(GetDoctorDataErrorState(failure.message)),
       ifRight: (data) {
@@ -148,20 +152,13 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
           clinicConsultationPriceController.text.trim(),
         ),
         gender: selectedGender?.toLowerCase(),
-        // paymentOption: selectedPaymentOption!.toLowerCase(),
         degrees: degreeControllers
             .map((c) => c.text.trim())
             .where((s) => s.isNotEmpty)
             .toList(),
-        // prePaymentNumbers: selectedPaymentOption == 'Prepayment'
-        //     ? prePaymentNumberControllers
-        //           .map((c) => c.text.trim())
-        //           .where((s) => s.isNotEmpty)
-        //           .toList()
-        //     : [],
       );
 
-      final result = await doctorProfileRepo.upDateDoctorData(request);
+      final result = await updateDoctorDataUseCase(request);
       result.fold(
         ifLeft: (failure) => emit(UpdateDoctorDataErrorState(failure.message)),
         ifRight: (data) {

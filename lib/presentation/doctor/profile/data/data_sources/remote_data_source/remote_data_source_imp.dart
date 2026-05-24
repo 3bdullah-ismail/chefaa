@@ -16,14 +16,10 @@ class DoctorProfileRemoteDataSourceImp extends DoctorProfileRemoteDataSource {
   }
 
   @override
-  Future<Response<dynamic>> upDateDoctorData(
-    DoctorProfileEntity request,
-  ) {
+  Future<Response<dynamic>> upDateDoctorData(DoctorProfileEntity request) {
     return networkService.dio.put("/doctor/profile", data: _buildBody(request));
   }
 
-  /// Converts the typed request into the raw Map that the API expects.
-  /// All serialisation logic lives here — not in the UI, Cubit, or Repo.
   Map<String, dynamic> _buildBody(DoctorProfileEntity request) {
     return {
       if (request.name != null) 'name': request.name,

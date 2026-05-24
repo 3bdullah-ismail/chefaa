@@ -1,3 +1,4 @@
+// ignore_for_file: overridden_fields
 import '../../domain/entities/doctor_profile_entity.dart';
 
 class UpdateDoctorProfileResponse {
@@ -25,24 +26,33 @@ class UpdatedDoctorData extends DoctorProfileEntity {
   final String? userId;
   @override
   final String? specialization;
+  @override
   final String? contactNumber;
   final String? image;
+  @override
   final String? about;
   final String? membershipPdf;
+  @override
   final List<dynamic>? degrees;
   final List<String>? clinicsData;
+  @override
   final String? paymentOption;
+  @override
   final List<dynamic>? prePaymentNumbers;
   @override
   final double? rating;
+  @override
   final num? clinicConsultationPrice;
   final List<dynamic>? reviewsData;
   final String? createdAt;
   final String? updatedAt;
   final int? v;
+  @override
   final String? gender;
 
+  @override
   final int? age;
+  @override
   final int? yearsOfExperience;
 
   UpdatedDoctorData({

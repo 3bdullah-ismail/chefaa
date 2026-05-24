@@ -7,7 +7,6 @@ class DoctorProfileEntity {
   final double? rating;
   final int? reviews;
 
-  // Extended profile fields
   final int? yearsOfExperience;
   final String? about;
   final int? age;
@@ -40,7 +39,9 @@ class DoctorProfileEntity {
   bool isProfileCompleted() {
     return _hasValue(name) &&
         _hasValue(contactNumber) &&
-        _hasValue(specialization);
+        _hasValue(specialization) &&
+        _hasValue(imageUrl) &&
+        _hasValue(about);
   }
 
   List<String> getMissingRequiredFields() {
@@ -49,6 +50,8 @@ class DoctorProfileEntity {
     if (!_hasValue(name)) missing.add('Full name');
     if (!_hasValue(contactNumber)) missing.add('Phone number');
     if (!_hasValue(specialization)) missing.add('Specialization');
+    if (!_hasValue(imageUrl)) missing.add('Profile image');
+    if (!_hasValue(about)) missing.add('Bio');
 
     return missing;
   }
