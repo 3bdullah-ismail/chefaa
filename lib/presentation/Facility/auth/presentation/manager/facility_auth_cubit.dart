@@ -1,4 +1,5 @@
-import 'package:chefaa/presentation/Facility/auth/data/repositories/repo.dart';
+import 'package:chefaa/presentation/Facility/auth/domain/repositories/facility_auth_repo.dart';
+import 'package:chefaa/presentation/Facility/auth/domain/utils/username_generator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,15 +11,12 @@ part 'facility_auth_state.dart';
 class FacilityAuthCubit extends Cubit<FacilityAuthState> {
   FacilityAuthCubit(this.facilityRepo) : super(FacilityAuthInitial());
   FacilityAuthRepo facilityRepo;
-
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController commercialRegisterNumber = TextEditingController();
   String? facilityType;
-
   TextEditingController medicalDirectorName = TextEditingController();
   TextEditingController directorProfessionalId = TextEditingController();
   TextEditingController specialization = TextEditingController();
@@ -26,7 +24,8 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
       TextEditingController();
   bool _isSigningUp = false;
 
-  static FacilityAuthCubit get(context) => BlocProvider.of(context);
+  static FacilityAuthCubit get(BuildContext context) =>
+      BlocProvider.of(context);
 
   Future<void> signUp({required PlatformFile? medicalLicence}) async {
     if (_isSigningUp) return;
@@ -40,7 +39,7 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
     try {
       final response = await facilityRepo.signUP(
         name: name.text,
-        username: username.text,
+        username: UsernameGenerator.generate(name.text),
         email: email.text,
         password: password.text,
         commercialRegisterNumber: commercialRegisterNumber.text,
@@ -62,7 +61,6 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
   Future<void> close() {
     name.dispose();
     email.dispose();
-    username.dispose();
     password.dispose();
     phoneNumber.dispose();
     commercialRegisterNumber.dispose();

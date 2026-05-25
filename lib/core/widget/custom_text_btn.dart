@@ -33,7 +33,6 @@ class CustomTextBtn extends StatelessWidget {
           decoration: TextDecoration.underline,
           decorationColor: ColorManager.primary,
           decorationThickness: 1.5,
-          height: 1.6,
         ),
       ),
     );

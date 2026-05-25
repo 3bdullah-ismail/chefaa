@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:chefaa/core/models/auth_response.dart';
-import 'package:chefaa/presentation/Facility/auth/data/data_sources/data_source.dart';
-import 'package:chefaa/presentation/Facility/auth/data/repositories/repo.dart';
+import 'package:chefaa/presentation/Facility/auth/data/data_sources/facility_auth_source.dart';
+import 'package:chefaa/presentation/Facility/auth/domain/repositories/facility_auth_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';
