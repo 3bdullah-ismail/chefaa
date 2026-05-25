@@ -8,7 +8,6 @@ import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/routes/app_routes_names.dart';
-import '../../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
 import '../../../../../../core/widget/layout_app_bar.dart';
 import '../../../../search/presentation/manager/search_cubit.dart';

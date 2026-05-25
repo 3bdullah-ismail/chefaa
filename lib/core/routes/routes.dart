@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/config/get_config.dart';
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
 import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
+import '../../presentation/Facility/layout/dashboard/presentation/pages/facility_results_page.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
@@ -216,6 +217,10 @@ class Routes {
       case AppRoutesNames.facilityLayout:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const FacilityLayout()),
+        );
+      case AppRoutesNames.facilityResults:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const FacilityResultsPage()),
         );
       case AppRoutesNames.chooseDoctor:
         return MaterialPageRoute(

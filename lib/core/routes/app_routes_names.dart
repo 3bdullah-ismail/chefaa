@@ -33,4 +33,5 @@ class AppRoutesNames {
   static const String clinicsPage = '/clinicsPage';
 
   static const String clinicsDetailsPage = '/clinicsDetailsPage';
+  static const String facilityResults = '/facilityResults';
 }
