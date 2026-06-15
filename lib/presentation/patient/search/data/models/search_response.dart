@@ -135,26 +135,6 @@ class SearchResponse extends ClinicModel {
     return allClinicResults;
   }
 
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['_id'] = id;
-    map['name'] = doctorName;
-    map['specialization'] = specialization;
-    map['age'] = age;
-    map['yearsOfExperience'] = yearsOfExperience;
-    map['image'] = image;
-    map['about'] = about;
-    map['degrees'] = degrees;
-    map['gender'] = gender;
-    map['rating'] = ratingValue;
-    map['prePaymentNumbers'] = prePaymentNumbers;
-    map['clinicConsultationPrice'] = clinicConsultationPrice;
-    if (reviews != null) map['reviews'] = reviews;
-    if (clinics != null) {
-      map['clinics'] = clinics?.map((v) => v.toJson()).toList();
-    }
-    return map;
-  }
 
   static List<DateTime> _parseDaysStatic(List<Clinics>? clinics) {
     if (clinics == null || clinics.isEmpty) return const [];

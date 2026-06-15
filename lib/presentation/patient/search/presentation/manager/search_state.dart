@@ -1,4 +1,5 @@
-part of "search_cubit.dart";
+import 'package:chefaa/presentation/patient/search/data/models/search_query.dart';
+import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 
 sealed class SearchState {}
 

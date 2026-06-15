@@ -1,5 +1,6 @@
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,12 +19,12 @@ class FilterBar extends StatelessWidget {
       buildWhen: (previous, current) => current is SearchDraftChanged,
       builder: (context, state) {
         return SizedBox(
-          height: 38,
+          height: AppSize.s38,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
             itemCount: cubit.filterTabs.length,
-            separatorBuilder: (_, _) => const SizedBox(width: 8),
+            separatorBuilder: (_, _) => const SizedBox(width: AppSize.s8),
             itemBuilder: (context, index) {
               final filter = cubit.filterTabs[index];
               final isSelected = cubit.isChipSelected(filter);
@@ -38,13 +39,13 @@ class FilterBar extends StatelessWidget {
                       filter: filter,
                     ),
                     child: Container(
-                      width: 100,
-                      height: 25,
+                      width: AppSize.s100,
+                      height: AppSize.s25,
                       decoration: BoxDecoration(
                         color: isSelected
                             ? ColorManager.primary
                             : ColorManager.lightGray,
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: BorderRadius.circular(AppRadius.r24),
                         border: Border.all(
                           color: isSelected
                               ? ColorManager.primary
@@ -60,16 +61,16 @@ class FilterBar extends StatelessWidget {
                               children: [
                                 SvgPicture.asset(
                                   SvgAssets.filter,
-                                  width: 20,
-                                  height: 20,
+                                  width: AppSize.s20,
+                                  height: AppSize.s20,
                                 ),
-                                const SizedBox(width: 6),
+                                const SizedBox(width: AppSize.s6),
                               ],
                             ),
                           Expanded(
                             child: Center(
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(AppPadding.p8),
                                 child: Text(
                                   label,
                                   overflow: TextOverflow.ellipsis,
@@ -154,12 +155,12 @@ class FilterBar extends StatelessWidget {
       context: context,
       position: RelativeRect.fromLTRB(
         position.dx,
-        position.dy + 45,
+        position.dy + AppSize.s45,
         position.dx,
         position.dy,
       ),
       color: ColorManager.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.r12)),
       items: ['Male', 'Female', 'Any'].map((value) {
         final normalized = value.toLowerCase();
         final selectedGender = cubit.draftQuery.gender.toLowerCase();
@@ -173,7 +174,7 @@ class FilterBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(value),
-              if (isSelected) const Icon(Icons.check, color: Colors.blue),
+              if (isSelected) const Icon(Icons.check, color: ColorManager.blue600),
             ],
           ),
         );

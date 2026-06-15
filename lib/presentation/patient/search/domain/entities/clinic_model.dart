@@ -40,4 +40,20 @@ class ClinicModel {
     required this.clinicId,
     required this.clinicName,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'doctorName': doctorName,
+      'availableDays': availableDays.map((e) => e.toIso8601String()).toList(),
+      'doctorSpecialty': doctorSpecialty,
+      'doctorRating': doctorRating,
+      'doctorRatingCount': doctorRatingCount,
+      'clinicPrice': clinicPrice,
+      'doctorImageUrl': doctorImageUrl,
+      'doctorGender': doctorGender,
+      'clinicLocation': clinicLocation,
+      'clinicId': clinicId,
+      'clinicName': clinicName,
+    };
+  }
 }

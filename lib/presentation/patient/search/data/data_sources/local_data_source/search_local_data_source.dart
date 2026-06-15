@@ -7,22 +7,7 @@ abstract class SearchLocalDataSource {
 
   Future<void> clearSearchHistory();
 
-  Future<List<ClinicModel>?> getCachedDoctors({
-    String? searchText,
-    String? specialization,
-    String? gender,
-    String? location,
-  });
-
-  Future<void> cacheDoctors({
-    required List<ClinicModel> doctors,
-    String? searchText,
-    String? specialization,
-    String? gender,
-    String? location,
-  });
-
-  Future<bool> hasFreshCache({
+  Future<(List<ClinicModel>? doctors, bool isFresh)> getCachedDoctors({
     String? searchText,
     String? specialization,
     String? gender,
@@ -30,7 +15,8 @@ abstract class SearchLocalDataSource {
     Duration maxAge = const Duration(minutes: 10),
   });
 
-  Future<void> touchCacheTimestamp({
+  Future<void> updateCache({
+    required List<ClinicModel> doctors,
     String? searchText,
     String? specialization,
     String? gender,

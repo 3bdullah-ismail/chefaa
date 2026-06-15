@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:chefaa/core/services/hive_service.dart';
-import 'package:chefaa/presentation/patient/search/data/datasources/local_data_source/search_local_data_source.dart';
+import 'package:chefaa/presentation/patient/search/data/data_sources/local_data_source/search_local_data_source.dart';
 import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -36,7 +38,6 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
     history.removeWhere((item) => item.toLowerCase() == trimmed.toLowerCase());
     history.insert(0, trimmed);
 
-    // Keep only the most recent values to avoid unbounded box growth.
     if (history.length > 20) {
       history.removeRange(20, history.length);
     }
@@ -45,56 +46,7 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
   }
 
   @override
-  Future<void> cacheDoctors({
-    required List<ClinicModel> doctors,
-    String? searchText,
-    String? specialization,
-    String? gender,
-    String? location,
-  }) async {
-    final key = _cacheKey(
-      searchText: searchText,
-      specialization: specialization,
-      gender: gender,
-      location: location,
-    );
-
-    final payload = <String, dynamic>{
-      'updatedAt': DateTime.now().millisecondsSinceEpoch,
-      'items': doctors,
-    };
-
-    await HiveService.put(HiveBoxes.doctorsBox, key, payload);
-  }
-
-  @override
-  Future<List<ClinicModel>?> getCachedDoctors({
-    String? searchText,
-    String? specialization,
-    String? gender,
-    String? location,
-  }) async {
-    final key = _cacheKey(
-      searchText: searchText,
-      specialization: specialization,
-      gender: gender,
-      location: location,
-    );
-
-    final dynamic raw = await HiveService.get<dynamic>(
-      HiveBoxes.doctorsBox,
-      key,
-    );
-    if (raw is! Map) return null;
-
-    final dynamic items = raw['items'];
-    if (items is! List) return null;
-
-    return items.whereType<ClinicModel>().toList(growable: false);
-  }
-
-  @override
-  Future<bool> hasFreshCache({
+  Future<(List<ClinicModel>? doctors, bool isFresh)> getCachedDoctors({
     String? searchText,
     String? specialization,
     String? gender,
@@ -107,22 +59,29 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
       gender: gender,
       location: location,
     );
+    final entry = await _getCacheEntry(key);
+    if (entry == null) {
+      return (null, false);
+    }
 
-    final dynamic raw = await HiveService.get<dynamic>(
-      HiveBoxes.doctorsBox,
-      key,
-    );
-    if (raw is! Map) return false;
+    final items = entry['items'];
+    final doctors = items is List
+        ? items.whereType<ClinicModel>().toList(growable: false)
+        : null;
 
-    final updatedAtMillis = raw['updatedAt'];
-    if (updatedAtMillis is! int) return false;
+    final updatedAtMillis = entry['updatedAt'];
+    var isFresh = false;
+    if (updatedAtMillis is int) {
+      final updatedAt = DateTime.fromMillisecondsSinceEpoch(updatedAtMillis);
+      isFresh = DateTime.now().difference(updatedAt) <= maxAge;
+    }
 
-    final updatedAt = DateTime.fromMillisecondsSinceEpoch(updatedAtMillis);
-    return DateTime.now().difference(updatedAt) <= maxAge;
+    return (doctors, isFresh);
   }
 
   @override
-  Future<void> touchCacheTimestamp({
+  Future<void> updateCache({
+    required List<ClinicModel> doctors,
     String? searchText,
     String? specialization,
     String? gender,
@@ -134,20 +93,41 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
       gender: gender,
       location: location,
     );
+    final entry = await _getCacheEntry(key);
+    final existingItems = entry?['items'];
 
-    final dynamic raw = await HiveService.get<dynamic>(
-      HiveBoxes.doctorsBox,
-      key,
-    );
-    if (raw is! Map) return;
+    final oldList = existingItems is List ? existingItems.whereType<ClinicModel>().toList(growable: false) : null;
+    
+    // If the new list matches the existing cached list, skip Hive write completely.
+    if (_areDoctorsEquivalent(oldList, doctors)) {
+      return;
+    }
 
-    final existingItems = raw['items'];
-    if (existingItems is! List) return;
+    await _saveCacheEntry(key, doctors);
+  }
 
-    await HiveService.put(HiveBoxes.doctorsBox, key, {
+  bool _areDoctorsEquivalent(List<ClinicModel>? oldList, List<ClinicModel> newList) {
+    if (oldList == null || oldList.length != newList.length) {
+      return false;
+    }
+
+    final oldJson = jsonEncode(oldList.map((e) => e.toJson()).toList());
+    final newJson = jsonEncode(newList.map((e) => e.toJson()).toList());
+
+    return oldJson == newJson;
+  }
+
+  Future<Map<dynamic, dynamic>?> _getCacheEntry(String key) async {
+    final raw = await HiveService.get<dynamic>(HiveBoxes.doctorsBox, key);
+    return raw is Map ? raw : null;
+  }
+
+  Future<void> _saveCacheEntry(String key, List<dynamic> items) async {
+    final payload = <String, dynamic>{
       'updatedAt': DateTime.now().millisecondsSinceEpoch,
-      'items': existingItems,
-    });
+      'items': items,
+    };
+    await HiveService.put(HiveBoxes.doctorsBox, key, payload);
   }
 
   String _cacheKey({

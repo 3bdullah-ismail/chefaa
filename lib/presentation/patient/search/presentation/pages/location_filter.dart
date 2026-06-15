@@ -7,7 +7,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 import '../../../profile/presentation/widgets/bottom_sheet.dart';
 import '../../domain/entities/clinic_model.dart';
 import '../widgets/search_card.dart';
@@ -187,7 +189,7 @@ class _LocationFilterState extends State<LocationFilter> {
             left: 0,
             right: 0,
             child: Container(
-              height: 220.h,
+              height: AppSize.s220.h,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -203,7 +205,7 @@ class _LocationFilterState extends State<LocationFilter> {
           ),
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: AppPadding.p16.w),
               child: Column(
                 children: [
                   Row(
@@ -212,37 +214,37 @@ class _LocationFilterState extends State<LocationFilter> {
                         onPressed: () => Navigator.pop(context),
                         icon: const Icon(
                           Icons.arrow_back_ios,
-                          color: Colors.black,
+                          color: ColorManager.black,
                         ),
                       ),
                       const Spacer(),
                       Text(
                         "Nearby",
                         style: getSemiBoldStyle(
-                          fontSize: 20.sp,
+                          fontSize: FontSize.s20.sp,
                           color: ColorManager.black,
                         ),
                       ),
                       const Spacer(),
-                      48.horizontalSpace,
+                      AppSize.s48.horizontalSpace,
                     ],
                   ),
-                  12.verticalSpace,
+                  AppSize.s12.verticalSpace,
                   Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 6.h,
+                      horizontal: AppPadding.p8.w,
+                      vertical: AppPadding.p6.h,
                     ),
                     decoration: BoxDecoration(
                       color: ColorManager.white,
-                      borderRadius: BorderRadius.circular(18.r),
+                      borderRadius: BorderRadius.circular(AppRadius.r18),
                       border: Border.all(
                         color: ColorManager.input.withValues(alpha: 0.5),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.06),
-                          blurRadius: 14,
+                          color: ColorManager.black.withValues(alpha: 0.06),
+                          blurRadius: AppSize.s14,
                           offset: const Offset(0, 4),
                         ),
                       ],
@@ -258,7 +260,7 @@ class _LocationFilterState extends State<LocationFilter> {
                         hintText: "Search by area, street, or landmark",
                         hintStyle: getRegularStyle(
                           color: ColorManager.gray,
-                          fontSize: 14.sp,
+                          fontSize: FontSize.s14.sp,
                         ),
                         prefixIcon: const Icon(
                           Icons.search_rounded,
@@ -279,7 +281,7 @@ class _LocationFilterState extends State<LocationFilter> {
                           ),
                         ),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: 14.h),
+                        contentPadding: EdgeInsets.symmetric(vertical: AppPadding.p14.h),
                       ),
                     ),
                   ),
@@ -295,12 +297,12 @@ class _LocationFilterState extends State<LocationFilter> {
 
           Positioned(
             bottom: 0.32.sh,
-            right: 16.w,
+            right: AppPadding.p16.w,
             child: FloatingActionButton(
               heroTag: "my_location_btn",
               mini: true,
               backgroundColor: ColorManager.white,
-              elevation: 4,
+              elevation: AppSize.s4,
               onPressed: _resolveCurrentLocation,
               child: const Icon(Icons.my_location, color: ColorManager.primary),
             ),
