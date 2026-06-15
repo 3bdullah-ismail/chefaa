@@ -1,3 +1,4 @@
+import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -48,12 +49,12 @@ class ResultsList extends StatelessWidget {
 
         return Column(
           children: [
-            if (isRefreshing) const LinearProgressIndicator(minHeight: 2),
+            if (isRefreshing) const LinearProgressIndicator(minHeight: AppSize.s2),
             Expanded(
               child: ListView.separated(
                 padding: EdgeInsets.zero,
                 itemCount: clinics.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 16),
+                separatorBuilder: (_, _) => const SizedBox(height: AppSize.s16),
                 itemBuilder: (context, index) {
                   return SearchCard(clinicModel: clinics[index]);
                 },

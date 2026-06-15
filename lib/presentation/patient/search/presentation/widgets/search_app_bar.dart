@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -10,7 +12,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SearchAppBar({super.key, this.title});
 
   @override
-  Size get preferredSize => Size.fromHeight(110.h);
+  Size get preferredSize => Size.fromHeight(AppSize.s110.h);
 
   @override
   Widget build(BuildContext context) {
@@ -18,24 +20,24 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: ColorManager.input.withValues(alpha: 50),
       shadowColor: ColorManager.transparent,
-      elevation: 15,
+      elevation: AppSize.s15,
       automaticallyImplyLeading: false,
       leading: canPop
           ? Padding(
-              padding: EdgeInsets.only(left: 12.w),
+              padding: EdgeInsets.only(left: AppPadding.p12.w),
               child: InkWell(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(AppRadius.r30),
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  width: 40.w,
-                  height: 40.w,
+                  width: AppSize.s40.w,
+                  height: AppSize.s40.w,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ColorManager.white,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.08),
-                        blurRadius: 6,
+                        color: ColorManager.black.withValues(alpha: 0.08),
+                        blurRadius: AppSize.s6,
                         offset: const Offset(0, 3),
                       ),
                     ],
@@ -43,7 +45,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: Icon(
                     Icons.arrow_back,
                     color: ColorManager.black,
-                    size: 20.sp,
+                    size: AppSize.s20.sp,
                   ),
                 ),
               ),
@@ -52,10 +54,10 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title ?? "",
-        style: getBoldStyle(color: ColorManager.black, fontSize: 26.sp),
+        style: getBoldStyle(color: ColorManager.black, fontSize: FontSize.s26.sp),
       ),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
+        borderRadius: BorderRadius.vertical(bottom: Radius.circular(AppRadius.r30)),
       ),
     );
   }

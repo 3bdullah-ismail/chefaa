@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/search/data/datasources/remote_date_source/search_remote_data_source.dart';
+import 'package:chefaa/presentation/patient/search/data/data_sources/remote_data_source/search_remote_data_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
