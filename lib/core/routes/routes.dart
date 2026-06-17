@@ -27,8 +27,9 @@ import '../../presentation/patient/complete_auth_data/presentation/manager/compl
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
-import '../../presentation/patient/layout/home/patient_appointment/presentation/pages/appointment_page.dart';
-import '../../presentation/patient/layout/home/patient_medication/presentation/pages/medication_page.dart';
+import '../../presentation/patient/appointment/presentation/pages/appointment_page.dart';
+import '../../presentation/patient/medication/presentation/pages/medication_page.dart';
+import '../../presentation/patient/lab_search/presentation/pages/find_lab_page.dart';
 import '../../presentation/patient/layout/patient_layout.dart';
 import '../../presentation/patient/search/presentation/pages/location_filter.dart';
 import '../../presentation/patient/search/presentation/pages/search_page.dart';
@@ -201,6 +202,10 @@ class Routes {
       case AppRoutesNames.medicationPage:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const MedicationPage()),
+        );
+      case AppRoutesNames.findLabPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const FindLabPage()),
         );
       case AppRoutesNames.doctorLayout:
         return MaterialPageRoute(

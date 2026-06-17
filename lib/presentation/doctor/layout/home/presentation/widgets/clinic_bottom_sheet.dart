@@ -2,7 +2,7 @@ import 'package:chefaa/core/widget/inspector_bottom_sheet_container.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/basic_info_section.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/schedule_section.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/working_days_section.dart';
-import 'package:chefaa/presentation/patient/layout/home/patient_medication/presentation/widgets/outline_button.dart';
+import 'package:chefaa/presentation/patient/medication/presentation/widgets/outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,7 +10,7 @@ import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/widget/custom_btn.dart';
-import '../../../../../patient/layout/home/presentation/widgets/ai_suggestion.dart';
+import '../../../../../patient/home/presentation/widgets/ai_suggestion.dart';
 
 class ClinicBottomSheet extends StatefulWidget {
   final String title;
