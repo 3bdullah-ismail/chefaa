@@ -1,5 +1,7 @@
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinic_details_page.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinics_page.dart';
+import 'package:chefaa/presentation/patient/checkout_order/presentation/pages/checkout_page.dart';
+import 'package:chefaa/presentation/patient/order/presentation/pages/track_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,6 +33,8 @@ import '../../presentation/patient/appointment/presentation/pages/appointment_pa
 import '../../presentation/patient/medication/presentation/pages/medication_page.dart';
 import '../../presentation/patient/lab_search/presentation/pages/find_lab_page.dart';
 import '../../presentation/patient/layout/patient_layout.dart';
+import '../../presentation/patient/payment/presentation/pages/payment_page.dart';
+import '../../presentation/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart';
 import '../../presentation/patient/search/presentation/pages/location_filter.dart';
 import '../../presentation/patient/search/presentation/pages/search_page.dart';
 import '../../presentation/patient/search/presentation/pages/speciality_page.dart';
@@ -77,9 +81,25 @@ class Routes {
           settings: settings,
           builder: (_) => _wrapWithCanPop(const ClinicDetailsPage()),
         );
+      case AppRoutesNames.searchPharmacy:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const MainLayout()),
+        );
       case AppRoutesNames.option:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const OptionScreen()),
+        );
+        case AppRoutesNames.checkoutPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const CheckoutPage()),
+        );
+        case AppRoutesNames.paymentPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const PaymentPage()),
+        );
+        case AppRoutesNames.trackOrderPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const TrackOrderPage()),
         );
       case AppRoutesNames.appEntryRoute:
         return MaterialPageRoute(

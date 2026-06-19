@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/resources/color_manager.dart';
-import '../../../../../../../core/resources/styles_manager.dart';
+import '../resources/color_manager.dart';
+import '../resources/styles_manager.dart';
 
-class DeleteMedicationDialog {
+class DeleteConfirmationDialog {
   static Future<void> show({
     required BuildContext context,
-    required String medicationId,
-    required dynamic cubit,
+    required String title,
+    required String message,
+    required VoidCallback onConfirm,
   }) {
     return showDialog(
       context: context,
@@ -15,11 +16,11 @@ class DeleteMedicationDialog {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         backgroundColor: ColorManager.lightGray,
         title: Text(
-          "Confirm Deletion",
+          title,
           style: getBoldStyle(color: ColorManager.primary, fontSize: 22),
         ),
         content: Text(
-          "Are you sure?",
+          message,
           style: getRegularStyle(color: ColorManager.black, fontSize: 18),
         ),
         actions: [
@@ -33,7 +34,7 @@ class DeleteMedicationDialog {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              cubit.deleteMedication(medicationId);
+              onConfirm();
             },
             child: Text(
               "Delete",

@@ -33,6 +33,10 @@ class AppRoutesNames {
   static const String clinicsPage = '/clinicsPage';
 
   static const String clinicsDetailsPage = '/clinicsDetailsPage';
+  static const String searchPharmacy = '/searchPharmacy';
+  static const String checkoutPage = '/checkoutPage';
+  static const String paymentPage = '/paymentPage';
+  static const String trackOrderPage = '/trackOrderPage';
   static const String facilityResults = '/facilityResults';
   static const String findLabPage = '/findLabPage';
 }

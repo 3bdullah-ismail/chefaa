@@ -16,7 +16,6 @@ class MedicationErrorWidget extends StatelessWidget {
     required this.onSignInRedirect,
   });
 
-  // فحص إذا كان الخطأ بسبب انتهاء الجلسة
   bool _isUnauthorized(String error) {
     final lowerError = error.toLowerCase();
     return lowerError.contains('unauthorized') ||

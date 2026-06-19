@@ -15,7 +15,7 @@ import 'package:chefaa/presentation/patient/home/presentation/widgets/ai_suggest
 import '../../data/models/Medications.dart';
 import '../manager/medication_cubit.dart';
 import '../manager/medication_state.dart';
-import 'delete_medication_dialog.dart';
+import '../../../../../../../core/widget/delete_confirmation_dialog.dart';
 import 'outline_button.dart';
 
 class MedicationBottomSheet extends StatefulWidget {
@@ -142,21 +142,18 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
           messenger.showSnackBar(
             const SnackBar(content: Text("Medication added successfully!")),
           );
-          Navigator.pop(context);
         }
 
         if (state is MedicationUpdateSuccessState) {
           messenger.showSnackBar(
             const SnackBar(content: Text("Medication updated successfully!")),
           );
-          Navigator.pop(context);
         }
 
         if (state is MedicationDeleteSuccessState) {
           messenger.showSnackBar(
             const SnackBar(content: Text("Medication deleted successfully!")),
           );
-          Navigator.pop(context);
         }
 
         if (state is MedicationAdditionErrorState) {
@@ -286,10 +283,12 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
                             onPressed: () {
                               final id = widget.medication?.id;
                               if (id != null) {
-                                DeleteMedicationDialog.show(
+                                DeleteConfirmationDialog.show(
                                   context: context,
-                                  medicationId: id,
-                                  cubit: cubit,
+                                  title: "Delete Medication",
+                                  message:
+                                      "Are you sure you want to delete this medication?",
+                                  onConfirm: () => cubit.deleteMedication(id),
                                 );
                               }
                             },
@@ -303,9 +302,10 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
                 ),
 
                 if (isLoading)
-                  Container(
-                    color: Colors.white.withAlpha(200),
-                    child: const Center(child: CircularProgressIndicator()),
+                  const Center(
+                    child: CircularProgressIndicator(
+                      color: ColorManager.primary,
+                    ),
                   ),
               ],
             ),

@@ -296,14 +296,12 @@ class _HomePageState extends State<HomePage> {
                       child: QuickActions(
                         title: "Order Pharmacy",
                         image: SvgAssets.orderPharmacy,
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: QuickActions(
-                        title: "Appointments",
-                        image: SvgAssets.appointment,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.searchPharmacy,
+                          );
+                        },
                       ),
                     ),
                     Expanded(
