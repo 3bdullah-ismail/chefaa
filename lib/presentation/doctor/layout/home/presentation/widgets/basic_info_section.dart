@@ -17,6 +17,7 @@ class BasicInfoSection extends StatelessWidget {
     required this.longitudeController,
     required this.licenseController,
   });
+
   final TextEditingController clinicNameController;
   final TextEditingController cityController;
 

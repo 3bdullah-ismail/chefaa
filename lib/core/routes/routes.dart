@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../core/config/get_config.dart';
 import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
 import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
+import '../../presentation/Facility/layout/dashboard/presentation/pages/facility_results_page.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
@@ -28,8 +29,9 @@ import '../../presentation/patient/complete_auth_data/presentation/manager/compl
 import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
 import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
-import '../../presentation/patient/layout/home/patient_appointment/presentation/pages/appointment_page.dart';
-import '../../presentation/patient/layout/home/patient_medication/presentation/pages/medication_page.dart';
+import '../../presentation/patient/appointment/presentation/pages/appointment_page.dart';
+import '../../presentation/patient/medication/presentation/pages/medication_page.dart';
+import '../../presentation/patient/lab_search/presentation/pages/find_lab_page.dart';
 import '../../presentation/patient/layout/patient_layout.dart';
 import '../../presentation/patient/payment/presentation/pages/payment_page.dart';
 import '../../presentation/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart';
@@ -221,6 +223,10 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const MedicationPage()),
         );
+      case AppRoutesNames.findLabPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const FindLabPage()),
+        );
       case AppRoutesNames.doctorLayout:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const DoctorLayout()),
@@ -236,6 +242,10 @@ class Routes {
       case AppRoutesNames.facilityLayout:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const FacilityLayout()),
+        );
+      case AppRoutesNames.facilityResults:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const FacilityResultsPage()),
         );
       case AppRoutesNames.chooseDoctor:
         return MaterialPageRoute(

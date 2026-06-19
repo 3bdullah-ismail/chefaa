@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/services/storage_service.dart';
-import '../../../../patient/layout/home/presentation/manager/users_cubit.dart';
+import '../../../../patient/home/presentation/manager/users_cubit.dart';
 
 part 'doctor_auth_state.dart';
 

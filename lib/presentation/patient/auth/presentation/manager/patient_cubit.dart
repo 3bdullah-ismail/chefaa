@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/services/storage_service.dart';
-import '../../../layout/home/presentation/manager/users_cubit.dart';
+import '../../../home/presentation/manager/users_cubit.dart';
 
 @injectable
 class PatientCubit extends Cubit<PatientState> {

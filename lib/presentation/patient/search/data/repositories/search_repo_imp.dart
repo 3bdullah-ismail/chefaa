@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/patient/search/data/datasources/local_data_source/search_local_data_source.dart';
-import 'package:chefaa/presentation/patient/search/data/datasources/remote_date_source/search_remote_data_source.dart';
+import 'package:chefaa/presentation/patient/search/data/data_sources/local_data_source/search_local_data_source.dart';
+import 'package:chefaa/presentation/patient/search/data/data_sources/remote_data_source/search_remote_data_source.dart';
 import 'package:chefaa/presentation/patient/search/data/models/search_response.dart';
-import 'package:chefaa/presentation/patient/search/data/repositories/search_repo.dart';
+import 'package:chefaa/presentation/patient/search/domain/repositories/search_repo.dart';
 import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -22,14 +22,7 @@ class SearchRepoImp implements SearchRepo {
     String? gender,
     String? location,
   }) async {
-    final cached = await searchLocalDataSource.getCachedDoctors(
-      searchText: searchText,
-      specialization: specialization,
-      gender: gender,
-      location: location,
-    );
-
-    final hasFreshCache = await searchLocalDataSource.hasFreshCache(
+    final (cached, isFresh) = await searchLocalDataSource.getCachedDoctors(
       searchText: searchText,
       specialization: specialization,
       gender: gender,
@@ -37,7 +30,7 @@ class SearchRepoImp implements SearchRepo {
     );
 
     // Return instantly from fresh cache to avoid unnecessary loading latency.
-    if (cached != null && hasFreshCache) {
+    if (cached != null && isFresh) {
       return cached;
     }
 
@@ -58,17 +51,7 @@ class SearchRepoImp implements SearchRepo {
         listPayload,
       ).map<ClinicModel>((e) => e).toList(growable: false);
 
-      if (_areDoctorsEquivalent(cached, doctors)) {
-        await searchLocalDataSource.touchCacheTimestamp(
-          searchText: searchText,
-          specialization: specialization,
-          gender: gender,
-          location: location,
-        );
-        return cached;
-      }
-
-      await searchLocalDataSource.cacheDoctors(
+      await searchLocalDataSource.updateCache(
         doctors: doctors,
         searchText: searchText,
         specialization: specialization,
@@ -109,29 +92,5 @@ class SearchRepoImp implements SearchRepo {
     }
 
     return null;
-  }
-
-  bool _areDoctorsEquivalent(
-    List<ClinicModel>? oldList,
-    List<ClinicModel> newList,
-  ) {
-    if (oldList == null || oldList.length != newList.length) {
-      return false;
-    }
-
-    for (var i = 0; i < oldList.length; i++) {
-      final oldDoctor = oldList[i];
-      final newDoctor = newList[i];
-
-      if (oldDoctor.clinicId != newDoctor.clinicId ||
-          oldDoctor.doctorName != newDoctor.doctorName ||
-          oldDoctor.clinicPrice != newDoctor.clinicPrice ||
-          oldDoctor.doctorRating != newDoctor.doctorRating ||
-          oldDoctor.clinicLocation != newDoctor.clinicLocation) {
-        return false;
-      }
-    }
-
-    return true;
   }
 }

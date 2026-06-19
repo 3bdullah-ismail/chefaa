@@ -183,6 +183,7 @@ class AppConstants {
     "Every 12 hours",
     "As needed",
   ];
+
   static String formToDropdownLabel(String? value) {
     switch ((value ?? '').toLowerCase().trim()) {
       case 'tablet':

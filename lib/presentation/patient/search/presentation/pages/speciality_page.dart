@@ -1,4 +1,5 @@
 import 'package:chefaa/core/resources/constants_manager.dart';
+import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:chefaa/presentation/patient/search/presentation/widgets/speciality_card.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,17 @@ class SpecialityPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(100),
+        preferredSize: Size.fromHeight(AppSize.s100),
         child: InsideAppBar(title: "Doctor Speciality", isSpeciality: true),
       ),
       body: SafeArea(
         child: GridView.builder(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppPadding.p24),
           itemCount: AppConstants.specialityItems.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 3,
+            crossAxisSpacing: AppSize.s8,
+            mainAxisSpacing: AppSize.s3,
             childAspectRatio: 0.75,
           ),
           itemBuilder: (BuildContext context, int index) {

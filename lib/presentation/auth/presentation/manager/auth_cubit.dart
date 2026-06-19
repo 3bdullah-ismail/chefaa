@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/models/auth_response.dart';
 import '../../../../core/services/storage_service.dart';
-import '../../../patient/layout/home/presentation/manager/users_cubit.dart';
+import '../../../patient/home/presentation/manager/users_cubit.dart';
 import '../../data/repositories/repo.dart';
 
 part 'auth_state.dart';

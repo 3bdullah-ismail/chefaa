@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
+
 class SpecialityCard extends StatelessWidget {
   final Map<String, String> item;
 
@@ -16,16 +19,16 @@ class SpecialityCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 105.h,
-            width: 105.w,
-            padding: const EdgeInsets.all(8.0),
+            height: AppSize.s105.h,
+            width: AppSize.s105.w,
+            padding: const EdgeInsets.all(AppPadding.p8),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
+              borderRadius: BorderRadius.circular(AppRadius.r10),
+              color: ColorManager.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: .1),
-                  blurRadius: 5,
+                  color: ColorManager.black.withValues(alpha: .1),
+                  blurRadius: AppSize.s5,
                   offset: const Offset(0, 2),
                 ),
               ],

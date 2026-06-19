@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:isolate';
+
 import 'package:chefaa/core/models/auth_response.dart';
 import 'package:chefaa/presentation/patient/auth/data/repositories/patient_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../core/error_handling/failure.dart';
 import '../../../../../core/services/storage_service.dart';
 import '../data_sources/patient_data_source.dart';
@@ -11,7 +13,9 @@ import '../data_sources/patient_data_source.dart';
 @Injectable(as: PatientRepo)
 class PatientRepoImp implements PatientRepo {
   PatientDataSource patientDataSource;
+
   PatientRepoImp(this.patientDataSource);
+
   @override
   Future<AuthResponse> patientSignUp({
     required String name,

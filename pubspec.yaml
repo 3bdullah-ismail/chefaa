@@ -69,6 +69,7 @@ dependencies:
   geocoding:
   fl_chart:
   material_symbols_icons:
+  username_generator: ^1.3.0
 
 dev_dependencies:
   flutter_native_splash:

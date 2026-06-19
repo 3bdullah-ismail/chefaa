@@ -30,6 +30,11 @@ abstract class ImageAssets {
   static const String healthIndicator = "$imagePath/health.png";
   static const String riskLevel = "$imagePath/risk_level.png";
   static const String historyReport = "$imagePath/history_report.png";
+  static const String labBackground = "$imagePath/lab_background.jpg";
+  static const String map = "$imagePath/map.png";
+  static const String mri = "$imagePath/mri.jpg";
+  static const String ct = "$imagePath/ct.jpg";
+  static const String xRay = "$imagePath/x_ray.jpg";
 }
 
 class SvgAssets {
@@ -66,6 +71,11 @@ abstract class IconsAssets {
   static const String phoneIcon = "$iconsPath/Phone_icon_Inactive.svg";
   static const String emailIcon = "$iconsPath/Email_icon_Inactive.svg";
   static const String passwordIcon = "$iconsPath/Password_icon_Inactive.svg";
+  static const String aboutIcon = "$svgPath/ix_about.svg";
+  static const String specializationIcon = "$svgPath/medical.svg";
+  static const String cashIcon = "$svgPath/cash.svg";
+  static const String appointmentIcon = "$svgPath/appointment.svg";
+  static const String degreeIcon = "$svgPath/degree.svg";
 
   static const String checkIconInactive =
       "$iconsPath/Checkbox_icon_Inactive.svg";

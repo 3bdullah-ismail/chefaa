@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/models/search_query.dart';
-import '../../data/repositories/search_repo.dart';
+import '../../domain/repositories/search_repo.dart';
 import '../../domain/entities/clinic_model.dart';
 
-part 'search_state.dart';
+import 'search_state.dart';
+export 'search_state.dart';
 
 enum FilterType { filters, specialization, gender, location }
 
