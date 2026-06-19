@@ -90,6 +90,16 @@ import 'package:chefaa/presentation/patient/booking/data/data_sources/remote_dat
     as _i352;
 import 'package:chefaa/presentation/patient/booking/data/data_sources/remote_date_source/remote_data_source_impl.dart'
     as _i369;
+import 'package:chefaa/presentation/patient/chatbot/data/data_sources/chatbot_remote_data_source.dart'
+    as _i231;
+import 'package:chefaa/presentation/patient/chatbot/data/data_sources/chatbot_remote_data_source_imp.dart'
+    as _i998;
+import 'package:chefaa/presentation/patient/chatbot/data/repositories/chatbot_repo.dart'
+    as _i989;
+import 'package:chefaa/presentation/patient/chatbot/data/repositories/chatbot_repo_imp.dart'
+    as _i350;
+import 'package:chefaa/presentation/patient/chatbot/presentation/manager/chatbot_cubit.dart'
+    as _i821;
 import 'package:chefaa/presentation/patient/complete_auth_data/data/data_sources/complete_data_source.dart'
     as _i1028;
 import 'package:chefaa/presentation/patient/complete_auth_data/data/data_sources/complete_data_source_imp.dart'
@@ -200,6 +210,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i88.AiReportRepoImp(gh<_i564.AIReportDataSource>()));
     gh.factory<_i366.AiReportCubit>(
         () => _i366.AiReportCubit(gh<_i17.AIReportRepo>()));
+    gh.factory<_i231.ChatbotRemoteDataSource>(
+        () => _i998.ChatbotRemoteDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i598.DoctorProfileRemoteDataSource>(
         () => _i5.DoctorProfileRemoteDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i13.DoctorAuthDataSource>(
@@ -240,6 +252,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i470.FacilityAuthCubit(gh<_i336.FacilityAuthRepo>()));
     gh.factory<_i216.AuthRepo>(
         () => _i63.AuthRepoImp(gh<_i339.AuthDataSource>()));
+    gh.factory<_i989.ChatbotRepo>(
+        () => _i350.ChatbotRepoImp(gh<_i231.ChatbotRemoteDataSource>()));
     gh.factory<_i483.SearchRepo>(() => _i331.SearchRepoImp(
           gh<_i169.SearchRemoteDataSource>(),
           gh<_i233.SearchLocalDataSource>(),
@@ -250,6 +264,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i598.DoctorProfileRemoteDataSource>(),
           gh<_i945.DoctorProfileLocalDataSource>(),
         ));
+    gh.factory<_i821.ChatbotCubit>(
+        () => _i821.ChatbotCubit(gh<_i989.ChatbotRepo>()));
     gh.factory<_i1070.HomeRepo>(
         () => _i1025.HomeRepoImp(gh<_i67.HomeDataSource>()));
     gh.factory<_i779.PharmacyCubit>(
