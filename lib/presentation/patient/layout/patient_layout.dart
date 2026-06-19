@@ -1,14 +1,15 @@
+import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/presentation/patient/chatbot/presentation/pages/chat_page.dart';
 import 'package:chefaa/presentation/patient/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../ai_lab/presentation/pages/ai_lab_page.dart';
-import '../booking/presentation/manager/booking_provider.dart';
+import '../booking/presentation/manager/booking_cubit.dart';
 import '../booking/presentation/pages/booking_page.dart';
 import '../profile/presentation/pages/profile_page.dart';
 
@@ -23,8 +24,8 @@ class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
     const HomePage(),
-    ChangeNotifierProvider(
-      create: (_) => BookingProvider(),
+    BlocProvider(
+      create: (_) => getIt<BookingCubit>(),
       child: const BookingPage(),
     ),
     const AiLabPage(),

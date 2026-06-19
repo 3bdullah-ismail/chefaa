@@ -1,14 +1,13 @@
 import 'package:chefaa/core/manager/file_handler_cubit.dart';
 import 'package:chefaa/presentation/auth/presentation/manager/auth_cubit.dart';
 import 'package:chefaa/presentation/patient/ai_lab/presentation/manager/ai_report_cubit.dart';
-import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_provider.dart';
+import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_cubit.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/home/presentation/manager/users_cubit.dart';
 import 'package:chefaa/presentation/patient/search/presentation/manager/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
 
 import 'chefaa.dart';
 import 'core/config/get_config.dart';
@@ -37,7 +36,7 @@ void main() async {
         BlocProvider(
           create: (_) => getIt<MedicationCubit>()..getMedicationList(),
         ),
-        ChangeNotifierProvider(create: (_) => BookingProvider()),
+        BlocProvider(create: (_) => getIt<BookingCubit>()),
       ],
       child: const Chefaa(),
     ),

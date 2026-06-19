@@ -90,6 +90,12 @@ import 'package:chefaa/presentation/patient/booking/data/data_sources/remote_dat
     as _i352;
 import 'package:chefaa/presentation/patient/booking/data/data_sources/remote_date_source/remote_data_source_impl.dart'
     as _i369;
+import 'package:chefaa/presentation/patient/booking/data/repositories/booking_repo.dart'
+    as _i598;
+import 'package:chefaa/presentation/patient/booking/data/repositories/booking_repo_imp.dart'
+    as _i501;
+import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_cubit.dart'
+    as _i1055;
 import 'package:chefaa/presentation/patient/chatbot/data/data_sources/chatbot_remote_data_source.dart'
     as _i231;
 import 'package:chefaa/presentation/patient/chatbot/data/data_sources/chatbot_remote_data_source_imp.dart'
@@ -232,6 +238,8 @@ extension GetItInjectableX on _i174.GetIt {
         completeDataSource: gh<_i1028.CompleteDataSource>()));
     gh.factory<_i235.PharmacyRepo>(() => _i71.PharmacyRepoImp(
         pharmacyDataSource: gh<_i831.PharmacyDataSource>()));
+    gh.factory<_i598.BookingRepo>(
+        () => _i501.BookingRepoImp(gh<_i352.BookingRemoteDataSource>()));
     gh.factory<_i40.CompleteCubit>(
         () => _i40.CompleteCubit(gh<_i695.CompletePatientRepo>()));
     gh.factory<_i761.MedicationCubit>(
@@ -266,6 +274,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i821.ChatbotCubit>(
         () => _i821.ChatbotCubit(gh<_i989.ChatbotRepo>()));
+    gh.factory<_i1055.BookingCubit>(
+        () => _i1055.BookingCubit(gh<_i598.BookingRepo>()));
     gh.factory<_i1070.HomeRepo>(
         () => _i1025.HomeRepoImp(gh<_i67.HomeDataSource>()));
     gh.factory<_i779.PharmacyCubit>(
