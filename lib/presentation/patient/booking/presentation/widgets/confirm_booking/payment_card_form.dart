@@ -33,31 +33,61 @@ class PaymentCardForm extends StatelessWidget {
     return null;
   }
 
+  bool _isValidLuhn(String number) {
+    int sum = 0;
+    bool alternate = false;
+
+    for (int i = number.length - 1; i >= 0; i--) {
+      int n = int.parse(number[i]);
+
+      if (alternate) {
+        n *= 2;
+        if (n > 9) n -= 9;
+      }
+
+      sum += n;
+      alternate = !alternate;
+    }
+
+    return sum % 10 == 0;
+  }
+
   String? _validateCardNumber(String? value) {
     final requiredError = _required(value);
     if (requiredError != null) return requiredError;
+
     final digits = value!.replaceAll(RegExp(r'\s+'), '');
-    if (!RegExp(r'^\d{13,19}$').hasMatch(digits)) {
-      return 'Enter a valid card number';
+
+    if (!RegExp(r'^\d{16}$').hasMatch(digits)) {
+      return 'Card number must be 16 digits';
     }
+
+    if (!_isValidLuhn(digits)) {
+      return 'Invalid card number';
+    }
+
     return null;
   }
 
   String? _validateExpiry(String? value) {
     final requiredError = _required(value);
     if (requiredError != null) return requiredError;
+
     if (!RegExp(r'^(0[1-9]|1[0-2])/\d{2}$').hasMatch(value!.trim())) {
       return 'Use MM/YY';
     }
+
     return null;
   }
 
   String? _validateCvv(String? value) {
     final requiredError = _required(value);
     if (requiredError != null) return requiredError;
+
     if (!RegExp(r'^\d{3,4}$').hasMatch(value!.trim())) {
       return 'Enter a valid CVV';
     }
+
     return null;
   }
 
@@ -71,20 +101,20 @@ class PaymentCardForm extends StatelessWidget {
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
         border: removeTopBorder
             ? Border(
-                left: BorderSide(color: borderColor, width: borderWidth),
-                right: BorderSide(color: borderColor, width: borderWidth),
-                bottom: BorderSide(color: borderColor, width: borderWidth),
-                top: BorderSide.none,
-              )
+          left: BorderSide(color: borderColor, width: borderWidth),
+          right: BorderSide(color: borderColor, width: borderWidth),
+          bottom: BorderSide(color: borderColor, width: borderWidth),
+          top: BorderSide.none,
+        )
             : Border.all(color: borderColor, width: borderWidth),
         boxShadow: showShadow
             ? [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ]
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ]
             : null,
       ),
       child: Form(
@@ -104,6 +134,7 @@ class PaymentCardForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+
             const Text("Card Number"),
             const SizedBox(height: 6),
             CustomTextField(
@@ -116,7 +147,9 @@ class PaymentCardForm extends StatelessWidget {
               ],
               validator: _validateCardNumber,
             ),
+
             const SizedBox(height: 12),
+
             const Text("Cardholder Name"),
             const SizedBox(height: 6),
             CustomTextField(
@@ -125,7 +158,9 @@ class PaymentCardForm extends StatelessWidget {
               textInputAction: TextInputAction.next,
               validator: _required,
             ),
+
             const SizedBox(height: 12),
+
             Row(
               children: [
                 Expanded(
@@ -138,7 +173,9 @@ class PaymentCardForm extends StatelessWidget {
                         controller: expiryDateController,
                         text: "MM/YY",
                         keyboardType: TextInputType.number,
-                        inputFormatters: [LengthLimitingTextInputFormatter(5)],
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(5),
+                        ],
                         validator: _validateExpiry,
                       ),
                     ],

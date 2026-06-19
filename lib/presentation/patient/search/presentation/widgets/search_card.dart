@@ -8,7 +8,7 @@ import '../../../../../core/resources/font_manager.dart';
 import '../../../../../core/resources/styles_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
-import '../../../booking/presentation/manager/booking_provider.dart';
+import '../../../booking/presentation/manager/booking_cubit.dart';
 import '../../domain/entities/clinic_model.dart';
 
 class SearchCard extends StatelessWidget {
@@ -111,10 +111,11 @@ class SearchCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              final provider = context.read<BookingProvider>();
-              final canProceed = provider.selectClinicAndNext(clinicModel);
+              final cubit = context.read<BookingCubit>();
 
-              if (!canProceed) {
+              cubit.selectClinic(clinicModel);
+
+              if (clinicModel.availableDays.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text(
@@ -122,7 +123,10 @@ class SearchCard extends StatelessWidget {
                     ),
                   ),
                 );
+                return;
               }
+
+              cubit.nextStep();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
