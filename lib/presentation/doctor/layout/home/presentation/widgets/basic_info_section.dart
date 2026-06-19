@@ -13,7 +13,6 @@ class BasicInfoSection extends StatelessWidget {
     required this.cityController,
     required this.consultationPriceController,
     required this.addressController,
-    required this.locationController,
     required this.latitudeController,
     required this.longitudeController,
     required this.licenseController,
@@ -25,7 +24,6 @@ class BasicInfoSection extends StatelessWidget {
 
   final TextEditingController addressController;
 
-  final TextEditingController locationController;
 
   final TextEditingController latitudeController;
 
@@ -88,13 +86,6 @@ class BasicInfoSection extends StatelessWidget {
 
             16.verticalSpace,
 
-            BottomSheetTextFieldItem(
-              title: "Location",
-              controller: locationController,
-              hint: "e.g. Google Maps Link",
-            ),
-
-            16.verticalSpace,
 
             Row(
               children: [

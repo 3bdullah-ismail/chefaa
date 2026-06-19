@@ -1,11 +1,13 @@
 import 'package:chefaa/presentation/doctor/layout/home/data/models/Clinic.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/schedule_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
+import '../manager/clinic_cubit.dart';
 import 'appointment_status_cart.dart';
 import 'clinic_bottom_sheet.dart';
 import 'clinic_days_avaliable.dart';
@@ -23,17 +25,30 @@ class ClinicCardDetails extends StatefulWidget {
 }
 
 class _ClinicCardDetailsState extends State<ClinicCardDetails> {
-  void _openAddSheet(BuildContext context) {
-    showModalBottomSheet(
+  late Clinic clinic;
+
+  @override
+  void initState() {
+    super.initState();
+    clinic = widget.clinic;
+  }
+
+  Future<void> _openEditSheet(BuildContext context) async {
+    final cubit = context.read<ClinicCubit>();
+
+    cubit.fillFromClinic(clinic);
+
+    await showModalBottomSheet(
       context: context,
-      backgroundColor: ColorManager.lightGray,
       isScrollControlled: true,
-      builder: (_) => const FractionallySizedBox(
-        heightFactor: 0.92,
+      backgroundColor: ColorManager.lightGray,
+      builder: (_) => BlocProvider.value(
+        value: cubit,
         child: ClinicBottomSheet(
           title: "Edit Clinic",
-          content: " Update your clinic details for tracking.",
+          content: "Update your clinic details.",
           isEdit: true,
+          clinicID: clinic.id,
         ),
       ),
     );
@@ -41,7 +56,7 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final availableDays = widget.clinic.defaultSchedule?.days ?? [];
+    final availableDays = clinic.defaultSchedule?.days ?? [];
 
     final activeDays = availableDays
         .where((day) => day.isActive == true)
@@ -50,49 +65,37 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
     return Container(
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
-
         borderRadius: BorderRadius.circular(25.r),
-
         boxShadow: [
           BoxShadow(
             color: ColorManager.gray.withAlpha(100),
-
             blurRadius: 10,
-
             offset: const Offset(0, 5),
           ),
         ],
       ),
-
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p18,
           vertical: AppPadding.p20,
         ),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
             Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
                       Text(
-                        widget.clinic.name ?? "Clinic Name",
-
+                        clinic.name ?? "Clinic Name",
                         style: getBoldStyle(
                           color: ColorManager.primary,
-
                           fontSize: 18.sp,
                         ),
                       ),
-
                       5.verticalSpace,
-
                       Row(
                         children: [
                           const Icon(
@@ -100,16 +103,12 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
                             color: ColorManager.gray,
                             size: 16,
                           ),
-
                           Expanded(
                             child: Text(
-                              widget.clinic.address ?? "Address",
-
+                              clinic.address ?? "Address",
                               overflow: TextOverflow.ellipsis,
-
                               style: getMediumStyle(
                                 color: ColorManager.gray,
-
                                 fontSize: 14.sp,
                               ),
                             ),
@@ -119,25 +118,18 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
                     ],
                   ),
                 ),
-
                 10.horizontalSpace,
-
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppPadding.p12,
-
                     vertical: AppPadding.p6,
                   ),
-
                   decoration: BoxDecoration(
                     color: ColorManager.lawAnalysis,
-
                     borderRadius: BorderRadius.circular(15.r),
                   ),
-
                   child: Text(
-                    widget.clinic.status ?? "Pending",
-
+                    clinic.status ?? "Pending",
                     style: getMediumStyle(
                       color: ColorManager.black,
                       fontSize: 12,
@@ -151,25 +143,17 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
 
             Align(
               alignment: Alignment.centerRight,
-
               child: SizedBox(
                 height: 30.h,
-
                 child: ListView.separated(
                   shrinkWrap: true,
-
                   scrollDirection: Axis.horizontal,
-
                   itemCount: activeDays.length,
-
                   separatorBuilder: (_, _) => const SizedBox(width: 7),
-
                   itemBuilder: (_, index) {
                     final scheduleDay = activeDays[index];
-
                     return ClinicDaysAvailable(
                       day: scheduleDay.day?.substring(0, 3) ?? "",
-
                       isAvailable: true,
                     );
                   },
@@ -178,9 +162,7 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
             ),
 
             10.verticalSpace,
-
-            ClinicStatus(days: widget.clinic.defaultSchedule?.days ?? []),
-
+            ClinicStatus(days: clinic.defaultSchedule?.days ?? []),
             15.verticalSpace,
 
             Row(
@@ -188,15 +170,11 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
               children: [
                 ClinicInfoCard(
                   title: "Consultation",
-
-                  value: "${widget.clinic.price ?? 0} EGP",
+                  value: "${clinic.price ?? 0} EGP",
                 ),
-
                 ClinicInfoCard(
                   title: "Slot Duration",
-
-                  value:
-                      "${widget.clinic.defaultSchedule?.slotDuration ?? 0} Min",
+                  value: "${clinic.defaultSchedule?.slotDuration ?? 0} Min",
                 ),
               ],
             ),
@@ -205,20 +183,16 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-
               children: [
                 ClinicInfoCard(
                   title: "Max Cases",
-
                   value:
-                      "${widget.clinic.defaultSchedule?.dailyCapacity ?? "—"} Patients",
+                      "${clinic.defaultSchedule?.dailyCapacity ?? "—"} Patients",
                 ),
-
                 ClinicInfoCard(
                   title: "Per Slot",
-
                   value:
-                      "${widget.clinic.defaultSchedule?.patientsPerSlot ?? "—"} Patient",
+                      "${clinic.defaultSchedule?.patientsPerSlot ?? "—"} Patient",
                 ),
               ],
             ),
@@ -227,9 +201,7 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
 
             ClinicInfoCard(
               title: "License",
-
-              value: widget.clinic.operatingLicense ?? "—",
-
+              value: clinic.operatingLicense ?? "—",
               isInfinity: true,
             ),
 
@@ -237,7 +209,6 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
 
             Text(
               "Schedule",
-
               style: getBoldStyle(color: ColorManager.gray, fontSize: 18),
             ),
 
@@ -246,18 +217,14 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
             if (activeDays.isNotEmpty)
               SizedBox(
                 height: 155.h,
-
                 child: ListView.separated(
                   itemCount: activeDays.length,
-
                   separatorBuilder: (_, _) => const SizedBox(height: 7),
-
                   itemBuilder: (_, index) {
                     final schedule = activeDays[index];
 
                     return ScheduleCard(
                       day: schedule.day ?? "—",
-
                       time:
                           "${_formatTime(schedule.open as int?)} - ${_formatTime(schedule.close as int?)}",
                     );
@@ -266,15 +233,13 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
               ),
 
             20.verticalSpace,
-
             const AppointmentStatusCart(),
-
             30.verticalSpace,
 
             CustomOutlineButton(
               isAdd: false,
               text: "Edit",
-              onPressed: () => _openAddSheet(context),
+              onPressed: () => _openEditSheet(context),
             ),
           ],
         ),
@@ -283,18 +248,12 @@ class _ClinicCardDetailsState extends State<ClinicCardDetails> {
   }
 
   String _formatTime(int? minutes) {
-    if (minutes == null) {
-      return "--";
-    }
+    if (minutes == null) return "--";
 
     final hour = minutes ~/ 60;
-
     final minute = minutes % 60;
-
     final period = hour >= 12 ? "PM" : "AM";
-
     final formattedHour = hour > 12 ? hour - 12 : hour;
-
     final formattedMinute = minute.toString().padLeft(2, '0');
 
     return "$formattedHour:$formattedMinute $period";

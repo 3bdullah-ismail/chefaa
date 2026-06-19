@@ -23,9 +23,28 @@ class ClinicRepoImp implements ClinicRepo {
     required String? operatingLicense,
     required Map<String, dynamic>? location,
     required Map<String, dynamic>? schedule,
-  }) {
-    // TODO: implement addClinics
-    throw UnimplementedError();
+  }) async{
+    try {
+      final response = await clinicDataSource.addClinics(
+        name: name,
+        address: address,
+        city: city,
+        price: price,
+        operatingLicense: operatingLicense,
+        location: location,
+        schedule: schedule,
+      );
+      if (response.statusCode == 200) {
+        return ClinicResponse.fromJson(response.data);
+      } else {
+        throw Exception("Failed to add clinic");
+      }
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e).message;
+    } catch (e) {
+      throw ServerFailure.unexpectedError;
+    }
+
   }
 
   //Delete clinic repo

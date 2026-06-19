@@ -18,19 +18,27 @@ import '../widgets/custom_outline_button.dart';
 class ClinicsPage extends StatelessWidget {
   const ClinicsPage({super.key});
 
-  void _openAddSheet(BuildContext context) {
-    showModalBottomSheet(
+  void _openAddSheet(BuildContext context) async {
+    final cubit = context.read<ClinicCubit>();
+    cubit.resetForm();
+
+    await showModalBottomSheet<String>(
       context: context,
-      backgroundColor: ColorManager.lightGray,
       isScrollControlled: true,
-      builder: (_) => const FractionallySizedBox(
-        heightFactor: 0.92,
-        child: ClinicBottomSheet(
-          title: "Add Clinic",
-          content: "Enter your clinic details for tracking.",
+      backgroundColor: ColorManager.lightGray,
+      builder: (_) => BlocProvider.value(
+        value: cubit,
+        child: const FractionallySizedBox(
+          heightFactor: 0.92,
+          child: ClinicBottomSheet(
+            title: "Add Clinic",
+            content: "Enter your clinic details for tracking.",
+          ),
         ),
       ),
     );
+      cubit.getClinics(doctorID: cubit.doctorID ?? "");
+
   }
 
   @override
@@ -39,54 +47,73 @@ class ClinicsPage extends StatelessWidget {
     final doctorID = userState is UserLoaded ? userState.user.id : "";
 
     return BlocProvider(
-      create: (_) => getIt<ClinicCubit>()..getClinics(doctorID: doctorID),
-      child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(100),
-          child: InsideAppBar(title: "My Clinics"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppPadding.p28,
-            vertical: AppPadding.p20,
-          ),
-          child: BlocBuilder<ClinicCubit, ClinicState>(
-            builder: (context, state) {
-              final bool isLoadedWithClinics =
-                  state is ClinicsSuccessState && state.clinics.isNotEmpty;
+      create: (_) {
+        final cubit = getIt<ClinicCubit>();
+        cubit.doctorID = doctorID;
+        cubit.getClinics(doctorID: doctorID);
+        return cubit;
+      },
+      child: Builder(
+        builder: (context) {
+          final cubit = context.read<ClinicCubit>();
 
-              return Column(
-                children: [
-                  if (isLoadedWithClinics)
-                    CustomOutlineButton(
-                      text: "Add Clinic",
-                      onPressed: () => _openAddSheet(context),
-                    ),
+          return Scaffold(
+            appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(100),
+              child: InsideAppBar(title: "My Clinics"),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p28,
+                vertical: AppPadding.p20,
+              ),
+              child: BlocBuilder<ClinicCubit, ClinicState>(
+                builder: (context, state) {
+                  return Column(
+                    children: [
+                      if (state is ClinicsSuccessState &&
+                          state.clinics.isNotEmpty)
+                        CustomOutlineButton(
+                          text: "Add Clinic",
+                          onPressed: () => _openAddSheet(context),
+                        ),
 
-                  if (isLoadedWithClinics) 20.verticalSpace,
+                      if (state is ClinicsSuccessState &&
+                          state.clinics.isNotEmpty)
+                        20.verticalSpace,
 
-                  Expanded(child: _buildContent(context, state)),
-                ],
-              );
-            },
-          ),
-        ),
+                      Expanded(
+                        child: _buildContent(context, state, cubit),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, ClinicState state) {
-    if (state is ClinicLoadingState) {
+  Widget _buildContent(
+      BuildContext context,
+      ClinicState state,
+      ClinicCubit cubit,
+      ) {
+    if (state is ClinicsLoadingState) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (state is ClinicErrorState) {
+    if (state is ClinicsErrorState) {
       return Center(child: Text(state.message));
     }
 
     if (state is ClinicsSuccessState) {
       if (state.clinics.isEmpty) {
-        return const EmptyClinicsState();
+        return EmptyClinicsState(
+          onAdd: () => _openAddSheet(context),
+        );
       }
 
       return ListView.separated(
@@ -94,10 +121,11 @@ class ClinicsPage extends StatelessWidget {
         separatorBuilder: (_, _) => const SizedBox(height: 15),
         itemBuilder: (_, index) {
           final clinic = state.clinics[index];
+
           return ClinicCard(
             clinic: clinic,
-            onPressed: () {
-              Navigator.pushNamed(
+            onPressed: () async {
+               await Navigator.pushNamed(
                 context,
                 AppRoutesNames.clinicsDetailsPage,
                 arguments: clinic,
@@ -108,6 +136,6 @@ class ClinicsPage extends StatelessWidget {
       );
     }
 
-    return const Center(child: CircularProgressIndicator());
+    return const SizedBox.shrink();
   }
 }

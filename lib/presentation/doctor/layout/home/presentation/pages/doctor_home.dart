@@ -21,155 +21,162 @@ class DoctorHome extends StatefulWidget {
 }
 
 class _DoctorHomeState extends State<DoctorHome> {
-  bool _isLoaded = false;
-
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    final userState = context.read<UsersCubit>().state;
+    if (userState is UserLoaded) {
+      context.read<ClinicCubit>().getClinics(doctorID: userState.user.id);
+    }
+  }
 
-    if (!_isLoaded) {
-      final userState = context.read<UsersCubit>().state;
-
-      if (userState is UserLoaded) {
-        context.read<ClinicCubit>().getClinics(
-          doctorID: userState.user.id,
-        );
-
-        _isLoaded = true;
-      }
+  void _refreshClinics() {
+    final userState = context.read<UsersCubit>().state;
+    if (userState is UserLoaded) {
+      context.read<ClinicCubit>().getClinics(doctorID: userState.user.id);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(170),
-        child: BlocBuilder<UsersCubit, UsersState>(
-          builder: (context, state) {
-            String doctorName = "Doctor";
-
-            if (state is UserLoaded) {
-              doctorName = state.user.name;
-            }
-
-            return CustomAppBarLayout(
-              title1: "Hello",
-              title2: doctorName,
-            );
-          },
-        ),
-      ),
-
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppPadding.p20,
-            vertical: AppPadding.p32,
+    return BlocListener<UsersCubit, UsersState>(
+      listenWhen: (previous, current) => current is UserLoaded,
+      listener: (context, state) {
+        context.read<ClinicCubit>().getClinics(
+          doctorID: (state as UserLoaded).user.id,
+        );
+      },
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(170),
+          child: BlocBuilder<UsersCubit, UsersState>(
+            builder: (context, state) {
+              String doctorName = "Doctor";
+              if (state is UserLoaded) doctorName = state.user.name;
+              return CustomAppBarLayout(title1: "Hello", title2: doctorName);
+            },
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              20.verticalSpace,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p20,
+              vertical: AppPadding.p32,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                20.verticalSpace,
 
-              BlocBuilder<ClinicCubit, ClinicState>(
-                builder: (context, state) {
-                  final isEmpty =
-                      state is ClinicsSuccessState && state.clinics.isEmpty;
+                BlocBuilder<ClinicCubit, ClinicState>(
+                  builder: (context, state) {
+                    final isEmpty =
+                        state is ClinicsSuccessState && state.clinics.isEmpty;
 
-                  return Row(
-                    children: [
-                      Text(
-                        "My Clinics",
-                        style: getBoldStyle(
-                          color: ColorManager.black,
-                          fontSize: 22,
+                    return Row(
+                      children: [
+                        Text(
+                          "My Clinics",
+                          style: getBoldStyle(
+                            color: ColorManager.black,
+                            fontSize: 22,
+                          ),
                         ),
-                      ),
-                      const Spacer(),
-
-                      if (state is ClinicsSuccessState && !isEmpty)
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            overlayColor: ColorManager.transparent,
-                          ),
-                          onPressed: () => Navigator.pushNamed(
-                            context,
-                            AppRoutesNames.clinicsPage,
-                          ),
-                          child: Row(
-                            children: [
-                              Text(
-                                "View All",
-                                style: getBoldStyle(
-                                  color: ColorManager.primary,
-                                  fontSize: 18,
+                        const Spacer(),
+                        if (state is ClinicsSuccessState && !isEmpty)
+                          TextButton(
+                            style: TextButton.styleFrom(
+                              overlayColor: ColorManager.transparent,
+                            ),
+                            onPressed: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.clinicsPage,
+                              );
+                              if (context.mounted) _refreshClinics();
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "View All",
+                                  style: getBoldStyle(
+                                    color: ColorManager.primary,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              7.horizontalSpace,
-                              const Icon(
-                                Icons.arrow_forward_ios_outlined,
-                                color: ColorManager.primary,
-                                size: 17,
-                              ),
-                            ],
+                                7.horizontalSpace,
+                                const Icon(
+                                  Icons.arrow_forward_ios_outlined,
+                                  color: ColorManager.primary,
+                                  size: 17,
+                                ),
+                              ],
+                            ),
                           ),
+                      ],
+                    );
+                  },
+                ),
+
+                10.verticalSpace,
+
+                BlocBuilder<ClinicCubit, ClinicState>(
+                  builder: (context, state) {
+                    if (state is ClinicsLoadingState) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: ColorManager.primary,
                         ),
-                    ],
-                  );
-                },
-              ),
-
-              10.verticalSpace,
-
-              BlocBuilder<ClinicCubit, ClinicState>(
-                builder: (context, state) {
-                  if (state is ClinicLoadingState) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: ColorManager.primary,
-                      ),
-                    );
-                  }
-
-                  if (state is ClinicErrorState) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  }
-
-                  if (state is ClinicsSuccessState) {
-                    final clinics = state.clinics;
-
-                    if (clinics.isEmpty) {
-                      return const EmptyClinicsState();
+                      );
                     }
 
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: clinics.length > 2 ? 2 : clinics.length,
-                      separatorBuilder: (_, _) =>
-                      const SizedBox(height: 15),
-                      itemBuilder: (_, index) {
-                        final clinic = clinics[index];
+                    if (state is ClinicsErrorState) {
+                      return Center(child: Text(state.message));
+                    }
 
-                        return ClinicCard(
-                          clinic: clinic,
-                          onPressed: () => Navigator.pushNamed(
-                            context,
-                            AppRoutesNames.clinicsDetailsPage,
-                            arguments: clinic,
-                          ),
+                    if (state is ClinicsSuccessState) {
+                      final clinics = state.clinics;
+
+                      if (clinics.isEmpty) {
+                        return EmptyClinicsState(
+                          onAdd: () async {
+                            await Navigator.pushNamed(
+                              context,
+                              AppRoutesNames.clinicsPage,
+                            );
+                            if (context.mounted) _refreshClinics();
+                          },
                         );
-                      },
-                    );
-                  }
+                      }
 
-                  return const SizedBox.shrink();
-                },
-              ),
-            ],
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: clinics.length > 2 ? 2 : clinics.length,
+                        separatorBuilder: (_, __) =>
+                        const SizedBox(height: 15),
+                        itemBuilder: (_, index) {
+                          final clinic = clinics[index];
+                          return ClinicCard(
+                            clinic: clinic,
+                            onPressed: () async {
+                              await Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.clinicsDetailsPage,
+                                arguments: clinic,
+                              );
+                              if (context.mounted) _refreshClinics();
+                            },
+                          );
+                        },
+                      );
+                    }
+
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

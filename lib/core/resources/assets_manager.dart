@@ -35,6 +35,7 @@ abstract class ImageAssets {
 class SvgAssets {
   static const String google = "$svgPath/Google.svg";
   static const String biApple = "$svgPath/bi_apple.svg";
+  static const String map = "$svgPath/map.svg";
   static const String home = "$svgPath/Home.svg";
   static const String homeActive = "$svgPath/Home_active.svg";
   static const String booking = "$svgPath/booking_inactive.svg";
@@ -57,6 +58,7 @@ class SvgAssets {
   static const String clinic = "$svgPath/clinic.svg";
   static const String clinicActive = "$svgPath/clinic_active.svg";
   static const String person = "$svgPath/person.svg";
+  static const String wallet = "$svgPath/wallet.svg";
 }
 
 abstract class IconsAssets {
