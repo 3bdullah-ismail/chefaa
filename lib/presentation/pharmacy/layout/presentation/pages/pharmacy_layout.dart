@@ -1,7 +1,9 @@
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/presentation/pharmacy/chatbot/presentation/pages/pharmacy_chatbot_page.dart';
 import 'package:chefaa/presentation/pharmacy/home/presentation/pages/pharmacy_home_page.dart';
 import 'package:chefaa/presentation/pharmacy/orders/presentation/pages/pharmacy_order_page.dart';
+import 'package:chefaa/presentation/pharmacy/profile/presentation/pages/pharmacy_profile_page.dart';
 import 'package:chefaa/presentation/pharmacy/stock/presentation/pages/pharmacy_stock_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,8 +24,8 @@ class _PharmacyLayoutState extends State<PharmacyLayout> {
     const PharmacyHomePage(),
     const PharmacyOrderPage(),
     const PharmacyStockPage(),
-    const Text("Home"),
-    const Text("Home"),
+    const PharmacyChatbotPage(),
+    const PharmacyProfilePage(),
   ];
 
   @override
