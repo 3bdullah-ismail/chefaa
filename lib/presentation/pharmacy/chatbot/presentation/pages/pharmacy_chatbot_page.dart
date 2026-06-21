@@ -7,39 +7,23 @@ class PharmacyChatbotPage extends StatefulWidget {
   const PharmacyChatbotPage({super.key});
 
   @override
-  State<PharmacyChatbotPage> createState() =>
-      _PharmacyChatbotPageState();
+  State<PharmacyChatbotPage> createState() => _PharmacyChatbotPageState();
 }
 
 class _PharmacyChatbotPageState extends State<PharmacyChatbotPage> {
-  final TextEditingController messageController =
-  TextEditingController();
+  final TextEditingController messageController = TextEditingController();
 
   final List<Map<String, dynamic>> messages = [
-    {
-      "message": "Hello 👋\nHow can I help you today?",
-      "isBot": true,
-    },
-    {
-      "message": "Do you have Panadol in stock?",
-      "isBot": false,
-    },
-    {
-      "message": "Yes, Panadol Extra is available.",
-      "isBot": true,
-    },
+    {"message": "Hello 👋\nHow can I help you today?", "isBot": true},
+    {"message": "Do you have Panadol in stock?", "isBot": false},
+    {"message": "Yes, Panadol Extra is available.", "isBot": true},
   ];
 
   void sendMessage() {
-    if (messageController.text
-        .trim()
-        .isEmpty) return;
+    if (messageController.text.trim().isEmpty) return;
 
     setState(() {
-      messages.add({
-        "message": messageController.text,
-        "isBot": false,
-      });
+      messages.add({"message": messageController.text, "isBot": false});
     });
 
     messageController.clear();
