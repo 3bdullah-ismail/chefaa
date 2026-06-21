@@ -10,7 +10,6 @@ class ClinicDataSourceImp implements ClinicDataSource {
   ClinicDataSourceImp(this.networkService);
 
   @override
-  //Add clinic data source
   Future<Response<dynamic>> addClinics({
     required String? name,
     required String? address,
@@ -34,25 +33,21 @@ class ClinicDataSourceImp implements ClinicDataSource {
     );
   }
 
-  //Delete clinic data source
   @override
   Future<Response<dynamic>> deleteClinics({required String clinicID}) {
     return networkService.dio.delete("/clinic/$clinicID");
   }
 
-  //Get clinic by ID data source
   @override
   Future<Response<dynamic>> getClinicByID({required String clinicID}) {
     return networkService.dio.get("/clinic/$clinicID");
   }
 
-  //Get clinics data source
   @override
   Future<Response<dynamic>> getClinics({required String doctorID}) {
     return networkService.dio.get("/doctor/$doctorID/clinics");
   }
 
-  //
   @override
   Future<Response<dynamic>> updateClinics({
     required String clinicID,

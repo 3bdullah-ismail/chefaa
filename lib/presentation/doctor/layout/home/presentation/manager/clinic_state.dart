@@ -18,7 +18,6 @@ final class ClinicAddedErrorState extends ClinicState {
   ClinicAddedErrorState({required this.message});
 }
 
-// clinics
 final class ClinicsLoadingState extends ClinicState {}
 final class ClinicsErrorState extends ClinicState {
   final String message;
@@ -31,7 +30,6 @@ final class ClinicsSuccessState extends ClinicState {
   ClinicsSuccessState({required this.clinics});
 }
 
-// edit
 final class ClinicEditLoadingState extends ClinicState {}
 final class ClinicEditSuccessState extends ClinicState {
   final Clinic clinic;
@@ -43,7 +41,6 @@ final class ClinicEditErrorState extends ClinicState {
 }
 
 
-// delete
 final class ClinicDeleteLoadingState extends ClinicState {}
 final class ClinicDeleteSuccessState extends ClinicState {
   final String clinicID;
@@ -53,7 +50,6 @@ final class ClinicDeleteErrorState extends ClinicState {
   final String message;
   ClinicDeleteErrorState({required this.message});
 }
-// get by id
 final class ClinicLoadingState extends ClinicState {}
 final class ClinicSuccessState extends ClinicState {
   final Clinic clinic;

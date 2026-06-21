@@ -34,16 +34,12 @@ class PatientRepoImp implements PatientRepo {
         password: password,
         role: role,
       );
-      // response.data might be a decoded Map or a raw JSON string depending on
-      // Dio configuration. Offload any JSON parsing to a background isolate to
-      // avoid blocking the UI thread during large responses.
       dynamic body = response.data;
       AuthResponse data;
       if (body is String) {
         final decoded = await Isolate.run(() => jsonDecode(body));
         data = AuthResponse.fromJson(decoded);
       } else {
-        // If body is already a Map, parsing is cheap
         data = AuthResponse.fromJson(body);
       }
       if (data.accessToken != null) {

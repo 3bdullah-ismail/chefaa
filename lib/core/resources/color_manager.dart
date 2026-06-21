@@ -18,7 +18,6 @@ abstract class ColorManager {
   static const Color cyan = Color(0xff05f3fb);
   static const Color transparent = Colors.transparent;
 
-  // Additional colors used across UI (added to centralize hardcoded values)
   static const Color lightBlue100 = Color(0xFFEFF6FF);
   static const Color blue600 = Color(0xFF2563EB);
   static const Color green100 = Color(0xFFECFDF5);

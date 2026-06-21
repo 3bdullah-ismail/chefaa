@@ -82,7 +82,6 @@ class HiveService {
     }
   }
 
-  /// Retrieve a value from Hive
   static Future<T?> get<T>(
     String boxName,
     String key, {
@@ -98,7 +97,6 @@ class HiveService {
     }
   }
 
-  /// Store a value in Hive
   static Future<void> put(String boxName, String key, dynamic value) async {
     try {
       final box = await _openBox(boxName);
@@ -109,7 +107,6 @@ class HiveService {
     }
   }
 
-  /// Delete a key from Hive
   static Future<void> delete(String boxName, String key) async {
     try {
       final box = await _openBox(boxName);
@@ -120,7 +117,6 @@ class HiveService {
     }
   }
 
-  /// Clear all data from a box
   static Future<void> clear(String boxName) async {
     try {
       final box = await _openBox(boxName);
@@ -131,7 +127,6 @@ class HiveService {
     }
   }
 
-  /// Check if a key exists in the box
   static Future<bool> containsKey(String boxName, String key) async {
     try {
       final box = await _openBox(boxName);
@@ -142,7 +137,6 @@ class HiveService {
     }
   }
 
-  /// Get all values from a box
   static Future<List<dynamic>> getAll(String boxName) async {
     try {
       final box = await _openBox(boxName);
@@ -153,7 +147,6 @@ class HiveService {
     }
   }
 
-  /// Get the number of items in a box
   static Future<int> getLength(String boxName) async {
     try {
       final box = await _openBox(boxName);
@@ -164,12 +157,10 @@ class HiveService {
     }
   }
 
-  /// Check if a box is open
   static bool isBoxOpen(String boxName) {
     return Hive.isBoxOpen(boxName);
   }
 
-  /// Close a specific box
   static Future<void> closeBox(String boxName) async {
     try {
       if (Hive.isBoxOpen(boxName)) {
@@ -181,7 +172,6 @@ class HiveService {
     }
   }
 
-  /// Close all boxes
   static Future<void> closeAllBoxes() async {
     try {
       await Hive.close();

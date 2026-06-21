@@ -13,10 +13,10 @@ class FacilityAlertBannerWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: const Color(0xFFFEF3C7), // Amber 100
+        color: const Color(0xFFFEF3C7),
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
-          color: const Color(0xFFFDE68A), // Amber 200
+          color: const Color(0xFFFDE68A),
           width: 1.w,
         ),
       ),
@@ -24,7 +24,7 @@ class FacilityAlertBannerWidget extends StatelessWidget {
         children: [
           Icon(
             Icons.warning_amber_rounded,
-            color: const Color(0xFFD97706), // Amber 600
+            color: const Color(0xFFD97706),
             size: 24.sp,
           ),
           SizedBox(width: AppSize.s12.w),
@@ -35,7 +35,7 @@ class FacilityAlertBannerWidget extends StatelessWidget {
                 Text(
                   "2 results ready to upload",
                   style: getBoldStyle(
-                    color: const Color(0xFF92400E), // Amber 800
+                    color: const Color(0xFF92400E),
                     fontSize: 12.sp,
                   ),
                 ),
@@ -43,7 +43,7 @@ class FacilityAlertBannerWidget extends StatelessWidget {
                 Text(
                   "These require urgent attention for patient Sara Rashed.",
                   style: getRegularStyle(
-                    color: const Color(0xFFB45309), // Amber 700
+                    color: const Color(0xFFB45309),
                     fontSize: FontSize.s10.sp,
                   ),
                 ),
@@ -55,7 +55,6 @@ class FacilityAlertBannerWidget extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFF59E0B),
-              // Amber 500
               foregroundColor: ColorManager.white,
               padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
               shape: RoundedRectangleBorder(

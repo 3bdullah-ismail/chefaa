@@ -13,7 +13,6 @@ class ClinicRepoImp implements ClinicRepo {
 
   ClinicRepoImp(this.clinicDataSource);
 
-  //Add clinic repo
   @override
   Future<ClinicResponse> addClinics({
     required String? name,
@@ -47,7 +46,6 @@ class ClinicRepoImp implements ClinicRepo {
 
   }
 
-  //Delete clinic repo
   @override
   Future<ClinicResponse> deleteClinics({required String clinicID}) async {
     try {
@@ -64,7 +62,6 @@ class ClinicRepoImp implements ClinicRepo {
     }
   }
 
-  //Get clinic by ID repo
   @override
   Future<ClinicResponse> getClinicByID({required String clinicID}) async {
     try {
@@ -81,7 +78,6 @@ class ClinicRepoImp implements ClinicRepo {
     }
   }
 
-  //Get clinics repo
   @override
   Future<ClinicsResponse> getClinics({required String doctorID}) async {
     try {
@@ -98,7 +94,6 @@ class ClinicRepoImp implements ClinicRepo {
     }
   }
 
-  //Update clinic repo
   @override
   Future<ClinicResponse> updateClinics({
     required String clinicID,

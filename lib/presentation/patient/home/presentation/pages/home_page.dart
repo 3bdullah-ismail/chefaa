@@ -1,3 +1,7 @@
+import 'package:chefaa/core/config/get_config.dart';
+import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
+import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_cubit.dart';
+import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_state.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/widgets/appointment_card.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_state.dart';
@@ -46,7 +50,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ميثود مركزية موحدة ومؤمنة للانتقال لصفحة تسجيل الدخول
   void _navigateToLogin(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
@@ -77,7 +80,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: BlocListener<MedicationCubit, MedicationState>(
-        // 👇 جعل المستمع يراقب حالتي التأكيد والخطأ معاً لمنع تداخل الشاشات
         listenWhen: (previous, current) =>
             current is MedicationConfirmSuccessState ||
             current is MedicationListErrorState,
@@ -88,7 +90,6 @@ class _HomePageState extends State<HomePage> {
             );
           }
 
-          // 👇 إذا حدث خطأ غير مصرح به أثناء تصفح الصفحة، يتم إخراجه تلقائياً وفوراً
           if (state is MedicationListErrorState) {
             final error = state.errorMessage.toLowerCase();
             if (error.contains('unauthorized') ||
@@ -226,9 +227,8 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
 
-                    // 💡 تم مسح الجزء المكرر والمغلق (Commented Code) لزيادة نظافة ومقروئية الملف
                     45.verticalSpace,
-                    const AiSuggestion(), // ملحوظة: مكررة مرتين في واجهتك، يمكنك مراجعتها لاحقاً إن لم تكن مقصودة
+                    const AiSuggestion(),
                     40.verticalSpace,
 
                     Row(
@@ -267,7 +267,68 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     20.verticalSpace,
-                    const DoctorCard(),
+                    BlocProvider(
+                      create: (_) => getIt<AppointmentCubit>()..getMyAppointments(),
+                      child: BlocBuilder<AppointmentCubit, AppointmentState>(
+                        builder: (context, state) {
+                          if (state is GetAppointmentsLoadingState) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: ColorManager.primary,
+                              ),
+                            );
+                          }
+
+                          final cubit = AppointmentCubit.get(context);
+                          final upcoming = cubit.appointments
+                              .cast<AppointmentModel?>()
+                              .firstWhere(
+                                (a) =>
+                                    (a?.status ?? '').toLowerCase() == 'upcoming',
+                                orElse: () => null,
+                              );
+
+                          if (upcoming == null) {
+                            return Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppPadding.p16,
+                                vertical: AppPadding.p24,
+                              ),
+                              decoration: BoxDecoration(
+                                color: ColorManager.lightGray,
+                                borderRadius: BorderRadius.circular(25.r),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "No upcoming appointments",
+                                  style: getMediumStyle(
+                                    color: ColorManager.gray,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+
+                          return DoctorCard(
+                            appointment: upcoming,
+                            onReschedule: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.appointmentPage,
+                              );
+                            },
+                            onCancel: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.appointmentPage,
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
                     50.verticalSpace,
                     Text(
                       "Quick Actions ",

@@ -34,7 +34,7 @@ class AppointmentCard extends StatelessWidget {
                 radius: 27.r,
                 child: Image.asset(ImageAssets.doctor),
               ),
-              12.verticalSpace,
+              12.horizontalSpace,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -24,7 +24,6 @@ class SearchCubit extends Cubit<SearchState> {
   SearchQuery draftQuery = const SearchQuery();
   bool _isSearching = false;
 
-  // Keep latest result so list widgets can render through transitions.
   List<ClinicModel> _lastClinics = const [];
 
   List<ClinicModel> get lastClinics => _lastClinics;

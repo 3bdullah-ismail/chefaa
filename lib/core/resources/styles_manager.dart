@@ -12,7 +12,6 @@ TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
   );
 }
 
-// regular style
 
 TextStyle getLightStyle({
   double fontSize = FontSize.s12,
@@ -21,7 +20,6 @@ TextStyle getLightStyle({
   return _getTextStyle(fontSize, FontWeightManager.light, color);
 }
 
-// regular style
 
 TextStyle getRegularStyle({
   double fontSize = FontSize.s12,
@@ -37,13 +35,11 @@ TextStyle getMediumStyle({
   return _getTextStyle(fontSize, FontWeightManager.medium, color);
 }
 
-// bold style
 
 TextStyle getBoldStyle({double fontSize = FontSize.s12, required Color color}) {
   return _getTextStyle(fontSize, FontWeightManager.bold, color);
 }
 
-// semibold style
 
 TextStyle getSemiBoldStyle({
   double fontSize = FontSize.s12,

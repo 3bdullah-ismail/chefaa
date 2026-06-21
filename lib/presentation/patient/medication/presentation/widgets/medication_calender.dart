@@ -71,7 +71,6 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
   Widget _buildCalendar() {
     final today = DateTime.now();
 
-    // Try to parse existing text; if invalid or in the past, fall back to today
     DateTime initialDate = today;
     if (widget.controller.text.isNotEmpty) {
       try {
@@ -84,8 +83,6 @@ class _CustomCalendarFieldState extends State<MedicationCalender> {
       selectionMode: DateRangePickerSelectionMode.single,
       initialSelectedDate: initialDate,
       initialDisplayDate: initialDate,
-      // FIX: was DateTime.now().Duration(days: 365) — compile error
-      // Now: starts from today, allows selection up to 10 years in the future
       minDate: DateTime(today.year, today.month, today.day),
       maxDate: DateTime(today.year + 10, today.month, today.day),
       selectionColor: ColorManager.primary,

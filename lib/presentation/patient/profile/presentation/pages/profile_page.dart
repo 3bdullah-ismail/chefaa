@@ -3,6 +3,9 @@ import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/services/storage_service.dart';
+import 'package:chefaa/presentation/patient/home/presentation/manager/users_cubit.dart';
+import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_cubit.dart';
+import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -139,17 +142,6 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                           context,
                           const AppointmentCard(),
                           // const Column(
-                          //   mainAxisSize: MainAxisSize.min,
-                          //   children: [
-                          //     Text(
-                          //       "No payments yet",
-                          //       style: TextStyle(
-                          //         color: ColorManager.gray,
-                          //         fontSize: 16,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
                         ),
                       ),
                     ),
@@ -213,26 +205,44 @@ class LogOutBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ItemContainer(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            "assets/svg_images/Logout.svg",
-            colorFilter: const ColorFilter.mode(
-              ColorManager.error,
-              BlendMode.srcIn,
+    return GestureDetector(
+      onTap: () async {
+        await StorageService.clearAll();
+        if (context.mounted) {
+          await context.read<UsersCubit>().logout();
+        }
+        if (context.mounted) {
+          context.read<MedicationCubit>().reset();
+        }
+        if (context.mounted) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            AppRoutesNames.login,
+            (route) => false,
+          );
+        }
+      },
+      child: ItemContainer(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/svg_images/Logout.svg",
+              colorFilter: const ColorFilter.mode(
+                ColorManager.error,
+                BlendMode.srcIn,
+              ),
             ),
-          ),
-          24.horizontalSpace,
-          Text(
-            "Logout",
-            style: getSemiBoldStyle(
-              color: ColorManager.error,
-              fontSize: FontSize.s20.sp,
+            24.horizontalSpace,
+            Text(
+              "Logout",
+              style: getSemiBoldStyle(
+                color: ColorManager.error,
+                fontSize: FontSize.s20.sp,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

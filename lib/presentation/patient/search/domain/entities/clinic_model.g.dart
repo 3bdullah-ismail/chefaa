@@ -1,10 +1,6 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'clinic_model.dart';
 
-// **************************************************************************
-// TypeAdapterGenerator
-// **************************************************************************
 
 class ClinicModelAdapter extends TypeAdapter<ClinicModel> {
   @override

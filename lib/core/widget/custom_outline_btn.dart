@@ -5,8 +5,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CustomOutlineBtn extends StatelessWidget {
   final String title;
   final Color color;
+  final VoidCallback? onPressed;
 
-  const CustomOutlineBtn({super.key, required this.title, required this.color});
+  const CustomOutlineBtn({
+    super.key,
+    required this.title,
+    required this.color,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +24,7 @@ class CustomOutlineBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(25.r),
         ),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Text(title, style: getMediumStyle(color: color, fontSize: 14)),
     );
   }

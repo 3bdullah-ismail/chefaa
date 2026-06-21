@@ -1,4 +1,3 @@
-// ignore_for_file: overridden_fields
 import '../../domain/entities/doctor_profile_entity.dart';
 
 class UpdateDoctorProfileResponse {

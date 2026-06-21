@@ -43,7 +43,6 @@ import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.da
 import 'app_routes_names.dart';
 
 class Routes {
-  // Wrap pages so the back button exits the app when there is no previous route.
   static Widget _wrapWithCanPop(Widget page) {
     return Builder(
       builder: (context) {

@@ -112,7 +112,6 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                           hintText: "Select Date of Birth",
                           controller: birthController,
                           onDateSelected: (date) {
-                            // fill the controller so the field shows the chosen date
                             final formatted =
                                 '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
                             context.read<CompleteCubit>().updateBirthDate(date);

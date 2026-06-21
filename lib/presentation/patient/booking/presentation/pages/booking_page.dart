@@ -20,7 +20,6 @@ class BookingPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-
     return BlocBuilder<BookingCubit, BookingState>(
       builder: (context, state) {
         final cubit = context.read<BookingCubit>();

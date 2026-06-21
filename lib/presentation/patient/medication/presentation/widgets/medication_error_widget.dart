@@ -7,7 +7,7 @@ import '../../../../../../core/resources/styles_manager.dart';
 class MedicationErrorWidget extends StatelessWidget {
   final String rawError;
   final VoidCallback onRetry;
-  final VoidCallback onSignInRedirect; // 👇 أضفنا هذا الـ Callback هنا
+  final VoidCallback onSignInRedirect;
 
   const MedicationErrorWidget({
     super.key,
@@ -42,7 +42,7 @@ class MedicationErrorWidget extends StatelessWidget {
 
   IconData _getErrorIcon(String error) {
     if (_isUnauthorized(error)) {
-      return Icons.lock_clock_rounded; // أيقونة قفل ترمز لانتهاء الصلاحية
+      return Icons.lock_clock_rounded;
     }
     final lowerError = error.toLowerCase();
     if (lowerError.contains('connection') || lowerError.contains('internet')) {
@@ -77,7 +77,6 @@ class MedicationErrorWidget extends StatelessWidget {
             ),
             16.verticalSpace,
 
-            // 👇 هنا نتحكم في شكل الزر بناءً على نوع الخطأ
             ElevatedButton.icon(
               onPressed: isAuthError ? onSignInRedirect : onRetry,
               icon: Icon(

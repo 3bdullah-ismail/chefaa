@@ -98,7 +98,6 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
 
     final oldList = existingItems is List ? existingItems.whereType<ClinicModel>().toList(growable: false) : null;
     
-    // If the new list matches the existing cached list, skip Hive write completely.
     if (_areDoctorsEquivalent(oldList, doctors)) {
       return;
     }

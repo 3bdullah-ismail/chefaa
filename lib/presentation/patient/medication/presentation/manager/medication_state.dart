@@ -7,7 +7,6 @@ sealed class MedicationState {}
 
 final class MedicationInitialState extends MedicationState {}
 
-// States for adding medication
 final class MedicationAdditionLoadingState extends MedicationState {}
 
 final class MedicationAdditionSuccessState extends MedicationState {
@@ -22,7 +21,6 @@ final class MedicationAdditionErrorState extends MedicationState {
   MedicationAdditionErrorState({required this.errorMessage});
 }
 
-// States for deleting medication
 final class MedicationDeleteLoadingState extends MedicationState {}
 
 final class MedicationDeleteSuccessState extends MedicationState {
@@ -37,7 +35,6 @@ final class MedicationDeleteErrorState extends MedicationState {
   MedicationDeleteErrorState({required this.errorMessage});
 }
 
-// States for confirming medication
 final class MedicationConfirmLoadingState extends MedicationState {}
 
 final class MedicationConfirmSuccessState extends MedicationState {
@@ -52,7 +49,6 @@ final class MedicationConfirmErrorState extends MedicationState {
   MedicationConfirmErrorState({required this.errorMessage});
 }
 
-// States for updating medication
 final class MedicationUpdateLoadingState extends MedicationState {}
 
 final class MedicationUpdateSuccessState extends MedicationState {
@@ -67,7 +63,6 @@ final class MedicationUpdateErrorState extends MedicationState {
   MedicationUpdateErrorState({required this.errorMessage});
 }
 
-// State for fetching medication list
 final class MedicationListLoadingState extends MedicationState {}
 
 final class MedicationListSuccessState extends MedicationState {

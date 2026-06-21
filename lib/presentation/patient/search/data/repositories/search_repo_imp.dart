@@ -29,7 +29,6 @@ class SearchRepoImp implements SearchRepo {
       location: location,
     );
 
-    // Return instantly from fresh cache to avoid unnecessary loading latency.
     if (cached != null && isFresh) {
       return cached;
     }

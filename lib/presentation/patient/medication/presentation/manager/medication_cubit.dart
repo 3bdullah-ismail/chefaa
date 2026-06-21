@@ -52,7 +52,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-  // Add Medication
   Future<void> addMedication() async {
     emit(MedicationAdditionLoadingState());
 
@@ -80,7 +79,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-  // Get Medication List
   Future<void> getMedicationList({bool forceRefresh = false}) async {
     if (_isMedicationListLoading) return;
     if (_hasLoadedMedicationList && !forceRefresh) return;
@@ -100,7 +98,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-  // Update Medication
 
   Future<void> updateMedication({required String medicationId}) async {
     emit(MedicationUpdateLoadingState());
@@ -130,7 +127,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-  // Delete Medication
 
   Future<void> deleteMedication(String medicationId) async {
     emit(MedicationDeleteLoadingState());
@@ -148,7 +144,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-  // Confirm Medication
 
   Future<void> confirmMedication(String medicationId) async {
     emit(MedicationConfirmLoadingState());
@@ -198,6 +193,13 @@ class MedicationCubit extends Cubit<MedicationState> {
 
     isActive = false;
     timesPerDay = 1;
+  }
+
+  void reset() {
+    _hasLoadedMedicationList = false;
+    _isMedicationListLoading = false;
+    clearControllers();
+    emit(MedicationInitialState());
   }
 
   @override

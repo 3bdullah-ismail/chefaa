@@ -1,4 +1,3 @@
-// ignore_for_file: overridden_fields
 import 'package:chefaa/presentation/doctor/profile/domain/entities/doctor_profile_entity.dart';
 
 import 'clinics.dart';

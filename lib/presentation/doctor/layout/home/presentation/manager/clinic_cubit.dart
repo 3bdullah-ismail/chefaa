@@ -111,7 +111,6 @@ class ClinicCubit extends Cubit<ClinicState> {
     }
   }
 
-  //Add clinic
   Future<void> addClinic() async {
     emit(ClinicAddedLoadingState());
 
@@ -133,7 +132,6 @@ class ClinicCubit extends Cubit<ClinicState> {
   }
 
 
-  // Get clinic by ID
   Future<void> getClinicByID({required String clinicID}) async {
     emit(ClinicLoadingState());
     try {
@@ -149,7 +147,6 @@ class ClinicCubit extends Cubit<ClinicState> {
       emit(ClinicErrorState(message: e.toString()));
     }
   }
-  // Update clinic
   Future<void> updateClinic({required String clinicID}) async {
     emit(ClinicEditLoadingState());
 
@@ -177,7 +174,6 @@ class ClinicCubit extends Cubit<ClinicState> {
     }
   }
 
-  // Delete clinic
   Future<void> deleteClinic({required String clinicID}) async {
     emit(ClinicDeleteLoadingState());
 
@@ -189,7 +185,6 @@ class ClinicCubit extends Cubit<ClinicState> {
     }
   }
 
-  // Get clinics for a doctor
   Future<void> getClinics({required String doctorID}) async {
     emit(ClinicsLoadingState());
 
@@ -204,7 +199,6 @@ class ClinicCubit extends Cubit<ClinicState> {
     }
   }
 
-  //Fill
 
   void fillFromClinic(Clinic clinic) {
     currentClinic = clinic;

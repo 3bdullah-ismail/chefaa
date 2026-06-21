@@ -1,13 +1,6 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
 
-// **************************************************************************
-// InjectableConfigGenerator
-// **************************************************************************
 
-// ignore_for_file: type=lint
-// coverage:ignore-file
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:chefaa/core/services/network_service.dart' as _i492;
 import 'package:chefaa/presentation/auth/data/data_sources/data_source.dart'
     as _i339;
@@ -76,6 +69,16 @@ import 'package:chefaa/presentation/patient/ai_lab/data/repositories/ai_report_r
     as _i88;
 import 'package:chefaa/presentation/patient/ai_lab/presentation/manager/ai_report_cubit.dart'
     as _i366;
+import 'package:chefaa/presentation/patient/appointment/data/data_sources/appointment_remote_data_source.dart'
+    as _i532;
+import 'package:chefaa/presentation/patient/appointment/data/data_sources/appointment_remote_data_source_impl.dart'
+    as _i538;
+import 'package:chefaa/presentation/patient/appointment/data/repositories/appointment_repo.dart'
+    as _i178;
+import 'package:chefaa/presentation/patient/appointment/data/repositories/appointment_repo_impl.dart'
+    as _i1047;
+import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_cubit.dart'
+    as _i522;
 import 'package:chefaa/presentation/patient/auth/data/data_sources/patient_data_source.dart'
     as _i597;
 import 'package:chefaa/presentation/patient/auth/data/data_sources/patient_data_source_imp.dart'
@@ -176,7 +179,6 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 extension GetItInjectableX on _i174.GetIt {
-// initializes the registration of main-scope dependencies inside of GetIt
   _i174.GetIt init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
@@ -210,6 +212,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i708.PatientDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i169.SearchRemoteDataSource>(
         () => _i623.SearchDataSourceImp(gh<_i492.NetworkService>()));
+    gh.factory<_i532.AppointmentRemoteDataSource>(() =>
+        _i538.AppointmentRemoteDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i145.MedicationRepo>(
         () => _i602.MedicationRepoImp(gh<_i775.MedicationDataSource>()));
     gh.factory<_i17.AIReportRepo>(
@@ -224,6 +228,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i875.DoctorAuthDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i339.AuthDataSource>(
         () => _i81.AuthDataSourceImp(gh<_i492.NetworkService>()));
+    gh.factory<_i178.AppointmentRepo>(() =>
+        _i1047.AppointmentRepoImpl(gh<_i532.AppointmentRemoteDataSource>()));
     gh.factory<_i67.HomeDataSource>(
         () => _i325.HomeDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i60.FacilityAuthDataSource>(
@@ -268,6 +274,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i952.SearchCubit>(
         () => _i952.SearchCubit(gh<_i483.SearchRepo>()));
+    gh.factory<_i522.AppointmentCubit>(
+        () => _i522.AppointmentCubit(gh<_i178.AppointmentRepo>()));
     gh.factory<_i440.DoctorProfileRepo>(() => _i962.DoctorProfileRepoImpl(
           gh<_i598.DoctorProfileRemoteDataSource>(),
           gh<_i945.DoctorProfileLocalDataSource>(),

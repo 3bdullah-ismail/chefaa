@@ -60,9 +60,8 @@ class TimeLineStepsCard extends StatelessWidget {
                     : [],
               ),
               child: Icon(
-                finalIcon, // الأيقونة الذكية المستنتجة
+                finalIcon,
                 size: isCompleted ? 25 : 22,
-                // حجم أكبر قليلاً لأيقونة الصح لتكون واضحة ومريحة
                 color: isActive ? ColorManager.white : itemColor,
               ),
             ),
@@ -78,7 +77,6 @@ class TimeLineStepsCard extends StatelessWidget {
         ),
         const SizedBox(width: 14),
 
-        // تفاصيل الخطوة الإرشادية والنصوص
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +133,6 @@ class TimeLineStepsCard extends StatelessWidget {
         ),
         const SizedBox(width: 8),
 
-        // التوقيت الزمني في أقصى اليمين
         Padding(
           padding: const EdgeInsets.only(top: 6.0),
           child: Text(

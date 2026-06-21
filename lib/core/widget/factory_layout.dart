@@ -5,9 +5,9 @@ import '../../presentation/patient/layout/patient_layout.dart';
 
 class LayoutFactory {
   static Widget getLayout(String role) {
-    final lowerRole = role.toLowerCase(); // هنا نعمل toLowerCase على المتغير
+    final lowerRole = role.toLowerCase();
     switch (lowerRole) {
-      case 'patient': // هنا نكتب constant string
+      case 'patient':
         return const PatientLayout();
       case 'doctor':
         return const DoctorLayout();

@@ -18,7 +18,6 @@ final class BookingErrorState extends BookingState {
   BookingErrorState({required this.error});
 }
 
-// slots
 class GetSlotsLoadingState extends BookingState {}
 
 class GetSlotsSuccessState extends BookingState {
@@ -33,7 +32,6 @@ class GetSlotsErrorState extends BookingState {
   GetSlotsErrorState(this.message);
 }
 
-/// Time selection
 class TimeSelectedState extends BookingState {
   final String selectedTime;
 

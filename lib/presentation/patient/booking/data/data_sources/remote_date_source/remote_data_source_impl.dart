@@ -59,9 +59,6 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
       });
     }
 
-    return await networkService.dio.post(
-      "/appointments/",
-      data: data,
-    );
+    return await networkService.dio.post("/appointments/", data: data);
   }
 }
