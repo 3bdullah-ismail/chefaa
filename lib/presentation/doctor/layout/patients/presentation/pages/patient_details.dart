@@ -43,8 +43,8 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
       body: Padding(
         padding: const EdgeInsets.only(
           top: AppPadding.p32,
-          left: AppPadding.p18,
-          right: AppPadding.p18,
+          left: AppPadding.p12,
+          right: AppPadding.p12,
         ),
         child: Column(
           children: [

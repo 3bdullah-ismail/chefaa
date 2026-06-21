@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../manager/search_cubit.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
+  final String text;
+  const CustomSearchBar({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class CustomSearchBar extends StatelessWidget {
       prefixIcon: IconsAssets.searchIcon,
       isSearch: true,
       controller: cubit.searchController,
-      text: 'Search Doctor or specialty',
+      text: text,
       textInputAction: TextInputAction.search,
       onChanged: (value) {
         cubit.setSearchText(value);

@@ -50,13 +50,21 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
     };
 
     if (paymentOption == "prePay" || paymentOption == "online") {
-      data.addAll({
-        "cardNumber": ?cardNumber,
-        "expiryMonth": ?expiryMonth,
-        "expiryYear": ?expiryYear,
-        "cvv": ?cvv,
-        "cardholderName": ?cardholderName,
-      });
+      if (cardNumber != null) {
+        data["cardNumber"] = cardNumber;
+      }
+      if (expiryMonth != null) {
+        data["expiryMonth"] = expiryMonth;
+      }
+      if (expiryYear != null) {
+        data["expiryYear"] = expiryYear;
+      }
+      if (cvv != null) {
+        data["cvv"] = cvv;
+      }
+      if (cardholderName != null) {
+        data["cardholderName"] = cardholderName;
+      }
     }
 
     return await networkService.dio.post(

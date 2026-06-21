@@ -43,7 +43,7 @@ class _ChooseDoctorState extends State<ChooseDoctor> {
               4.verticalSpace,
               const SubText(text: 'Select your healthcare provider.'),
               16.verticalSpace,
-              const CustomSearchBar(),
+              const CustomSearchBar(text: "Search Doctor or Specialty",),
               16.verticalSpace,
               const FilterBar(),
               16.verticalSpace,
