@@ -31,6 +31,16 @@ import 'package:chefaa/presentation/doctor/layout/home/data/repositories/clinic_
     as _i210;
 import 'package:chefaa/presentation/doctor/layout/home/presentation/manager/clinic_cubit.dart'
     as _i819;
+import 'package:chefaa/presentation/doctor/layout/patients/data/data_sources/patients_data_source_imp.dart'
+    as _i535;
+import 'package:chefaa/presentation/doctor/layout/patients/data/data_sources/patients_data_sourse.dart'
+    as _i126;
+import 'package:chefaa/presentation/doctor/layout/patients/data/repositories/patients_repo.dart'
+    as _i154;
+import 'package:chefaa/presentation/doctor/layout/patients/data/repositories/patients_repo_imp.dart'
+    as _i312;
+import 'package:chefaa/presentation/doctor/layout/patients/presentation/manager/patients_cubit.dart'
+    as _i57;
 import 'package:chefaa/presentation/doctor/profile/data/data_sources/local_data_source/doctor_profile_local_data_source.dart'
     as _i945;
 import 'package:chefaa/presentation/doctor/profile/data/data_sources/local_data_source/doctor_profile_local_data_source_imp.dart'
@@ -202,6 +212,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i819.ProfileRemoteDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i831.PharmacyDataSource>(() => _i440.PharmacyDataSourceImp(
         networkService: gh<_i492.NetworkService>()));
+    gh.factory<_i126.PatientsDataSource>(
+        () => _i535.PatientsDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i508.UsersCubit>(
         () => _i508.UsersCubit(gh<_i778.UserUseCase>()));
     gh.factory<_i775.MedicationDataSource>(
@@ -216,6 +228,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i538.AppointmentRemoteDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i145.MedicationRepo>(
         () => _i602.MedicationRepoImp(gh<_i775.MedicationDataSource>()));
+    gh.factory<_i154.PatientsRepo>(
+        () => _i312.PatientsRepoImp(gh<_i126.PatientsDataSource>()));
     gh.factory<_i17.AIReportRepo>(
         () => _i88.AiReportRepoImp(gh<_i564.AIReportDataSource>()));
     gh.factory<_i366.AiReportCubit>(
@@ -246,6 +260,8 @@ extension GetItInjectableX on _i174.GetIt {
         pharmacyDataSource: gh<_i831.PharmacyDataSource>()));
     gh.factory<_i598.BookingRepo>(
         () => _i501.BookingRepoImp(gh<_i352.BookingRemoteDataSource>()));
+    gh.factory<_i57.PatientsCubit>(
+        () => _i57.PatientsCubit(gh<_i154.PatientsRepo>()));
     gh.factory<_i40.CompleteCubit>(
         () => _i40.CompleteCubit(gh<_i695.CompletePatientRepo>()));
     gh.factory<_i761.MedicationCubit>(

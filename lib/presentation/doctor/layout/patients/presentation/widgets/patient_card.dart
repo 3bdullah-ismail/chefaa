@@ -8,6 +8,7 @@ import '../../../../../../core/resources/values_manager.dart';
 class PatientCard extends StatelessWidget {
   final String name;
   final String lastVisit;
+  final bool? isFollowingUp;
   final void Function() onTap;
 
   const PatientCard({
@@ -15,6 +16,7 @@ class PatientCard extends StatelessWidget {
     required this.name,
     required this.lastVisit,
     required this.onTap,
+    this.isFollowingUp = false,
   });
 
   @override
@@ -27,7 +29,7 @@ class PatientCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withAlpha(50),
@@ -46,7 +48,7 @@ class PatientCard extends StatelessWidget {
                   name,
                   style: getSemiBoldStyle(
                     color: ColorManager.black,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                   ),
                 ),
                 15.verticalSpace,
@@ -60,10 +62,10 @@ class PatientCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.r),
                   ),
                   child: Text(
-                    "Following Up",
+                    isFollowingUp! ? "Following Up" : "Not Following Up",
                     style: getSemiBoldStyle(
                       color: ColorManager.lawAnalysis,
-                      fontSize: 14,
+                      fontSize: 13.sp,
                     ),
                   ),
                 ),
@@ -75,9 +77,9 @@ class PatientCard extends StatelessWidget {
               children: [
                 Text(
                   lastVisit,
-                  style: getRegularStyle(
+                  style: getMediumStyle(
                     color: ColorManager.gray,
-                    fontSize: 16,
+                    fontSize: 15.sp,
                   ),
                 ),
                 15.verticalSpace,
@@ -94,7 +96,7 @@ class PatientCard extends StatelessWidget {
                     "Upcoming",
                     style: getMediumStyle(
                       color: ColorManager.primary,
-                      fontSize: 14,
+                      fontSize: 13.sp,
                     ),
                   ),
                 ),

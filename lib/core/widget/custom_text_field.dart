@@ -126,8 +126,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     padding: EdgeInsets.only(left: 20.w, right: 12.w),
                     child: SvgPicture.asset(
                       widget.prefixIcon!,
-                      width: 24.w,
-                      height: 24.h,
+                      width: 20.w,
+                      height: 20.h,
                       colorFilter: ColorFilter.mode(
                         currentColor,
                         BlendMode.srcIn,

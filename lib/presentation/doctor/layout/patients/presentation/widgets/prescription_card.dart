@@ -28,14 +28,15 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
       child: Padding(
         padding: const EdgeInsets.only(
           top: AppPadding.p20,
-          left: AppPadding.p10,
-          right: AppPadding.p10,
+          left: AppPadding.p4,
+          right: AppPadding.p4,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomBtn(
+
               text: "Add Prescription",
               onPressed: () {
                 showModalBottomSheet(
@@ -137,7 +138,7 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
                     "Medication Items",
                     style: getBoldStyle(
                       color: ColorManager.black,
-                      fontSize: 22.sp,
+                      fontSize: 20.sp,
                     ),
                   ),
                 ),
@@ -155,7 +156,7 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
                     "${widget.medications.length} items",
                     style: getMediumStyle(
                       color: ColorManager.primary,
-                      fontSize: 15.sp,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
@@ -214,28 +215,28 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
             30.verticalSpace,
             Text(
               "Lab Tests",
-              style: getBoldStyle(color: ColorManager.black, fontSize: 22.sp),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
             ),
             15.verticalSpace,
             const LabTests(),
             30.verticalSpace,
             Text(
               "Imaging / Radiology Tests",
-              style: getBoldStyle(color: ColorManager.black, fontSize: 22.sp),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
             ),
             15.verticalSpace,
             const LabTests(),
             30.verticalSpace,
             Text(
               "Doctor Notes",
-              style: getBoldStyle(color: ColorManager.black, fontSize: 22.sp),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
             ),
             15.verticalSpace,
             Container(
               padding: const EdgeInsets.all(AppPadding.p20),
               decoration: BoxDecoration(
                 color: ColorManager.lightGray,
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(25.r),
                 border: Border.all(color: ColorManager.primary.withAlpha(50)),
                 boxShadow: [
                   BoxShadow(
@@ -248,7 +249,7 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
                 "Take the medications as prescribed and follow up in 2 weeks for a check-up. Monitor your blood pressure daily and report any significant changes. Maintain a healthy diet and exercise regularly.",
                 style: getMediumStyle(
                   color: ColorManager.black,
-                  fontSize: 17.sp,
+                  fontSize: 15.sp,
                 ),
               ),
             ),

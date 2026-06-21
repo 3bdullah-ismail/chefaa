@@ -1,27 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/core/resources/styles_manager.dart';
+import '../widgets/chatbot_appbar.dart';
+import '../widgets/message_bubble.dart';
+import '../widgets/pharmacy_chat_input_bar.dart';
 
-class PharmacyChatbotPage extends StatelessWidget {
+class PharmacyChatbotPage extends StatefulWidget {
   const PharmacyChatbotPage({super.key});
+
+  @override
+  State<PharmacyChatbotPage> createState() =>
+      _PharmacyChatbotPageState();
+}
+
+class _PharmacyChatbotPageState extends State<PharmacyChatbotPage> {
+  final TextEditingController messageController =
+  TextEditingController();
+
+  final List<Map<String, dynamic>> messages = [
+    {
+      "message": "Hello 👋\nHow can I help you today?",
+      "isBot": true,
+    },
+    {
+      "message": "Do you have Panadol in stock?",
+      "isBot": false,
+    },
+    {
+      "message": "Yes, Panadol Extra is available.",
+      "isBot": true,
+    },
+  ];
+
+  void sendMessage() {
+    if (messageController.text
+        .trim()
+        .isEmpty) return;
+
+    setState(() {
+      messages.add({
+        "message": messageController.text,
+        "isBot": false,
+      });
+    });
+
+    messageController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.lightGray,
-      appBar: AppBar(
-        title: Text(
-          'Pharmacy Assistant',
-          style: getBoldStyle(color: ColorManager.black, fontSize: 20),
-        ),
-        backgroundColor: ColorManager.white,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Text(
-          'Welcome to Pharmacy Assistant Chatbot',
-          style: getMediumStyle(color: ColorManager.darkGray, fontSize: 16),
-        ),
+      backgroundColor: const Color(0xffF5F7FB),
+      appBar: const ChatAppBar(),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                return ChatMessageBubble(
+                  message: messages[index]["message"],
+                  isBot: messages[index]["isBot"],
+                );
+              },
+            ),
+          ),
+          PharmacyChatInputBar(
+            controller: messageController,
+            onSend: sendMessage,
+          ),
+        ],
       ),
     );
   }

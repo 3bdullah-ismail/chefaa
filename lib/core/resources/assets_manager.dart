@@ -5,6 +5,7 @@ const String svgPath = "assets/svg_images";
 
 abstract class ImageAssets {
   static const String onboarding1 = "$imagePath/onboarding_1.png";
+  static const String chatbot = "$imagePath/bot.png";
   static const String onboarding2 = "$imagePath/onboarding_2.png";
   static const String onboarding3 = "$imagePath/onboarding_3.png";
   static const String hospitalist = "$imagePath/Hospitalist.png";
@@ -64,6 +65,10 @@ class SvgAssets {
   static const String clinicActive = "$svgPath/clinic_active.svg";
   static const String person = "$svgPath/person.svg";
   static const String wallet = "$svgPath/wallet.svg";
+  static const String order = "$svgPath/order.svg";
+  static const String orderActive = "$svgPath/order_active.svg";
+  static const String stock = "$svgPath/stock.svg";
+  static const String stockActive = "$svgPath/stock_active.svg";
 }
 
 abstract class IconsAssets {

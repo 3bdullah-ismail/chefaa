@@ -1,5 +1,6 @@
 import 'package:chefaa/presentation/doctor/layout/home/presentation/manager/clinic_cubit.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/doctor_home.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/presentation/manager/patients_cubit.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/presentation/pages/patients_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +23,12 @@ class DoctorLayout extends StatefulWidget {
 class _DoctorLayoutState extends State<DoctorLayout> {
   int _selectedIndex = 0;
 
-  final List<Widget> _tabs = const [
-    DoctorHome(),
-    PatientsPage(),
-     DoctorProfile(),
+  final List<Widget> _tabs =  [
+    const DoctorHome(),
+    BlocProvider(
+        create: (_) =>getIt<PatientsCubit>(),
+        child: const PatientsPage()),
+     const DoctorProfile(),
   ];
 
   @override
