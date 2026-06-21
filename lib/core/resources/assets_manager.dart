@@ -64,6 +64,10 @@ class SvgAssets {
   static const String clinicActive = "$svgPath/clinic_active.svg";
   static const String person = "$svgPath/person.svg";
   static const String wallet = "$svgPath/wallet.svg";
+  static const String order = "$svgPath/order.svg";
+  static const String orderActive = "$svgPath/order_active.svg";
+  static const String stock = "$svgPath/stock.svg";
+  static const String stockActive = "$svgPath/stock_active.svg";
 }
 
 abstract class IconsAssets {

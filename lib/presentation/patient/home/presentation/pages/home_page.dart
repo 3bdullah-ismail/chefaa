@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ميثود مركزية موحدة ومؤمنة للانتقال لصفحة تسجيل الدخول
   void _navigateToLogin(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
@@ -77,7 +76,6 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: BlocListener<MedicationCubit, MedicationState>(
-        // 👇 جعل المستمع يراقب حالتي التأكيد والخطأ معاً لمنع تداخل الشاشات
         listenWhen: (previous, current) =>
             current is MedicationConfirmSuccessState ||
             current is MedicationListErrorState,
@@ -88,7 +86,6 @@ class _HomePageState extends State<HomePage> {
             );
           }
 
-          // 👇 إذا حدث خطأ غير مصرح به أثناء تصفح الصفحة، يتم إخراجه تلقائياً وفوراً
           if (state is MedicationListErrorState) {
             final error = state.errorMessage.toLowerCase();
             if (error.contains('unauthorized') ||
@@ -226,9 +223,8 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
 
-                    // 💡 تم مسح الجزء المكرر والمغلق (Commented Code) لزيادة نظافة ومقروئية الملف
                     45.verticalSpace,
-                    const AiSuggestion(), // ملحوظة: مكررة مرتين في واجهتك، يمكنك مراجعتها لاحقاً إن لم تكن مقصودة
+                    const AiSuggestion(),
                     40.verticalSpace,
 
                     Row(

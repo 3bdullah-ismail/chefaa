@@ -1,4 +1,5 @@
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,10 +26,10 @@ class _CustomSwitchTabState extends State<CustomSwitchTab> {
   Widget build(BuildContext context) {
     return Container(
       height: 55.h,
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(AppPadding.p4),
       decoration: BoxDecoration(
         color: ColorManager.gray.withAlpha(50),
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(30.r),
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -86,7 +87,7 @@ class _CustomSwitchTabState extends State<CustomSwitchTab> {
           child: Text(
             title,
             style: getBoldStyle(
-              fontSize: isSelected ? 17.sp : 15.sp,
+              fontSize: isSelected ? 15.sp : 12.sp,
               color: isSelected
                   ? ColorManager.primary
                   : ColorManager.gray,

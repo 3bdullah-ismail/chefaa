@@ -49,7 +49,7 @@ class MedicationItems extends StatelessWidget {
                   frequency,
                   style: getMediumStyle(
                     color: ColorManager.primary,
-                    fontSize: 15.sp,
+                    fontSize: 13.sp,
                   ),
                 ),
               ),
@@ -69,7 +69,7 @@ class MedicationItems extends StatelessWidget {
                   duration,
                   style: getMediumStyle(
                     color: ColorManager.primary,
-                    fontSize: 15.sp,
+                    fontSize: 13.sp,
                   ),
                 ),
               ),
