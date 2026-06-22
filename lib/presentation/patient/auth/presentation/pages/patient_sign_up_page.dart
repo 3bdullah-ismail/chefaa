@@ -77,16 +77,18 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                 ),
                 barrierDismissible: false,
               );
+              final navigator = Navigator.of(context);
               Future.delayed(const Duration(seconds: 2), () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => BlocProvider(
-                      create: (_) => getIt<CompleteCubit>(),
-                      child: const FirstCompletePage(),
+                if (mounted) {
+                  navigator.pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) => BlocProvider(
+                        create: (_) => getIt<CompleteCubit>(),
+                        child: const FirstCompletePage(),
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               });
             }
           },

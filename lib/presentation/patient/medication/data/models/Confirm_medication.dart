@@ -1,4 +1,4 @@
-import 'Medication.dart';
+﻿import 'medication.dart';
 
 class ConfirmMedication {
   ConfirmMedication({this.message, this.adherenceRate, this.medication});

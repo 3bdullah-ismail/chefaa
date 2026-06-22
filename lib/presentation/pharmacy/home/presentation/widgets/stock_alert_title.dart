@@ -23,9 +23,9 @@ class StockAlertTile extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: severityColor.withOpacity(0.08),
+        color: severityColor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: severityColor.withOpacity(0.3)),
+        border: Border.all(color: severityColor.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -34,13 +34,16 @@ class StockAlertTile extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: getSemiBoldStyle(color: ColorManager.black, fontSize: 14.sp),
+              style: getSemiBoldStyle(
+                color: ColorManager.black,
+                fontSize: 14.sp,
+              ),
             ),
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
             decoration: BoxDecoration(
-              color: severityColor.withOpacity(0.15),
+              color: severityColor.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Text(

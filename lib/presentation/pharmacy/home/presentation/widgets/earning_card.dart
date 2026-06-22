@@ -31,21 +31,35 @@ class EarningsCard extends StatelessWidget {
               children: [
                 Text(
                   'Cross Available Orders ',
-                  style: getBoldStyle(color: ColorManager.white, fontSize: 13.sp),
+                  style: getBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 13.sp,
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   _fmt(totalCompleted),
-                  style: getBoldStyle(color: ColorManager.white, fontSize: 18.sp),
+                  style: getBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 18.sp,
+                  ),
                 ),
                 7.verticalSpace,
-                Text("Completed Orders",
-                  style: getSemiBoldStyle(color: ColorManager.white, fontSize: 14.sp),
+                Text(
+                  "Completed Orders",
+                  style: getSemiBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 14.sp,
+                  ),
                 ),
               ],
             ),
           ),
-          Container(width: 3, height: 80.h, color: ColorManager.white.withOpacity(0.3)),
+          Container(
+            width: 3,
+            height: 80.h,
+            color: ColorManager.white.withValues(alpha: 0.3),
+          ),
           SizedBox(width: 16.w),
           Expanded(
             child: Column(
@@ -53,12 +67,18 @@ class EarningsCard extends StatelessWidget {
               children: [
                 Text(
                   'Net Earnings · after 1%',
-                  style: getBoldStyle(color: ColorManager.white, fontSize: 13.sp),
+                  style: getBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 13.sp,
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 Text(
                   _fmt(netEarnings),
-                  style: getBoldStyle(color: ColorManager.white, fontSize: 18.sp),
+                  style: getBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 18.sp,
+                  ),
                 ),
               ],
             ),

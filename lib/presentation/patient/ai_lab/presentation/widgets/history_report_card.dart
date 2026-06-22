@@ -1,10 +1,10 @@
-import 'package:chefaa/core/resources/styles_manager.dart';
+﻿import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/presentation/patient/ai_lab/presentation/widgets/risk_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
-import '../../data/models/Report_analysis.dart';
+import '../../data/models/report_analysis.dart';
 
 class ReportCard extends StatelessWidget {
   final ReportAnalysis report;

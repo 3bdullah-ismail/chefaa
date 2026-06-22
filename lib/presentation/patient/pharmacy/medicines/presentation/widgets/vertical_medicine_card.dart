@@ -7,10 +7,7 @@ import 'add_to_cart_button.dart';
 class VerticalMedicineCard extends StatelessWidget {
   final MedicineModel medicine;
 
-  const VerticalMedicineCard({
-    super.key,
-    required this.medicine,
-  });
+  const VerticalMedicineCard({super.key, required this.medicine});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,7 @@ class VerticalMedicineCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -104,9 +101,7 @@ class VerticalMedicineCard extends StatelessWidget {
 
             const SizedBox(width: 8),
 
-            AddToCartButton(
-              medicineName: medicine.name,
-            ),
+            AddToCartButton(medicineName: medicine.name),
           ],
         ),
       ),

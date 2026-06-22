@@ -25,7 +25,7 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
 
   final UsersCubit usersCubit;
 
-  static DoctorAuthCubit get(context) => BlocProvider.of(context);
+  static DoctorAuthCubit get(BuildContext context) => BlocProvider.of(context);
 
   DoctorAuthCubit({required this.doctorAuthRepo, required this.usersCubit})
     : super(DoctorAuthInitial());

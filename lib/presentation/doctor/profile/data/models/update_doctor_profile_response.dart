@@ -23,75 +23,41 @@ class UpdateDoctorProfileResponse {
 class UpdatedDoctorData extends DoctorProfileEntity {
   final String? id;
   final String? userId;
-  @override
-  final String? specialization;
-  @override
-  final String? contactNumber;
   final String? image;
-  @override
-  final String? about;
   final String? membershipPdf;
-  @override
-  final List<dynamic>? degrees;
   final List<String>? clinicsData;
-  @override
-  final String? paymentOption;
-  @override
-  final List<dynamic>? prePaymentNumbers;
-  @override
-  final double? rating;
-  @override
-  final num? clinicConsultationPrice;
   final List<dynamic>? reviewsData;
   final String? createdAt;
   final String? updatedAt;
   final int? v;
-  @override
-  final String? gender;
-
-  @override
-  final int? age;
-  @override
-  final int? yearsOfExperience;
 
   UpdatedDoctorData({
     this.id,
     this.userId,
-    this.specialization,
-    this.contactNumber,
+    super.specialization,
+    super.contactNumber,
     this.image,
-    this.about,
+    super.about,
     this.membershipPdf,
-    this.degrees,
+    super.degrees,
     this.clinicsData,
-    this.paymentOption,
-    this.prePaymentNumbers,
-    this.rating,
-    this.clinicConsultationPrice,
+    super.paymentOption,
+    super.prePaymentNumbers,
+    super.rating,
+    super.clinicConsultationPrice,
     this.reviewsData,
     this.createdAt,
     this.updatedAt,
     this.v,
-    this.gender,
-    this.age,
-    this.yearsOfExperience,
+    super.gender,
+    super.age,
+    super.yearsOfExperience,
   }) : super(
          name: null,
-         specialization: specialization,
          location: null,
          imageUrl: image,
          clinics: clinicsData?.length ?? 0,
-         rating: rating,
          reviews: reviewsData?.length ?? 0,
-         about: about,
-         age: age,
-         yearsOfExperience: yearsOfExperience,
-         paymentOption: paymentOption,
-         gender: gender,
-         contactNumber: contactNumber,
-         degrees: degrees,
-         prePaymentNumbers: prePaymentNumbers,
-         clinicConsultationPrice: clinicConsultationPrice,
        );
 
   factory UpdatedDoctorData.fromJson(Map<String, dynamic> json) {

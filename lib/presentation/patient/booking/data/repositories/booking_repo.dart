@@ -1,5 +1,5 @@
-import 'package:chefaa/presentation/patient/booking/data/models/Booking.dart';
-import 'package:chefaa/presentation/patient/booking/data/models/Slots.dart';
+﻿import 'package:chefaa/presentation/patient/booking/data/models/booking.dart';
+import 'package:chefaa/presentation/patient/booking/data/models/slots.dart';
 
 
 abstract class BookingRepo {

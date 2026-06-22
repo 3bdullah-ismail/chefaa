@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/patient/medication/data/models/Confirm_medication.dart';
+﻿import 'package:chefaa/presentation/patient/medication/data/models/confirm_medication.dart';
 
-import '../../data/models/Medication_list.dart';
-import '../../data/models/Medication_response.dart';
+import '../../data/models/medication_list.dart';
+import '../../data/models/medication_response.dart';
 
 sealed class MedicationState {}
 

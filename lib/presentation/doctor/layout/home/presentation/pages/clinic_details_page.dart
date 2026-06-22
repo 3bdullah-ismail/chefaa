@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/config/get_config.dart';
 import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/widget/inside_app_bar.dart';
-import '../../data/models/Clinic.dart';
-import '../../data/models/Clinics.dart';
+import '../../data/models/clinic.dart';
+import '../../data/models/clinics.dart';
 import '../manager/clinic_cubit.dart';
 import '../manager/clinic_state.dart';
 import '../widgets/clinic_card_details.dart';

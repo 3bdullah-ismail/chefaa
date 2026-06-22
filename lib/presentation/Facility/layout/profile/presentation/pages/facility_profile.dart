@@ -1,11 +1,11 @@
-import 'package:chefaa/core/resources/color_manager.dart';
+﻿import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/custom_app_bar.dart';
-import 'package:chefaa/presentation/Facility/layout/profile/presentation/widgets/ai_visibility_section.dart';
-import 'package:chefaa/presentation/Facility/layout/profile/presentation/widgets/facility_info_section.dart';
-import 'package:chefaa/presentation/Facility/layout/profile/presentation/widgets/facility_profile_header_section.dart';
-import 'package:chefaa/presentation/Facility/layout/profile/presentation/widgets/location_section.dart';
-import 'package:chefaa/presentation/Facility/layout/profile/presentation/widgets/profile_stats_section.dart';
+import 'package:chefaa/presentation/facility/layout/profile/presentation/widgets/ai_visibility_section.dart';
+import 'package:chefaa/presentation/facility/layout/profile/presentation/widgets/facility_info_section.dart';
+import 'package:chefaa/presentation/facility/layout/profile/presentation/widgets/facility_profile_header_section.dart';
+import 'package:chefaa/presentation/facility/layout/profile/presentation/widgets/location_section.dart';
+import 'package:chefaa/presentation/facility/layout/profile/presentation/widgets/profile_stats_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

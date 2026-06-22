@@ -1,11 +1,11 @@
-import 'package:chefaa/core/resources/styles_manager.dart';
+﻿import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
-import 'package:chefaa/presentation/patient/medication/data/models/Confirm_medication.dart';
-import 'package:chefaa/presentation/patient/medication/data/models/Medications.dart';
+import 'package:chefaa/presentation/patient/medication/data/models/confirm_medication.dart';
+import 'package:chefaa/presentation/patient/medication/data/models/medications.dart';
 import 'elevate_button.dart';
 
 class MedicineCard extends StatefulWidget {

@@ -31,7 +31,7 @@ class PatientCubit extends Cubit<PatientState> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  static PatientCubit get(context) => BlocProvider.of(context);
+  static PatientCubit get(BuildContext context) => BlocProvider.of(context);
 
   bool _isSigningUp = false;
 

@@ -214,11 +214,12 @@ class _PermissionsRequestDialogState extends State<PermissionsRequestDialog> {
                       onPressed: isLoading
                           ? null
                           : () async {
+                              final messenger = ScaffoldMessenger.of(context);
                               try {
                                 await PermissionsService.openAppSettings();
                               } catch (e) {
                                 if (mounted) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  messenger.showSnackBar(
                                     SnackBar(
                                       content: Text(
                                         'Error opening settings: $e',

@@ -1,5 +1,5 @@
-import '../models/Clinic_response.dart';
-import '../models/Clinics_response.dart';
+﻿import '../models/clinic_response.dart';
+import '../models/clinics_response.dart';
 
 abstract class ClinicRepo {
   Future<ClinicsResponse> getClinics({required String doctorID});

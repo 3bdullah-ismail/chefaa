@@ -1,5 +1,6 @@
 import 'package:chefaa/core/services/hive_service.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +14,7 @@ class AiReportCubit extends Cubit<AiReportState> {
 
   AiReportCubit(this.aiReportRepo) : super(InitialState());
 
-  static AiReportCubit get(context) => BlocProvider.of(context);
+  static AiReportCubit get(BuildContext context) => BlocProvider.of(context);
   final Box<dynamic> box = Hive.box(HiveBoxes.reportsBox);
 
   Future<void> reportAnalysis(PlatformFile? file) async {

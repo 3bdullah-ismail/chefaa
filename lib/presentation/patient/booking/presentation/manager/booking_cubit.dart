@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
+﻿import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import '../../../../../core/error_handling/failure.dart';
 import '../../../search/domain/entities/clinic_model.dart';
-import '../../data/models/Booking.dart';
-import '../../data/models/Slots.dart';
+import '../../data/models/booking.dart';
+import '../../data/models/slots.dart';
 import '../../data/repositories/booking_repo.dart';
 import '../pages/choose_visit_type.dart';
 import 'booking_state.dart';

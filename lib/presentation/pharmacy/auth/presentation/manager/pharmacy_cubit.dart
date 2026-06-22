@@ -22,7 +22,7 @@ class PharmacyCubit extends Cubit<PharmacyState> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  static PharmacyCubit get(context) => BlocProvider.of(context);
+  static PharmacyCubit get(BuildContext context) => BlocProvider.of(context);
 
   bool _isSigningUp = false;
 

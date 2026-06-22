@@ -66,7 +66,7 @@ class LiveStatusCard extends StatelessWidget {
               Container(
                 height: 6,
                 decoration: BoxDecoration(
-                  color: ColorManager.white.withOpacity(0.2),
+                  color: ColorManager.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),

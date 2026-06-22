@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
@@ -7,7 +7,7 @@ import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/core/widget/already_have_account.dart';
 import 'package:chefaa/core/manager/file_handler_cubit.dart';
-import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart';
 
 class TermsAndSubmitSection extends StatefulWidget {
   final GlobalKey<FormState> formKey;

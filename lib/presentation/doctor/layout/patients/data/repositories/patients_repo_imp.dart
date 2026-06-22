@@ -1,10 +1,10 @@
-import 'package:chefaa/presentation/doctor/layout/patients/data/data_sources/patients_data_sourse.dart';
+﻿import 'package:chefaa/presentation/doctor/layout/patients/data/data_sources/patients_data_sourse.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/data/repositories/patients_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/error_handling/failure.dart';
-import '../models/Data.dart';
+import '../models/data.dart';
 
 @Injectable(as: PatientsRepo)
 class PatientsRepoImp implements PatientsRepo{

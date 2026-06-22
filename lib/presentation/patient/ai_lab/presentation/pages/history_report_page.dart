@@ -1,8 +1,8 @@
-import 'package:chefaa/core/services/hive_service.dart';
+﻿import 'package:chefaa/core/services/hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../data/models/Report_analysis.dart';
+import '../../data/models/report_analysis.dart';
 import '../manager/ai_report_cubit.dart';
 import '../widgets/analysis_app_bar.dart';
 import '../widgets/history_report_card.dart';

@@ -1,4 +1,4 @@
-import 'Medication.dart';
+﻿import 'medication.dart';
 
 class MedicationResponse {
   MedicationResponse({this.message, this.medication});

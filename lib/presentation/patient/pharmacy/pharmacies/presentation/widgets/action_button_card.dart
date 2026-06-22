@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 
-
 class ActionButtonCard extends StatelessWidget {
   final String icon;
   final String label;
@@ -30,9 +29,7 @@ class ActionButtonCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: ColorManager.white,
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(
-            color: ColorManager.input.withOpacity(0.6),
-          ),
+          border: Border.all(color: ColorManager.input.withValues(alpha: 0.6)),
           boxShadow: [
             BoxShadow(
               color: ColorManager.black.withAlpha(80),
@@ -56,10 +53,7 @@ class ActionButtonCard extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               label,
-              style: getBoldStyle(
-                color: color,
-                fontSize: 16.sp,
-              ),
+              style: getBoldStyle(color: color, fontSize: 16.sp),
             ),
           ],
         ),

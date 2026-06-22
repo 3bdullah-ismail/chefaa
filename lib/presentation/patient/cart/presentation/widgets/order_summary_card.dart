@@ -20,7 +20,7 @@ class OrderSummaryCard extends StatelessWidget {
     required this.deliveryFee,
     required this.total,
     required this.onPressed,
-    required this.btnTitle ,
+    required this.btnTitle,
   });
 
   @override
@@ -109,9 +109,9 @@ class OrderSummaryCard extends StatelessWidget {
                 ),
               ),
 
-              child:  Text(
+              child: Text(
                 btnTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,

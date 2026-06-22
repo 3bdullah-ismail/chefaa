@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/medication/data/models/AdherenceHistory.dart';
+﻿import 'package:chefaa/presentation/patient/medication/data/models/adherence_history.dart';
 
 class Medication {
   Medication({

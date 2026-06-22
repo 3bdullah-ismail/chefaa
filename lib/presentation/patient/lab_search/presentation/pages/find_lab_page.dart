@@ -168,7 +168,7 @@ class _FindLabPageState extends State<FindLabPage> {
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: _filters.length,
-        separatorBuilder: (_, __) => 8.horizontalSpace,
+        separatorBuilder: (_, _) => 8.horizontalSpace,
         itemBuilder: (context, index) {
           return FilterChipItem(
             label: _filters[index],

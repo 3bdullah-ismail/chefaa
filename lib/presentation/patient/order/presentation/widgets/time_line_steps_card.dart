@@ -52,7 +52,7 @@ class TimeLineStepsCard extends StatelessWidget {
                 boxShadow: isActive
                     ? [
                         BoxShadow(
-                          color: ColorManager.primary.withOpacity(0.3),
+                          color: ColorManager.primary.withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 3),
                         ),
@@ -71,7 +71,7 @@ class TimeLineStepsCard extends StatelessWidget {
                 height: 50,
                 color: isCompleted
                     ? ColorManager.lightGreen
-                    : ColorManager.input.withOpacity(0.7),
+                    : ColorManager.input.withValues(alpha: 0.7),
               ),
           ],
         ),
@@ -104,7 +104,7 @@ class TimeLineStepsCard extends StatelessWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: ColorManager.primary.withOpacity(0.15),
+                        color: ColorManager.primary.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: const Text(

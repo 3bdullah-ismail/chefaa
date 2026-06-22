@@ -28,7 +28,7 @@ class OrderInfoCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: ColorManager.lightBlue.withOpacity(0.4),
+                  color: ColorManager.lightBlue.withValues(alpha: 0.4),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Icon(
@@ -41,7 +41,7 @@ class OrderInfoCard extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children:  [
+                  children: [
                     const Text(
                       "Order #CH-20491",
                       style: TextStyle(
@@ -68,9 +68,9 @@ class OrderInfoCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 12.0),
             child: Divider(color: ColorManager.input, thickness: 0.7),
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
+            children: [
               Text(
                 "Placed: Today 2:30 PM",
                 style: TextStyle(

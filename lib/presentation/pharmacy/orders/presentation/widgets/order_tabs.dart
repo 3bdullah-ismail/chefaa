@@ -42,7 +42,9 @@ class OrderTabs extends StatelessWidget {
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: const Color(0xFF4CAF50).withOpacity(0.2),
+                              color: const Color(
+                                0xFF4CAF50,
+                              ).withValues(alpha: 0.2),
                               blurRadius: 10,
                               offset: const Offset(0, 5),
                             ),
@@ -53,8 +55,10 @@ class OrderTabs extends StatelessWidget {
                     child: Text(
                       tabs[index],
                       style: getBoldStyle(
-                        color: isSelected ? ColorManager.white : ColorManager.gray,
-                        fontSize: 14.sp
+                        color: isSelected
+                            ? ColorManager.white
+                            : ColorManager.gray,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ),

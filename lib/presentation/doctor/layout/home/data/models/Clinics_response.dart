@@ -1,4 +1,4 @@
-import 'Clinics.dart';
+﻿import 'clinics.dart';
 
 class ClinicsResponse {
   ClinicsResponse({this.doctorId, this.totalClinics, this.clinics});

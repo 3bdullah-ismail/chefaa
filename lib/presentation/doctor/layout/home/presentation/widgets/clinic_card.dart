@@ -1,4 +1,4 @@
-import 'package:chefaa/core/resources/color_manager.dart';
+﻿import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/clinic_days_avaliable.dart';
@@ -6,7 +6,7 @@ import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/clin
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/Clinics.dart';
+import '../../data/models/clinics.dart';
 
 
 class ClinicCard extends StatelessWidget {

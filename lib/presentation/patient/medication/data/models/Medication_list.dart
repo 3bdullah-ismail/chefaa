@@ -1,5 +1,5 @@
-import 'Medications.dart';
-import 'Stats.dart';
+﻿import 'medications.dart';
+import 'stats.dart';
 
 class MedicationList {
   MedicationList({this.stats, this.medications});

@@ -1,4 +1,4 @@
-import '../../data/models/Data.dart';
+﻿import '../../data/models/data.dart';
 
 sealed class PatientsState {}
 

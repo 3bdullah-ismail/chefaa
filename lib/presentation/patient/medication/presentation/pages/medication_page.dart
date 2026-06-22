@@ -1,4 +1,4 @@
-import 'package:chefaa/core/resources/color_manager.dart';
+﻿import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/Medications.dart';
+import '../../data/models/medications.dart';
 import '../widgets/empty_medication_list_state.dart';
 import '../widgets/medication_bottom_sheet.dart';
 

@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinic_details_page.dart';
+﻿import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinic_details_page.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinics_page.dart';
 import 'package:chefaa/presentation/patient/checkout_order/presentation/pages/checkout_page.dart';
 import 'package:chefaa/presentation/patient/order/presentation/pages/track_order_page.dart';
@@ -7,9 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/config/get_config.dart';
-import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
-import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
-import '../../presentation/Facility/layout/dashboard/presentation/pages/facility_results_page.dart';
+import '../../presentation/facility/auth/presentation/pages/facility_signup.dart';
+import '../../presentation/facility/layout/presentation/pages/facility_layout.dart';
+import '../../presentation/facility/layout/dashboard/presentation/pages/facility_results_page.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';

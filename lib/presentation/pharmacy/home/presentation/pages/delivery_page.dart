@@ -30,7 +30,7 @@ class DeliveryTab extends StatelessWidget {
           total: staffTotal,
         ),
         SizedBox(height: 20.h),
-        DriverGroupCard(
+        const DriverGroupCard(
           label: 'Available Now',
           statusColor: ColorManager.lightGreen,
           drivers: [
@@ -51,10 +51,10 @@ class DeliveryTab extends StatelessWidget {
           ],
         ),
         30.verticalSpace,
-        DriverGroupCard(
+        const DriverGroupCard(
           label: 'Currently Busy',
           statusColor: ColorManager.error,
-          drivers: const [
+          drivers: [
             {
               "name": "Omar Shaban",
               "phone": "01018275619",
@@ -71,7 +71,6 @@ class DeliveryTab extends StatelessWidget {
             },
           ],
         ),
-
       ],
     );
   }

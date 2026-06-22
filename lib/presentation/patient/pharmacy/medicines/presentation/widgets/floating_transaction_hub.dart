@@ -29,7 +29,7 @@ class FloatingTransactionHub extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: const Color(0xff0F172A).withOpacity(0.06),
+            color: const Color(0xff0F172A).withValues(alpha: 0.06),
             blurRadius: 24,
             offset: const Offset(0, -6),
           ),
@@ -84,10 +84,7 @@ class FloatingTransactionHub extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.add_shopping_cart_rounded,
-                      size: 18,
-                    ),
+                    const Icon(Icons.add_shopping_cart_rounded, size: 18),
                     const SizedBox(width: 8),
                     Text(
                       "Add $quantity to Cart",

@@ -1,4 +1,4 @@
-import 'Clinic.dart';
+﻿import 'clinic.dart';
 
 class ClinicResponse {
   ClinicResponse({this.message, this.clinic});

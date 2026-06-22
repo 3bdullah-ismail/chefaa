@@ -13,9 +13,9 @@ class PharmacyHomePage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: ColorManager.lightGray.withOpacity(0.3),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
+        backgroundColor: ColorManager.lightGray.withValues(alpha: 0.3),
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(100),
           child: InsideAppBar(
             title: "Elmokhtabar Pharmacy",
             isLayout: true,
@@ -34,10 +34,7 @@ class PharmacyHomePage extends StatelessWidget {
                 indicatorWeight: 3,
                 indicatorSize: TabBarIndicatorSize.tab,
                 tabs: [
-                  Tab(
-                    icon: Icon(Icons.dashboard_outlined),
-                    text: "Brief",
-                  ),
+                  Tab(icon: Icon(Icons.dashboard_outlined), text: "Brief"),
                   Tab(
                     icon: Icon(Icons.local_shipping_outlined),
                     text: "Delivery",
@@ -46,7 +43,7 @@ class PharmacyHomePage extends StatelessWidget {
               ),
             ),
 
-            Expanded(
+            const Expanded(
               child: TabBarView(
                 children: [
                   BriefTab(
@@ -57,11 +54,7 @@ class PharmacyHomePage extends StatelessWidget {
                     staffTotal: 5,
                   ),
 
-                  DeliveryTab(
-                    staffAvailable: 3,
-                    staffBusy: 2,
-                    staffTotal: 5,
-                  ),
+                  DeliveryTab(staffAvailable: 3, staffBusy: 2, staffTotal: 5),
                 ],
               ),
             ),

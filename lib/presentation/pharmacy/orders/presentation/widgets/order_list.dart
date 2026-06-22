@@ -33,7 +33,7 @@ class OrderList extends StatelessWidget {
             border: Border.all(color: Colors.grey.shade200),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.04),
+                color: Colors.black.withValues(alpha: 0.04),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -47,7 +47,10 @@ class OrderList extends StatelessWidget {
                 children: [
                   Text(
                     "Order #${order["id"]}",
-                    style: getBoldStyle(color: ColorManager.error, fontSize: 14.sp)
+                    style: getBoldStyle(
+                      color: ColorManager.error,
+                      fontSize: 14.sp,
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
@@ -72,20 +75,26 @@ class OrderList extends StatelessWidget {
                 ],
               ),
 
-            10.verticalSpace,
+              10.verticalSpace,
 
               Row(
                 children: [
                   Expanded(
                     child: Text(
                       order["name"]!,
-                      style: getBoldStyle(color: ColorManager.black, fontSize: 14.sp)
+                      style: getBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 14.sp,
+                      ),
                     ),
                   ),
                   10.horizontalSpace,
                   Text(
-                      order["items"]!,
-                      style: getMediumStyle(color: ColorManager.gray, fontSize: 14.sp)
+                    order["items"]!,
+                    style: getMediumStyle(
+                      color: ColorManager.gray,
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ],
               ),

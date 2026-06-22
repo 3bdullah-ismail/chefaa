@@ -1,8 +1,8 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:chefaa/presentation/patient/ai_lab/data/datasources/ai_report_data_source.dart';
-import 'package:chefaa/presentation/patient/ai_lab/data/models/Report_analysis.dart';
+import 'package:chefaa/presentation/patient/ai_lab/data/models/report_analysis.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:injectable/injectable.dart';

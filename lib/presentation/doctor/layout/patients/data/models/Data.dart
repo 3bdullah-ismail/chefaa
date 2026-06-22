@@ -1,5 +1,5 @@
-import 'Patient.dart';
-import 'Clinic.dart';
+﻿import 'patient.dart';
+import 'clinic.dart';
 
 class Data {
   Data({

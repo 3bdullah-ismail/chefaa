@@ -1,4 +1,4 @@
-import 'Slots.dart';
+﻿import 'slots.dart';
 
 class ClinicTimes {
   ClinicTimes({
