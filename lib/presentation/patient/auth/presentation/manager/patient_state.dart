@@ -18,3 +18,4 @@ final class SignUpErrorState extends PatientState {
 }
 
 final class SignUpLoadingState extends PatientState {}
+

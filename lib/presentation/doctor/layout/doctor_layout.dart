@@ -28,6 +28,7 @@ class _DoctorLayoutState extends State<DoctorLayout> {
     BlocProvider(
         create: (_) =>getIt<PatientsCubit>(),
         child: const PatientsPage()),
+    const Center(child: Text('ChatBot')),
      const DoctorProfile(),
   ];
 
@@ -57,6 +58,11 @@ class _DoctorLayoutState extends State<DoctorLayout> {
               icon: SvgPicture.asset(SvgAssets.patient, width: 32.w, height: 32.h),
               activeIcon: SvgPicture.asset(SvgAssets.patientActive, width: 32.w, height: 32.h),
               label: 'Patients',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(SvgAssets.chat),
+              activeIcon: SvgPicture.asset(SvgAssets.chatActive),
+              label: 'ChatBot',
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(SvgAssets.profile),
