@@ -3,16 +3,26 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inspector_bottom_sheet_container.dart';
 import 'package:flutter/material.dart';
-import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/prescription_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/prescription_card.dart';
 
-class PrescriptionHistoryBottomSheet extends StatelessWidget {
+import '../../data/models/patients/Prescription.dart';
+
+class PrescriptionHistoryBottomSheet extends StatefulWidget {
   final List<Map<String, String>> medications;
+  final Prescription prescription;
 
   const PrescriptionHistoryBottomSheet({
     super.key,
     required this.medications,
+    required this.prescription,
   });
+
+  @override
+  State<PrescriptionHistoryBottomSheet> createState() => _PrescriptionHistoryBottomSheetState();
+}
+
+class _PrescriptionHistoryBottomSheetState extends State<PrescriptionHistoryBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +50,10 @@ class PrescriptionHistoryBottomSheet extends StatelessWidget {
 
               Expanded(
                 child: PrescriptionCard(
-                  medications: medications,
+                  medications: widget.medications,
+                  showAddButton: false,
+                  showEditButton: false,
+                  prescriptionOverride: widget.prescription,
                 ),
               ),
             ],

@@ -6,13 +6,13 @@ import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
 import '../manager/patients_cubit.dart';
 
-class MedicationCard extends StatelessWidget {
+class MedicationAdditionCard extends StatelessWidget {
   final MedicationItem medicine;
   final int index;
   final VoidCallback onDelete;
   final bool showDelete;
 
-  const MedicationCard({
+  const MedicationAdditionCard({
     super.key,
     required this.medicine,
     required this.index,

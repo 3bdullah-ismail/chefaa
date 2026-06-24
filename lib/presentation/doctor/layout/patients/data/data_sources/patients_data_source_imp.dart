@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 @Injectable(as: PatientsDataSource)
 class PatientsDataSourceImp implements PatientsDataSource {
   NetworkService networkService;
-
   PatientsDataSourceImp(this.networkService);
 
   @override
@@ -32,7 +31,7 @@ class PatientsDataSourceImp implements PatientsDataSource {
     required String notes,
   }) {
     return networkService.dio.post(
-      '/appointments/prescriptions',
+      '/appointments/prescription',
       data: {
         'appointment': appointment,
         'diagnosis': diagnosis,
@@ -55,7 +54,7 @@ class PatientsDataSourceImp implements PatientsDataSource {
     required String nextVisit,
     required String notes,
   }) {
-    return networkService.dio.put(
+    return networkService.dio.patch(
       '/appointments/$appointment/updatePrescription',
       data: {
         'appointment': appointment,

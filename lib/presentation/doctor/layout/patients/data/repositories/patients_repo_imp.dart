@@ -40,7 +40,7 @@ class PatientsRepoImp implements PatientsRepo {
         appointmentId: appointmentId,
       );
 
-      return CompleteAppointment.fromJson(response.data['data']);
+      return CompleteAppointment.fromJson(response.data);
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
@@ -70,7 +70,7 @@ class PatientsRepoImp implements PatientsRepo {
         notes: notes,
       );
 
-      return Prescription.fromJson(response.data['data']);
+      return Prescription.fromJson(response.data);
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
@@ -100,7 +100,7 @@ class PatientsRepoImp implements PatientsRepo {
         notes: notes,
       );
 
-      return Prescription.fromJson(response.data['data']);
+      return Prescription.fromJson(response.data);
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
@@ -118,7 +118,7 @@ class PatientsRepoImp implements PatientsRepo {
         appointmentId: appointmentId,
       );
 
-      return Prescription.fromJson(response.data['data']);
+      return Prescription.fromJson(response.data);
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
@@ -136,11 +136,26 @@ class PatientsRepoImp implements PatientsRepo {
         appointmentId: appointmentId,
       );
 
-      final List data = response.data['data'] as List;
+      final dynamic raw = response.data['data'];
 
-      return data
-          .map((json) => Prescription.fromJson(json as Map<String, dynamic>))
-          .toList();
+      if (raw is List) {
+        return raw
+            .map((json) => Prescription.fromJson({
+          'success': true,
+          'data': json,
+        }))
+            .toList();
+      } else if (raw is Map<String, dynamic>) {
+        // ✅ التصحيح: لف الـ raw تحت مفتاح "data" قبل التمرير
+        return [
+          Prescription.fromJson({
+            'success': true,
+            'data': raw,
+          })
+        ];
+      } else {
+        return [];
+      }
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {

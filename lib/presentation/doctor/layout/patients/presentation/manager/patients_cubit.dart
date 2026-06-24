@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../data/models/Data.dart';
+import '../../data/models/patients/Prescription.dart';
+
 @injectable
 class PatientsCubit extends Cubit<PatientsState> {
   final PatientsRepo patientsRepo;
@@ -11,6 +14,13 @@ class PatientsCubit extends Cubit<PatientsState> {
   PatientsCubit(this.patientsRepo) : super(PatientsInitialState());
 
   static PatientsCubit get(context) => BlocProvider.of(context);
+  Prescription? currentPrescription;
+  List<Prescription> previousPrescriptions = [];
+  dynamic selectedAppointment;
+
+  void selectAppointment(dynamic appointment) {
+    selectedAppointment = appointment;
+  }
 
   TextEditingController diagnosisController = TextEditingController();
   TextEditingController nextVisitController = TextEditingController();
@@ -19,43 +29,134 @@ class PatientsCubit extends Cubit<PatientsState> {
   TextEditingController imagingController = TextEditingController();
 
   List<MedicationItem> medications = [MedicationItem()];
-
-  void initPrescriptionForm({
-    String diagnosis = '',
-    String nextVisit = '',
-    String notes = '',
-    String labTests = '',
-    String imaging = '',
-    List<Map<String, String>>? existingMedicines,
-  }) {
-    _disposeFormControllers();
-
-    diagnosisController = TextEditingController(text: diagnosis);
-    nextVisitController = TextEditingController(text: nextVisit);
-    notesController = TextEditingController(text: notes);
-    labTestController = TextEditingController(text: labTests);
-    imagingController = TextEditingController(text: imaging);
-
-    if (existingMedicines != null && existingMedicines.isNotEmpty) {
-      medications = existingMedicines
-          .map(
-            (m) => MedicationItem(
-              name: m['name'],
-              dosage: m['dosage'],
-              frequency: m['frequency'],
-              duration: m['duration'],
-              instructions: m['instructions'],
-            ),
-          )
-          .toList();
-    } else {
-      medications = [MedicationItem()];
-    }
-
-    emit(PrescriptionFormResetState());
+  int selectedTab = 0;
+  void addMedicine() {
+    medications.add(MedicationItem());
+    emit(AddMedicineState());
   }
 
-  void _disposeFormControllers() {
+  void removeMedicine(int index) {
+    medications[index].dispose();
+    medications.removeAt(index);
+
+    emit(RemoveMedicineState());
+  }
+
+  List<Data> allPatients = [];
+  List<Data> filteredPatients = [];
+
+  Future<void> getPatients() async {
+    emit(
+      PatientsSuccessState(
+        upcoming: [],
+        completed: [],
+        selectedIndex: 0,
+        isUpcomingLoading: true,
+        isCompletedLoading: false,
+      ),
+    );
+
+    try {
+      final patients = await patientsRepo.getPatients();
+
+      final upcoming =
+      patients.where((e) => e.status == "upcoming").toList();
+
+      final completed =
+      patients.where((e) => e.status == "completed").toList();
+
+      emit(
+        PatientsSuccessState(
+          upcoming: upcoming,
+          completed: completed,
+          selectedIndex: 0,
+          isUpcomingLoading: false,
+          isCompletedLoading: false,
+        ),
+      );
+
+    } catch (e) {
+      emit(PatientsFailureState(e.toString()));
+    }
+  }
+  Future<void> refreshCurrentTab() async {
+    try {
+      final patients = await patientsRepo.getPatients();
+
+      final upcoming =
+      patients.where((e) => e.status == "upcoming").toList();
+
+      final completed =
+      patients.where((e) => e.status == "completed").toList();
+
+      emit(
+        PatientsSuccessState(
+          upcoming: upcoming,
+          completed: completed,
+          selectedIndex: selectedTab,
+        ),
+      );
+    } catch (e) {
+      emit(PatientsFailureState(e.toString()));
+    }
+  }
+  void changeTab(int index) {
+    selectedTab = index;
+
+    final currentState = state;
+
+    if (currentState is PatientsSuccessState) {
+      emit(currentState.copyWith(selectedIndex: index));
+    }
+  }
+  Future<void> createPrescription({required String appointmentId}) async {
+    emit(PrescriptionCreatingLoadingState());
+
+    try {
+      final prescription = await patientsRepo.createPrescription(
+        appointment: appointmentId,
+
+        diagnosis: diagnosisController.text,
+
+        medicines: medications
+            .map(
+              (medicine) => {
+                "name": medicine.nameController.text,
+                "dosage": medicine.dosageController.text,
+                "frequency": medicine.frequencyController.text,
+                "duration": medicine.durationController.text,
+                "instructions": medicine.instructionsController.text,
+              },
+            )
+            .toList(),
+
+        labTests: labTestController.text
+            .split('\n')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
+
+        imaging: imagingController.text
+            .split('\n')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
+
+        nextVisit: nextVisitController.text,
+
+        notes: notesController.text,
+      );
+
+      currentPrescription = prescription;
+
+      emit(PrescriptionCreatingSuccessState(prescription: prescription));
+    } catch (e) {
+      emit(PrescriptionCreatingErrorState(e.toString()));
+    }
+  }
+
+  @override
+  Future<void> close() {
     diagnosisController.dispose();
     nextVisitController.dispose();
     notesController.dispose();
@@ -65,80 +166,8 @@ class PatientsCubit extends Cubit<PatientsState> {
     for (final medicine in medications) {
       medicine.dispose();
     }
-  }
 
-  void addMedicine() {
-    medications.add(MedicationItem());
-    emit(AddMedicineState());
-  }
-
-  void removeMedicine(int index) {
-    if (index < 0 || index >= medications.length) return;
-    if (medications.length <= 1) return;
-
-    medications[index].dispose();
-    medications.removeAt(index);
-
-    emit(RemoveMedicineState());
-  }
-
-
-  Future<void> getPatients() async {
-    emit(PatientsLoadingState());
-
-    try {
-      final patients = await patientsRepo.getPatients();
-
-      final upcoming = patients.where((e) => e.status == "upcoming").toList();
-
-      final completed = patients
-          .where((e) => e.status == "completed" && e.paymentStatus == "paid")
-          .toList();
-
-      emit(PatientsSuccessState(upcoming: upcoming, completed: completed));
-    } catch (e) {
-      emit(PatientsFailureState(e.toString()));
-    }
-  }
-
-  void changeTab(int index) {
-    final currentState = state;
-
-    if (currentState is PatientsSuccessState) {
-      emit(currentState.copyWith(selectedIndex: index));
-    }
-  }
-
-
-  Map<String, dynamic> _medicineToMap(MedicationItem medicine) => {
-    "name": medicine.nameController.text,
-    "dosage": medicine.dosageController.text,
-    "frequency": medicine.frequencyController.text,
-    "duration": medicine.durationController.text,
-    "instructions": medicine.instructionsController.text,
-  };
-
-  List<String> _splitLines(String text) =>
-      text.split('\n').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
-
-  Future<void> createPrescription({required String appointmentId}) async {
-    emit(PrescriptionCreatingLoadingState());
-
-    try {
-      final prescription = await patientsRepo.createPrescription(
-        appointment: appointmentId,
-        diagnosis: diagnosisController.text,
-        medicines: medications.map(_medicineToMap).toList(),
-        labTests: _splitLines(labTestController.text),
-        imaging: _splitLines(imagingController.text),
-        nextVisit: nextVisitController.text,
-        notes: notesController.text,
-      );
-
-      emit(PrescriptionCreatingSuccessState(prescription: prescription));
-    } catch (e) {
-      emit(PrescriptionCreatingErrorState(e.toString()));
-    }
+    return super.close();
   }
 
   Future<void> updatePrescription({required String appointmentId}) async {
@@ -148,12 +177,37 @@ class PatientsCubit extends Cubit<PatientsState> {
       final prescription = await patientsRepo.editPrescription(
         appointment: appointmentId,
         diagnosis: diagnosisController.text,
-        medicines: medications.map(_medicineToMap).toList(),
-        labTests: _splitLines(labTestController.text),
-        imaging: _splitLines(imagingController.text),
+
+        medicines: medications
+            .map(
+              (medicine) => {
+                "name": medicine.nameController.text,
+                "dosage": medicine.dosageController.text,
+                "frequency": medicine.frequencyController.text,
+                "duration": medicine.durationController.text,
+                "instructions": medicine.instructionsController.text,
+              },
+            )
+            .toList(),
+
+        labTests: labTestController.text
+            .split('\n')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
+
+        imaging: imagingController.text
+            .split('\n')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
+
         nextVisit: nextVisitController.text,
+
         notes: notesController.text,
       );
+
+      currentPrescription = prescription;
 
       emit(PrescriptionEditingSuccessState(prescription: prescription));
     } catch (e) {
@@ -164,15 +218,24 @@ class PatientsCubit extends Cubit<PatientsState> {
   Future<void> getPrescriptionByAppointment({
     required String appointmentId,
   }) async {
+    currentPrescription = null;
+
     emit(PrescriptionByAppointmentLoadingState());
 
     try {
-      final prescription = await patientsRepo.getPrescriptionByAppointment(
+      currentPrescription = await patientsRepo.getPrescriptionByAppointment(
         appointmentId: appointmentId,
       );
 
-      emit(PrescriptionByAppointmentSuccessState(prescription: prescription));
+      emit(
+        PrescriptionByAppointmentSuccessState(
+          prescription: currentPrescription!,
+        ),
+      );
+
     } catch (e) {
+      currentPrescription = null;
+
       emit(PrescriptionByAppointmentErrorState(e.toString()));
     }
   }
@@ -184,7 +247,7 @@ class PatientsCubit extends Cubit<PatientsState> {
       final prescriptions = await patientsRepo.getPreviousPrescriptions(
         appointmentId: appointmentId,
       );
-
+      previousPrescriptions = prescriptions;
       emit(PrescriptionPreviousSuccessState(prescriptions: prescriptions));
     } catch (e) {
       emit(PrescriptionPreviousErrorState(e.toString()));
@@ -200,36 +263,38 @@ class PatientsCubit extends Cubit<PatientsState> {
       );
 
       emit(CompleteAppointmentSuccessState(appointment: complete));
+
+      await refreshCurrentTab();
     } catch (e) {
       emit(CompleteAppointmentErrorState(e.toString()));
     }
   }
 
-  @override
-  Future<void> close() {
-    _disposeFormControllers();
-    return super.close();
+  void clearPrescriptionForm() {
+    diagnosisController.clear();
+    nextVisitController.clear();
+    notesController.clear();
+    labTestController.clear();
+    imagingController.clear();
+
+    for (final medicine in medications) {
+      medicine.dispose();
+    }
+
+    medications = [MedicationItem()];
   }
 }
 
 class MedicationItem {
-  final TextEditingController nameController;
-  final TextEditingController dosageController;
-  final TextEditingController frequencyController;
-  final TextEditingController durationController;
-  final TextEditingController instructionsController;
+  final TextEditingController nameController = TextEditingController();
 
-  MedicationItem({
-    String? name,
-    String? dosage,
-    String? frequency,
-    String? duration,
-    String? instructions,
-  }) : nameController = TextEditingController(text: name ?? ''),
-       dosageController = TextEditingController(text: dosage ?? ''),
-       frequencyController = TextEditingController(text: frequency ?? ''),
-       durationController = TextEditingController(text: duration ?? ''),
-       instructionsController = TextEditingController(text: instructions ?? '');
+  final TextEditingController dosageController = TextEditingController();
+
+  final TextEditingController frequencyController = TextEditingController();
+
+  final TextEditingController durationController = TextEditingController();
+
+  final TextEditingController instructionsController = TextEditingController();
 
   void dispose() {
     nameController.dispose();

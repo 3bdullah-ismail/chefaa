@@ -4,11 +4,26 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/inspector_bottom_sheet_container.dart';
+import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/custom_outline_button.dart';
+import 'package:chefaa/presentation/patient/medication/presentation/widgets/medication_calender.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/patients/Prescription.dart';
+import '../manager/patients_cubit.dart';
+import '../manager/patients_state.dart';
+import 'medicine_addition_card.dart';
+
 class AddPrescriptionBottomSheet extends StatefulWidget {
-  const AddPrescriptionBottomSheet({super.key});
+  final bool isEdit;
+  final Prescription? prescription;
+
+  const AddPrescriptionBottomSheet({
+    super.key,
+    this.isEdit = false,
+    this.prescription,
+  });
 
   @override
   State<AddPrescriptionBottomSheet> createState() =>
@@ -17,16 +32,6 @@ class AddPrescriptionBottomSheet extends StatefulWidget {
 
 class _AddPrescriptionBottomSheetState
     extends State<AddPrescriptionBottomSheet> {
-  final diagnosisController = TextEditingController();
-  final medicationNameController = TextEditingController();
-  final dosageController = TextEditingController();
-  final frequencyController = TextEditingController();
-  final durationController = TextEditingController();
-  final labTestsController = TextEditingController();
-  final imagingController = TextEditingController();
-  final nextVisitController = TextEditingController();
-  final doctorNotesController = TextEditingController();
-
   Widget sectionTitle(String title) {
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
@@ -55,127 +60,263 @@ class _AddPrescriptionBottomSheetState
             borderRadius: BorderRadius.circular(25.r),
             borderSide: const BorderSide(color: ColorManager.gray),
           ),
-          
-
         ),
       ),
     );
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    final cubit = context.read<PatientsCubit>();
+
+    if (widget.isEdit && widget.prescription != null) {
+      final p = widget.prescription!;
+
+      cubit.diagnosisController.text = p.data?.diagnosis ?? '';
+      cubit.notesController.text = p.data?.notes ?? '';
+      cubit.nextVisitController.text = p.data?.nextVisit ?? '';
+      cubit.labTestController.text = (p.data?.labTests ?? []).join('\n');
+      cubit.imagingController.text = (p.data?.imaging ?? []).join('\n');
+
+      for (final medicine in cubit.medications) {
+        medicine.dispose();
+      }
+      cubit.medications.clear();
+
+      final medicines = p.data?.medicines ?? [];
+
+      for (final med in medicines) {
+        final item = MedicationItem();
+
+        item.nameController.text = med.name ?? '';
+        item.dosageController.text = med.dosage ?? '';
+        item.frequencyController.text = med.frequency ?? '';
+        item.durationController.text = med.duration ?? '';
+        item.instructionsController.text = med.instructions ?? '';
+
+        cubit.medications.add(item);
+      }
+
+      if (cubit.medications.isEmpty) {
+        cubit.medications.add(MedicationItem());
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * .8,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p20,
-              vertical: AppPadding.p16,
+    return BlocConsumer<PatientsCubit, PatientsState>(
+      listener: (context, state) async {
+        final cubit = context.read<PatientsCubit>();
+
+        if (state is PrescriptionCreatingSuccessState ||
+            state is PrescriptionEditingSuccessState) {
+          final appointment = cubit.selectedAppointment;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                state is PrescriptionEditingSuccessState
+                    ? "Prescription updated successfully"
+                    : "Prescription added successfully",
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const InspectorBottomSheetContainer(),
+          );
+          Navigator.pop(context);
 
-                Text(
-                  "Add Prescription",
-                  style: getBoldStyle(
-                    color: ColorManager.black,
-                    fontSize: 24.sp,
-                  ),
+          if (appointment?.id != null) {
+            await cubit.getPrescriptionByAppointment(
+              appointmentId: appointment.id!,
+            );
+          }
+        }
+
+        if (state is PrescriptionCreatingErrorState) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
+
+        if (state is PrescriptionEditingErrorState) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<PatientsCubit>();
+
+        return SafeArea(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * .8,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p20,
+                  vertical: AppPadding.p16,
                 ),
-
-                6.verticalSpace,
-
-                Text(
-                  "Add patient prescription details",
-                  style: getMediumStyle(
-                    color: ColorManager.gray,
-                    fontSize: 14.sp,
-                  ),
-                ),
-
-                24.verticalSpace,
-
-                sectionTitle("Diagnosis"),
-
-                CustomTextField(
-                  controller: diagnosisController,
-                  text: "Enter diagnosis details",
-                ),
-                10.verticalSpace,
-                sectionTitle("Medication"),
-
-                CustomTextField(
-                  controller: medicationNameController,
-                  text: "Enter medication name",
-                ),
-                10.verticalSpace,
-
-                CustomTextField(
-                  controller: dosageController,
-                  text: "dosage (e.g., 500mg)",
-                ),
-                10.verticalSpace,
-                Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: CustomTextField(
-                        controller: frequencyController,
-                        text: "Frequency (e.g., twice a day)",
+                    const InspectorBottomSheetContainer(),
+
+                    Text(
+                      widget.isEdit ? "Edit Prescription" : "Add Prescription",
+                      style: getBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 24.sp,
                       ),
                     ),
-                    15.horizontalSpace,
-                    Expanded(
-                      child: CustomTextField(
-                        controller: durationController,
-                        text: "Duration (e.g., 7 days)",
+
+                    6.verticalSpace,
+
+                    Text(
+                      widget.isEdit
+                          ? "Update patient prescription details"
+                          : "Add patient prescription details",
+                      style: getMediumStyle(
+                        color: ColorManager.gray,
+                        fontSize: 14.sp,
                       ),
                     ),
+
+                    24.verticalSpace,
+
+                    sectionTitle("Diagnosis"),
+
+                    CustomTextField(
+                      controller: cubit.diagnosisController,
+                      text: "Enter diagnosis details",
+                    ),
+
+                    10.verticalSpace,
+
+                    sectionTitle("Medications"),
+
+                    BlocBuilder<PatientsCubit, PatientsState>(
+                      buildWhen: (previous, current) =>
+                          current is AddMedicineState ||
+                          current is RemoveMedicineState,
+                      builder: (context, state) {
+                        return Column(
+                          children: [
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: cubit.medications.length,
+                              itemBuilder: (context, index) {
+                                return MedicationAdditionCard(
+                                  medicine: cubit.medications[index],
+                                  index: index,
+                                  showDelete: cubit.medications.length > 1,
+                                  onDelete: () {
+                                    cubit.removeMedicine(index);
+                                  },
+                                );
+                              },
+                            ),
+
+                            10.verticalSpace,
+
+                            CustomOutlineButton(
+                              text: "Add Another Medicine",
+                              onPressed: () {
+                                cubit.addMedicine();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+
+                    10.verticalSpace,
+
+                    sectionTitle("Lab Tests"),
+
+                    textField(
+                      hint: "Enter lab tests",
+                      controller: cubit.labTestController,
+                      maxLines: 3,
+                    ),
+
+                    sectionTitle("Imaging / Radiology Tests"),
+
+                    textField(
+                      hint: "Enter imaging tests",
+                      controller: cubit.imagingController,
+                      maxLines: 3,
+                    ),
+
+                    10.verticalSpace,
+
+                    sectionTitle("Next Visit"),
+
+                    MedicationCalender(
+                      hintText: "Next Visit Date",
+                      controller: cubit.nextVisitController,
+                      onDateSelected: (date) {
+                        cubit.nextVisitController.text =
+                            "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
+                      },
+                    ),
+
+                    20.verticalSpace,
+
+                    sectionTitle("Doctor Notes"),
+
+                    textField(
+                      hint: "Write notes...",
+                      controller: cubit.notesController,
+                      maxLines: 5,
+                    ),
+
+                    20.verticalSpace,
+
+                    (state is PrescriptionCreatingLoadingState ||
+                            state is PrescriptionEditingLoadingState)
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: ColorManager.primary,
+                            ),
+                          )
+                        : CustomBtn(
+                            text: widget.isEdit
+                                ? "Update Prescription"
+                                : "Add Prescription",
+                            onPressed: () {
+                              final appointment = cubit.selectedAppointment;
+
+                              if (appointment?.id == null) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Appointment ID not found"),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              if (widget.isEdit) {
+                                cubit.updatePrescription(
+                                  appointmentId: appointment.id!,
+                                );
+                              } else {
+                                cubit.createPrescription(
+                                  appointmentId: appointment.id!,
+                                );
+                              }
+                            },
+                          ),
+
+                    20.verticalSpace,
                   ],
                 ),
-
-                10.verticalSpace,
-                sectionTitle("Lab Tests"),
-                textField(
-                  hint: "Enter lab tests",
-                  controller: labTestsController,
-                  maxLines: 3,
-                ),
-                sectionTitle("Imaging / Radiology Tests"),
-                textField(
-                  hint: "Enter imaging tests",
-                  controller: imagingController,
-                  maxLines: 3,
-                ),
-                  10.verticalSpace,
-                sectionTitle("Next Visit"),
-
-                CustomTextField(
-                  text: "Next visit date",
-                  controller: nextVisitController,
-                ),
-                  20.verticalSpace,
-                sectionTitle("Doctor Notes"),
-
-                textField(
-                  hint: "Write notes...",
-                  controller: doctorNotesController,
-                  maxLines: 5,
-                ),
-
-                20.verticalSpace,
-
-                CustomBtn(text: "Add Prescription", onPressed: () {}),
-
-                20.verticalSpace,
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

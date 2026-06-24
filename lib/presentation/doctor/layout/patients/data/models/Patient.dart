@@ -2,20 +2,30 @@ import 'UserId.dart';
 
 class Patient {
   Patient({
-      this.address, 
-      this.isBlocked, 
-      this.id, 
-      this.userId, 
-      this.age, 
-      this.gender, 
-      this.height, 
-      this.weight, 
-      this.bloodType, 
-      this.allergies, 
-      this.chronicConditions,});
+    this.address,
+    this.isBlocked,
+    this.id,
+    this.userId,
+    this.age,
+    this.gender,
+    this.height,
+    this.weight,
+    this.bloodType,
+    this.allergies,
+    this.chronicConditions,
+  });
 
   Patient.fromJson(dynamic json) {
-    address = json['address'];
+    final addr = json['address'];
+
+    if (addr is String) {
+      address = addr;
+    } else if (addr is Map<String, dynamic>) {
+      address = addr['location']?['coordinates']?.toString();
+    } else {
+      address = null;
+    }
+
     isBlocked = json['isBlocked'];
     id = json['_id'];
     userId = json['userId'] != null ? UserId.fromJson(json['userId']) : null;
@@ -24,9 +34,14 @@ class Patient {
     height = json['height'];
     weight = json['weight'];
     bloodType = json['bloodType'];
-    allergies = json['allergies'] != null ? json['allergies'].cast<String>() : [];
-    chronicConditions = json['chronicConditions'] != null ? json['chronicConditions'].cast<String>() : [];
+    allergies = json['allergies'] != null
+        ? json['allergies'].cast<String>()
+        : [];
+    chronicConditions = json['chronicConditions'] != null
+        ? json['chronicConditions'].cast<String>()
+        : [];
   }
+
   String? address;
   bool? isBlocked;
   String? id;
@@ -56,5 +71,4 @@ class Patient {
     map['chronicConditions'] = chronicConditions;
     return map;
   }
-
 }
