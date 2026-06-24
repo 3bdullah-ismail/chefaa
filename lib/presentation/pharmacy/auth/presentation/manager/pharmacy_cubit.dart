@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/models/auth_response.dart';
+import '../../../../../core/utils/username_generator.dart';
 import '../../data/repositories/pharmacy_repo.dart';
 
 part 'pharmacy_state.dart';
@@ -15,7 +16,7 @@ class PharmacyCubit extends Cubit<PharmacyState> {
   PharmacyCubit(this.pharmacyRepo) : super(PharmacyInitial());
 
   TextEditingController email = TextEditingController();
-  TextEditingController username = TextEditingController();
+  TextEditingController name = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController registerNumber = TextEditingController();
@@ -32,8 +33,8 @@ class PharmacyCubit extends Cubit<PharmacyState> {
     emit(PharmacyLoadingState());
     try {
       final response = await pharmacyRepo.pharmacySignUp(
-        name: username.text,
-        username: username.text,
+        name: name.text,
+        username: UsernameGenerator.generate(name.text),
         phoneNumber: phoneNumber.text,
         email: email.text,
         role: "pharmacy",
@@ -52,7 +53,6 @@ class PharmacyCubit extends Cubit<PharmacyState> {
   @override
   Future<void> close() {
     email.dispose();
-    username.dispose();
     password.dispose();
     phoneNumber.dispose();
     registerNumber.dispose();

@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chefaa/core/extensions/build_ex.dart';
@@ -62,7 +62,7 @@ class _FacilityInfoCardState extends State<FacilityInfoCard> {
             ),
             const SizedBox(height: 16),
             LabeledTextField(
-              validator: Validators.nameValidator,
+              validator: Validators.businessNameValidator,
               label: AppConstants.facilityName,
               controller: widget.cubit.name,
               hint: "e.g. Alpa Labs/Scan",

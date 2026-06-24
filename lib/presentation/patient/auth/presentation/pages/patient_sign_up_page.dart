@@ -120,8 +120,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                             ),
                             Expanded(
                               child: CustomTextField(
-                                validator: Validators.validateUsername,
-                                controller: cubit.userNameController,
+                                validator: Validators.nameValidator,
+                                controller: cubit.lastNameController,
                                 text: AppConstants.lastName,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,

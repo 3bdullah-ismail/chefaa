@@ -1,4 +1,5 @@
 import 'package:chefaa/presentation/doctor/auth/data/repositories/repo.dart';
+import 'package:chefaa/core/utils/username_generator.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
 
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
-  TextEditingController username = TextEditingController();
+  TextEditingController lastName = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController specialization = TextEditingController();
@@ -45,10 +46,11 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
     }
     emit(SingUpLoading());
     try {
+      final String fullName = "${name.text} ${lastName.text}".trim();
       final response = await doctorAuthRepo.signUp(
-        name: name.text,
+        name: fullName,
         email: email.text,
-        username: username.text,
+        username: UsernameGenerator.generate(fullName),
         password: password.text,
         phoneNumber: phoneNumber.text,
         specialization: specialization.text,
@@ -73,7 +75,7 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
   Future<void> close() {
     name.dispose();
     email.dispose();
-    username.dispose();
+    lastName.dispose();
     password.dispose();
     phoneNumber.dispose();
     specialization.dispose();

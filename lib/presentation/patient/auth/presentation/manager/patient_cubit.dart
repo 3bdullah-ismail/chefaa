@@ -1,5 +1,6 @@
 import 'package:chefaa/presentation/patient/auth/data/repositories/patient_repo.dart';
 import 'package:chefaa/presentation/patient/auth/presentation/manager/patient_state.dart';
+import 'package:chefaa/core/utils/username_generator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -24,7 +25,7 @@ class PatientCubit extends Cubit<PatientState> {
   }
 
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -40,9 +41,10 @@ class PatientCubit extends Cubit<PatientState> {
     _isSigningUp = true;
     emit(SignUpLoadingState());
     try {
+      final String fullName = "${nameController.text} ${lastNameController.text}".trim();
       var response = await patientRepo.patientSignUp(
-        name: nameController.text,
-        userName: userNameController.text,
+        name: fullName,
+        userName: UsernameGenerator.generate(fullName),
         phone: phoneController.text,
         email: emailController.text,
         password: passwordController.text,
@@ -68,7 +70,7 @@ class PatientCubit extends Cubit<PatientState> {
   @override
   Future<void> close() {
     nameController.dispose();
-    userNameController.dispose();
+    lastNameController.dispose();
     phoneController.dispose();
     emailController.dispose();
     passwordController.dispose();
