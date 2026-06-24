@@ -8,7 +8,6 @@ import 'package:chefaa/presentation/patient/medication/presentation/widgets/add_
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/medication_card.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/over_view_card.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/suggest_card.dart';
-import 'package:chefaa/presentation/patient/home/presentation/widgets/ai_suggestion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -215,8 +214,6 @@ class _MedicationPageState extends State<MedicationPage> {
                               _openEditSheet(context, medications[index]),
                         ),
                       ),
-
-                    if (!isEmpty) ...[30.verticalSpace, const AiSuggestion()],
                   ],
                 ),
               ),

@@ -60,7 +60,6 @@ dependencies:
   geolocator:
   permission_handler:
   widget_to_marker:
-  provider:
   easy_date_timeline:
   intl:
   syncfusion_flutter_gauges: ^32.2.9

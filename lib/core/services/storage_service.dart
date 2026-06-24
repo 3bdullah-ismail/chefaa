@@ -65,5 +65,10 @@ class StorageService {
     await _storage.write(key: _onboardingKey, value: 'true');
   }
 
-  static Future<void> clearAll() async => await _storage.deleteAll();
+  static Future<void> clearAll() async {
+    token = null;
+    user = null;
+    role = null;
+    await _storage.deleteAll();
+  }
 }

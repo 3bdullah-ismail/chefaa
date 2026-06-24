@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
+import '../../data/remote/models/search_centers_response.dart';
 
 class CenterRecommendationCard extends StatelessWidget {
-  final Map<String, dynamic> centerData;
+  final CenterModel centerData;
 
   const CenterRecommendationCard({super.key, required this.centerData});
 
+  String get _centerImage {
+    if (centerData.facilityType?.toLowerCase() == 'lab') {
+      return ImageAssets.labBackground;
+    } else if (centerData.facilityType?.toLowerCase() == 'both') {
+      return ImageAssets.mri;
+    } else {
+      return ImageAssets.xRay;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final String tag = centerData["tag"] ?? "";
+    final String tag = centerData.badge ?? "";
 
     return Container(
       margin: EdgeInsets.only(bottom: 14.h),
@@ -40,7 +52,7 @@ class CenterRecommendationCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12.r),
                   child: Image.asset(
-                    centerData["image"],
+                    _centerImage,
                     width: 72.w,
                     height: 72.h,
                     fit: BoxFit.cover,
@@ -52,7 +64,7 @@ class CenterRecommendationCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        centerData["name"],
+                        centerData.name ?? "",
                         style: getBoldStyle(
                           color: ColorManager.black,
                           fontSize: 16.sp,
@@ -60,7 +72,7 @@ class CenterRecommendationCard extends StatelessWidget {
                       ),
                       4.verticalSpace,
                       Text(
-                        centerData["location"],
+                        centerData.distance ?? "Unknown",
                         style: getRegularStyle(
                           color: ColorManager.gray,
                           fontSize: 13.sp,
@@ -76,7 +88,7 @@ class CenterRecommendationCard extends StatelessWidget {
                           ),
                           4.horizontalSpace,
                           Text(
-                            "${centerData["rating"]}${centerData["ratingCount"]}",
+                            (centerData.rating ?? 0.0).toString(),
                             style: getMediumStyle(
                               color: ColorManager.gray,
                               fontSize: 13.sp,
@@ -90,26 +102,27 @@ class CenterRecommendationCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 8.w,
-                        vertical: 4.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: tag.toTagBackgroundColor,
-                        borderRadius: BorderRadius.circular(6.r),
-                      ),
-                      child: Text(
-                        tag,
-                        style: getBoldStyle(
-                          color: tag.toTagTextColor,
-                          fontSize: 10.sp,
+                    if (tag.isNotEmpty)
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 4.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: tag.toTagBackgroundColor,
+                          borderRadius: BorderRadius.circular(6.r),
+                        ),
+                        child: Text(
+                          tag,
+                          style: getBoldStyle(
+                            color: tag.toTagTextColor,
+                            fontSize: 10.sp,
+                          ),
                         ),
                       ),
-                    ),
                     22.verticalSpace,
                     Text(
-                      centerData["price"],
+                      "EGP ${centerData.minPrice ?? 0}",
                       style: getBoldStyle(
                         color: ColorManager.primary,
                         fontSize: 15.sp,
