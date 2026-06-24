@@ -122,8 +122,8 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                               10.verticalSpace,
                               CustomTextField(
                                 textInputAction: TextInputAction.next,
-                                validator: Validators.validateUsername,
-                                controller: cubit.username,
+                               validator: Validators.businessNameValidator,
+                                controller: cubit.name,
                                 text: "Full Pharmacy legal name",
                                 keyboardType: TextInputType.name,
                               ),

@@ -114,8 +114,8 @@ class _DocSignUpState extends State<DocSignUp> {
                             8.horizontalSpace,
                             Expanded(
                               child: CustomTextField(
-                                validator: Validators.validateUsername,
-                                controller: cubit.username,
+                                validator: Validators.nameValidator,
+                                controller: cubit.lastName,
                                 text: AppConstants.lastName,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,

@@ -39,18 +39,18 @@ class Validators {
       return 'Phone cannot be empty.';
     }
 
-    if (phone.length >= 10) {
-      return null;
-    } else {
-      return "Enter a valid phone";
+    final RegExp phoneRegExp = RegExp(r'^\+?[0-9]{10,15}$');
+    if (!phoneRegExp.hasMatch(phone)) {
+      return 'Enter a valid phone number (10-15 digits only)';
     }
+    return null;
   }
 
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) return 'Please enter password';
 
     final regex = RegExp(
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$&*~]).{8,}$',
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9]).{8,}$',
     );
     if (!regex.hasMatch(value)) {
       return 'Password must be at least 8 chars\n and contain upper, lower,\n number & special char';
@@ -76,7 +76,7 @@ class Validators {
       return 'License number is required';
     }
 
-    final cleaned = value.replaceAll('-', '');
+    final cleaned = value.replaceAll('-', '').toUpperCase();
 
     final regex = RegExp(r'^[A-Z]{3}\d{6}$');
 
@@ -84,6 +84,18 @@ class Validators {
       return 'Enter 3 letters followed by 6 numbers';
     }
 
+    return null;
+  }
+
+  static String? businessNameValidator(String? value) {
+    if (value == null || value.trim().isEmpty) return 'Name cannot be empty';
+
+    final RegExp businessNameRegExp = RegExp(r"^[\p{L}\p{N}\s\-\/&'.]+$", unicode: true);
+    if (!businessNameRegExp.hasMatch(value)) {
+      return 'Enter a valid name (letters, numbers, spaces, and - / & . only)';
+    }
+    if (value.length < 2) return 'Name must be at least 2 characters long';
+    if (value.length > 100) return 'Name cannot exceed 100 characters';
     return null;
   }
 
