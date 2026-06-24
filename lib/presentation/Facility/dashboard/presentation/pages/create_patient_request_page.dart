@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
@@ -9,10 +5,13 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
-
+import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/facility/dashboard/presentation/manager/dashboard_cubit.dart';
-import 'package:chefaa/presentation/facility/services/presentation/manager/services_cubit.dart';
 import 'package:chefaa/presentation/facility/services/data/models/service_model.dart';
+import 'package:chefaa/presentation/facility/services/presentation/manager/services_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreatePatientRequestPage extends StatelessWidget {
   const CreatePatientRequestPage({super.key});
@@ -68,17 +67,6 @@ class _CreatePatientRequestPageBodyState
     setState(() {
       _selectedServices.clear();
     });
-  }
-
-  String? _validateEgyptianPhone(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return 'Phone number is required';
-    }
-    final regex = RegExp(r'^01[0125]\d{8}$');
-    if (!regex.hasMatch(value.trim())) {
-      return 'Enter a valid Egyptian phone number (e.g. 01012345678)';
-    }
-    return null;
   }
 
   void _submit() {
@@ -204,7 +192,7 @@ class _CreatePatientRequestPageBodyState
                       controller: _phoneController,
                       text: "Patient Phone (e.g. 01225408571)",
                       keyboardType: TextInputType.phone,
-                      // validator: _validateEgyptianPhone,
+                      validator: Validators.validatePhone,
                     ),
                     SizedBox(height: 24.h),
 
