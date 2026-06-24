@@ -8,21 +8,18 @@ import 'data_block.dart';
 class ActiveMonographContent extends StatelessWidget {
   final String selectedSection;
 
-  const ActiveMonographContent({
-    super.key,
-    required this.selectedSection,
-  });
+  const ActiveMonographContent({super.key, required this.selectedSection});
 
   @override
   Widget build(BuildContext context) {
     switch (selectedSection) {
       case "Clinical Actions":
-        return Column(
-          children: const [
+        return const Column(
+          children: [
             DataBlock(
               title: "Approved Therapeutic Indications",
               description:
-              "Indicated for the comprehensive systemic management of localized fever, general inflammation reduction, and acute structural muscle aches under strict clinical healthcare oversight protocols.",
+                  "Indicated for the comprehensive systemic management of localized fever, general inflammation reduction, and acute structural muscle aches under strict clinical healthcare oversight protocols.",
             ),
 
             SizedBox(height: 12),
@@ -30,7 +27,7 @@ class ActiveMonographContent extends StatelessWidget {
             DataBlock(
               title: "Administration & Modality Strategy",
               description:
-              "Ingest 1 tablet whole with water every 4 to 6 hours as clinically necessary. Maximum daily accumulation threshold must not exceed 4000mg under any circumstances.",
+                  "Ingest 1 tablet whole with water every 4 to 6 hours as clinically necessary. Maximum daily accumulation threshold must not exceed 4000mg under any circumstances.",
             ),
           ],
         );
@@ -43,13 +40,10 @@ class ActiveMonographContent extends StatelessWidget {
               decoration: BoxDecoration(
                 color: const Color(0xffFFF1F2),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: const Color(0xffFFE4E6),
-                ),
+                border: Border.all(color: const Color(0xffFFE4E6)),
               ),
               child: Column(
-                crossAxisAlignment:
-                CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -91,18 +85,18 @@ class ActiveMonographContent extends StatelessWidget {
             const DataBlock(
               title: "Observed Adverse Reactions",
               description:
-              "Mild transient gastrointestinal standard adjustments, mild vertigo loops, or temporary dry mouth symptoms may develop in a small segment (< 2.4%) of verified clinical studies.",
+                  "Mild transient gastrointestinal standard adjustments, mild vertigo loops, or temporary dry mouth symptoms may develop in a small segment (< 2.4%) of verified clinical studies.",
             ),
           ],
         );
 
       default:
-        return Column(
-          children: const [
+        return const Column(
+          children: [
             DataBlock(
               title: "Product Structural Summary",
               description:
-              "A precision formulated clinical molecular agent built to execute rapid structural symptom reduction while preserving normal organic metabolic functionality across target cellular tissue matrix lines.",
+                  "A precision formulated clinical molecular agent built to execute rapid structural symptom reduction while preserving normal organic metabolic functionality across target cellular tissue matrix lines.",
             ),
 
             SizedBox(height: 12),
@@ -110,7 +104,7 @@ class ActiveMonographContent extends StatelessWidget {
             DataBlock(
               title: "Packaging Configuration",
               description:
-              "Supplied in standard medical grade double-foil PVC localized blister panels containing verified hermetically preserved stable units to secure absolute protection against air degradation loop systems.",
+                  "Supplied in standard medical grade double-foil PVC localized blister panels containing verified hermetically preserved stable units to secure absolute protection against air degradation loop systems.",
             ),
           ],
         );

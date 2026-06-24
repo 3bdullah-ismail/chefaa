@@ -1,11 +1,11 @@
-import 'package:chefaa/presentation/doctor/layout/home/data/data_sources/clinic_data_source.dart';
-import 'package:chefaa/presentation/doctor/layout/home/data/models/Clinic_response.dart';
+﻿import 'package:chefaa/presentation/doctor/layout/home/data/data_sources/clinic_data_source.dart';
+import 'package:chefaa/presentation/doctor/layout/home/data/models/clinic_response.dart';
 import 'package:chefaa/presentation/doctor/layout/home/data/repositories/clinic_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/error_handling/failure.dart';
-import '../models/Clinics_response.dart';
+import '../models/clinics_response.dart';
 
 @Injectable(as: ClinicRepo)
 class ClinicRepoImp implements ClinicRepo {

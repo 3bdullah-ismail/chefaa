@@ -4,12 +4,13 @@ import '../../../../../../core/resources/color_manager.dart';
 import 'counter_button.dart';
 
 class InteractivePurchaseCard extends StatelessWidget {
-  final double unitPrice ;
+  final double unitPrice;
   final int quantity;
-  final String currencySign ;
-  final void  Function() onIncrement;
-  final void  Function() onDecrement;
-  const InteractivePurchaseCard({super.key,
+  final String currencySign;
+  final void Function() onIncrement;
+  final void Function() onDecrement;
+  const InteractivePurchaseCard({
+    super.key,
     required this.currencySign,
     required this.unitPrice,
     required this.quantity,
@@ -26,7 +27,7 @@ class InteractivePurchaseCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xff0F172A).withOpacity(0.03),
+            color: const Color(0xff0F172A).withValues(alpha: 0.03),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),

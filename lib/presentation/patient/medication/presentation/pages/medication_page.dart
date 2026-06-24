@@ -1,4 +1,4 @@
-import 'package:chefaa/core/resources/color_manager.dart';
+﻿import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
@@ -8,12 +8,11 @@ import 'package:chefaa/presentation/patient/medication/presentation/widgets/add_
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/medication_card.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/over_view_card.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/suggest_card.dart';
-import 'package:chefaa/presentation/patient/home/presentation/widgets/ai_suggestion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/Medications.dart';
+import '../../data/models/medications.dart';
 import '../widgets/empty_medication_list_state.dart';
 import '../widgets/medication_bottom_sheet.dart';
 
@@ -215,8 +214,6 @@ class _MedicationPageState extends State<MedicationPage> {
                               _openEditSheet(context, medications[index]),
                         ),
                       ),
-
-                    if (!isEmpty) ...[30.verticalSpace, const AiSuggestion()],
                   ],
                 ),
               ),

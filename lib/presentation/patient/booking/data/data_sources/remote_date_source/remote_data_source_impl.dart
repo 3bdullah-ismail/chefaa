@@ -1,6 +1,7 @@
 import 'package:chefaa/presentation/patient/booking/data/data_sources/remote_date_source/remote_data_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../../core/services/network_service.dart';
 
 @Injectable(as: BookingRemoteDataSource)
@@ -21,8 +22,8 @@ class BookingRemoteDataSourceImpl implements BookingRemoteDataSource {
       );
 
       return response;
-    } on DioException catch (e) {
-      throw e;
+    } on DioException {
+      rethrow;
     }
   }
 

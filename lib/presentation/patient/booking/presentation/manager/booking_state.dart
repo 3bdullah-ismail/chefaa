@@ -1,4 +1,4 @@
-import '../../data/models/Slots.dart';
+﻿import '../../data/models/slots.dart';
 
 sealed class BookingState {}
 

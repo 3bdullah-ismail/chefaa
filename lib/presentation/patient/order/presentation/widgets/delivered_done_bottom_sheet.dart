@@ -44,10 +44,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24.0,
-        vertical: 20.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -55,7 +52,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
             width: 40,
             height: 5,
             decoration: BoxDecoration(
-              color: ColorManager.input.withOpacity(0.6),
+              color: ColorManager.input.withValues(alpha: 0.6),
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -65,7 +62,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: ColorManager.lightGreen.withOpacity(0.12),
+              color: ColorManager.lightGreen.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
             child: const Icon(
@@ -102,7 +99,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
 
           Container(
             height: 1,
-            color: ColorManager.input.withOpacity(0.5),
+            color: ColorManager.input.withValues(alpha: 0.5),
           ),
 
           const SizedBox(height: 12),
@@ -129,10 +126,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
               ),
               child: const Text(
                 "Back to Home",
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
             ),
           ),

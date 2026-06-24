@@ -185,4 +185,5 @@ class HiveService {
 class HiveBoxes {
   static const String doctorsBox = 'search_cache_v2';
   static const String reportsBox = 'reports';
+  static const String facilityBox = 'facility_cache_v1';
 }

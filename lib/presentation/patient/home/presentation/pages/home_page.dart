@@ -3,6 +3,8 @@ import 'package:chefaa/presentation/patient/appointment/data/models/appointment_
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_cubit.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_state.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/widgets/appointment_card.dart';
+import 'package:chefaa/presentation/patient/lab_results/presentation/manager/lab_results_cubit.dart';
+import 'package:chefaa/presentation/patient/lab_results/presentation/manager/lab_results_state.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_state.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/empty_medication_state.dart';
@@ -23,7 +25,6 @@ import '../../../../../../core/widget/custom_text_field.dart';
 import '../../../../../../core/widget/layout_app_bar.dart';
 import '../../../medication/presentation/widgets/medication_error_widget.dart';
 import '../manager/users_cubit.dart';
-import '../widgets/ai_suggestion.dart';
 import '../widgets/quick_actions.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,6 +38,12 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<MedicineCardState> _medicineCardKey =
       GlobalKey<MedicineCardState>();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<MedicationCubit>().getMedicationList();
+  }
 
   void _openSearchPage() {
     Navigator.push(
@@ -127,8 +134,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
 
-                    50.verticalSpace,
-                    const AiSuggestion(),
                     40.verticalSpace,
 
                     BlocBuilder<MedicationCubit, MedicationState>(
@@ -228,24 +233,22 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                     45.verticalSpace,
-                    const AiSuggestion(),
-                    40.verticalSpace,
 
                     Row(
                       children: [
                         Expanded(
                           child: Text(
-                            "Upcoming Appointment",
+                            "Latest Lab Results",
                             style: getBoldStyle(
                               color: ColorManager.black,
-                              fontSize: 22,
+                              fontSize: 22.sp,
                             ),
                           ),
                         ),
                         TextButton(
                           onPressed: () => Navigator.pushNamed(
                             context,
-                            AppRoutesNames.appointmentPage,
+                            AppRoutesNames.labResultsPage,
                           ),
                           child: Row(
                             children: [
@@ -254,13 +257,202 @@ class _HomePageState extends State<HomePage> {
                                 style:
                                     getMediumStyle(
                                       color: ColorManager.primary,
-                                      fontSize: 18,
+                                      fontSize: 18.sp,
                                     ).copyWith(
                                       decoration: TextDecoration.underline,
                                       decorationColor: ColorManager.primary,
                                     ),
                               ),
-                              SvgPicture.asset("assets/icons/drug.svg"),
+                              6.horizontalSpace,
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: ColorManager.primary,
+                                size: 14.sp,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    15.verticalSpace,
+                    BlocProvider(
+                      create: (_) => getIt<LabResultsCubit>()..getLabResults(),
+                      child: BlocBuilder<LabResultsCubit, LabResultsState>(
+                        builder: (context, state) {
+                          if (state is LabResultsLoadingState) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: ColorManager.primary,
+                              ),
+                            );
+                          }
+                          if (state is LabResultsErrorState) {
+                            return const SizedBox.shrink();
+                          }
+                          if (state is LabResultsSuccessState) {
+                            final results = state.results;
+                            if (results.isEmpty) {
+                              return Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w,
+                                  vertical: 24.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ColorManager.lightGray,
+                                  borderRadius: BorderRadius.circular(25.r),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "No uploaded results yet",
+                                    style: getMediumStyle(
+                                      color: ColorManager.gray,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            final latest = results.first;
+                            return Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.all(16.r),
+                              decoration: BoxDecoration(
+                                color: ColorManager.white,
+                                borderRadius: BorderRadius.circular(25.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ColorManager.black.withValues(
+                                      alpha: 0.04,
+                                    ),
+                                    blurRadius: 10.r,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                                border: Border.all(
+                                  color: ColorManager.input.withValues(
+                                    alpha: 0.5,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(12.r),
+                                    decoration: BoxDecoration(
+                                      color: ColorManager.primary.withValues(
+                                        alpha: 0.1,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      latest.fileName?.toLowerCase().contains(
+                                                'blood',
+                                              ) ==
+                                              true
+                                          ? Icons.bloodtype_outlined
+                                          : latest.fileName
+                                                    ?.toLowerCase()
+                                                    .contains('urine') ==
+                                                true
+                                          ? Icons.opacity_outlined
+                                          : Icons.science_outlined,
+                                      color: ColorManager.primary,
+                                      size: 24.sp,
+                                    ),
+                                  ),
+                                  12.horizontalSpace,
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          latest.fileName ?? 'Lab Report',
+                                          style: getBoldStyle(
+                                            color: ColorManager.black,
+                                            fontSize: 15.sp,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        4.verticalSpace,
+                                        Text(
+                                          latest.labName ?? 'Laboratory',
+                                          style: getMediumStyle(
+                                            color: ColorManager.gray,
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: ColorManager.primary,
+                                      size: 16.sp,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        AppRoutesNames.labResultsPage,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                    ),
+
+                    40.verticalSpace,
+
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Upcoming Appointment",
+                            style: getBoldStyle(
+                              color: ColorManager.black,
+                              fontSize: 18.sp,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pushNamed(
+                            context,
+                            AppRoutesNames.appointmentPage,
+                          ),
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 4.h,
+                            ),
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "All Appointments",
+                                style: getBoldStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                              SizedBox(width: 4.w),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: ColorManager.primary,
+                                size: 12.sp,
+                              ),
                             ],
                           ),
                         ),
@@ -268,7 +460,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     20.verticalSpace,
                     BlocProvider(
-                      create: (_) => getIt<AppointmentCubit>()..getMyAppointments(),
+                      create: (_) =>
+                          getIt<AppointmentCubit>()..getMyAppointments(),
                       child: BlocBuilder<AppointmentCubit, AppointmentState>(
                         builder: (context, state) {
                           if (state is GetAppointmentsLoadingState) {
@@ -284,29 +477,65 @@ class _HomePageState extends State<HomePage> {
                               .cast<AppointmentModel?>()
                               .firstWhere(
                                 (a) =>
-                                    (a?.status ?? '').toLowerCase() == 'upcoming',
+                                    (a?.status ?? '').toLowerCase() ==
+                                    'upcoming',
                                 orElse: () => null,
                               );
 
                           if (upcoming == null) {
                             return Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppPadding.p16,
-                                vertical: AppPadding.p24,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 24.w,
+                                vertical: 30.h,
                               ),
                               decoration: BoxDecoration(
-                                color: ColorManager.lightGray,
-                                borderRadius: BorderRadius.circular(25.r),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "No upcoming appointments",
-                                  style: getMediumStyle(
-                                    color: ColorManager.gray,
-                                    fontSize: 16,
+                                color: ColorManager.white,
+                                borderRadius: BorderRadius.circular(20.r),
+                                border: Border.all(
+                                  color: ColorManager.input.withValues(
+                                    alpha: 0.6,
                                   ),
+                                  width: 1.w,
                                 ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ColorManager.black.withValues(
+                                      alpha: 0.02,
+                                    ),
+                                    blurRadius: 10.r,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(12.r),
+                                    decoration: BoxDecoration(
+                                      color: ColorManager.primary.withValues(
+                                        alpha: 0.08,
+                                      ),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.calendar_month_outlined,
+                                      color: ColorManager.primary,
+                                      size: 32.sp,
+                                    ),
+                                  ),
+                                  16.verticalSpace,
+                                  Text(
+                                    "No upcoming appointments",
+                                    textAlign: TextAlign.center,
+                                    style: getBoldStyle(
+                                      color: ColorManager.black,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           }

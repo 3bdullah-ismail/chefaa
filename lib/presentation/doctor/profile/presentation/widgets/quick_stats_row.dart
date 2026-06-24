@@ -33,7 +33,7 @@ class QuickStatsRow extends StatelessWidget {
               ),
             ),
             SizedBox(width: AppSize.s10.w),
-            Expanded(
+            const Expanded(
               child: StatCard(
                 label: 'Score',
 

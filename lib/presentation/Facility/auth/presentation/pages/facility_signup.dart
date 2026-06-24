@@ -1,6 +1,6 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,18 +25,29 @@ class FacilitySignup extends StatefulWidget {
 class _FacilitySignupState extends State<FacilitySignup> {
   final _formKey = GlobalKey<FormState>();
   late final FacilityAuthCubit _cubit;
+  late final FileHandlerCubit _fileHandlerCubit;
+  bool _isCubitInitialized = false;
 
   @override
   void initState() {
     super.initState();
     _cubit = getIt<FacilityAuthCubit>();
-    FileHandlerCubit.get(context).clearFile();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isCubitInitialized) {
+      _fileHandlerCubit = FileHandlerCubit.get(context);
+      _fileHandlerCubit.clearFile();
+      _isCubitInitialized = true;
+    }
   }
 
   @override
   void dispose() {
     _cubit.close();
-    FileHandlerCubit.get(context).clearFile();
+    _fileHandlerCubit.clearFile();
     super.dispose();
   }
 

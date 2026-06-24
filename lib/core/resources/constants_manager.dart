@@ -113,6 +113,9 @@ class AppConstants {
       case "pharmacy":
         return AppRoutesNames.pharmacyLayout;
       case "facility":
+      case "lab":
+      case "radiology center":
+      case "radiology":
         return AppRoutesNames.facilityLayout;
       default:
         return AppRoutesNames.patientLayout;

@@ -1,4 +1,4 @@
-import '../../data/models/Report_analysis.dart';
+﻿import '../../data/models/report_analysis.dart';
 
 sealed class AiReportState {}
 

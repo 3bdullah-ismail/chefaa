@@ -153,8 +153,7 @@ class _DoctorHomeState extends State<DoctorHome> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: clinics.length > 2 ? 2 : clinics.length,
-                        separatorBuilder: (_, __) =>
-                        const SizedBox(height: 15),
+                        separatorBuilder: (_, _) => const SizedBox(height: 15),
                         itemBuilder: (_, index) {
                           final clinic = clinics[index];
                           return ClinicCard(

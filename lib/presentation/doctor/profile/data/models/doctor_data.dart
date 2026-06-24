@@ -5,26 +5,24 @@ import 'clinics.dart';
 class DoctorData extends DoctorProfileEntity {
   DoctorData({
     this.id,
-    this.specialization,
-    this.age,
-    this.yearsOfExperience,
+    super.specialization,
+    super.age,
+    super.yearsOfExperience,
     this.image,
-    this.about,
-    this.degrees,
-    this.gender,
-    this.rating,
-    this.paymentOption,
-    this.prePaymentNumbers,
-    this.clinicConsultationPrice,
+    super.about,
+    super.degrees,
+    super.gender,
+    double? rating,
+    super.paymentOption,
+    super.prePaymentNumbers,
+    super.clinicConsultationPrice,
     this.clinicsData,
     this.reviewsData,
-    this.contactNumber,
+    super.contactNumber,
     this.membershipPdf,
-    this.name,
+    super.name,
     this.email,
   }) : super(
-         name: name,
-         specialization: specialization,
          location: clinicsData != null && clinicsData.isNotEmpty
              ? clinicsData.first.address ?? ''
              : '',
@@ -32,15 +30,6 @@ class DoctorData extends DoctorProfileEntity {
          clinics: clinicsData?.length ?? 0,
          rating: rating ?? 0.0,
          reviews: reviewsData?.length ?? 0,
-         yearsOfExperience: yearsOfExperience,
-         about: about,
-         age: age,
-         paymentOption: paymentOption,
-         gender: gender,
-         contactNumber: contactNumber,
-         degrees: degrees,
-         prePaymentNumbers: prePaymentNumbers,
-         clinicConsultationPrice: clinicConsultationPrice,
        );
 
   DoctorData.fromJson(dynamic json)
@@ -73,35 +62,12 @@ class DoctorData extends DoctorProfileEntity {
         email: json['email'] as String?,
       );
 
+  // Only fields NOT present in DoctorProfileEntity
   String? id;
-  @override
-  String? specialization;
-  @override
-  int? age;
-  @override
-  int? yearsOfExperience;
   String? image;
-  @override
-  String? about;
-  @override
-  List<dynamic>? degrees;
-  @override
-  String? gender;
-  @override
-  double? rating;
-  @override
-  String? paymentOption;
-  @override
-  List<dynamic>? prePaymentNumbers;
-  @override
-  num? clinicConsultationPrice;
   List<Clinics>? clinicsData;
   List<dynamic>? reviewsData;
-  @override
-  String? contactNumber;
   String? membershipPdf;
-  @override
-  String? name;
   String? email;
 
   Map<String, dynamic> toJson() {

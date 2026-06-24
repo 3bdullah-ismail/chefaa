@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/medication/presentation/widgets/basic_info_section.dart';
+﻿import 'package:chefaa/presentation/patient/medication/presentation/widgets/basic_info_section.dart';
 import 'package:chefaa/presentation/patient/medication/presentation/widgets/medication_schedule_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,12 +10,11 @@ import '../../../../../../../core/resources/constants_manager.dart';
 import '../../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../../core/resources/values_manager.dart';
 import '../../../../../../../core/widget/custom_btn.dart';
+import '../../../../../../../core/widget/delete_confirmation_dialog.dart';
 import '../../../../../../../core/widget/inspector_bottom_sheet_container.dart';
-import 'package:chefaa/presentation/patient/home/presentation/widgets/ai_suggestion.dart';
-import '../../data/models/Medications.dart';
+import '../../data/models/medications.dart';
 import '../manager/medication_cubit.dart';
 import '../manager/medication_state.dart';
-import '../../../../../../../core/widget/delete_confirmation_dialog.dart';
 import 'outline_button.dart';
 
 class MedicationBottomSheet extends StatefulWidget {
@@ -254,8 +253,6 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
                               : Alignment.centerLeft,
                         ),
 
-                        20.verticalSpace,
-                        const AiSuggestion(),
                         20.verticalSpace,
 
                         CustomBtn(

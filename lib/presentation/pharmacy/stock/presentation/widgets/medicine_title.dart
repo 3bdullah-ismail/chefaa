@@ -50,7 +50,7 @@ class MedicineTile extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: statusColor.withOpacity(0.15),
+                  color: statusColor.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -74,7 +74,10 @@ class MedicineTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding:const  EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p2),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p8,
+                  vertical: AppPadding.p2,
+                ),
                 decoration: BoxDecoration(
                   color: ColorManager.primary.withAlpha(50),
                   borderRadius: BorderRadius.circular(20),

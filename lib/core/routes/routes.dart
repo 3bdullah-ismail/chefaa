@@ -7,9 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/config/get_config.dart';
-import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
-import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
-import '../../presentation/Facility/layout/dashboard/presentation/pages/facility_results_page.dart';
+import '../../presentation/facility/auth/presentation/pages/facility_signup.dart';
+import '../../presentation/facility/dashboard/presentation/pages/facility_results_page.dart';
+import '../../presentation/facility/dashboard/presentation/pages/create_patient_request_page.dart';
+import '../../presentation/facility/layout/presentation/pages/facility_layout.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';
@@ -40,6 +41,8 @@ import '../../presentation/patient/search/presentation/pages/search_page.dart';
 import '../../presentation/patient/search/presentation/pages/speciality_page.dart';
 import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
 import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
+import 'package:chefaa/presentation/patient/lab_results/presentation/pages/lab_results_page.dart';
+import 'package:chefaa/presentation/patient/lab_results/presentation/manager/lab_results_cubit.dart';
 import 'app_routes_names.dart';
 
 class Routes {
@@ -88,15 +91,15 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const OptionScreen()),
         );
-        case AppRoutesNames.checkoutPage:
+      case AppRoutesNames.checkoutPage:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const CheckoutPage()),
         );
-        case AppRoutesNames.paymentPage:
+      case AppRoutesNames.paymentPage:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const PaymentPage()),
         );
-        case AppRoutesNames.trackOrderPage:
+      case AppRoutesNames.trackOrderPage:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const TrackOrderPage()),
         );
@@ -247,6 +250,10 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const FacilityResultsPage()),
         );
+      case AppRoutesNames.createPatientRequest:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const CreatePatientRequestPage()),
+        );
       case AppRoutesNames.chooseDoctor:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const ChooseDoctor()),
@@ -254,6 +261,13 @@ class Routes {
       case AppRoutesNames.locationFilter:
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(const LocationFilter()),
+        );
+      case AppRoutesNames.labResultsPage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => getIt<LabResultsCubit>()..getLabResults(),
+            child: _wrapWithCanPop(const LabResultsPage()),
+          ),
         );
       default:
         return MaterialPageRoute(

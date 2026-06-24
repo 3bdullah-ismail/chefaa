@@ -1,28 +1,47 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../../../../../core/config/get_config.dart';
 import '../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
+import '../../data/remote/models/search_centers_response.dart';
+import '../manager/lab_search_cubit.dart';
+import '../manager/lab_search_state.dart';
 import '../widgets/center_recommendation_card.dart';
 import '../widgets/filter_chip_item.dart';
 
-class FindLabPage extends StatefulWidget {
+class FindLabPage extends StatelessWidget {
   const FindLabPage({super.key});
 
   @override
-  State<FindLabPage> createState() => _FindLabPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => getIt<LabSearchCubit>()..searchCenters(),
+      child: const _FindLabView(),
+    );
+  }
 }
 
-class _FindLabPageState extends State<FindLabPage> {
+class _FindLabView extends StatefulWidget {
+  const _FindLabView();
+
+  @override
+  State<_FindLabView> createState() => _FindLabViewState();
+}
+
+class _FindLabViewState extends State<_FindLabView> {
   final TextEditingController _searchController = TextEditingController();
   int _selectedFilterIndex = 0;
+  Timer? _debounce;
 
   GoogleMapController? _mapController;
   final bool _canShowMyLocation = true;
@@ -32,50 +51,39 @@ class _FindLabPageState extends State<FindLabPage> {
   BitmapDescriptor? _customIcon;
 
   final List<String> _filters = ["All", "Lab only", "Radiology", "Home scan"];
-  final List<Map<String, dynamic>> _centers = [
-    {
-      "name": "Cairo MRI Center",
-      "location": "Maadi Degla • 0.4 km away",
-      "rating": "4.8",
-      "ratingCount": "",
-      "price": "EGP 1,200",
-      "image": ImageAssets.mri,
-      "tag": "NEAREST",
-    },
-    {
-      "name": "Maadi Lab Professionals",
-      "location": "Victory Square • 1.2 km away",
-      "rating": "4.5",
-      "ratingCount": "",
-      "price": "EGP 450",
-      "image": ImageAssets.labBackground,
-      "tag": "CHEAPEST",
-    },
-    {
-      "name": "Al-Salam Specialized",
-      "location": "Corniche Road • 3.5 km away",
-      "rating": "5.0",
-      "ratingCount": " (2k+ reviews)",
-      "price": "EGP 2,800",
-      "image": ImageAssets.ct,
-      "tag": "TOP RATED",
-    },
-    {
-      "name": "Degla Rapid Diagnostics",
-      "location": "Street 9 • 1.8 km away",
-      "rating": "4.2",
-      "ratingCount": "",
-      "price": "EGP 950",
-      "image": ImageAssets.xRay,
-      "tag": "FASTEST",
-    },
-  ];
 
   @override
   void dispose() {
     _searchController.dispose();
     _mapController?.dispose();
+    _debounce?.cancel();
     super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      _triggerSearch();
+    });
+  }
+
+  void _triggerSearch() {
+    context.read<LabSearchCubit>().searchCenters(
+      requiredServices: _searchController.text.trim().isNotEmpty
+          ? _searchController.text.trim()
+          : null,
+      homeService: _selectedFilterIndex == 3 ? true : null,
+    );
+  }
+
+  List<CenterModel> _getFilteredCenters(List<CenterModel> originalCenters) {
+    var list = originalCenters;
+    if (_selectedFilterIndex == 1) {
+      list = list.where((c) => c.facilityType?.toLowerCase() == 'lab').toList();
+    } else if (_selectedFilterIndex == 2) {
+      list = list.where((c) => c.facilityType?.toLowerCase() == 'scan' || c.facilityType?.toLowerCase() == 'both').toList();
+    }
+    return list;
   }
 
   @override
@@ -100,15 +108,76 @@ class _FindLabPageState extends State<FindLabPage> {
                   text: "Search labs, radiology, or services...",
                   prefixIcon: IconsAssets.searchIcon,
                   isSearch: true,
+                  onChanged: _onSearchChanged,
                 ),
                 20.verticalSpace,
                 _buildFilterList(),
                 20.verticalSpace,
-                _buildMapSection(),
-                24.verticalSpace,
-                _buildSectionHeader(),
-                16.verticalSpace,
-                _buildRecommendedList(),
+                BlocBuilder<LabSearchCubit, LabSearchState>(
+                  builder: (context, state) {
+                    List<CenterModel> centers = [];
+                    bool isLoading = false;
+                    String? error;
+
+                    if (state is LabSearchLoading) {
+                      isLoading = true;
+                    } else if (state is LabSearchSuccess) {
+                      centers = _getFilteredCenters(state.response.centers ?? []);
+                    } else if (state is LabSearchError) {
+                      error = state.error;
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildMapSection(centers.length),
+                        24.verticalSpace,
+                        _buildSectionHeader(),
+                        16.verticalSpace,
+                        if (isLoading)
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 40),
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
+                        else if (error != null)
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                              child: Column(
+                                children: [
+                                  const Icon(Icons.error_outline, size: 48, color: ColorManager.error),
+                                  16.verticalSpace,
+                                  Text(error, textAlign: TextAlign.center),
+                                  16.verticalSpace,
+                                  ElevatedButton(
+                                    onPressed: _triggerSearch,
+                                    child: const Text("Try Again"),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        else if (centers.isEmpty)
+                          Center(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 40),
+                              child: Text(
+                                "No centers found",
+                                style: getMediumStyle(
+                                  color: ColorManager.gray,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ),
+                          )
+                        else
+                          _buildRecommendedList(centers),
+                      ],
+                    );
+                  },
+                ),
               ],
             ),
           ),
@@ -168,7 +237,7 @@ class _FindLabPageState extends State<FindLabPage> {
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: _filters.length,
-        separatorBuilder: (_, __) => 8.horizontalSpace,
+        separatorBuilder: (_, _) => 8.horizontalSpace,
         itemBuilder: (context, index) {
           return FilterChipItem(
             label: _filters[index],
@@ -177,6 +246,7 @@ class _FindLabPageState extends State<FindLabPage> {
               setState(() {
                 _selectedFilterIndex = index;
               });
+              _triggerSearch();
             },
           );
         },
@@ -184,7 +254,7 @@ class _FindLabPageState extends State<FindLabPage> {
     );
   }
 
-  Widget _buildMapSection() {
+  Widget _buildMapSection(int centersCount) {
     return Container(
       height: 160.h,
       decoration: BoxDecoration(
@@ -233,7 +303,7 @@ class _FindLabPageState extends State<FindLabPage> {
                 border: Border.all(color: ColorManager.input, width: 1.w),
               ),
               child: Text(
-                "12 Centers found in Maadi",
+                "$centersCount Centers found in Maadi",
                 style: getMediumStyle(
                   color: ColorManager.black,
                   fontSize: 12.sp,
@@ -262,13 +332,13 @@ class _FindLabPageState extends State<FindLabPage> {
     );
   }
 
-  Widget _buildRecommendedList() {
+  Widget _buildRecommendedList(List<CenterModel> centers) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: _centers.length,
+      itemCount: centers.length,
       itemBuilder: (context, index) {
-        return CenterRecommendationCard(centerData: _centers[index]);
+        return CenterRecommendationCard(centerData: centers[index]);
       },
     );
   }

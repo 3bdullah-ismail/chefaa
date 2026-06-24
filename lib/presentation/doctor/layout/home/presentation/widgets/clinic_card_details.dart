@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/doctor/layout/home/data/models/Clinic.dart';
+﻿import 'package:chefaa/presentation/doctor/layout/home/data/models/clinic.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/schedule_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

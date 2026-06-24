@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/patient/medication/data/models/Medication_list.dart';
+﻿import 'package:chefaa/presentation/patient/medication/data/models/medication_list.dart';
 
-import '../models/Confirm_medication.dart';
-import '../models/Medication_response.dart';
+import '../models/confirm_medication.dart';
+import '../models/medication_response.dart';
 
 abstract class MedicationRepo {
   Future<MedicationResponse> addMedication({

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../data/models/Clinic.dart';
+import '../../data/models/clinic.dart';
 import '../../data/repositories/clinic_repo.dart';
 import 'clinic_state.dart';
 
@@ -12,7 +12,7 @@ class ClinicCubit extends Cubit<ClinicState> {
 
   ClinicCubit(this.clinicRepo) : super(ClinicInitialState());
 
-  static ClinicCubit get(context) => BlocProvider.of(context);
+  static ClinicCubit get(BuildContext context) => BlocProvider.of(context);
 
   final nameController = TextEditingController();
   final addressController = TextEditingController();
@@ -45,7 +45,6 @@ class ClinicCubit extends Cubit<ClinicState> {
   final Map<String, TimeOfDay?> openTimes = {};
   final Map<String, TimeOfDay?> closeTimes = {};
 
-
   int _toMinutes(TimeOfDay t) => t.hour * 60 + t.minute;
 
   Map<String, dynamic> _buildLocation() {
@@ -59,9 +58,7 @@ class ClinicCubit extends Cubit<ClinicState> {
   }
 
   List<Map<String, dynamic>> _buildDays() {
-    return selectedDays.entries
-        .where((e) => e.value)
-        .map((e) {
+    return selectedDays.entries.where((e) => e.value).map((e) {
       final open = openTimes[e.key];
       final close = closeTimes[e.key];
 
@@ -71,8 +68,7 @@ class ClinicCubit extends Cubit<ClinicState> {
         "open": open != null ? _toMinutes(open) : 0,
         "close": close != null ? _toMinutes(close) : 0,
       };
-    })
-        .toList();
+    }).toList();
   }
 
   Map<String, dynamic> _buildSchedule() {
@@ -83,7 +79,6 @@ class ClinicCubit extends Cubit<ClinicState> {
       "patientsPerSlot": int.tryParse(patientsPerSlotController.text) ?? 1,
     };
   }
-
 
   void onDayTap(String day) {
     selectedDays[day] = !(selectedDays[day] ?? false);
@@ -131,7 +126,6 @@ class ClinicCubit extends Cubit<ClinicState> {
     }
   }
 
-
   Future<void> getClinicByID({required String clinicID}) async {
     emit(ClinicLoadingState());
     try {
@@ -147,6 +141,7 @@ class ClinicCubit extends Cubit<ClinicState> {
       emit(ClinicErrorState(message: e.toString()));
     }
   }
+
   Future<void> updateClinic({required String clinicID}) async {
     emit(ClinicEditLoadingState());
 
@@ -191,14 +186,11 @@ class ClinicCubit extends Cubit<ClinicState> {
     try {
       final clinics = await clinicRepo.getClinics(doctorID: doctorID);
 
-      emit(ClinicsSuccessState(
-        clinics: clinics.clinics ?? [],
-      ));
+      emit(ClinicsSuccessState(clinics: clinics.clinics ?? []));
     } catch (e) {
       emit(ClinicsErrorState(message: e.toString()));
     }
   }
-
 
   void fillFromClinic(Clinic clinic) {
     currentClinic = clinic;

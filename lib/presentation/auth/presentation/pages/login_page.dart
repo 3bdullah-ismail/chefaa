@@ -71,12 +71,13 @@ class _LoginPageState extends State<LoginPage> {
                         context: context,
                         barrierDismissible: false,
                         builder: (context) {
+                          final navigator = Navigator.of(context);
                           Future.microtask(() async {
                             await Future.delayed(
                               const Duration(milliseconds: 1500),
                             );
                             if (mounted) {
-                              Navigator.of(context).pop();
+                              navigator.pop();
                               _navigationService.toLayout(state.user.role!);
                             }
                           });
@@ -169,12 +170,13 @@ class _LoginPageState extends State<LoginPage> {
                                   context: context,
                                   barrierDismissible: false,
                                   builder: (context) {
+                                    final navigator = Navigator.of(context);
                                     Future.microtask(() async {
                                       await Future.delayed(
                                         const Duration(milliseconds: 1500),
                                       );
                                       if (mounted) {
-                                        Navigator.of(context).pop();
+                                        navigator.pop();
                                         _navigationService.toLayout(
                                           state.user.role!,
                                         );
@@ -203,25 +205,26 @@ class _LoginPageState extends State<LoginPage> {
 
                                   if (idToken != null) {
                                     googleSignInCubit.signInWithGoogle(idToken);
-                                  } else {
+                                  } else if (mounted) {
                                     AnimatedSnackBar.rectangle(
                                       'Error',
                                       'Failed to retrieve Google ID token.',
                                       type: AnimatedSnackBarType.error,
                                       brightness: Brightness.dark,
                                       duration: const Duration(seconds: 3),
-                                    ).show(context);
+                                    ).show(this.context);
                                   }
                                 } catch (e) {
-                                  if (e is! Exception ||
-                                      !e.toString().contains('cancel')) {
+                                  if (mounted &&
+                                      (e is! Exception ||
+                                          !e.toString().contains('cancel'))) {
                                     AnimatedSnackBar.rectangle(
                                       'Error',
                                       e.toString(),
                                       type: AnimatedSnackBarType.error,
                                       brightness: Brightness.dark,
                                       duration: const Duration(seconds: 3),
-                                    ).show(context);
+                                    ).show(this.context);
                                   }
                                 }
                               },

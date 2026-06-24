@@ -19,10 +19,7 @@ class ProfileHeader extends StatelessWidget {
               width: double.infinity,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    ColorManager.primary,
-                    ColorManager.lightBlue,
-                  ],
+                  colors: [ColorManager.primary, ColorManager.lightBlue],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -42,7 +39,7 @@ class ProfileHeader extends StatelessWidget {
                 ),
                 child: CircleAvatar(
                   radius: 40.r,
-                  backgroundColor: ColorManager.primary.withOpacity(0.08),
+                  backgroundColor: ColorManager.primary.withValues(alpha: 0.08),
                   child: Icon(
                     Icons.local_pharmacy_rounded,
                     color: ColorManager.primary,
@@ -69,10 +66,7 @@ class ProfileHeader extends StatelessWidget {
 
         Text(
           "Pharmacy ID #2548",
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: Colors.grey.shade500,
-          ),
+          style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade500),
         ),
 
         SizedBox(height: 14.h),

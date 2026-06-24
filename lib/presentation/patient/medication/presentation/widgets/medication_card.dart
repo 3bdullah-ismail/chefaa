@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -6,7 +6,7 @@ import '../../../../../../../core/resources/assets_manager.dart';
 import '../../../../../../../core/resources/color_manager.dart';
 import '../../../../../../../core/resources/constants_manager.dart';
 import '../../../../../../../core/resources/styles_manager.dart';
-import '../../data/models/Medications.dart';
+import '../../data/models/medications.dart';
 import 'outline_button.dart';
 
 class MedicationCard extends StatelessWidget {

@@ -5,11 +5,7 @@ class HeroBanner extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onCart;
 
-  const HeroBanner({
-    super.key,
-    required this.onBack,
-    required this.onCart,
-  });
+  const HeroBanner({super.key, required this.onBack, required this.onCart});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +17,7 @@ class HeroBanner extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                ColorManager.primary.withOpacity(0.07),
+                ColorManager.primary.withValues(alpha: 0.07),
                 const Color(0xffF1F5F9),
               ],
               begin: Alignment.topCenter,
@@ -70,24 +66,17 @@ class _CircularIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const _CircularIconButton({
-    required this.icon,
-    required this.onTap,
-  });
+  const _CircularIconButton({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
+        color: Colors.white.withValues(alpha: 0.9),
         shape: BoxShape.circle,
       ),
       child: IconButton(
-        icon: Icon(
-          icon,
-          size: 25,
-          color: ColorManager.primary,
-        ),
+        icon: Icon(icon, size: 25, color: ColorManager.primary),
         onPressed: onTap,
       ),
     );

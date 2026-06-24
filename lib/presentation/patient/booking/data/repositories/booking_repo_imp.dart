@@ -1,5 +1,5 @@
-import 'package:chefaa/presentation/patient/booking/data/models/Booking.dart';
-import 'package:chefaa/presentation/patient/booking/data/models/Slots.dart';
+﻿import 'package:chefaa/presentation/patient/booking/data/models/booking.dart';
+import 'package:chefaa/presentation/patient/booking/data/models/slots.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

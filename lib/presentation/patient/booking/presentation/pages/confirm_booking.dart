@@ -37,7 +37,7 @@ class ConfirmBooking extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.08),
+                      color: Colors.black.withValues(alpha: 0.08),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -48,7 +48,7 @@ class ConfirmBooking extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
-                        color: ColorManager.primary.withOpacity(0.15),
+                        color: ColorManager.primary.withValues(alpha: 0.15),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
@@ -184,28 +184,40 @@ class ConfirmBooking extends StatelessWidget {
                           onPressed: state is BookingLoadingState
                               ? () {}
                               : () async {
-
-
                                   final canProceed = cubit
                                       .onConfirmBookingPressed();
                                   if (!canProceed) return;
 
-                                  final isCard = cubit.selectedPaymentMethod == PaymentMethod.creditCard;
+                                  final isCard =
+                                      cubit.selectedPaymentMethod ==
+                                      PaymentMethod.creditCard;
 
                                   await cubit.bookAppointment(
                                     clinicId: cubit.selectedClinic!.clinicId,
                                     isFollowUp: false,
-                                    paymentOption: isCard ? "prePay" : "atClinic",
+                                    paymentOption: isCard
+                                        ? "prePay"
+                                        : "atClinic",
 
-                                    cardNumber: isCard ? cubit.cardNumberController.text : null,
+                                    cardNumber: isCard
+                                        ? cubit.cardNumberController.text
+                                        : null,
                                     expiryMonth: isCard
-                                        ? cubit.expiryDateController.text.split("/")[0]
+                                        ? cubit.expiryDateController.text.split(
+                                            "/",
+                                          )[0]
                                         : null,
                                     expiryYear: isCard
-                                        ? cubit.expiryDateController.text.split("/")[1]
+                                        ? cubit.expiryDateController.text.split(
+                                            "/",
+                                          )[1]
                                         : null,
-                                    cvv: isCard ? cubit.cvvController.text : null,
-                                    cardholderName: isCard ? cubit.cardHolderNameController.text : null,
+                                    cvv: isCard
+                                        ? cubit.cvvController.text
+                                        : null,
+                                    cardholderName: isCard
+                                        ? cubit.cardHolderNameController.text
+                                        : null,
                                   );
                                 },
                         ),

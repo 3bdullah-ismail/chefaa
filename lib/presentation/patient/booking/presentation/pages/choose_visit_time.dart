@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../core/resources/assets_manager.dart';
 import '../../../../../core/resources/color_manager.dart';
@@ -69,8 +68,7 @@ class ChooseVisitTime extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  cubit.selectedClinic?.doctorSpecialty ??
-                                      "",
+                                  cubit.selectedClinic?.doctorSpecialty ?? "",
                                   style: getMediumStyle(
                                     color: ColorManager.gray,
                                     fontSize: 13,
@@ -105,10 +103,8 @@ class ChooseVisitTime extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 shrinkWrap: true,
                                 physics: const ClampingScrollPhysics(),
-                                itemCount: cubit
-                                    .selectedClinic!
-                                    .availableDays
-                                    .length,
+                                itemCount:
+                                    cubit.selectedClinic!.availableDays.length,
                                 itemBuilder: (context, index) {
                                   final date = cubit
                                       .selectedClinic!
@@ -216,12 +212,12 @@ class ChooseVisitTime extends StatelessWidget {
 
                     if (state is GetSlotsLoadingState)
                       const Center(
-                        child: CircularProgressIndicator(color: ColorManager.primary,),
+                        child: CircularProgressIndicator(
+                          color: ColorManager.primary,
+                        ),
                       )
                     else if (cubit.slots.isEmpty)
-                      const Center(
-                        child: Text("No available time slots"),
-                      )
+                      const Center(child: Text("No available time slots"))
                     else
                       GridView.builder(
                         shrinkWrap: true,
@@ -253,7 +249,9 @@ class ChooseVisitTime extends StatelessWidget {
                                 border: Border.all(
                                   color: isSelected
                                       ? ColorManager.primary
-                                      : ColorManager.input.withValues(alpha: 0.5),
+                                      : ColorManager.input.withValues(
+                                          alpha: 0.5,
+                                        ),
                                 ),
                                 boxShadow: [
                                   BoxShadow(

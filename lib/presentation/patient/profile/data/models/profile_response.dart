@@ -5,7 +5,7 @@ class ProfileResponse extends UserProfileEntity {
     required this.id,
     required this.userId,
     required this.address,
-    required this.age,
+    required super.age,
     required this.gender,
     required this.height,
     required this.weight,
@@ -19,7 +19,6 @@ class ProfileResponse extends UserProfileEntity {
   }) : super(
          userName: userId?.name,
          userAddress: address,
-         age: age,
          userGender: gender,
          userHeight: height,
          userWeight: weight,
@@ -53,7 +52,6 @@ class ProfileResponse extends UserProfileEntity {
   final String? id;
   final UserId? userId;
   final String? address;
-  final num? age;
   final String? gender;
   final num? height;
   final num? weight;

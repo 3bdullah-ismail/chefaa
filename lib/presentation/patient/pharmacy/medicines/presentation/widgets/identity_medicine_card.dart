@@ -5,20 +5,21 @@ import '../../../../../../core/resources/color_manager.dart';
 class IdentityMedicineCard extends StatelessWidget {
   final String name;
   final String activeIngredient;
-  const IdentityMedicineCard({super.key,
+  const IdentityMedicineCard({
+    super.key,
     required this.name,
     required this.activeIngredient,
   });
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: ColorManager.primary.withOpacity(0.1),
+            color: ColorManager.primary.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: const Text(

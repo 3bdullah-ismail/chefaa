@@ -1,11 +1,11 @@
-import 'package:chefaa/core/resources/color_manager.dart';
+﻿import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/Report_analysis.dart';
+import '../../data/models/report_analysis.dart';
 import '../widgets/ai_summary.dart';
 import '../widgets/ai_tips.dart';
 import '../widgets/health_indicator.dart';
