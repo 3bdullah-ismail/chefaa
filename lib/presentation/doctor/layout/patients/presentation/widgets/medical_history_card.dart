@@ -6,7 +6,14 @@ import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 
 class MedicalHistoryCard extends StatelessWidget {
-  const MedicalHistoryCard({super.key});
+  final List<String> allergies;
+  final List<String> chronicConditions;
+
+  const MedicalHistoryCard({
+    super.key,
+    this.allergies = const [],
+    this.chronicConditions = const [],
+  });
 
   Widget _sectionTitle(String title) {
     return Align(
@@ -48,6 +55,9 @@ class MedicalHistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allergyItems = allergies.isEmpty ? ['None'] : allergies;
+    final conditionItems = chronicConditions.isEmpty ? ['None'] : chronicConditions;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -67,16 +77,16 @@ class MedicalHistoryCard extends StatelessWidget {
           children: [
             _sectionTitle('Allergies'),
             _wrapList([
-              _chip('Peanuts', ColorManager.primary),
-              _chip('Penicillin', ColorManager.primary),
+              ...allergyItems.map((item) => _chip(item, ColorManager.primary)),
             ]),
 
             SizedBox(height: 16.h),
 
             _sectionTitle('Chronic Conditions'),
             _wrapList([
-              _chip('Diabetes', ColorManager.lawAnalysis),
-              _chip('Hypertension', ColorManager.lawAnalysis),
+              ...conditionItems.map(
+                (item) => _chip(item, ColorManager.lawAnalysis),
+              ),
             ]),
           ],
         ),

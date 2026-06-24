@@ -5,18 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LabTests extends StatelessWidget {
-  const LabTests({super.key});
+  final List<String> tests;
+  const LabTests({super.key, required this.tests});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> tests = [
-      "CBC",
-      "Lipid Profile",
-      "Liver Function",
-      "HbA1c",
-      "Vitamin D",
-      "Iron Test",
-    ];
+    // final List<String> tests = [
+    //   "CBC",
+    //   "Lipid Profile",
+    //   "Liver Function",
+    //   "HbA1c",
+    //   "Vitamin D",
+    //   "Iron Test",
+    // ];
 
     return Container(
       width: double.infinity,

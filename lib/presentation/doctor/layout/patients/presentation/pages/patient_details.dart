@@ -1,11 +1,18 @@
 import 'package:chefaa/core/widget/inside_app_bar.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/presentation/manager/patients_cubit.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/patient_data_card.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/prescription_card.dart';
-import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/prescription_history.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
+import '../manager/patients_state.dart';
 import '../widgets/custom_switch_tab.dart';
+import '../widgets/empty_prescription_card.dart';
+import '../widgets/prescription_history_bottom_sheet.dart';
+import '../widgets/prescription_mini_card.dart';
 
 class PatientDetailsPage extends StatefulWidget {
   const PatientDetailsPage({super.key});
@@ -17,28 +24,25 @@ class PatientDetailsPage extends StatefulWidget {
 class _PatientDetailsPageState extends State<PatientDetailsPage> {
   int selectedIndex = 0;
 
-  List upcomingPatients = [
-    {"name": "Ahmed Omar ", "lastVisit": "01/01/2024"},
-    {"name": "Sara Hashem", "lastVisit": "15/02/2024"},
-    {"name": "Omar Rafat", "lastVisit": "20/03/2024"},
-    {"name": "Mona Ali", "lastVisit": "10/04/2024"},
-  ];
-  List completedPatients = [
-    {"name": "Fares Samwel", "lastVisit": "01/01/2024"},
-    {"name": "Asmaa Ragab", "lastVisit": "15/02/2024"},
-    {"name": "Abeer Osama", "lastVisit": "20/03/2024"},
-    {"name": "Hanaa Ahmed", "lastVisit": "10/04/2024"},
-  ];
+  @override
+  @override
+  void initState() {
+    super.initState();
 
-  List get currentList {
-    return selectedIndex == 0 ? upcomingPatients : completedPatients;
+    final cubit = context.read<PatientsCubit>();
+    final appointment = cubit.selectedAppointment;
+
+    if (appointment?.id != null) {
+      cubit.getPrescriptionByAppointment(appointmentId: appointment.id!);
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(
-        preferredSize:  Size.fromHeight(100),
-        child: InsideAppBar(title: 'Patient Details',isLayout: true ,),
+        preferredSize: Size.fromHeight(100),
+        child: InsideAppBar(title: 'Patient Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -51,59 +55,146 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
             CustomSwitchTab(
               items: const ['Prescription', 'Patient Data', 'History'],
               onChanged: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
+                setState(() => selectedIndex = index);
+
+                final cubit = context.read<PatientsCubit>();
+                final appointment = cubit.selectedAppointment;
+
+                if (appointment?.id == null) return;
+
+                if (index == 0) {
+                  cubit.getPrescriptionByAppointment(
+                    appointmentId: appointment.id!,
+                  );
+                }
+
+                if (index == 2 && cubit.previousPrescriptions.isEmpty) {
+                  cubit.getPreviousPrescriptions(
+                    appointmentId: appointment.id!,
+                  );
+                }
               },
             ),
-
             const SizedBox(height: 10),
-
-            Expanded(
-              child:_buildContent(),
-            ),
+            Expanded(child: _buildContent()),
           ],
         ),
-      )
+      ),
     );
   }
+
   Widget _buildContent() {
     switch (selectedIndex) {
       case 0:
-        return const PrescriptionCard(
-      medications:[
-        {
-        "name": "Amoxicillin",
-        "dosage": "500 mg",
-        "frequency": "Every 8 hours",
-        "duration": "7 days",
-        },
-        {
-        "name": "Ibuprofen",
-        "dosage": "200 mg",
-        "frequency": "Twice daily after meals",
-        "duration": "5 days",
-        },
-        {
-        "name": "Salbutamol Inhaler",
-        "dosage": "2 puffs",
-        "frequency": "As needed",
-        "duration": " Use for 2 weeks",
-        },
-        {
-        "name": "Cetirizine",
-        "dosage": "10 mg",
-        "frequency": "Once daily at night",
-        "duration": "10 days",
-        },
-        ],
-        );
+        return _buildPrescriptionTab();
+
       case 1:
-        return const PatientDataCard();
+        final appointment = context.read<PatientsCubit>().selectedAppointment;
+
+        return PatientDataCard(data: appointment);
+
       case 2:
-        return const PrescriptionHistory();
+        return _buildHistoryTab();
+
       default:
         return const SizedBox();
     }
+  }
+
+  Widget _buildPrescriptionTab() {
+    return BlocBuilder<PatientsCubit, PatientsState>(
+      buildWhen: (prev, curr) =>
+      curr is PrescriptionByAppointmentLoadingState ||
+          curr is PrescriptionByAppointmentSuccessState ||
+          curr is PrescriptionByAppointmentErrorState,
+      builder: (context, state) {
+        if (state is PrescriptionByAppointmentLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final cubit = context.read<PatientsCubit>();
+        final prescription = cubit.currentPrescription;
+
+        final medications = (prescription?.data?.medicines ?? [])
+            .map<Map<String, String>>(
+              (m) => {
+            "name": m.name ?? "",
+            "dosage": m.dosage ?? "",
+            "frequency": m.frequency ?? "",
+            "duration": m.duration ?? "",
+          },
+        )
+            .toList();
+        if (medications.isEmpty) {
+          return const EmptyPrescriptionCard();
+        }
+
+        return PrescriptionCard(medications: medications, showAddButton: true);
+      },
+    );
+  }  Widget _buildHistoryTab() {
+    return BlocBuilder<PatientsCubit, PatientsState>(
+      buildWhen: (prev, curr) =>
+          curr is PrescriptionPreviousLoadingState ||
+          curr is PrescriptionPreviousSuccessState ||
+          curr is PrescriptionPreviousErrorState,
+      builder: (context, state) {
+        final cubit = context.read<PatientsCubit>();
+        final list = cubit.previousPrescriptions;
+
+        if (state is PrescriptionPreviousLoadingState && list.isEmpty) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (list.isEmpty) {
+          return const Center(child: Text("No prescriptions"));
+        }
+
+        return ListView.separated(
+          physics: const BouncingScrollPhysics(),
+          itemCount: list.length,
+          separatorBuilder: (_, _) => 10.verticalSpace,
+          itemBuilder: (context, index) {
+            final p = list[index];
+            final meds = (p.data?.medicines ?? [])
+                .map<Map<String, String>>(
+                  (m) => {
+                    "name": m.name ?? "",
+                    "dosage": m.dosage ?? "",
+                    "frequency": m.frequency ?? "",
+                    "duration": m.duration ?? "",
+                  },
+                )
+                .toList();
+
+            return PrescriptionMiniCard(
+              prescriptionName: p.data?.diagnosis ?? "Prescription",
+              date: p.data?.createdAt ?? "",
+              medsCount: meds.length,
+              status: "Completed",
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: ColorManager.lightGray,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),
+                  builder: (_) => BlocProvider.value(
+                    value: context.read<PatientsCubit>(),
+                    child: PrescriptionHistoryBottomSheet(
+                      prescription: p,
+                      medications: meds,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
   }
 }

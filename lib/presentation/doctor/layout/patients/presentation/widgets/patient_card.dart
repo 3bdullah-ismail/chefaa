@@ -9,6 +9,7 @@ class PatientCard extends StatelessWidget {
   final String name;
   final String lastVisit;
   final bool? isFollowingUp;
+  final String status;
   final void Function() onTap;
 
   const PatientCard({
@@ -16,6 +17,7 @@ class PatientCard extends StatelessWidget {
     required this.name,
     required this.lastVisit,
     required this.onTap,
+    required this.status,
     this.isFollowingUp = false,
   });
 
@@ -89,13 +91,13 @@ class PatientCard extends StatelessWidget {
                     vertical: AppPadding.p2,
                   ),
                   decoration: BoxDecoration(
-                    color: ColorManager.lightBlue,
+                    color: status=="completed"?ColorManager.lightGreen.withAlpha(50): ColorManager.lightBlue,
                     borderRadius: BorderRadius.circular(25.r),
                   ),
                   child: Text(
-                    "Upcoming",
+                    status,
                     style: getMediumStyle(
-                      color: ColorManager.primary,
+                      color: status=="completed"?ColorManager.lightGreen:ColorManager.primary,
                       fontSize: 13.sp,
                     ),
                   ),

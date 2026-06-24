@@ -1,10 +1,9 @@
-import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/presentation/pages/patient_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 import '../manager/patients_cubit.dart';
@@ -41,12 +40,6 @@ class _PatientsPageState extends State<PatientsPage> {
         ),
         child: BlocBuilder<PatientsCubit, PatientsState>(
           builder: (context, state) {
-            if (state is PatientsLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(color: ColorManager.primary),
-              );
-            }
-
             if (state is PatientsFailureState) {
               return Center(child: Text(state.errorMessage));
             }
@@ -64,8 +57,28 @@ class _PatientsPageState extends State<PatientsPage> {
                   const SizedBox(height: 10),
 
                   Expanded(
-                    child: state.currentList.isEmpty
-                        ? Center(
+                    child: Builder(
+                      builder: (_) {
+                        if (state.selectedIndex == 0 &&
+                            state.isUpcomingLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: ColorManager.primary,
+                            ),
+                          );
+                        }
+
+                        if (state.selectedIndex == 1 &&
+                            state.isCompletedLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: ColorManager.primary,
+                            ),
+                          );
+                        }
+
+                        if (state.currentList.isEmpty) {
+                          return Center(
                             child: Text(
                               state.selectedIndex == 0
                                   ? "No upcoming patients"
@@ -75,37 +88,68 @@ class _PatientsPageState extends State<PatientsPage> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                          )
-                        : ListView.separated(
-                            padding: const EdgeInsets.only(top: AppPadding.p18),
-                            separatorBuilder: (_, _) => 10.verticalSpace,
-                            itemCount: state.currentList.length,
-                            itemBuilder: (context, index) {
-                              final patient = state.currentList[index];
+                          );
+                        }
 
-                              return PatientCard(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    AppRoutesNames.patientDetailsPage,
-                                  );
-                                },
-                                isFollowingUp: patient.isFollowUp,
-                                name: patient.patient?.userId?.name ?? "",
-                                lastVisit: patient.date != null
-                                    ? DateFormat(
-                                        'dd/MM/yyyy',
-                                      ).format(DateTime.parse(patient.date!))
-                                    : "",
-                              );
-                            },
-                          ),
+                        return ListView.separated(
+                          padding: const EdgeInsets.only(top: AppPadding.p18),
+                          separatorBuilder: (_, _) => 10.verticalSpace,
+                          itemCount: state.currentList.length,
+                          itemBuilder: (context, index) {
+                            final patient = state.currentList[index];
+
+                            return PatientCard(
+                              onTap: () async {
+                                final cubit = context.read<PatientsCubit>();
+
+                                cubit.selectAppointment(patient);
+
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => BlocProvider.value(
+                                      value: cubit,
+                                      child: const PatientDetailsPage(),
+                                    ),
+                                  ),
+                                );
+
+                                await cubit.refreshCurrentTab();
+                              },
+                              isFollowingUp: patient.isFollowUp,
+                              name: patient.patient?.userId?.name ?? "",
+                              status: patient.status ?? "upcoming",
+                              lastVisit: patient.date != null
+                                  ? DateFormat(
+                                      'dd/MM/yyyy',
+                                    ).format(DateTime.parse(patient.date!))
+                                  : "",
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ],
               );
             }
 
-            return const SizedBox();
+            return Column(
+              children: [
+                CustomSwitchTab(
+                  items: const ['Upcoming', 'Completed'],
+                  onChanged: (_) {},
+                ),
+                const SizedBox(height: 10),
+                const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: ColorManager.primary,
+                    ),
+                  ),
+                ),
+              ],
+            );
           },
         ),
       ),

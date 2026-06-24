@@ -3,12 +3,16 @@ import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/
 import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/medical_history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
+import '../../data/models/Data.dart';
 
 class PatientDataCard extends StatelessWidget {
-  const PatientDataCard({super.key});
+  final Data? data;
+
+  const PatientDataCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +30,24 @@ class PatientDataCard extends StatelessWidget {
               style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
             ),
             15.verticalSpace,
-             DetailsCard(
+            DetailsCard(
               items: [
-                DetailItem(title: 'Full Name', value: 'Ganna Mohamed'),
-                DetailItem(title: 'Phone', value: '+1 234 567 890'),
-                DetailItem(title: 'Email', value: 'ganaa@gmail.com'),
-                DetailItem(title: 'Address', value: '123 Main Street'),
+                DetailItem(
+                  title: 'Full Name',
+                  value: data?.patient?.userId!.name ?? "",
+                ),
+                DetailItem(
+                  title: 'Phone',
+                  value: data?.patient?.userId?.phoneNumber ?? "",
+                ),
+                DetailItem(
+                  title: 'Email',
+                  value: data?.patient?.userId?.email ?? "",
+                ),
+                DetailItem(
+                  title: 'Address',
+                  value: data?.patient?.address ?? "",
+                ),
               ],
             ),
             30.verticalSpace,
@@ -42,10 +58,19 @@ class PatientDataCard extends StatelessWidget {
             15.verticalSpace,
             DetailsCard(
               items: [
-                DetailItem(title: 'Age', value: '28'),
-                DetailItem(title: 'Gender', value: 'Female'),
-                DetailItem(title: 'Blood Type', value: 'O+'),
-                DetailItem(title: 'Weight', value: '70 kg'),
+                DetailItem(
+                  title: 'Age',
+                  value: data?.patient?.age.toString() ?? "",
+                ),
+                DetailItem(title: 'Gender', value: data?.patient?.gender ?? ""),
+                DetailItem(
+                  title: 'Blood Type',
+                  value: data?.patient?.bloodType ?? "",
+                ),
+                DetailItem(
+                  title: 'Weight',
+                  value: data?.patient?.weight.toString() ?? "",
+                ),
               ],
             ),
             30.verticalSpace,
@@ -64,15 +89,24 @@ class PatientDataCard extends StatelessWidget {
 
             DetailsCard(
               items: [
-                DetailItem(title: 'Date', value: '16 May 2026'),
-                DetailItem(title: 'Time', value: '10:30 AM'),
-                DetailItem(title: 'Clinic', value: 'Al Noor Clinic'),
-                DetailItem(title: 'Payment', value: 'Cash'),
+                DetailItem(
+                  title: 'Date',
+                  value: data?.date?.toFormattedDate() ?? "",
+                ),
+                DetailItem(title: 'Time', value: data?.slotStart ?? ""),
+                DetailItem(title: 'Clinic', value: data?.clinic?.name ?? ""),
+                DetailItem(title: 'Payment', value: data?.paymentOption ?? ""),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+extension DateFormatting on String {
+  String toFormattedDate() {
+    return DateFormat('dd/MM/yyyy').format(DateTime.parse(this));
   }
 }
