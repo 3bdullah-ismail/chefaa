@@ -39,4 +39,6 @@ class AppRoutesNames {
   static const String trackOrderPage = '/trackOrderPage';
   static const String facilityResults = '/facilityResults';
   static const String findLabPage = '/findLabPage';
+  static const String createPatientRequest = '/createPatientRequest';
+  static const String labResultsPage = '/labResultsPage';
 }

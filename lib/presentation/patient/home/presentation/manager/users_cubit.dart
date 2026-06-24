@@ -8,7 +8,7 @@ import '../../data/users_domain/domain/user_usecase.dart';
 
 part 'users_state.dart';
 
-@injectable
+@lazySingleton
 class UsersCubit extends Cubit<UsersState> {
   final UserUseCase _userUseCase;
 
