@@ -11,12 +11,12 @@ class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-backgroundColor:  ColorManager.white,
+      backgroundColor: ColorManager.white,
       leading: const SizedBox(),
       titleSpacing: 0,
       elevation: 3,
       shadowColor: ColorManager.black.withAlpha(80),
-      shape:  RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30.r)),
       ),
       title: Row(
@@ -28,16 +28,10 @@ backgroundColor:  ColorManager.white,
                 height: 45.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: ColorManager.primary,
-                    width: 2,
-                  ),
+                  border: Border.all(color: ColorManager.primary, width: 2),
                 ),
                 child: ClipOval(
-                  child: Image.asset(
-                    ImageAssets.chatbot,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.asset(ImageAssets.chatbot, fit: BoxFit.cover),
                 ),
               ),
               Positioned(
@@ -49,10 +43,7 @@ backgroundColor:  ColorManager.white,
                   decoration: BoxDecoration(
                     color: ColorManager.lightGreen,
                     shape: BoxShape.circle,
-                    border: Border.all(
-                      color: ColorManager.white,
-                      width: 2,
-                    ),
+                    border: Border.all(color: ColorManager.white, width: 2),
                   ),
                 ),
               ),
@@ -67,19 +58,13 @@ backgroundColor:  ColorManager.white,
             children: [
               Text(
                 "Pharmacy Assistant",
-                style: getBoldStyle(
-                  color: ColorManager.black,
-                  fontSize: 16.sp,
-                ),
+                style: getBoldStyle(color: ColorManager.black, fontSize: 16.sp),
               ),
 
               SizedBox(height: 2.h),
               Text(
                 "Always here to help",
-                style: getMediumStyle(
-                  color: Colors.grey,
-                  fontSize: 12.sp,
-                ),
+                style: getMediumStyle(color: Colors.grey, fontSize: 12.sp),
               ),
             ],
           ),

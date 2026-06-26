@@ -18,7 +18,8 @@ class ServicesSearchBarWidget extends StatefulWidget {
   });
 
   @override
-  State<ServicesSearchBarWidget> createState() => _ServicesSearchBarWidgetState();
+  State<ServicesSearchBarWidget> createState() =>
+      _ServicesSearchBarWidgetState();
 }
 
 class _ServicesSearchBarWidgetState extends State<ServicesSearchBarWidget> {
@@ -61,10 +62,7 @@ class _ServicesSearchBarWidgetState extends State<ServicesSearchBarWidget> {
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
           hintText: "Search services, codes, or department",
-          hintStyle: getRegularStyle(
-            color: ColorManager.gray,
-            fontSize: 13.sp,
-          ),
+          hintStyle: getRegularStyle(color: ColorManager.gray, fontSize: 13.sp),
           prefixIcon: Icon(
             Icons.search_rounded,
             color: ColorManager.gray,

@@ -3,11 +3,7 @@ class LabResultsResponse {
   final num? count;
   final List<LabResultItem>? results;
 
-  LabResultsResponse({
-    this.success,
-    this.count,
-    this.results,
-  });
+  LabResultsResponse({this.success, this.count, this.results});
 
   factory LabResultsResponse.fromJson(Map<String, dynamic> json) {
     return LabResultsResponse(

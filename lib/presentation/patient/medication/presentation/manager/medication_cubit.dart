@@ -98,7 +98,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-
   Future<void> updateMedication({required String medicationId}) async {
     emit(MedicationUpdateLoadingState());
 
@@ -127,7 +126,6 @@ class MedicationCubit extends Cubit<MedicationState> {
     }
   }
 
-
   Future<void> deleteMedication(String medicationId) async {
     emit(MedicationDeleteLoadingState());
 
@@ -143,7 +141,6 @@ class MedicationCubit extends Cubit<MedicationState> {
       emit(MedicationDeleteErrorState(errorMessage: e.toString()));
     }
   }
-
 
   Future<void> confirmMedication(String medicationId) async {
     emit(MedicationConfirmLoadingState());

@@ -11,10 +11,7 @@ import '../../data/models/patient_detail_data.dart';
 class DetailedAnalysisCard extends StatelessWidget {
   final PatientDetailData detail;
 
-  const DetailedAnalysisCard({
-    super.key,
-    required this.detail,
-  });
+  const DetailedAnalysisCard({super.key, required this.detail});
 
   @override
   Widget build(BuildContext context) {

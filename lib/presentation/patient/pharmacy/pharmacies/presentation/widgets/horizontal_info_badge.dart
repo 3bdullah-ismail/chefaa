@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 
@@ -23,10 +22,7 @@ class HorizontalInfoBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(right: 12),
-      padding: EdgeInsets.symmetric(
-        horizontal: 14.w,
-        vertical: 12.h,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: ColorManager.lightBlue.withAlpha(50),
         borderRadius: BorderRadius.circular(20.r),
@@ -41,11 +37,7 @@ class HorizontalInfoBadge extends StatelessWidget {
               color: color.withAlpha(50),
               borderRadius: BorderRadius.circular(14.r),
             ),
-            child: Icon(
-              icon,
-              color: color,
-              size: 20.sp,
-            ),
+            child: Icon(icon, color: color, size: 20.sp),
           ),
 
           12.horizontalSpace,
@@ -66,10 +58,7 @@ class HorizontalInfoBadge extends StatelessWidget {
 
               Text(
                 value,
-                style: getBoldStyle(
-                  color: ColorManager.black,
-                  fontSize: 14.sp,
-                ),
+                style: getBoldStyle(color: ColorManager.black, fontSize: 14.sp),
               ),
             ],
           ),

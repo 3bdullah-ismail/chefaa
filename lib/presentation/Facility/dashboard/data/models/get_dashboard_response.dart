@@ -17,7 +17,8 @@ class GetDashboardResponse {
     if (json.containsKey('stats') || json.containsKey('todaysRequests')) {
       final statsObj = json['stats'] as Map<String, dynamic>?;
       final todaysRequestsList = json['todaysRequests'] as List<dynamic>? ?? [];
-      final resultsUploadedTodayList = json['resultsUploadedToday'] as List<dynamic>? ?? [];
+      final resultsUploadedTodayList =
+          json['resultsUploadedToday'] as List<dynamic>? ?? [];
 
       // Map pending requests (where status != completed)
       final pendingList = todaysRequestsList
@@ -100,11 +101,15 @@ class DashboardRequestItem {
     }
 
     return DashboardRequestItem(
-      id: json['_id'] as String? ?? json['id'] as String? ?? json['ref'] as String?,
+      id:
+          json['_id'] as String? ??
+          json['id'] as String? ??
+          json['ref'] as String?,
       patientName: pName,
       services: servicesList,
       status: json['status'] as String?,
-      createdAt: json['createdAt'] as String? ??
+      createdAt:
+          json['createdAt'] as String? ??
           json['bookedAt'] as String? ??
           json['resultUploadedAt'] as String? ??
           json['uploadedAt'] as String?,

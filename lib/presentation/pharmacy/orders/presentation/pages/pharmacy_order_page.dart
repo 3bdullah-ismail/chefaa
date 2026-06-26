@@ -67,7 +67,7 @@ class _PharmacyOrderPageState extends State<PharmacyOrderPage> {
 
       body: Column(
         children: [
-         const  NewOrderAlertCard(count: 2,),
+          const NewOrderAlertCard(count: 2),
           OrderTabs(
             tabs: tabs,
             selectedIndex: selectedIndex,
@@ -78,9 +78,7 @@ class _PharmacyOrderPageState extends State<PharmacyOrderPage> {
             },
           ),
 
-          Expanded(
-            child: OrderList(orders: filteredOrders),
-          ),
+          Expanded(child: OrderList(orders: filteredOrders)),
         ],
       ),
     );

@@ -43,7 +43,9 @@ class DoctorCard extends StatelessWidget {
     try {
       final parsed = DateTime.parse(date);
       final formatted = DateFormat('dd MMM yyyy').format(parsed);
-      return (time != null && time.isNotEmpty) ? '$formatted – $time' : formatted;
+      return (time != null && time.isNotEmpty)
+          ? '$formatted – $time'
+          : formatted;
     } catch (_) {
       return date;
     }
@@ -137,10 +139,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                   child: Text(
                     appointment!.status!,
-                    style: getSemiBoldStyle(
-                      color: _statusColor,
-                      fontSize: 12,
-                    ),
+                    style: getSemiBoldStyle(color: _statusColor, fontSize: 12),
                   ),
                 ),
             ],

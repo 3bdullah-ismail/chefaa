@@ -90,7 +90,10 @@ class Validators {
   static String? businessNameValidator(String? value) {
     if (value == null || value.trim().isEmpty) return 'Name cannot be empty';
 
-    final RegExp businessNameRegExp = RegExp(r"^[\p{L}\p{N}\s\-\/&'.]+$", unicode: true);
+    final RegExp businessNameRegExp = RegExp(
+      r"^[\p{L}\p{N}\s\-\/&'.]+$",
+      unicode: true,
+    );
     if (!businessNameRegExp.hasMatch(value)) {
       return 'Enter a valid name (letters, numbers, spaces, and - / & . only)';
     }

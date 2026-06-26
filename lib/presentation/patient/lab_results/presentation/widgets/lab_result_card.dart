@@ -20,7 +20,9 @@ class LabResultCard extends StatelessWidget {
     final name = (testName ?? '').toLowerCase();
     if (name.contains('blood')) return Icons.bloodtype_outlined;
     if (name.contains('urine')) return Icons.opacity_outlined;
-    if (name.contains('scan') || name.contains('x-ray') || name.contains('radiology')) {
+    if (name.contains('scan') ||
+        name.contains('x-ray') ||
+        name.contains('radiology')) {
       return Icons.radio_button_checked_outlined;
     }
     return Icons.science_outlined;
@@ -30,7 +32,9 @@ class LabResultCard extends StatelessWidget {
     final name = (testName ?? '').toLowerCase();
     if (name.contains('blood')) return Colors.redAccent;
     if (name.contains('urine')) return Colors.amber;
-    if (name.contains('scan') || name.contains('x-ray') || name.contains('radiology')) {
+    if (name.contains('scan') ||
+        name.contains('x-ray') ||
+        name.contains('radiology')) {
       return Colors.purpleAccent;
     }
     return ColorManager.primary;
@@ -41,8 +45,18 @@ class LabResultCard extends StatelessWidget {
     try {
       final dateTime = DateTime.parse(dateStr);
       final months = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
       ];
       return "${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}";
     } catch (_) {
@@ -85,11 +99,7 @@ class LabResultCard extends StatelessWidget {
                   color: themeColor.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
-                  testIcon,
-                  color: themeColor,
-                  size: 24.sp,
-                ),
+                child: Icon(testIcon, color: themeColor, size: 24.sp),
               ),
               12.horizontalSpace,
               Expanded(

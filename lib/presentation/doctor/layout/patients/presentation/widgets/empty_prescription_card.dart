@@ -58,10 +58,7 @@ class EmptyPrescriptionCard extends StatelessWidget {
             Text(
               "This appointment doesn't have a prescription yet.\nYou can add one now.",
               textAlign: TextAlign.center,
-              style: getRegularStyle(
-                color: ColorManager.gray,
-                fontSize: 14.sp,
-              ),
+              style: getRegularStyle(color: ColorManager.gray, fontSize: 14.sp),
             ),
 
             20.verticalSpace,

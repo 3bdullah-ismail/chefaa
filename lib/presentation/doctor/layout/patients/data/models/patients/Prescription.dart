@@ -1,10 +1,7 @@
 import 'Data.dart';
 
 class Prescription {
-  Prescription({
-      this.success, 
-      this.message, 
-      this.data,});
+  Prescription({this.success, this.message, this.data});
 
   Prescription.fromJson(dynamic json) {
     success = json['success'];
@@ -24,5 +21,4 @@ class Prescription {
     }
     return map;
   }
-
 }

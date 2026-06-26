@@ -3,27 +3,30 @@ import 'clinic.dart';
 
 class Data {
   Data({
-      this.id, 
-      this.patient, 
-      this.doctor, 
-      this.clinic, 
-      this.prescription, 
-      this.date, 
-      this.timeChosed, 
-      this.slotStart, 
-      this.slotEnd, 
-      this.isFollowUp, 
-      this.paymentStatus, 
-      this.paymentOption, 
-      this.status, 
-      this.paidAt, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.id,
+    this.patient,
+    this.doctor,
+    this.clinic,
+    this.prescription,
+    this.date,
+    this.timeChosed,
+    this.slotStart,
+    this.slotEnd,
+    this.isFollowUp,
+    this.paymentStatus,
+    this.paymentOption,
+    this.status,
+    this.paidAt,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   Data.fromJson(dynamic json) {
     id = json['_id'];
-    patient = json['patient'] != null ? Patient.fromJson(json['patient']) : null;
+    patient = json['patient'] != null
+        ? Patient.fromJson(json['patient'])
+        : null;
     doctor = json['doctor'];
     clinic = json['clinic'] != null ? Clinic.fromJson(json['clinic']) : null;
     prescription = json['prescription'];
@@ -83,5 +86,4 @@ class Data {
     map['__v'] = v;
     return map;
   }
-
 }

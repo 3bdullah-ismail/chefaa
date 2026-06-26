@@ -28,7 +28,7 @@ class CompletedOrdersCard extends StatelessWidget {
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
-        ]
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,14 +40,19 @@ class CompletedOrdersCard extends StatelessWidget {
           SizedBox(height: 8.h),
           Text(
             '$completedToday today \t\t\t-  \t\t\t$completedTotalOrders orders total',
-            style: getSemiBoldStyle(color: ColorManager.darkGray, fontSize: 12.sp),
+            style: getSemiBoldStyle(
+              color: ColorManager.darkGray,
+              fontSize: 12.sp,
+            ),
           ),
-         10.verticalSpace,
+          10.verticalSpace,
           if (completedToday == 0)
             Text(
               'No completed orders today',
-              style: getBoldStyle(color: ColorManager.darkGray, fontSize: 13.sp)
-                  .copyWith(fontStyle: FontStyle.italic),
+              style: getBoldStyle(
+                color: ColorManager.darkGray,
+                fontSize: 13.sp,
+              ).copyWith(fontStyle: FontStyle.italic),
             ),
         ],
       ),

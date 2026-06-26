@@ -68,9 +68,16 @@ class ProfileData {
       workingHours: json['workingHours'] != null
           ? WorkingHours.fromJson(json['workingHours'] as Map<String, dynamic>)
           : null,
-      paymentmethod: (json['paymentmethod'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-          (json['paymentMethod'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-          (json['paymentMethods'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      paymentmethod:
+          (json['paymentmethod'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          (json['paymentMethod'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          (json['paymentMethods'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
     );
   }
 
@@ -84,7 +91,8 @@ class ProfileData {
       if (servicesCount != null) 'servicesCount': servicesCount,
       if (aiVisibility != null) 'aiVisibility': aiVisibility!.toJson(),
       if (settings != null) 'settings': settings!.toJson(),
-      if (addresses != null) 'addresses': addresses!.map((e) => e.toJson()).toList(),
+      if (addresses != null)
+        'addresses': addresses!.map((e) => e.toJson()).toList(),
       if (workingHours != null) 'workingHours': workingHours!.toJson(),
       if (paymentmethod != null) 'paymentmethod': paymentmethod,
     };
@@ -105,10 +113,7 @@ class WorkingHours {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      if (open != null) 'open': open,
-      if (close != null) 'close': close,
-    };
+    return {if (open != null) 'open': open, if (close != null) 'close': close};
   }
 }
 
@@ -206,7 +211,8 @@ class ProfileSettings {
 
   Map<String, dynamic> toJson() {
     return {
-      if (homeSampleCollection != null) 'homeSampleCollection': homeSampleCollection,
+      if (homeSampleCollection != null)
+        'homeSampleCollection': homeSampleCollection,
       if (aiRecommendations != null) 'aiRecommendations': aiRecommendations,
       if (insuranceAccepted != null) 'insuranceAccepted': insuranceAccepted,
     };

@@ -167,7 +167,10 @@ class _LabResultsPageState extends State<LabResultsPage> {
                   return Center(
                     child: Text(
                       "Failed to load image",
-                      style: getMediumStyle(color: ColorManager.white, fontSize: 14.sp),
+                      style: getMediumStyle(
+                        color: ColorManager.white,
+                        fontSize: 14.sp,
+                      ),
                     ),
                   );
                 },
@@ -199,18 +202,12 @@ class _LabResultsPageState extends State<LabResultsPage> {
           children: [
             Text(
               "My Lab Results",
-              style: getBoldStyle(
-                color: ColorManager.black,
-                fontSize: 18.sp,
-              ),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 18.sp),
             ),
             2.verticalSpace,
             Text(
               "View and track laboratory test records",
-              style: getRegularStyle(
-                color: ColorManager.gray,
-                fontSize: 11.sp,
-              ),
+              style: getRegularStyle(color: ColorManager.gray, fontSize: 11.sp),
             ),
           ],
         ),
@@ -308,7 +305,9 @@ class _LabResultsPageState extends State<LabResultsPage> {
                               20.verticalSpace,
                               ElevatedButton(
                                 onPressed: () {
-                                  context.read<LabResultsCubit>().getLabResults();
+                                  context
+                                      .read<LabResultsCubit>()
+                                      .getLabResults();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: ColorManager.primary,
@@ -318,7 +317,9 @@ class _LabResultsPageState extends State<LabResultsPage> {
                                 ),
                                 child: Text(
                                   "Try Again",
-                                  style: getBoldStyle(color: ColorManager.white),
+                                  style: getBoldStyle(
+                                    color: ColorManager.white,
+                                  ),
                                 ),
                               ),
                             ],
@@ -370,8 +371,10 @@ class _LabResultsPageState extends State<LabResultsPage> {
                           final item = filtered[index];
                           return LabResultCard(
                             item: item,
-                            onViewPressed: () => _openFullScreenImage(context, item),
-                            onNotesPressed: () => _showDoctorNotesDialog(context, item),
+                            onViewPressed: () =>
+                                _openFullScreenImage(context, item),
+                            onNotesPressed: () =>
+                                _showDoctorNotesDialog(context, item),
                           );
                         },
                       );

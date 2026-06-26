@@ -135,7 +135,6 @@ class SearchResponse extends ClinicModel {
     return allClinicResults;
   }
 
-
   static List<DateTime> _parseDaysStatic(List<Clinics>? clinics) {
     if (clinics == null || clinics.isEmpty) return const [];
 

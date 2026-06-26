@@ -1,10 +1,7 @@
 import 'Data.dart';
 
 class CompleteAppointment {
-  CompleteAppointment({
-      this.success, 
-      this.message, 
-      this.data,});
+  CompleteAppointment({this.success, this.message, this.data});
 
   CompleteAppointment.fromJson(dynamic json) {
     success = json['success'];
@@ -24,5 +21,4 @@ class CompleteAppointment {
     }
     return map;
   }
-
 }

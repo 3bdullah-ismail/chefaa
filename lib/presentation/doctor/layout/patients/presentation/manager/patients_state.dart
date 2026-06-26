@@ -26,8 +26,7 @@ class PatientsSuccessState extends PatientsState {
     this.isCompletedLoading = false,
   });
 
-  List<Data> get currentList =>
-      selectedIndex == 0 ? upcoming : completed;
+  List<Data> get currentList => selectedIndex == 0 ? upcoming : completed;
 
   PatientsSuccessState copyWith({
     List<Data>? upcoming,
@@ -40,13 +39,12 @@ class PatientsSuccessState extends PatientsState {
       upcoming: upcoming ?? this.upcoming,
       completed: completed ?? this.completed,
       selectedIndex: selectedIndex ?? this.selectedIndex,
-      isUpcomingLoading:
-      isUpcomingLoading ?? this.isUpcomingLoading,
-      isCompletedLoading:
-      isCompletedLoading ?? this.isCompletedLoading,
+      isUpcomingLoading: isUpcomingLoading ?? this.isUpcomingLoading,
+      isCompletedLoading: isCompletedLoading ?? this.isCompletedLoading,
     );
   }
 }
+
 class PatientsFailureState extends PatientsState {
   final String errorMessage;
 

@@ -33,11 +33,19 @@ class StaffSummaryCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          _StaffMetric(label: 'Available', value: available, color: ColorManager.lightGreen),
+          _StaffMetric(
+            label: 'Available',
+            value: available,
+            color: ColorManager.lightGreen,
+          ),
           10.horizontalSpace,
           _StaffMetric(label: 'Busy', value: busy, color: ColorManager.error),
           10.horizontalSpace,
-          _StaffMetric(label: 'Total', value: total, color: ColorManager.primary),
+          _StaffMetric(
+            label: 'Total',
+            value: total,
+            color: ColorManager.primary,
+          ),
         ],
       ),
     );
@@ -49,16 +57,29 @@ class _StaffMetric extends StatelessWidget {
   final int value;
   final Color color;
 
-  const _StaffMetric({required this.label, required this.value, required this.color});
+  const _StaffMetric({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
-          Text('$value', style: getBoldStyle(color: color, fontSize: 18.sp)),
-         7.verticalSpace,
-          Text(label, style: getSemiBoldStyle(color: ColorManager.darkGray, fontSize: 14.sp)),
+          Text(
+            '$value',
+            style: getBoldStyle(color: color, fontSize: 18.sp),
+          ),
+          7.verticalSpace,
+          Text(
+            label,
+            style: getSemiBoldStyle(
+              color: ColorManager.darkGray,
+              fontSize: 14.sp,
+            ),
+          ),
         ],
       ),
     );

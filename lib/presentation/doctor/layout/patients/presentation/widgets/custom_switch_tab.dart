@@ -55,10 +55,8 @@ class _CustomSwitchTabState extends State<CustomSwitchTab> {
               Row(
                 children: List.generate(
                   widget.items.length,
-                      (index) => _buildTab(
-                    title: widget.items[index],
-                    index: index,
-                  ),
+                  (index) =>
+                      _buildTab(title: widget.items[index], index: index),
                 ),
               ),
             ],
@@ -88,9 +86,7 @@ class _CustomSwitchTabState extends State<CustomSwitchTab> {
             title,
             style: getBoldStyle(
               fontSize: isSelected ? 15.sp : 12.sp,
-              color: isSelected
-                  ? ColorManager.primary
-                  : ColorManager.gray,
+              color: isSelected ? ColorManager.primary : ColorManager.gray,
             ),
           ),
         ),

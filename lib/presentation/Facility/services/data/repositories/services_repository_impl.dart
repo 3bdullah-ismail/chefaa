@@ -44,10 +44,10 @@ class ServicesRepositoryImpl implements ServicesRepository {
               await Isolate.run(() => jsonDecode(body)),
             )
           : AddServiceResponse.fromJson(body);
-      
+
       // Invalidate services cache
       await HiveService.delete(HiveBoxes.facilityBox, _cacheKey);
-      
+
       return data;
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e).message;
@@ -69,14 +69,17 @@ class ServicesRepositoryImpl implements ServicesRepository {
               await Isolate.run(() => jsonDecode(body)),
             )
           : GetServicesResponse.fromJson(body);
-      
+
       if (isSearchEmpty) {
         await HiveService.put(HiveBoxes.facilityBox, _cacheKey, body);
       }
       return data;
     } on DioException catch (e) {
       if (isSearchEmpty) {
-        final cachedBody = await HiveService.get<dynamic>(HiveBoxes.facilityBox, _cacheKey);
+        final cachedBody = await HiveService.get<dynamic>(
+          HiveBoxes.facilityBox,
+          _cacheKey,
+        );
         if (cachedBody != null) {
           try {
             final decoded = cachedBody is String
@@ -89,7 +92,10 @@ class ServicesRepositoryImpl implements ServicesRepository {
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
       if (isSearchEmpty) {
-        final cachedBody = await HiveService.get<dynamic>(HiveBoxes.facilityBox, _cacheKey);
+        final cachedBody = await HiveService.get<dynamic>(
+          HiveBoxes.facilityBox,
+          _cacheKey,
+        );
         if (cachedBody != null) {
           try {
             final decoded = cachedBody is String
@@ -113,7 +119,7 @@ class ServicesRepositoryImpl implements ServicesRepository {
               await Isolate.run(() => jsonDecode(body)),
             )
           : AddServiceResponse.fromJson(body);
-      
+
       // Invalidate services cache
       await HiveService.delete(HiveBoxes.facilityBox, _cacheKey);
 

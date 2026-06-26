@@ -23,7 +23,6 @@ class Data {
   });
 
   Data.fromJson(dynamic json) {
-
     id = json['_id'];
     appointment = json['appointment'] != null
         ? Appointment.fromJson(json['appointment'])

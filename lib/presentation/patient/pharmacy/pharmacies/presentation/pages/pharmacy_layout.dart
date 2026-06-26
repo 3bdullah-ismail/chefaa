@@ -56,38 +56,20 @@ class _MainLayoutState extends State<MainLayout> {
 
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_rounded,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.home_rounded,
-              size: 26,
-            ),
+            icon: Icon(Icons.home_rounded, size: 24),
+            activeIcon: Icon(Icons.home_rounded, size: 26),
             label: 'Home',
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shopping_cart_outlined,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.shopping_cart_rounded,
-              size: 26,
-            ),
+            icon: Icon(Icons.shopping_cart_outlined, size: 24),
+            activeIcon: Icon(Icons.shopping_cart_rounded, size: 26),
             label: 'Cart',
           ),
 
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.receipt_long_outlined,
-              size: 24,
-            ),
-            activeIcon: Icon(
-              Icons.receipt_long_rounded,
-              size: 26,
-            ),
+            icon: Icon(Icons.receipt_long_outlined, size: 24),
+            activeIcon: Icon(Icons.receipt_long_rounded, size: 26),
             label: 'Orders',
           ),
         ],

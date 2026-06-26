@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class MedicineSearchBar extends StatelessWidget {
-
   final TextEditingController controller;
   final String query;
   final Function(String) onChanged;
@@ -17,7 +16,6 @@ class MedicineSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return TextField(
       controller: controller,
       onChanged: onChanged,
@@ -25,17 +23,13 @@ class MedicineSearchBar extends StatelessWidget {
       decoration: InputDecoration(
         hintText: "Search medicine",
 
-        prefixIcon: const Icon(
-          Icons.search_rounded,
-        ),
+        prefixIcon: const Icon(Icons.search_rounded),
 
         suffixIcon: query.isNotEmpty
             ? IconButton(
-          onPressed: onClear,
-          icon: const Icon(
-            Icons.cancel_rounded,
-          ),
-        )
+                onPressed: onClear,
+                icon: const Icon(Icons.cancel_rounded),
+              )
             : null,
       ),
     );

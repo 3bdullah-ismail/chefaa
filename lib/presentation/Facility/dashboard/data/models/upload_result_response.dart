@@ -10,7 +10,9 @@ class UploadResultResponse {
       success: json['success'] as bool?,
       message: json['message'] as String?,
       updatedRequest: json['updatedRequest'] != null
-          ? UpdatedRequest.fromJson(json['updatedRequest'] as Map<String, dynamic>)
+          ? UpdatedRequest.fromJson(
+              json['updatedRequest'] as Map<String, dynamic>,
+            )
           : null,
     );
   }

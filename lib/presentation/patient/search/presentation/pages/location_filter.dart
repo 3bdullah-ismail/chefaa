@@ -281,7 +281,9 @@ class _LocationFilterState extends State<LocationFilter> {
                           ),
                         ),
                         border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(vertical: AppPadding.p14.h),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: AppPadding.p14.h,
+                        ),
                       ),
                     ),
                   ),

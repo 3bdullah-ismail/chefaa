@@ -37,8 +37,7 @@ class ClinicsPage extends StatelessWidget {
         ),
       ),
     );
-      cubit.getClinics(doctorID: cubit.doctorID ?? "");
-
+    cubit.getClinics(doctorID: cubit.doctorID ?? "");
   }
 
   @override
@@ -82,9 +81,7 @@ class ClinicsPage extends StatelessWidget {
                           state.clinics.isNotEmpty)
                         20.verticalSpace,
 
-                      Expanded(
-                        child: _buildContent(context, state, cubit),
-                      ),
+                      Expanded(child: _buildContent(context, state, cubit)),
                     ],
                   );
                 },
@@ -97,10 +94,10 @@ class ClinicsPage extends StatelessWidget {
   }
 
   Widget _buildContent(
-      BuildContext context,
-      ClinicState state,
-      ClinicCubit cubit,
-      ) {
+    BuildContext context,
+    ClinicState state,
+    ClinicCubit cubit,
+  ) {
     if (state is ClinicsLoadingState) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -111,9 +108,7 @@ class ClinicsPage extends StatelessWidget {
 
     if (state is ClinicsSuccessState) {
       if (state.clinics.isEmpty) {
-        return EmptyClinicsState(
-          onAdd: () => _openAddSheet(context),
-        );
+        return EmptyClinicsState(onAdd: () => _openAddSheet(context));
       }
 
       return ListView.separated(
@@ -125,7 +120,7 @@ class ClinicsPage extends StatelessWidget {
           return ClinicCard(
             clinic: clinic,
             onPressed: () async {
-               await Navigator.pushNamed(
+              await Navigator.pushNamed(
                 context,
                 AppRoutesNames.clinicsDetailsPage,
                 arguments: clinic,

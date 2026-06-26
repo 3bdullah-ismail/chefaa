@@ -6,12 +6,7 @@ class ChatbotResponse {
   final String? error;
   final ChatbotData? data;
 
-  ChatbotResponse({
-    this.success,
-    this.message,
-    this.error,
-    this.data,
-  });
+  ChatbotResponse({this.success, this.message, this.error, this.data});
 
   factory ChatbotResponse.fromJson(Map<String, dynamic> json) {
     return ChatbotResponse(
@@ -38,18 +33,18 @@ class ChatbotData {
   final String? reply;
   final List<ChatMessageModel>? conversationHistory;
 
-  ChatbotData({
-    this.reply,
-    this.conversationHistory,
-  });
+  ChatbotData({this.reply, this.conversationHistory});
 
   factory ChatbotData.fromJson(Map<String, dynamic> json) {
     return ChatbotData(
       reply: json['reply'] as String?,
       conversationHistory: json['conversationHistory'] != null
           ? (json['conversationHistory'] as List)
-              .map((item) => ChatMessageModel.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map(
+                  (item) =>
+                      ChatMessageModel.fromJson(item as Map<String, dynamic>),
+                )
+                .toList()
           : null,
     );
   }
@@ -57,7 +52,9 @@ class ChatbotData {
   Map<String, dynamic> toJson() {
     return {
       'reply': reply,
-      'conversationHistory': conversationHistory?.map((item) => item.toJson()).toList(),
+      'conversationHistory': conversationHistory
+          ?.map((item) => item.toJson())
+          .toList(),
     };
   }
 }

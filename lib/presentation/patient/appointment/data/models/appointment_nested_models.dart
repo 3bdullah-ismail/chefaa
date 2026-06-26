@@ -74,8 +74,9 @@ class AppointmentPatientModel {
       weight: json['weight'],
       bloodType: json['bloodType'],
       allergies: json['allergies'] is List ? json['allergies'] : [],
-      chronicConditions:
-          json['chronicConditions'] is List ? json['chronicConditions'] : [],
+      chronicConditions: json['chronicConditions'] is List
+          ? json['chronicConditions']
+          : [],
     );
   }
 
@@ -121,12 +122,7 @@ class AppointmentClinicModel {
   final String? address;
   final num? price;
 
-  const AppointmentClinicModel({
-    this.id,
-    this.name,
-    this.address,
-    this.price,
-  });
+  const AppointmentClinicModel({this.id, this.name, this.address, this.price});
 
   factory AppointmentClinicModel.fromJson(dynamic json) {
     if (json == null) return const AppointmentClinicModel();
@@ -139,11 +135,6 @@ class AppointmentClinicModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'name': name,
-      'address': address,
-      'price': price,
-    };
+    return {'_id': id, 'name': name, 'address': address, 'price': price};
   }
 }

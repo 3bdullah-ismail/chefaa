@@ -6,21 +6,14 @@ import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
 
 class AddToCartButton extends StatelessWidget {
-
   final String medicineName;
 
-  const AddToCartButton({
-    super.key,
-    required this.medicineName,
-  });
+  const AddToCartButton({super.key, required this.medicineName});
 
   @override
   Widget build(BuildContext context) {
-
     return ElevatedButton(
-      onPressed: (){
-
-      },
+      onPressed: () {},
       style: ElevatedButton.styleFrom(
         backgroundColor: ColorManager.primary.withAlpha(185),
         shape: RoundedRectangleBorder(
@@ -42,10 +35,7 @@ class AddToCartButton extends StatelessWidget {
           5.horizontalSpace,
           Text(
             'Add to Cart',
-            style: getBoldStyle(
-              color: ColorManager.white,
-              fontSize: 14.sp,
-            ),
+            style: getBoldStyle(color: ColorManager.white, fontSize: 14.sp),
           ),
         ],
       ),

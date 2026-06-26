@@ -46,4 +46,3 @@ final class ToggleServiceFailure extends ServicesState {
 
   ToggleServiceFailure(this.errorMessage);
 }
-

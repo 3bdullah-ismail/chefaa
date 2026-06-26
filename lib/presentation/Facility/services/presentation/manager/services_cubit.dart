@@ -14,10 +14,10 @@ class ServicesCubit extends Cubit<ServicesState> {
   final List<ServiceModel> addedServices = [];
   List<ServiceModel> labTests = [];
   List<ServiceModel> radiologyScans = [];
-  
+
   List<ServiceModel> allLabTests = [];
   List<ServiceModel> allRadiologyScans = [];
-  
+
   String? aiInsight;
 
   ServicesCubit(this._servicesRepository) : super(ServicesInitial());
@@ -31,12 +31,12 @@ class ServicesCubit extends Cubit<ServicesState> {
       labTests = response.labTests ?? [];
       radiologyScans = response.radiology ?? [];
       aiInsight = response.aiInsight;
-      
+
       if (search == null || search.trim().isEmpty) {
         allLabTests = List.from(labTests);
         allRadiologyScans = List.from(radiologyScans);
       }
-      
+
       emit(GetServicesSuccess(response));
     } catch (e) {
       emit(GetServicesFailure(e.toString()));
@@ -51,18 +51,22 @@ class ServicesCubit extends Cubit<ServicesState> {
       final lowercaseQuery = query.toLowerCase();
       labTests = allLabTests.where((item) {
         return (item.name ?? '').toLowerCase().contains(lowercaseQuery) ||
-               (item.instructions ?? '').toLowerCase().contains(lowercaseQuery);
+            (item.instructions ?? '').toLowerCase().contains(lowercaseQuery);
       }).toList();
       radiologyScans = allRadiologyScans.where((item) {
         return (item.name ?? '').toLowerCase().contains(lowercaseQuery);
       }).toList();
     }
-    emit(GetServicesSuccess(GetServicesResponse(
-      success: true,
-      labTests: labTests,
-      radiology: radiologyScans,
-      aiInsight: aiInsight,
-    )));
+    emit(
+      GetServicesSuccess(
+        GetServicesResponse(
+          success: true,
+          labTests: labTests,
+          radiology: radiologyScans,
+          aiInsight: aiInsight,
+        ),
+      ),
+    );
   }
 
   Future<void> addService({

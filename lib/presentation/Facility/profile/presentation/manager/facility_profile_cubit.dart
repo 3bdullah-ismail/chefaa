@@ -13,9 +13,11 @@ class FacilityProfileCubit extends Cubit<FacilityProfileState> {
 
   ProfileData? profileData;
 
-  FacilityProfileCubit(this._profileRepository) : super(FacilityProfileInitial());
+  FacilityProfileCubit(this._profileRepository)
+    : super(FacilityProfileInitial());
 
-  static FacilityProfileCubit get(BuildContext context) => BlocProvider.of(context);
+  static FacilityProfileCubit get(BuildContext context) =>
+      BlocProvider.of(context);
 
   Future<void> getProfile() async {
     emit(GetProfileLoading());

@@ -23,15 +23,8 @@ class DosageMetricItem extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: bg,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              size: 18,
-              color: iconColor,
-            ),
+            decoration: BoxDecoration(color: bg, shape: BoxShape.circle),
+            child: Icon(icon, size: 18, color: iconColor),
           ),
           const SizedBox(height: 8),
           Text(

@@ -8,10 +8,7 @@ import 'package:chefaa/core/resources/values_manager.dart';
 class EmptyStateCardWidget extends StatelessWidget {
   final String message;
 
-  const EmptyStateCardWidget({
-    super.key,
-    required this.message,
-  });
+  const EmptyStateCardWidget({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {

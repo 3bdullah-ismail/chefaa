@@ -75,20 +75,16 @@ class _AppointmentView extends StatelessWidget {
         builder: (context, state) {
           final cubit = AppointmentCubit.get(context);
 
-
           if (state is GetAppointmentsLoadingState) {
             return const Center(
               child: CircularProgressIndicator(color: ColorManager.primary),
             );
           }
 
-
           if (state is GetAppointmentsErrorState) {
             return Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p20,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -120,7 +116,6 @@ class _AppointmentView extends StatelessWidget {
 
           final appointments = cubit.appointments;
 
-
           if (appointments.isEmpty) {
             return Center(
               child: Column(
@@ -144,7 +139,6 @@ class _AppointmentView extends StatelessWidget {
             );
           }
 
-
           return RefreshIndicator(
             color: ColorManager.primary,
             onRefresh: () => cubit.getMyAppointments(forceRefresh: true),
@@ -161,11 +155,8 @@ class _AppointmentView extends StatelessWidget {
                   return DoctorCard(
                     isAppointments: true,
                     appointment: appointment,
-                    onReschedule: () => _showRescheduleSheet(
-                      context,
-                      cubit,
-                      appointment,
-                    ),
+                    onReschedule: () =>
+                        _showRescheduleSheet(context, cubit, appointment),
                     onCancel: () {
                       showDialog(
                         context: context,
@@ -227,7 +218,6 @@ class _AppointmentView extends StatelessWidget {
     );
   }
 
-
   void _showRescheduleSheet(
     BuildContext pageContext,
     AppointmentCubit cubit,
@@ -241,32 +231,23 @@ class _AppointmentView extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
 
-      builder: (_) => _RescheduleSheet(
-        cubit: cubit,
-        appointment: appointment,
-      ),
+      builder: (_) => _RescheduleSheet(cubit: cubit, appointment: appointment),
     );
   }
 }
-
 
 class _RescheduleSheet extends StatefulWidget {
   final AppointmentCubit cubit;
   final AppointmentModel appointment;
 
-  const _RescheduleSheet({
-    required this.cubit,
-    required this.appointment,
-  });
+  const _RescheduleSheet({required this.cubit, required this.appointment});
 
   @override
   State<_RescheduleSheet> createState() => _RescheduleSheetState();
 }
 
 class _RescheduleSheetState extends State<_RescheduleSheet> {
-
   late DateTime _pickedDate;
-
 
   late TimeOfDay _slotStart;
   late TimeOfDay _slotEnd;
@@ -276,15 +257,27 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
   void initState() {
     super.initState();
     _pickedDate = _parseDateOrNow(widget.appointment.date);
-    _slotStart  = _parseTimeOrDefault(widget.appointment.slotStart,  const TimeOfDay(hour: 9,  minute: 0));
-    _slotEnd    = _parseTimeOrDefault(widget.appointment.slotEnd,    const TimeOfDay(hour: 9,  minute: 30));
-    _timeChosed = _parseTimeOrDefault(widget.appointment.timeChosed, const TimeOfDay(hour: 9,  minute: 0));
+    _slotStart = _parseTimeOrDefault(
+      widget.appointment.slotStart,
+      const TimeOfDay(hour: 9, minute: 0),
+    );
+    _slotEnd = _parseTimeOrDefault(
+      widget.appointment.slotEnd,
+      const TimeOfDay(hour: 9, minute: 30),
+    );
+    _timeChosed = _parseTimeOrDefault(
+      widget.appointment.timeChosed,
+      const TimeOfDay(hour: 9, minute: 0),
+    );
   }
-
 
   DateTime _parseDateOrNow(String? iso) {
     if (iso == null) return DateTime.now();
-    try { return DateTime.parse(iso); } catch (_) { return DateTime.now(); }
+    try {
+      return DateTime.parse(iso);
+    } catch (_) {
+      return DateTime.now();
+    }
   }
 
   TimeOfDay _parseTimeOrDefault(String? hhmm, TimeOfDay fallback) {
@@ -297,13 +290,11 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
     }
   }
 
-
   String _fmt(TimeOfDay t) =>
       '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
 
   String get _displayDate => DateFormat('dd MMM yyyy').format(_pickedDate);
-  String get _apiDate     => DateFormat('yyyy-MM-dd').format(_pickedDate);
-
+  String get _apiDate => DateFormat('yyyy-MM-dd').format(_pickedDate);
 
   Future<void> _pickDate() async {
     final now = DateTime.now();
@@ -347,18 +338,16 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
     if (picked != null) setState(() => onPicked(picked));
   }
 
-
   void _submit() {
     widget.cubit.rescheduleAppointment(
       appointmentId: widget.appointment.id ?? '',
-      date:       _apiDate,
-      slotStart:  _fmt(_slotStart),
-      slotEnd:    _fmt(_slotEnd),
+      date: _apiDate,
+      slotStart: _fmt(_slotStart),
+      slotEnd: _fmt(_slotEnd),
       timeChosed: _fmt(_timeChosed),
     );
     Navigator.pop(context);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -378,7 +367,6 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Text(
                 'Reschedule Appointment',
                 style: getBoldStyle(color: ColorManager.black, fontSize: 20),
@@ -390,7 +378,6 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
               ),
               20.verticalSpace,
 
-
               _PickerRow(
                 icon: Icons.calendar_today_outlined,
                 label: 'Date',
@@ -399,7 +386,6 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
               ),
               12.verticalSpace,
 
-
               _PickerRow(
                 icon: Icons.access_time_outlined,
                 label: 'Slot Start',
@@ -407,12 +393,11 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
                 onTap: isLoading
                     ? null
                     : () => _pickTime(
-                          initial: _slotStart,
-                          onPicked: (t) => _slotStart = t,
-                        ),
+                        initial: _slotStart,
+                        onPicked: (t) => _slotStart = t,
+                      ),
               ),
               12.verticalSpace,
-
 
               _PickerRow(
                 icon: Icons.access_time_filled_outlined,
@@ -421,12 +406,11 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
                 onTap: isLoading
                     ? null
                     : () => _pickTime(
-                          initial: _slotEnd,
-                          onPicked: (t) => _slotEnd = t,
-                        ),
+                        initial: _slotEnd,
+                        onPicked: (t) => _slotEnd = t,
+                      ),
               ),
               12.verticalSpace,
-
 
               _PickerRow(
                 icon: Icons.schedule_outlined,
@@ -435,12 +419,11 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
                 onTap: isLoading
                     ? null
                     : () => _pickTime(
-                          initial: _timeChosed,
-                          onPicked: (t) => _timeChosed = t,
-                        ),
+                        initial: _timeChosed,
+                        onPicked: (t) => _timeChosed = t,
+                      ),
               ),
               24.verticalSpace,
-
 
               isLoading
                   ? const Center(
@@ -448,10 +431,7 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
                         color: ColorManager.primary,
                       ),
                     )
-                  : CustomBtn(
-                      text: 'Confirm Reschedule',
-                      onPressed: _submit,
-                    ),
+                  : CustomBtn(text: 'Confirm Reschedule', onPressed: _submit),
             ],
           ),
         );
@@ -459,7 +439,6 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
     );
   }
 }
-
 
 class _PickerRow extends StatelessWidget {
   final IconData icon;

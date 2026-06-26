@@ -1,9 +1,5 @@
 class Clinic {
-  Clinic({
-      this.id, 
-      this.name, 
-      this.address, 
-      this.price,});
+  Clinic({this.id, this.name, this.address, this.price});
 
   Clinic.fromJson(dynamic json) {
     id = json['_id'];
@@ -24,5 +20,4 @@ class Clinic {
     map['price'] = price;
     return map;
   }
-
 }

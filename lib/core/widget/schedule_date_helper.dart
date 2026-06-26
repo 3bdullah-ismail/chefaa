@@ -71,32 +71,35 @@ class ScheduleDateHelper {
   }
 
   static List<Map<String, dynamic>> buildActiveDaysWithDates(
-      List<dynamic> days, {
-        DateTime? referenceDate,
-      }) {
+    List<dynamic> days, {
+    DateTime? referenceDate,
+  }) {
     final activeDays = days
         .where((d) => d['isActive'] == true)
         .map<Map<String, dynamic>>((d) {
-      final date = getDateForDay(d['day'], referenceDate: referenceDate);
-      return {
-        'day': d['day'],
-        'open': d['open'],
-        'close': d['close'],
-        'breaks': d['breaks'],
-        'slotDuration': d['slotDuration'],
-        'dailyCapacity': d['dailyCapacity'],
-        'patientsPerSlot': d['patientsPerSlot'],
-        'isDayLocked': d['isDayLocked'],
-        'isBookingLocked': d['isBookingLocked'],
-        'date': date,
-        'displayDate': formatScheduleDate(date),
-        'displayDateWithDay': formatScheduleDateWithDay(date),
-        'openTime': formatMinutesToTime(d['open']),
-        'closeTime': formatMinutesToTime(d['close']),
-      };
-    }).toList();
+          final date = getDateForDay(d['day'], referenceDate: referenceDate);
+          return {
+            'day': d['day'],
+            'open': d['open'],
+            'close': d['close'],
+            'breaks': d['breaks'],
+            'slotDuration': d['slotDuration'],
+            'dailyCapacity': d['dailyCapacity'],
+            'patientsPerSlot': d['patientsPerSlot'],
+            'isDayLocked': d['isDayLocked'],
+            'isBookingLocked': d['isBookingLocked'],
+            'date': date,
+            'displayDate': formatScheduleDate(date),
+            'displayDateWithDay': formatScheduleDateWithDay(date),
+            'openTime': formatMinutesToTime(d['open']),
+            'closeTime': formatMinutesToTime(d['close']),
+          };
+        })
+        .toList();
 
-    activeDays.sort((a, b) => (a['date'] as DateTime).compareTo(b['date'] as DateTime));
+    activeDays.sort(
+      (a, b) => (a['date'] as DateTime).compareTo(b['date'] as DateTime),
+    );
 
     return activeDays;
   }

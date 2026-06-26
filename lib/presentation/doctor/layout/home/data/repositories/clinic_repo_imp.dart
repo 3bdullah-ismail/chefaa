@@ -22,7 +22,7 @@ class ClinicRepoImp implements ClinicRepo {
     required String? operatingLicense,
     required Map<String, dynamic>? location,
     required Map<String, dynamic>? schedule,
-  }) async{
+  }) async {
     try {
       final response = await clinicDataSource.addClinics(
         name: name,
@@ -43,7 +43,6 @@ class ClinicRepoImp implements ClinicRepo {
     } catch (e) {
       throw ServerFailure.unexpectedError;
     }
-
   }
 
   @override

@@ -8,34 +8,23 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/models/clinics.dart';
 
-
 class ClinicCard extends StatelessWidget {
-
   final Clinics clinic;
   final VoidCallback onPressed;
 
-  const ClinicCard({
-    super.key,
-    required this.onPressed,
-    required this.clinic,
-  });
-
+  const ClinicCard({super.key, required this.onPressed, required this.clinic});
 
   @override
   Widget build(BuildContext context) {
-
-    final availableDays =
-        clinic.defaultSchedule?.days ?? [];
+    final availableDays = clinic.defaultSchedule?.days ?? [];
 
     return InkWell(
-
       splashColor: ColorManager.transparent,
       highlightColor: ColorManager.transparent,
 
       onTap: onPressed,
 
       child: Container(
-
         decoration: BoxDecoration(
           color: ColorManager.lightGray,
 
@@ -43,8 +32,7 @@ class ClinicCard extends StatelessWidget {
 
           boxShadow: [
             BoxShadow(
-              color:
-              ColorManager.gray.withAlpha(100),
+              color: ColorManager.gray.withAlpha(100),
 
               blurRadius: 10,
 
@@ -63,21 +51,16 @@ class ClinicCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-
                   Expanded(
                     child: Column(
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
 
                       children: [
-
                         Text(
-                          clinic.name ??
-                              "Clinic Name",
+                          clinic.name ?? "Clinic Name",
 
                           style: getBoldStyle(
-                            color:
-                            ColorManager.primary,
+                            color: ColorManager.primary,
 
                             fontSize: 18,
                           ),
@@ -87,26 +70,20 @@ class ClinicCard extends StatelessWidget {
 
                         Row(
                           children: [
-
                             const Icon(
                               Icons.location_on,
-                              color:
-                              ColorManager.gray,
+                              color: ColorManager.gray,
                               size: 16,
                             ),
 
                             Expanded(
                               child: Text(
-                                clinic.address ??
-                                    "Clinic Address",
+                                clinic.address ?? "Clinic Address",
 
-                                overflow:
-                                TextOverflow.ellipsis,
+                                overflow: TextOverflow.ellipsis,
 
-                                style:
-                                getMediumStyle(
-                                  color:
-                                  ColorManager.gray,
+                                style: getMediumStyle(
+                                  color: ColorManager.gray,
 
                                   fontSize: 14,
                                 ),
@@ -121,22 +98,16 @@ class ClinicCard extends StatelessWidget {
                   12.horizontalSpace,
 
                   Container(
-                    padding:
-                    const EdgeInsets.symmetric(
-                      horizontal:
-                      AppPadding.p12,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppPadding.p12,
 
                       vertical: AppPadding.p6,
                     ),
 
                     decoration: BoxDecoration(
-                      color:
-                      ColorManager.lawAnalysis,
+                      color: ColorManager.lawAnalysis,
 
-                      borderRadius:
-                      BorderRadius.circular(
-                        15.r,
-                      ),
+                      borderRadius: BorderRadius.circular(15.r),
                     ),
 
                     child: Text(
@@ -160,36 +131,29 @@ class ClinicCard extends StatelessWidget {
                   height: 30.h,
 
                   child: ListView.separated(
-
                     shrinkWrap: true,
 
-                    scrollDirection:
-                    Axis.horizontal,
+                    scrollDirection: Axis.horizontal,
 
                     itemCount: availableDays.length,
                     separatorBuilder: (_, _) => 7.horizontalSpace,
 
                     itemBuilder: (_, index) {
-
                       final scheduleDay = availableDays[index];
 
                       if (scheduleDay.isActive != true) {
                         return const SizedBox.shrink();
                       }
                       return ClinicDaysAvailable(
-                        day: scheduleDay.day
-                            ?.substring(0, 3) ??
-                            "",
+                        day: scheduleDay.day?.substring(0, 3) ?? "",
                         isAvailable: true,
                       );
-                    }
+                    },
+                  ),
                 ),
               ),
-              ),
               15.verticalSpace,
-              ClinicStatus(
-                days: clinic.defaultSchedule?.days ?? [],
-              ),
+              ClinicStatus(days: clinic.defaultSchedule?.days ?? []),
             ],
           ),
         ),

@@ -53,11 +53,14 @@ class DashboardRepositoryImpl implements DashboardRepository {
               await Isolate.run(() => jsonDecode(body)),
             )
           : GetDashboardResponse.fromJson(body);
-      
+
       await HiveService.put(HiveBoxes.facilityBox, _cacheKey, body);
       return data;
     } on DioException catch (e) {
-      final cachedBody = await HiveService.get<dynamic>(HiveBoxes.facilityBox, _cacheKey);
+      final cachedBody = await HiveService.get<dynamic>(
+        HiveBoxes.facilityBox,
+        _cacheKey,
+      );
       if (cachedBody != null) {
         try {
           final decoded = cachedBody is String
@@ -68,7 +71,10 @@ class DashboardRepositoryImpl implements DashboardRepository {
       }
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
-      final cachedBody = await HiveService.get<dynamic>(HiveBoxes.facilityBox, _cacheKey);
+      final cachedBody = await HiveService.get<dynamic>(
+        HiveBoxes.facilityBox,
+        _cacheKey,
+      );
       if (cachedBody != null) {
         try {
           final decoded = cachedBody is String

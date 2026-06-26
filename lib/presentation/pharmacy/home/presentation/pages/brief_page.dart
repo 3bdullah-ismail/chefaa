@@ -8,7 +8,6 @@ import '../../../../../core/resources/values_manager.dart';
 import '../widgets/brief_card.dart';
 import '../widgets/earning_card.dart';
 
-
 class BriefTab extends StatelessWidget {
   final double totalCompleted;
   final double netEarnings;
@@ -52,10 +51,7 @@ class BriefTab extends StatelessWidget {
               ),
               Text(
                 "Monday, June 16, 2026",
-                style: getBoldStyle(
-                  color: ColorManager.black,
-                  fontSize: 15.sp,
-                ),
+                style: getBoldStyle(color: ColorManager.black, fontSize: 15.sp),
               ),
             ],
           ),
@@ -69,33 +65,15 @@ class BriefTab extends StatelessWidget {
           crossAxisSpacing: 7.w,
           childAspectRatio: 1.15,
           children: [
-            StatCard(
-              label: 'Completed',
-              value: '$completed',
-            ),
-            StatCard(
-              label: 'Pending',
-              value: '$pending',
-            ),
-            StatCard(
-              label: 'Cancelled',
-              value: '$cancelled',
-            ),
-            StatCard(
-              label: 'Low Stock',
-              value: '$lowStock',
-            ),
-            StatCard(
-              label: 'Staff',
-              value: '$staffTotal',
-            ),
+            StatCard(label: 'Completed', value: '$completed'),
+            StatCard(label: 'Pending', value: '$pending'),
+            StatCard(label: 'Cancelled', value: '$cancelled'),
+            StatCard(label: 'Low Stock', value: '$lowStock'),
+            StatCard(label: 'Staff', value: '$staffTotal'),
           ],
         ),
         SizedBox(height: 16.h),
-        EarningsCard(
-          totalCompleted: totalCompleted,
-          netEarnings: netEarnings,
-        ),
+        EarningsCard(totalCompleted: totalCompleted, netEarnings: netEarnings),
         SizedBox(height: 20.h),
         const OrdersAndStock(),
       ],

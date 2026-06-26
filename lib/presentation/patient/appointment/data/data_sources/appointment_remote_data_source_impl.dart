@@ -27,11 +27,7 @@ class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSource {
   }
 
   @override
-  Future<Response<dynamic>> cancelAppointment({
-    required String appointmentId,
-  }) {
-    return networkService.dio.patch(
-      '/appointments/$appointmentId/cancel',
-    );
+  Future<Response<dynamic>> cancelAppointment({required String appointmentId}) {
+    return networkService.dio.patch('/appointments/$appointmentId/cancel');
   }
 }

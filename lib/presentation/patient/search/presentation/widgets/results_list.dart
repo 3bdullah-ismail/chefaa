@@ -49,7 +49,8 @@ class ResultsList extends StatelessWidget {
 
         return Column(
           children: [
-            if (isRefreshing) const LinearProgressIndicator(minHeight: AppSize.s2),
+            if (isRefreshing)
+              const LinearProgressIndicator(minHeight: AppSize.s2),
             Expanded(
               child: ListView.separated(
                 padding: EdgeInsets.zero,

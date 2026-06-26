@@ -77,9 +77,7 @@ class FacilityResultsUploadZone extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primary,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            AppRadius.r10.r,
-                          ),
+                          borderRadius: BorderRadius.circular(AppRadius.r10.r),
                         ),
                         elevation: 0,
                       ),
@@ -101,13 +99,9 @@ class FacilityResultsUploadZone extends StatelessWidget {
                       onPressed: onCamera,
                       style: OutlinedButton.styleFrom(
                         backgroundColor: ColorManager.white,
-                        side: const BorderSide(
-                          color: ColorManager.input,
-                        ),
+                        side: const BorderSide(color: ColorManager.input),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            AppRadius.r10.r,
-                          ),
+                          borderRadius: BorderRadius.circular(AppRadius.r10.r),
                         ),
                       ),
                       child: Text(

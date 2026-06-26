@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/resources/values_manager.dart';
@@ -43,8 +42,7 @@ class _MedicineDetailsPageState extends State<MedicineDetailsPage> {
 
   void _parsePriceString() {
     try {
-      final cleanedPrice =
-      widget.price.replaceAll(RegExp(r'[^0-9.]'), '');
+      final cleanedPrice = widget.price.replaceAll(RegExp(r'[^0-9.]'), '');
 
       _unitPrice = double.parse(cleanedPrice);
 
@@ -87,9 +85,7 @@ class _MedicineDetailsPageState extends State<MedicineDetailsPage> {
         backgroundColor: const Color(0xff059669),
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
     );
   }
@@ -108,9 +104,7 @@ class _MedicineDetailsPageState extends State<MedicineDetailsPage> {
                   onCart: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const CartPage(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const CartPage()),
                     );
                   },
                 ),
@@ -153,9 +147,7 @@ class _MedicineDetailsPageState extends State<MedicineDetailsPage> {
 
                           const SizedBox(height: 28),
 
-                          const SectionHeader(
-                            title: "Usage Instructions",
-                          ),
+                          const SectionHeader(title: "Usage Instructions"),
 
                           const SizedBox(height: 12),
 
@@ -163,9 +155,7 @@ class _MedicineDetailsPageState extends State<MedicineDetailsPage> {
 
                           const SizedBox(height: 32),
 
-                          const SectionHeader(
-                            title: "Chemical Profile",
-                          ),
+                          const SectionHeader(title: "Chemical Profile"),
 
                           const SizedBox(height: 12),
 
@@ -173,9 +163,7 @@ class _MedicineDetailsPageState extends State<MedicineDetailsPage> {
 
                           const SizedBox(height: 32),
 
-                          const SectionHeader(
-                            title: "Clinical Information",
-                          ),
+                          const SectionHeader(title: "Clinical Information"),
 
                           const SizedBox(height: 14),
 

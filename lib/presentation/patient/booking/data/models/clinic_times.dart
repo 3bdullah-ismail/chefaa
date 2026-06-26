@@ -2,20 +2,21 @@
 
 class ClinicTimes {
   ClinicTimes({
-      this.date, 
-      this.day, 
-      this.isPast, 
-      this.status, 
-      this.open, 
-      this.close, 
-      this.slotDuration, 
-      this.dailyCapacity, 
-      this.patientsPerSlot, 
-      this.totalBookedToday, 
-      this.totalSlots, 
-      this.hasAppointments, 
-      this.breaks, 
-      this.slots,});
+    this.date,
+    this.day,
+    this.isPast,
+    this.status,
+    this.open,
+    this.close,
+    this.slotDuration,
+    this.dailyCapacity,
+    this.patientsPerSlot,
+    this.totalBookedToday,
+    this.totalSlots,
+    this.hasAppointments,
+    this.breaks,
+    this.slots,
+  });
 
   ClinicTimes.fromJson(dynamic json) {
     date = json['date'];
@@ -74,5 +75,4 @@ class ClinicTimes {
     }
     return map;
   }
-
 }

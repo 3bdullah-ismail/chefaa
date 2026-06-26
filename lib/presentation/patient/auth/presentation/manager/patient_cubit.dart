@@ -41,7 +41,8 @@ class PatientCubit extends Cubit<PatientState> {
     _isSigningUp = true;
     emit(SignUpLoadingState());
     try {
-      final String fullName = "${nameController.text} ${lastNameController.text}".trim();
+      final String fullName =
+          "${nameController.text} ${lastNameController.text}".trim();
       var response = await patientRepo.patientSignUp(
         name: fullName,
         userName: UsernameGenerator.generate(fullName),

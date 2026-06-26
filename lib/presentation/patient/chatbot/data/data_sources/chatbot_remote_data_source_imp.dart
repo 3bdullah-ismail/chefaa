@@ -20,7 +20,9 @@ class ChatbotRemoteDataSourceImp implements ChatbotRemoteDataSource {
       "/chatboot/chat",
       data: {
         "message": message,
-        "conversationHistory": conversationHistory.map((e) => e.toJson()).toList(),
+        "conversationHistory": conversationHistory
+            .map((e) => e.toJson())
+            .toList(),
       },
     );
     return response;

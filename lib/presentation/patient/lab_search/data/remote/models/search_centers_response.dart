@@ -119,11 +119,7 @@ class AvailableTagModel {
   final String? category;
   final bool? isPartner;
 
-  AvailableTagModel({
-    this.name,
-    this.category,
-    this.isPartner,
-  });
+  AvailableTagModel({this.name, this.category, this.isPartner});
 
   factory AvailableTagModel.fromJson(Map<String, dynamic> json) {
     return AvailableTagModel(
@@ -134,10 +130,6 @@ class AvailableTagModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'category': category,
-      'isPartner': isPartner,
-    };
+    return {'name': name, 'category': category, 'isPartner': isPartner};
   }
 }

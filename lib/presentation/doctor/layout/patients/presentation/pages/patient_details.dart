@@ -104,7 +104,7 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
   Widget _buildPrescriptionTab() {
     return BlocBuilder<PatientsCubit, PatientsState>(
       buildWhen: (prev, curr) =>
-      curr is PrescriptionByAppointmentLoadingState ||
+          curr is PrescriptionByAppointmentLoadingState ||
           curr is PrescriptionByAppointmentSuccessState ||
           curr is PrescriptionByAppointmentErrorState,
       builder: (context, state) {
@@ -118,12 +118,12 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         final medications = (prescription?.data?.medicines ?? [])
             .map<Map<String, String>>(
               (m) => {
-            "name": m.name ?? "",
-            "dosage": m.dosage ?? "",
-            "frequency": m.frequency ?? "",
-            "duration": m.duration ?? "",
-          },
-        )
+                "name": m.name ?? "",
+                "dosage": m.dosage ?? "",
+                "frequency": m.frequency ?? "",
+                "duration": m.duration ?? "",
+              },
+            )
             .toList();
         if (medications.isEmpty) {
           return const EmptyPrescriptionCard();
@@ -132,7 +132,9 @@ class _PatientDetailsPageState extends State<PatientDetailsPage> {
         return PrescriptionCard(medications: medications, showAddButton: true);
       },
     );
-  }  Widget _buildHistoryTab() {
+  }
+
+  Widget _buildHistoryTab() {
     return BlocBuilder<PatientsCubit, PatientsState>(
       buildWhen: (prev, curr) =>
           curr is PrescriptionPreviousLoadingState ||

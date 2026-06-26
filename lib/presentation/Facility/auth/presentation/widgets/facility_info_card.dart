@@ -38,10 +38,7 @@ class _FacilityInfoCardState extends State<FacilityInfoCard> {
           children: [
             Text(
               AppConstants.facilityType,
-              style: getMediumStyle(
-                color: ColorManager.black,
-                fontSize: 16,
-              ),
+              style: getMediumStyle(color: ColorManager.black, fontSize: 16),
             ),
             const SizedBox(height: 16),
             CustomDropDownBtn(
@@ -111,9 +108,7 @@ class _FacilityInfoCardState extends State<FacilityInfoCard> {
             LabeledTextField(
               textInputAction: TextInputAction.done,
               inputFormatters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp(r'[a-zA-Z0-9]'),
-                ),
+                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
                 LicenseFormatter(),
               ],
               validator: Validators.validateLicense,
@@ -124,10 +119,7 @@ class _FacilityInfoCardState extends State<FacilityInfoCard> {
             const SizedBox(height: 22),
             Text(
               AppConstants.medicalLicenseUpload,
-              style: getMediumStyle(
-                color: ColorManager.black,
-                fontSize: 16,
-              ),
+              style: getMediumStyle(color: ColorManager.black, fontSize: 16),
             ),
             const SizedBox(height: 16),
             const UploadCard(

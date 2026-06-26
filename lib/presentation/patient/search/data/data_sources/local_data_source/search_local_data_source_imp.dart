@@ -96,8 +96,10 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
     final entry = await _getCacheEntry(key);
     final existingItems = entry?['items'];
 
-    final oldList = existingItems is List ? existingItems.whereType<ClinicModel>().toList(growable: false) : null;
-    
+    final oldList = existingItems is List
+        ? existingItems.whereType<ClinicModel>().toList(growable: false)
+        : null;
+
     if (_areDoctorsEquivalent(oldList, doctors)) {
       return;
     }
@@ -105,7 +107,10 @@ class SearchDoctorLocalDataSourceImp extends SearchLocalDataSource {
     await _saveCacheEntry(key, doctors);
   }
 
-  bool _areDoctorsEquivalent(List<ClinicModel>? oldList, List<ClinicModel> newList) {
+  bool _areDoctorsEquivalent(
+    List<ClinicModel>? oldList,
+    List<ClinicModel> newList,
+  ) {
     if (oldList == null || oldList.length != newList.length) {
       return false;
     }

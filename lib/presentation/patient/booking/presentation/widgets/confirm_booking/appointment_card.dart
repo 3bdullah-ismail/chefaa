@@ -11,10 +11,7 @@ import 'confirm_booking_card_decoration.dart';
 import 'text_row.dart';
 
 class AppointmentCard extends StatelessWidget {
-  const AppointmentCard({
-    super.key,
-    required this.cubit,
-  });
+  const AppointmentCard({super.key, required this.cubit});
 
   final BookingCubit cubit;
 
@@ -28,17 +25,14 @@ class AppointmentCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CustomCircleAvatar(
-                imagePath: ImageAssets.doctor,
-              ),
+              const CustomCircleAvatar(imagePath: ImageAssets.doctor),
               12.horizontalSpace,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      cubit.selectedClinic?.doctorName ??
-                          "No Clinic Selected",
+                      cubit.selectedClinic?.doctorName ?? "No Clinic Selected",
                       style: getBoldStyle(
                         color: ColorManager.black,
                         fontSize: 16,
@@ -66,25 +60,18 @@ class AppointmentCard extends StatelessWidget {
 
           TextRow(
             firstText: 'Visit Type',
-            secondText:
-            cubit.selectedVisitType == VisitType.online
+            secondText: cubit.selectedVisitType == VisitType.online
                 ? 'Video Call'
                 : 'Clinic Visit',
           ),
 
           8.verticalSpace,
 
-          TextRow(
-            firstText: 'Date',
-            secondText: cubit.selectedDate ?? '--',
-          ),
+          TextRow(firstText: 'Date', secondText: cubit.selectedDate ?? '--'),
 
           8.verticalSpace,
 
-          TextRow(
-            firstText: 'Time',
-            secondText: cubit.selectedTime ?? '--:--',
-          ),
+          TextRow(firstText: 'Time', secondText: cubit.selectedTime ?? '--:--'),
 
           8.verticalSpace,
           const Divider(color: ColorManager.input),
@@ -95,10 +82,7 @@ class AppointmentCard extends StatelessWidget {
             children: [
               Text(
                 'Consultation Fee',
-                style: getMediumStyle(
-                  color: ColorManager.black,
-                  fontSize: 16,
-                ),
+                style: getMediumStyle(color: ColorManager.black, fontSize: 16),
               ),
               Text(
                 '${cubit.selectedClinic?.clinicPrice ?? 0} E£',

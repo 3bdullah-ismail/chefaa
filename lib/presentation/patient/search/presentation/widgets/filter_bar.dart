@@ -160,7 +160,9 @@ class FilterBar extends StatelessWidget {
         position.dy,
       ),
       color: ColorManager.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.r12)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.r12),
+      ),
       items: ['Male', 'Female', 'Any'].map((value) {
         final normalized = value.toLowerCase();
         final selectedGender = cubit.draftQuery.gender.toLowerCase();
@@ -174,7 +176,8 @@ class FilterBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(value),
-              if (isSelected) const Icon(Icons.check, color: ColorManager.blue600),
+              if (isSelected)
+                const Icon(Icons.check, color: ColorManager.blue600),
             ],
           ),
         );

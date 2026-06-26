@@ -13,7 +13,9 @@ class FacilityInfoSection extends StatelessWidget {
   const FacilityInfoSection({super.key, this.profileData});
 
   String _formatWorkingHours(WorkingHours? workingHours) {
-    if (workingHours == null || workingHours.open == null || workingHours.close == null) {
+    if (workingHours == null ||
+        workingHours.open == null ||
+        workingHours.close == null) {
       return 'Not Set';
     }
     return '${_formatHour(workingHours.open)} - ${_formatHour(workingHours.close)}';
@@ -66,8 +68,12 @@ class FacilityInfoSection extends StatelessWidget {
             title: 'Payment Methods',
             value: (profileData?.paymentmethod?.isNotEmpty == true)
                 ? profileData!.paymentmethod!
-                    .map((e) => e.isEmpty ? '' : '${e[0].toUpperCase()}${e.substring(1)}')
-                    .join(', ')
+                      .map(
+                        (e) => e.isEmpty
+                            ? ''
+                            : '${e[0].toUpperCase()}${e.substring(1)}',
+                      )
+                      .join(', ')
                 : 'Not Set',
           ),
           Divider(
@@ -108,7 +114,9 @@ class FacilityInfoSection extends StatelessWidget {
           _InfoRow(
             icon: Icons.health_and_safety_outlined,
             title: 'Insurance Accepted',
-            value: profileData?.settings?.insuranceAccepted == true ? 'Yes' : 'No',
+            value: profileData?.settings?.insuranceAccepted == true
+                ? 'Yes'
+                : 'No',
           ),
         ],
       ),

@@ -1,14 +1,11 @@
 ﻿import 'package:chefaa/presentation/patient/booking/data/models/booking.dart';
 import 'package:chefaa/presentation/patient/booking/data/models/slots.dart';
 
-
 abstract class BookingRepo {
-
   Future<List<Slots>> getDaySlots({
     required String clinicId,
     required String date,
   });
-
 
   Future<Booking> bookAppointment({
     required String clinicId,
@@ -16,7 +13,7 @@ abstract class BookingRepo {
     required String time,
     required bool isFollowUp,
     required String paymentOption,
-      required String paymentStatus,
+    required String paymentStatus,
     String? cardNumber,
     String? expiryMonth,
     String? expiryYear,

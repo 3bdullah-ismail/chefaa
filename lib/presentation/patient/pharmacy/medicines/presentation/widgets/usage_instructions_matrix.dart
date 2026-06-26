@@ -14,9 +14,7 @@ class UsageInstructionsMatrix extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: const Color(0xffF1F5F9),
-        ),
+        border: Border.all(color: const Color(0xffF1F5F9)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,10 +52,7 @@ class UsageInstructionsMatrix extends StatelessWidget {
           ),
 
           const SizedBox(height: 18),
-          const Divider(
-            height: 1,
-            color: Color(0xffF1F5F9),
-          ),
+          const Divider(height: 1, color: Color(0xffF1F5F9)),
           const SizedBox(height: 14),
 
           const Text(
@@ -74,7 +69,7 @@ class UsageInstructionsMatrix extends StatelessWidget {
           const Wrap(
             spacing: 8,
             runSpacing: 8,
-            children:  [
+            children: [
               IndicationChip(
                 text: "Mild to Moderate Pain Relief",
                 icon: Icons.healing_rounded,
@@ -91,10 +86,6 @@ class UsageInstructionsMatrix extends StatelessWidget {
   }
 
   Widget _buildVerticalDivider() {
-    return Container(
-      width: 1,
-      height: 80,
-      color: const Color(0xffF1F5F9),
-    );
+    return Container(width: 1, height: 80, color: const Color(0xffF1F5F9));
   }
 }
