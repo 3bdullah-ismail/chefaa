@@ -12,12 +12,14 @@ class CustomAppBarLayout extends StatelessWidget {
   final String title1;
   final String title2;
   final VoidCallback? onPressed;
+  final bool hasUnreadNotifications;
 
   const CustomAppBarLayout({
     super.key,
     required this.title1,
     required this.title2,
     this.onPressed,
+    this.hasUnreadNotifications = false,
   });
 
   @override
@@ -63,19 +65,38 @@ class CustomAppBarLayout extends StatelessWidget {
 
           IconButton(
             onPressed: onPressed,
-            icon: Container(
-              padding: const EdgeInsets.all(AppPadding.p10),
-              decoration: BoxDecoration(
-                color: ColorManager.white,
-                borderRadius: BorderRadius.circular(25.r),
-              ),
-              child: SvgPicture.asset(
-                IconsAssets.notification,
-                height: 20.h,
-                width: 20.w,
-              ),
+            icon: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(AppPadding.p10),
+                  decoration: BoxDecoration(
+                    color: ColorManager.white,
+                    borderRadius: BorderRadius.circular(25.r),
+                  ),
+                  child: SvgPicture.asset(
+                    IconsAssets.notification,
+                    height: 20.h,
+                    width: 20.w,
+                  ),
+                ),
+
+                if (hasUnreadNotifications)
+                  Container(
+                    padding: const EdgeInsets.all(AppPadding.p10),
+                    decoration: BoxDecoration(
+                      color: ColorManager.white,
+                      borderRadius: BorderRadius.circular(25.r),
+                    ),
+                    child: SvgPicture.asset(
+                      IconsAssets.notificationFull,
+                      height: 20.h,
+                      width: 20.w,
+                    ),
+                  ),
+              ],
             ),
-          ),
+          )
         ],
       ),
     );

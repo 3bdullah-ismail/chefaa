@@ -19,7 +19,8 @@ class Chefaa extends StatelessWidget {
           theme: AppTheme.theme,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: Routes.generateRoute,
-          initialRoute: AppRoutesNames.login,
+          initialRoute: AppRoutesNames.login
+          ,
         );
       },
     );
