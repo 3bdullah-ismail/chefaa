@@ -3,6 +3,7 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/presentation/patient/chatbot/presentation/pages/chat_page.dart';
 import 'package:chefaa/presentation/patient/home/presentation/pages/home_page.dart';
+import 'package:chefaa/presentation/patient/notification/presentation/manager/patient_notification_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,7 +24,9 @@ class PatientLayout extends StatefulWidget {
 class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-    const HomePage(),
+  BlocProvider(
+  create: (_) => getIt<PatientNotificationCubit>(),
+  child: const  HomePage()),
     BlocProvider(
       create: (_) => getIt<BookingCubit>(),
       child: const BookingPage(),

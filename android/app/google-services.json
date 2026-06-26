@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "50620876414",
-    "project_id": "chifaa-faa5f",
-    "storage_bucket": "chifaa-faa5f.firebasestorage.app"
+    "project_number": "159192741145",
+    "project_id": "chefaa-495509",
+    "storage_bucket": "chefaa-495509.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:50620876414:android:d49b535002d017665dfa2f",
+        "mobilesdk_app_id": "1:159192741145:android:cda5faa7cfb48e1f6f0188",
         "android_client_info": {
           "package_name": "com.example.chefaa"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "50620876414-k3oqablhornpmge377eg1dsfm4haefvl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.chefaa",
-            "certificate_hash": "acdd4daad2e5a8306ea519b1dbd2c9f8d3f473d6"
-          }
-        },
-        {
-          "client_id": "50620876414-hfv5genejr18gdoi522k6gb9t5ajt43o.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCB66dswJasZYfEAB90pTX0zbwPK4ja2kM"
+          "current_key": "AIzaSyBs8-b-XGUImQp9romWo86ELh2DAhPX5ZU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "50620876414-hfv5genejr18gdoi522k6gb9t5ajt43o.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

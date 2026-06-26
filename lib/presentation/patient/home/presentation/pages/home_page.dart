@@ -23,6 +23,9 @@ import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/routes/app_routes_names.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
 import '../../../../../../core/widget/layout_app_bar.dart';
+import '../../../notification/presentation/manager/patient_notification_cubit.dart';
+import '../../../notification/presentation/manager/patient_notification_state.dart';
+import '../../../notification/presentation/pages/patient_notification_page.dart';
 import '../manager/users_cubit.dart';
 import '../widgets/quick_actions.dart';
 
@@ -42,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<MedicationCubit>().getMedicationList();
+    context.read<PatientNotificationCubit>().getNotification();
   }
 
   void _openSearchPage() {
@@ -56,13 +60,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // void _navigateToLogin(BuildContext context) {
-  //   Navigator.pushNamedAndRemoveUntil(
-  //     context,
-  //     AppRoutesNames.login,
-  //     (route) => false,
-  //   );
-  // }
 
   @override
   void dispose() {
@@ -81,7 +78,34 @@ class _HomePageState extends State<HomePage> {
             if (state is UserLoaded) userName = state.user.name;
             if (state is UsersLoading) userName = "...";
 
-            return CustomAppBarLayout(title1: "Hello", title2: userName);
+            return BlocBuilder<PatientNotificationCubit, PatientNotificationState>(
+              builder: (context, notificationState) {
+                bool hasUnread = false;
+
+                if (notificationState is PatientNotificationSuccessState) {
+                  hasUnread = notificationState.notification.any(
+                        (e) => e.isRead != true,
+                  );
+                }
+
+                return CustomAppBarLayout(
+                  title1: "Hello",
+                  title2: userName,
+                  hasUnreadNotifications: hasUnread,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                          value: context.read<PatientNotificationCubit>(),
+                          child: const PatientNotificationPage(),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            );
           },
         ),
       ),
@@ -149,10 +173,40 @@ class _HomePageState extends State<HomePage> {
                         }
 
                         if (state is MedicationListErrorState) {
-                          return Center(
-                            child: Text(
-                              state.errorMessage,
-                              style: getMediumStyle(color: ColorManager.error),
+                          return Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.w,
+                              vertical: 24.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: ColorManager.lightGray,
+                              borderRadius: BorderRadius.circular(25.r),
+                            ),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.error_outline,
+                                  color: ColorManager.error,
+                                  size: 40.sp,
+                                ),
+                                12.verticalSpace,
+                                Text(
+                                  state.errorMessage,
+                                  textAlign: TextAlign.center,
+                                  style: getMediumStyle(
+                                    color: ColorManager.gray,
+                                    fontSize: 15.sp,
+                                  ),
+                                ),
+                                12.verticalSpace,
+                                ElevatedButton(
+                                  onPressed: () {
+                                    context.read<MedicationCubit>().getMedicationList();
+                                  },
+                                  child: const Text("Retry"),
+                                ),
+                              ],
                             ),
                           );
                         }

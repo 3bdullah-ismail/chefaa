@@ -71,11 +71,12 @@ class MedicineTile extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: 10.w,
             children: [
+              Expanded(child:
               Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p8,
+                  horizontal: AppPadding.p4,
                   vertical: AppPadding.p2,
                 ),
                 decoration: BoxDecoration(
@@ -89,7 +90,7 @@ class MedicineTile extends StatelessWidget {
                     fontSize: 14.sp,
                   ),
                 ),
-              ),
+              )),
               Text(
                 "Price: $price EGP",
                 style: getBoldStyle(color: ColorManager.black, fontSize: 14.sp),
