@@ -6,7 +6,6 @@ import 'package:chefaa/presentation/patient/booking/presentation/manager/booking
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../pages/choose_visit_type.dart';
 import 'confirm_booking_card_decoration.dart';
 import 'text_row.dart';
 
@@ -62,16 +61,6 @@ class AppointmentCard extends StatelessWidget {
 
           16.verticalSpace,
           const Divider(color: ColorManager.input),
-          8.verticalSpace,
-
-          TextRow(
-            firstText: 'Visit Type',
-            secondText:
-            cubit.selectedVisitType == VisitType.online
-                ? 'Video Call'
-                : 'Clinic Visit',
-          ),
-
           8.verticalSpace,
 
           TextRow(

@@ -1,4 +1,7 @@
-﻿import '../models/clinic_response.dart';
+﻿
+import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
+
+import '../models/clinic_response.dart';
 import '../models/clinics_response.dart';
 
 abstract class ClinicRepo {
@@ -28,4 +31,6 @@ abstract class ClinicRepo {
   });
 
   Future<ClinicResponse> getClinicByID({required String clinicID});
+  Future<List<AppointmentModel>> getMyAppointments();
+
 }

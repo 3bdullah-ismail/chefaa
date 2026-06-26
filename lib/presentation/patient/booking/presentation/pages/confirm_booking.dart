@@ -2,7 +2,6 @@ import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_cubit.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_state.dart';
-import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_visit_type.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/widgets/sub_text.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/widgets/title_text.dart';
 import 'package:flutter/material.dart';
@@ -117,7 +116,6 @@ class ConfirmBooking extends StatelessWidget {
 
                   24.verticalSpace,
 
-                  if (cubit.selectedVisitType == VisitType.clinic)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -156,8 +154,6 @@ class ConfirmBooking extends StatelessWidget {
                           )
                         : const SizedBox.shrink(),
                   ),
-
-                  if (cubit.selectedVisitType == VisitType.clinic)
                     Column(
                       children: [
                         16.verticalSpace,

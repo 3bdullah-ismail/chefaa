@@ -4,7 +4,7 @@ import 'package:chefaa/core/extensions/build_ex.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
-import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'labeled_text_field.dart';
 
 class MedicalLeadershipCard extends StatelessWidget {

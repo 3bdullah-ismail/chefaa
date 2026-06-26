@@ -1,5 +1,6 @@
 ﻿import 'package:chefaa/presentation/doctor/layout/home/data/models/clinics.dart';
 
+import '../../../../../patient/appointment/data/models/appointment_model.dart';
 import '../../data/models/clinic.dart';
 
 sealed class ClinicState {}
@@ -58,4 +59,13 @@ final class ClinicSuccessState extends ClinicState {
 final class ClinicErrorState extends ClinicState {
   final String message;
   ClinicErrorState({required this.message});
+}
+final class ClinicAppointmentStatusLoadingState extends ClinicState {}
+final class ClinicAppointmentStatusSuccessState extends ClinicState {
+  List<AppointmentModel> appointments;
+  ClinicAppointmentStatusSuccessState({required this.appointments});
+}
+final class ClinicAppointmentStatusErrorState extends ClinicState {
+  final String message;
+  ClinicAppointmentStatusErrorState({required this.message});
 }

@@ -121,8 +121,8 @@ class _PatientsPageState extends State<PatientsPage> {
                               status: patient.status ?? "upcoming",
                               lastVisit: patient.date != null
                                   ? DateFormat(
-                                      'dd/MM/yyyy',
-                                    ).format(DateTime.parse(patient.date!))
+                                'dd/MM/yyyy',
+                              ).format(DateTime.parse(patient.date!))
                                   : "",
                             );
                           },

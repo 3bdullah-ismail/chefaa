@@ -7,7 +7,6 @@ import '../../../search/domain/entities/clinic_model.dart';
 import '../../data/models/booking.dart';
 import '../../data/models/slots.dart';
 import '../../data/repositories/booking_repo.dart';
-import '../pages/choose_visit_type.dart';
 import 'booking_state.dart';
 
 
@@ -33,7 +32,6 @@ class BookingCubit extends Cubit<BookingState> {
   int activeStep = 0;
   final PageController pageController = PageController();
 
-  VisitType? selectedVisitType;
   PaymentMethod? selectedPaymentMethod;
 
   final GlobalKey<FormState> cardFormKey = GlobalKey<FormState>();
@@ -104,12 +102,6 @@ class BookingCubit extends Cubit<BookingState> {
   void selectTime(String time) {
     selectedTime = time;
     emit(TimeSelectedState(time));
-  }
-
-
-  void selectVisitType(VisitType type) {
-    selectedVisitType = type;
-    emit(ChangeStepState());
   }
 
 

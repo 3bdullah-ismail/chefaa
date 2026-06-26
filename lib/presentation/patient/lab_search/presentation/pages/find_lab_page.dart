@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,13 @@ class _FindLabViewState extends State<_FindLabView> {
     if (_selectedFilterIndex == 1) {
       list = list.where((c) => c.facilityType?.toLowerCase() == 'lab').toList();
     } else if (_selectedFilterIndex == 2) {
-      list = list.where((c) => c.facilityType?.toLowerCase() == 'scan' || c.facilityType?.toLowerCase() == 'both').toList();
+      list = list
+          .where(
+            (c) =>
+                c.facilityType?.toLowerCase() == 'scan' ||
+                c.facilityType?.toLowerCase() == 'both',
+          )
+          .toList();
     }
     return list;
   }
@@ -89,7 +96,10 @@ class _FindLabViewState extends State<_FindLabView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.lightGray,
+      appBar: const PreferredSize(
+        preferredSize:  Size.fromHeight(100),
+        child: InsideAppBar(title: "Find Lab"),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -101,7 +111,6 @@ class _FindLabViewState extends State<_FindLabView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeader(context),
                 20.verticalSpace,
                 CustomTextField(
                   controller: _searchController,
@@ -122,7 +131,9 @@ class _FindLabViewState extends State<_FindLabView> {
                     if (state is LabSearchLoading) {
                       isLoading = true;
                     } else if (state is LabSearchSuccess) {
-                      centers = _getFilteredCenters(state.response.centers ?? []);
+                      centers = _getFilteredCenters(
+                        state.response.centers ?? [],
+                      );
                     } else if (state is LabSearchError) {
                       error = state.error;
                     }
@@ -144,10 +155,17 @@ class _FindLabViewState extends State<_FindLabView> {
                         else if (error != null)
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 40,
+                                horizontal: 20,
+                              ),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.error_outline, size: 48, color: ColorManager.error),
+                                  const Icon(
+                                    Icons.error_outline,
+                                    size: 48,
+                                    color: ColorManager.error,
+                                  ),
                                   16.verticalSpace,
                                   Text(error, textAlign: TextAlign.center),
                                   16.verticalSpace,
@@ -186,49 +204,49 @@ class _FindLabViewState extends State<_FindLabView> {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        InkWell(
-          onTap: () => Navigator.pop(context),
-          borderRadius: BorderRadius.circular(AppRadius.r20.r),
-          child: Container(
-            width: 40.w,
-            height: 40.w,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Icon(
-              Icons.arrow_back,
-              color: ColorManager.black,
-              size: 20.sp,
-            ),
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            IconsAssets.notification,
-            width: 24.w,
-            height: 24.h,
-            colorFilter: const ColorFilter.mode(
-              ColorManager.darkGray,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildHeader(BuildContext context) {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: [
+  //       InkWell(
+  //         onTap: () => Navigator.pop(context),
+  //         borderRadius: BorderRadius.circular(AppRadius.r20.r),
+  //         child: Container(
+  //           width: 40.w,
+  //           height: 40.w,
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             shape: BoxShape.circle,
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withValues(alpha: 0.08),
+  //                 blurRadius: 6,
+  //                 offset: const Offset(0, 3),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Icon(
+  //             Icons.arrow_back,
+  //             color: ColorManager.black,
+  //             size: 20.sp,
+  //           ),
+  //         ),
+  //       ),
+  //       IconButton(
+  //         onPressed: () {},
+  //         icon: SvgPicture.asset(
+  //           IconsAssets.notification,
+  //           width: 24.w,
+  //           height: 24.h,
+  //           colorFilter: const ColorFilter.mode(
+  //             ColorManager.darkGray,
+  //             BlendMode.srcIn,
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildFilterList() {
     return SizedBox(

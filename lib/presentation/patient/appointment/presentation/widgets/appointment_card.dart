@@ -207,20 +207,19 @@ class DoctorCard extends StatelessWidget {
               (appointment!.status ?? '').toLowerCase() == 'upcoming') ...[
             10.verticalSpace,
             Row(
+              spacing: 3.w,
               children: [
                 CustomOutlineBtn(
                   title: 'Cancel',
                   color: ColorManager.error,
                   onPressed: onCancel,
                 ),
-                5.horizontalSpace,
                 CustomOutlineBtn(
                   title: 'Reschedule',
                   color: ColorManager.primary,
                   onPressed: onReschedule,
                 ),
-                5.horizontalSpace,
-                CustomBtn(text: 'Join Now', onPressed: () {}, isSmall: true),
+                CustomBtn(text: 'Join Now', onPressed: () {}, isSmall: true, isDisabled: true,),
               ],
             ),
           ],

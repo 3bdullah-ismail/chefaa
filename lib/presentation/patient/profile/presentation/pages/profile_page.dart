@@ -12,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
 import '../manager/profile_cubit.dart';
 import '../widgets/appointment_card.dart';
@@ -52,27 +53,30 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
         builder: (context) {
           return Scaffold(
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(210),
+              preferredSize: const Size.fromHeight(170),
               child: AppBar(
                 automaticallyImplyLeading: false,
                 backgroundColor: ColorManager.primary,
                 shadowColor: ColorManager.black.withValues(alpha: .25),
                 elevation: 15,
-                flexibleSpace: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const CustomCircleAvatar(
-                      imagePath: ImageAssets.patient,
-                      radius: 50,
-                    ),
-                    Text(
-                      StorageService.user?.name ?? "user name",
-                      style: getSemiBoldStyle(
-                        color: ColorManager.white,
-                        fontSize: FontSize.s20.sp,
+                flexibleSpace: Padding(
+                  padding: const EdgeInsets.only(top: AppPadding.p60),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const CustomCircleAvatar(
+                        imagePath: ImageAssets.patient,
+                        radius: 50,
                       ),
-                    ),
-                  ],
+                      Text(
+                        StorageService.user?.name ?? "user name",
+                        style: getSemiBoldStyle(
+                          color: ColorManager.white,
+                          fontSize: FontSize.s20.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
                 shape: const RoundedRectangleBorder(

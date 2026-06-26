@@ -57,29 +57,29 @@ class FilterBar extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           if (index == 0)
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  SvgAssets.filter,
-                                  width: AppSize.s20,
-                                  height: AppSize.s20,
-                                ),
-                                const SizedBox(width: AppSize.s6),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.all(AppPadding.p6),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    SvgAssets.filter,
+                                    width: AppSize.s15,
+                                    height: AppSize.s15,
+                                  ),
+                                  const SizedBox(width: AppSize.s6),
+                                ],
+                              ),
                             ),
                           Expanded(
                             child: Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(AppPadding.p8),
-                                child: Text(
-                                  label,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: isSelected
-                                        ? ColorManager.white
-                                        : ColorManager.black,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                              child: Text(
+                                label,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: isSelected
+                                      ? ColorManager.white
+                                      : ColorManager.black,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),

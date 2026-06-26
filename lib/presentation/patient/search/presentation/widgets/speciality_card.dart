@@ -16,32 +16,33 @@ class SpecialityCard extends StatelessWidget {
         Navigator.pop(context, item["specialityName"]);
       },
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            height: AppSize.s105.h,
-            width: AppSize.s105.w,
-            padding: const EdgeInsets.all(AppPadding.p8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppRadius.r10),
-              color: ColorManager.white,
-              boxShadow: [
-                BoxShadow(
-                  color: ColorManager.black.withValues(alpha: .1),
-                  blurRadius: AppSize.s5,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Image.asset(
-              item["specialityImage"]!,
-              width: double.infinity,
-              height: double.infinity,
-              alignment: Alignment.topCenter,
-              fit: BoxFit.cover,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(AppPadding.p10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppRadius.r10),
+                color: ColorManager.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorManager.black.withValues(alpha: .1),
+                    blurRadius: AppSize.s5,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Image.asset(item["specialityImage"]!, fit: BoxFit.contain),
             ),
           ),
-          Text(item["specialityName"]!, textAlign: TextAlign.center),
+
+          6.verticalSpace,
+
+          Text(
+            item["specialityName"]!,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );

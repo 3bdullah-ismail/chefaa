@@ -144,12 +144,14 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
         }
 
         if (state is MedicationUpdateSuccessState) {
+          Navigator.of(context).pop();
           messenger.showSnackBar(
             const SnackBar(content: Text("Medication updated successfully!")),
           );
         }
 
         if (state is MedicationDeleteSuccessState) {
+          Navigator.of(context).pop();
           messenger.showSnackBar(
             const SnackBar(content: Text("Medication deleted successfully!")),
           );

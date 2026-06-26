@@ -7,10 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../core/config/get_config.dart';
-import '../../presentation/facility/auth/presentation/pages/facility_signup.dart';
-import '../../presentation/facility/dashboard/presentation/pages/facility_results_page.dart';
-import '../../presentation/facility/dashboard/presentation/pages/create_patient_request_page.dart';
-import '../../presentation/facility/layout/presentation/pages/facility_layout.dart';
+import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
+import '../../presentation/Facility/dashboard/presentation/pages/facility_results_page.dart';
+import '../../presentation/Facility/dashboard/presentation/pages/create_patient_request_page.dart';
+import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
 import '../../presentation/auth/presentation/pages/forget_password.dart';
 import '../../presentation/auth/presentation/pages/login_page.dart';
 import '../../presentation/auth/presentation/pages/reset_code.dart';

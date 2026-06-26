@@ -14,7 +14,7 @@ class AppointmentStatusCart extends StatelessWidget {
       children: [
         SizedBox(
           height: 120.h,
-          width: 120.w,
+          width: 115.w,
           child: PieChart(
             PieChartData(
               centerSpaceRadius: 50.r,

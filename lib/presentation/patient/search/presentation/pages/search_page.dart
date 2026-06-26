@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/search/presentation/widgets/search_app_bar.dart';
+import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(100),
-          child: SearchAppBar(title: 'Search'),
+          child: InsideAppBar(title: "Search"),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(

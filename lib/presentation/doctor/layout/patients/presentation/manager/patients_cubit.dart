@@ -60,10 +60,10 @@ class PatientsCubit extends Cubit<PatientsState> {
       final patients = await patientsRepo.getPatients();
 
       final upcoming =
-      patients.where((e) => e.status == "upcoming").toList();
+      patients.where((e) => e.status == "upcoming" && e.paymentStatus=="paid").toList();
 
       final completed =
-      patients.where((e) => e.status == "completed").toList();
+      patients.where((e) => e.status == "completed"&& e.paymentStatus=="paid").toList();
 
       emit(
         PatientsSuccessState(

@@ -35,6 +35,8 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
   bool profileCompleted = false;
 
   void initializeControllers(DoctorProfileEntity? d, {bool emitState = true}) {
+    if (isClosed) return; // controllers are disposed once the cubit is closed
+
     currentDoctor = d;
     profileCompleted = d?.isProfileCompleted() ?? false;
     nameController.text = d?.name ?? '';
@@ -58,15 +60,15 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
     degreeControllers = degrees.isEmpty
         ? [TextEditingController()]
         : degrees
-              .map((e) => TextEditingController(text: e.toString()))
-              .toList();
+        .map((e) => TextEditingController(text: e.toString()))
+        .toList();
 
     final preNums = d?.prePaymentNumbers ?? [];
     prePaymentNumberControllers = preNums.isEmpty
         ? [TextEditingController()]
         : preNums
-              .map((e) => TextEditingController(text: e.toString()))
-              .toList();
+        .map((e) => TextEditingController(text: e.toString()))
+        .toList();
 
     if (emitState) {
       emit(DoctorProfileControllersInitializedState());
@@ -112,6 +114,9 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
   Future<void> getDoctorData() async {
     emit(GetDoctorDataLoadingState());
     final result = await getDoctorDataUseCase();
+
+    if (isClosed) return;
+
     result.fold(
       ifLeft: (failure) => emit(GetDoctorDataErrorState(failure.message)),
       ifRight: (data) {
@@ -159,6 +164,9 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
       );
 
       final result = await updateDoctorDataUseCase(request);
+
+      if (isClosed) return;
+
       result.fold(
         ifLeft: (failure) => emit(UpdateDoctorDataErrorState(failure.message)),
         ifRight: (data) {

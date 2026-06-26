@@ -10,7 +10,7 @@ import 'package:chefaa/core/widget/custom_dropdown_btn.dart';
 import 'package:chefaa/core/widget/upload_container.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/core/widget/license_formatter.dart';
-import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'labeled_text_field.dart';
 
 class FacilityInfoCard extends StatefulWidget {

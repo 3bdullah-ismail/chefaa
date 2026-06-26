@@ -1,3 +1,6 @@
+import 'package:chefaa/presentation/doctor/layout/chatbot/presentation/manager/doc_chatbot_cubit.dart';
+import 'package:chefaa/presentation/doctor/layout/chatbot/presentation/pages/doc_chatbot_page.dart';
+import 'package:chefaa/presentation/doctor/layout/daily_brief/presentation/pages/daily_brief_page.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/manager/clinic_cubit.dart';
 import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/doctor_home.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/presentation/manager/patients_cubit.dart';
@@ -12,6 +15,7 @@ import '../../../core/resources/assets_manager.dart';
 import '../../../core/resources/color_manager.dart';
 import '../../../core/resources/styles_manager.dart';
 import '../profile/presentation/pages/profile_page.dart';
+import 'daily_brief/presentation/manager/brief_cubit.dart';
 
 class DoctorLayout extends StatefulWidget {
   const DoctorLayout({super.key});
@@ -28,7 +32,14 @@ class _DoctorLayoutState extends State<DoctorLayout> {
     BlocProvider(
         create: (_) =>getIt<PatientsCubit>(),
         child: const PatientsPage()),
-    const Center(child: Text('ChatBot')),
+  BlocProvider(
+  create: (_) =>getIt<BriefCubit>(),
+  child: const DailyBriefPage()),
+
+  BlocProvider(
+  create: (_) =>getIt<DocChatbotCubit>(),
+  child: const DocChatbotPage()),
+
      const DoctorProfile(),
   ];
 
@@ -58,6 +69,11 @@ class _DoctorLayoutState extends State<DoctorLayout> {
               icon: SvgPicture.asset(SvgAssets.patient, width: 32.w, height: 32.h),
               activeIcon: SvgPicture.asset(SvgAssets.patientActive, width: 32.w, height: 32.h),
               label: 'Patients',
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(SvgAssets.docBrief, width: 32.w, height: 32.h),
+              activeIcon: SvgPicture.asset(SvgAssets.docBriefActive, width: 32.w, height: 32.h),
+              label: 'Briefing',
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(SvgAssets.chat),

@@ -3,14 +3,14 @@ import 'dart:isolate';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/core/services/hive_service.dart';
-import 'package:chefaa/presentation/facility/dashboard/data/models/get_dashboard_response.dart';
-import 'package:chefaa/presentation/facility/dashboard/data/models/create_patient_request_response.dart';
-import 'package:chefaa/presentation/facility/dashboard/domain/repositories/dashboard_repository.dart';
+import 'package:chefaa/presentation/Facility/dashboard/data/models/get_dashboard_response.dart';
+import 'package:chefaa/presentation/Facility/dashboard/data/models/create_patient_request_response.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../data_sources/dashboard_remote_source.dart';
 import '../models/upload_result_response.dart';
+import 'dashboard_repository.dart';
 
 @Injectable(as: DashboardRepository)
 class DashboardRepositoryImpl implements DashboardRepository {

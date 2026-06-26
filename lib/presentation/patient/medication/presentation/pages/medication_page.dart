@@ -154,8 +154,8 @@ class _MedicationPageState extends State<MedicationPage> {
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: AppPadding.p32,
-                  left: AppPadding.p20,
-                  right: AppPadding.p20,
+                  left: AppPadding.p16,
+                  right: AppPadding.p16,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

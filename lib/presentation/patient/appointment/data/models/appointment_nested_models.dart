@@ -32,7 +32,7 @@ class AppointmentPatientUserModel {
 
 class AppointmentPatientModel {
   final String? id;
-  final String? address;
+  final Map<String, dynamic>? address;
   final bool? isBlocked;
   final AppointmentPatientUserModel? userId;
   final int? age;
@@ -63,7 +63,7 @@ class AppointmentPatientModel {
     final userJson = json['userId'];
     return AppointmentPatientModel(
       id: json['_id'],
-      address: json['address'],
+      address: json['address'] as Map<String, dynamic>?,
       isBlocked: json['isBlocked'],
       userId: userJson != null
           ? AppointmentPatientUserModel.fromJson(userJson)
