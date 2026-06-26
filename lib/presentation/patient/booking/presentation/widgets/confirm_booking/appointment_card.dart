@@ -64,16 +64,6 @@ class AppointmentCard extends StatelessWidget {
           8.verticalSpace,
 
           TextRow(
-            firstText: 'Visit Type',
-            secondText:
-            cubit.selectedVisitType == VisitType.online
-                ? 'Video Call'
-                : 'Clinic Visit',
-          ),
-
-          8.verticalSpace,
-
-          TextRow(
             firstText: 'Date',
             secondText: cubit.selectedDate ?? '--',
           ),
