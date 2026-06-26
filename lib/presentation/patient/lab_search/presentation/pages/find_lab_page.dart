@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +96,10 @@ class _FindLabViewState extends State<_FindLabView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorManager.lightGray,
+      appBar: const PreferredSize(
+        preferredSize:  Size.fromHeight(100),
+        child: InsideAppBar(title: "Find Lab"),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
@@ -107,7 +111,6 @@ class _FindLabViewState extends State<_FindLabView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeader(context),
                 20.verticalSpace,
                 CustomTextField(
                   controller: _searchController,
@@ -201,49 +204,49 @@ class _FindLabViewState extends State<_FindLabView> {
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        InkWell(
-          onTap: () => Navigator.pop(context),
-          borderRadius: BorderRadius.circular(AppRadius.r20.r),
-          child: Container(
-            width: 40.w,
-            height: 40.w,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.08),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Icon(
-              Icons.arrow_back,
-              color: ColorManager.black,
-              size: 20.sp,
-            ),
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: SvgPicture.asset(
-            IconsAssets.notification,
-            width: 24.w,
-            height: 24.h,
-            colorFilter: const ColorFilter.mode(
-              ColorManager.darkGray,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildHeader(BuildContext context) {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //     children: [
+  //       InkWell(
+  //         onTap: () => Navigator.pop(context),
+  //         borderRadius: BorderRadius.circular(AppRadius.r20.r),
+  //         child: Container(
+  //           width: 40.w,
+  //           height: 40.w,
+  //           decoration: BoxDecoration(
+  //             color: Colors.white,
+  //             shape: BoxShape.circle,
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withValues(alpha: 0.08),
+  //                 blurRadius: 6,
+  //                 offset: const Offset(0, 3),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Icon(
+  //             Icons.arrow_back,
+  //             color: ColorManager.black,
+  //             size: 20.sp,
+  //           ),
+  //         ),
+  //       ),
+  //       IconButton(
+  //         onPressed: () {},
+  //         icon: SvgPicture.asset(
+  //           IconsAssets.notification,
+  //           width: 24.w,
+  //           height: 24.h,
+  //           colorFilter: const ColorFilter.mode(
+  //             ColorManager.darkGray,
+  //             BlendMode.srcIn,
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildFilterList() {
     return SizedBox(

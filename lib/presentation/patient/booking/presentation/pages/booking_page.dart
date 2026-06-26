@@ -3,7 +3,6 @@ import 'package:chefaa/presentation/patient/booking/presentation/manager/booking
 import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_state.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_doctor.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_visit_time.dart';
-import 'package:chefaa/presentation/patient/booking/presentation/pages/choose_visit_type.dart';
 import 'package:chefaa/presentation/patient/booking/presentation/widgets/stepper_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +22,6 @@ class BookingPage extends StatelessWidget {
         final cubit = context.read<BookingCubit>();
 
         final pages = [
-          const ChooseVisitTypePage(),
           const ChooseDoctor(),
           const ChooseVisitTime(),
           const ConfirmBooking(),

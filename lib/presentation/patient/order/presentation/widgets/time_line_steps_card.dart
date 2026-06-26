@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 
@@ -87,7 +88,7 @@ class TimeLineStepsCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14.sp,
                       fontWeight: isActive || isCompleted
                           ? FontWeight.bold
                           : FontWeight.w500,

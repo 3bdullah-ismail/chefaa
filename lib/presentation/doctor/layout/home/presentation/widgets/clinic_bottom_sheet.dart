@@ -133,7 +133,7 @@ class _ClinicBottomSheetState extends State<ClinicBottomSheet> {
                           slotDurationController: cubit.slotDurationController,
                           maxPatientsController: cubit.dailyCapacityController,
                           patientPerSlotController:
-                              cubit.patientsPerSlotController,
+                          cubit.patientsPerSlotController,
                         ),
 
                         20.verticalSpace,

@@ -232,12 +232,16 @@ class ChooseVisitTime extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final slot = cubit.slots[index];
 
-                          final String time = slot.startTime ?? "";
+                          // هذا هو الوقت الذي سيرسل للـ API
+                          final String apiTime = slot.startTime ?? "00:00";
 
-                          final bool isSelected = cubit.selectedTime == time;
+                          // هذا فقط للعرض
+                          final String displayTime = formatTime12Hour(apiTime);
+
+                          final bool isSelected = cubit.selectedTime == apiTime;
 
                           return GestureDetector(
-                            onTap: () => cubit.selectTime(time),
+                            onTap: () => cubit.selectTime(apiTime),
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
                               alignment: Alignment.center,
@@ -262,7 +266,7 @@ class ChooseVisitTime extends StatelessWidget {
                                 ],
                               ),
                               child: Text(
-                                time,
+                                displayTime,
                                 style: getMediumStyle(
                                   color: isSelected
                                       ? Colors.white
@@ -293,4 +297,9 @@ class ChooseVisitTime extends StatelessWidget {
       },
     );
   }
+}
+
+String formatTime12Hour(String time) {
+  final date = DateFormat("HH:mm").parse(time);
+  return DateFormat("hh:mm a").format(date);
 }

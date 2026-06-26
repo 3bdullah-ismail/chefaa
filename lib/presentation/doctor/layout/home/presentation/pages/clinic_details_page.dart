@@ -20,13 +20,15 @@ class ClinicDetailsPage extends StatefulWidget {
 class _ClinicDetailsPageState extends State<ClinicDetailsPage> {
   Clinic? clinic;
 
+
   @override
   Widget build(BuildContext context) {
     var clinics = ModalRoute.of(context)!.settings.arguments as Clinics;
 
     return BlocProvider(
-      create: (_) =>
-          getIt<ClinicCubit>()..getClinicByID(clinicID: clinics.id ?? ""),
+        create: (_) =>
+        getIt<ClinicCubit>()
+          ..getClinicByID(clinicID: clinics.id ?? ""),
 
       child: BlocListener<ClinicCubit, ClinicState>(
         listener: (context, state) {

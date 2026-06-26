@@ -2,6 +2,7 @@ import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../../core/resources/color_manager.dart';
@@ -12,7 +13,7 @@ class SuggestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 100.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: ColorManager.lightGray,
@@ -45,7 +46,7 @@ class SuggestCard extends StatelessWidget {
                   "Metformin 500mg at 8:00 PM (in 3 hours)",
                   style: getRegularStyle(
                     color: ColorManager.h2Color,
-                  ).copyWith(fontSize: 14),
+                  ).copyWith(fontSize: 12.sp),
                 ),
               ],
             ),

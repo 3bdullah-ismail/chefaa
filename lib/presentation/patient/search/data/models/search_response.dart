@@ -136,36 +136,45 @@ class SearchResponse extends ClinicModel {
   }
 
   static List<DateTime> _parseDaysStatic(List<Clinics>? clinics) {
-    if (clinics == null || clinics.isEmpty) return const [];
+    if (clinics == null || clinics.isEmpty) {
+      return const [];
+    }
 
     final weekDays = <int>{};
 
     for (final clinic in clinics) {
       final days = clinic.defaultSchedule?.days;
+
       if (days == null || days.isEmpty) continue;
 
       for (final day in days) {
         if (!_isActiveDay(day.isActive)) continue;
 
         final weekday = _weekdayFromString(day.day);
+
         if (weekday == null) continue;
 
         weekDays.add(weekday);
       }
     }
 
-    if (weekDays.isEmpty) return const [];
+    if (weekDays.isEmpty) {
+      return const [];
+    }
 
     final now = DateTime.now();
     final start = DateTime(now.year, now.month, now.day);
 
-    return List.generate(
-      14,
-      (i) => start.add(Duration(days: i)),
-    ).where((date) => weekDays.contains(date.weekday)).toList(growable: false);
-  }
+    final dates = List.generate(
+      7,
+          (i) => start.add(Duration(days: i)),
+    ).where(
+          (date) => weekDays.contains(date.weekday),
+    ).toList(growable: false);
 
-  static bool _isActiveDay(bool? isActive) {
+
+    return dates;
+  }  static bool _isActiveDay(bool? isActive) {
     return isActive == true;
   }
 
