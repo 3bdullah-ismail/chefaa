@@ -6,9 +6,9 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/validators.dart';
-import 'package:chefaa/presentation/facility/dashboard/presentation/manager/dashboard_cubit.dart';
-import 'package:chefaa/presentation/facility/services/data/models/service_model.dart';
-import 'package:chefaa/presentation/facility/services/presentation/manager/services_cubit.dart';
+import 'package:chefaa/presentation/Facility/dashboard/presentation/manager/dashboard_cubit.dart';
+import 'package:chefaa/presentation/Facility/services/data/models/service_model.dart';
+import 'package:chefaa/presentation/Facility/services/presentation/manager/services_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -480,7 +480,7 @@ class _CreatePatientRequestPageBodyState
                           width: 1.w,
                         ),
                       ),
-                      child: Row(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(

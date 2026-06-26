@@ -72,4 +72,8 @@ class ClinicDataSourceImp implements ClinicDataSource {
       },
     );
   }
+  @override
+  Future<Response<dynamic>> getMyAppointments() {
+    return networkService.dio.get('/appointments/my');
+  }
 }

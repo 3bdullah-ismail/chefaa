@@ -1,3 +1,5 @@
+import 'package:chefaa/core/resources/values_manager.dart';
+import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/custom_outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +14,7 @@ class EmptyMedicationState extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 40.h),
+      padding: const EdgeInsets.symmetric(vertical:AppPadding.p18),
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
         borderRadius: BorderRadius.circular(16.r),
@@ -22,39 +24,29 @@ class EmptyMedicationState extends StatelessWidget {
         children: [
           Icon(
             Icons.medication_outlined,
-            size: 80.sp,
+            size: 30.sp,
             color: ColorManager.primary.withAlpha(80),
           ),
-          24.verticalSpace,
+          12.verticalSpace,
           Text(
             "No Medications Yet",
-            style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
+            style: getBoldStyle(color: ColorManager.black, fontSize: 16.sp),
           ),
-          8.verticalSpace,
+          5.verticalSpace,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.w),
             child: Text(
               "Add your medications to track them daily",
-              style: getMediumStyle(color: ColorManager.gray, fontSize: 15.sp),
+              style: getMediumStyle(color: ColorManager.gray, fontSize: 12.sp),
               textAlign: TextAlign.center,
             ),
           ),
-          32.verticalSpace,
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorManager.primary,
-              padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 12.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-            ),
+          5.verticalSpace,
+          CustomOutlineButton(
+            text: "Add Medication",
             onPressed: () {
               Navigator.pushNamed(context, AppRoutesNames.medicationPage);
             },
-            child: Text(
-              "Add Medication",
-              style: getBoldStyle(color: Colors.white, fontSize: 16.sp),
-            ),
           ),
         ],
       ),

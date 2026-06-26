@@ -27,4 +27,5 @@ abstract class ClinicDataSource {
   });
 
   Future<Response> getClinicByID({required String clinicID});
+  Future<Response> getMyAppointments();
 }

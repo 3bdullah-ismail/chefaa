@@ -32,7 +32,7 @@ class QuickActions extends StatelessWidget {
             onTap();
           },
           child: Container(
-            height: 70.h,
+            height: 60.h,
             padding: const EdgeInsets.all(AppPadding.p16),
             decoration: BoxDecoration(
               color: ColorManager.lightGray,
@@ -50,7 +50,7 @@ class QuickActions extends StatelessWidget {
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: getMediumStyle(color: ColorManager.black, fontSize: 14),
+            style: getMediumStyle(color: ColorManager.black, fontSize: 14.sp),
           ),
         ),
       ],

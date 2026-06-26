@@ -24,22 +24,22 @@ class CustomBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: isSmall ? context.width * .26 : context.width * .9,
+        width: isSmall ? context.width * .250 : context.width * .9,
         child: CupertinoButton(
           disabledColor: ColorManager.gray,
           minimumSize: Size.zero,
           padding: EdgeInsets.symmetric(
-            vertical: isSmall ? AppPadding.p12 : 16.h,
-            horizontal: isSmall ? AppPadding.p10 : 0,
+            vertical: isSmall ? AppPadding.p10 : AppPadding.p16,
+            horizontal: isSmall ? AppPadding.p8 : 0,
           ),
           color: ColorManager.primary,
-          borderRadius: BorderRadius.circular(isSmall ? 35.r : 32.r),
+          borderRadius: BorderRadius.circular(isSmall ? 30.r : 32.r),
           onPressed: isDisabled ? null : onPressed,
           child: Text(
             text,
             style: isSmall
-                ? getMediumStyle(color: ColorManager.white, fontSize: 18)
-                : getSemiBoldStyle(color: ColorManager.white, fontSize: 20),
+                ? getMediumStyle(color: ColorManager.white, fontSize: 16.sp)
+                : getSemiBoldStyle(color: ColorManager.white, fontSize: 20.sp),
           ),
         ),
       ),

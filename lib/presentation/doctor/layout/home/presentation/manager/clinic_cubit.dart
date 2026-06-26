@@ -2,6 +2,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../../core/error_handling/failure.dart';
 import '../../data/models/clinic.dart';
 import '../../data/repositories/clinic_repo.dart';
 import 'clinic_state.dart';
@@ -239,6 +240,22 @@ class ClinicCubit extends Cubit<ClinicState> {
 
     emit(ClinicInitialState());
   }
+  Future<void> getMyAppointments() async {
+
+    emit(ClinicAppointmentStatusLoadingState());
+
+    try {
+      final appointments = await clinicRepo.getMyAppointments();
+      emit(ClinicAppointmentStatusSuccessState(appointments: appointments));
+    } catch (e) {
+      if (e is ServerFailure) {
+        emit(ClinicAppointmentStatusErrorState(message: e.message));
+      } else {
+        emit(ClinicAppointmentStatusErrorState(message: ServerFailure.unexpectedError));
+      }
+    }
+  }
+
 
   void resetDays() {
     for (final k in selectedDays.keys) {

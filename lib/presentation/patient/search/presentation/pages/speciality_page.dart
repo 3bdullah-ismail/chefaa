@@ -12,17 +12,17 @@ class SpecialityPage extends StatelessWidget {
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(AppSize.s100),
-        child: InsideAppBar(title: "Doctor Speciality", isSpeciality: true),
+        child: InsideAppBar(title: "Doctor Speciality"),
       ),
       body: SafeArea(
         child: GridView.builder(
-          padding: const EdgeInsets.all(AppPadding.p24),
+          padding: const EdgeInsets.all(AppPadding.p16),
           itemCount: AppConstants.specialityItems.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             crossAxisSpacing: AppSize.s8,
             mainAxisSpacing: AppSize.s3,
-            childAspectRatio: 0.75,
+            childAspectRatio: 0.60,
           ),
           itemBuilder: (BuildContext context, int index) {
             final item = AppConstants.specialityItems[index];

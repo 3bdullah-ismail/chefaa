@@ -107,7 +107,7 @@ class SearchCubit extends Cubit<SearchState> {
   String labelFor(FilterType type) {
     switch (type) {
       case FilterType.filters:
-        return hasActiveSelections() ? 'Clear' : 'Filters';
+        return hasActiveSelections() ? 'Filters' : ' Filters';
       case FilterType.specialization:
         return draftQuery.specialization.isNotEmpty
             ? draftQuery.specialization

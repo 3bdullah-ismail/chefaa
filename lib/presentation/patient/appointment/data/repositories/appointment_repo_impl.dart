@@ -21,8 +21,10 @@ class AppointmentRepoImpl implements AppointmentRepo {
       return model.appointments ?? [];
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e);
-    } catch (_) {
-      throw ServerFailure(ServerFailure.unexpectedError);
+    }catch (e, s) {
+      print("ERROR = $e");
+      print(s);
+      rethrow;
     }
   }
 

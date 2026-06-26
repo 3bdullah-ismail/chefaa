@@ -23,7 +23,6 @@ import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/routes/app_routes_names.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
 import '../../../../../../core/widget/layout_app_bar.dart';
-import '../../../medication/presentation/widgets/medication_error_widget.dart';
 import '../manager/users_cubit.dart';
 import '../widgets/quick_actions.dart';
 
@@ -57,13 +56,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _navigateToLogin(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      AppRoutesNames.login,
-      (route) => false,
-    );
-  }
+  // void _navigateToLogin(BuildContext context) {
+  //   Navigator.pushNamedAndRemoveUntil(
+  //     context,
+  //     AppRoutesNames.login,
+  //     (route) => false,
+  //   );
+  // }
 
   @override
   void dispose() {
@@ -98,14 +97,13 @@ class _HomePageState extends State<HomePage> {
           }
 
           if (state is MedicationListErrorState) {
-            final error = state.errorMessage.toLowerCase();
-            if (error.contains('unauthorized') ||
-                error.contains('401') ||
-                error.contains('token')) {
-              _navigateToLogin(context);
-            }
-          }
-        },
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: ColorManager.error,
+              ),
+            );
+        }   },
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -138,7 +136,7 @@ class _HomePageState extends State<HomePage> {
 
                     BlocBuilder<MedicationCubit, MedicationState>(
                       buildWhen: (previous, current) =>
-                          current is MedicationListLoadingState ||
+                      current is MedicationListLoadingState ||
                           current is MedicationListSuccessState ||
                           current is MedicationListErrorState,
                       builder: (context, state) {
@@ -151,14 +149,11 @@ class _HomePageState extends State<HomePage> {
                         }
 
                         if (state is MedicationListErrorState) {
-                          return MedicationErrorWidget(
-                            rawError: state.errorMessage,
-                            onRetry: () {
-                              context
-                                  .read<MedicationCubit>()
-                                  .getMedicationList();
-                            },
-                            onSignInRedirect: () => _navigateToLogin(context),
+                          return Center(
+                            child: Text(
+                              state.errorMessage,
+                              style: getMediumStyle(color: ColorManager.error),
+                            ),
                           );
                         }
 
@@ -175,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                                       "Today's Medication",
                                       style: getBoldStyle(
                                         color: ColorManager.black,
-                                        fontSize: 22.sp,
+                                        fontSize: 18.sp,
                                       ),
                                     ),
                                   ),
@@ -190,21 +185,19 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             "Manage",
                                             style:
-                                                getMediumStyle(
-                                                  color: ColorManager.primary,
-                                                  fontSize: 18.sp,
-                                                ).copyWith(
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  decorationColor:
-                                                      ColorManager.primary,
-                                                  decorationThickness: 2,
-                                                ),
+                                            getMediumStyle(
+                                              color: ColorManager.primary,
+                                              fontSize: 16.sp,
+                                            ).copyWith(
+                                              decoration:
+                                              TextDecoration.underline,
+                                              decorationColor:
+                                              ColorManager.primary,
+                                              decorationThickness: 2,
+                                            ),
                                           ),
-                                          6.horizontalSpace,
                                           SvgPicture.asset(
                                             "assets/icons/drug.svg",
-                                            width: 20.w,
                                           ),
                                         ],
                                       ),
@@ -241,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                             "Latest Lab Results",
                             style: getBoldStyle(
                               color: ColorManager.black,
-                              fontSize: 22.sp,
+                              fontSize: 18.sp,
                             ),
                           ),
                         ),
@@ -257,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                                 style:
                                     getMediumStyle(
                                       color: ColorManager.primary,
-                                      fontSize: 18.sp,
+                                      fontSize: 16.sp,
                                     ).copyWith(
                                       decoration: TextDecoration.underline,
                                       decorationColor: ColorManager.primary,
@@ -444,7 +437,7 @@ class _HomePageState extends State<HomePage> {
                                 "All Appointments",
                                 style: getBoldStyle(
                                   color: ColorManager.primary,
-                                  fontSize: 13.sp,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                               SizedBox(width: 4.w),

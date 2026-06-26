@@ -17,37 +17,35 @@ class FacilityStatCardsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: _FacilityStatCardWidget(
-              title: "REQUESTS",
-              count: requestsCount?.toString() ?? "0",
-              subtitle: "Today",
-            ),
+    return Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: _FacilityStatCardWidget(
+            title: "REQUESTS",
+            count: requestsCount?.toString() ?? "0",
+            subtitle: "Today",
           ),
-          SizedBox(width: AppSize.s8.w),
-          Expanded(
-            child: _FacilityStatCardWidget(
-              title: "COMPLETED",
-              count: completedCount?.toString() ?? "0",
-              icon: Icons.check_circle_outline_rounded,
-              iconColor: ColorManager.lightGreen,
-            ),
+        ),
+        SizedBox(width: AppSize.s8.w),
+        Expanded(
+          child: _FacilityStatCardWidget(
+            title: "COMPLETED",
+            count: completedCount?.toString() ?? "0",
+            icon: Icons.check_circle_outline_rounded,
+            iconColor: ColorManager.lightGreen,
           ),
-          SizedBox(width: AppSize.s8.w),
-          const Expanded(
-            child: _FacilityStatCardWidget(
-              title: "AI MATCHES",
-              count: "18",
-              icon: Icons.flash_on_rounded,
-              iconColor: ColorManager.primary,
-            ),
+        ),
+        SizedBox(width: AppSize.s8.w),
+        const Expanded(
+          child: _FacilityStatCardWidget(
+            title: "AI MATCHES",
+            count: "18",
+            icon: Icons.flash_on_rounded,
+            iconColor: ColorManager.primary,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -96,8 +94,7 @@ class _FacilityStatCardWidget extends StatelessWidget {
           ),
           SizedBox(height: 6.h),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
                 count,
