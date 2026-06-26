@@ -17,8 +17,14 @@ class CartItemCard extends StatelessWidget {
 
   final VoidCallback onDelete;
 
-  const CartItemCard(
-      {super.key, required this.item, required this.index, required this.onIncrease, required this.onDecrease, required this.onDelete});
+  const CartItemCard({
+    super.key,
+    required this.item,
+    required this.index,
+    required this.onIncrease,
+    required this.onDecrease,
+    required this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +54,7 @@ class CartItemCard extends StatelessWidget {
                 children: [
                   Text(
                     "${item["name"]}   ${item["dosage"]}",
-                    style: getBoldStyle(
-                      color: Colors.black,
-                      fontSize: 17.sp,
-                    ),
+                    style: getBoldStyle(color: Colors.black, fontSize: 17.sp),
                   ),
                   7.verticalSpace,
                   Text(
@@ -65,10 +68,7 @@ class CartItemCard extends StatelessWidget {
                   15.verticalSpace,
                   Row(
                     children: [
-                      QuantityButton(
-                        icon: Icons.remove,
-                        onTap: onDecrease,
-                      ),
+                      QuantityButton(icon: Icons.remove, onTap: onDecrease),
 
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -79,14 +79,11 @@ class CartItemCard extends StatelessWidget {
                           style: getBoldStyle(
                             color: Colors.black,
                             fontSize: 16.sp,
-                          )
+                          ),
                         ),
                       ),
 
-                      QuantityButton(
-                        icon: Icons.add,
-                        onTap: onIncrease
-                      ),
+                      QuantityButton(icon: Icons.add, onTap: onIncrease),
                     ],
                   ),
                 ],
@@ -99,7 +96,7 @@ class CartItemCard extends StatelessWidget {
 
             children: [
               IconButton(
-                onPressed:onDelete,
+                onPressed: onDelete,
 
                 icon: Icon(
                   Icons.delete_outline_rounded,

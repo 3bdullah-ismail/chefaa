@@ -59,11 +59,9 @@ class PatientsCubit extends Cubit<PatientsState> {
     try {
       final patients = await patientsRepo.getPatients();
 
-      final upcoming =
-      patients.where((e) => e.status == "upcoming").toList();
+      final upcoming = patients.where((e) => e.status == "upcoming").toList();
 
-      final completed =
-      patients.where((e) => e.status == "completed").toList();
+      final completed = patients.where((e) => e.status == "completed").toList();
 
       emit(
         PatientsSuccessState(
@@ -74,20 +72,18 @@ class PatientsCubit extends Cubit<PatientsState> {
           isCompletedLoading: false,
         ),
       );
-
     } catch (e) {
       emit(PatientsFailureState(e.toString()));
     }
   }
+
   Future<void> refreshCurrentTab() async {
     try {
       final patients = await patientsRepo.getPatients();
 
-      final upcoming =
-      patients.where((e) => e.status == "upcoming").toList();
+      final upcoming = patients.where((e) => e.status == "upcoming").toList();
 
-      final completed =
-      patients.where((e) => e.status == "completed").toList();
+      final completed = patients.where((e) => e.status == "completed").toList();
 
       emit(
         PatientsSuccessState(
@@ -100,6 +96,7 @@ class PatientsCubit extends Cubit<PatientsState> {
       emit(PatientsFailureState(e.toString()));
     }
   }
+
   void changeTab(int index) {
     selectedTab = index;
 
@@ -109,6 +106,7 @@ class PatientsCubit extends Cubit<PatientsState> {
       emit(currentState.copyWith(selectedIndex: index));
     }
   }
+
   Future<void> createPrescription({required String appointmentId}) async {
     emit(PrescriptionCreatingLoadingState());
 
@@ -232,7 +230,6 @@ class PatientsCubit extends Cubit<PatientsState> {
           prescription: currentPrescription!,
         ),
       );
-
     } catch (e) {
       currentPrescription = null;
 

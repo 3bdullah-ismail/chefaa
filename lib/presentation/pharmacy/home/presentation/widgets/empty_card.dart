@@ -25,7 +25,10 @@ class EmptyRow extends StatelessWidget {
           SizedBox(height: 8.h),
           Text(
             text,
-            style: getRegularStyle(color: ColorManager.darkGray, fontSize: 13.sp),
+            style: getRegularStyle(
+              color: ColorManager.darkGray,
+              fontSize: 13.sp,
+            ),
           ),
         ],
       ),

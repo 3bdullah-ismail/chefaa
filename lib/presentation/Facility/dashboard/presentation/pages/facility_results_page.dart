@@ -113,7 +113,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
         listener: (context, state) {
           if (state is GetDashboardSuccess) {
             setState(() {
-              _pendingUploads = (state.response.pendingUploads ?? []).map((item) {
+              _pendingUploads = (state.response.pendingUploads ?? []).map((
+                item,
+              ) {
                 final name = item.patientName ?? "Unknown Patient";
                 final scanType = item.services?.join(', ') ?? "General Scan";
                 return PendingUploadItem(
@@ -126,7 +128,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                 );
               }).toList();
 
-              _recentlyUploaded = (state.response.uploadedResults ?? []).map((item) {
+              _recentlyUploaded = (state.response.uploadedResults ?? []).map((
+                item,
+              ) {
                 final name = item.patientName ?? "Unknown Patient";
                 final scanType = item.services?.join(', ') ?? "General Scan";
                 return UploadedResultItem(
@@ -209,7 +213,6 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
           }
         },
         builder: (context, state) {
-
           final currentDetail =
               _patientsDetails[_selectedPatientName] ??
               PatientDetailData(
@@ -217,7 +220,8 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                 name: _selectedPatientName,
                 details: "Patient File",
                 badges: const ["COMPLETED"],
-                doctorNotes: "No additional doctor notes available for this request.",
+                doctorNotes:
+                    "No additional doctor notes available for this request.",
                 doctorName: "N/A",
                 doctorNotesTime: "",
                 aiInsight: "AI diagnostic mapping completed successfully.",
@@ -323,7 +327,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                               isUploading: isUploading,
                             ),
                             onUpload: () async {
-                              final cubit = BlocProvider.of<DashboardCubit>(context);
+                              final cubit = BlocProvider.of<DashboardCubit>(
+                                context,
+                              );
                               final result = await FilePicker.pickFiles(
                                 type: FileType.any,
                               );
@@ -344,7 +350,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
 
                       FacilityResultsUploadZone(
                         onSelectFile: () async {
-                          final cubit = BlocProvider.of<DashboardCubit>(context);
+                          final cubit = BlocProvider.of<DashboardCubit>(
+                            context,
+                          );
                           final result = await FilePicker.pickFiles(
                             type: FileType.any,
                           );
@@ -359,7 +367,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                           }
                         },
                         onCamera: () async {
-                          final cubit = BlocProvider.of<DashboardCubit>(context);
+                          final cubit = BlocProvider.of<DashboardCubit>(
+                            context,
+                          );
                           final result = await FilePicker.pickFiles(
                             type: FileType.image,
                           );

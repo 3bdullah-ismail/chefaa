@@ -64,7 +64,9 @@ class _UpdateProfileBottomSheetState extends State<_UpdateProfileBottomSheet> {
     final paymentMethods = profileData?.paymentmethod ?? [];
     _cashEnabled = paymentMethods.any((e) => e.toLowerCase() == 'cash');
     _visaEnabled = paymentMethods.any((e) => e.toLowerCase() == 'visa');
-    _insuranceEnabled = paymentMethods.any((e) => e.toLowerCase() == 'insurance');
+    _insuranceEnabled = paymentMethods.any(
+      (e) => e.toLowerCase() == 'insurance',
+    );
   }
 
   @override
@@ -118,7 +120,8 @@ class _UpdateProfileBottomSheetState extends State<_UpdateProfileBottomSheet> {
         ? profileData!.addresses!.first.location
         : null;
 
-    final hasAddressChanged = _addressController.text.trim() != originalAddressText;
+    final hasAddressChanged =
+        _addressController.text.trim() != originalAddressText;
 
     if (_addressController.text.trim().isNotEmpty && hasAddressChanged) {
       final coords = (originalLocation?.coordinates?.isNotEmpty == true)
@@ -128,10 +131,7 @@ class _UpdateProfileBottomSheetState extends State<_UpdateProfileBottomSheet> {
       body['addresses'] = [
         {
           'addressText': _addressController.text.trim(),
-          'location': {
-            'type': 'Point',
-            'coordinates': coords,
-          }
+          'location': {'type': 'Point', 'coordinates': coords},
         },
       ];
     }

@@ -4,11 +4,7 @@ import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
 
 class ChatMessage extends StatelessWidget {
-  const ChatMessage({
-    super.key,
-    required this.message,
-    required this.isUser,
-  });
+  const ChatMessage({super.key, required this.message, required this.isUser});
 
   final String message;
   final bool isUser;
@@ -18,13 +14,15 @@ class ChatMessage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
-        mainAxisAlignment: isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
-        crossAxisAlignment: isUser ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+        mainAxisAlignment: isUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
+        crossAxisAlignment: isUser
+            ? CrossAxisAlignment.center
+            : CrossAxisAlignment.start,
         children: [
           if (!isUser) ...[
-            const CustomCircleAvatar(
-              imagePath: 'assets/images/bot.png',
-            ),
+            const CustomCircleAvatar(imagePath: 'assets/images/bot.png'),
             const SizedBox(width: 8),
           ],
           if (isUser) const SizedBox(width: 40),

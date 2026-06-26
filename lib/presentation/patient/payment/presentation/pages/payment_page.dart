@@ -1,4 +1,3 @@
-
 import 'package:chefaa/presentation/patient/cart/presentation/widgets/order_summary_card.dart';
 import 'package:chefaa/presentation/patient/order/presentation/pages/track_order_page.dart';
 import 'package:chefaa/presentation/patient/payment/presentation/widgets/card_details.dart';
@@ -59,12 +58,9 @@ class _PaymentPageState extends State<PaymentPage> {
               },
               btnTitle: "Payment Now",
             ),
-
           ],
         ),
       ),
     );
   }
-
-
 }

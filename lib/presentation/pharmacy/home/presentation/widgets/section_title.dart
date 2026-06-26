@@ -3,7 +3,6 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class SectionTitle extends StatelessWidget {
   final String title;
   final String? trailing;
@@ -22,7 +21,10 @@ class SectionTitle extends StatelessWidget {
         if (trailing != null)
           Text(
             trailing!,
-            style: getRegularStyle(color: ColorManager.darkGray, fontSize: 12.sp),
+            style: getRegularStyle(
+              color: ColorManager.darkGray,
+              fontSize: 12.sp,
+            ),
           ),
       ],
     );

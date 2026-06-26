@@ -101,20 +101,20 @@ class PaymentCardForm extends StatelessWidget {
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
         border: removeTopBorder
             ? Border(
-          left: BorderSide(color: borderColor, width: borderWidth),
-          right: BorderSide(color: borderColor, width: borderWidth),
-          bottom: BorderSide(color: borderColor, width: borderWidth),
-          top: BorderSide.none,
-        )
+                left: BorderSide(color: borderColor, width: borderWidth),
+                right: BorderSide(color: borderColor, width: borderWidth),
+                bottom: BorderSide(color: borderColor, width: borderWidth),
+                top: BorderSide.none,
+              )
             : Border.all(color: borderColor, width: borderWidth),
         boxShadow: showShadow
             ? [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ]
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ]
             : null,
       ),
       child: Form(
@@ -173,9 +173,7 @@ class PaymentCardForm extends StatelessWidget {
                         controller: expiryDateController,
                         text: "MM/YY",
                         keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(5),
-                        ],
+                        inputFormatters: [LengthLimitingTextInputFormatter(5)],
                         validator: _validateExpiry,
                       ),
                     ],

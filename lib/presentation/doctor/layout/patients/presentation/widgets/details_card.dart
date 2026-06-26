@@ -8,10 +8,7 @@ import '../../../../../../core/resources/values_manager.dart';
 class DetailsCard extends StatelessWidget {
   final List<DetailItem> items;
 
-  const DetailsCard({
-    super.key,
-    required this.items,
-  });
+  const DetailsCard({super.key, required this.items});
 
   Widget _infoRow(String title, String value) {
     return Padding(
@@ -21,20 +18,14 @@ class DetailsCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: getBoldStyle(
-              color: ColorManager.black,
-              fontSize: 16.sp,
-            ),
+            style: getBoldStyle(color: ColorManager.black, fontSize: 16.sp),
           ),
           const Spacer(),
           Expanded(
             child: Text(
               value,
               textAlign: TextAlign.end,
-              style: getBoldStyle(
-                color: ColorManager.gray,
-                fontSize: 15.sp,
-              ),
+              style: getBoldStyle(color: ColorManager.gray, fontSize: 15.sp),
             ),
           ),
         ],
@@ -43,10 +34,7 @@ class DetailsCard extends StatelessWidget {
   }
 
   Widget _divider() {
-    return const Divider(
-      thickness: 1,
-      color: ColorManager.lightBlue,
-    );
+    return const Divider(thickness: 1, color: ColorManager.lightBlue);
   }
 
   @override
@@ -84,8 +72,5 @@ class DetailItem {
   final String title;
   final String value;
 
-  DetailItem({
-    required this.title,
-    required this.value,
-  });
+  DetailItem({required this.title, required this.value});
 }

@@ -18,8 +18,6 @@ class BookingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocBuilder<BookingCubit, BookingState>(
       builder: (context, state) {
         final cubit = context.read<BookingCubit>();
@@ -78,10 +76,7 @@ class BookingPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    StepperHeader(
-                      activeStep: cubit.activeStep,
-                      totalSteps: 4,
-                    ),
+                    StepperHeader(activeStep: cubit.activeStep, totalSteps: 4),
                   ],
                 ),
               ),

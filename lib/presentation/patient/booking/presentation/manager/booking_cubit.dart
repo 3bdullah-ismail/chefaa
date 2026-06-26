@@ -10,15 +10,13 @@ import '../../data/repositories/booking_repo.dart';
 import '../pages/choose_visit_type.dart';
 import 'booking_state.dart';
 
-
 @injectable
 class BookingCubit extends Cubit<BookingState> {
   final BookingRepo bookingRepo;
 
   BookingCubit(this.bookingRepo) : super(BookingInitialState());
 
-  static BookingCubit get(BuildContext context) =>
-      BlocProvider.of(context);
+  static BookingCubit get(BuildContext context) => BlocProvider.of(context);
 
   ClinicModel? selectedClinic;
 
@@ -43,7 +41,6 @@ class BookingCubit extends Cubit<BookingState> {
   final expiryDateController = TextEditingController();
   final cvvController = TextEditingController();
 
-
   void selectClinic(ClinicModel clinic) {
     selectedClinic = clinic;
     slots.clear();
@@ -56,17 +53,13 @@ class BookingCubit extends Cubit<BookingState> {
 
   bool get canChooseTime => selectedClinic != null;
 
-
   void updateSelectedDate(DateTime date) {
     selectedDay = date;
 
     final clinicId = selectedClinic?.clinicId;
     if (clinicId == null) return;
 
-    getDaySlots(
-      clinicId: clinicId,
-      date: date,
-    );
+    getDaySlots(clinicId: clinicId, date: date);
 
     emit(ChangeStepState());
   }
@@ -74,7 +67,6 @@ class BookingCubit extends Cubit<BookingState> {
   void selectDay(DateTime date) {
     updateSelectedDate(date);
   }
-
 
   Future<void> getDaySlots({
     required String clinicId,
@@ -91,7 +83,7 @@ class BookingCubit extends Cubit<BookingState> {
       );
 
       emit(GetSlotsSuccessState(slots));
-    }catch (e) {
+    } catch (e) {
       if (e is ServerFailure) {
         emit(GetSlotsErrorState(e.message));
       } else {
@@ -100,26 +92,22 @@ class BookingCubit extends Cubit<BookingState> {
     }
   }
 
-
   void selectTime(String time) {
     selectedTime = time;
     emit(TimeSelectedState(time));
   }
-
 
   void selectVisitType(VisitType type) {
     selectedVisitType = type;
     emit(ChangeStepState());
   }
 
-
   void selectPaymentMethod(PaymentMethod method) {
     selectedPaymentMethod = method;
     emit(ChangeStepState());
   }
 
-  bool get needsCard =>
-      selectedPaymentMethod == PaymentMethod.creditCard;
+  bool get needsCard => selectedPaymentMethod == PaymentMethod.creditCard;
 
   bool onConfirmBookingPressed() {
     if (needsCard) {
@@ -127,7 +115,6 @@ class BookingCubit extends Cubit<BookingState> {
     }
     return true;
   }
-
 
   Future<void> bookAppointment({
     required String clinicId,
@@ -165,7 +152,7 @@ class BookingCubit extends Cubit<BookingState> {
       booking = result;
 
       emit(BookingSuccessState(message: booking!.message));
-    }catch (e) {
+    } catch (e) {
       if (e is ServerFailure) {
         emit(BookingErrorState(error: e.message));
       } else {
@@ -173,7 +160,6 @@ class BookingCubit extends Cubit<BookingState> {
       }
     }
   }
-
 
   void nextStep() {
     if (activeStep < 3) {
@@ -205,8 +191,4 @@ class BookingCubit extends Cubit<BookingState> {
   }
 }
 
-enum PaymentMethod {
-
-  creditCard,
-  cash,
-}
+enum PaymentMethod { creditCard, cash }

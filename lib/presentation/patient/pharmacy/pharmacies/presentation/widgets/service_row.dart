@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../../../../../core/resources/color_manager.dart';
 
 class ServiceRow extends StatelessWidget {
@@ -26,11 +25,7 @@ class ServiceRow extends StatelessWidget {
         CircleAvatar(
           radius: 20.r,
           backgroundColor: color.withAlpha(30),
-          child: Icon(
-            icon,
-            color: color,
-            size: 18,
-          ),
+          child: Icon(icon, color: color, size: 18),
         ),
 
         15.horizontalSpace,

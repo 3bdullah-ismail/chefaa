@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart';
 
 abstract class BookingRemoteDataSource {
-
   Future<Response> getDaySlots({
     required String clinicId,
     required String date,
   });
-
 
   Future<Response> bookAppointment({
     required String clinicId,

@@ -35,10 +35,7 @@ class MedicationAdditionCard extends StatelessWidget {
             children: [
               Text(
                 "Medicine ${index + 1}",
-                style: getBoldStyle(
-                  color: ColorManager.black,
-                  fontSize: 18.sp,
-                ),
+                style: getBoldStyle(color: ColorManager.black, fontSize: 18.sp),
               ),
 
               const Spacer(),
@@ -46,10 +43,7 @@ class MedicationAdditionCard extends StatelessWidget {
               if (showDelete)
                 IconButton(
                   onPressed: onDelete,
-                  icon: const Icon(
-                    Icons.delete_outline,
-                    color: Colors.red,
-                  ),
+                  icon: const Icon(Icons.delete_outline, color: Colors.red),
                 ),
             ],
           ),

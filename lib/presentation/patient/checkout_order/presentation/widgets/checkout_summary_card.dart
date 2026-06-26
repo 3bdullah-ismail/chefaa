@@ -35,9 +35,9 @@ class CheckoutSummaryCard extends StatelessWidget {
       child: Column(
         children: [
           CheckoutSummaryRow(title: "Subtotal", value: subtotal),
-          CheckoutSummaryRow(title :"Delivery", value:delivery),
+          CheckoutSummaryRow(title: "Delivery", value: delivery),
           const Divider(color: ColorManager.lightGray),
-          CheckoutSummaryRow(title:"Total", value:total, isTotal: true),
+          CheckoutSummaryRow(title: "Total", value: total, isTotal: true),
         ],
       ),
     );

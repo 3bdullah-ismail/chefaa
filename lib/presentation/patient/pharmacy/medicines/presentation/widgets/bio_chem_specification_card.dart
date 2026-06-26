@@ -11,9 +11,7 @@ class BioChemSpecificationCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: const Color(0xffF1F5F9),
-        ),
+        border: Border.all(color: const Color(0xffF1F5F9)),
       ),
       child: const Column(
         children: [
@@ -23,10 +21,7 @@ class BioChemSpecificationCard extends StatelessWidget {
             icon: Icons.fingerprint_rounded,
           ),
 
-          Divider(
-            height: 24,
-            color: Color(0xffF1F5F9),
-          ),
+          Divider(height: 24, color: Color(0xffF1F5F9)),
 
           SpecificationRow(
             label: "Absolute Bioavailability",
@@ -34,10 +29,7 @@ class BioChemSpecificationCard extends StatelessWidget {
             icon: Icons.blur_on_rounded,
           ),
 
-          Divider(
-            height: 24,
-            color: Color(0xffF1F5F9),
-          ),
+          Divider(height: 24, color: Color(0xffF1F5F9)),
 
           SpecificationRow(
             label: "Plasma Half-Life Curve",
@@ -45,10 +37,7 @@ class BioChemSpecificationCard extends StatelessWidget {
             icon: Icons.hourglass_empty_rounded,
           ),
 
-          Divider(
-            height: 24,
-            color: Color(0xffF1F5F9),
-          ),
+          Divider(height: 24, color: Color(0xffF1F5F9)),
 
           SpecificationRow(
             label: "Excretion Pathway",

@@ -7,10 +7,7 @@ import '../../../../../core/widget/custom_circle_avatar.dart';
 class ChatbotLandingWidget extends StatelessWidget {
   final Function(String) onActionTap;
 
-  const ChatbotLandingWidget({
-    super.key,
-    required this.onActionTap,
-  });
+  const ChatbotLandingWidget({super.key, required this.onActionTap});
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +86,7 @@ class ChatbotLandingWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              color: ColorManager.primary,
-              size: 28.sp,
-            ),
+            Icon(icon, color: ColorManager.primary, size: 28.sp),
             SizedBox(height: 12.h),
             Text(
               title,

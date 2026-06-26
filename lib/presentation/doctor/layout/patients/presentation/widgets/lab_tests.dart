@@ -26,11 +26,7 @@ class LabTests extends StatelessWidget {
         color: ColorManager.lightGray,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
-          BoxShadow(
-            color: ColorManager.black.withAlpha(50),
-
-            blurRadius: 8,
-          ),
+          BoxShadow(color: ColorManager.black.withAlpha(50), blurRadius: 8),
         ],
       ),
       child: Wrap(
@@ -38,23 +34,15 @@ class LabTests extends StatelessWidget {
         runSpacing: 10.h,
         children: tests.map((test) {
           return Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.w,
-              vertical: 10.h,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
             decoration: BoxDecoration(
               color: ColorManager.primary.withAlpha(30),
               borderRadius: BorderRadius.circular(8.r),
-              border: Border.all(
-                color: ColorManager.primary.withAlpha(80),
-              ),
+              border: Border.all(color: ColorManager.primary.withAlpha(80)),
             ),
             child: Text(
               test,
-              style: getBoldStyle(
-                fontSize: 14.sp,
-                color: ColorManager.black,
-              ),
+              style: getBoldStyle(fontSize: 14.sp, color: ColorManager.black),
             ),
           );
         }).toList(),

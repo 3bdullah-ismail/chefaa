@@ -7,7 +7,7 @@ import 'pharmacy_list.dart';
 
 class PharmacyDynamicList extends StatelessWidget {
   final int selectedIndex;
-  final List<MedicineModel>medicines;
+  final List<MedicineModel> medicines;
 
   const PharmacyDynamicList({
     super.key,
@@ -22,7 +22,7 @@ class PharmacyDynamicList extends StatelessWidget {
         return const PharmacyList();
 
       case 1:
-        return  MedicineList(medicines: medicines,);
+        return MedicineList(medicines: medicines);
 
       case 2:
         return const NearbyList();

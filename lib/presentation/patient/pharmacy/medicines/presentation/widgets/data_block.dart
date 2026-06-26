@@ -4,11 +4,7 @@ class DataBlock extends StatelessWidget {
   final String title;
   final String description;
 
-  const DataBlock({
-    super.key,
-    required this.title,
-    required this.description,
-  });
+  const DataBlock({super.key, required this.title, required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +14,7 @@ class DataBlock extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: const Color(0xffF1F5F9),
-        ),
+        border: Border.all(color: const Color(0xffF1F5F9)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

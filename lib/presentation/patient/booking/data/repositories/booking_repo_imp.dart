@@ -13,7 +13,6 @@ class BookingRepoImp implements BookingRepo {
 
   BookingRepoImp(this.remoteDataSource);
 
-
   @override
   Future<Booking> bookAppointment({
     required String clinicId,

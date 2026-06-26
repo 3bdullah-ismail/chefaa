@@ -1,15 +1,16 @@
 class Slots {
   Slots({
-      this.index, 
-      this.start, 
-      this.end, 
-      this.startTime, 
-      this.endTime, 
-      this.available, 
-      this.bookedCount, 
-      this.patientsPerSlot, 
-      this.remainingInSlot, 
-      this.remainingInDay,});
+    this.index,
+    this.start,
+    this.end,
+    this.startTime,
+    this.endTime,
+    this.available,
+    this.bookedCount,
+    this.patientsPerSlot,
+    this.remainingInSlot,
+    this.remainingInDay,
+  });
 
   Slots.fromJson(dynamic json) {
     index = json['index'];
@@ -48,5 +49,4 @@ class Slots {
     map['remainingInDay'] = remainingInDay;
     return map;
   }
-
 }

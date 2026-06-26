@@ -91,13 +91,17 @@ class PatientCard extends StatelessWidget {
                     vertical: AppPadding.p2,
                   ),
                   decoration: BoxDecoration(
-                    color: status=="completed"?ColorManager.lightGreen.withAlpha(50): ColorManager.lightBlue,
+                    color: status == "completed"
+                        ? ColorManager.lightGreen.withAlpha(50)
+                        : ColorManager.lightBlue,
                     borderRadius: BorderRadius.circular(25.r),
                   ),
                   child: Text(
                     status,
                     style: getMediumStyle(
-                      color: status=="completed"?ColorManager.lightGreen:ColorManager.primary,
+                      color: status == "completed"
+                          ? ColorManager.lightGreen
+                          : ColorManager.primary,
                       fontSize: 13.sp,
                     ),
                   ),

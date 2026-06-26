@@ -61,7 +61,7 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
         final prescription =
             widget.prescriptionOverride ?? cubit.currentPrescription;
         if (prescription == null) {
-          return  const EmptyPrescriptionCard();
+          return const EmptyPrescriptionCard();
         }
 
         if (state is PrescriptionByAppointmentLoadingState) {

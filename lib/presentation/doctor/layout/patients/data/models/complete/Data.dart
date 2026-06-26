@@ -1,22 +1,23 @@
 class Data {
   Data({
-      this.id, 
-      this.patient, 
-      this.doctor, 
-      this.clinic, 
-      this.prescription, 
-      this.date, 
-      this.timeChosed, 
-      this.slotStart, 
-      this.slotEnd, 
-      this.isFollowUp, 
-      this.paymentStatus, 
-      this.paymentOption, 
-      this.status, 
-      this.paidAt, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.id,
+    this.patient,
+    this.doctor,
+    this.clinic,
+    this.prescription,
+    this.date,
+    this.timeChosed,
+    this.slotStart,
+    this.slotEnd,
+    this.isFollowUp,
+    this.paymentStatus,
+    this.paymentOption,
+    this.status,
+    this.paidAt,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   Data.fromJson(dynamic json) {
     id = json['_id'];
@@ -76,5 +77,4 @@ class Data {
     map['__v'] = v;
     return map;
   }
-
 }

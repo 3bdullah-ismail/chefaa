@@ -4,30 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
+import '../../data/models/pharmacy_card_model.dart';
 import '../pages/pharmacy_details_page.dart';
 
 class PharmacyCard extends StatelessWidget {
-  final String name;
-  final String location;
-  final String distance;
-  final String deliveryTime;
-  final int medicinesCount;
-  final double rating;
-  final int reviewsCount;
-  final bool isOpen;
-  final bool acceptsRx;
+  final PharmacyCardModel pharmacy;
 
   const PharmacyCard({
     super.key,
-    required this.name,
-    required this.location,
-    required this.distance,
-    required this.deliveryTime,
-    required this.medicinesCount,
-    required this.rating,
-    required this.reviewsCount,
-    required this.isOpen,
-    required this.acceptsRx,
+    required this.pharmacy,
   });
 
   @override
@@ -37,20 +22,9 @@ class PharmacyCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) =>
-                PharmacyDetailsPage(
-                  name: name,
-                  location: location,
-                  distance: distance,
-                  deliveryTime: deliveryTime,
-                  medicinesCount: medicinesCount,
-                  rating: rating,
-                  reviewsCount: reviewsCount,
-                  isOpen: isOpen,
-                  acceptsRx: acceptsRx,
-                    lat: 30.0626,
-                    lng: 31.3219,
-                ),
+            builder: (_) => PharmacyDetailsPage(
+              pharmacy: pharmacy,
+            ),
           ),
         );
       },
@@ -77,7 +51,7 @@ class PharmacyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (isOpen)
+                if (pharmacy.isOpen)
                   Container(
                     padding: const EdgeInsets.symmetric(
                       horizontal: AppPadding.p10,
@@ -119,7 +93,7 @@ class PharmacyCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        name,
+                        pharmacy.name,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -134,7 +108,7 @@ class PharmacyCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              rating.toString(),
+                              pharmacy.rating.toString(),
                               style: getBoldStyle(
                                 color: ColorManager.black,
                                 fontSize: 14.sp,
@@ -149,7 +123,7 @@ class PharmacyCard extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '($reviewsCount reviews)',
+                          '(${pharmacy.reviewsCount} reviews)',
                           style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: 12.sp,
@@ -169,7 +143,7 @@ class PharmacyCard extends StatelessWidget {
                     ),
                     7.horizontalSpace,
                     Text(
-                      '$location — $distance away',
+                      '${pharmacy.location} — ${pharmacy.distance} away',
                       style: const TextStyle(
                         fontSize: 13,
                         color: ColorManager.gray,
@@ -186,13 +160,13 @@ class PharmacyCard extends StatelessWidget {
                   children: [
                     _buildTag(
                       icon: Icons.access_time_filled_rounded,
-                      label: deliveryTime,
+                      label: pharmacy.deliveryTime,
                       bgColor: ColorManager.lightBlue.withAlpha(120),
                       textColor: ColorManager.primary,
                     ),
                     _buildTag(
                       icon: Icons.medication_rounded,
-                      label: '$medicinesCount medicines',
+                      label: '${pharmacy.medicinesCount} medicines',
                       bgColor: ColorManager.greenOverlay.withAlpha(40),
                       textColor: ColorManager.lightGreen,
                     ),

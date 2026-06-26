@@ -11,10 +11,7 @@ import 'empty_state_card_widget.dart';
 class ResultsUploadedWidget extends StatelessWidget {
   final List<DashboardRequestItem>? uploadedResults;
 
-  const ResultsUploadedWidget({
-    super.key,
-    this.uploadedResults,
-  });
+  const ResultsUploadedWidget({super.key, this.uploadedResults});
 
   String _formatTime(String? createdAt) {
     if (createdAt == null) return '';
@@ -56,9 +53,7 @@ class ResultsUploadedWidget extends StatelessWidget {
         ),
         SizedBox(height: 14.h),
         if (list.isEmpty)
-          const EmptyStateCardWidget(
-            message: "No results uploaded today.",
-          )
+          const EmptyStateCardWidget(message: "No results uploaded today.")
         else
           ...list.map(
             (item) => UploadedResultItemWidget(

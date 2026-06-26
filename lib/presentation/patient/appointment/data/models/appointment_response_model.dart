@@ -20,8 +20,9 @@ class AppointmentResponseModel {
 
     List<AppointmentModel>? appointmentList;
     if (data is List) {
-      appointmentList =
-          data.map((item) => AppointmentModel.fromJson(item)).toList();
+      appointmentList = data
+          .map((item) => AppointmentModel.fromJson(item))
+          .toList();
     }
 
     return AppointmentResponseModel(

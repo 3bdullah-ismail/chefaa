@@ -66,7 +66,7 @@ class DriverRow extends StatelessWidget {
                       ),
                     ],
                   ),
-                5.verticalSpace,
+                  5.verticalSpace,
                   Row(
                     children: [
                       const Icon(

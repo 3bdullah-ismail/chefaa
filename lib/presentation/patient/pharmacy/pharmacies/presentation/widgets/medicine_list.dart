@@ -5,7 +5,6 @@ import '../../../medicines/data/models/medicine_model.dart';
 import '../../../medicines/presentation/pages/medicine_details_page.dart';
 import '../../../medicines/presentation/widgets/medicine_card.dart';
 
-
 class MedicineList extends StatelessWidget {
   final List<MedicineModel> medicines;
   const MedicineList({super.key, required this.medicines});
@@ -20,7 +19,7 @@ class MedicineList extends StatelessWidget {
       itemBuilder: (_, index) {
         final med = medicines[index];
         return GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -36,9 +35,7 @@ class MedicineList extends StatelessWidget {
             name: med.name,
             description: med.activeIngredient,
             price: med.price,
-            onAddTap: () {
-
-            },
+            onAddTap: () {},
           ),
         );
       },

@@ -1,10 +1,7 @@
 ﻿import 'data.dart';
 
 class PatientsData {
-  PatientsData({
-      this.success, 
-      this.count, 
-      this.data,});
+  PatientsData({this.success, this.count, this.data});
 
   PatientsData.fromJson(dynamic json) {
     success = json['success'];
@@ -29,5 +26,4 @@ class PatientsData {
     }
     return map;
   }
-
 }

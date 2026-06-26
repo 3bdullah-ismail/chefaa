@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 
@@ -31,8 +30,9 @@ class PharmacyFilters extends StatelessWidget {
               margin: EdgeInsets.only(right: index == 2 ? 0 : 10),
               height: 42.h,
               decoration: BoxDecoration(
-                color:
-                isSelected ? ColorManager.primary : ColorManager.lightGray,
+                color: isSelected
+                    ? ColorManager.primary
+                    : ColorManager.lightGray,
                 borderRadius: BorderRadius.circular(30.r),
                 border: Border.all(
                   color: isSelected
@@ -44,9 +44,7 @@ class PharmacyFilters extends StatelessWidget {
                 child: Text(
                   filters[index],
                   style: getBoldStyle(
-                    color: isSelected
-                        ? Colors.white
-                        : Colors.grey.shade700,
+                    color: isSelected ? Colors.white : Colors.grey.shade700,
                     fontSize: 14.sp,
                   ),
                 ),

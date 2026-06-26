@@ -25,7 +25,6 @@ class BasicInfoSection extends StatelessWidget {
 
   final TextEditingController addressController;
 
-
   final TextEditingController latitudeController;
 
   final TextEditingController longitudeController;
@@ -86,7 +85,6 @@ class BasicInfoSection extends StatelessWidget {
             ),
 
             16.verticalSpace,
-
 
             Row(
               children: [

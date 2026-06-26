@@ -43,4 +43,5 @@ final class SlotsErrorState extends BookingState {
 
   SlotsErrorState({required this.error});
 }
+
 class ChangeStepState extends BookingState {}

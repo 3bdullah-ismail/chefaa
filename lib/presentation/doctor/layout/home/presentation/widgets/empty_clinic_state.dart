@@ -4,11 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 
-
 class EmptyClinicsState extends StatelessWidget {
   final VoidCallback? onAdd;
 
-  const EmptyClinicsState({super.key,this.onAdd});
+  const EmptyClinicsState({super.key, this.onAdd});
 
   @override
   Widget build(BuildContext context) {

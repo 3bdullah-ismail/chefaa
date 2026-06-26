@@ -1,7 +1,5 @@
 class Doctor {
-  Doctor({
-      this.id, 
-      this.specialization,});
+  Doctor({this.id, this.specialization});
 
   Doctor.fromJson(dynamic json) {
     id = json['_id'];
@@ -16,5 +14,4 @@ class Doctor {
     map['specialization'] = specialization;
     return map;
   }
-
 }

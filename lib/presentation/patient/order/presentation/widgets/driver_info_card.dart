@@ -37,12 +37,12 @@ class DriverInfoCard extends StatelessWidget {
               size: 28,
             ),
           ),
-         15.horizontalSpace,
-           Expanded(
+          15.horizontalSpace,
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const  Text(
+                const Text(
                   "Ahmed Mohamed",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -53,11 +53,11 @@ class DriverInfoCard extends StatelessWidget {
                 7.horizontalSpace,
 
                 Row(
-                  children:  [
-                   const  Icon(
+                  children: [
+                    const Icon(
                       Icons.star_rounded,
                       color: ColorManager.gold,
-                      size:20 ,
+                      size: 20,
                     ),
                     7.horizontalSpace,
 

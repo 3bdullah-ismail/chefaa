@@ -1,9 +1,5 @@
 class Patient {
-  Patient({
-      this.id, 
-      this.userId, 
-      this.age, 
-      this.gender,});
+  Patient({this.id, this.userId, this.age, this.gender});
 
   Patient.fromJson(dynamic json) {
     id = json['_id'];
@@ -24,5 +20,4 @@ class Patient {
     map['gender'] = gender;
     return map;
   }
-
 }

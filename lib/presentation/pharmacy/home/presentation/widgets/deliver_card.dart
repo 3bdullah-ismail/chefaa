@@ -30,7 +30,7 @@ class DriverGroupCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
         borderRadius: BorderRadius.circular(25.r),
-      boxShadow: [
+        boxShadow: [
           BoxShadow(
             color: ColorManager.black.withAlpha(60),
             blurRadius: 10,
@@ -70,23 +70,29 @@ class DriverGroupCard extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p24, vertical: AppPadding.p10),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p24,
+        vertical: AppPadding.p10,
+      ),
       child: Row(
         children: [
           Text(
             label.toUpperCase(),
-            style: getBoldStyle(color: ColorManager.black)
+            style: getBoldStyle(color: ColorManager.black),
           ),
           const SizedBox(width: 6),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p2),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p8,
+              vertical: AppPadding.p2,
+            ),
             decoration: BoxDecoration(
               color: statusColor.withAlpha(50),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               '${drivers.length}',
-              style: getBoldStyle(color: statusColor, fontSize: 12.sp)
+              style: getBoldStyle(color: statusColor, fontSize: 12.sp),
             ),
           ),
         ],

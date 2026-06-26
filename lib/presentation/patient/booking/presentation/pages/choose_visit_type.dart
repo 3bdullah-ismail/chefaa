@@ -21,10 +21,7 @@ class ChooseVisitTypePage extends StatelessWidget {
         return Scaffold(
           body: SafeArea(
             child: Padding(
-              padding: REdgeInsets.symmetric(
-                horizontal: 40,
-                vertical: 24,
-              ),
+              padding: REdgeInsets.symmetric(horizontal: 40, vertical: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -33,8 +30,7 @@ class ChooseVisitTypePage extends StatelessWidget {
                   4.verticalSpace,
 
                   const SubText(
-                    text:
-                    "Select how you'd like to consult with the doctor",
+                    text: "Select how you'd like to consult with the doctor",
                   ),
 
                   32.verticalSpace,
@@ -43,8 +39,7 @@ class ChooseVisitTypePage extends StatelessWidget {
                     svgPath: "assets/svg_images/map.svg",
                     title: "Clinic Visit",
                     subtitle: " In-person consultation at clinic ",
-                    isSelected:
-                    cubit.selectedVisitType == VisitType.clinic,
+                    isSelected: cubit.selectedVisitType == VisitType.clinic,
                     onTap: () {
                       cubit.selectVisitType(VisitType.clinic);
                     },
@@ -56,8 +51,7 @@ class ChooseVisitTypePage extends StatelessWidget {
                     svgPath: "assets/svg_images/video.svg",
                     title: "Video Call",
                     subtitle: "Consult from comfort of home ",
-                    isSelected:
-                    cubit.selectedVisitType == VisitType.online,
+                    isSelected: cubit.selectedVisitType == VisitType.online,
                     onTap: () {
                       cubit.selectVisitType(VisitType.online);
                     },
@@ -82,7 +76,4 @@ class ChooseVisitTypePage extends StatelessWidget {
   }
 }
 
-enum VisitType {
-  clinic,
-  online,
-}
+enum VisitType { clinic, online }

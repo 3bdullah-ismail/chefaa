@@ -9,7 +9,5 @@ abstract class AppointmentRemoteDataSource {
     required RescheduleAppointmentRequestModel requestModel,
   });
 
-  Future<Response> cancelAppointment({
-    required String appointmentId,
-  });
+  Future<Response> cancelAppointment({required String appointmentId});
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
@@ -94,13 +93,8 @@ class PharmacyHeaderCard extends StatelessWidget {
           ),
 
           const Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: AppPadding.p16,
-            ),
-            child: Divider(
-              color: ColorManager.input,
-              thickness: 0.5,
-            ),
+            padding: EdgeInsets.symmetric(vertical: AppPadding.p16),
+            child: Divider(color: ColorManager.input, thickness: 0.5),
           ),
 
           Row(

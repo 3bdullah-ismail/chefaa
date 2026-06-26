@@ -81,7 +81,13 @@ class _FindLabViewState extends State<_FindLabView> {
     if (_selectedFilterIndex == 1) {
       list = list.where((c) => c.facilityType?.toLowerCase() == 'lab').toList();
     } else if (_selectedFilterIndex == 2) {
-      list = list.where((c) => c.facilityType?.toLowerCase() == 'scan' || c.facilityType?.toLowerCase() == 'both').toList();
+      list = list
+          .where(
+            (c) =>
+                c.facilityType?.toLowerCase() == 'scan' ||
+                c.facilityType?.toLowerCase() == 'both',
+          )
+          .toList();
     }
     return list;
   }
@@ -122,7 +128,9 @@ class _FindLabViewState extends State<_FindLabView> {
                     if (state is LabSearchLoading) {
                       isLoading = true;
                     } else if (state is LabSearchSuccess) {
-                      centers = _getFilteredCenters(state.response.centers ?? []);
+                      centers = _getFilteredCenters(
+                        state.response.centers ?? [],
+                      );
                     } else if (state is LabSearchError) {
                       error = state.error;
                     }
@@ -144,10 +152,17 @@ class _FindLabViewState extends State<_FindLabView> {
                         else if (error != null)
                           Center(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 40,
+                                horizontal: 20,
+                              ),
                               child: Column(
                                 children: [
-                                  const Icon(Icons.error_outline, size: 48, color: ColorManager.error),
+                                  const Icon(
+                                    Icons.error_outline,
+                                    size: 48,
+                                    color: ColorManager.error,
+                                  ),
                                   16.verticalSpace,
                                   Text(error, textAlign: TextAlign.center),
                                   16.verticalSpace,

@@ -54,10 +54,15 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title ?? "",
-        style: getBoldStyle(color: ColorManager.black, fontSize: FontSize.s26.sp),
+        style: getBoldStyle(
+          color: ColorManager.black,
+          fontSize: FontSize.s26.sp,
+        ),
       ),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(AppRadius.r30)),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(AppRadius.r30),
+        ),
       ),
     );
   }

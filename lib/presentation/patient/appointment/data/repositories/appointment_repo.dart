@@ -11,7 +11,5 @@ abstract class AppointmentRepo {
     required String timeChosed,
   });
 
-  Future<AppointmentModel> cancelAppointment({
-    required String appointmentId,
-  });
+  Future<AppointmentModel> cancelAppointment({required String appointmentId});
 }

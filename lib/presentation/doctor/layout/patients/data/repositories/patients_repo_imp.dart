@@ -140,18 +140,14 @@ class PatientsRepoImp implements PatientsRepo {
 
       if (raw is List) {
         return raw
-            .map((json) => Prescription.fromJson({
-          'success': true,
-          'data': json,
-        }))
+            .map(
+              (json) => Prescription.fromJson({'success': true, 'data': json}),
+            )
             .toList();
       } else if (raw is Map<String, dynamic>) {
         // ✅ التصحيح: لف الـ raw تحت مفتاح "data" قبل التمرير
         return [
-          Prescription.fromJson({
-            'success': true,
-            'data': raw,
-          })
+          Prescription.fromJson({'success': true, 'data': raw}),
         ];
       } else {
         return [];

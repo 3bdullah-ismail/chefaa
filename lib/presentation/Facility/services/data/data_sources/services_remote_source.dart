@@ -15,4 +15,3 @@ abstract class ServicesRemoteSource {
 
   Future<Response> toggleService(String serviceId);
 }
-

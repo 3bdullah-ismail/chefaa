@@ -40,66 +40,65 @@ class PrescriptionMiniCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.p18),
           child: Row(
-        children: [
-        Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              prescriptionName,
-              maxLines: 2,
-              style: getBoldStyle(
-                color: ColorManager.black,
-                fontSize: 16.sp,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      prescriptionName,
+                      maxLines: 2,
+                      style: getBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                    10.verticalSpace,
+                    Text(
+                      formatDate(date),
+                      style: getSemiBoldStyle(
+                        color: ColorManager.gray,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                    7.verticalSpace,
+                    Text(
+                      "$medsCount medications",
+                      style: getSemiBoldStyle(
+                        color: ColorManager.primary,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            10.verticalSpace,
-            Text(
-              formatDate(date),
-              style: getSemiBoldStyle(
-                color: ColorManager.gray,
-                fontSize: 14.sp,
-              ),
-            ),
-            7.verticalSpace,
-            Text(
-              "$medsCount medications",
-              style: getSemiBoldStyle(
-                color: ColorManager.primary,
-                fontSize: 14.sp,
-              ),
-            ),
-          ],
-        ),
-      ),
 
-      const SizedBox(width: 10),
+              const SizedBox(width: 10),
 
-      Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p6,
-          vertical: AppPadding.p4,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.green.withAlpha(50),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Text(
-          status,
-          style: getSemiBoldStyle(
-            color: Colors.green,
-            fontSize: 12.sp,
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p6,
+                  vertical: AppPadding.p4,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.green.withAlpha(50),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  status,
+                  style: getSemiBoldStyle(color: Colors.green, fontSize: 12.sp),
+                ),
+              ),
+            ],
           ),
         ),
       ),
-      ],
-    )),
-    )
-    ,
     );
   }
-}String formatDate(String isoDate) {
+}
+
+String formatDate(String isoDate) {
   final dateTime = DateTime.parse(isoDate);
   return DateFormat('dd MMM, yyyy • hh:mm a').format(dateTime);
 }

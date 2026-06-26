@@ -11,17 +11,18 @@ class ChatbotCubit extends Cubit<ChatbotState> {
   final ChatbotRepo chatbotRepo;
 
   ChatbotCubit(this.chatbotRepo)
-      : super(
-          ChatbotInitial([
-            ChatMessageModel(
-              role: 'assistant',
-              content:
-                  'Welcome! How can I help you today with your medications or health condition?',
-            ),
-          ]),
-        );
+    : super(
+        ChatbotInitial([
+          ChatMessageModel(
+            role: 'assistant',
+            content:
+                'Welcome! How can I help you today with your medications or health condition?',
+          ),
+        ]),
+      );
 
-  static ChatbotCubit get(BuildContext context) => BlocProvider.of<ChatbotCubit>(context);
+  static ChatbotCubit get(BuildContext context) =>
+      BlocProvider.of<ChatbotCubit>(context);
 
   Future<void> sendMessage(String text) async {
     final trimmedText = text.trim();

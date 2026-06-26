@@ -27,11 +27,14 @@ class ProfileRepositoryImpl implements ProfileRepository {
               await Isolate.run(() => jsonDecode(body)),
             )
           : GetProfileResponse.fromJson(body);
-      
+
       await HiveService.put(HiveBoxes.facilityBox, _cacheKey, body);
       return data;
     } on DioException catch (e) {
-      final cachedBody = await HiveService.get<dynamic>(HiveBoxes.facilityBox, _cacheKey);
+      final cachedBody = await HiveService.get<dynamic>(
+        HiveBoxes.facilityBox,
+        _cacheKey,
+      );
       if (cachedBody != null) {
         try {
           final decoded = cachedBody is String
@@ -42,7 +45,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
       }
       throw ServerFailure.fromDioError(e).message;
     } catch (e) {
-      final cachedBody = await HiveService.get<dynamic>(HiveBoxes.facilityBox, _cacheKey);
+      final cachedBody = await HiveService.get<dynamic>(
+        HiveBoxes.facilityBox,
+        _cacheKey,
+      );
       if (cachedBody != null) {
         try {
           final decoded = cachedBody is String
@@ -65,7 +71,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
               await Isolate.run(() => jsonDecode(responseBody)),
             )
           : GetProfileResponse.fromJson(responseBody);
-      
+
       await HiveService.put(HiveBoxes.facilityBox, _cacheKey, responseBody);
       return data;
     } on DioException catch (e) {

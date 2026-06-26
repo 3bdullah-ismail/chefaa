@@ -46,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
           child: Column(
             children: [
-              const CustomSearchBar(text: "Search Doctor or Specialty",),
+              const CustomSearchBar(text: "Search Doctor or Specialty"),
               16.verticalSpace,
               const FilterBar(),
               16.verticalSpace,

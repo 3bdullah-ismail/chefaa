@@ -37,7 +37,10 @@ class FacilityQuickActionsWidget extends StatelessWidget {
               icon: Icons.add_circle_outline_rounded,
               label: "New Request",
               onTap: () {
-                Navigator.pushNamed(context, AppRoutesNames.createPatientRequest);
+                Navigator.pushNamed(
+                  context,
+                  AppRoutesNames.createPatientRequest,
+                );
               },
             ),
           ],

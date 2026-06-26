@@ -49,7 +49,7 @@ class DeliveryCard extends StatelessWidget {
               ],
             ),
           ),
-         const  Icon(Icons.check_circle, color: ColorManager.primary),
+          const Icon(Icons.check_circle, color: ColorManager.primary),
         ],
       ),
     );

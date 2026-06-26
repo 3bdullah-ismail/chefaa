@@ -22,11 +22,7 @@ class SpecificationRow extends StatelessWidget {
             color: const Color(0xffF8FAFC),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Icon(
-            icon,
-            size: 16,
-            color: const Color(0xff64748B),
-          ),
+          child: Icon(icon, size: 16, color: const Color(0xff64748B)),
         ),
 
         const SizedBox(width: 14),

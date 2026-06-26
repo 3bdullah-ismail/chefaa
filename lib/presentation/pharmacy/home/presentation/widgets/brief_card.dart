@@ -7,15 +7,10 @@ class StatCard extends StatelessWidget {
   final String label;
   final String value;
 
-  const StatCard({
-    super.key,
-    required this.label,
-    required this.value,
-  });
+  const StatCard({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       padding: EdgeInsets.all(14.r),
       decoration: BoxDecoration(

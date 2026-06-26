@@ -25,9 +25,7 @@ class PharmacyChatInputBar extends StatelessWidget {
       ),
       decoration: const BoxDecoration(
         color: ColorManager.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(24),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Row(
         children: [
@@ -59,12 +57,9 @@ class PharmacyChatInputBar extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: onSend,
-              icon: const Icon(
-                Icons.send_rounded,
-                color: ColorManager.white,
-              ),
+              icon: const Icon(Icons.send_rounded, color: ColorManager.white),
             ),
-          )
+          ),
         ],
       ),
     );

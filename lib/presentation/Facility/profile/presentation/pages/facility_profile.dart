@@ -38,7 +38,9 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
           padding: EdgeInsets.zero,
           child: BlocBuilder<FacilityProfileCubit, FacilityProfileState>(
             builder: (context, state) {
-              final profileData = context.read<FacilityProfileCubit>().profileData;
+              final profileData = context
+                  .read<FacilityProfileCubit>()
+                  .profileData;
               final chips = <String>[];
               if (profileData != null) {
                 if (profileData.facilityType != null) {
@@ -52,7 +54,8 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
               }
 
               return FacilityProfileHeaderSection(
-                title: profileData?.name ?? user?.name ?? 'Cairo MRI & Lab Center',
+                title:
+                    profileData?.name ?? user?.name ?? 'Cairo MRI & Lab Center',
                 location: (profileData?.addresses?.isNotEmpty == true)
                     ? (profileData!.addresses!.first.addressText ?? '')
                     : 'Maadi, Cairo, Egypt',
@@ -121,7 +124,9 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                   );
                 }
 
-                final profileData = context.read<FacilityProfileCubit>().profileData;
+                final profileData = context
+                    .read<FacilityProfileCubit>()
+                    .profileData;
                 return SingleChildScrollView(
                   physics: const BouncingScrollPhysics(),
                   child: Padding(
@@ -138,13 +143,9 @@ class _FacilityProfilePageState extends State<FacilityProfilePage> {
                           servicesCount: profileData?.servicesCount,
                         ),
                         SizedBox(height: AppSize.s24.h),
-                        LocationSection(
-                          addresses: profileData?.addresses,
-                        ),
+                        LocationSection(addresses: profileData?.addresses),
                         SizedBox(height: AppSize.s20.h),
-                        FacilityInfoSection(
-                          profileData: profileData,
-                        ),
+                        FacilityInfoSection(profileData: profileData),
                         SizedBox(height: AppSize.s24.h),
                         const LogOutBtn(),
                         SizedBox(height: AppSize.s24.h),

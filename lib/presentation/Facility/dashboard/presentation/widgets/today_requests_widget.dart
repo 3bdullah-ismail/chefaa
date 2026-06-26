@@ -13,10 +13,7 @@ import 'empty_state_card_widget.dart';
 class TodayRequestsWidget extends StatelessWidget {
   final List<DashboardRequestItem>? pendingUploads;
 
-  const TodayRequestsWidget({
-    super.key,
-    this.pendingUploads,
-  });
+  const TodayRequestsWidget({super.key, this.pendingUploads});
 
   String _formatTime(String? createdAt) {
     if (createdAt == null) return '';

@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/presentation/patient/checkout_order/presentation/widgets/checkout_summary_card.dart';
 import 'package:chefaa/presentation/patient/checkout_order/presentation/widgets/delivery_card.dart';

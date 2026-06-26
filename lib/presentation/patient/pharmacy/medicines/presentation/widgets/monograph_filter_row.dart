@@ -13,11 +13,7 @@ class MonographFilterRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = [
-      "Overview",
-      "Clinical Actions",
-      "Safety & Risks",
-    ];
+    final sections = ["Overview", "Clinical Actions", "Safety & Risks"];
 
     return Row(
       children: sections.map((section) {
@@ -32,8 +28,7 @@ class MonographFilterRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 12),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color:
-                isSelected ? ColorManager.primary : Colors.white,
+                color: isSelected ? ColorManager.primary : Colors.white,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
                   color: isSelected
@@ -46,9 +41,7 @@ class MonographFilterRow extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
-                  color: isSelected
-                      ? Colors.white
-                      : const Color(0xff64748B),
+                  color: isSelected ? Colors.white : const Color(0xff64748B),
                 ),
               ),
             ),

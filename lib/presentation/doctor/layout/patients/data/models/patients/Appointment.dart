@@ -1,10 +1,5 @@
 class Appointment {
-  Appointment({
-      this.id, 
-      this.clinic, 
-      this.date, 
-      this.slotStart, 
-      this.slotEnd,});
+  Appointment({this.id, this.clinic, this.date, this.slotStart, this.slotEnd});
 
   Appointment.fromJson(dynamic json) {
     id = json['_id'];
@@ -28,5 +23,4 @@ class Appointment {
     map['slotEnd'] = slotEnd;
     return map;
   }
-
 }

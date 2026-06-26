@@ -1,10 +1,11 @@
 class Medicines {
   Medicines({
-      this.name, 
-      this.dosage, 
-      this.frequency, 
-      this.duration, 
-      this.instructions,});
+    this.name,
+    this.dosage,
+    this.frequency,
+    this.duration,
+    this.instructions,
+  });
 
   Medicines.fromJson(dynamic json) {
     name = json['name'];
@@ -28,5 +29,4 @@ class Medicines {
     map['instructions'] = instructions;
     return map;
   }
-
 }

@@ -1,4 +1,3 @@
-
 import 'package:chefaa/presentation/doctor/layout/patients/data/models/complete/Complete_appointment.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/data/models/patients/Prescription.dart';
 
@@ -16,7 +15,7 @@ abstract class PatientsRepo {
     required String notes,
   });
 
-  Future<Prescription>editPrescription({
+  Future<Prescription> editPrescription({
     required String appointment,
     required String diagnosis,
     required List<Map<String, dynamic>> medicines,
@@ -26,9 +25,15 @@ abstract class PatientsRepo {
     required String notes,
   });
 
-  Future<Prescription>getPrescriptionByAppointment({required String appointmentId});
+  Future<Prescription> getPrescriptionByAppointment({
+    required String appointmentId,
+  });
 
-  Future<List<Prescription>>getPreviousPrescriptions({required String appointmentId});
+  Future<List<Prescription>> getPreviousPrescriptions({
+    required String appointmentId,
+  });
 
-  Future<CompleteAppointment>completeAppointment({required String appointmentId});
+  Future<CompleteAppointment> completeAppointment({
+    required String appointmentId,
+  });
 }

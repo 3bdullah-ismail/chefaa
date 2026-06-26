@@ -33,7 +33,7 @@ class _PrescriptionHistoryState extends State<PrescriptionHistory> {
   Widget build(BuildContext context) {
     return BlocBuilder<PatientsCubit, PatientsState>(
       buildWhen: (prev, curr) =>
-      curr is PrescriptionPreviousLoadingState ||
+          curr is PrescriptionPreviousLoadingState ||
           curr is PrescriptionPreviousSuccessState ||
           curr is PrescriptionPreviousErrorState,
       builder: (context, state) {
@@ -46,7 +46,7 @@ class _PrescriptionHistoryState extends State<PrescriptionHistory> {
         }
 
         final List<Prescription> prescriptions =
-        state is PrescriptionPreviousSuccessState
+            state is PrescriptionPreviousSuccessState
             ? state.prescriptions
             : <Prescription>[];
 
@@ -74,7 +74,9 @@ class _PrescriptionHistoryState extends State<PrescriptionHistory> {
                   isScrollControlled: true,
                   backgroundColor: ColorManager.lightGray,
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
                   ),
                   builder: (_) {
                     return BlocProvider.value(
@@ -82,12 +84,14 @@ class _PrescriptionHistoryState extends State<PrescriptionHistory> {
                       child: PrescriptionHistoryBottomSheet(
                         prescription: item,
                         medications: meds
-                            .map((e) => {
-                          "name": e.name ?? "",
-                          "dosage": e.dosage ?? "",
-                          "frequency": e.frequency ?? "",
-                          "duration": e.duration ?? "",
-                        })
+                            .map(
+                              (e) => {
+                                "name": e.name ?? "",
+                                "dosage": e.dosage ?? "",
+                                "frequency": e.frequency ?? "",
+                                "duration": e.duration ?? "",
+                              },
+                            )
                             .toList(),
                       ),
                     );

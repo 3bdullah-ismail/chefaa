@@ -10,7 +10,8 @@ class LabResultsCubit extends Cubit<LabResultsState> {
 
   LabResultsCubit(this._repository) : super(LabResultsInitialState());
 
-  static LabResultsCubit get(BuildContext context) => BlocProvider.of<LabResultsCubit>(context);
+  static LabResultsCubit get(BuildContext context) =>
+      BlocProvider.of<LabResultsCubit>(context);
 
   Future<void> getLabResults() async {
     emit(LabResultsLoadingState());

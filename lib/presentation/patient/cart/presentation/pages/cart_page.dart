@@ -83,13 +83,13 @@ class _CartPageState extends State<CartPage> {
 
                 itemBuilder: (context, index) {
                   final item = cartItems[index];
-                    return CartItemCard(
-                      item: item,
-                      index: index,
-                      onIncrease: () => increaseQuantity(index),
-                      onDecrease: () => decreaseQuantity(index),
-                      onDelete: () => removeItem(index),
-                    );
+                  return CartItemCard(
+                    item: item,
+                    index: index,
+                    onIncrease: () => increaseQuantity(index),
+                    onDecrease: () => decreaseQuantity(index),
+                    onDelete: () => removeItem(index),
+                  );
                 },
               ),
             ),
@@ -97,12 +97,12 @@ class _CartPageState extends State<CartPage> {
             20.verticalSpace,
             CustomOutlineButton(text: "Add More Items", onPressed: () {}),
 
-           10.verticalSpace,
+            10.verticalSpace,
             OrderSummaryCard(
               subtotal: subtotal,
               deliveryFee: deliveryFee,
               total: total,
-              onPressed: (){
+              onPressed: () {
                 Navigator.pushNamed(context, AppRoutesNames.checkoutPage);
               },
               btnTitle: "Proceed to Checkout",

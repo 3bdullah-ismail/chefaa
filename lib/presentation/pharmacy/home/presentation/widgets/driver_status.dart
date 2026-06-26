@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/resources/values_manager.dart';
 
 class StatusBadge extends StatelessWidget {
-  const StatusBadge({super.key, 
+  const StatusBadge({
+    super.key,
     required this.isAvailable,
     required this.activeOrders,
     required this.color,
@@ -25,7 +26,7 @@ class StatusBadge extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(color: color.withAlpha(100)),
             borderRadius: BorderRadius.circular(20),
-            color:  color.withAlpha(40),
+            color: color.withAlpha(40),
           ),
           child: Text(
             isAvailable ? 'Available' : 'Busy',

@@ -45,4 +45,3 @@ final class CancelAppointmentErrorState extends AppointmentState {
 
   CancelAppointmentErrorState({required this.error});
 }
-

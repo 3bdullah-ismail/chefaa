@@ -61,7 +61,10 @@ class _LocationSectionState extends State<LocationSection> {
       final locations = await locationFromAddress(address);
       if (locations.isNotEmpty && mounted) {
         setState(() {
-          _mapCoordinates = LatLng(locations.first.latitude, locations.first.longitude);
+          _mapCoordinates = LatLng(
+            locations.first.latitude,
+            locations.first.longitude,
+          );
           _isLoadingCoordinates = false;
         });
       }
@@ -88,8 +91,12 @@ class _LocationSectionState extends State<LocationSection> {
   @override
   Widget build(BuildContext context) {
     final hasAddress = widget.addresses != null && widget.addresses!.isNotEmpty;
-    final addressText = hasAddress ? (widget.addresses!.first.addressText ?? '') : 'Maadi, Cairo, Egypt';
-    final floorText = hasAddress && widget.addresses!.first.floor != null ? 'Floor ${widget.addresses!.first.floor}' : '';
+    final addressText = hasAddress
+        ? (widget.addresses!.first.addressText ?? '')
+        : 'Maadi, Cairo, Egypt';
+    final floorText = hasAddress && widget.addresses!.first.floor != null
+        ? 'Floor ${widget.addresses!.first.floor}'
+        : '';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,54 +134,59 @@ class _LocationSectionState extends State<LocationSection> {
                           ),
                         )
                       : _mapCoordinates == null
-                          ? Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(
-                                  ImageAssets.map,
-                                  height: 150.h,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
+                      ? Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.asset(
+                              ImageAssets.map,
+                              height: 150.h,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                            Container(
+                              width: 36.r,
+                              height: 36.r,
+                              decoration: BoxDecoration(
+                                color: ColorManager.primary,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: ColorManager.white,
+                                  width: 2.w,
                                 ),
-                                Container(
-                                  width: 36.r,
-                                  height: 36.r,
-                                  decoration: BoxDecoration(
-                                    color: ColorManager.primary,
-                                    shape: BoxShape.circle,
-                                    border: Border.all(color: ColorManager.white, width: 2.w),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: ColorManager.primary.withValues(alpha: 0.3),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: ColorManager.primary.withValues(
+                                      alpha: 0.3,
+                                    ),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 2),
                                   ),
-                                  child: Icon(
-                                    Icons.location_on,
-                                    color: ColorManager.white,
-                                    size: 18.sp,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : AbsorbPointer(
-                              child: GoogleMap(
-                                initialCameraPosition: CameraPosition(
-                                  target: _mapCoordinates!,
-                                  zoom: 15,
-                                ),
-                                markers: _markers,
-                                zoomControlsEnabled: false,
-                                myLocationButtonEnabled: false,
-                                scrollGesturesEnabled: false,
-                                rotateGesturesEnabled: false,
-                                zoomGesturesEnabled: false,
-                                tiltGesturesEnabled: false,
-                                myLocationEnabled: false,
+                                ],
+                              ),
+                              child: Icon(
+                                Icons.location_on,
+                                color: ColorManager.white,
+                                size: 18.sp,
                               ),
                             ),
+                          ],
+                        )
+                      : AbsorbPointer(
+                          child: GoogleMap(
+                            initialCameraPosition: CameraPosition(
+                              target: _mapCoordinates!,
+                              zoom: 15,
+                            ),
+                            markers: _markers,
+                            zoomControlsEnabled: false,
+                            myLocationButtonEnabled: false,
+                            scrollGesturesEnabled: false,
+                            rotateGesturesEnabled: false,
+                            zoomGesturesEnabled: false,
+                            tiltGesturesEnabled: false,
+                            myLocationEnabled: false,
+                          ),
+                        ),
                 ),
               ),
               Padding(

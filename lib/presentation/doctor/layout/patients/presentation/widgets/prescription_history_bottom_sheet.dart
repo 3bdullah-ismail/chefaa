@@ -19,11 +19,12 @@ class PrescriptionHistoryBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<PrescriptionHistoryBottomSheet> createState() => _PrescriptionHistoryBottomSheetState();
+  State<PrescriptionHistoryBottomSheet> createState() =>
+      _PrescriptionHistoryBottomSheetState();
 }
 
-class _PrescriptionHistoryBottomSheetState extends State<PrescriptionHistoryBottomSheet> {
-
+class _PrescriptionHistoryBottomSheetState
+    extends State<PrescriptionHistoryBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,10 +41,7 @@ class _PrescriptionHistoryBottomSheetState extends State<PrescriptionHistoryBott
 
               Text(
                 "Prescription Details",
-                style: getBoldStyle(
-                  color: ColorManager.black,
-                  fontSize: 20.sp,
-                ),
+                style: getBoldStyle(color: ColorManager.black, fontSize: 20.sp),
               ),
 
               10.verticalSpace,

@@ -31,7 +31,7 @@ class InsideAppBar extends StatelessWidget {
       elevation: 3,
       shadowColor: ColorManager.lightGray,
       toolbarHeight: height,
-      shape:  RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(30.r)),
       ),
       title: Row(

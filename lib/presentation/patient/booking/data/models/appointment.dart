@@ -1,23 +1,23 @@
 class Appointment {
-
   Appointment({
-      this.patient, 
-      this.doctor, 
-      this.clinic, 
-      this.prescription, 
-      this.date, 
-      this.timeChosed, 
-      this.slotStart, 
-      this.slotEnd, 
-      this.isFollowUp, 
-      this.paymentStatus, 
-      this.paymentOption, 
-      this.status, 
-      this.paidAt, 
-      this.id, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v,});
+    this.patient,
+    this.doctor,
+    this.clinic,
+    this.prescription,
+    this.date,
+    this.timeChosed,
+    this.slotStart,
+    this.slotEnd,
+    this.isFollowUp,
+    this.paymentStatus,
+    this.paymentOption,
+    this.status,
+    this.paidAt,
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
 
   Appointment.fromJson(dynamic json) {
     patient = json['patient'];
@@ -77,5 +77,4 @@ class Appointment {
     map['__v'] = v;
     return map;
   }
-
 }

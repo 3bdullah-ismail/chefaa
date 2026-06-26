@@ -4,12 +4,11 @@ import 'package:chefaa/presentation/pharmacy/chatbot/presentation/pages/pharmacy
 import 'package:chefaa/presentation/pharmacy/home/presentation/pages/pharmacy_home_page.dart';
 import 'package:chefaa/presentation/pharmacy/orders/presentation/pages/pharmacy_order_page.dart';
 import 'package:chefaa/presentation/pharmacy/profile/presentation/pages/pharmacy_profile_page.dart';
-import 'package:chefaa/presentation/pharmacy/stock/presentation/pages/pharmacy_stock_page.dart';
+import 'package:chefaa/presentation/pharmacy/inventory/presentation/pages/pharmacy_stock_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../../core/resources/assets_manager.dart';
-
 
 class PharmacyLayout extends StatefulWidget {
   const PharmacyLayout({super.key});
@@ -49,7 +48,11 @@ class _PharmacyLayoutState extends State<PharmacyLayout> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.order, width: 25.w, height: 25.h),
             label: 'Orders',
-            activeIcon: SvgPicture.asset(SvgAssets.orderActive, width: 25.w, height: 25.h),
+            activeIcon: SvgPicture.asset(
+              SvgAssets.orderActive,
+              width: 25.w,
+              height: 25.h,
+            ),
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(SvgAssets.stock, width: 25.w, height: 25.h),

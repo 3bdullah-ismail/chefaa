@@ -20,18 +20,22 @@ class MedicalHistoryCard extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: getBoldStyle(
-          color: ColorManager.black,
-          fontSize: 16.sp,
-        ),
+        style: getBoldStyle(color: ColorManager.black, fontSize: 16.sp),
       ),
     );
   }
 
   Widget _chip(String text, Color color) {
     return Container(
-      margin: const EdgeInsets.only(right: AppPadding.p8, bottom: AppPadding.p4,top: AppPadding.p8),
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12, vertical: AppPadding.p8),
+      margin: const EdgeInsets.only(
+        right: AppPadding.p8,
+        bottom: AppPadding.p4,
+        top: AppPadding.p8,
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p12,
+        vertical: AppPadding.p8,
+      ),
       decoration: BoxDecoration(
         color: color.withAlpha(50),
         borderRadius: BorderRadius.circular(20.r),
@@ -39,24 +43,21 @@ class MedicalHistoryCard extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: getBoldStyle(
-          color: color,
-          fontSize: 14.sp,
-        ),
+        style: getBoldStyle(color: color, fontSize: 14.sp),
       ),
     );
   }
 
   Widget _wrapList(List<Widget> children) {
-    return Wrap(
-      children: children,
-    );
+    return Wrap(children: children);
   }
 
   @override
   Widget build(BuildContext context) {
     final allergyItems = allergies.isEmpty ? ['None'] : allergies;
-    final conditionItems = chronicConditions.isEmpty ? ['None'] : chronicConditions;
+    final conditionItems = chronicConditions.isEmpty
+        ? ['None']
+        : chronicConditions;
 
     return Container(
       decoration: BoxDecoration(
