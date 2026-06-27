@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
-import '../../data/models/Data.dart';
+import '../../data/models/data.dart';
 
 class PatientDataCard extends StatelessWidget {
   final Data? data;
@@ -110,3 +110,4 @@ extension DateFormatting on String {
     return DateFormat('dd/MM/yyyy').format(DateTime.parse(this));
   }
 }
+

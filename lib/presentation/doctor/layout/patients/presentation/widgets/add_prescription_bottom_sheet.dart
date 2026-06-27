@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/patients/Prescription.dart';
+import '../../data/models/patients/prescription.dart';
 import '../manager/patients_cubit.dart';
 import '../manager/patients_state.dart';
 import 'medicine_addition_card.dart';
@@ -131,6 +131,8 @@ class _AddPrescriptionBottomSheetState
             );
           }
         }
+        
+        if (!context.mounted) return;
 
         if (state is PrescriptionCreatingErrorState) {
           ScaffoldMessenger.of(
@@ -320,3 +322,4 @@ class _AddPrescriptionBottomSheetState
     );
   }
 }
+

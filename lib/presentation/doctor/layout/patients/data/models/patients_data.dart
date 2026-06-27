@@ -1,4 +1,4 @@
-﻿import 'data.dart';
+import 'data.dart';
 
 class PatientsData {
   PatientsData({this.success, this.count, this.data});
@@ -27,3 +27,4 @@ class PatientsData {
     return map;
   }
 }
+

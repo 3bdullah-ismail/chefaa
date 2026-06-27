@@ -1,6 +1,6 @@
-import 'CompletionTokensDetails.dart';
-import 'LatencyCheckpoint.dart';
-import 'PromptTokensDetails.dart';
+import 'completion_tokens_details.dart';
+import 'latency_checkpoint.dart';
+import 'prompt_tokens_details.dart';
 
 class Usage {
   Usage({

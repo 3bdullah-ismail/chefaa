@@ -1,8 +1,8 @@
-import 'Summary.dart';
-import 'ProfitLoss.dart';
-import 'PerClinicBreakdown.dart';
-import 'Trends.dart';
-import 'Predictions.dart';
+import 'summary.dart';
+import 'profit_loss.dart';
+import 'per_clinic_breakdown.dart';
+import 'trends.dart';
+import 'predictions.dart';
 
 class Analysis {
   Analysis({

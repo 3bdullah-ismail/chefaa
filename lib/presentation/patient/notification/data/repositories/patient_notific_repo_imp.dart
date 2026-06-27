@@ -1,5 +1,5 @@
 import 'package:chefaa/presentation/patient/notification/data/data_source/patient_notific_data_source.dart';
-import 'package:chefaa/presentation/patient/notification/data/models/Notification.dart';
+import 'package:chefaa/presentation/patient/notification/data/models/notification.dart';
 import 'package:chefaa/presentation/patient/notification/data/repositories/patient_notific_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -28,3 +28,4 @@ class PatientNotificatorRepoImp implements PatientNotificatorRepo {
     }
   }
 }
+

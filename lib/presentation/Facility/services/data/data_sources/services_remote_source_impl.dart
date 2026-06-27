@@ -1,5 +1,5 @@
 import 'package:chefaa/core/services/network_service.dart';
-import 'package:chefaa/presentation/Facility/services/data/data_sources/services_remote_source.dart';
+import 'package:chefaa/presentation/facility/services/data/data_sources/services_remote_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -77,3 +77,4 @@ class ServicesRemoteSourceImpl extends ServicesRemoteSource {
     return _networkService.dio.patch("/lab/toggle-service/$serviceId");
   }
 }
+

@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/notification/data/models/Notification.dart';
+import 'package:chefaa/presentation/patient/notification/data/models/notification.dart';
 
 sealed class PatientNotificationState {}
 class PatientNotificationInitialState extends PatientNotificationState {}

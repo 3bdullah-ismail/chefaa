@@ -1,10 +1,10 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chefaa/core/extensions/build_ex.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
-import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'labeled_text_field.dart';
 
 class MedicalLeadershipCard extends StatelessWidget {
@@ -43,13 +43,13 @@ class MedicalLeadershipCard extends StatelessWidget {
             textInputAction: TextInputAction.next,
             label: "Medical Director Name",
             controller: cubit.medicalDirectorName,
-            hint: "Doctor’s full name",
+            hint: "Doctor's full name",
           ),
           const SizedBox(height: 48),
           LabeledTextField(
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.done,
-            label: "Director’s Professional ID",
+            label: "Director's Professional ID",
             controller: cubit.directorProfessionalId,
             hint: "ID number",
           ),
@@ -58,3 +58,4 @@ class MedicalLeadershipCard extends StatelessWidget {
     );
   }
 }
+

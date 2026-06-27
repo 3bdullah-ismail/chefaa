@@ -1,6 +1,6 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart';
+import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,3 +128,4 @@ class _FacilitySignupState extends State<FacilitySignup> {
     );
   }
 }
+

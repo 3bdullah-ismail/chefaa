@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../data/models/Data.dart';
-import '../../data/models/patients/Prescription.dart';
+import '../../data/models/data.dart';
+import '../../data/models/patients/prescription.dart';
 
 @injectable
 class PatientsCubit extends Cubit<PatientsState> {
@@ -13,7 +13,7 @@ class PatientsCubit extends Cubit<PatientsState> {
 
   PatientsCubit(this.patientsRepo) : super(PatientsInitialState());
 
-  static PatientsCubit get(context) => BlocProvider.of(context);
+  static PatientsCubit get(BuildContext context) => BlocProvider.of(context);
   Prescription? currentPrescription;
   List<Prescription> previousPrescriptions = [];
   dynamic selectedAppointment;
@@ -304,3 +304,4 @@ class MedicationItem {
     instructionsController.dispose();
   }
 }
+

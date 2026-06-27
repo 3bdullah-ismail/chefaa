@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/patient/pharmacy/pharmacies/data/models/Pharmacy_details.dart';
+import 'package:chefaa/presentation/patient/pharmacy/pharmacies/data/models/pharmacy_details.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../../patient/pharmacy/pharmacies/data/models/pharmacy_medicines/Data.dart';
+import '../../../../../patient/pharmacy/pharmacies/data/models/pharmacy_medicines/data.dart';
 
 abstract class PharmacyPatientRepo {
 
@@ -20,4 +20,5 @@ abstract class PharmacyPatientRepo {
   required String comment,
   });
   }
+
 

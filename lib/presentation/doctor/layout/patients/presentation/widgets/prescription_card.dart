@@ -11,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
-import '../../data/models/patients/Prescription.dart';
+import '../../data/models/patients/prescription.dart';
 import '../manager/patients_state.dart';
 import 'add_prescription_bottom_sheet.dart';
 
@@ -377,3 +377,4 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
     );
   }
 }
+

@@ -1,4 +1,4 @@
-﻿import 'data.dart';
+import 'data.dart';
 
 class ReportAnalysis {
   String? message;
@@ -32,3 +32,4 @@ class ReportAnalysis {
     };
   }
 }
+

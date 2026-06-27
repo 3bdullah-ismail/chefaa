@@ -1,6 +1,6 @@
 import 'package:chefaa/presentation/doctor/layout/daily_brief/data/data_sources/brief_data_source.dart';
-import 'package:chefaa/presentation/doctor/layout/daily_brief/data/models/Brief.dart';
-import 'package:chefaa/presentation/doctor/layout/daily_brief/data/models/Financials.dart';
+import 'package:chefaa/presentation/doctor/layout/daily_brief/data/models/brief.dart';
+import 'package:chefaa/presentation/doctor/layout/daily_brief/data/models/financials.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -47,3 +47,4 @@ class BriefRepoImp implements BriefRepo {
     }
   }
 }
+

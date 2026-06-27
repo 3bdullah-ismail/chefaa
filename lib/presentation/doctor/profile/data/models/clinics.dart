@@ -90,3 +90,4 @@ class Clinics {
     return map;
   }
 }
+

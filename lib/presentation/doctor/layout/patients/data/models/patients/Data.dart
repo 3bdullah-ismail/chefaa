@@ -1,7 +1,7 @@
-import 'Appointment.dart';
-import 'Doctor.dart';
-import 'Patient.dart';
-import 'Medicines.dart';
+import 'appointment.dart';
+import 'doctor.dart';
+import 'patient.dart';
+import 'medicines.dart';
 
 class Data {
   Data({
@@ -109,3 +109,4 @@ class Data {
     return map;
   }
 }
+

@@ -61,3 +61,4 @@ class PatientNotificationPage extends StatelessWidget {
     );
   }
 }
+

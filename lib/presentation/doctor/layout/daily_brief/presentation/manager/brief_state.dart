@@ -1,5 +1,5 @@
-import '../../data/models/Brief.dart';
-import '../../data/models/Financials.dart';
+import '../../data/models/brief.dart';
+import '../../data/models/financials.dart';
 
 class BriefState {
   final bool briefLoading;

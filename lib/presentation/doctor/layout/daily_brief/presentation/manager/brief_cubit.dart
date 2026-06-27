@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/repositories/brief_repo.dart';
@@ -12,7 +13,7 @@ class BriefCubit extends Cubit<BriefState> {
     required this.briefRepo,
   }) : super(const BriefState());
 
-  static BriefCubit get(context) => BlocProvider.of(context);
+  static BriefCubit get(BuildContext context) => BlocProvider.of(context);
 
 
   Future<void> getDailyBrief({

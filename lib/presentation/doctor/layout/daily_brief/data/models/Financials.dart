@@ -1,4 +1,4 @@
-import 'Analysis.dart';
+import 'analysis.dart';
 
 class Financials {
   Financials({

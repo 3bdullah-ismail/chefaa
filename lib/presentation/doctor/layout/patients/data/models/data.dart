@@ -1,4 +1,4 @@
-﻿import 'patient.dart';
+import 'patient.dart';
 import 'clinic.dart';
 
 class Data {
@@ -87,3 +87,4 @@ class Data {
     return map;
   }
 }
+
