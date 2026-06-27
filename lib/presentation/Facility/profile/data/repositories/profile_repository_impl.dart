@@ -3,9 +3,9 @@ import 'dart:isolate';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/core/services/hive_service.dart';
-import 'package:chefaa/presentation/facility/profile/data/data_sources/profile_remote_source.dart';
-import 'package:chefaa/presentation/facility/profile/data/models/get_profile_response.dart';
-import 'package:chefaa/presentation/facility/profile/data/repositories/profile_repository.dart';
+import 'package:chefaa/presentation/Facility/profile/data/data_sources/profile_remote_source.dart';
+import 'package:chefaa/presentation/Facility/profile/data/models/get_profile_response.dart';
+import 'package:chefaa/presentation/Facility/profile/data/repositories/profile_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

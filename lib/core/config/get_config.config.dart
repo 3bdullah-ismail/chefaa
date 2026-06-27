@@ -46,46 +46,46 @@ import 'package:chefaa/presentation/doctor/profile/domain/use_cases/update_docto
     as _i722;
 import 'package:chefaa/presentation/doctor/profile/presentation/manager/doctor_profile_cubit.dart'
     as _i248;
-import 'package:chefaa/presentation/facility/auth/data/data_sources/facility_auth_source.dart'
-    as _i442;
-import 'package:chefaa/presentation/facility/auth/data/data_sources/facility_auth_source_impl.dart'
-    as _i373;
-import 'package:chefaa/presentation/facility/auth/data/repositories/facility_auth_repo_impl.dart'
-    as _i349;
-import 'package:chefaa/presentation/facility/auth/domain/repositories/facility_auth_repo.dart'
-    as _i923;
-import 'package:chefaa/presentation/facility/auth/presentation/manager/facility_auth_cubit.dart'
-    as _i423;
-import 'package:chefaa/presentation/facility/dashboard/data/data_sources/dashboard_remote_source.dart'
-    as _i892;
-import 'package:chefaa/presentation/facility/dashboard/data/data_sources/dashboard_remote_source_impl.dart'
-    as _i566;
-import 'package:chefaa/presentation/facility/dashboard/data/repositories/dashboard_repository.dart'
-    as _i434;
-import 'package:chefaa/presentation/facility/dashboard/data/repositories/dashboard_repository_impl.dart'
-    as _i102;
-import 'package:chefaa/presentation/facility/dashboard/presentation/manager/dashboard_cubit.dart'
-    as _i1062;
-import 'package:chefaa/presentation/facility/profile/data/data_sources/profile_remote_source.dart'
-    as _i658;
-import 'package:chefaa/presentation/facility/profile/data/data_sources/profile_remote_source_impl.dart'
-    as _i500;
-import 'package:chefaa/presentation/facility/profile/data/repositories/profile_repository.dart'
-    as _i26;
-import 'package:chefaa/presentation/facility/profile/data/repositories/profile_repository_impl.dart'
-    as _i73;
-import 'package:chefaa/presentation/facility/profile/presentation/manager/facility_profile_cubit.dart'
-    as _i264;
-import 'package:chefaa/presentation/facility/services/data/data_sources/services_remote_source.dart'
-    as _i993;
-import 'package:chefaa/presentation/facility/services/data/data_sources/services_remote_source_impl.dart'
-    as _i32;
-import 'package:chefaa/presentation/facility/services/data/repositories/services_repository.dart'
-    as _i1012;
-import 'package:chefaa/presentation/facility/services/data/repositories/services_repository_impl.dart'
-    as _i620;
-import 'package:chefaa/presentation/facility/services/presentation/manager/services_cubit.dart'
-    as _i130;
+import 'package:chefaa/presentation/Facility/auth/data/data_sources/facility_auth_source.dart'
+    as _i60;
+import 'package:chefaa/presentation/Facility/auth/data/data_sources/facility_auth_source_impl.dart'
+    as _i214;
+import 'package:chefaa/presentation/Facility/auth/data/repositories/facility_auth_repo_impl.dart'
+    as _i24;
+import 'package:chefaa/presentation/Facility/auth/domain/repositories/facility_auth_repo.dart'
+    as _i336;
+import 'package:chefaa/presentation/Facility/auth/presentation/manager/facility_auth_cubit.dart'
+    as _i470;
+import 'package:chefaa/presentation/Facility/dashboard/data/data_sources/dashboard_remote_source.dart'
+    as _i321;
+import 'package:chefaa/presentation/Facility/dashboard/data/data_sources/dashboard_remote_source_impl.dart'
+    as _i326;
+import 'package:chefaa/presentation/Facility/dashboard/data/repositories/dashboard_repository.dart'
+    as _i519;
+import 'package:chefaa/presentation/Facility/dashboard/data/repositories/dashboard_repository_impl.dart'
+    as _i479;
+import 'package:chefaa/presentation/Facility/dashboard/presentation/manager/dashboard_cubit.dart'
+    as _i529;
+import 'package:chefaa/presentation/Facility/profile/data/data_sources/profile_remote_source.dart'
+    as _i504;
+import 'package:chefaa/presentation/Facility/profile/data/data_sources/profile_remote_source_impl.dart'
+    as _i635;
+import 'package:chefaa/presentation/Facility/profile/data/repositories/profile_repository.dart'
+    as _i115;
+import 'package:chefaa/presentation/Facility/profile/data/repositories/profile_repository_impl.dart'
+    as _i893;
+import 'package:chefaa/presentation/Facility/profile/presentation/manager/facility_profile_cubit.dart'
+    as _i584;
+import 'package:chefaa/presentation/Facility/services/data/data_sources/services_remote_source.dart'
+    as _i941;
+import 'package:chefaa/presentation/Facility/services/data/data_sources/services_remote_source_impl.dart'
+    as _i657;
+import 'package:chefaa/presentation/Facility/services/data/repositories/services_repository.dart'
+    as _i326;
+import 'package:chefaa/presentation/Facility/services/data/repositories/services_repository_impl.dart'
+    as _i298;
+import 'package:chefaa/presentation/Facility/services/presentation/manager/services_cubit.dart'
+    as _i48;
 import 'package:chefaa/presentation/patient/ai_lab/data/datasources/ai_report_data_source.dart'
     as _i564;
 import 'package:chefaa/presentation/patient/ai_lab/data/datasources/ai_report_data_source_imp.dart'
@@ -306,25 +306,23 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i66.DoctorProfileLocalDataSourceImp());
     gh.factory<_i233.SearchLocalDataSource>(
         () => _i617.SearchDoctorLocalDataSourceImp());
-    gh.factory<_i658.ProfileRemoteSource>(
-        () => _i500.ProfileRemoteSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i352.BookingRemoteDataSource>(
         () => _i369.BookingRemoteDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i979.PharmacyRemoteDataSource>(
         () => _i424.PharmacyRemoteDataSourceImp(gh<_i492.NetworkService>()));
-    gh.factory<_i892.DashboardRemoteSource>(
-        () => _i566.DashboardRemoteSourceImpl(gh<_i492.NetworkService>()));
+    gh.factory<_i941.ServicesRemoteSource>(
+        () => _i657.ServicesRemoteSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i716.LabResultsRemoteDataSource>(
         () => _i934.LabResultsRemoteDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i723.ProfileRemoteDataSource>(
         () => _i819.ProfileRemoteDataSourceImpl(gh<_i492.NetworkService>()));
+    gh.factory<_i321.DashboardRemoteSource>(
+        () => _i326.DashboardRemoteSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i831.PharmacyDataSource>(() => _i440.PharmacyDataSourceImp(
         networkService: gh<_i492.NetworkService>()));
     gh.factory<_i744.PatientNotificatorDataSource>(() =>
         _i750.PatientNotificatorDataSourceImp(
             networkService: gh<_i492.NetworkService>()));
-    gh.factory<_i442.FacilityAuthDataSource>(
-        () => _i373.FacilityAuthDataSourceImpl(gh<_i492.NetworkService>()));
     gh.lazySingleton<_i508.UsersCubit>(
         () => _i508.UsersCubit(gh<_i778.UserUseCase>()));
     gh.factory<_i775.MedicationDataSource>(
@@ -350,8 +348,6 @@ extension GetItInjectableX on _i174.GetIt {
         _i538.AppointmentRemoteDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i829.PharmacySettingsDataSource>(
         () => _i443.PharmacySettingsDataSourceImpl(gh<_i492.NetworkService>()));
-    gh.factory<_i923.FacilityAuthRepo>(
-        () => _i349.FacilityAuthRepoImpl(gh<_i442.FacilityAuthDataSource>()));
     gh.factory<_i145.MedicationRepo>(
         () => _i602.MedicationRepoImp(gh<_i775.MedicationDataSource>()));
     gh.factory<_i17.AIReportRepo>(
@@ -360,6 +356,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i366.AiReportCubit(gh<_i17.AIReportRepo>()));
     gh.factory<_i231.ChatbotRemoteDataSource>(
         () => _i998.ChatbotRemoteDataSourceImp(gh<_i492.NetworkService>()));
+    gh.factory<_i60.FacilityAuthDataSource>(
+        () => _i214.FacilityAuthDataSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i598.DoctorProfileRemoteDataSource>(
         () => _i5.DoctorProfileRemoteDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i110.MedicineDetailsCubit>(
@@ -380,28 +378,30 @@ extension GetItInjectableX on _i174.GetIt {
         _i482.LabResultsRepositoryImpl(gh<_i716.LabResultsRemoteDataSource>()));
     gh.factory<_i28.LabSearchRemoteDataSource>(
         () => _i496.LabSearchRemoteDataSourceImpl(gh<_i492.NetworkService>()));
-    gh.factory<_i993.ServicesRemoteSource>(
-        () => _i32.ServicesRemoteSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i339.AuthDataSource>(
         () => _i81.AuthDataSourceImp(gh<_i492.NetworkService>()));
+    gh.factory<_i504.ProfileRemoteSource>(
+        () => _i635.ProfileRemoteSourceImpl(gh<_i492.NetworkService>()));
     gh.factory<_i178.AppointmentRepo>(() =>
         _i1047.AppointmentRepoImpl(gh<_i532.AppointmentRemoteDataSource>()));
     gh.factory<_i67.HomeDataSource>(
         () => _i325.HomeDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i936.PharmacyProfileDataSource>(
         () => _i866.PharmacyProfileDataSourceImpl(gh<_i492.NetworkService>()));
+    gh.factory<_i336.FacilityAuthRepo>(
+        () => _i24.FacilityAuthRepoImpl(gh<_i60.FacilityAuthDataSource>()));
     gh.factory<_i1028.CompleteDataSource>(() => _i450.CompleteDataSourceImp(
         networkService: gh<_i492.NetworkService>()));
     gh.factory<_i212.PatientRepo>(
         () => _i473.PatientRepoImp(gh<_i597.PatientDataSource>()));
     gh.factory<_i695.CompletePatientRepo>(() => _i801.CompletePatientRepoImp(
         completeDataSource: gh<_i1028.CompleteDataSource>()));
-    gh.factory<_i26.ProfileRepository>(
-        () => _i73.ProfileRepositoryImpl(gh<_i658.ProfileRemoteSource>()));
     gh.factory<_i235.PharmacyRepo>(() => _i71.PharmacyRepoImp(
         pharmacyDataSource: gh<_i831.PharmacyDataSource>()));
     gh.factory<_i598.BookingRepo>(
         () => _i501.BookingRepoImp(gh<_i352.BookingRemoteDataSource>()));
+    gh.factory<_i326.ServicesRepository>(
+        () => _i298.ServicesRepositoryImpl(gh<_i941.ServicesRemoteSource>()));
     gh.factory<_i107.PharmacySettingsRepo>(() => _i343.PharmacySettingsRepoImpl(
         pharmacySettingsDataSource: gh<_i829.PharmacySettingsDataSource>()));
     gh.factory<_i40.CompleteCubit>(
@@ -412,27 +412,29 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i761.MedicationCubit(gh<_i145.MedicationRepo>()));
     gh.factory<_i260.DoctorAuthRepo>(
         () => _i969.DoctorAuthRepoImp(gh<_i13.DoctorAuthDataSource>()));
-    gh.factory<_i434.DashboardRepository>(
-        () => _i102.DashboardRepositoryImpl(gh<_i892.DashboardRemoteSource>()));
     gh.factory<_i188.LabSearchRepo>(
         () => _i490.LabSearchRepoImpl(gh<_i28.LabSearchRemoteDataSource>()));
     gh.factory<_i556.PatientCubit>(() => _i556.PatientCubit(
           patientRepo: gh<_i212.PatientRepo>(),
           usersCubit: gh<_i508.UsersCubit>(),
         ));
-    gh.factory<_i423.FacilityAuthCubit>(
-        () => _i423.FacilityAuthCubit(gh<_i923.FacilityAuthRepo>()));
     gh.factory<_i941.PatientNotificationCubit>(() =>
         _i941.PatientNotificationCubit(
             patientNotificatorRepo: gh<_i564.PatientNotificatorRepo>()));
+    gh.factory<_i519.DashboardRepository>(
+        () => _i479.DashboardRepositoryImpl(gh<_i321.DashboardRemoteSource>()));
     gh.factory<_i654.PharmacyInventoryRepo>(() =>
         _i325.PharmacyInventoryRepoImpl(
             pharmacyInventoryDataSource:
                 gh<_i472.PharmacyInventoryDataSource>()));
     gh.factory<_i229.ProfileRepo>(
         () => _i851.ProfileRepoImpl(gh<_i723.ProfileRemoteDataSource>()));
+    gh.factory<_i470.FacilityAuthCubit>(
+        () => _i470.FacilityAuthCubit(gh<_i336.FacilityAuthRepo>()));
     gh.factory<_i216.AuthRepo>(
         () => _i63.AuthRepoImp(gh<_i339.AuthDataSource>()));
+    gh.factory<_i115.ProfileRepository>(
+        () => _i893.ProfileRepositoryImpl(gh<_i504.ProfileRemoteSource>()));
     gh.factory<_i989.ChatbotRepo>(
         () => _i350.ChatbotRepoImp(gh<_i231.ChatbotRemoteDataSource>()));
     gh.factory<_i376.LabResultsCubit>(
@@ -443,10 +445,10 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i169.SearchRemoteDataSource>(),
           gh<_i233.SearchLocalDataSource>(),
         ));
-    gh.factory<_i264.FacilityProfileCubit>(
-        () => _i264.FacilityProfileCubit(gh<_i26.ProfileRepository>()));
     gh.factory<_i952.SearchCubit>(
         () => _i952.SearchCubit(gh<_i483.SearchRepo>()));
+    gh.factory<_i48.ServicesCubit>(
+        () => _i48.ServicesCubit(gh<_i326.ServicesRepository>()));
     gh.factory<_i522.AppointmentCubit>(
         () => _i522.AppointmentCubit(gh<_i178.AppointmentRepo>()));
     gh.factory<_i421.PharmacySettingsCubit>(() => _i421.PharmacySettingsCubit(
@@ -457,8 +459,6 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i598.DoctorProfileRemoteDataSource>(),
           gh<_i945.DoctorProfileLocalDataSource>(),
         ));
-    gh.factory<_i1012.ServicesRepository>(
-        () => _i620.ServicesRepositoryImpl(gh<_i993.ServicesRemoteSource>()));
     gh.factory<_i821.ChatbotCubit>(
         () => _i821.ChatbotCubit(gh<_i989.ChatbotRepo>()));
     gh.factory<_i1055.BookingCubit>(
@@ -467,6 +467,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1025.HomeRepoImp(gh<_i67.HomeDataSource>()));
     gh.factory<_i779.PharmacyCubit>(
         () => _i779.PharmacyCubit(gh<_i235.PharmacyRepo>()));
+    gh.factory<_i529.DashboardCubit>(
+        () => _i529.DashboardCubit(gh<_i519.DashboardRepository>()));
     gh.factory<_i23.AuthCubit>(() => _i23.AuthCubit(
           repo: gh<_i216.AuthRepo>(),
           usersCubit: gh<_i508.UsersCubit>(),
@@ -487,12 +489,10 @@ extension GetItInjectableX on _i174.GetIt {
           doctorAuthRepo: gh<_i260.DoctorAuthRepo>(),
           usersCubit: gh<_i508.UsersCubit>(),
         ));
-    gh.factory<_i1062.DashboardCubit>(
-        () => _i1062.DashboardCubit(gh<_i434.DashboardRepository>()));
+    gh.factory<_i584.FacilityProfileCubit>(
+        () => _i584.FacilityProfileCubit(gh<_i115.ProfileRepository>()));
     gh.factory<_i527.LabSearchCubit>(
         () => _i527.LabSearchCubit(gh<_i188.LabSearchRepo>()));
-    gh.factory<_i130.ServicesCubit>(
-        () => _i130.ServicesCubit(gh<_i1012.ServicesRepository>()));
     return this;
   }
 }

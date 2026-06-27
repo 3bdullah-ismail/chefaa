@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/facility/services/data/models/service_model.dart';
+import 'package:chefaa/presentation/Facility/services/data/models/service_model.dart';
 
 class GetServicesResponse {
   final bool? success;

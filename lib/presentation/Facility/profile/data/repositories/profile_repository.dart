@@ -1,5 +1,5 @@
 
-import 'package:chefaa/presentation/facility/profile/data/models/get_profile_response.dart';
+import 'package:chefaa/presentation/Facility/profile/data/models/get_profile_response.dart';
 
 abstract class ProfileRepository {
   Future<GetProfileResponse> getProfile();

@@ -1,5 +1,5 @@
 import 'package:chefaa/core/services/network_service.dart';
-import 'package:chefaa/presentation/facility/profile/data/data_sources/profile_remote_source.dart';
+import 'package:chefaa/presentation/Facility/profile/data/data_sources/profile_remote_source.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

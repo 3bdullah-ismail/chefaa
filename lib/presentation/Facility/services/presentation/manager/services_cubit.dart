@@ -1,7 +1,7 @@
 
-import 'package:chefaa/presentation/facility/services/data/models/get_services_response.dart';
-import 'package:chefaa/presentation/facility/services/data/models/service_model.dart';
-import 'package:chefaa/presentation/facility/services/data/repositories/services_repository.dart';
+import 'package:chefaa/presentation/Facility/services/data/models/get_services_response.dart';
+import 'package:chefaa/presentation/Facility/services/data/models/service_model.dart';
+import 'package:chefaa/presentation/Facility/services/data/repositories/services_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
