@@ -142,12 +142,16 @@ class PharmacyCard extends StatelessWidget {
                       size: 14,
                     ),
                     7.horizontalSpace,
-                    Text(
-                      '${pharmacy.location} — ${pharmacy.distance} away',
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: ColorManager.gray,
-                        fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: Text(
+                        '${pharmacy.location} — ${pharmacy.distance} away',
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: ColorManager.gray,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],

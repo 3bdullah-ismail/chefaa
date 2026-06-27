@@ -4,10 +4,24 @@ import 'dosage_metric_item.dart';
 import 'indication_chip.dart';
 
 class UsageInstructionsMatrix extends StatelessWidget {
-  const UsageInstructionsMatrix({super.key});
+  final String indications;
+  final String dosageInstructions;
+
+  const UsageInstructionsMatrix({
+    super.key,
+    required this.indications,
+    required this.dosageInstructions,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Split indications by comma if possible, to create chips
+    final list = indications
+        .split(RegExp(r'[,;]'))
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
@@ -28,9 +42,7 @@ class UsageInstructionsMatrix extends StatelessWidget {
                 bg: Color(0xffEFF6FF),
                 iconColor: ColorManager.primary,
               ),
-
               _buildVerticalDivider(),
-
               const DosageMetricItem(
                 title: "Interval Cycle",
                 value: "Every 4–6 hrs",
@@ -38,9 +50,7 @@ class UsageInstructionsMatrix extends StatelessWidget {
                 bg: Color(0xffF0FDF4),
                 iconColor: Color(0xff16A34A),
               ),
-
               _buildVerticalDivider(),
-
               const DosageMetricItem(
                 title: "24H Limit",
                 value: "Max 8 Tabs",
@@ -50,11 +60,9 @@ class UsageInstructionsMatrix extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 18),
           const Divider(height: 1, color: Color(0xffF1F5F9)),
           const SizedBox(height: 14),
-
           const Text(
             "CLINICAL INDICATIONS & TARGETS",
             style: TextStyle(
@@ -63,23 +71,40 @@ class UsageInstructionsMatrix extends StatelessWidget {
               color: Color(0xff94A3B8),
             ),
           ),
-
           const SizedBox(height: 10),
-
-          const Wrap(
+          Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: [
-              IndicationChip(
-                text: "Mild to Moderate Pain Relief",
+            children: list.map((ind) {
+              return IndicationChip(
+                text: ind,
                 icon: Icons.healing_rounded,
-              ),
-              IndicationChip(
-                text: "Fever Reduction",
-                icon: Icons.thermostat_rounded,
-              ),
-            ],
+              );
+            }).toList(),
           ),
+          if (dosageInstructions.isNotEmpty) ...[
+            const SizedBox(height: 18),
+            const Divider(height: 1, color: Color(0xffF1F5F9)),
+            const SizedBox(height: 14),
+            const Text(
+              "DOSAGE & USAGE DIRECTIONS",
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff94A3B8),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              dosageInstructions,
+              style: const TextStyle(
+                fontSize: 13,
+                color: Color(0xff475569),
+                fontWeight: FontWeight.w500,
+                height: 1.4,
+              ),
+            ),
+          ],
         ],
       ),
     );

@@ -208,6 +208,10 @@ import 'package:chefaa/presentation/patient/medication/data/repositories/medicat
     as _i602;
 import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_cubit.dart'
     as _i761;
+import 'package:chefaa/presentation/patient/pharmacy/medicines/presentation/manager/medicine_details_cubit.dart'
+    as _i110;
+import 'package:chefaa/presentation/patient/pharmacy/medicines/presentation/manager/pharmacy_medicines_cubit.dart'
+    as _i1012;
 import 'package:chefaa/presentation/patient/pharmacy/pharmacies/data/data_sources/pharmacy_remote_data_source.dart'
     as _i979;
 import 'package:chefaa/presentation/patient/pharmacy/pharmacies/data/data_sources/pharmacy_remote_data_source_imp.dart'
@@ -216,8 +220,14 @@ import 'package:chefaa/presentation/patient/pharmacy/pharmacies/data/repositorie
     as _i853;
 import 'package:chefaa/presentation/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart'
     as _i108;
+import 'package:chefaa/presentation/patient/pharmacy/pharmacies/presentation/manager/pharmacy_checkout_cubit.dart'
+    as _i721;
 import 'package:chefaa/presentation/patient/pharmacy/pharmacies/presentation/manager/pharmacy_profile_cubit.dart'
     as _i249;
+import 'package:chefaa/presentation/patient/pharmacy/pharmacies/presentation/manager/pharmacy_review_cubit.dart'
+    as _i815;
+import 'package:chefaa/presentation/patient/pharmacy/pharmacies/presentation/manager/pharmacy_search_cubit.dart'
+    as _i705;
 import 'package:chefaa/presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source.dart'
     as _i723;
 import 'package:chefaa/presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source_imp.dart'
@@ -356,6 +366,16 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i5.DoctorProfileRemoteDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i249.PharmacyProfileCubit>(
         () => _i249.PharmacyProfileCubit(gh<_i108.PharmacyProfileRepo>()));
+    gh.factory<_i705.PharmacySearchCubit>(
+        () => _i705.PharmacySearchCubit(gh<_i108.PharmacyProfileRepo>()));
+    gh.factory<_i1012.PharmacyMedicinesCubit>(
+        () => _i1012.PharmacyMedicinesCubit(gh<_i108.PharmacyProfileRepo>()));
+    gh.factory<_i110.MedicineDetailsCubit>(
+        () => _i110.MedicineDetailsCubit(gh<_i108.PharmacyProfileRepo>()));
+    gh.factory<_i815.PharmacyReviewCubit>(
+        () => _i815.PharmacyReviewCubit(gh<_i108.PharmacyProfileRepo>()));
+    gh.factory<_i721.PharmacyCheckoutCubit>(
+        () => _i721.PharmacyCheckoutCubit(gh<_i108.PharmacyProfileRepo>()));
     gh.factory<_i13.DoctorAuthDataSource>(
         () => _i875.DoctorAuthDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i988.LabResultsRepository>(() =>
