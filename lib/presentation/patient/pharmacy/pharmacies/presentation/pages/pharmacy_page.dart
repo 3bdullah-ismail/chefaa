@@ -3,8 +3,11 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../medicines/data/models/medicine_model.dart';
+import '../../../../../../core/config/get_config.dart';
+import '../manager/pharmacy_search_cubit.dart';
 import '../widgets/pharmacy_dynamic_list.dart';
 import '../widgets/pharmacy_filters.dart';
 import '../widgets/pharmacy_header.dart';
@@ -19,25 +22,48 @@ class PharmacyPage extends StatefulWidget {
 
 class _PharmacyPageState extends State<PharmacyPage> {
   int _selectedFilterIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+  late final PharmacySearchCubit _searchCubit;
 
   final List<String> _filters = ['Pharmacies', 'Medicines', 'Nearby'];
   final List<MedicineModel> medicines = const [
     MedicineModel(
+      id: "1",
       name: "Paracetamol 500mg",
-      activeIngredient: "Acetaminophen",
-      price: "10 EGP",
+      category: "Acetaminophen",
+      price: 10,
+      quantity: 10,
+      requiresPrescription: false,
     ),
     MedicineModel(
+      id: "2",
       name: "Amoxicillin 500mg",
-      activeIngredient: "Amoxicillin",
-      price: "15 EGP",
+      category: "Amoxicillin",
+      price: 15,
+      quantity: 10,
+      requiresPrescription: false,
     ),
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _searchCubit = getIt<PharmacySearchCubit>()..searchPharmacies("");
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _searchCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
+    return BlocProvider.value(
+      value: _searchCubit,
+      child: Scaffold(
+        appBar: const PreferredSize(
         preferredSize: Size.fromHeight(120),
         child: InsideAppBar(
           title: 'Pharmacy',
@@ -53,7 +79,12 @@ class _PharmacyPageState extends State<PharmacyPage> {
             ),
             child: Column(
               children: [
-                const PharmacySearchBar(),
+                PharmacySearchBar(
+                  controller: _searchController,
+                  onChanged: (value) {
+                    _searchCubit.searchPharmacies(value);
+                  },
+                ),
                 15.verticalSpace,
 
                 PharmacyFilters(
@@ -97,6 +128,7 @@ class _PharmacyPageState extends State<PharmacyPage> {
           ),
         ],
       ),
+    ),
     );
   }
 }

@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/resources/color_manager.dart';
-import '../../../order/presentation/pages/track_order_page.dart';
-import '../../../payment/presentation/pages/payment_page.dart';
+
 
 class ContinueBtn extends StatelessWidget {
-  final String paymentMethod;
+  final VoidCallback? onPressed;
+  final bool isLoading;
 
-  const ContinueBtn({super.key, required this.paymentMethod});
+  const ContinueBtn({
+    super.key,
+    required this.onPressed,
+    this.isLoading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,23 +28,20 @@ class ContinueBtn extends StatelessWidget {
           ),
           elevation: 4,
         ),
-        onPressed: () {
-          if (paymentMethod == "online") {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const PaymentPage()),
-            );
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => const TrackOrderPage()),
-            );
-          }
-        },
-        child: Text(
-          "Continue",
-          style: getBoldStyle(color: ColorManager.white, fontSize: 18.sp),
-        ),
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                  strokeWidth: 2,
+                ),
+              )
+            : Text(
+                "Continue",
+                style: getBoldStyle(color: ColorManager.white, fontSize: 18.sp),
+              ),
       ),
     );
   }

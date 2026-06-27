@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import '../../data/models/medicine_details_model.dart';
 import 'specification_row.dart';
 
 class BioChemSpecificationCard extends StatelessWidget {
-  const BioChemSpecificationCard({super.key});
+  final MedicineInfoModel medicineInfo;
+
+  const BioChemSpecificationCard({super.key, required this.medicineInfo});
 
   @override
   Widget build(BuildContext context) {
@@ -13,36 +16,36 @@ class BioChemSpecificationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: const Color(0xffF1F5F9)),
       ),
-      child: const Column(
+      child: Column(
         children: [
           SpecificationRow(
-            label: "ATC Classification",
-            value: "N02BE01 / J01CA04",
-            icon: Icons.fingerprint_rounded,
+            label: "Manufacturer",
+            value: medicineInfo.manufacturer.isNotEmpty
+                ? medicineInfo.manufacturer
+                : "N/A",
+            icon: Icons.business_rounded,
           ),
-
-          Divider(height: 24, color: Color(0xffF1F5F9)),
-
+          const Divider(height: 24, color: Color(0xffF1F5F9)),
           SpecificationRow(
-            label: "Absolute Bioavailability",
-            value: "85% – 90% Intestinal absorption",
+            label: "Concentration",
+            value: medicineInfo.concentration.isNotEmpty
+                ? medicineInfo.concentration
+                : "N/A",
             icon: Icons.blur_on_rounded,
           ),
-
-          Divider(height: 24, color: Color(0xffF1F5F9)),
-
+          const Divider(height: 24, color: Color(0xffF1F5F9)),
           SpecificationRow(
-            label: "Plasma Half-Life Curve",
-            value: "1.5 – 3.0 Hours baseline clearance",
-            icon: Icons.hourglass_empty_rounded,
+            label: "Prescription",
+            value: medicineInfo.prescription.isNotEmpty
+                ? medicineInfo.prescription
+                : "Not Required",
+            icon: Icons.assignment_turned_in_rounded,
           ),
-
-          Divider(height: 24, color: Color(0xffF1F5F9)),
-
+          const Divider(height: 24, color: Color(0xffF1F5F9)),
           SpecificationRow(
-            label: "Excretion Pathway",
-            value: "Hepatic metabolism / Renal filter",
-            icon: Icons.gavel_rounded,
+            label: "Shelf Location",
+            value: medicineInfo.shelf.isNotEmpty ? medicineInfo.shelf : "N/A",
+            icon: Icons.grid_view_rounded,
           ),
         ],
       ),

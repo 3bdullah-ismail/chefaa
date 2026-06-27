@@ -33,7 +33,7 @@ import '../../presentation/patient/complete_auth_data/presentation/pages/second_
 import '../../presentation/patient/appointment/presentation/pages/appointment_page.dart';
 import '../../presentation/patient/medication/presentation/pages/medication_page.dart';
 import '../../presentation/patient/lab_search/presentation/pages/find_lab_page.dart';
-import '../../presentation/patient/layout/patient_layout.dart';
+import '../../presentation/patient/layout/presentation/pages/patient_layout.dart';
 import '../../presentation/patient/payment/presentation/pages/payment_page.dart';
 import '../../presentation/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart';
 import '../../presentation/patient/search/presentation/pages/location_filter.dart';

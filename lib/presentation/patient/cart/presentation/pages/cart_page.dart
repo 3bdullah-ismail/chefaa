@@ -5,6 +5,7 @@ import 'package:chefaa/presentation/doctor/layout/home/presentation/widgets/cust
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../manager/cart_manager.dart';
 import '../widgets/cart_item_card.dart';
 import '../widgets/order_summary_card.dart';
 
@@ -16,11 +17,13 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  final List<Map<String, dynamic>> cartItems = [
-    {"name": "Panadol Extra", "dosage": "500mg", "price": 12.5, "quantity": 1},
-    {"name": "Vitamin C", "dosage": "250mg", "price": 18.0, "quantity": 2},
-    {"name": "Vitamin E", "dosage": "250mg", "price": 25.0, "quantity": 2},
-  ];
+  late final List<Map<String, dynamic>> cartItems;
+
+  @override
+  void initState() {
+    super.initState();
+    cartItems = CartManager().cartItems;
+  }
 
   double deliveryFee = 15;
 
@@ -103,7 +106,16 @@ class _CartPageState extends State<CartPage> {
               deliveryFee: deliveryFee,
               total: total,
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutesNames.checkoutPage);
+                Navigator.pushNamed(
+                  context,
+                  AppRoutesNames.checkoutPage,
+                  arguments: {
+                    'pharmacyId': CartManager().pharmacyId ?? '6a0a13efd785cd1a6461b64c',
+                    'items': cartItems,
+                    'subtotal': subtotal,
+                    'deliveryFee': deliveryFee,
+                  },
+                );
               },
               btnTitle: "Proceed to Checkout",
             ),
