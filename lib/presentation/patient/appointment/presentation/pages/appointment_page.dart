@@ -5,14 +5,16 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
 import 'package:chefaa/core/widget/loading.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_cubit.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_state.dart';
+import 'package:chefaa/presentation/patient/appointment/presentation/pages/prescription_page.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/widgets/appointment_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+
+import '../../data/models/Data.dart';
 
 class AppointmentPage extends StatelessWidget {
   const AppointmentPage({super.key});
@@ -114,8 +116,33 @@ class _AppointmentView extends StatelessWidget {
             );
           }
 
-          final appointments = cubit.appointments;
+          final appointments = List<AppointmentModel>.from(cubit.appointments);
 
+          int getStatusPriority(String? status) {
+            switch ((status ?? '').toLowerCase()) {
+              case 'upcoming':
+                return 0;
+              case 'completed':
+                return 1;
+              case 'cancelled':
+                return 2;
+              default:
+                return 3;
+            }
+          }
+
+          appointments.sort((a, b) {
+            final statusCompare = getStatusPriority(
+              a.status,
+            ).compareTo(getStatusPriority(b.status));
+
+            if (statusCompare != 0) return statusCompare;
+
+            final aDate = DateTime.tryParse(a.date ?? '') ?? DateTime(9999);
+            final bDate = DateTime.tryParse(b.date ?? '') ?? DateTime(9999);
+
+            return aDate.compareTo(bDate);
+          });
           if (appointments.isEmpty) {
             return Center(
               child: Column(
@@ -208,6 +235,24 @@ class _AppointmentView extends StatelessWidget {
                         ),
                       );
                     },
+                    onViewPrescription: () {
+                      if (appointment.prescription == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("No prescription available"),
+                          ),
+                        );
+                        return;
+                      }
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              PrescriptionPage(appointment: appointment),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
@@ -294,6 +339,7 @@ class _RescheduleSheetState extends State<_RescheduleSheet> {
       '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
 
   String get _displayDate => DateFormat('dd MMM yyyy').format(_pickedDate);
+
   String get _apiDate => DateFormat('yyyy-MM-dd').format(_pickedDate);
 
   Future<void> _pickDate() async {

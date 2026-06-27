@@ -1,4 +1,5 @@
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
+
+import '../../data/models/Data.dart';
 
 sealed class AppointmentState {}
 

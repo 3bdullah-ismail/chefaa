@@ -1,4 +1,5 @@
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
+
+import '../models/Data.dart';
 
 abstract class AppointmentRepo {
   Future<List<AppointmentModel>> getMyAppointments();

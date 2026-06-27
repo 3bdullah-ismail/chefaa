@@ -4,6 +4,7 @@ import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/validators.dart';
 import 'package:chefaa/presentation/auth/presentation/manager/auth_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +14,7 @@ import '../../../../core/resources/color_manager.dart';
 import '../../../../core/resources/values_manager.dart';
 import '../../../../core/routes/app_routes_names.dart';
 import '../../../../core/widget/loading.dart';
+import '../../../patient/auth/presentation/widgets/language_switch.dart';
 import '../../../patient/auth/presentation/widgets/success_dialog.dart';
 import '../widgets/custom_outline_btn.dart';
 import '../widgets/not_have_account.dart';
@@ -57,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   } else if (state is LoginErrorState) {
                     Loading.hide(context);
                     AnimatedSnackBar.rectangle(
-                      'Error',
+                      'error'.tr(),
                       state.message,
                       type: AnimatedSnackBarType.error,
                       brightness: Brightness.dark,
@@ -83,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                           });
 
                           return SuccessDialog(
-                            title: "Yeah ! Welcome back ${state.user.name}",
+                            title: "welcomeBack ${state.user.name}".tr(),
                             content:
-                                "Once again you login successfully into Chefaa app",
+                                "loginSuccess".tr(),
                           );
                         },
                       );
@@ -111,14 +113,14 @@ class _LoginPageState extends State<LoginPage> {
                         70.verticalSpace,
                         CustomTextField(
                           controller: loginCubit.identityController,
-                          text: "Enter your Email or Phone",
+                          text: "emailOrPhone".tr(),
                           prefixIcon: IconsAssets.emailIcon,
                           validator: Validators.validateEmailOrPhone,
                         ),
                         20.verticalSpace,
                         CustomTextField(
                           controller: loginCubit.passwordController,
-                          text: "Enter your Password",
+                          text: "password".tr(),
                           prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
                         ),
@@ -129,9 +131,9 @@ class _LoginPageState extends State<LoginPage> {
                               AppRoutesNames.forgetPassword,
                             );
                           },
-                          child: const Text(
-                            "Forgot Password?",
-                            style: TextStyle(
+                          child: Text(
+                            "forgotPassword".tr(),
+                            style: const TextStyle(
                               color: ColorManager.primary,
                               fontSize: 16,
                               decoration: TextDecoration.underline,
@@ -141,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         45.verticalSpace,
                         CustomBtn(
-                          text: "Login",
+                          text: "login".tr(),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               loginCubit.login();
@@ -156,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                             } else if (state is GoogleSignInErrorState) {
                               Loading.hide(context);
                               AnimatedSnackBar.rectangle(
-                                'Error',
+                                'error'.tr(),
                                 state.message!,
                                 type: AnimatedSnackBarType.error,
                                 brightness: Brightness.dark,
@@ -185,9 +187,9 @@ class _LoginPageState extends State<LoginPage> {
 
                                     return SuccessDialog(
                                       title:
-                                          "Yeah ! Welcome back ${state.user.name}",
+                                          "welcomeBack ${state.user.name}".tr(),
                                       content:
-                                          "Once again you login successfully into Chefaa app",
+                                          "loginSuccess".tr(),
                                     );
                                   },
                                 );
@@ -207,8 +209,8 @@ class _LoginPageState extends State<LoginPage> {
                                     googleSignInCubit.signInWithGoogle(idToken);
                                   } else if (mounted) {
                                     AnimatedSnackBar.rectangle(
-                                      'Error',
-                                      'Failed to retrieve Google ID token.',
+                                      'error'.tr(),
+                                      'Failed to retrieve Google ID token.'.tr(),
                                       type: AnimatedSnackBarType.error,
                                       brightness: Brightness.dark,
                                       duration: const Duration(seconds: 3),
@@ -219,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                                       (e is! Exception ||
                                           !e.toString().contains('cancel'))) {
                                     AnimatedSnackBar.rectangle(
-                                      'Error',
+                                      'Error'.tr(),
                                       e.toString(),
                                       type: AnimatedSnackBarType.error,
                                       brightness: Brightness.dark,
@@ -229,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               },
                               prefixImage: SvgAssets.google,
-                              title: "Sign in with Google",
+                              title: "signInGoogle".tr(),
                             );
                           },
                         ),
@@ -239,6 +241,8 @@ class _LoginPageState extends State<LoginPage> {
                             _navigationService.toSignUp(widget.role);
                           },
                         ),
+                        15.verticalSpace,
+                        const LanguageSwitch(),
                       ],
                     ),
                   );

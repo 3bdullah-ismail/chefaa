@@ -1,5 +1,6 @@
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/core/widget/loading.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +38,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
               Loading.show(context);
             } else if (state.status == CompleteStatus.error) {
               Loading.hide(context);
-              final message = state.message ?? 'Something went wrong';
+              final message = state.message ?? 'Somethingwentwrong'.tr();
               ScaffoldMessenger.of(
                 context,
               ).showSnackBar(SnackBar(content: Text(message)));
@@ -57,7 +58,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                 children: [
                   50.verticalSpace,
                   Text(
-                    "Do you have any allergies?",
+                    "doyouhaveanyallergies".tr(),
                     style: TextStyle(
                       fontSize: 28.sp,
                       fontWeight: FontWeight.w800,
@@ -84,15 +85,14 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                                 height: 0.h,
                               ),
                               itemBuilder: (context, index) {
-                                final allergy = AppConstants.allergies[index];
-                                final isSelected = state.allergies.contains(
-                                  allergy,
-                                );
+                                final allergyKey = AppConstants.allergies[index];
+
+                                final isSelected = state.allergies.contains(allergyKey);
 
                                 return GestureDetector(
                                   onTap: () => context
                                       .read<CompleteCubit>()
-                                      .toggleAllergy(allergy),
+                                      .toggleAllergy(allergyKey),
                                   child: Container(
                                     width: double.infinity,
                                     height: 50.h,
@@ -103,25 +103,21 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                                     margin: EdgeInsets.symmetric(vertical: 3.h),
                                     decoration: BoxDecoration(
                                       color: isSelected
-                                          ? ColorManager.gray.withValues(
-                                              alpha: 0.2,
-                                            )
+                                          ? ColorManager.gray.withValues(alpha: 0.2)
                                           : ColorManager.transparent,
                                       borderRadius: BorderRadius.circular(12.r),
                                       boxShadow: isSelected
                                           ? [
-                                              BoxShadow(
-                                                color: Colors.black.withValues(
-                                                  alpha: 0.2,
-                                                ),
-                                                blurRadius: 4,
-                                                offset: const Offset(0, 4),
-                                              ),
-                                            ]
+                                        BoxShadow(
+                                          color: Colors.black.withValues(alpha: 0.2),
+                                          blurRadius: 4,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                      ]
                                           : [],
                                     ),
                                     child: Text(
-                                      allergy,
+                                      allergyKey.tr(),
                                       style: TextStyle(
                                         fontSize: 20.sp,
                                         fontWeight: FontWeight.w700,
@@ -145,12 +141,12 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                     ),
                     child: CustomTextField(
                       controller: allergiesController,
-                      text: "Enter the name of Allergies",
+                      text: "enterthenameofAllergies".tr(),
                     ),
                   ),
                   30.verticalSpace,
                   CustomBtn(
-                    text: "Finish Sign Up",
+                    text: "finishSignUp".tr(),
                     onPressed: () async {
                       final cubit = CompleteCubit.get(context);
                       cubit.addCustomAllergy(allergiesController.text);

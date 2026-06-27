@@ -17,7 +17,7 @@ class CustomBtn extends StatelessWidget {
 
   final bool isSmall;
   final String text;
-  final Function() onPressed;
+  final Function()? onPressed;
   final bool isDisabled;
 
   @override

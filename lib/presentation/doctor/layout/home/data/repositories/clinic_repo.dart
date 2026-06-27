@@ -1,6 +1,6 @@
 ﻿
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 
+import '../../../../../patient/appointment/data/models/Data.dart';
 import '../models/clinic_response.dart';
 import '../models/clinics_response.dart';
 

@@ -1,6 +1,8 @@
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_text_field.dart';
 import 'package:chefaa/presentation/patient/complete_auth_data/presentation/widgets/complete_data_container.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' as diseasekey;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +33,7 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
             children: [
               50.verticalSpace,
               Text(
-                "Do you have any chronic conditions?",
+                "doyouhaveanychronicconditions".tr(),
                 style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w800),
                 textAlign: TextAlign.center,
               ),
@@ -56,15 +58,14 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                             height: 0.h,
                           ),
                           itemBuilder: (context, index) {
-                            final disease =
-                                AppConstants.chronicConditions[index];
+                            final diseaseKey = AppConstants.chronicConditions[index];
                             final isSelected = state.chronicConditions.contains(
-                              disease,
+                              diseaseKey.tr(),
                             );
                             return GestureDetector(
                               onTap: () => context
                                   .read<CompleteCubit>()
-                                  .toggleChronicConditions(disease),
+                                  .toggleChronicConditions(diseaseKey),
                               child: Container(
                                 width: double.infinity,
                                 height: 50.h,
@@ -93,7 +94,7 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                                       : [],
                                 ),
                                 child: Text(
-                                  disease,
+                                  diseaseKey.tr(),
                                   style: TextStyle(
                                     fontSize: 20.sp,
                                     fontWeight: FontWeight.w700,
@@ -115,12 +116,12 @@ class _SecondCompletePageState extends State<SecondCompletePage> {
                 padding: const EdgeInsets.symmetric(horizontal: AppPadding.p28),
                 child: CustomTextField(
                   controller: controller,
-                  text: "Enter the name of chronic diseases",
+                  text: "enterthenameofchronicdiseases".tr(),
                 ),
               ),
               30.verticalSpace,
               CustomBtn(
-                text: "Continue",
+                text: "continue".tr(),
                 onPressed: () {
                   final cubit = CompleteCubit.get(context);
                   cubit.addCustomChronicDisease(controller.text);

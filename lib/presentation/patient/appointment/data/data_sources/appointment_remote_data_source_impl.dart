@@ -1,8 +1,9 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/presentation/patient/appointment/data/data_sources/appointment_remote_data_source.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/reschedule_appointment_request_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
+import '../models/reschedule_appointment_request_model.dart';
 
 @Injectable(as: AppointmentRemoteDataSource)
 class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSource {

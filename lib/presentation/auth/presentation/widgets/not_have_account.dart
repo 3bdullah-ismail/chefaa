@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../../core/resources/color_manager.dart';
@@ -15,11 +16,11 @@ class NotHaveAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don’t have an account?",
+          "dontHaveAccount".tr(),
           style: getBoldStyle(color: ColorManager.gray, fontSize: 18),
         ),
         CustomTextBtn(
-          text: "Sign Up",
+          text: "signUp".tr(),
           onPressed: () {
             onPressed();
           },

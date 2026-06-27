@@ -1,17 +1,17 @@
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/custom_outline_btn.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/values_manager.dart';
+import '../../data/models/Data.dart';
 
 class DoctorCard extends StatelessWidget {
   final bool isAppointments;
-
+  final Function()? onViewPrescription;
   final AppointmentModel? appointment;
   final VoidCallback? onReschedule;
   final VoidCallback? onCancel;
@@ -22,6 +22,7 @@ class DoctorCard extends StatelessWidget {
     this.appointment,
     this.onReschedule,
     this.onCancel,
+    this.onViewPrescription,
   });
 
   String get _clinicName {
@@ -128,19 +129,46 @@ class DoctorCard extends StatelessWidget {
                 ),
               ),
               if (appointment?.status != null)
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p8,
-                    vertical: AppPadding.p4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: _statusColor.withAlpha(30),
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Text(
-                    appointment!.status!,
-                    style: getSemiBoldStyle(color: _statusColor, fontSize: 12),
-                  ),
+                Column(
+                  children: [
+                    if (appointment?.prescription != null)
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 8.h),
+                        child: TextButton(
+                          onPressed: onViewPrescription,
+                          child: Text(
+                            'View Prescription',
+                            style:
+                                getMediumStyle(
+                                  color: ColorManager.primary,
+                                  fontSize: 14.sp,
+                                ).copyWith(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: ColorManager.primary,
+                                ),
+                          ),
+                        ),
+                      ),
+
+                    if (appointment?.status != null)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p8,
+                          vertical: AppPadding.p4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _statusColor.withAlpha(30),
+                          borderRadius: BorderRadius.circular(20.r),
+                        ),
+                        child: Text(
+                          appointment!.status!,
+                          style: getSemiBoldStyle(
+                            color: _statusColor,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
             ],
           ),
@@ -218,7 +246,12 @@ class DoctorCard extends StatelessWidget {
                   color: ColorManager.primary,
                   onPressed: onReschedule,
                 ),
-                CustomBtn(text: 'Join Now', onPressed: () {}, isSmall: true, isDisabled: true,),
+                CustomBtn(
+                  text: 'Join Now',
+                  onPressed: () {},
+                  isSmall: true,
+                  isDisabled: true,
+                ),
               ],
             ),
           ],

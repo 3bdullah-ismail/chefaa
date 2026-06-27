@@ -7,7 +7,7 @@ import '../../../../../../core/resources/values_manager.dart';
 class CustomOutlineButton extends StatelessWidget {
   final String text;
   final bool isAdd;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CustomOutlineButton({
     super.key,
@@ -29,7 +29,7 @@ class CustomOutlineButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
       onPressed: () {
-        onPressed();
+        onPressed!();
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

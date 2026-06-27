@@ -1,10 +1,11 @@
 import 'package:chefaa/core/error_handling/failure.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/presentation/patient/appointment/data/repositories/appointment_repo.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../data/models/Data.dart';
 
 @injectable
 class AppointmentCubit extends Cubit<AppointmentState> {
@@ -20,7 +21,6 @@ class AppointmentCubit extends Cubit<AppointmentState> {
   Future<void> getMyAppointments({bool forceRefresh = false}) async {
     if (state is GetAppointmentsLoadingState) return;
     if (appointments.isNotEmpty && !forceRefresh) return;
-
     emit(GetAppointmentsLoadingState());
 
     try {
