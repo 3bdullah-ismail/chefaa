@@ -1,4 +1,4 @@
-﻿import 'appointment.dart';
+import 'appointment.dart';
 
 class Booking {
   Booking({this.message, this.appointment});
@@ -21,3 +21,4 @@ class Booking {
     return map;
   }
 }
+

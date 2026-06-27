@@ -1,4 +1,4 @@
-import 'Data.dart';
+import 'data.dart';
 
 class Prescription {
   Prescription({this.success, this.message, this.data});
@@ -22,3 +22,4 @@ class Prescription {
     return map;
   }
 }
+

@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/doctor/layout/patients/data/models/complete/Complete_appointment.dart';
-import 'package:chefaa/presentation/doctor/layout/patients/data/models/patients/Prescription.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/data/models/complete/complete_appointment.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/data/models/patients/prescription.dart';
 
-import '../models/Data.dart';
+import '../models/data.dart';
 
 abstract class PatientsRepo {
   Future<List<Data>> getPatients();
@@ -37,3 +37,4 @@ abstract class PatientsRepo {
     required String appointmentId,
   });
 }
+

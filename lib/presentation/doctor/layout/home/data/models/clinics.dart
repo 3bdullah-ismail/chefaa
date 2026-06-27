@@ -1,4 +1,4 @@
-﻿import 'default_schedule.dart';
+import 'default_schedule.dart';
 import 'location.dart';
 
 class Clinics {
@@ -90,3 +90,4 @@ class Clinics {
     return map;
   }
 }
+

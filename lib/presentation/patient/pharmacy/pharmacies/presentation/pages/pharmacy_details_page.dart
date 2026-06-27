@@ -18,6 +18,7 @@ import '../widgets/section_title.dart';
 import '../widgets/service_row.dart';
 
 import '../../../medicines/presentation/pages/pharmacy_medicines_page.dart';
+import '../manager/pharmacy_review_cubit.dart';
 
 class PharmacyDetailsPage extends StatelessWidget {
   final PharmacyCardModel pharmacy;
@@ -152,9 +153,22 @@ class PharmacyDetailsPage extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (_) => PharmacyMedicinesPage(
-                                pharmacyName: profile.pharmacyName),
+                              pharmacyName: profile.pharmacyName,
+                              pharmacyId: profile.id,
+                            ),
                           ),
                         );
+                      },
+                    ),
+
+                    12.verticalSpace,
+
+                    ActionButtonCard(
+                      icon: SvgAssets.suggestIcon,
+                      label: "Add Review",
+                      color: ColorManager.gold,
+                      onTap: () {
+                        _showAddReviewDialog(context, profile.id);
                       },
                     ),
 
@@ -275,6 +289,121 @@ class PharmacyDetailsPage extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  void _showAddReviewDialog(BuildContext parentContext, String pharmacyId) {
+    showDialog(
+      context: parentContext,
+      builder: (context) {
+        int rating = 5;
+        final commentController = TextEditingController();
+
+        return BlocProvider(
+          create: (_) => getIt<PharmacyReviewCubit>(),
+          child: BlocConsumer<PharmacyReviewCubit, PharmacyReviewState>(
+            listener: (context, state) {
+              if (state is PharmacyReviewSuccess) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(parentContext).showSnackBar(
+                  const SnackBar(
+                    content: Text("Review added successfully!"),
+                    backgroundColor: ColorManager.primary,
+                  ),
+                );
+                parentContext
+                    .read<PharmacyProfileCubit>()
+                    .getPharmacyProfile(pharmacyId);
+              } else if (state is PharmacyReviewFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: ColorManager.error,
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return AlertDialog(
+                    title: const Text("Add Review"),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(5, (index) {
+                            final starRating = index + 1;
+                            return IconButton(
+                              icon: Icon(
+                                starRating <= rating
+                                    ? Icons.star_rounded
+                                    : Icons.star_border_rounded,
+                                color: ColorManager.gold,
+                                size: 36,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  rating = starRating;
+                                });
+                              },
+                            );
+                          }),
+                        ),
+                        16.verticalSpace,
+                        TextField(
+                          controller: commentController,
+                          maxLines: 3,
+                          decoration: const InputDecoration(
+                            hintText: "Write your comment here...",
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: state is PharmacyReviewLoading
+                            ? null
+                            : () => Navigator.pop(context),
+                        child: const Text("Cancel"),
+                      ),
+                      ElevatedButton(
+                        onPressed: state is PharmacyReviewLoading
+                            ? null
+                            : () {
+                                context
+                                    .read<PharmacyReviewCubit>()
+                                    .addPharmacyReview(
+                                      pharmacyId,
+                                      rating,
+                                      commentController.text.trim(),
+                                    );
+                              },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManager.primary,
+                        ),
+                        child: state is PharmacyReviewLoading
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : const Text("Submit",
+                                style: TextStyle(color: Colors.white)),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

@@ -39,6 +39,12 @@ class DefaultFirebaseOptions {
         );
     }
   }
+    throw UnsupportedError(
+      'DefaultFirebaseOptions have not been configured for your platform - '
+      'you can reconfigure this by running the FlutterFire CLI again.',
+    );
+  }
+}
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyB46DNCE5i1xuCwpDk8LScBmWZx5TlOvVE',

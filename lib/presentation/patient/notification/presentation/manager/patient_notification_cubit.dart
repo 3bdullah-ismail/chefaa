@@ -2,7 +2,7 @@ import 'package:chefaa/presentation/patient/notification/presentation/manager/pa
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:flutter/material.dart' hide Notification;
-import 'package:chefaa/presentation/patient/notification/data/models/Notification.dart';
+import 'package:chefaa/presentation/patient/notification/data/models/notification.dart';
 
 import '../../data/repositories/patient_notific_repo.dart';
 
@@ -38,3 +38,4 @@ class PatientNotificationCubit extends Cubit<PatientNotificationState> {
     }
   }
 }
+

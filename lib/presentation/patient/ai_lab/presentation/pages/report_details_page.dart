@@ -1,4 +1,4 @@
-﻿import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widget/inside_app_bar.dart';
@@ -103,3 +103,4 @@ class ReportDetailsPage extends StatelessWidget {
     );
   }
 }
+

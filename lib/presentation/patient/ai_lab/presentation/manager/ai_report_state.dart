@@ -1,4 +1,4 @@
-﻿import '../../data/models/report_analysis.dart';
+import '../../data/models/report_analysis.dart';
 
 sealed class AiReportState {}
 
@@ -34,3 +34,4 @@ final class HistoryLoadedState extends AiReportState {
 }
 
 final class HistoryRefreshState extends AiReportState {}
+

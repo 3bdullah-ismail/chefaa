@@ -272,3 +272,4 @@ class DetailedAnalysisCard extends StatelessWidget {
     );
   }
 }
+

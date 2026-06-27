@@ -22,3 +22,4 @@ class CompletePatientDataResponse {
     return map;
   }
 }
+

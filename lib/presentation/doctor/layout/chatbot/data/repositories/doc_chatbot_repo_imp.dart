@@ -1,5 +1,5 @@
 import 'package:chefaa/presentation/doctor/layout/chatbot/data/data_sources/doc_chatbot_data_source.dart';
-import 'package:chefaa/presentation/doctor/layout/chatbot/data/models/Chatbot_doc.dart';
+import 'package:chefaa/presentation/doctor/layout/chatbot/data/models/chatbot_doc.dart';
 import 'package:chefaa/presentation/doctor/layout/chatbot/data/models/chat_history.dart';
 import 'package:chefaa/presentation/doctor/layout/chatbot/data/repositories/doc_chatbot_repo.dart';
 import 'package:dio/dio.dart';
@@ -35,3 +35,4 @@ class DocChatbotRepoImp implements DocChatbotRepo {
     }
   }
 }
+

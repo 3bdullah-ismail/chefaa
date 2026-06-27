@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chefaa/presentation/doctor/layout/patients/presentation/widgets/prescription_card.dart';
 
-import '../../data/models/patients/Prescription.dart';
+import '../../data/models/patients/prescription.dart';
 
 class PrescriptionHistoryBottomSheet extends StatefulWidget {
   final List<Map<String, String>> medications;
@@ -61,3 +61,4 @@ class _PrescriptionHistoryBottomSheetState
     );
   }
 }
+

@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/doctor/layout/patients/data/models/complete/Complete_appointment.dart';
-import 'package:chefaa/presentation/doctor/layout/patients/data/models/patients/Prescription.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/data/models/complete/complete_appointment.dart';
+import 'package:chefaa/presentation/doctor/layout/patients/data/models/patients/prescription.dart';
 
-import '../../data/models/Data.dart';
+import '../../data/models/data.dart';
 
 sealed class PatientsState {}
 
@@ -144,3 +144,4 @@ class AddMedicineState extends PatientsState {}
 class RemoveMedicineState extends PatientsState {}
 
 class PrescriptionFormResetState extends PatientsState {}
+

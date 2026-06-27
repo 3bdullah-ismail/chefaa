@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/medicine_model.dart';
+import 'package:chefaa/presentation/patient/cart/presentation/manager/cart_manager.dart';
 import '../pages/medicine_details_page.dart';
 import 'add_to_cart_button.dart';
 
 class VerticalMedicineCard extends StatelessWidget {
   final MedicineModel medicine;
+  final String pharmacyId;
 
-  const VerticalMedicineCard({super.key, required this.medicine});
+  const VerticalMedicineCard({
+    super.key,
+    required this.medicine,
+    required this.pharmacyId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +25,10 @@ class VerticalMedicineCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (_) => MedicineDetailsPage(
               name: medicine.name,
-              activeIngredient: medicine.activeIngredient,
-              price: medicine.price,
+              activeIngredient: medicine.category,
+              price: '${medicine.price} EGP',
+              medicineId: medicine.id,
+              pharmacyId: pharmacyId,
             ),
           ),
         );
@@ -54,9 +62,7 @@ class VerticalMedicineCard extends StatelessWidget {
                 color: Color(0xff0F8A5F),
               ),
             ),
-
             const SizedBox(width: 14),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,11 +77,9 @@ class VerticalMedicineCard extends StatelessWidget {
                       color: Color(0xff1A1D29),
                     ),
                   ),
-
                   const SizedBox(height: 4),
-
                   Text(
-                    medicine.activeIngredient,
+                    medicine.category,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -84,11 +88,9 @@ class VerticalMedicineCard extends StatelessWidget {
                       color: Colors.grey.shade500,
                     ),
                   ),
-
                   const SizedBox(height: 6),
-
                   Text(
-                    medicine.price,
+                    '${medicine.price} EGP',
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w800,
@@ -98,10 +100,49 @@ class VerticalMedicineCard extends StatelessWidget {
                 ],
               ),
             ),
-
             const SizedBox(width: 8),
-
-            AddToCartButton(medicineName: medicine.name),
+            AddToCartButton(
+              onPressed: () {
+                CartManager().addToCart(
+                  pharmacyId: pharmacyId,
+                  medicineId: medicine.id,
+                  name: medicine.name,
+                  dosage: medicine.category,
+                  price: medicine.price.toDouble(),
+                  quantity: 1,
+                );
+                ScaffoldMessenger.of(context).clearSnackBars();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Row(
+                      children: [
+                        const Icon(
+                          Icons.check_circle_rounded,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            '1 Pack of ${medicine.name} added to cart.',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    backgroundColor: const Color(0xff059669),
+                    behavior: SnackBarBehavior.floating,
+                    margin: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

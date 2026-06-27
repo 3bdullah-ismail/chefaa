@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:isolate';
 
 import 'package:chefaa/presentation/patient/ai_lab/data/datasources/ai_report_data_source.dart';
@@ -33,3 +33,4 @@ class AiReportRepoImp implements AIReportRepo {
     }
   }
 }
+

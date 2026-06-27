@@ -1,6 +1,6 @@
-import 'Medicines.dart';
-import 'MostOrdered.dart';
-import 'Pagination.dart';
+import 'medicines.dart';
+import 'most_ordered.dart';
+import 'pagination.dart';
 
 class Data {
   Data({
