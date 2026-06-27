@@ -1,5 +1,5 @@
-import 'WorkingHours.dart';
-import 'Location.dart';
+import 'working_hours.dart';
+import 'location.dart';
 
 class Data {
   Data({

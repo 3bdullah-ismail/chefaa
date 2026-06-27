@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/Facility/services/data/models/service_model.dart';
+import 'package:chefaa/presentation/facility/services/data/models/service_model.dart';
 
 class AddServiceResponse {
   final String? message;
@@ -35,3 +35,4 @@ class AddServiceResponse {
     };
   }
 }
+

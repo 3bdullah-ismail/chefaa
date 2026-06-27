@@ -5,7 +5,14 @@ import '../../../../../../core/resources/color_manager.dart';
 import '../../../../../../core/resources/styles_manager.dart';
 
 class PharmacySearchBar extends StatelessWidget {
-  const PharmacySearchBar({super.key});
+  final TextEditingController? controller;
+  final Function(String)? onChanged;
+
+  const PharmacySearchBar({
+    super.key,
+    this.controller,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +23,8 @@ class PharmacySearchBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.r),
       ),
       child: TextField(
+        controller: controller,
+        onChanged: onChanged,
         decoration: InputDecoration(
           hintText: 'Search medicines or pharmacies',
           hintStyle: getRegularStyle(color: ColorManager.gray, fontSize: 15.sp),

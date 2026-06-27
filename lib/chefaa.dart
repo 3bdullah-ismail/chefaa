@@ -1,3 +1,4 @@
+import 'package:chefaa/core/extensions/build_ex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +12,7 @@ class Chefaa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: Size(context.width, context.height),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -19,8 +20,7 @@ class Chefaa extends StatelessWidget {
           theme: AppTheme.theme,
           debugShowCheckedModeBanner: false,
           onGenerateRoute: Routes.generateRoute,
-          initialRoute: AppRoutesNames.login
-          ,
+          initialRoute: AppRoutesNames.appEntryRoute,
         );
       },
     );

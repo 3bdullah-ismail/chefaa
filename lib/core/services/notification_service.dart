@@ -9,8 +9,7 @@ class NotificationService {
       badge: true,
       sound: true,
     );
-    final token = await _messaging.getToken();
+    await _messaging.getToken();
 
-    print("FCM Token: $token");
   }
 }

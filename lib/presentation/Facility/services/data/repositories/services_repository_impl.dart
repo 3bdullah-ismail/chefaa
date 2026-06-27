@@ -3,10 +3,10 @@ import 'dart:isolate';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/core/services/hive_service.dart';
-import 'package:chefaa/presentation/Facility/services/data/data_sources/services_remote_source.dart';
-import 'package:chefaa/presentation/Facility/services/data/models/add_service_response.dart';
-import 'package:chefaa/presentation/Facility/services/data/models/get_services_response.dart';
-import 'package:chefaa/presentation/Facility/services/data/repositories/services_repository.dart';
+import 'package:chefaa/presentation/facility/services/data/data_sources/services_remote_source.dart';
+import 'package:chefaa/presentation/facility/services/data/models/add_service_response.dart';
+import 'package:chefaa/presentation/facility/services/data/models/get_services_response.dart';
+import 'package:chefaa/presentation/facility/services/data/repositories/services_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -131,3 +131,4 @@ class ServicesRepositoryImpl implements ServicesRepository {
     }
   }
 }
+

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,7 +19,7 @@ class DocChatbotCubit extends Cubit<DocChatbotState> {
   DocChatbotCubit({required this.docChatbotRepo})
       : super(DocChatbotInitialState());
 
-  static DocChatbotCubit get(context) => BlocProvider.of(context);
+  static DocChatbotCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future<void> sendMessage(String text) async {
     if (text.trim().isEmpty) return;

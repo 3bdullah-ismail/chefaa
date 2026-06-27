@@ -1,4 +1,4 @@
-﻿import 'package:chefaa/core/services/hive_service.dart';
+import 'package:chefaa/core/services/hive_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -73,3 +73,4 @@ class ReportsHistoryPage extends StatelessWidget {
     );
   }
 }
+

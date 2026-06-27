@@ -1,5 +1,5 @@
-import 'package:chefaa/presentation/Facility/services/data/models/add_service_response.dart';
-import 'package:chefaa/presentation/Facility/services/data/models/get_services_response.dart';
+import 'package:chefaa/presentation/facility/services/data/models/add_service_response.dart';
+import 'package:chefaa/presentation/facility/services/data/models/get_services_response.dart';
 
 abstract class ServicesRepository {
   Future<AddServiceResponse> addService({
@@ -16,3 +16,4 @@ abstract class ServicesRepository {
 
   Future<AddServiceResponse> toggleService(String serviceId);
 }
+

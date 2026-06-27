@@ -1,4 +1,4 @@
-import 'Data.dart';
+import 'data.dart';
 
 class CompleteAppointment {
   CompleteAppointment({this.success, this.message, this.data});
@@ -22,3 +22,4 @@ class CompleteAppointment {
     return map;
   }
 }
+

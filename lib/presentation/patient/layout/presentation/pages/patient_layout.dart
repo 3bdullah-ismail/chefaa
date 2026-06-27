@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/resources/assets_manager.dart';
-import '../ai_lab/presentation/pages/ai_lab_page.dart';
-import '../booking/presentation/manager/booking_cubit.dart';
-import '../booking/presentation/pages/booking_page.dart';
-import '../profile/presentation/pages/profile_page.dart';
+import 'package:chefaa/core/resources/assets_manager.dart';
+import 'package:chefaa/presentation/patient/ai_lab/presentation/pages/ai_lab_page.dart';
+import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_cubit.dart';
+import 'package:chefaa/presentation/patient/booking/presentation/pages/booking_page.dart';
+import 'package:chefaa/presentation/patient/profile/presentation/pages/profile_page.dart';
 
 class PatientLayout extends StatefulWidget {
   const PatientLayout({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../presentation/doctor/layout/doctor_layout.dart';
-import '../../presentation/patient/layout/patient_layout.dart';
+import '../../presentation/patient/layout/presentation/pages/patient_layout.dart';
 
 class LayoutFactory {
   static Widget getLayout(String role) {

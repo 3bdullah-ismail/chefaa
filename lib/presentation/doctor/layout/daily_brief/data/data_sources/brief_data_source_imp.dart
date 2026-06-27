@@ -1,6 +1,6 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/presentation/doctor/layout/daily_brief/data/data_sources/brief_data_source.dart';
-import 'package:dio/src/response.dart';
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: BriefDataSource)
