@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../resources/color_manager.dart';
@@ -12,17 +13,17 @@ class TermsOfService extends StatelessWidget {
       text: TextSpan(
         style: getMediumStyle(color: ColorManager.black, fontSize: 14),
         children: [
-          const TextSpan(text: "I agree to the Docify "),
+            TextSpan(text: "terms".tr()),
           TextSpan(
-            text: "Terms of Service",
+            text: "termSuccess".tr(),
             style: getBoldStyle(
               color: ColorManager.primary,
               fontSize: 14,
             ).copyWith(decoration: TextDecoration.underline),
           ),
-          const TextSpan(text: " and "),
+          TextSpan(text: "and".tr()),
           TextSpan(
-            text: "Privacy Policy",
+            text: "privacyPolicy".tr(),
             style: getBoldStyle(
               color: ColorManager.primary,
               fontSize: 14,

@@ -1,5 +1,6 @@
-import 'package:chefaa/presentation/patient/appointment/data/models/reschedule_appointment_request_model.dart';
 import 'package:dio/dio.dart';
+
+import '../models/reschedule_appointment_request_model.dart';
 
 abstract class AppointmentRemoteDataSource {
   Future<Response> getMyAppointments();

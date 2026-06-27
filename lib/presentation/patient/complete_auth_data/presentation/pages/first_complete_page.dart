@@ -1,5 +1,6 @@
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,9 +62,9 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                       children: [
                         20.verticalSpace,
 
-                        const Text(
-                          "Gender",
-                          style: TextStyle(
+                         Text(
+                          "gender".tr(),
+                          style: const TextStyle(
                             color: ColorManager.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -77,8 +78,8 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                               previous.gender != current.gender,
                           builder: (context, state) {
                             return CustomDropDownBtn(
-                              items: const ["Male", "Female"],
-                              hintText: "Select Your Gender",
+                              items:  ["male".tr(), "female".tr()],
+                              hintText: "selectYourGender".tr(),
                               value: state.gender,
                               onChanged: (value) {
                                 context.read<CompleteCubit>().updateGender(
@@ -87,7 +88,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please select your gender';
+                                  return 'pleaseselectyourgender'.tr();
                                 }
                                 return null;
                               },
@@ -97,9 +98,9 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
 
                         23.verticalSpace,
 
-                        const Text(
-                          "Date of Birth",
-                          style: TextStyle(
+                         Text(
+                          "dateofBirth".tr(),
+                          style: const TextStyle(
                             color: ColorManager.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -109,7 +110,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         12.verticalSpace,
 
                         CustomCalendarField(
-                          hintText: "Select Date of Birth",
+                          hintText: "selectDate ofBirth".tr(),
                           controller: birthController,
                           onDateSelected: (date) {
                             final formatted =
@@ -121,9 +122,9 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
 
                         23.verticalSpace,
 
-                        const Text(
-                          "Weight",
-                          style: TextStyle(
+                         Text(
+                          "weight".tr(),
+                          style: const TextStyle(
                             color: ColorManager.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -133,13 +134,13 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         12.verticalSpace,
 
                         CustomTextField(
-                          suffixText: "kg",
+                          suffixText: "kg".tr(),
                           completeData: true,
                           controller: weightController,
-                          text: "Weight",
+                          text: "weight".tr(),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your weight';
+                              return 'pleaseenteryourweight'.tr();
                             }
                             return null;
                           },
@@ -147,9 +148,9 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
 
                         23.verticalSpace,
 
-                        const Text(
-                          "Height",
-                          style: TextStyle(
+                         Text(
+                          "height".tr(),
+                          style: const TextStyle(
                             color: ColorManager.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -159,13 +160,13 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         12.verticalSpace,
 
                         CustomTextField(
-                          suffixText: "cm",
+                          suffixText: "cm".tr(),
                           completeData: true,
                           controller: heightController,
-                          text: "Height",
+                          text: "height".tr(),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your height';
+                              return 'pleaseenter yourheight'.tr();
                             }
                             return null;
                           },
@@ -173,9 +174,9 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
 
                         23.verticalSpace,
 
-                        const Text(
-                          "Blood Type",
-                          style: TextStyle(
+                         Text(
+                          "bloodType".tr(),
+                          style: const TextStyle(
                             color: ColorManager.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -187,10 +188,10 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                         CustomTextField(
                           completeData: true,
                           controller: bloodTypeController,
-                          text: "Blood Type with ( + or - )",
+                          text: "bloodTypewith( + or - )".tr(),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your blood type';
+                              return 'pleaseenteryourbloodtype'.tr();
                             }
                             return null;
                           },
@@ -203,7 +204,7 @@ class _FirstCompletePageState extends State<FirstCompletePage> {
                 50.verticalSpace,
 
                 CustomBtn(
-                  text: "Continue",
+                  text: "continue".tr(),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       final cubit = CompleteCubit.get(context);

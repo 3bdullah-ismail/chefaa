@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../resources/color_manager.dart';
@@ -15,11 +16,11 @@ class AlreadyHaveAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Do you already have an account?",
+          "dontHaveAccount".tr(),
           style: getMediumStyle(color: ColorManager.black, fontSize: 14),
         ),
         CustomTextBtn(
-          text: "Login",
+          text: "login".tr(),
           onPressed: () {
             onPressed!();
           },

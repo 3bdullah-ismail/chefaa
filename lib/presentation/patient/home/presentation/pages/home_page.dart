@@ -1,5 +1,4 @@
 import 'package:chefaa/core/config/get_config.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_cubit.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/manager/appointment_state.dart';
 import 'package:chefaa/presentation/patient/appointment/presentation/widgets/appointment_card.dart';
@@ -23,6 +22,7 @@ import '../../../../../../core/resources/values_manager.dart';
 import '../../../../../../core/routes/app_routes_names.dart';
 import '../../../../../../core/widget/custom_text_field.dart';
 import '../../../../../../core/widget/layout_app_bar.dart';
+import '../../../appointment/data/models/Data.dart';
 import '../../../notification/presentation/manager/patient_notification_cubit.dart';
 import '../../../notification/presentation/manager/patient_notification_state.dart';
 import '../../../notification/presentation/pages/patient_notification_page.dart';
@@ -60,7 +60,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -78,13 +77,16 @@ class _HomePageState extends State<HomePage> {
             if (state is UserLoaded) userName = state.user.name;
             if (state is UsersLoading) userName = "...";
 
-            return BlocBuilder<PatientNotificationCubit, PatientNotificationState>(
+            return BlocBuilder<
+              PatientNotificationCubit,
+              PatientNotificationState
+            >(
               builder: (context, notificationState) {
                 bool hasUnread = false;
 
                 if (notificationState is PatientNotificationSuccessState) {
                   hasUnread = notificationState.notification.any(
-                        (e) => e.isRead != true,
+                    (e) => e.isRead != true,
                   );
                 }
 
@@ -127,7 +129,8 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: ColorManager.error,
               ),
             );
-        }   },
+          }
+        },
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -160,7 +163,7 @@ class _HomePageState extends State<HomePage> {
 
                     BlocBuilder<MedicationCubit, MedicationState>(
                       buildWhen: (previous, current) =>
-                      current is MedicationListLoadingState ||
+                          current is MedicationListLoadingState ||
                           current is MedicationListSuccessState ||
                           current is MedicationListErrorState,
                       builder: (context, state) {
@@ -202,7 +205,9 @@ class _HomePageState extends State<HomePage> {
                                 12.verticalSpace,
                                 ElevatedButton(
                                   onPressed: () {
-                                    context.read<MedicationCubit>().getMedicationList();
+                                    context
+                                        .read<MedicationCubit>()
+                                        .getMedicationList();
                                   },
                                   child: const Text("Retry"),
                                 ),
@@ -239,16 +244,16 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             "Manage",
                                             style:
-                                            getMediumStyle(
-                                              color: ColorManager.primary,
-                                              fontSize: 16.sp,
-                                            ).copyWith(
-                                              decoration:
-                                              TextDecoration.underline,
-                                              decorationColor:
-                                              ColorManager.primary,
-                                              decorationThickness: 2,
-                                            ),
+                                                getMediumStyle(
+                                                  color: ColorManager.primary,
+                                                  fontSize: 16.sp,
+                                                ).copyWith(
+                                                  decoration:
+                                                      TextDecoration.underline,
+                                                  decorationColor:
+                                                      ColorManager.primary,
+                                                  decorationThickness: 2,
+                                                ),
                                           ),
                                           SvgPicture.asset(
                                             "assets/icons/drug.svg",
@@ -520,15 +525,28 @@ class _HomePageState extends State<HomePage> {
                           }
 
                           final cubit = AppointmentCubit.get(context);
-                          final upcoming = cubit.appointments
-                              .cast<AppointmentModel?>()
-                              .firstWhere(
-                                (a) =>
-                                    (a?.status ?? '').toLowerCase() ==
+                          final upcomingAppointments = cubit.appointments
+                              .where(
+                                (e) =>
+                                    (e.status ?? '').toLowerCase() ==
                                     'upcoming',
-                                orElse: () => null,
-                              );
+                              )
+                              .toList();
 
+                          upcomingAppointments.sort((a, b) {
+                            final aDate =
+                                DateTime.tryParse(a.date ?? '') ??
+                                DateTime(9999);
+                            final bDate =
+                                DateTime.tryParse(b.date ?? '') ??
+                                DateTime(9999);
+                            return aDate.compareTo(bDate);
+                          });
+
+                          final AppointmentModel? upcoming =
+                              upcomingAppointments.isNotEmpty
+                              ? upcomingAppointments.first
+                              : null;
                           if (upcoming == null) {
                             return Container(
                               width: double.infinity,

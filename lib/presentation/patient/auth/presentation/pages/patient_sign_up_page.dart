@@ -1,10 +1,10 @@
 import 'package:chefaa/core/resources/assets_manager.dart';
-import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/widget/already_have_account.dart';
 import 'package:chefaa/core/widget/custom_btn.dart';
 import 'package:chefaa/core/widget/loading.dart';
 import 'package:chefaa/core/widget/terms_of_service.dart';
 import 'package:chefaa/presentation/patient/auth/presentation/manager/patient_cubit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,9 +71,9 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
               Loading.hide(context);
               showDialog(
                 context: context,
-                builder: (context) => const SuccessDialog(
-                  title: "Success",
-                  content: "Account created successfully",
+                builder: (context) =>  SuccessDialog(
+                  title: "Success".tr(),
+                  content: "Account created successfully".tr(),
                 ),
                 barrierDismissible: false,
               );
@@ -112,7 +112,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                               child: CustomTextField(
                                 validator: Validators.nameValidator,
                                 controller: cubit.nameController,
-                                text: AppConstants.firstName,
+                                text: "firstName".tr(),
                                 prefixIcon: IconsAssets.userIcon,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
@@ -122,7 +122,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                               child: CustomTextField(
                                 validator: Validators.nameValidator,
                                 controller: cubit.lastNameController,
-                                text: AppConstants.lastName,
+                                text: "lastName".tr(),
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
                               ),
@@ -133,7 +133,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         CustomTextField(
                           validator: Validators.validatePhone,
                           controller: cubit.phoneController,
-                          text: AppConstants.enterPhone,
+                          text: "phone".tr(),
                           prefixIcon: IconsAssets.phoneIcon,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.phone,
@@ -143,7 +143,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         CustomTextField(
                           validator: Validators.validateEmail,
                           controller: cubit.emailController,
-                          text: AppConstants.enterEmail,
+                          text: "email".tr(),
                           prefixIcon: IconsAssets.emailIcon,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.emailAddress,
@@ -152,7 +152,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         CustomTextField(
                           validator: Validators.validatePassword,
                           controller: cubit.passwordController,
-                          text: AppConstants.enterPassword,
+                          text: "password".tr(),
                           prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
                           textInputAction: TextInputAction.next,
@@ -166,7 +166,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                                 cubit.passwordController.text,
                               ),
                           controller: cubit.confirmPasswordController,
-                          text: " Confirm your Password",
+                          text: "confirmPassword".tr(),
                           prefixIcon: IconsAssets.passwordIcon,
                           isPass: true,
                           textInputAction: TextInputAction.done,
@@ -202,7 +202,7 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                         50.verticalSpace,
                         CustomBtn(
                           isDisabled: state is SignUpLoadingState || !isChecked,
-                          text: AppConstants.createAccount,
+                          text: "createAccount".tr(),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               cubit.patientSignUp();
@@ -218,6 +218,8 @@ class _PatientSignUpPageState extends State<PatientSignUpPage> {
                             );
                           },
                         ),
+                        20.verticalSpace,
+
                       ],
                     ),
                   ),

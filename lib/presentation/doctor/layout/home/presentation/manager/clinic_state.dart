@@ -1,6 +1,6 @@
 ﻿import 'package:chefaa/presentation/doctor/layout/home/data/models/clinics.dart';
 
-import '../../../../../patient/appointment/data/models/appointment_model.dart';
+import '../../../../../patient/appointment/data/models/Data.dart';
 import '../../data/models/clinic.dart';
 
 sealed class ClinicState {}

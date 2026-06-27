@@ -4,6 +4,7 @@ import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/presentation/onboarding/widgets/next_button.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -45,7 +46,7 @@ class _OptionScreenState extends State<OptionScreen> {
               children: [
                 48.verticalSpace,
                 Text(
-                  "Choose who you are",
+                  "choosewhoyouare".tr(),
                   style: getBoldStyle(
                     color: ColorManager.black,
                     fontSize: FontSize.s24,
@@ -53,7 +54,7 @@ class _OptionScreenState extends State<OptionScreen> {
                 ),
                 24.verticalSpace,
                 OptionCard(
-                  title: AppConstants.doctor,
+                  title: "doctor".tr(),
                   image: ImageAssets.doctor,
                   isSelected: selectedRole == AppConstants.doctor,
                   onTap: () => onSelect(AppConstants.doctor),
@@ -61,7 +62,7 @@ class _OptionScreenState extends State<OptionScreen> {
                 32.verticalSpace,
 
                 OptionCard(
-                  title: AppConstants.patient,
+                  title: "patient".tr(),
                   image: ImageAssets.patient,
                   isSelected: selectedRole == AppConstants.patient,
                   onTap: () => onSelect(AppConstants.patient),
@@ -70,7 +71,7 @@ class _OptionScreenState extends State<OptionScreen> {
                 32.verticalSpace,
 
                 OptionCard(
-                  title: AppConstants.facility,
+                  title: "facility".tr(),
                   image: ImageAssets.drugs,
                   isSelected: selectedRole == AppConstants.facility,
                   onTap: () => onSelect(AppConstants.facility),

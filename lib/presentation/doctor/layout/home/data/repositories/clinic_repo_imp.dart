@@ -1,11 +1,11 @@
 ﻿import 'package:chefaa/presentation/doctor/layout/home/data/data_sources/clinic_data_source.dart';
 import 'package:chefaa/presentation/doctor/layout/home/data/models/clinic_response.dart';
 import 'package:chefaa/presentation/doctor/layout/home/data/repositories/clinic_repo.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/error_handling/failure.dart';
+import '../../../../../patient/appointment/data/models/Data.dart';
 import '../../../../../patient/appointment/data/models/appointment_response_model.dart';
 import '../models/clinics_response.dart';
 

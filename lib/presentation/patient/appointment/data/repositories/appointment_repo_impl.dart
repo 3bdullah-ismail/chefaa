@@ -1,11 +1,12 @@
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/presentation/patient/appointment/data/data_sources/appointment_remote_data_source.dart';
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/presentation/patient/appointment/data/models/appointment_response_model.dart';
 import 'package:chefaa/presentation/patient/appointment/data/models/reschedule_appointment_request_model.dart';
 import 'package:chefaa/presentation/patient/appointment/data/repositories/appointment_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
+import '../models/Data.dart';
 
 @Injectable(as: AppointmentRepo)
 class AppointmentRepoImpl implements AppointmentRepo {
@@ -21,10 +22,8 @@ class AppointmentRepoImpl implements AppointmentRepo {
       return model.appointments ?? [];
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e);
-    } catch (e) {
-      // print("ERROR = $e");
-      // print(s);
-      rethrow;
+    } catch (_) {
+      throw ServerFailure(ServerFailure.unexpectedError);
     }
   }
 
@@ -49,8 +48,7 @@ class AppointmentRepoImpl implements AppointmentRepo {
         requestModel: requestModel,
       );
 
-      final model = AppointmentResponseModel.fromJsonSingle(response.data);
-
+final model = AppointmentResponseModel.fromJsonSingle(response.data);
       if (model.appointment == null) {
         throw ServerFailure('Rescheduled appointment data is missing.');
       }

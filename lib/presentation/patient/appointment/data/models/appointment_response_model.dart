@@ -1,4 +1,4 @@
-import 'package:chefaa/presentation/patient/appointment/data/models/appointment_model.dart';
+import 'Data.dart';
 
 class AppointmentResponseModel {
   final bool? success;
@@ -34,17 +34,14 @@ class AppointmentResponseModel {
   }
 
   factory AppointmentResponseModel.fromJsonSingle(dynamic json) {
-    final dynamic data = json['data'];
-
-    AppointmentModel? singleAppointment;
-    if (data is Map<String, dynamic>) {
-      singleAppointment = AppointmentModel.fromJson(data);
-    }
+    final data = json['data'];
 
     return AppointmentResponseModel(
       success: json['success'],
       message: json['message'],
-      appointment: singleAppointment,
+      appointment: data == null
+          ? null
+          : AppointmentModel.fromJson(Map<String, dynamic>.from(data)),
     );
   }
 }

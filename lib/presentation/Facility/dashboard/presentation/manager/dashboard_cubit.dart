@@ -1,7 +1,7 @@
-import 'package:chefaa/presentation/facility/dashboard/data/models/create_patient_request_response.dart';
-import 'package:chefaa/presentation/facility/dashboard/data/models/get_dashboard_response.dart';
-import 'package:chefaa/presentation/facility/dashboard/data/models/upload_result_response.dart';
-import 'package:chefaa/presentation/facility/dashboard/data/repositories/dashboard_repository.dart' show DashboardRepository;
+import 'package:chefaa/presentation/Facility/dashboard/data/models/create_patient_request_response.dart';
+import 'package:chefaa/presentation/Facility/dashboard/data/models/get_dashboard_response.dart';
+import 'package:chefaa/presentation/Facility/dashboard/data/models/upload_result_response.dart';
+import 'package:chefaa/presentation/Facility/dashboard/data/repositories/dashboard_repository.dart' show DashboardRepository;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

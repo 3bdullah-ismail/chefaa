@@ -35,13 +35,17 @@ class CustomOutlineBtn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(prefixImage, width: 24, height: 24),
-            32.horizontalSpace,
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: ColorManager.black,
+            20.horizontalSpace,
+            Flexible(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: ColorManager.black,
+                ),
               ),
             ),
           ],
