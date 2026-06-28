@@ -85,16 +85,18 @@ class TimeLineStepsCard extends StatelessWidget {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: isActive || isCompleted
-                          ? FontWeight.bold
-                          : FontWeight.w500,
-                      color: isActive
-                          ? ColorManager.primary
-                          : ColorManager.black,
+                  Flexible(
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: isActive || isCompleted
+                            ? FontWeight.bold
+                            : FontWeight.w500,
+                        color: isActive
+                            ? ColorManager.primary
+                            : ColorManager.black,
+                      ),
                     ),
                   ),
                   if (isActive) ...[
