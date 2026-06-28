@@ -17,7 +17,18 @@ import 'package:chefaa/features/patient/checkout_order/presentation/widgets/cont
 import 'package:chefaa/features/patient/checkout_order/presentation/widgets/custom_card.dart';
 
 class CheckoutPage extends StatefulWidget {
-  const CheckoutPage({super.key});
+  final String? pharmacyId;
+  final List<Map<String, dynamic>> items;
+  final double? subtotal;
+  final double? deliveryFee;
+
+  const CheckoutPage({
+    super.key,
+    this.pharmacyId,
+    this.items = const [],
+    this.subtotal,
+    this.deliveryFee,
+  });
 
   @override
   State<CheckoutPage> createState() => _CheckoutPageState();
@@ -26,8 +37,8 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   String paymentMethod = "cod";
 
-  double subtotal = 37.5;
-  double delivery = 15.0;
+  late double subtotal;
+  late double delivery;
 
   double get total => subtotal + delivery;
 
@@ -36,23 +47,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
   final cityController = TextEditingController();
   final streetController = TextEditingController();
 
-  bool _didInit = false;
-  String? pharmacyId;
-  List<Map<String, dynamic>> items = [];
+  late String? pharmacyId;
+  late List<Map<String, dynamic>> items;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (!_didInit) {
-      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-      if (args != null) {
-        pharmacyId = args['pharmacyId'] as String?;
-        items = List<Map<String, dynamic>>.from(args['items'] ?? []);
-        subtotal = (args['subtotal'] as num?)?.toDouble() ?? 37.5;
-        delivery = (args['deliveryFee'] as num?)?.toDouble() ?? 15.0;
-      }
-      _didInit = true;
-    }
+  void initState() {
+    super.initState();
+    pharmacyId = widget.pharmacyId;
+    items = List<Map<String, dynamic>>.from(widget.items);
+    subtotal = widget.subtotal ?? 0.0;
+    delivery = widget.deliveryFee ?? 15.0;
   }
 
   @override
@@ -63,6 +67,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     streetController.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {

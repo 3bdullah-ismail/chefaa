@@ -25,10 +25,11 @@ class OrderTimelineStepper extends StatelessWidget {
     final bool isPickedUpCompleted = pickedUp?.isCompleted ?? false;
     final bool isOnWayCompleted = onWay?.isCompleted ?? false;
 
+    // Active = the first incomplete step in sequence
     final bool isConfirmedActive = !isConfirmedCompleted;
     final bool isPreparingActive = isConfirmedCompleted && !isPreparingCompleted;
-    final bool isPickedUpActive = isPreparingCompleted && !isPickedUpCompleted;
-    final bool isOnWayActive = isPickedUpCompleted && !isOnWayCompleted;
+    final bool isPickedUpActive = isConfirmedCompleted && isPreparingCompleted && !isPickedUpCompleted;
+    final bool isOnWayActive = isConfirmedCompleted && isPreparingCompleted && isPickedUpCompleted && !isOnWayCompleted;
 
     return Container(
       padding: const EdgeInsets.all(20),

@@ -74,6 +74,8 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
               );
             } else if (state is ConfirmReceiptSuccess) {
               Loading.hide(context);
+              // Refresh order tracking data to reflect updated status
+              context.read<TrackOrderCubit>().getOrderTracking(_orderId!);
               showModalBottomSheet(
                 context: context,
                 backgroundColor: ColorManager.white,
@@ -147,18 +149,14 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                 'quantity': item.quantity,
               }).toList();
 
-              // Determine details for live status card
+              // Determine details for live status card — show the latest completed step
               String liveStatusTitle = orderData.orderStatus;
               String liveStatusDesc = "Your order status is updated.";
               String? liveStatusTime;
 
               final timeline = orderData.statusTimeline;
               if (timeline != null) {
-                if (orderData.orderStatus.toLowerCase() == 'new') {
-                  liveStatusTitle = timeline.orderConfirmed?.title ?? "Order Confirmed";
-                  liveStatusDesc = timeline.orderConfirmed?.description ?? "";
-                  liveStatusTime = timeline.orderConfirmed?.time;
-                } else if (timeline.onTheWay?.isCompleted == true) {
+                if (timeline.onTheWay?.isCompleted == true) {
                   liveStatusTitle = timeline.onTheWay?.title ?? "On The Way";
                   liveStatusDesc = timeline.onTheWay?.description ?? "";
                   liveStatusTime = timeline.onTheWay?.time;
@@ -170,6 +168,10 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                   liveStatusTitle = timeline.pharmacyPreparing?.title ?? "Preparing";
                   liveStatusDesc = timeline.pharmacyPreparing?.description ?? "";
                   liveStatusTime = timeline.pharmacyPreparing?.time;
+                } else if (timeline.orderConfirmed?.isCompleted == true) {
+                  liveStatusTitle = timeline.orderConfirmed?.title ?? "Order Confirmed";
+                  liveStatusDesc = timeline.orderConfirmed?.description ?? "";
+                  liveStatusTime = timeline.orderConfirmed?.time;
                 }
               }
 

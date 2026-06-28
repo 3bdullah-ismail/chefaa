@@ -92,8 +92,16 @@ class Routes {
           builder: (_) => _wrapWithCanPop(const OptionScreen()),
         );
       case AppRoutesNames.checkoutPage:
+        final checkoutArgs = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const CheckoutPage()),
+          builder: (_) => _wrapWithCanPop(
+            CheckoutPage(
+              pharmacyId: checkoutArgs?['pharmacyId'] as String?,
+              items: List<Map<String, dynamic>>.from(checkoutArgs?['items'] ?? []),
+              subtotal: (checkoutArgs?['subtotal'] as num?)?.toDouble(),
+              deliveryFee: (checkoutArgs?['deliveryFee'] as num?)?.toDouble(),
+            ),
+          ),
         );
       case AppRoutesNames.paymentPage:
         final args = settings.arguments as Map<String, dynamic>?;
