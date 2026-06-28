@@ -68,6 +68,18 @@
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<!-- TODO: Replace with the actual REVERSED_CLIENT_ID from your GoogleService-Info.plist -->
+					<string>com.googleusercontent.apps.50620876414-placeholder</string>
+				</array>
+			</dict>
+		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>
