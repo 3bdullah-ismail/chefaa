@@ -61,7 +61,10 @@ class ServerFailure extends Failure {
   }
 
   factory ServerFailure.fromResponse(int? statusCode, dynamic response) {
-    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+    if (statusCode == 400 ||
+        statusCode == 401 ||
+        statusCode == 403 ||
+        statusCode == 422) {
       final errorModel = ApiErrorModel.fromJson(response);
       return ServerFailure(
         errorModel.message ?? 'Authentication or request error.',
@@ -69,6 +72,14 @@ class ServerFailure extends Failure {
     } else if (statusCode == 404) {
       return ServerFailure(
         'Your request was not found. Please try again later.',
+      );
+    } else if (statusCode == 405) {
+      return ServerFailure('Method not allowed.');
+    } else if (statusCode == 409) {
+      return ServerFailure('Conflict occurred. Please try again.');
+    } else if (statusCode == 429) {
+      return ServerFailure(
+        'Too many requests. Please slow down and try again later.',
       );
     } else if (statusCode == 500) {
       return ServerFailure('Internal server error. Please try again later.');

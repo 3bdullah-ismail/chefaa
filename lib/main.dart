@@ -1,19 +1,22 @@
-import 'package:chefaa/core/manager/file_handler_cubit.dart';
-import 'package:chefaa/presentation/auth/presentation/manager/auth_cubit.dart';
-import 'package:chefaa/presentation/patient/ai_lab/presentation/manager/ai_report_cubit.dart';
-import 'package:chefaa/presentation/patient/booking/presentation/manager/booking_cubit.dart';
-import 'package:chefaa/presentation/patient/medication/presentation/manager/medication_cubit.dart';
-import 'package:chefaa/presentation/patient/home/presentation/manager/users_cubit.dart';
-import 'package:chefaa/presentation/patient/search/presentation/manager/search_cubit.dart';
+import 'package:chefaa/shared/file_handler/presentation/manager/file_handler_cubit.dart';
+import 'package:chefaa/features/auth/presentation/manager/auth_cubit.dart';
+import 'package:chefaa/features/patient/ai_lab/presentation/manager/ai_report_cubit.dart';
+import 'package:chefaa/features/patient/booking/presentation/manager/booking_cubit.dart';
+import 'package:chefaa/features/patient/medication/presentation/manager/medication_cubit.dart';
+import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';
+import 'package:chefaa/features/patient/search/presentation/manager/search_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
 import 'chefaa.dart';
 import 'core/config/get_config.dart';
 import 'core/services/app_bloc_observer.dart';
 import 'core/services/hive_service.dart';
+import 'firebase_options.dart';
 
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +25,16 @@ void main() async {
   await HiveService.init();
   await HiveService.openBox(HiveBoxes.reportsBox);
   await EasyLocalization.ensureInitialized();
-  //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //await NotificationService().initialize();
+  try {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  } catch (e) {
+    debugPrint("Firebase options initialization failed, falling back to default initialization: $e");
+    try {
+      await Firebase.initializeApp();
+    } catch (val) {
+      debugPrint("Firebase default initialization failed: $val");
+    }
+  }
   configureDependencies();
   Bloc.observer = AppBlocObserver();
   await GoogleSignIn.instance.initialize(

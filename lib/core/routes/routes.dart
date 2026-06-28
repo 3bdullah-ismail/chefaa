@@ -1,48 +1,48 @@
-import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinic_details_page.dart';
-import 'package:chefaa/presentation/doctor/layout/home/presentation/pages/clinics_page.dart';
-import 'package:chefaa/presentation/patient/checkout_order/presentation/pages/checkout_page.dart';
-import 'package:chefaa/presentation/patient/order/presentation/pages/track_order_page.dart';
+import 'package:chefaa/features/doctor/layout/home/presentation/pages/clinic_details_page.dart';
+import 'package:chefaa/features/doctor/layout/home/presentation/pages/clinics_page.dart';
+import 'package:chefaa/features/patient/checkout_order/presentation/pages/checkout_page.dart';
+import 'package:chefaa/features/patient/order/presentation/pages/track_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/config/get_config.dart';
-import '../../presentation/Facility/auth/presentation/pages/facility_signup.dart';
-import '../../presentation/Facility/dashboard/presentation/pages/facility_results_page.dart';
-import '../../presentation/Facility/dashboard/presentation/pages/create_patient_request_page.dart';
-import '../../presentation/Facility/layout/presentation/pages/facility_layout.dart';
-import '../../presentation/auth/presentation/pages/forget_password.dart';
-import '../../presentation/auth/presentation/pages/login_page.dart';
-import '../../presentation/auth/presentation/pages/reset_code.dart';
-import '../../presentation/auth/presentation/pages/reset_password.dart';
-import '../../presentation/chefaa_entry_page.dart';
-import '../../presentation/doctor/auth/presentation/pages/doctor_sing_up.dart';
-import '../../presentation/doctor/layout/doctor_layout.dart';
-import '../../presentation/doctor/layout/patients/presentation/pages/patient_details.dart';
-import '../../presentation/onboarding/pages/facility_option.dart';
-import '../../presentation/onboarding/pages/onboarding_page.dart';
-import '../../presentation/onboarding/pages/option_screen.dart';
-import '../../presentation/patient/ai_lab/presentation/pages/ai_lab_analysis.dart';
-import '../../presentation/patient/ai_lab/presentation/pages/history_report_page.dart';
-import '../../presentation/patient/auth/presentation/pages/patient_sign_up_page.dart';
-import '../../presentation/patient/booking/presentation/pages/choose_doctor.dart';
-import '../../presentation/patient/complete_auth_data/presentation/manager/complete_cubit.dart';
-import '../../presentation/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
-import '../../presentation/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
-import '../../presentation/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
-import '../../presentation/patient/appointment/presentation/pages/appointment_page.dart';
-import '../../presentation/patient/medication/presentation/pages/medication_page.dart';
-import '../../presentation/patient/lab_search/presentation/pages/find_lab_page.dart';
-import '../../presentation/patient/layout/presentation/pages/patient_layout.dart';
-import '../../presentation/patient/payment/presentation/pages/payment_page.dart';
-import '../../presentation/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart';
-import '../../presentation/patient/search/presentation/pages/location_filter.dart';
-import '../../presentation/patient/search/presentation/pages/search_page.dart';
-import '../../presentation/patient/search/presentation/pages/speciality_page.dart';
-import '../../presentation/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
-import '../../presentation/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
-import 'package:chefaa/presentation/patient/lab_results/presentation/pages/lab_results_page.dart';
-import 'package:chefaa/presentation/patient/lab_results/presentation/manager/lab_results_cubit.dart';
+import 'package:chefaa/core/config/get_config.dart';
+import 'package:chefaa/features/facility/auth/presentation/pages/facility_sign_up_page.dart';
+import 'package:chefaa/features/facility/dashboard/presentation/pages/facility_results_page.dart';
+import 'package:chefaa/features/facility/dashboard/presentation/pages/create_patient_request_page.dart';
+import 'package:chefaa/features/facility/layout/presentation/pages/facility_layout_page.dart';
+import 'package:chefaa/features/auth/presentation/pages/forget_password_page.dart';
+import 'package:chefaa/features/auth/presentation/pages/login_page.dart';
+import 'package:chefaa/features/auth/presentation/pages/reset_code_page.dart';
+import 'package:chefaa/features/auth/presentation/pages/reset_password_page.dart';
+import 'package:chefaa/features/entry/presentation/pages/chefaa_entry_page.dart';
+import 'package:chefaa/features/doctor/auth/presentation/pages/doctor_sign_up_page.dart';
+import 'package:chefaa/features/doctor/layout/doctor_layout.dart';
+import 'package:chefaa/features/doctor/layout/patients/presentation/pages/patient_details.dart';
+import 'package:chefaa/features/onboarding/presentation/pages/facility_option.dart';
+import 'package:chefaa/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:chefaa/features/onboarding/presentation/pages/option_screen.dart';
+import 'package:chefaa/features/patient/ai_lab/presentation/pages/ai_lab_analysis.dart';
+import 'package:chefaa/features/patient/ai_lab/presentation/pages/history_report_page.dart';
+import 'package:chefaa/features/patient/auth/presentation/pages/patient_sign_up_page.dart';
+import 'package:chefaa/features/patient/booking/presentation/pages/choose_doctor_page.dart';
+import 'package:chefaa/features/patient/complete_auth_data/presentation/manager/complete_cubit.dart';
+import 'package:chefaa/features/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
+import 'package:chefaa/features/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
+import 'package:chefaa/features/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
+import 'package:chefaa/features/patient/appointment/presentation/pages/appointment_page.dart';
+import 'package:chefaa/features/patient/medication/presentation/pages/medication_page.dart';
+import 'package:chefaa/features/patient/lab_search/presentation/pages/find_lab_page.dart';
+import 'package:chefaa/features/patient/layout/presentation/pages/patient_layout.dart';
+import 'package:chefaa/features/patient/payment/presentation/pages/payment_page.dart';
+import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart';
+import 'package:chefaa/features/patient/search/presentation/pages/location_filter.dart';
+import 'package:chefaa/features/patient/search/presentation/pages/search_page.dart';
+import 'package:chefaa/features/patient/search/presentation/pages/speciality_page.dart';
+import 'package:chefaa/features/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
+import 'package:chefaa/features/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
+import 'package:chefaa/features/patient/lab_results/presentation/pages/lab_results_page.dart';
+import 'package:chefaa/features/patient/lab_results/presentation/manager/lab_results_cubit.dart';
 import 'app_routes_names.dart';
 
 class Routes {
@@ -96,12 +96,20 @@ class Routes {
           builder: (_) => _wrapWithCanPop(const CheckoutPage()),
         );
       case AppRoutesNames.paymentPage:
+        final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const PaymentPage()),
+          builder: (_) => _wrapWithCanPop(
+            PaymentPage(
+              orderId: args?['orderId'] as String? ?? "",
+              subtotal: (args?['subtotal'] as num?)?.toDouble() ?? 0.0,
+              deliveryFee: (args?['deliveryFee'] as num?)?.toDouble() ?? 0.0,
+            ),
+          ),
         );
       case AppRoutesNames.trackOrderPage:
+        final orderId = settings.arguments as String?;
         return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const TrackOrderPage()),
+          builder: (_) => _wrapWithCanPop(TrackOrderPage(orderId: orderId)),
         );
       case AppRoutesNames.appEntryRoute:
         return MaterialPageRoute(
@@ -277,4 +285,3 @@ class Routes {
     }
   }
 }
-

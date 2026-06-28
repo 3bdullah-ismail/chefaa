@@ -12,13 +12,11 @@ class ApiErrorModel {
   ApiErrorModel({this.statusMsg, this.message});
 
   ApiErrorModel.fromJson(dynamic json) {
-    if (json is Map<String, dynamic>) {
-      statusMsg = json['statusMsg']?.toString();
-      message = json['message']?.toString();
-    } else {
-      statusMsg = "Error";
-      message = "Something went wrong.";
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
     }
+    statusMsg = json['statusMsg']?.toString();
+    message = json['message']?.toString();
   }
 
   Map<String, dynamic> toJson() {

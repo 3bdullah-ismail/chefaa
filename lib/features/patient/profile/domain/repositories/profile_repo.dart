@@ -1,0 +1,25 @@
+
+import 'package:dart_either/dart_either.dart';
+
+import '../../../../../core/error_handling/failure.dart';
+import '../entities/address_entity.dart';
+import '../entities/user_profile_entity.dart';
+
+abstract class ProfileRepo {
+  Future<Either<Failure, UserProfileEntity>> getProfileData();
+
+  Future<Either<Failure, UserProfileEntity>> updateProfileData(
+    String? name,
+    String? gender,
+    num? age,
+    num? height,
+    num? weight,
+      AddressEntity address,
+  );
+
+  Future<Either<Failure, UserProfileEntity>> updateMedicalData({
+    required String bloodType,
+    required List<String> allergiesList,
+    required List<String> chronicConditionsList,
+  });
+}
