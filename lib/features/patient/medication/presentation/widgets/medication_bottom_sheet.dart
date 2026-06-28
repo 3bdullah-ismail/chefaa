@@ -134,6 +134,17 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MedicationCubit, MedicationState>(
+      buildWhen: (previous, current) {
+        final prevLoading = previous is MedicationAdditionLoadingState || previous is MedicationUpdateLoadingState;
+        final currLoading = current is MedicationAdditionLoadingState || current is MedicationUpdateLoadingState;
+        return prevLoading != currLoading;
+      },
+      listenWhen: (previous, current) =>
+          current is MedicationAdditionSuccessState ||
+          current is MedicationUpdateSuccessState ||
+          current is MedicationDeleteSuccessState ||
+          current is MedicationAdditionErrorState ||
+          current is MedicationUpdateErrorState,
       listener: (context, state) {
         final messenger = ScaffoldMessenger.of(context);
 

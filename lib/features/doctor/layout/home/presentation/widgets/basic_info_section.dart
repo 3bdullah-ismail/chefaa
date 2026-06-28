@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/features/patient/profile/presentation/widgets/item_container.dart';
+import 'package:chefaa/core/widgets/map_picker.dart';
 
 class BasicInfoSection extends StatelessWidget {
   const BasicInfoSection({
@@ -78,10 +79,35 @@ class BasicInfoSection extends StatelessWidget {
 
             16.verticalSpace,
 
-            BottomSheetTextFieldItem(
-              title: "Address",
-              controller: addressController,
-              hint: "e.g. 123 Main St, Cairo",
+            GestureDetector(
+              onTap: () async {
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => MapPicker(
+                      initialLatitude: double.tryParse(latitudeController.text),
+                      initialLongitude: double.tryParse(longitudeController.text),
+                      initialAddress: addressController.text,
+                    ),
+                  ),
+                );
+                if (result != null && result is MapPickerResult) {
+                  addressController.text = result.address;
+                  latitudeController.text = result.latitude.toString();
+                  longitudeController.text = result.longitude.toString();
+                  if (result.city != null && result.city!.isNotEmpty) {
+                    cityController.text = result.city!;
+                  }
+                }
+              },
+              child: AbsorbPointer(
+                child: BottomSheetTextFieldItem(
+                  title: "Address",
+                  controller: addressController,
+                  hint: "e.g. 123 Main St, Cairo",
+                  isReadOnly: true,
+                ),
+              ),
             ),
 
             16.verticalSpace,
@@ -93,6 +119,7 @@ class BasicInfoSection extends StatelessWidget {
                     title: "Latitude",
                     controller: latitudeController,
                     hint: "e.g. 30.0444",
+                    isReadOnly: true,
                   ),
                 ),
 
@@ -103,6 +130,7 @@ class BasicInfoSection extends StatelessWidget {
                     title: "Longitude",
                     controller: longitudeController,
                     hint: "e.g. 31.2357",
+                    isReadOnly: true,
                   ),
                 ),
               ],

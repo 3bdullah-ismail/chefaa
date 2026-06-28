@@ -99,6 +99,13 @@ class _MedicationPageState extends State<MedicationPage> {
       ),
 
       body: BlocConsumer<MedicationCubit, MedicationState>(
+        buildWhen: (previous, current) =>
+            current is MedicationListLoadingState ||
+            current is MedicationListErrorState ||
+            current is MedicationListSuccessState,
+        listenWhen: (previous, current) =>
+            current is MedicationDeleteSuccessState ||
+            current is MedicationDeleteErrorState,
         listener: (context, state) {
           if (state is MedicationDeleteSuccessState) {
             ScaffoldMessenger.of(

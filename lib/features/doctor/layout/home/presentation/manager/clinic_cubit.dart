@@ -108,7 +108,18 @@ class ClinicCubit extends Cubit<ClinicState> {
   }
 
   Future<void> addClinic() async {
-      if (!isClosed) emit(ClinicAddedLoadingState());
+    if (nameController.text.trim().isEmpty) {
+      if (!isClosed) emit(ClinicAddedErrorState(message: "Clinic name cannot be empty"));
+      return;
+    }
+    if (addressController.text.trim().isEmpty ||
+        latitudeController.text.trim().isEmpty ||
+        longitudeController.text.trim().isEmpty) {
+      if (!isClosed) emit(ClinicAddedErrorState(message: "Please select a clinic location on the map"));
+      return;
+    }
+
+    if (!isClosed) emit(ClinicAddedLoadingState());
 
     try {
       await clinicRepo.addClinics(
@@ -142,7 +153,18 @@ class ClinicCubit extends Cubit<ClinicState> {
   }
 
   Future<void> updateClinic({required String clinicID}) async {
-      if (!isClosed) emit(ClinicEditLoadingState());
+    if (nameController.text.trim().isEmpty) {
+      if (!isClosed) emit(ClinicEditErrorState(message: "Clinic name cannot be empty"));
+      return;
+    }
+    if (addressController.text.trim().isEmpty ||
+        latitudeController.text.trim().isEmpty ||
+        longitudeController.text.trim().isEmpty) {
+      if (!isClosed) emit(ClinicEditErrorState(message: "Please select a clinic location on the map"));
+      return;
+    }
+
+    if (!isClosed) emit(ClinicEditLoadingState());
 
     try {
       final response = await clinicRepo.updateClinics(

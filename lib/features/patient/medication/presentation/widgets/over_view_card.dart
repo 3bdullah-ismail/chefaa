@@ -33,7 +33,7 @@ class OverViewCard extends StatelessWidget {
         ],
       ),
       height: 75.h,
-      width: 1.w,
+      width: 155.w,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppPadding.p12,

@@ -62,6 +62,13 @@ class _EditUserDetailsState extends State<EditUserDetails> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: BlocListener<ProfileCubit, ProfileState>(
+                listenWhen: (previous, current) =>
+                    current is GetProfileDataLoadingState ||
+                    current is UpdateProfileDataLoadingState ||
+                    current is GetProfileDataSuccessState ||
+                    current is UpdateProfileDataSuccessState ||
+                    current is GetProfileDataFailureState ||
+                    current is UpdateProfileDataFailureState,
                 listener: (context, state) {
                   if (state is GetProfileDataLoadingState ||
                       state is UpdateProfileDataLoadingState) {

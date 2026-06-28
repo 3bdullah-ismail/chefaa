@@ -31,6 +31,7 @@ class _ClinicDetailsPageState extends State<ClinicDetailsPage> {
           ..getClinicByID(clinicID: clinics.id ?? ""),
 
       child: BlocListener<ClinicCubit, ClinicState>(
+        listenWhen: (previous, current) => current is ClinicDeleteSuccessState,
         listener: (context, state) {
           if (state is ClinicDeleteSuccessState) {
             Navigator.pop(context);
@@ -43,6 +44,10 @@ class _ClinicDetailsPageState extends State<ClinicDetailsPage> {
             child: InsideAppBar(title: "Clinic Details"),
           ),
           body: BlocBuilder<ClinicCubit, ClinicState>(
+            buildWhen: (previous, current) =>
+                current is ClinicLoadingState ||
+                current is ClinicErrorState ||
+                current is ClinicSuccessState,
             builder: (context, state) {
               if (state is ClinicLoadingState) {
                 return const Center(child: CircularProgressIndicator());

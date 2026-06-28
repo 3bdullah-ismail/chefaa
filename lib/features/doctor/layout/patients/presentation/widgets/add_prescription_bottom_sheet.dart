@@ -108,6 +108,16 @@ class _AddPrescriptionBottomSheetState
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PatientsCubit, PatientsState>(
+      buildWhen: (previous, current) {
+        final prevLoading = previous is PrescriptionCreatingLoadingState || previous is PrescriptionEditingLoadingState;
+        final currLoading = current is PrescriptionCreatingLoadingState || current is PrescriptionEditingLoadingState;
+        return prevLoading != currLoading;
+      },
+      listenWhen: (previous, current) =>
+          current is PrescriptionCreatingSuccessState ||
+          current is PrescriptionEditingSuccessState ||
+          current is PrescriptionCreatingErrorState ||
+          current is PrescriptionEditingErrorState,
       listener: (context, state) async {
         final cubit = context.read<PatientsCubit>();
 

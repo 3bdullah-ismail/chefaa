@@ -59,10 +59,7 @@ class _DocSignUpState extends State<DocSignUp> {
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           child: const AppBarContent(),
         ),
-        body: BlocConsumer<DoctorAuthCubit, DoctorAuthState>(
-          buildWhen: (previous, current) {
-            return (previous is SingUpLoading) != (current is SingUpLoading);
-          },
+        body: BlocListener<DoctorAuthCubit, DoctorAuthState>(
           listener: (context, state) {
             if (state is SingUpLoading) {
               Loading.show(context);
@@ -88,149 +85,156 @@ class _DocSignUpState extends State<DocSignUp> {
               );
             }
           },
-          builder: (context, state) {
-            var cubit = DoctorAuthCubit.get(context);
-            return SafeArea(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        45.verticalSpace,
+          child: SafeArea(
+            child: Builder(
+              builder: (context) {
+                var cubit = DoctorAuthCubit.get(context);
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          45.verticalSpace,
 
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextField(
-                                validator: Validators.nameValidator,
-                                controller: cubit.name,
-                                text: AppConstants.firstName,
-                                prefixIcon: IconsAssets.userIcon,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.name,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  validator: Validators.nameValidator,
+                                  controller: cubit.name,
+                                  text: AppConstants.firstName,
+                                  prefixIcon: IconsAssets.userIcon,
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.name,
+                                ),
                               ),
-                            ),
-                            8.horizontalSpace,
-                            Expanded(
-                              child: CustomTextField(
-                                validator: Validators.nameValidator,
-                                controller: cubit.lastName,
-                                text: AppConstants.lastName,
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.name,
+                              8.horizontalSpace,
+                              Expanded(
+                                child: CustomTextField(
+                                  validator: Validators.nameValidator,
+                                  controller: cubit.lastName,
+                                  text: AppConstants.lastName,
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.name,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        8.verticalSpace,
+                            ],
+                          ),
+                          8.verticalSpace,
 
-                        CustomTextField(
-                          validator: Validators.validatePhone,
-                          controller: cubit.phoneNumber,
-                          text: AppConstants.enterPhone,
-                          prefixIcon: IconsAssets.phoneIcon,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.phone,
-                        ),
-                        8.verticalSpace,
-                        CustomTextField(
-                          validator: Validators.validateEmail,
-                          controller: cubit.email,
-                          text: AppConstants.enterEmail,
-                          prefixIcon: IconsAssets.emailIcon,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        8.verticalSpace,
-                        CustomTextField(
-                          validator: Validators.validatePassword,
-                          controller: cubit.password,
-                          text: AppConstants.enterPassword,
-                          prefixIcon: IconsAssets.passwordIcon,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.visiblePassword,
+                          CustomTextField(
+                            validator: Validators.validatePhone,
+                            controller: cubit.phoneNumber,
+                            text: AppConstants.enterPhone,
+                            prefixIcon: IconsAssets.phoneIcon,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.phone,
+                          ),
+                          8.verticalSpace,
+                          CustomTextField(
+                            validator: Validators.validateEmail,
+                            controller: cubit.email,
+                            text: AppConstants.enterEmail,
+                            prefixIcon: IconsAssets.emailIcon,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                          8.verticalSpace,
+                          CustomTextField(
+                            validator: Validators.validatePassword,
+                            controller: cubit.password,
+                            text: AppConstants.enterPassword,
+                            prefixIcon: IconsAssets.passwordIcon,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.visiblePassword,
 
-                          isPass: true,
-                        ),
-                        8.verticalSpace,
-                        CustomTextField(
-                          textInputAction: TextInputAction.next,
-                          validator: (value) =>
-                              Validators.validateConfirmPassword(
-                                value,
-                                cubit.password.text,
+                            isPass: true,
+                          ),
+                          8.verticalSpace,
+                          CustomTextField(
+                            textInputAction: TextInputAction.next,
+                            validator: (value) =>
+                                Validators.validateConfirmPassword(
+                                  value,
+                                  cubit.password.text,
+                                ),
+                            controller: cubit.confirmPasswordController,
+                            text: AppConstants.reEnterPassword,
+                            prefixIcon: IconsAssets.passwordIcon,
+                            keyboardType: TextInputType.visiblePassword,
+
+                            isPass: true,
+                          ),
+                          8.verticalSpace,
+                          CustomTextField(
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.text,
+                            controller: cubit.specialization,
+                            text: "Enter your specialization",
+                            prefixIcon: IconsAssets.drugIcon,
+                          ),
+                          8.verticalSpace,
+                          const UploadCard(),
+                          16.verticalSpace,
+
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  isChecked = !isChecked;
+                                  setState(() {});
+                                },
+                                child: isChecked
+                                    ? SvgPicture.asset(
+                                        IconsAssets.checkIconActive,
+                                      )
+                                    : SvgPicture.asset(
+                                        IconsAssets.checkIconInactive,
+                                      ),
                               ),
-                          controller: cubit.confirmPasswordController,
-                          text: AppConstants.reEnterPassword,
-                          prefixIcon: IconsAssets.passwordIcon,
-                          keyboardType: TextInputType.visiblePassword,
+                              12.horizontalSpace,
+                              const Expanded(child: TermsOfService()),
+                            ],
+                          ),
+                          SizedBox(height: 16.h),
+                          BlocSelector<DoctorAuthCubit, DoctorAuthState, bool>(
+                            selector: (state) => state is SingUpLoading,
+                            builder: (context, isLoading) {
+                              return CustomBtn(
+                                isDisabled: !isChecked || isLoading,
+                                text: AppConstants.submitForVerification,
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    final file = context
+                                        .read<FileHandlerCubit>()
+                                        .pickedFile;
 
-                          isPass: true,
-                        ),
-                        8.verticalSpace,
-                        CustomTextField(
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          controller: cubit.specialization,
-                          text: "Enter your specialization",
-                          prefixIcon: IconsAssets.drugIcon,
-                        ),
-                        8.verticalSpace,
-                        const UploadCard(),
-                        16.verticalSpace,
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                isChecked = !isChecked;
-                                setState(() {});
-                              },
-                              child: isChecked
-                                  ? SvgPicture.asset(
-                                      IconsAssets.checkIconActive,
-                                    )
-                                  : SvgPicture.asset(
-                                      IconsAssets.checkIconInactive,
-                                    ),
-                            ),
-                            12.horizontalSpace,
-                            const Expanded(child: TermsOfService()),
-                          ],
-                        ),
-                        SizedBox(height: 16.h),
-                        CustomBtn(
-                          isDisabled: !isChecked || state is SingUpLoading,
-                          text: AppConstants.submitForVerification,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              final file = context
-                                  .read<FileHandlerCubit>()
-                                  .pickedFile;
-
-                              cubit.signUp(membershipFile: file);
-                            }
-                          },
-                        ),
-                        AlreadyHaveAccount(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutesNames.login,
-                              arguments: AppConstants.doctor.toLowerCase(),
-                            );
-                          },
-                        ),
-                      ],
+                                    cubit.signUp(membershipFile: file);
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                          AlreadyHaveAccount(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.login,
+                                arguments: AppConstants.doctor.toLowerCase(),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
       ),
     );

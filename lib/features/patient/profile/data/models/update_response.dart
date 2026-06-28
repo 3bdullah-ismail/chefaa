@@ -12,7 +12,7 @@ class UpdateResponse extends UserProfileEntity {
         userGender: updatedData?.gender,
         userHeight: updatedData?.height,
         userWeight: updatedData?.weight,
-        userBloodType: '',
+        userBloodType: null,
         allergiesList: null,
         chronicConditionsList: null,
       );
@@ -20,7 +20,11 @@ class UpdateResponse extends UserProfileEntity {
   factory UpdateResponse.fromJson(Map<String, dynamic> json) {
     final data = json['updatedData'] != null
         ? UpdatedData.fromJson(json['updatedData'])
-        : null;
+        : json['patient'] != null
+            ? UpdatedData.fromJson(json['patient'])
+            : json['data'] != null
+                ? UpdatedData.fromJson(json['data'])
+                : null;
 
     return UpdateResponse(message: json['message'], updatedData: data);
   }

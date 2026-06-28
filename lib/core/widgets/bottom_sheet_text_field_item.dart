@@ -9,12 +9,14 @@ class BottomSheetTextFieldItem extends StatelessWidget {
   final String title;
   final TextEditingController controller;
   final String hint;
+  final bool isReadOnly;
 
   const BottomSheetTextFieldItem({
     super.key,
     required this.title,
     required this.controller,
     required this.hint,
+    this.isReadOnly = false,
   });
 
   @override
@@ -28,7 +30,11 @@ class BottomSheetTextFieldItem extends StatelessWidget {
         ),
         8.verticalSpace,
 
-        CustomTextField(controller: controller, text: hint),
+        CustomTextField(
+          controller: controller,
+          text: hint,
+          isReadOnly: isReadOnly,
+        ),
       ],
     );
   }

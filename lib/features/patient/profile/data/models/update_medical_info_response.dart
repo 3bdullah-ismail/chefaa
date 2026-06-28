@@ -6,13 +6,13 @@ class UpdateMedicalInfoResponse extends UserProfileEntity {
 
   UpdateMedicalInfoResponse({this.message, this.patient})
     : super(
-        userName: '',
+        userName: null,
         userAddress: patient?.address,
         age: patient?.age,
         userGender: patient?.gender,
         userHeight: patient?.height,
         userWeight: patient?.weight,
-        userBloodType: patient?.bloodType ?? '',
+        userBloodType: patient?.bloodType,
         allergiesList: patient?.allergies,
         chronicConditionsList: patient?.chronicConditions,
       );
@@ -70,26 +70,30 @@ class Patient {
   });
 
   Patient.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
-    userId = json['userId'];
-    address = json['address'];
-    age = json['age'];
-    gender = json['gender'];
-    height = json['height'];
-    weight = json['weight'];
-    bloodType = json['bloodType'];
+    id = json['_id']?.toString();
+    userId = json['userId']?.toString();
+    address = json['address'] is Map
+        ? (json['address'] as Map)['addressText']?.toString()
+        : json['address']?.toString();
+    age = json['age'] as num?;
+    gender = json['gender']?.toString();
+    height = json['height'] as num?;
+    weight = json['weight'] as num?;
+    bloodType = json['bloodType']?.toString();
 
     allergies = json['allergies'] != null
         ? List<String>.from(json['allergies'])
-        : [];
+        : null;
     chronicConditions = json['chronicConditions'] != null
         ? List<String>.from(json['chronicConditions'])
-        : [];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    v = json['__v'];
+        : null;
+    createdAt = json['createdAt']?.toString();
+    updatedAt = json['updatedAt']?.toString();
+    v = json['__v'] as num?;
 
-    medications = json['medications'];
+    medications = json['medications'] != null
+        ? List<dynamic>.from(json['medications'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {

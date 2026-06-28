@@ -37,6 +37,18 @@ class _AppointmentView extends StatelessWidget {
         child: InsideAppBar(title: 'My Appointments'),
       ),
       body: BlocConsumer<AppointmentCubit, AppointmentState>(
+        buildWhen: (previous, current) =>
+            current is GetAppointmentsLoadingState ||
+            current is GetAppointmentsErrorState ||
+            current is GetAppointmentsSuccessState ||
+            current is RescheduleSuccessState ||
+            current is CancelAppointmentSuccessState,
+        listenWhen: (previous, current) =>
+            current is RescheduleSuccessState ||
+            current is RescheduleErrorState ||
+            current is CancelAppointmentLoadingState ||
+            current is CancelAppointmentSuccessState ||
+            current is CancelAppointmentErrorState,
         listener: (context, state) {
           if (state is RescheduleSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(

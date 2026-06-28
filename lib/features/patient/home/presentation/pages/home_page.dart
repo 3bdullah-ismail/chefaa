@@ -69,7 +69,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => getIt<LabResultsCubit>()..getLabResults(),
+        ),
+        BlocProvider(
+          create: (_) => getIt<AppointmentCubit>()..getMyAppointments(),
+        ),
+      ],
+      child: Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(175),
         child: Builder(
@@ -322,10 +331,8 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     15.verticalSpace,
-                    BlocProvider(
-                      create: (_) => getIt<LabResultsCubit>()..getLabResults(),
-                      child: BlocBuilder<LabResultsCubit, LabResultsState>(
-                        builder: (context, state) {
+                    BlocBuilder<LabResultsCubit, LabResultsState>(
+                      builder: (context, state) {
                           if (state is LabResultsLoadingState) {
                             return const Center(
                               child: CircularProgressIndicator(
@@ -454,8 +461,6 @@ class _HomePageState extends State<HomePage> {
                           return const SizedBox.shrink();
                         },
                       ),
-                    ),
-
                     40.verticalSpace,
 
                     Row(
@@ -506,11 +511,8 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     20.verticalSpace,
-                    BlocProvider(
-                      create: (_) =>
-                          getIt<AppointmentCubit>()..getMyAppointments(),
-                      child: BlocBuilder<AppointmentCubit, AppointmentState>(
-                        builder: (context, state) {
+                    BlocBuilder<AppointmentCubit, AppointmentState>(
+                      builder: (context, state) {
                           if (state is GetAppointmentsLoadingState) {
                             return const Center(
                               child: CircularProgressIndicator(
@@ -604,7 +606,6 @@ class _HomePageState extends State<HomePage> {
                           );
                         },
                       ),
-                    ),
                     50.verticalSpace,
                     Text(
                       "Quick Actions ",
@@ -658,6 +659,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    ),
     );
   }
 }

@@ -60,10 +60,7 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
           padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
           child: const AppBarContent(),
         ),
-        body: BlocConsumer<PharmacyCubit, PharmacyState>(
-          buildWhen: (previous, current) {
-            return (previous is PharmacyLoadingState) != (current is PharmacyLoadingState);
-          },
+        body: BlocListener<PharmacyCubit, PharmacyState>(
           listener: (context, state) {
             if (state is PharmacyLoadingState) {
               Loading.show(context);
@@ -89,207 +86,215 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
               );
             }
           },
-          builder: (context, state) {
-            var cubit = PharmacyCubit.get(context);
-            return SingleChildScrollView(
-              child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p18,
-                    vertical: AppPadding.p16,
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(AppPadding.p18),
-                          margin: const EdgeInsets.all(AppMargin.m8),
-                          decoration: BoxDecoration(
-                            color: ColorManager.white,
-                            borderRadius: BorderRadius.circular(20),
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p18,
+                  vertical: AppPadding.p16,
+                ),
+                child: Builder(
+                  builder: (context) {
+                    var cubit = PharmacyCubit.get(context);
+                    return Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(AppPadding.p18),
+                            margin: const EdgeInsets.all(AppMargin.m8),
+                            decoration: BoxDecoration(
+                              color: ColorManager.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                20.verticalSpace,
+                                const Text(
+                                  "Pharmacy Name",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                CustomTextField(
+                                  textInputAction: TextInputAction.next,
+                                  validator: Validators.businessNameValidator,
+                                  controller: cubit.name,
+                                  text: "Full Pharmacy legal name",
+                                  keyboardType: TextInputType.name,
+                                ),
+                                20.verticalSpace,
+                                const Text(
+                                  AppConstants.phoneNumber,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                CustomTextField(
+                                  textInputAction: TextInputAction.next,
+                                  validator: Validators.validatePhone,
+                                  prefixIcon: IconsAssets.phoneIcon,
+                                  controller: cubit.phoneNumber,
+                                  text: AppConstants.phoneHint,
+                                  keyboardType: TextInputType.phone,
+                                ),
+                                20.verticalSpace,
+                                const Text(
+                                  AppConstants.workEmail,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                CustomTextField(
+                                  textInputAction: TextInputAction.next,
+                                  validator: Validators.validateEmail,
+                                  prefixIcon: IconsAssets.emailIcon,
+                                  controller: cubit.email,
+                                  text: AppConstants.emailPharmacyHint,
+                                  keyboardType: TextInputType.emailAddress,
+                                ),
+                                20.verticalSpace,
+                                const Text(
+                                  AppConstants.password,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                CustomTextField(
+                                  textInputAction: TextInputAction.next,
+                                  validator: Validators.validatePassword,
+                                  prefixIcon: IconsAssets.passwordIcon,
+                                  controller: cubit.password,
+                                  text: AppConstants.enterPassword,
+                                  keyboardType: TextInputType.visiblePassword,
+                                ),
+                                20.verticalSpace,
+                                const Text(
+                                  AppConstants.confirmPassword,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                CustomTextField(
+                                  textInputAction: TextInputAction.next,
+                                  keyboardType: TextInputType.visiblePassword,
+
+                                  validator: (value) =>
+                                      Validators.validateConfirmPassword(
+                                        value,
+                                        cubit.password.text,
+                                      ),
+                                  prefixIcon: IconsAssets.passwordIcon,
+                                  controller: cubit.confirmPasswordController,
+                                  text: AppConstants.reEnterPassword,
+                                ),
+                                20.verticalSpace,
+                                const Text(
+                                  AppConstants.commercialLicenseNumber,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                CustomTextField(
+                                  textInputAction: TextInputAction.done,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'[a-zA-Z0-9]'),
+                                    ),
+                                    LicenseFormatter(),
+                                  ],
+                                  validator: Validators.validateLicense,
+                                  controller: cubit.registerNumber,
+                                  text: AppConstants.licenseHint,
+                                ),
+                                20.verticalSpace,
+                                const Text(
+                                  AppConstants.medicalLicenseUpload,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                10.verticalSpace,
+                                const UploadCard(
+                                  text: AppConstants.uploadYourLicence,
+                                  dialogText:
+                                      AppConstants.uploadYourMedicalLicence,
+                                  fileName: AppConstants.licensePdf,
+                                ),
+                              ],
+                            ),
                           ),
-                          child: Column(
+                          40.verticalSpace,
+                          Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              20.verticalSpace,
-                              const Text(
-                                "Pharmacy Name",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
+                              const Spacer(),
+                              SizedBox(
+                                height: 27.h,
+                                width: 27.w,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () {
+                                    setState(() {
+                                      isChecked = !isChecked;
+                                    });
+                                  },
+                                  icon: isChecked
+                                      ? SvgPicture.asset(
+                                          IconsAssets.checkIconActive,
+                                        )
+                                      : SvgPicture.asset(
+                                          IconsAssets.checkIconInactive,
+                                        ),
                                 ),
                               ),
-                              10.verticalSpace,
-                              CustomTextField(
-                                textInputAction: TextInputAction.next,
-                                validator: Validators.businessNameValidator,
-                                controller: cubit.name,
-                                text: "Full Pharmacy legal name",
-                                keyboardType: TextInputType.name,
-                              ),
-                              20.verticalSpace,
-                              const Text(
-                                AppConstants.phoneNumber,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomTextField(
-                                textInputAction: TextInputAction.next,
-                                validator: Validators.validatePhone,
-                                prefixIcon: IconsAssets.phoneIcon,
-                                controller: cubit.phoneNumber,
-                                text: AppConstants.phoneHint,
-                                keyboardType: TextInputType.phone,
-                              ),
-                              20.verticalSpace,
-                              const Text(
-                                AppConstants.workEmail,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomTextField(
-                                textInputAction: TextInputAction.next,
-                                validator: Validators.validateEmail,
-                                prefixIcon: IconsAssets.emailIcon,
-                                controller: cubit.email,
-                                text: AppConstants.emailPharmacyHint,
-                                keyboardType: TextInputType.emailAddress,
-                              ),
-                              20.verticalSpace,
-                              const Text(
-                                AppConstants.password,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomTextField(
-                                textInputAction: TextInputAction.next,
-                                validator: Validators.validatePassword,
-                                prefixIcon: IconsAssets.passwordIcon,
-                                controller: cubit.password,
-                                text: AppConstants.enterPassword,
-                                keyboardType: TextInputType.visiblePassword,
-                              ),
-                              20.verticalSpace,
-                              const Text(
-                                AppConstants.confirmPassword,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomTextField(
-                                textInputAction: TextInputAction.next,
-                                keyboardType: TextInputType.visiblePassword,
-
-                                validator: (value) =>
-                                    Validators.validateConfirmPassword(
-                                      value,
-                                      cubit.password.text,
-                                    ),
-                                prefixIcon: IconsAssets.passwordIcon,
-                                controller: cubit.confirmPasswordController,
-                                text: AppConstants.reEnterPassword,
-                              ),
-                              20.verticalSpace,
-                              const Text(
-                                AppConstants.commercialLicenseNumber,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              CustomTextField(
-                                textInputAction: TextInputAction.done,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                    RegExp(r'[a-zA-Z0-9]'),
-                                  ),
-                                  LicenseFormatter(),
-                                ],
-                                validator: Validators.validateLicense,
-                                controller: cubit.registerNumber,
-                                text: AppConstants.licenseHint,
-                              ),
-                              20.verticalSpace,
-                              const Text(
-                                AppConstants.medicalLicenseUpload,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              10.verticalSpace,
-                              const UploadCard(
-                                text: AppConstants.uploadYourLicence,
-                                dialogText:
-                                    AppConstants.uploadYourMedicalLicence,
-                                fileName: AppConstants.licensePdf,
-                              ),
+                              14.horizontalSpace,
+                              const Expanded(child: TermsOfService()),
                             ],
                           ),
-                        ),
-                        40.verticalSpace,
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 27.h,
-                              width: 27.w,
-                              child: IconButton(
-                                padding: EdgeInsets.zero,
+                          25.verticalSpace,
+
+                          BlocSelector<PharmacyCubit, PharmacyState, bool>(
+                            selector: (state) => state is PharmacyLoadingState,
+                            builder: (context, isLoading) {
+                              return CustomBtn(
+                                isDisabled:
+                                    !isChecked || isLoading,
+                                text: AppConstants.submitForVerification,
                                 onPressed: () {
-                                  setState(() {
-                                    isChecked = !isChecked;
-                                  });
+                                  if (_formKey.currentState!.validate()) {
+                                    final file = context
+                                        .read<FileHandlerCubit>()
+                                        .pickedFile;
+
+                                    cubit.pharmacySignUp(medicalLicence: file);
+                                  }
                                 },
-                                icon: isChecked
-                                    ? SvgPicture.asset(
-                                        IconsAssets.checkIconActive,
-                                      )
-                                    : SvgPicture.asset(
-                                        IconsAssets.checkIconInactive,
-                                      ),
-                              ),
-                            ),
-                            14.horizontalSpace,
-                            const Expanded(child: TermsOfService()),
-                          ],
-                        ),
-                        25.verticalSpace,
-
-                        CustomBtn(
-                          isDisabled:
-                              !isChecked || state is PharmacyLoadingState,
-                          text: AppConstants.submitForVerification,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              final file = context
-                                  .read<FileHandlerCubit>()
-                                  .pickedFile;
-
-                              cubit.pharmacySignUp(medicalLicence: file);
-                            }
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ),
-            );
-          },
+            ),
+          ),
         ),
       ),
     );

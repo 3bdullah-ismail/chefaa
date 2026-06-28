@@ -1,6 +1,7 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/auth/data/data_sources/data_source.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: AuthDataSource)
@@ -22,6 +23,7 @@ class AuthDataSourceImp implements AuthDataSource {
 
   @override
   Future<Response<dynamic>> googleSignIn(String idToken) {
+    debugPrint('AuthDataSourceImp.googleSignIn POST /auth/google/mobile idToken=${idToken.isEmpty ? "empty" : "present"}');
     return networkService.dio.post(
       "/auth/google/mobile",
       data: {"idToken": idToken},

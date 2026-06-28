@@ -37,6 +37,10 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
                 current is PharmacySettingsLoadError ||
                 current is PharmacySettingsInitial;
           },
+          listenWhen: (previous, current) =>
+              current is PharmacySettingsUpdateLoading ||
+              current is PharmacySettingsUpdateSuccess ||
+              current is PharmacySettingsUpdateError,
           listener: (context, state) {
             if (state is PharmacySettingsUpdateLoading) {
               Loading.show(context);

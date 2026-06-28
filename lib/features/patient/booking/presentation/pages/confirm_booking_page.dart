@@ -19,6 +19,14 @@ class ConfirmBooking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BookingCubit, BookingState>(
+      buildWhen: (previous, current) =>
+          current is BookingInitialState ||
+          current is BookingLoadingState ||
+          current is BookingErrorState ||
+          current is BookingSuccessState,
+      listenWhen: (previous, current) =>
+          current is BookingSuccessState ||
+          current is BookingErrorState,
       listener: (context, state) {
         if (state is BookingSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(

@@ -10,6 +10,7 @@ part 'profile_state.dart';
 @injectable
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo profileRepo;
+  UserProfileEntity? _profileSnapshot;
 
   ProfileCubit(this.profileRepo) : super(ProfileInitial());
   final TextEditingController nameController = TextEditingController();
@@ -28,6 +29,59 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   static ProfileCubit get(BuildContext context) => BlocProvider.of(context);
 
+  void _cacheProfile(UserProfileEntity profile) {
+    _profileSnapshot = profile;
+
+    if (profile.userName != null && profile.userName!.trim().isNotEmpty) {
+      nameController.text = profile.userName!.trim();
+    }
+
+    if (profile.age != null) {
+      ageController.text = profile.age.toString();
+    }
+
+    if (profile.userHeight != null) {
+      heightController.text = profile.userHeight.toString();
+    }
+
+    if (profile.userWeight != null) {
+      weightController.text = profile.userWeight.toString();
+    }
+
+    if (profile.userBloodType != null &&
+        profile.userBloodType!.trim().isNotEmpty) {
+      bloodTypeController.text = profile.userBloodType!.trim();
+    }
+
+    if (profile.allergiesList != null) {
+      allergiesController.text = profile.allergiesList!.join(', ');
+    }
+
+    if (profile.chronicConditionsList != null) {
+      chronicController.text = profile.chronicConditionsList!.join(', ');
+    }
+
+    if (profile.userAddress != null && profile.userAddress!.trim().isNotEmpty) {
+      locationController.text = profile.userAddress!.trim();
+    }
+
+    if (profile.userGender != null && profile.userGender!.trim().isNotEmpty) {
+      gender = profile.userGender!.trim();
+    }
+  }
+
+  AddressEntity _buildAddressEntity() {
+    final addressText = locationController.text.trim().isNotEmpty
+        ? locationController.text.trim()
+        : _profileSnapshot?.userAddress?.trim() ?? '';
+
+    return AddressEntity(
+      addressText: addressText,
+      longitude: longitude!,
+      latitude: latitude!,
+    );
+  }
+
   void setLocation({
     required String addressText,
     required double lat,
@@ -40,7 +94,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   bool get isLocationMissing =>
-      locationController.text.trim().isEmpty ||
+      (locationController.text.trim().isEmpty &&
+          (_profileSnapshot?.userAddress?.trim().isEmpty ?? true)) ||
           latitude == null ||
           longitude == null;
 
@@ -51,7 +106,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     result.fold(
       ifLeft: (failure) => emit(GetProfileDataFailureState(failure.message)),
-      ifRight: (profileData) => emit(GetProfileDataSuccessState(profileData)),
+      ifRight: (profileData) {
+        _cacheProfile(profileData);
+        emit(GetProfileDataSuccessState(profileData));
+      },
     );
   }
 
@@ -63,23 +121,34 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     emit(UpdateProfileDataLoadingState());
 
+    final cachedProfile = _profileSnapshot;
+    final name = nameController.text.trim().isNotEmpty
+        ? nameController.text.trim()
+        : cachedProfile?.userName;
+    final genderValue = gender.trim().isNotEmpty
+        ? gender.toLowerCase().trim()
+        : cachedProfile?.userGender?.toLowerCase().trim();
+    final age = num.tryParse(ageController.text.trim()) ?? cachedProfile?.age;
+    final height =
+        num.tryParse(heightController.text.trim()) ?? cachedProfile?.userHeight;
+    final weight =
+        num.tryParse(weightController.text.trim()) ?? cachedProfile?.userWeight;
+
     final result = await profileRepo.updateProfileData(
-      nameController.text.trim().isEmpty ? null : nameController.text.trim(),
-      gender.trim().isEmpty ? null : gender.toLowerCase().trim(),
-      num.tryParse(ageController.text.trim()),
-      num.tryParse(heightController.text.trim()),
-      num.tryParse(weightController.text.trim()),
-      AddressEntity(
-        addressText: locationController.text.trim(),
-        longitude: longitude!,
-        latitude: latitude!,
-      ),
+      name,
+      genderValue,
+      age,
+      height,
+      weight,
+      _buildAddressEntity(),
     );
 
     result.fold(
       ifLeft: (failure) => emit(UpdateProfileDataFailureState(failure.message)),
-      ifRight: (profileData) =>
-          emit(UpdateProfileDataSuccessState(profileData)),
+      ifRight: (profileData) {
+        _cacheProfile(profileData);
+        emit(UpdateProfileDataSuccessState(profileData));
+      },
     );
   }
 
@@ -113,8 +182,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     result.fold(
       ifLeft: (failure) =>
           emit(UpdateMedicalInformationFailureState(failure.message)),
-      ifRight: (profileData) =>
-          emit(UpdateMedicalInformationSuccessState(profileData)),
+      ifRight: (profileData) {
+        _cacheProfile(profileData);
+        emit(UpdateMedicalInformationSuccessState(profileData));
+      },
     );
   }
 

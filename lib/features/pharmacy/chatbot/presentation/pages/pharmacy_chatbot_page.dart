@@ -44,6 +44,7 @@ class _PharmacyChatbotPageState extends State<PharmacyChatbotPage> {
         backgroundColor: const Color(0xffF5F7FB),
         appBar: const ChatAppBar(),
         body: BlocConsumer<PharmacyChatbotCubit, PharmacyChatbotState>(
+          listenWhen: (previous, current) => current is ChatbotError,
           listener: (context, state) {
             final cubit = context.read<PharmacyChatbotCubit>();
             if (state is ChatbotError && cubit.latestContext != null) {

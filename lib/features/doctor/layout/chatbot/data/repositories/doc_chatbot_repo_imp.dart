@@ -3,6 +3,7 @@ import 'package:chefaa/features/doctor/layout/chatbot/data/models/chatbot_doc.da
 import 'package:chefaa/features/doctor/layout/chatbot/data/models/chat_history.dart';
 import 'package:chefaa/features/doctor/layout/chatbot/domain/repositories/doc_chatbot_repo.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/error_handling/failure.dart';
@@ -19,9 +20,15 @@ class DocChatbotRepoImp implements DocChatbotRepo {
     required List<ChatHistory> history,
   }) async {
     try {
+      debugPrint(
+        'DocChatbotRepoImp.getResponse message="$message" history=${history.map((e) => "${e.role}:${e.content}").toList()}',
+      );
       final response = await docChatbotDataSource.getResponse(
         message: message,
         history: history,
+      );
+      debugPrint(
+        'DocChatbotRepoImp response status=${response.statusCode} data=${response.data}',
       );
       if (response.statusCode == 200) {
         return ChatbotDoc.fromJson(response.data);
@@ -35,4 +42,3 @@ class DocChatbotRepoImp implements DocChatbotRepo {
     }
   }
 }
-

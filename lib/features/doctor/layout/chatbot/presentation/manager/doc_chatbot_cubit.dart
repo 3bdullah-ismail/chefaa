@@ -14,19 +14,32 @@ class DocChatbotCubit extends Cubit<DocChatbotState> {
     {"message": "Hello 👋\nHow can I help you today?", "isBot": true},
   ];
 
-  List<Map<String, dynamic>> get messages => _messages;
+  List<Map<String, dynamic>> get messages => List.unmodifiable(_messages);
 
   DocChatbotCubit({required this.docChatbotRepo})
-      : super(DocChatbotInitialState());
+      : super(
+          const DocChatbotInitialState([
+            {"message": "Hello 👋\nHow can I help you today?", "isBot": true},
+          ]),
+        );
 
   static DocChatbotCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future<void> sendMessage(String text) async {
     if (text.trim().isEmpty) return;
 
-    _messages.add({"message": text, "isBot": false});
-    _messages.add({"isBot": true, "isLoading": true});
-      if (!isClosed) emit(DocChatbotLoadingState(List.of(_messages)));
+    debugPrint('DocChatbotCubit.sendMessage text="$text"');
+
+    final userMessage = text.trim();
+    final nextMessages = List<Map<String, dynamic>>.from(_messages)
+      ..add({"message": userMessage, "isBot": false})
+      ..add({"isBot": true, "isLoading": true});
+
+    _messages
+      ..clear()
+      ..addAll(nextMessages);
+
+    if (!isClosed) emit(DocChatbotLoadingState(List.unmodifiable(_messages)));
 
     final history = _messages
         .where((m) => m["isLoading"] != true)
@@ -38,18 +51,23 @@ class DocChatbotCubit extends Cubit<DocChatbotState> {
         .toList();
 
     try {
+      debugPrint(
+        'DocChatbotCubit calling repo with history=${history.map((e) => "${e.role}:${e.content}").toList()}',
+      );
       final response = await docChatbotRepo.getResponse(
-        message: text,
+        message: userMessage,
         history: history,
       );
 
       _messages.removeWhere((e) => e["isLoading"] == true);
       _messages.add({"message": response.reply ?? '', "isBot": true});
-      if (!isClosed) emit(DocChatbotSuccessState(List.of(_messages)));
+      debugPrint('DocChatbotCubit success reply="${response.reply}"');
+      if (!isClosed) emit(DocChatbotSuccessState(List.unmodifiable(_messages)));
     } catch (e) {
       _messages.removeWhere((e) => e["isLoading"] == true);
       _messages.add({"message": e.toString(), "isBot": true});
-      if (!isClosed) emit(DocChatbotErrorState(List.of(_messages), e.toString()));
+      debugPrint('DocChatbotCubit error="$e"');
+      if (!isClosed) emit(DocChatbotErrorState(List.unmodifiable(_messages), e.toString()));
     }
   }
 }

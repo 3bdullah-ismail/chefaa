@@ -48,12 +48,14 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login() async {
     if (_isSubmitting) return;
     _isSubmitting = true;
+    debugPrint('AuthCubit.login entered identity="${identityController.text.trim()}"');
       if (!isClosed) emit(LoginLoadingState());
     try {
       final res = await repo.login(
         identity: identityController.text.trim(),
         password: passwordController.text.trim(),
       );
+      debugPrint('AuthCubit.login repo returned accessToken=${res.accessToken} user=${res.user?.name} role=${res.user?.role}');
 
       if (res.accessToken != null) {
         await StorageService.saveToken(res.accessToken!);
@@ -84,10 +86,12 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signInWithGoogle(String idToken) async {
     if (_isSubmitting) return;
     _isSubmitting = true;
+    debugPrint('AuthCubit.signInWithGoogle entered idToken=${idToken.isEmpty ? "empty" : "present"}');
       if (!isClosed) emit(GoogleSignInLoadingState());
 
     try {
       final res = await repo.googleSignIn(idToken);
+      debugPrint('AuthCubit.signInWithGoogle repo returned accessToken=${res.accessToken} user=${res.user?.name} role=${res.user?.role}');
 
       if (res.accessToken != null) {
         await StorageService.saveToken(res.accessToken!);
@@ -109,6 +113,7 @@ class AuthCubit extends Cubit<AuthState> {
       );
       }
     } catch (e) {
+      debugPrint('AuthCubit.signInWithGoogle error=$e');
       if (!isClosed) emit(GoogleSignInErrorState(e.toString()));
     } finally {
       _isSubmitting = false;

@@ -29,9 +29,16 @@ class ProfileResponse extends UserProfileEntity {
        );
 
   factory ProfileResponse.fromJson(dynamic json) {
-    final userId = json['userId'] != null
-        ? UserId.fromJson(json['userId'])
-        : null;
+    final userIdValue = json['userId'];
+    final userId = userIdValue is Map<String, dynamic>
+        ? UserId.fromJson(userIdValue)
+        : userIdValue != null
+            ? UserId(
+                id: userIdValue.toString(),
+                name: json['name']?.toString(),
+                email: json['email']?.toString(),
+              )
+            : null;
     return ProfileResponse(
       id: json['_id']?.toString(),
       userId: userId,

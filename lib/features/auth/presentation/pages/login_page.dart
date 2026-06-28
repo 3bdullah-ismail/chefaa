@@ -162,15 +162,21 @@ class _LoginPageState extends State<LoginPage> {
                           50.verticalSpace,
                           CustomOutlineBtn(
                             onPressed: () async {
+                              debugPrint('Google sign-in button pressed');
                               try {
+                                debugPrint('Calling GoogleSignIn.instance.authenticate()');
                                 final result = await GoogleSignIn.instance.authenticate();
+                                debugPrint('Google account selected: ${result.authentication}');
                                 final String? idToken = result.authentication.idToken;
+                                debugPrint('Google idToken: $idToken');
 
                                 if (idToken != null) {
                                   if (context.mounted) {
+                                    debugPrint('Calling AuthCubit.signInWithGoogle()');
                                     context.read<AuthCubit>().signInWithGoogle(idToken);
                                   }
                                 } else if (context.mounted) {
+                                  debugPrint('Google idToken is null, backend will not be called');
                                   AnimatedSnackBar.rectangle(
                                     'Error',
                                     'Failed to retrieve Google ID token.',
@@ -180,6 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ).show(context);
                                 }
                               } catch (e) {
+                                debugPrint('Google sign-in exception: $e');
                                 if (context.mounted && (e is! Exception || !e.toString().contains('cancel'))) {
                                   AnimatedSnackBar.rectangle(
                                     'Error',

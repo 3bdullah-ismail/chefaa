@@ -79,6 +79,7 @@ class _ClinicBottomSheetState extends State<ClinicBottomSheet> {
         }
 
         if (state is ClinicErrorState ||
+            state is ClinicAddedErrorState ||
             state is ClinicEditErrorState ||
             state is ClinicDeleteErrorState) {
           final msg = (state as dynamic).message;

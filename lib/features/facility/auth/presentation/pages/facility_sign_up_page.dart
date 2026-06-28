@@ -63,7 +63,7 @@ class _FacilitySignupState extends State<FacilitySignup> {
             child: Image.asset("assets/images/chefaa.png", height: 50.h),
           ),
         ),
-        body: BlocConsumer<FacilityAuthCubit, FacilityAuthState>(
+        body: BlocListener<FacilityAuthCubit, FacilityAuthState>(
           listener: (context, state) {
             if (state is SignUpLoading) {
               showDialog(
@@ -96,32 +96,35 @@ class _FacilitySignupState extends State<FacilitySignup> {
               );
             }
           },
-          builder: (context, state) {
-            var cubit = FacilityAuthCubit.get(context);
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(height: 48),
-                      FacilityInfoCard(cubit: cubit),
-                      const SizedBox(height: 24),
-                      MedicalLeadershipCard(cubit: cubit),
-                      const SizedBox(height: 25),
-                      TermsAndSubmitSection(
-                        formKey: _formKey,
-                        cubit: cubit,
-                        state: state,
+          child: SafeArea(
+            child: Builder(
+              builder: (context) {
+                var cubit = FacilityAuthCubit.get(context);
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(height: 48),
+                          FacilityInfoCard(cubit: cubit),
+                          const SizedBox(height: 24),
+                          MedicalLeadershipCard(cubit: cubit),
+                          const SizedBox(height: 25),
+                          TermsAndSubmitSection(
+                            formKey: _formKey,
+                            cubit: cubit,
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
       ),
     );

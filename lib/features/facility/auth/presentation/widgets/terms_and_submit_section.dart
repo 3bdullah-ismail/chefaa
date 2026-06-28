@@ -12,13 +12,11 @@ import 'package:chefaa/features/facility/auth/presentation/manager/facility_auth
 class TermsAndSubmitSection extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final FacilityAuthCubit cubit;
-  final FacilityAuthState state;
 
   const TermsAndSubmitSection({
     super.key,
     required this.formKey,
     required this.cubit,
-    required this.state,
   });
 
   @override
@@ -53,14 +51,19 @@ class _TermsAndSubmitSectionState extends State<TermsAndSubmitSection> {
           ),
         ),
         const SizedBox(height: 16),
-        CustomBtn(
-          isDisabled: !isChecked || widget.state is SignUpLoading,
-          text: AppConstants.submitForVerification,
-          onPressed: () {
-            if (widget.formKey.currentState!.validate()) {
-              final file = context.read<FileHandlerCubit>().pickedFile;
-              widget.cubit.signUp(medicalLicence: file);
-            }
+        BlocSelector<FacilityAuthCubit, FacilityAuthState, bool>(
+          selector: (state) => state is SignUpLoading,
+          builder: (context, isLoading) {
+            return CustomBtn(
+              isDisabled: !isChecked || isLoading,
+              text: AppConstants.submitForVerification,
+              onPressed: () {
+                if (widget.formKey.currentState!.validate()) {
+                  final file = context.read<FileHandlerCubit>().pickedFile;
+                  widget.cubit.signUp(medicalLicence: file);
+                }
+              },
+            );
           },
         ),
         const SizedBox(height: 15),

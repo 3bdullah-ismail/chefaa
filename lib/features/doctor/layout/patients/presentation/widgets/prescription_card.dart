@@ -39,6 +39,14 @@ class _PrescriptionCardState extends State<PrescriptionCard> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PatientsCubit, PatientsState>(
+      buildWhen: (previous, current) {
+        final prevLoading = previous is PrescriptionByAppointmentLoadingState || previous is CompleteAppointmentLoadingState;
+        final currLoading = current is PrescriptionByAppointmentLoadingState || current is CompleteAppointmentLoadingState;
+        return prevLoading != currLoading || current is PrescriptionByAppointmentSuccessState;
+      },
+      listenWhen: (previous, current) =>
+          current is CompleteAppointmentSuccessState ||
+          current is CompleteAppointmentErrorState,
       listener: (context, state) {
         if (state is CompleteAppointmentSuccessState) {
           ScaffoldMessenger.of(context).showSnackBar(

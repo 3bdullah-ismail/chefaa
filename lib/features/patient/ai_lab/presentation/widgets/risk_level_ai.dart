@@ -15,7 +15,7 @@ class RiskLevelAi extends StatelessWidget {
   Widget build(BuildContext context) {
     final riskLevel = RiskLevel.fromScore(dangerScore);
     return Container(
-      height: 115.h,
+      height: 150.h,
       padding: const EdgeInsets.all(AppPadding.p16),
       decoration: BoxDecoration(
         color: ColorManager.lightGray,
@@ -59,7 +59,7 @@ class RiskLevelAi extends StatelessWidget {
                     color: ColorManager.black,
                     fontSize: 12,
                   ),
-                  maxLines: 3,
+                  maxLines: 5,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
