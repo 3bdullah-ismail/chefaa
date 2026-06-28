@@ -1,6 +1,6 @@
 import 'dart:developer' as developer;
 
-import 'package:chefaa/presentation/patient/search/domain/entities/clinic_model.dart';
+import 'package:chefaa/features/patient/search/domain/entities/clinic_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveService {

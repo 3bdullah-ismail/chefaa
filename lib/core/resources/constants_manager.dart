@@ -1,7 +1,7 @@
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:intl/intl.dart';
 
-import '../routes/app_routes_names.dart';
+import 'package:chefaa/core/routes/app_routes_names.dart';
 
 class AppConstants {
   static const String error = "Error";

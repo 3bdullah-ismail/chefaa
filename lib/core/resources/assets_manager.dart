@@ -88,7 +88,6 @@ abstract class IconsAssets {
       "$iconsPath/Checkbox_icon_Inactive.svg";
   static const String checkIconActive = "$iconsPath/Checkbox_active.svg";
   static const String doneIcon = "$iconsPath/Done.svg";
-  static const String stethoscopeIcon = "$iconsPath/drug.svg";
   static const String notification = "$iconsPath/notification.svg";
   static const String notificationFull = "$iconsPath/notification_full.svg";
   static const String searchIcon = "$iconsPath/search-normal.svg";

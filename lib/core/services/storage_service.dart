@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:chefaa/core/models/auth_response.dart';
+import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
