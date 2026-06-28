@@ -120,6 +120,7 @@ class _PharmacyPageState extends State<PharmacyPage> {
                     PharmacyDynamicList(
                       selectedIndex: _selectedFilterIndex,
                       medicines: medicines,
+                      pharmacyId: "",
                     ),
                   ],
                 ),

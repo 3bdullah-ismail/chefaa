@@ -106,11 +106,21 @@ class _CartPageState extends State<CartPage> {
               deliveryFee: deliveryFee,
               total: total,
               onPressed: () {
+                final pid = CartManager().pharmacyId;
+                if (pid == null || pid.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Pharmacy info is missing. Please add items from a pharmacy first."),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
                 Navigator.pushNamed(
                   context,
                   AppRoutesNames.checkoutPage,
                   arguments: {
-                    'pharmacyId': CartManager().pharmacyId ?? '6a0a13efd785cd1a6461b64c',
+                    'pharmacyId': pid,
                     'items': cartItems,
                     'subtotal': subtotal,
                     'deliveryFee': deliveryFee,

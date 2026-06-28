@@ -75,7 +75,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               child: BlocListener<AuthCubit, AuthState>(
                 listener: (context, state) async {
-                  if (state is LoginLoadingState || state is GoogleSignInLoadingState) {
+                  if (state is LoginLoadingState ||
+                      state is GoogleSignInLoadingState) {
                     Loading.show(context);
                   } else if (state is LoginErrorState) {
                     Loading.hide(context);
@@ -90,7 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                     Loading.hide(context);
                     AnimatedSnackBar.rectangle(
                       'Error',
-                      state.message ?? 'An error occurred during Google sign-in',
+                      state.message ??
+                          'An error occurred during Google sign-in',
                       type: AnimatedSnackBarType.error,
                       brightness: Brightness.dark,
                       duration: const Duration(seconds: 3),
@@ -123,7 +125,6 @@ class _LoginPageState extends State<LoginPage> {
                             controller: loginCubit.identityController,
                             text: "Enter your Email or Phone",
                             prefixIcon: IconsAssets.emailIcon,
-                            validator: Validators.validateEmailOrPhone,
                           ),
                           20.verticalSpace,
                           CustomTextField(
@@ -164,19 +165,31 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: () async {
                               debugPrint('Google sign-in button pressed');
                               try {
-                                debugPrint('Calling GoogleSignIn.instance.authenticate()');
-                                final result = await GoogleSignIn.instance.authenticate();
-                                debugPrint('Google account selected: ${result.authentication}');
-                                final String? idToken = result.authentication.idToken;
+                                debugPrint(
+                                  'Calling GoogleSignIn.instance.authenticate()',
+                                );
+                                final result = await GoogleSignIn.instance
+                                    .authenticate();
+                                debugPrint(
+                                  'Google account selected: ${result.authentication}',
+                                );
+                                final String? idToken =
+                                    result.authentication.idToken;
                                 debugPrint('Google idToken: $idToken');
 
                                 if (idToken != null) {
                                   if (context.mounted) {
-                                    debugPrint('Calling AuthCubit.signInWithGoogle()');
-                                    context.read<AuthCubit>().signInWithGoogle(idToken);
+                                    debugPrint(
+                                      'Calling AuthCubit.signInWithGoogle()',
+                                    );
+                                    context.read<AuthCubit>().signInWithGoogle(
+                                      idToken,
+                                    );
                                   }
                                 } else if (context.mounted) {
-                                  debugPrint('Google idToken is null, backend will not be called');
+                                  debugPrint(
+                                    'Google idToken is null, backend will not be called',
+                                  );
                                   AnimatedSnackBar.rectangle(
                                     'Error',
                                     'Failed to retrieve Google ID token.',
@@ -187,7 +200,9 @@ class _LoginPageState extends State<LoginPage> {
                                 }
                               } catch (e) {
                                 debugPrint('Google sign-in exception: $e');
-                                if (context.mounted && (e is! Exception || !e.toString().contains('cancel'))) {
+                                if (context.mounted &&
+                                    (e is! Exception ||
+                                        !e.toString().contains('cancel'))) {
                                   AnimatedSnackBar.rectangle(
                                     'Error',
                                     e.toString(),
@@ -210,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     );
-                  }
+                  },
                 ),
               ),
             ),

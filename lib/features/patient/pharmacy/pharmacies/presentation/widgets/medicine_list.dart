@@ -8,7 +8,8 @@ import 'package:chefaa/features/patient/cart/presentation/manager/cart_cubit.dar
 
 class MedicineList extends StatelessWidget {
   final List<MedicineModel> medicines;
-  const MedicineList({super.key, required this.medicines});
+  final String pharmacyId;
+  const MedicineList({super.key, required this.medicines, required this.pharmacyId});
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class MedicineList extends StatelessWidget {
                   activeIngredient: med.category,
                   price: '${med.price} EGP',
                   medicineId: med.id,
+                  pharmacyId: pharmacyId,
                 ),
               ),
             );
@@ -39,7 +41,7 @@ class MedicineList extends StatelessWidget {
             price: '${med.price} EGP',
             onAddTap: () {
               CartManager().addToCart(
-                pharmacyId: '6a0a13efd785cd1a6461b64c', // Fallback pharmacy ID
+                pharmacyId: pharmacyId,
                 medicineId: med.id,
                 name: med.name,
                 dosage: med.category,

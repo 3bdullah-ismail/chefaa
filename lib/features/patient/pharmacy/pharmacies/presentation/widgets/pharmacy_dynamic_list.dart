@@ -8,11 +8,13 @@ import 'pharmacy_list.dart';
 class PharmacyDynamicList extends StatelessWidget {
   final int selectedIndex;
   final List<MedicineModel> medicines;
+  final String pharmacyId;
 
   const PharmacyDynamicList({
     super.key,
     required this.selectedIndex,
     required this.medicines,
+    required this.pharmacyId,
   });
 
   @override
@@ -22,7 +24,7 @@ class PharmacyDynamicList extends StatelessWidget {
         return const PharmacyList();
 
       case 1:
-        return MedicineList(medicines: medicines);
+        return MedicineList(medicines: medicines, pharmacyId: pharmacyId);
 
       case 2:
         return const NearbyList();

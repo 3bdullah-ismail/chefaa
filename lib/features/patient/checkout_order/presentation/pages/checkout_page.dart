@@ -174,12 +174,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         return;
                       }
 
+                      if (pharmacyId == null || pharmacyId!.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Pharmacy info is missing. Please go back and try again."),
+                            backgroundColor: ColorManager.error,
+                          ),
+                        );
+                        return;
+                      }
+
                       final checkoutData = {
-                        "pharmacyId": pharmacyId ?? "6a0a13efd785cd1a6461b64c",
+                        "pharmacyId": pharmacyId,
                         "orderType": "Delivery",
                         "paymentMethod": paymentMethod == "cod" ? "Cash" : "Visa",
                         "items": items.map((item) => {
-                          "medicineId": item["medicineId"] ?? "6a0a2dfc4fdc199ce495e74b",
+                          "medicineId": item["medicineId"] ?? "",
                           "medicineName": item["name"] ?? item["medicineName"] ?? "",
                           "quantity": item["quantity"] ?? 1,
                         }).toList(),
