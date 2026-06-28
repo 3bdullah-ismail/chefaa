@@ -68,6 +68,7 @@ dependencies:
   hive_flutter:
   geocoding:
   fl_chart:
+  flutter_native_splash:
   easy_localization:
   material_symbols_icons:
   username_generator: ^1.3.0

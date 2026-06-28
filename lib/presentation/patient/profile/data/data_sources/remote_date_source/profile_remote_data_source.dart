@@ -1,3 +1,4 @@
+import 'package:chefaa/presentation/patient/profile/domain/entities/address_entity.dart';
 import 'package:dio/dio.dart';
 
 abstract class ProfileRemoteDataSource {
@@ -9,6 +10,7 @@ abstract class ProfileRemoteDataSource {
     num? age,
     num? height,
     num? weight,
+      AddressEntity address,
   );
 
   Future<Response<dynamic>> updateMedicalData({

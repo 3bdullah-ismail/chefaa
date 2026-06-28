@@ -34,7 +34,7 @@ class _OptionScreenState extends State<OptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        preferredHeight: 150.h,
+        preferredHeight: 130.h,
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: const AppBarContent(),
       ),

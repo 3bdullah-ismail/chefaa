@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/repositories/profile_repo.dart';
+import '../../domain/entities/address_entity.dart';
 import '../../domain/entities/user_profile_entity.dart';
 
 part 'profile_state.dart';
@@ -19,10 +20,30 @@ class ProfileCubit extends Cubit<ProfileState> {
   final TextEditingController bloodTypeController = TextEditingController();
   final TextEditingController allergiesController = TextEditingController();
   final TextEditingController chronicController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+
+  double? latitude;
+  double? longitude;
 
   String gender = "Male";
 
   static ProfileCubit get(BuildContext context) => BlocProvider.of(context);
+
+  void setLocation({
+    required String addressText,
+    required double lat,
+    required double lng,
+  }) {
+    locationController.text = addressText;
+    latitude = lat;
+    longitude = lng;
+    emit(LocationPickedState(addressText: addressText, lat: lat, lng: lng));
+  }
+
+  bool get isLocationMissing =>
+      locationController.text.trim().isEmpty ||
+          latitude == null ||
+          longitude == null;
 
   Future<void> getProfileData() async {
     emit(GetProfileDataLoadingState());
@@ -36,6 +57,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> updateProfileData() async {
+    if (isLocationMissing) {
+      emit(UpdateProfileDataFailureState("Please choose your location"));
+      return;
+    }
+
     emit(UpdateProfileDataLoadingState());
 
     final result = await profileRepo.updateProfileData(
@@ -44,6 +70,11 @@ class ProfileCubit extends Cubit<ProfileState> {
       num.tryParse(ageController.text.trim()),
       num.tryParse(heightController.text.trim()),
       num.tryParse(weightController.text.trim()),
+      AddressEntity(
+        addressText: locationController.text.trim(),
+        longitude: longitude!,
+        latitude: latitude!,
+      ),
     );
 
     result.fold(
@@ -61,18 +92,18 @@ class ProfileCubit extends Cubit<ProfileState> {
     final allergiesList = allergiesController.text.trim().isEmpty
         ? <String>[]
         : allergiesController.text
-              .split(',')
-              .map((e) => e.trim())
-              .where((e) => e.isNotEmpty)
-              .toList();
+        .split(',')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
 
     final chronicConditionsList = chronicController.text.trim().isEmpty
         ? <String>[]
         : chronicController.text
-              .split(',')
-              .map((e) => e.trim())
-              .where((e) => e.isNotEmpty)
-              .toList();
+        .split(',')
+        .map((e) => e.trim())
+        .where((e) => e.isNotEmpty)
+        .toList();
 
     final result = await profileRepo.updateMedicalData(
       bloodType: bloodType,
@@ -97,6 +128,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     bloodTypeController.dispose();
     allergiesController.dispose();
     chronicController.dispose();
+    locationController.dispose();
     return super.close();
   }
 }

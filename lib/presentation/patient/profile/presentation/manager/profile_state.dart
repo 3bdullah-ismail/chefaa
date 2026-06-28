@@ -46,3 +46,9 @@ final class UpdateMedicalInformationFailureState extends ProfileState {
 
   UpdateMedicalInformationFailureState(this.message);
 }
+class LocationPickedState extends ProfileState {
+  final String addressText;
+  final double lat;
+  final double lng;
+  LocationPickedState({required this.addressText, required this.lat, required this.lng});
+}

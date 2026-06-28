@@ -161,9 +161,59 @@ class _HomePageState extends State<HomePage> {
 
                     40.verticalSpace,
 
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Today's Medication",
+                            style: getBoldStyle(
+                              color: ColorManager.black,
+                              fontSize: 18.sp,
+                            ),
+                          ),
+                        ),
+                        BlocBuilder<MedicationCubit, MedicationState>(
+                          buildWhen: (previous, current) =>
+                          current is MedicationListLoadingState ||
+                              current is MedicationListSuccessState ||
+                              current is MedicationListErrorState,
+                          builder: (context, state) {
+                            final medications = state is MedicationListSuccessState
+                                ? (state.medications.medications ?? [])
+                                : <dynamic>[];
+
+                            if (medications.isEmpty) return const SizedBox.shrink();
+
+                            return TextButton(
+                              onPressed: () => Navigator.pushNamed(
+                                context,
+                                AppRoutesNames.medicationPage,
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Manage",
+                                    style: getMediumStyle(
+                                      color: ColorManager.primary,
+                                      fontSize: 16.sp,
+                                    ).copyWith(
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: ColorManager.primary,
+                                      decorationThickness: 2,
+                                    ),
+                                  ),
+                                  SvgPicture.asset("assets/icons/drug.svg"),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    15.verticalSpace,
                     BlocBuilder<MedicationCubit, MedicationState>(
                       buildWhen: (previous, current) =>
-                          current is MedicationListLoadingState ||
+                      current is MedicationListLoadingState ||
                           current is MedicationListSuccessState ||
                           current is MedicationListErrorState,
                       builder: (context, state) {
@@ -205,9 +255,7 @@ class _HomePageState extends State<HomePage> {
                                 12.verticalSpace,
                                 ElevatedButton(
                                   onPressed: () {
-                                    context
-                                        .read<MedicationCubit>()
-                                        .getMedicationList();
+                                    context.read<MedicationCubit>().getMedicationList();
                                   },
                                   child: const Text("Retry"),
                                 ),
@@ -217,73 +265,24 @@ class _HomePageState extends State<HomePage> {
                         }
 
                         if (state is MedicationListSuccessState) {
-                          final medications =
-                              state.medications.medications ?? [];
+                          final medications = state.medications.medications ?? [];
 
-                          return Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "Today's Medication",
-                                      style: getBoldStyle(
-                                        color: ColorManager.black,
-                                        fontSize: 18.sp,
-                                      ),
-                                    ),
-                                  ),
-                                  if (medications.isNotEmpty)
-                                    TextButton(
-                                      onPressed: () => Navigator.pushNamed(
-                                        context,
-                                        AppRoutesNames.medicationPage,
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Manage",
-                                            style:
-                                                getMediumStyle(
-                                                  color: ColorManager.primary,
-                                                  fontSize: 16.sp,
-                                                ).copyWith(
-                                                  decoration:
-                                                      TextDecoration.underline,
-                                                  decorationColor:
-                                                      ColorManager.primary,
-                                                  decorationThickness: 2,
-                                                ),
-                                          ),
-                                          SvgPicture.asset(
-                                            "assets/icons/drug.svg",
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              15.verticalSpace,
-                              if (medications.isEmpty)
-                                const EmptyMedicationState()
-                              else
-                                MedicineCard(
-                                  key: _medicineCardKey,
-                                  medications: medications,
-                                  onPressed: (med) {
-                                    context
-                                        .read<MedicationCubit>()
-                                        .confirmMedication(med.id ?? '');
-                                  },
-                                ),
-                            ],
+                          if (medications.isEmpty) {
+                            return const EmptyMedicationState();
+                          }
+
+                          return MedicineCard(
+                            key: _medicineCardKey,
+                            medications: medications,
+                            onPressed: (med) {
+                              context.read<MedicationCubit>().confirmMedication(med.id ?? '');
+                            },
                           );
                         }
 
                         return const SizedBox.shrink();
                       },
                     ),
-
                     45.verticalSpace,
 
                     Row(

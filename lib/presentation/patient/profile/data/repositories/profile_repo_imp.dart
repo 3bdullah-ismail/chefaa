@@ -8,6 +8,7 @@ import 'package:dart_either/dart_either.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../domain/entities/address_entity.dart';
 import '../data_sources/remote_date_source/profile_remote_data_source.dart';
 
 @Injectable(as: ProfileRepo)
@@ -36,6 +37,7 @@ class ProfileRepoImpl implements ProfileRepo {
     num? age,
     num? height,
     num? weight,
+      AddressEntity address,
   ) async {
     try {
       var response = await profileRemoteDataSource.updateProfileData(
@@ -44,6 +46,8 @@ class ProfileRepoImpl implements ProfileRepo {
         age,
         height,
         weight,
+        address
+
       );
       var data = UpdateResponse.fromJson(response.data);
       return Right(data);

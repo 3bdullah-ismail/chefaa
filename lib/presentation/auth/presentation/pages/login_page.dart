@@ -242,7 +242,8 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                         15.verticalSpace,
-                        const LanguageSwitch(),
+                        Center(child:
+                        const LanguageSwitch(),)
                       ],
                     ),
                   );

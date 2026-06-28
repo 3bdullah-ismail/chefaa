@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/routes/app_routes_names.dart';
+import '../../../core/services/storage_service.dart';
 import '../models/onboarding_model.dart';
 import '../widgets/onboarding_container.dart';
 
@@ -57,12 +59,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
     );
   }
 
-  void nextPage() {
+  Future<void> nextPage() async {
     if (currentIndex < OnboardingModel.onboardingData.length - 1) {
       controller.nextPage(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,
       );
+    } else {
+      await StorageService.markOnboardingSeen();
+      if (!mounted) return;
+      Navigator.pushReplacementNamed(context, AppRoutesNames.login);
     }
   }
 

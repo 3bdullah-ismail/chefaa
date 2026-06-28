@@ -32,7 +32,7 @@ class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        preferredHeight: 150.h,
+        preferredHeight: 130.h,
         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
         child: const AppBarContent(),
       ),
@@ -64,7 +64,7 @@ class _FacilityOptionScreenState extends State<FacilityOptionScreen> {
                     ),
 
                     OptionCard(
-                      width: 330,
+                      width: 330.w,
                       title: "Medical Lab /\nRadiology Center",
                       image: "assets/images/lab.png",
                       isSelected: selectedRole == AppConstants.lab,

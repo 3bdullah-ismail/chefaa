@@ -90,10 +90,9 @@ class _FacilitySignupState extends State<FacilitySignup> {
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
               ).show(context);
-              Navigator.pushNamedAndRemoveUntil(
+              Navigator.pushReplacementNamed(
                 context,
-                AppRoutesNames.facilityLayout,
-                (_) => false,
+                AppRoutesNames.login,
               );
             }
           },

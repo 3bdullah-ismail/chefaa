@@ -10,10 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
 import '../../../../../core/widget/custom_circle_avatar.dart';
+import '../../data/models/profile_response.dart';
 import '../manager/profile_cubit.dart';
 import '../widgets/appointment_card.dart';
 import '../widgets/bottom_sheet.dart';
@@ -22,6 +25,7 @@ import '../widgets/edit_user_details.dart';
 import '../widgets/item_column.dart';
 import '../widgets/item_container.dart';
 import '../widgets/item_content.dart';
+import '../widgets/location_helper.dart';
 
 class PatientProfilePage extends StatefulWidget {
   const PatientProfilePage({super.key});
@@ -112,6 +116,113 @@ class _PatientProfilePageState extends State<PatientProfilePage> {
                                 child: const EditUserDetails(),
                               ),
                             ),
+                          ),
+                          const Divider(
+                            color: ColorManager.input,
+                            thickness: 1,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _buildSectionTitle("Location"),
+                              const SizedBox(height: 16),
+
+                              BlocConsumer<ProfileCubit, ProfileState>(
+                                listener: (context, state) {
+                                  if (state is GetProfileDataSuccessState) {
+                                    final profile =
+                                        state.profileData as ProfileResponse;
+
+                                    final address =
+                                        profile.address?.addressText ?? "";
+
+                                    if (address.isEmpty) {
+                                      Future.microtask(() {
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => AlertDialog(
+                                            title: const Text(
+                                              "Location Required",
+                                            ),
+                                            content: const Text(
+                                              "Please add your location to continue.",
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  LocationHelper.getCurrentLocation(
+                                                    context,
+                                                  );
+                                                },
+                                                child: const Text(
+                                                  "Add Location",
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                    }
+                                  }
+                                },
+                                builder: (context, state) {
+                                  final cubit = context.read<ProfileCubit>();
+
+                                  if (state is GetProfileDataSuccessState) {
+                                    final profile =
+                                        state.profileData as ProfileResponse;
+
+                                    cubit.locationController.text =
+                                        profile.address?.addressText ?? "";
+
+                                    cubit.latitude = profile.address?.latitude;
+                                    cubit.longitude =
+                                        profile.address?.longitude;
+                                  }
+
+                                  return InkWell(
+                                    onTap: () =>
+                                        LocationHelper.getCurrentLocation(
+                                          context,
+                                        ),
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey.shade300,
+                                        ),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on_outlined,
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Expanded(
+                                            child: Text(
+                                              cubit
+                                                      .locationController
+                                                      .text
+                                                      .isEmpty
+                                                  ? "Tap to choose your location"
+                                                  : cubit
+                                                        .locationController
+                                                        .text,
+                                              softWrap: true,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                           const Divider(
                             color: ColorManager.input,
@@ -313,5 +424,69 @@ class VersionContainer extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<void> getCurrentLocation(BuildContext context) async {
+  final cubit = context.read<ProfileCubit>();
+
+  try {
+    LocationPermission permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Location permission denied")),
+      );
+      return;
+    }
+
+    final position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    final places = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
+    );
+
+    String address = "";
+
+    if (places.isNotEmpty) {
+      final p = places.first;
+      String street = p.street ?? "";
+
+      if (street.contains("+")) {
+        street = "";
+      }
+      address = [
+        p.street,
+        p.subLocality,
+        p.locality,
+        p.administrativeArea,
+      ].where((e) => e != null && e.trim().isNotEmpty).join(", ");
+    }
+
+    cubit.setLocation(
+      addressText: address,
+      lat: position.latitude,
+      lng: position.longitude,
+    );
+
+    await cubit.updateProfileData();
+
+    if (!context.mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Location saved successfully")),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(e.toString())));
   }
 }

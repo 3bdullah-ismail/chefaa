@@ -1,5 +1,6 @@
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/presentation/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source.dart';
+import 'package:chefaa/presentation/patient/profile/domain/entities/address_entity.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
@@ -37,6 +38,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     num? age,
     num? height,
     num? weight,
+      AddressEntity address,
   ) {
     return networkService.dio.put(
       "/patient/profile/basic-info",
@@ -46,6 +48,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
         "gender": gender,
         "height": height,
         "weight": weight,
+        "address": {
+          "addressText": address.addressText,
+          "location": {
+            "type": "point",
+            "coordinates": [address.longitude, address.latitude],
+          },
+        },
       },
     );
   }

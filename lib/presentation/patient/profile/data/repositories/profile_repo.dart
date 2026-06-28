@@ -1,3 +1,4 @@
+import 'package:chefaa/presentation/patient/profile/domain/entities/address_entity.dart';
 import 'package:chefaa/presentation/patient/profile/domain/entities/user_profile_entity.dart';
 import 'package:dart_either/dart_either.dart';
 
@@ -12,6 +13,7 @@ abstract class ProfileRepo {
     num? age,
     num? height,
     num? weight,
+      AddressEntity address,
   );
 
   Future<Either<Failure, UserProfileEntity>> updateMedicalData({

@@ -81,10 +81,9 @@ class _PharmacySignUpPageState extends State<PharmacySignUpPage> {
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
               ).show(context);
-              Navigator.pushNamedAndRemoveUntil(
+              Navigator.pushReplacementNamed(
                 context,
-                AppRoutesNames.pharmacyLayout,
-                (route) => false,
+                AppRoutesNames.login,
               );
             } else {}
           },

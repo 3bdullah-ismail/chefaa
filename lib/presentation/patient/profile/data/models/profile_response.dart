@@ -1,4 +1,5 @@
 import '../../domain/entities/user_profile_entity.dart';
+import 'address_model.dart';
 
 class ProfileResponse extends UserProfileEntity {
   ProfileResponse({
@@ -18,7 +19,7 @@ class ProfileResponse extends UserProfileEntity {
     required this.medications,
   }) : super(
          userName: userId?.name,
-         userAddress: address,
+         userAddress: address?.addressText,
          userGender: gender,
          userHeight: height,
          userWeight: weight,
@@ -34,7 +35,9 @@ class ProfileResponse extends UserProfileEntity {
     return ProfileResponse(
       id: json['_id']?.toString(),
       userId: userId,
-      address: json['address']?.toString(),
+      address: json["address"] != null
+          ? AddressModel.fromJson(json["address"])
+          : null,
       age: json['age'] as num?,
       gender: json['gender']?.toString(),
       height: json['height'] as num?,
@@ -51,7 +54,7 @@ class ProfileResponse extends UserProfileEntity {
 
   final String? id;
   final UserId? userId;
-  final String? address;
+  final AddressModel? address;
   final String? gender;
   final num? height;
   final num? weight;
@@ -69,7 +72,7 @@ class ProfileResponse extends UserProfileEntity {
     if (userId != null) {
       map['userId'] = userId!.toJson();
     }
-    map['address'] = address;
+    map["address"] = address?.toJson();
     map['age'] = age;
     map['gender'] = gender;
     map['height'] = height;

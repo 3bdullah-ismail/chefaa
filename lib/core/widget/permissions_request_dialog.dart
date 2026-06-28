@@ -208,64 +208,68 @@ class _PermissionsRequestDialogState extends State<PermissionsRequestDialog> {
                 ],
                 24.verticalSpace,
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextButton(
-                      onPressed: isLoading
-                          ? null
-                          : () async {
-                              final messenger = ScaffoldMessenger.of(context);
-                              try {
-                                await PermissionsService.openAppSettings();
-                              } catch (e) {
-                                if (mounted) {
-                                  messenger.showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Error opening settings: $e',
-                                      ),
-                                    ),
-                                  );
-                                }
-                              }
-                            },
-                      child: Text(
-                        'Open Settings',
-                        style: getMediumStyle(
-                          color: ColorManager.primary,
-                          fontSize: 14.sp,
+                    Flexible(
+                      child: TextButton(
+                        onPressed: isLoading
+                            ? null
+                            : () async {
+                          final messenger = ScaffoldMessenger.of(context);
+                          try {
+                            await PermissionsService.openAppSettings();
+                          } catch (e) {
+                            if (mounted) {
+                              messenger.showSnackBar(
+                                SnackBar(
+                                  content: Text('Error opening settings: $e'),
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        child: Text(
+                          'Open Settings',
+                          style: getMediumStyle(
+                            color: ColorManager.primary,
+                            fontSize: 13.sp, // قللتها شوية
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: isLoading
-                          ? null
-                          : () {
-                              Navigator.pop(context, permissionsStatus);
-                            },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorManager.primary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
+                    8.horizontalSpace,
+                    Flexible(
+                      child: ElevatedButton(
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                          Navigator.pop(context, permissionsStatus);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorManager.primary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.w,
-                          vertical: 12.h,
-                        ),
-                        child: Text(
-                          'Continue',
-                          style: getMediumStyle(
-                            color: ColorManager.white,
-                            fontSize: 14.sp,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w, // قللتها من 24 لـ 16
+                            vertical: 12.h,
+                          ),
+                          child: Text(
+                            'Continue',
+                            style: getMediumStyle(
+                              color: ColorManager.white,
+                              fontSize: 13.sp,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ),
                     ),
                   ],
-                ),
-              ],
+                ),              ],
             ),
           ),
         ),

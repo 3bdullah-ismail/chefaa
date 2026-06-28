@@ -15,9 +15,9 @@ class NextButton extends StatelessWidget {
     return InkWell(
       onTap: isEnabled ? onTap : null,
       child: Container(
-        width: 55.w,
-        height: 55.h,
-        padding: const EdgeInsets.all(AppPadding.p14),
+        width: 50.w,
+        height: 50.h,
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p8),
         decoration: BoxDecoration(
           color: isEnabled
               ? ColorManager.primary
