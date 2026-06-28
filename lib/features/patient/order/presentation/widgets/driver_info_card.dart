@@ -1,3 +1,4 @@
+import 'package:chefaa/features/patient/order/data/models/track_order_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -5,7 +6,12 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'circle_button.dart';
 
 class DriverInfoCard extends StatelessWidget {
-  const DriverInfoCard({super.key});
+  final RiderInfo rider;
+
+  const DriverInfoCard({
+    super.key,
+    required this.rider,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +48,15 @@ class DriverInfoCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Ahmed Mohamed",
-                  style: TextStyle(
+                Text(
+                  rider.name,
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     color: ColorManager.black,
                     fontSize: 16,
                   ),
                 ),
                 7.horizontalSpace,
-
                 Row(
                   children: [
                     const Icon(
@@ -60,10 +65,9 @@ class DriverInfoCard extends StatelessWidget {
                       size: 20,
                     ),
                     7.horizontalSpace,
-
-                    const Text(
-                      "4.9",
-                      style: TextStyle(
+                    Text(
+                      rider.rating.toString(),
+                      style: const TextStyle(
                         color: ColorManager.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -85,8 +89,8 @@ class DriverInfoCard extends StatelessWidget {
                 icon: Icons.call_rounded,
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Phone number copied to clipboard!'),
+                    SnackBar(
+                      content: Text('Phone: ${rider.phoneNumber}'),
                     ),
                   );
                 },

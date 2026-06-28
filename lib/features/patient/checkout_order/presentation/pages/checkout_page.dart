@@ -99,7 +99,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
               } else {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (_) => const TrackOrderPage()),
+                  MaterialPageRoute(
+                    builder: (_) => TrackOrderPage(
+                      orderId: state.response.data?.orderId ?? "",
+                    ),
+                  ),
                 );
               }
             } else if (state is PharmacyCheckoutFailure) {

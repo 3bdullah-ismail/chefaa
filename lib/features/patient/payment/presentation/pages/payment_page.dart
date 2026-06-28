@@ -72,7 +72,9 @@ class _PaymentPageState extends State<PaymentPage> {
 
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => const TrackOrderPage()),
+                MaterialPageRoute(
+                  builder: (_) => TrackOrderPage(orderId: widget.orderId),
+                ),
                 (route) => false,
               );
             } else if (state is PaymentFailure) {
@@ -87,7 +89,9 @@ class _PaymentPageState extends State<PaymentPage> {
 
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (_) => const TrackOrderPage()),
+                  MaterialPageRoute(
+                    builder: (_) => TrackOrderPage(orderId: widget.orderId),
+                  ),
                   (route) => false,
                 );
               } else {

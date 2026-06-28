@@ -6,7 +6,35 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 
 class LiveStatusCard extends StatelessWidget {
-  const LiveStatusCard({super.key});
+  final String status;
+  final String description;
+  final String? time;
+
+  const LiveStatusCard({
+    super.key,
+    required this.status,
+    required this.description,
+    this.time,
+  });
+
+  double _getProgressWidth(String status) {
+    switch (status.toLowerCase()) {
+      case 'new':
+      case 'confirmed':
+        return 80.w;
+      case 'preparing':
+        return 160.w;
+      case 'picked up':
+      case 'picked_up':
+        return 240.w;
+      case 'on the way':
+      case 'on_the_way':
+      case 'delivered':
+        return 320.w;
+      default:
+        return 80.w;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,31 +58,32 @@ class LiveStatusCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "On The Way",
+                status,
                 style: getBoldStyle(color: ColorManager.white, fontSize: 17.sp),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p10,
-                  vertical: AppPadding.p4,
-                ),
-                decoration: BoxDecoration(
-                  color: ColorManager.white.withAlpha(130),
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-                child: Text(
-                  "25-35 MINS",
-                  style: getBoldStyle(
-                    color: ColorManager.white,
-                    fontSize: 13.sp,
+              if (time != null && time!.isNotEmpty)
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p10,
+                    vertical: AppPadding.p4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: ColorManager.white.withAlpha(130),
+                    borderRadius: BorderRadius.circular(15.r),
+                  ),
+                  child: Text(
+                    time!,
+                    style: getBoldStyle(
+                      color: ColorManager.white,
+                      fontSize: 13.sp,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
-            "Your order is out for delivery and moving towards you.",
+            description,
             style: getSemiBoldStyle(
               color: ColorManager.white.withAlpha(200),
               fontSize: 13.sp,
@@ -73,7 +102,7 @@ class LiveStatusCard extends StatelessWidget {
               AnimatedContainer(
                 duration: const Duration(milliseconds: 500),
                 height: 6,
-                width: 200,
+                width: _getProgressWidth(status),
                 decoration: BoxDecoration(
                   color: ColorManager.white,
                   borderRadius: BorderRadius.circular(10),

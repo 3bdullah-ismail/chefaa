@@ -4,7 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 
 class OrderInfoCard extends StatelessWidget {
-  const OrderInfoCard({super.key});
+  final String orderNumber;
+  final int itemsCount;
+  final String placedTime;
+  final String paymentMethod;
+
+  const OrderInfoCard({
+    super.key,
+    required this.orderNumber,
+    required this.itemsCount,
+    required this.placedTime,
+    required this.paymentMethod,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +53,18 @@ class OrderInfoCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Order #CH-20491",
-                      style: TextStyle(
+                    Text(
+                      "Order #$orderNumber",
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: ColorManager.black,
                       ),
                     ),
                     5.verticalSpace,
-                    const Text(
-                      "Al-Shifa Pharmacy • 3 items",
-                      style: TextStyle(
+                    Text(
+                      "$itemsCount items",
+                      style: const TextStyle(
                         color: ColorManager.gray,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -68,20 +79,20 @@ class OrderInfoCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 12.0),
             child: Divider(color: ColorManager.input, thickness: 0.7),
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Placed: Today 2:30 PM",
-                style: TextStyle(
+                "Placed: $placedTime",
+                style: const TextStyle(
                   fontSize: 13,
                   color: ColorManager.darkGray,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
-                "Cash on Delivery",
-                style: TextStyle(
+                paymentMethod,
+                style: const TextStyle(
                   fontSize: 13,
                   color: ColorManager.lightGreen,
                   fontWeight: FontWeight.bold,

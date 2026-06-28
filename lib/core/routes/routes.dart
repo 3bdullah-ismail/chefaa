@@ -107,8 +107,9 @@ class Routes {
           ),
         );
       case AppRoutesNames.trackOrderPage:
+        final orderId = settings.arguments as String?;
         return MaterialPageRoute(
-          builder: (_) => _wrapWithCanPop(const TrackOrderPage()),
+          builder: (_) => _wrapWithCanPop(TrackOrderPage(orderId: orderId)),
         );
       case AppRoutesNames.appEntryRoute:
         return MaterialPageRoute(

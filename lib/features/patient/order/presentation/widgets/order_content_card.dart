@@ -1,4 +1,5 @@
 import 'package:chefaa/core/resources/values_manager.dart';
+import 'package:chefaa/features/patient/order/data/models/track_order_response.dart';
 import 'package:chefaa/features/patient/order/presentation/widgets/medicine_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,12 @@ import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 
 class OrderContentCard extends StatelessWidget {
-  const OrderContentCard({super.key});
+  final OrderContents contents;
+
+  const OrderContentCard({
+    super.key,
+    required this.contents,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,27 +48,15 @@ class OrderContentCard extends StatelessWidget {
             ],
           ),
           16.verticalSpace,
-          const MedicineItemCard(
-            name: "Paracetamol 500mg",
-            quantity: 2,
-            price: "EGP 10.00",
-          ),
-          const MedicineItemCard(
-            name: "Amoxicillin 500mg",
-            quantity: 1,
-            price: "EGP 15.00",
-          ),
-          const MedicineItemCard(
-            name: "Metformin 500mg",
-            quantity: 1,
-            price: "EGP 12.50",
-          ),
-
+          ...contents.items.map((item) => MedicineItemCard(
+                name: item.medicineName,
+                quantity: item.quantity,
+                price: "EGP ${item.price.toStringAsFixed(2)}",
+              )),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: AppPadding.p12),
             child: Divider(color: ColorManager.input, thickness: 0.8),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -71,7 +65,7 @@ class OrderContentCard extends StatelessWidget {
                 style: getBoldStyle(fontSize: 22.sp, color: ColorManager.black),
               ),
               Text(
-                "EGP 52.50",
+                "EGP ${(contents.summary?.totalPrice ?? 0).toStringAsFixed(2)}",
                 style: getBoldStyle(
                   fontSize: 20.sp,
                   color: ColorManager.primary,

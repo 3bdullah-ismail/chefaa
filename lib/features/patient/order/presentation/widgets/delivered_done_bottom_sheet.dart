@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
+import 'package:chefaa/core/routes/app_routes_names.dart';
 
 class DeliveredDoneBottomSheet extends StatelessWidget {
-  const DeliveredDoneBottomSheet({super.key});
+  final List<Map<String, dynamic>> items;
+
+  const DeliveredDoneBottomSheet({super.key, required this.items});
 
   Widget buildItem(String name, int quantity) {
     return Padding(
@@ -16,7 +19,6 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
             size: 22,
           ),
           const SizedBox(width: 14),
-
           Expanded(
             child: Text(
               name,
@@ -27,7 +29,6 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
               ),
             ),
           ),
-
           Text(
             "${quantity}x",
             style: const TextStyle(
@@ -56,9 +57,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-
           const SizedBox(height: 24),
-
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -71,9 +70,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
               size: 45,
             ),
           ),
-
           const SizedBox(height: 16),
-
           const Text(
             "Order Delivered!",
             style: TextStyle(
@@ -82,9 +79,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
               color: ColorManager.black,
             ),
           ),
-
           const SizedBox(height: 6),
-
           const Text(
             "All items have been successfully handed over.",
             textAlign: TextAlign.center,
@@ -94,28 +89,24 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-
           const SizedBox(height: 24),
-
           Container(
             height: 1,
             color: ColorManager.input.withValues(alpha: 0.5),
           ),
-
           const SizedBox(height: 12),
-
-          buildItem("Paracetamol 500mg", 2),
-          buildItem("Amoxicillin 500mg", 1),
-          buildItem("Metformin 500mg", 1),
-
+          ...items.map((i) => buildItem(i['name'] ?? '', i['quantity'] ?? 1)),
           const SizedBox(height: 24),
-
           SizedBox(
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRoutesNames.appEntryRoute,
+                  (route) => false,
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: ColorManager.primary,

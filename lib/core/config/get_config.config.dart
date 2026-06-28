@@ -236,6 +236,16 @@ import 'package:chefaa/features/patient/notification/domain/repositories/patient
     as _i307;
 import 'package:chefaa/features/patient/notification/presentation/manager/patient_notification_cubit.dart'
     as _i476;
+import 'package:chefaa/features/patient/order/data/data_sources/track_order_data_source.dart'
+    as _i85;
+import 'package:chefaa/features/patient/order/data/data_sources/track_order_data_source_imp.dart'
+    as _i361;
+import 'package:chefaa/features/patient/order/data/repositories/track_order_repo_impl.dart'
+    as _i516;
+import 'package:chefaa/features/patient/order/domain/repositories/track_order_repo.dart'
+    as _i213;
+import 'package:chefaa/features/patient/order/presentation/manager/track_order_cubit.dart'
+    as _i594;
 import 'package:chefaa/features/patient/payment/data/data_sources/online_payment_data_source.dart'
     as _i246;
 import 'package:chefaa/features/patient/payment/data/data_sources/online_payment_data_source_imp.dart'
@@ -370,6 +380,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i181.ChatbotRemoteDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i563.PharmacyRepo>(() => _i682.PharmacyRepoImp(
         pharmacyDataSource: gh<_i705.PharmacyDataSource>()));
+    gh.factory<_i85.TrackOrderDataSource>(
+        () => _i361.TrackOrderDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i222.PatientDataSource>(
         () => _i38.PatientDataSourceImp(gh<_i492.NetworkService>()));
     gh.factory<_i572.DashboardRemoteSource>(
@@ -464,6 +476,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i315.BriefRepoImp(briefDataSource: gh<_i394.BriefDataSource>()));
     gh.factory<_i197.DoctorAuthRepo>(
         () => _i685.DoctorAuthRepoImp(gh<_i480.DoctorAuthDataSource>()));
+    gh.factory<_i213.TrackOrderRepo>(
+        () => _i516.TrackOrderRepoImpl(gh<_i85.TrackOrderDataSource>()));
     gh.factory<_i433.AIReportRepo>(
         () => _i889.AiReportRepoImp(gh<_i807.AIReportDataSource>()));
     gh.factory<_i208.DashboardRepository>(
@@ -522,6 +536,8 @@ extension GetItInjectableX on _i174.GetIt {
           doctorAuthRepo: gh<_i197.DoctorAuthRepo>(),
           usersCubit: gh<_i355.UsersCubit>(),
         ));
+    gh.factory<_i594.TrackOrderCubit>(
+        () => _i594.TrackOrderCubit(gh<_i213.TrackOrderRepo>()));
     gh.factory<_i800.PaymentCubit>(
         () => _i800.PaymentCubit(gh<_i216.OnlinePaymentRepo>()));
     gh.factory<_i816.SearchCubit>(

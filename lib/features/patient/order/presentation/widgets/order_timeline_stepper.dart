@@ -1,14 +1,35 @@
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/features/patient/order/data/models/track_order_response.dart';
 import 'package:chefaa/features/patient/order/presentation/widgets/time_line_steps_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 
 class OrderTimelineStepper extends StatelessWidget {
-  const OrderTimelineStepper({super.key});
+  final StatusTimeline timeline;
+
+  const OrderTimelineStepper({
+    super.key,
+    required this.timeline,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final confirmed = timeline.orderConfirmed;
+    final preparing = timeline.pharmacyPreparing;
+    final pickedUp = timeline.riderPickedUp;
+    final onWay = timeline.onTheWay;
+
+    final bool isConfirmedCompleted = confirmed?.isCompleted ?? false;
+    final bool isPreparingCompleted = preparing?.isCompleted ?? false;
+    final bool isPickedUpCompleted = pickedUp?.isCompleted ?? false;
+    final bool isOnWayCompleted = onWay?.isCompleted ?? false;
+
+    final bool isConfirmedActive = !isConfirmedCompleted;
+    final bool isPreparingActive = isConfirmedCompleted && !isPreparingCompleted;
+    final bool isPickedUpActive = isPreparingCompleted && !isPickedUpCompleted;
+    final bool isOnWayActive = isPickedUpCompleted && !isOnWayCompleted;
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -30,39 +51,43 @@ class OrderTimelineStepper extends StatelessWidget {
             style: getBoldStyle(color: ColorManager.black, fontSize: 18.sp),
           ),
           const SizedBox(height: 24),
-
-          const TimeLineStepsCard(
-            defaultIcon: Icons.receipt_long_rounded,
-            title: "Order Confirmed",
-            subtitle: "Your order was received and processed",
-            time: "9:30 AM",
-            isCompleted: true,
-          ),
-
-          const TimeLineStepsCard(
-            defaultIcon: Icons.healing_rounded,
-            title: "Pharmacy Preparing Order",
-            subtitle: "Al-Shifa Pharmacy started packing your medicines",
-            time: "9:33 AM",
-            isCompleted: true,
-          ),
-
-          const TimeLineStepsCard(
-            defaultIcon: Icons.inventory_2_rounded,
-            title: "Rider Picked Up Order",
-            subtitle: "Mohamed collected your order from the pharmacy",
-            time: "9:48 AM",
-            isCompleted: true,
-          ),
-
-          const TimeLineStepsCard(
-            defaultIcon: Icons.directions_bike_rounded,
-            title: "On the Way",
-            subtitle: "Rider is ~2.5 km from your location",
-            time: "10:16 AM",
-            isActive: true,
-            isLast: true,
-          ),
+          if (confirmed != null)
+            TimeLineStepsCard(
+              defaultIcon: Icons.receipt_long_rounded,
+              title: confirmed.title,
+              subtitle: confirmed.description,
+              time: confirmed.time ?? "",
+              isCompleted: isConfirmedCompleted,
+              isActive: isConfirmedActive,
+            ),
+          if (preparing != null)
+            TimeLineStepsCard(
+              defaultIcon: Icons.healing_rounded,
+              title: preparing.title,
+              subtitle: preparing.description,
+              time: preparing.time ?? "",
+              isCompleted: isPreparingCompleted,
+              isActive: isPreparingActive,
+            ),
+          if (pickedUp != null)
+            TimeLineStepsCard(
+              defaultIcon: Icons.inventory_2_rounded,
+              title: pickedUp.title,
+              subtitle: pickedUp.description,
+              time: pickedUp.time ?? "",
+              isCompleted: isPickedUpCompleted,
+              isActive: isPickedUpActive,
+            ),
+          if (onWay != null)
+            TimeLineStepsCard(
+              defaultIcon: Icons.directions_bike_rounded,
+              title: onWay.title,
+              subtitle: onWay.description,
+              time: onWay.time ?? "",
+              isCompleted: isOnWayCompleted,
+              isActive: isOnWayActive,
+              isLast: true,
+            ),
         ],
       ),
     );
