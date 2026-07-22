@@ -11,7 +11,7 @@ import 'package:chefaa/features/doctor/layout/daily_brief/presentation/manager/b
 import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/ai_narrative_card.dart';
 import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/clinic_performance_card.dart';
 import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/next_estimate_card.dart';
-import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/per_clinic_card.dart';
+import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/per_clinic_breakdown_card.dart';
 import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/profit_loss_card.dart';
 import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/recommendation_card.dart';
 import 'package:chefaa/features/doctor/layout/daily_brief/presentation/widgets/revenue_split_card.dart';
@@ -225,18 +225,19 @@ class FinancialsView extends StatelessWidget {
                         .asMap()
                         .entries
                         .map(
-                          (entry) => ClinicRevenueShare(
-                        label: entry.value.clinicName ?? '',
-                        percentage: double.tryParse(
-                          (entry.value.shareOfTotal ?? '0')
-                              .replaceAll('%', ''),
-                        ) ??
-                            0,
-                        color: ColorManager.primary
-                            .withAlpha(
-                          255 - (entry.key * 40),
-                        ),
-                      ),
+                          (entry) =>
+                          ClinicRevenueShare(
+                            label: entry.value.clinicName ?? '',
+                            percentage: double.tryParse(
+                              (entry.value.shareOfTotal ?? '0')
+                                  .replaceAll('%', ''),
+                            ) ??
+                                0,
+                            color: ColorManager.primary
+                                .withAlpha(
+                              255 - (entry.key * 40),
+                            ),
+                          ),
                     )
                         .toList(),
                   ),

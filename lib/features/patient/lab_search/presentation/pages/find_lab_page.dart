@@ -19,6 +19,7 @@ import 'package:chefaa/features/patient/lab_search/presentation/manager/lab_sear
 import 'package:chefaa/features/patient/lab_search/presentation/manager/lab_search_state.dart';
 import 'package:chefaa/features/patient/lab_search/presentation/widgets/center_recommendation_card.dart';
 import 'package:chefaa/features/patient/lab_search/presentation/widgets/filter_chip_item.dart';
+import 'package:chefaa/features/patient/lab_search/presentation/widgets/lab_details_bottom_sheet.dart';
 
 class FindLabPage extends StatelessWidget {
   const FindLabPage({super.key});
@@ -356,7 +357,19 @@ class _FindLabViewState extends State<_FindLabView> {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: centers.length,
       itemBuilder: (context, index) {
-        return CenterRecommendationCard(centerData: centers[index]);
+        return CenterRecommendationCard(
+          centerData: centers[index],
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              builder: (context) => LabDetailsBottomSheet(
+                centerData: centers[index],
+              ),
+            );
+          },
+        );
       },
     );
   }

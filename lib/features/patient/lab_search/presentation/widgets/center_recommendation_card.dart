@@ -7,8 +7,13 @@ import 'package:chefaa/features/patient/lab_search/data/models/search_centers_re
 
 class CenterRecommendationCard extends StatelessWidget {
   final CenterModel centerData;
+  final VoidCallback? onTap;
 
-  const CenterRecommendationCard({super.key, required this.centerData});
+  const CenterRecommendationCard({
+    super.key,
+    required this.centerData,
+    this.onTap,
+  });
 
   String get _centerImage {
     if (centerData.facilityType?.toLowerCase() == 'lab') {
@@ -30,110 +35,123 @@ class CenterRecommendationCard extends StatelessWidget {
         color: ColorManager.white,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(color: ColorManager.input, width: 1.w),
+        boxShadow: [
+          BoxShadow(
+            color: ColorManager.black.withAlpha(10),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       clipBehavior: Clip.antiAlias,
-      child: Stack(
-        children: [
-          PositionedDirectional(
-            start: 0,
-            top: 0,
-            bottom: 0,
-            child: Container(width: 5.w, color: tag.toTagTextColor),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 17.w,
-              top: 12.w,
-              right: 12.w,
-              bottom: 12.w,
-            ),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: Image.asset(
-                    _centerImage,
-                    width: 72.w,
-                    height: 72.h,
-                    fit: BoxFit.cover,
-                  ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          child: Stack(
+            children: [
+              PositionedDirectional(
+                start: 0,
+                top: 0,
+                bottom: 0,
+                child: Container(width: 5.w, color: tag.toTagTextColor),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 17.w,
+                  top: 12.w,
+                  right: 12.w,
+                  bottom: 12.w,
                 ),
-                12.horizontalSpace,
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        centerData.name ?? "",
-                        style: getBoldStyle(
-                          color: ColorManager.black,
-                          fontSize: 16.sp,
-                        ),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12.r),
+                      child: Image.asset(
+                        _centerImage,
+                        width: 72.w,
+                        height: 72.h,
+                        fit: BoxFit.cover,
                       ),
-                      4.verticalSpace,
-                      Text(
-                        centerData.distance ?? "Unknown",
-                        style: getRegularStyle(
-                          color: ColorManager.gray,
-                          fontSize: 13.sp,
-                        ),
-                      ),
-                      6.verticalSpace,
-                      Row(
+                    ),
+                    12.horizontalSpace,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(
-                            Icons.star_rounded,
-                            color: ColorManager.gold,
-                            size: 16.sp,
-                          ),
-                          4.horizontalSpace,
                           Text(
-                            (centerData.rating ?? 0.0).toString(),
-                            style: getMediumStyle(
+                            centerData.name ?? "",
+                            style: getBoldStyle(
+                              color: ColorManager.black,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          4.verticalSpace,
+                          Text(
+                            centerData.distance ?? "Unknown",
+                            style: getRegularStyle(
                               color: ColorManager.gray,
                               fontSize: 13.sp,
                             ),
                           ),
+                          6.verticalSpace,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star_rounded,
+                                color: ColorManager.gold,
+                                size: 16.sp,
+                              ),
+                              4.horizontalSpace,
+                              Text(
+                                (centerData.rating ?? 0.0).toString(),
+                                style: getMediumStyle(
+                                  color: ColorManager.gray,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    if (tag.isNotEmpty)
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 4.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: tag.toTagBackgroundColor,
-                          borderRadius: BorderRadius.circular(6.r),
-                        ),
-                        child: Text(
-                          tag,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        if (tag.isNotEmpty)
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 4.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: tag.toTagBackgroundColor,
+                              borderRadius: BorderRadius.circular(6.r),
+                            ),
+                            child: Text(
+                              tag,
+                              style: getBoldStyle(
+                                color: tag.toTagTextColor,
+                                fontSize: 10.sp,
+                              ),
+                            ),
+                          ),
+                        22.verticalSpace,
+                        Text(
+                          "EGP ${centerData.minPrice ?? 0}",
                           style: getBoldStyle(
-                            color: tag.toTagTextColor,
-                            fontSize: 10.sp,
+                            color: ColorManager.primary,
+                            fontSize: 15.sp,
                           ),
                         ),
-                      ),
-                    22.verticalSpace,
-                    Text(
-                      "EGP ${centerData.minPrice ?? 0}",
-                      style: getBoldStyle(
-                        color: ColorManager.primary,
-                        fontSize: 15.sp,
-                      ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

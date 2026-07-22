@@ -1,6 +1,7 @@
 import 'package:chefaa/features/doctor/layout/home/presentation/pages/clinic_details_page.dart';
 import 'package:chefaa/features/doctor/layout/home/presentation/pages/clinics_page.dart';
 import 'package:chefaa/features/patient/checkout_order/presentation/pages/checkout_page.dart';
+import 'package:chefaa/features/patient/order/presentation/pages/orders_list_page.dart';
 import 'package:chefaa/features/patient/order/presentation/pages/track_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -118,6 +119,10 @@ class Routes {
         final orderId = settings.arguments as String?;
         return MaterialPageRoute(
           builder: (_) => _wrapWithCanPop(TrackOrderPage(orderId: orderId)),
+        );
+      case AppRoutesNames.ordersListPage:
+        return MaterialPageRoute(
+          builder: (_) => _wrapWithCanPop(const OrdersListPage()),
         );
       case AppRoutesNames.appEntryRoute:
         return MaterialPageRoute(

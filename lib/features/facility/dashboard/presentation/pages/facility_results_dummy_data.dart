@@ -102,4 +102,3 @@ Map<String, PatientDetailData> getInitialPatientDetails() => {
     aiLinkText: "View Doctors",
   ),
 };
-

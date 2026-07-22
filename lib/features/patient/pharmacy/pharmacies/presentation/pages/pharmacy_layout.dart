@@ -1,8 +1,9 @@
-import 'package:chefaa/features/patient/order/presentation/pages/track_order_page.dart';
-import 'package:flutter/material.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/features/patient/cart/presentation/pages/cart_page.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../order/presentation/pages/orders_list_page.dart';
 import 'pharmacy_page.dart';
 
 class MainLayout extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MainLayoutState extends State<MainLayout> {
   final List<Widget> tabs = [
     const PharmacyPage(),
     const CartPage(),
-    const TrackOrderPage(),
+    const OrdersListPage(),
   ];
 
   @override

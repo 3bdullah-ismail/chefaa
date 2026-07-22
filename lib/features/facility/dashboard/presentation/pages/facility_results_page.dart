@@ -336,8 +336,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                               if (result != null && result.files.isNotEmpty) {
                                 final filePath = result.files.first.path;
                                 if (filePath != null && mounted) {
+                                  print("UI upload requestId = ${item.id}");
                                   cubit.uploadResult(
-                                    requestId: item.id ?? "",
+                                    requestId: "6a3019112eb20b02387e784a",
                                     filePath: filePath,
                                   );
                                 }
@@ -359,6 +360,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                           if (result != null && result.files.isNotEmpty) {
                             final filePath = result.files.first.path;
                             if (filePath != null && mounted) {
+                              print(
+                                "UI upload requestId = 6a3019112eb20b02387e784a",
+                              );
                               cubit.uploadResult(
                                 requestId: "6a3019112eb20b02387e784a",
                                 filePath: filePath,
@@ -376,6 +380,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                           if (result != null && result.files.isNotEmpty) {
                             final filePath = result.files.first.path;
                             if (filePath != null && mounted) {
+                              print(
+                                "UI upload requestId = 6a3019112eb20b02387e784a",
+                              );
                               cubit.uploadResult(
                                 requestId: "6a3019112eb20b02387e784a",
                                 filePath: filePath,
@@ -417,5 +424,3 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
     );
   }
 }
-
-

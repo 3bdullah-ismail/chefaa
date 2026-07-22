@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/utils/username_generator.dart';
+
 part 'facility_auth_state.dart';
 
 @injectable
@@ -21,7 +23,7 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
   TextEditingController directorProfessionalId = TextEditingController();
   TextEditingController specialization = TextEditingController();
   final TextEditingController confirmPasswordController =
-  TextEditingController();
+      TextEditingController();
   bool _isSigningUp = false;
 
   static FacilityAuthCubit get(BuildContext context) =>
@@ -35,11 +37,11 @@ class FacilityAuthCubit extends Cubit<FacilityAuthState> {
       _isSigningUp = false;
       return;
     }
-      if (!isClosed) emit(SignUpLoading());
+    if (!isClosed) emit(SignUpLoading());
     try {
       final response = await facilityRepo.signUP(
         name: name.text,
-        username: username.text,
+        username: UsernameGenerator.generate(name.text),
         email: email.text,
         password: password.text,
         commercialRegisterNumber: commercialRegisterNumber.text,
