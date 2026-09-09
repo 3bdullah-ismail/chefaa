@@ -1,8 +1,7 @@
+import 'package:chefaa/core/widgets/file_helper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:chefaa/core/widgets/file_helper.dart';
 
 part 'file_handler_state.dart';
 
@@ -19,9 +18,9 @@ class FileHandlerCubit extends Cubit<FileHandlerState> {
 
       if (file != null) {
         pickedFile = file;
-      if (!isClosed) emit(FilePickedSuccess(file));
+        if (!isClosed) emit(FilePickedSuccess(file));
       } else {
-      if (!isClosed) emit(FileHandlerInitial());
+        if (!isClosed) emit(FileHandlerInitial());
       }
     } catch (e) {
       if (!isClosed) emit(FileError('Failed to pick file: $e'));
@@ -30,6 +29,6 @@ class FileHandlerCubit extends Cubit<FileHandlerState> {
 
   void clearFile() {
     pickedFile = null;
-      if (!isClosed) emit(FileHandlerInitial());
+    if (!isClosed) emit(FileHandlerInitial());
   }
 }

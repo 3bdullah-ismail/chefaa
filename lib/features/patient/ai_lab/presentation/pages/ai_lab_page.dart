@@ -1,15 +1,15 @@
-import 'package:chefaa/shared/file_handler/presentation/manager/file_handler_cubit.dart';
+import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
+import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/widgets/upload_dialog.dart';
 import 'package:chefaa/features/patient/ai_lab/presentation/manager/ai_report_cubit.dart';
 import 'package:chefaa/features/patient/ai_lab/presentation/manager/ai_report_state.dart';
+import 'package:chefaa/features/patient/ai_lab/presentation/widgets/ai_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:chefaa/core/routes/app_routes_names.dart';
-import 'package:chefaa/features/patient/ai_lab/presentation/widgets/ai_app_bar.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../core/file_handler/file_handler_cubit.dart';
 
 class AiLabPage extends StatefulWidget {
   const AiLabPage({super.key});
@@ -73,8 +73,7 @@ class _AiLabPageState extends State<AiLabPage> {
               if (state is SuccessState) {
                 context.pop();
 
-                context.push(AppRoutesNames.aiLabAnalysis, extra: state.report,
-                );
+                context.push(AppRoutesNames.aiLabAnalysis, extra: state.report);
               }
 
               if (state is ErrorState) {

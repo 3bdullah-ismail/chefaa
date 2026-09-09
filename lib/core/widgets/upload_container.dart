@@ -1,9 +1,10 @@
-import 'package:chefaa/shared/file_handler/presentation/manager/file_handler_cubit.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/widgets/upload_dialog.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../file_handler/file_handler_cubit.dart';
 
 class UploadCard extends StatelessWidget {
   const UploadCard({super.key, this.text, this.dialogText, this.fileName});

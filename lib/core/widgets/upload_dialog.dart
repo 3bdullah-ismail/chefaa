@@ -1,14 +1,14 @@
-import 'package:chefaa/shared/file_handler/presentation/manager/file_handler_cubit.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
+import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:chefaa/core/resources/values_manager.dart';
+import '../file_handler/file_handler_cubit.dart';
 
 class UploadDialog extends StatefulWidget {
   const UploadDialog({

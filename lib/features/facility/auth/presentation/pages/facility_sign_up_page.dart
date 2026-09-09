@@ -6,11 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/config/get_config.dart';
+import '../../../../../core/file_handler/file_handler_cubit.dart';
 import '../../../../../core/resources/constants_manager.dart';
 import '../../../../../core/routes/app_routes_names.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
 import '../../../../../core/widgets/loading_dialog.dart';
-import '../../../../../shared/file_handler/presentation/manager/file_handler_cubit.dart';
 import '../manager/facility_auth_cubit.dart';
 import '../widgets/facility_info_card.dart';
 import '../widgets/medical_leadership_card.dart';

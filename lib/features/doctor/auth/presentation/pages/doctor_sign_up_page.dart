@@ -13,12 +13,13 @@ import 'package:chefaa/core/widgets/terms_of_service.dart';
 import 'package:chefaa/core/widgets/upload_container.dart';
 import 'package:chefaa/core/widgets/validators.dart';
 import 'package:chefaa/features/doctor/auth/presentation/manager/doctor_auth_cubit.dart';
-import 'package:chefaa/shared/file_handler/presentation/manager/file_handler_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../../../core/file_handler/file_handler_cubit.dart';
 
 class DocSignUp extends StatefulWidget {
   const DocSignUp({super.key});
