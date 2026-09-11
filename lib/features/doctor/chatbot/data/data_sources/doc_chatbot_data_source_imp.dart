@@ -1,8 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/doctor/chatbot/data/models/chat_history.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
 
 import 'doc_chatbot_data_source.dart';
 

@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:chefaa/features/patient/pharmacy/medicines/data/models/medicine_model.dart';
 import 'package:chefaa/core/config/get_config.dart';

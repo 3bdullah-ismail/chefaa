@@ -1,6 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/pharmacy/home/presentation/widgets/stack_alert_staff.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'completed_order_card.dart';
 

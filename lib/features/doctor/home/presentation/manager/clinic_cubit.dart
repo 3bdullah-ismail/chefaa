@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/doctor/home/data/models/clinic.dart';
 import 'package:chefaa/features/doctor/home/domain/repositories/clinic_repo.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/features/doctor/home/data/models/clinics.dart';
 import 'package:chefaa/features/patient/appointment/data/models/appointment_model.dart';

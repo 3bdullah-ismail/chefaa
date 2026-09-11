@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 import 'ai_report_data_source.dart';
 

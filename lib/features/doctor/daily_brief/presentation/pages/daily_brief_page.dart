@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
 import 'package:chefaa/features/doctor/daily_brief/presentation/manager/brief_cubit.dart';
 import 'package:chefaa/features/doctor/patients/presentation/widgets/custom_switch_tab.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'brief_view.dart';
 import 'financial_view.dart';
 

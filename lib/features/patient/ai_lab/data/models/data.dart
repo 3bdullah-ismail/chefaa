@@ -1,4 +1,4 @@
-﻿import 'findings.dart';
+import 'findings.dart';
 
 class Data {
   String? patientName;

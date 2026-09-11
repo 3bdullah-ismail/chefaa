@@ -1,6 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:flutter/material.dart';
 
 class TextRow extends StatelessWidget {
   const TextRow({super.key, required this.firstText, required this.secondText});

@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -13,7 +10,6 @@ import 'package:chefaa/core/widgets/custom_btn.dart';
 import 'package:chefaa/core/widgets/loading.dart';
 import 'package:chefaa/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:chefaa/features/auth/presentation/widgets/back_button.dart';
-import 'package:go_router/go_router.dart';
 
 class ResetCode extends StatefulWidget {
   const ResetCode({super.key, required this.index});

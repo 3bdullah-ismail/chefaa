@@ -1,5 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
-import 'package:flutter/material.dart';
 import 'package:chefaa/features/pharmacy/orders/presentation/widgets/alert_new_order.dart';
 import 'package:chefaa/features/pharmacy/orders/presentation/widgets/order_tabs.dart';
 import 'package:chefaa/features/pharmacy/orders/presentation/widgets/order_list.dart';

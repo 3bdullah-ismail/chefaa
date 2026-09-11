@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -8,9 +9,6 @@ import 'package:chefaa/features/patient/medication/presentation/widgets/add_medi
 import 'package:chefaa/features/patient/medication/presentation/widgets/medication_card.dart';
 import 'package:chefaa/features/patient/medication/presentation/widgets/over_view_card.dart';
 import 'package:chefaa/features/patient/medication/presentation/widgets/suggest_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/features/patient/medication/data/models/medications.dart';
 import 'package:chefaa/features/patient/medication/presentation/widgets/empty_medication_list_state.dart';

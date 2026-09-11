@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import '../../../../core/routes/app_routes_names.dart';
 import '../../../../core/services/storage_service.dart';
 import '../../data/models/onboarding_model.dart';
 import '../widgets/onboarding_container.dart';
-import 'package:go_router/go_router.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

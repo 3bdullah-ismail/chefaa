@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 abstract class PharmacyRemoteDataSource {
   Future<Response<dynamic>> getPharmacyProfile(String pharmacyId);
   Future<Response<dynamic>> searchPharmacies(String query);

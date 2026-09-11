@@ -1,7 +1,5 @@
-import 'package:dart_either/dart_either.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/data/data_sources/pharmacy_remote_data_source.dart';

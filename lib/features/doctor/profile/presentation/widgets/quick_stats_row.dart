@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/features/doctor/profile/domain/entities/doctor_profile_entity.dart';
 import 'profile_helpers.dart';

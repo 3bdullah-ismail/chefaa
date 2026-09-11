@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'dart:isolate';
 
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/chatbot/data/data_sources/chatbot_remote_data_source.dart';
 import 'package:chefaa/features/patient/chatbot/data/models/chat_message_model.dart';

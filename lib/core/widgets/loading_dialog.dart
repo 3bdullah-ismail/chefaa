@@ -1,10 +1,8 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:go_router/go_router.dart';
 
 class LoadingDialog extends StatelessWidget {
   const LoadingDialog({super.key});

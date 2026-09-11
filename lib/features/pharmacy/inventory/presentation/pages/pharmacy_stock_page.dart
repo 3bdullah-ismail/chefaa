@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -6,10 +7,6 @@ import 'package:chefaa/core/widgets/inside_app_bar.dart';
 import 'package:chefaa/features/pharmacy/inventory/presentation/manager/pharmacy_inventory_cubit.dart';
 import 'package:chefaa/features/pharmacy/inventory/presentation/widgets/medicine_title.dart';
 import 'package:chefaa/features/pharmacy/inventory/presentation/widgets/section_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/routes/app_routes_names.dart';
 

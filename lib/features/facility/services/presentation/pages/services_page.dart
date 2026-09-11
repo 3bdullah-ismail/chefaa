@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -8,9 +9,6 @@ import 'package:chefaa/features/facility/services/presentation/widgets/add_servi
 import 'package:chefaa/features/facility/services/presentation/widgets/lab_test_card_widget.dart';
 import 'package:chefaa/features/facility/services/presentation/widgets/radiology_card_widget.dart';
 import 'package:chefaa/features/facility/services/presentation/widgets/services_search_bar_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({super.key});

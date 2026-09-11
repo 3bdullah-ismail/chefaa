@@ -1,6 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/checkout_order/presentation/widgets/checkout_summary_row.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';

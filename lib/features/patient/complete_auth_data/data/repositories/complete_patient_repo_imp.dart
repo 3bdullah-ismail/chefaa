@@ -1,6 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/complete_auth_data/data/data_sources/complete_data_source.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/complete_auth_data/data/models/complete_patient_data_response.dart';

@@ -1,6 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/lab_search/domain/repositories/lab_search_repo.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'lab_search_state.dart';
 
 @injectable

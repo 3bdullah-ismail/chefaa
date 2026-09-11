@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/cart/presentation/manager/cart_cubit.dart';
 import 'package:chefaa/features/patient/pharmacy/medicines/data/models/medicine_model.dart';
 import 'package:chefaa/features/patient/pharmacy/medicines/presentation/widgets/medicine_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/routes/app_routes_names.dart';
 

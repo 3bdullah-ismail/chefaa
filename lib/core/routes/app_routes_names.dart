@@ -1,7 +1,10 @@
 class AppRoutesNames {
-  static const String option = '/option';
-  static const String appEntryRoute = '/chefaaEntry';
   static const String onboardingRoute = '/onboarding';
+  static const String login = '/login';
+  static const String appEntryRoute = '/chefaaEntry';
+
+  static const String option = '/option';
+
   static const String docSignUp = '/docSignUp';
   static const String patientSignUp = '/patientSignUp/:role';
   static const String patientSignUpCompleteData = '/patientSignUpCompleteData';
@@ -15,11 +18,10 @@ class AppRoutesNames {
   static const String forgetPassword = '/forgetPassword';
   static const String resetCode = '/resetCode/:index';
   static const String resetPassword = '/resetPassword';
-  static const String login = '/login';
-  
+
   static const String patientLayout = '/patientLayout';
   static const String patientSearch = '/patientSearch';
-  
+
   static const String doctorLayout = '/doctorLayout';
 
   static const String pharmacyLayout = '/pharmacyLayout';

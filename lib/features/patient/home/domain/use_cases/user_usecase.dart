@@ -1,5 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/share_service.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import '../entities/user_entity.dart';

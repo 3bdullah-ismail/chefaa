@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/data/models/pharmacy_card_model.dart';
 import 'pharmacy_card.dart';
 

@@ -1,8 +1,8 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/hive_service.dart';
 import 'package:chefaa/features/doctor/profile/data/data_sources/local_data_source/doctor_profile_local_data_source.dart';
 import 'package:chefaa/features/doctor/profile/data/models/doctor_data.dart';
 import 'package:chefaa/features/doctor/profile/domain/entities/doctor_profile_entity.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: DoctorProfileLocalDataSource)
 class DoctorProfileLocalDataSourceImp implements DoctorProfileLocalDataSource {

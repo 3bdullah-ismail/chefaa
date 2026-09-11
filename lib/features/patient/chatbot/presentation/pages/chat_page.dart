@@ -1,8 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/symbols.dart';
 
 import 'package:chefaa/features/patient/chatbot/presentation/manager/chatbot_cubit.dart';
 import 'package:chefaa/features/patient/chatbot/presentation/manager/chatbot_state.dart';

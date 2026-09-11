@@ -1,15 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:chefaa/core/imports/imports.dart';
+import 'package:chefaa/core/resources/color_manager.dart';
 
 import '../../../../core/resources/constants_manager.dart';
 import '../../../../core/routes/app_routes_names.dart';
 import '../../../../core/services/permissions_service.dart';
 import '../../../../core/services/storage_service.dart';
 import '../../../../core/widgets/permissions_request_dialog.dart';
-import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:go_router/go_router.dart';
-
 
 class ChefaaEntryPage extends StatefulWidget {
   const ChefaaEntryPage({super.key});
@@ -55,7 +51,6 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
 
     if (!mounted) return;
 
-    // ⬅️ هنا أهم تعديل: شيل السبلاش قبل ما تعرض ديالوج الصلاحيات
     FlutterNativeSplash.remove();
 
     debugPrint('Step 3: checking permissions');
@@ -67,9 +62,10 @@ class _ChefaaEntryPageState extends State<ChefaaEntryPage> {
     debugPrint('Step 4: navigating to $route');
     context.go(route);
   }
+
   Future<void> _requestPermissionsIfNeeded() async {
     final allPermissionsGranted =
-    await PermissionsService.areCriticalPermissionsGranted();
+        await PermissionsService.areCriticalPermissionsGranted();
 
     if (allPermissionsGranted) {
       return;

@@ -1,11 +1,10 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/appointment/data/data_sources/appointment_remote_data_source.dart';
 import 'package:chefaa/features/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/features/patient/appointment/data/models/appointment_response_model.dart';
 import 'package:chefaa/features/patient/appointment/data/models/reschedule_appointment_request_model.dart';
 import 'package:chefaa/features/patient/appointment/domain/repositories/appointment_repo.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: AppointmentRepo)
 class AppointmentRepoImpl implements AppointmentRepo {

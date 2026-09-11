@@ -1,11 +1,10 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/manager/doc_chatbot_cubit.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/manager/doc_chatbot_state.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/widgets/chatbot_appbar.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/widgets/doc_chat_input_bar.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/widgets/message_bubble.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/widgets/typing_bubble.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DocChatbotPage extends StatefulWidget {
   const DocChatbotPage({super.key});

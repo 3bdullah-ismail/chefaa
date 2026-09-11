@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -14,9 +15,6 @@ import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/risk_fla
 import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/summary_card.dart';
 import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/trend_card.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/widgets/section_title.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FinancialsView extends StatelessWidget {
   const FinancialsView({super.key});

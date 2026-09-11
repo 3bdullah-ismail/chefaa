@@ -1,6 +1,5 @@
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/patient/chatbot/data/models/chat_message_model.dart';
 import 'chatbot_remote_data_source.dart';

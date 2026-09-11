@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/features/doctor/patients/presentation/widgets/details_card.dart';
 import 'package:chefaa/features/doctor/patients/presentation/widgets/medical_history_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';

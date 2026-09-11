@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 class UploadedResultItem {
   final String name;
   final String scanType;

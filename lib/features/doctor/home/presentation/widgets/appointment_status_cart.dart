@@ -1,7 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/home/presentation/widgets/indicator_status.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
 

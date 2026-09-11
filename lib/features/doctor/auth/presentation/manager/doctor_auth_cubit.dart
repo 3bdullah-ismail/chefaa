@@ -1,9 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/auth/domain/repositories/repo.dart';
 import 'package:chefaa/core/utils/username_generator.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/services/storage_service.dart';
 import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';

@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/widgets/custom_btn.dart';
 import 'package:chefaa/features/doctor/home/presentation/widgets/custom_outline_button.dart';
@@ -5,9 +6,6 @@ import 'package:chefaa/features/doctor/patients/presentation/manager/patients_cu
 import 'package:chefaa/features/doctor/patients/presentation/widgets/empty_prescription_card.dart';
 import 'package:chefaa/features/doctor/patients/presentation/widgets/lab_tests.dart';
 import 'package:chefaa/features/doctor/patients/presentation/widgets/medication_items.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';

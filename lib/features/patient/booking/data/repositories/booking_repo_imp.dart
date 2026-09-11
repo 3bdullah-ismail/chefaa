@@ -1,7 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/booking/data/models/booking.dart';
 import 'package:chefaa/features/patient/booking/data/models/slots.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/booking/data/data_sources/remote_date_source/remote_data_source.dart';

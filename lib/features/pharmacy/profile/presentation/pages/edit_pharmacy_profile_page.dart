@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/widgets/custom_btn.dart';
@@ -8,7 +6,6 @@ import 'package:chefaa/core/widgets/custom_text_field.dart';
 import 'package:chefaa/core/widgets/loading.dart';
 import 'package:chefaa/features/pharmacy/profile/data/models/pharmacy_profile_response.dart';
 import 'package:chefaa/features/pharmacy/profile/presentation/manager/pharmacy_profile_cubit.dart';
-import 'package:go_router/go_router.dart';
 
 class EditPharmacyProfilePage extends StatefulWidget {
   final PharmacyProfileData? profileData;

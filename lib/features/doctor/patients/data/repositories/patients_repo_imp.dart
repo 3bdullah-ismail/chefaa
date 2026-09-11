@@ -1,9 +1,8 @@
-﻿import 'package:chefaa/features/doctor/patients/data/data_sources/patients_data_source.dart';
+import 'package:chefaa/core/imports/imports.dart';
+import 'package:chefaa/features/doctor/patients/data/data_sources/patients_data_source.dart';
 import 'package:chefaa/features/doctor/patients/data/models/complete/complete_appointment.dart';
 import 'package:chefaa/features/doctor/patients/data/models/patients/prescription.dart';
 import 'package:chefaa/features/doctor/patients/domain/repositories/patients_repo.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/doctor/patients/data/models/data.dart';

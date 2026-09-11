@@ -1,7 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/complete_auth_data/domain/repositories/complete_patient_repo.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/features/patient/complete_auth_data/data/models/patient.dart';
 

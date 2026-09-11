@@ -1,8 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/patients/domain/repositories/patients_repo.dart';
 import 'package:chefaa/features/doctor/patients/presentation/manager/patients_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/features/doctor/patients/data/models/data.dart';
 import 'package:chefaa/features/doctor/patients/data/models/patients/prescription.dart';

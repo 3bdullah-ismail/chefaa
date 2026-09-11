@@ -1,6 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
-import 'package:flutter/material.dart';
 
 import 'brief_page.dart';
 import 'delivery_page.dart';

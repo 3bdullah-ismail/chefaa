@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/auth/domain/repositories/patient_repo.dart';
 import 'package:chefaa/features/patient/auth/presentation/manager/patient_state.dart';
 import 'package:chefaa/core/utils/username_generator.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/services/storage_service.dart';
 import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';

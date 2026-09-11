@@ -1,6 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/checkout_order/presentation/widgets/payment_title_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PaymentCard extends StatelessWidget {
   final String paymentMethod;

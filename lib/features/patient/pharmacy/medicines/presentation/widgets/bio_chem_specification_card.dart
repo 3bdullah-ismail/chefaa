@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/medicines/data/models/medicine_details_model.dart';
 import 'specification_row.dart';
 

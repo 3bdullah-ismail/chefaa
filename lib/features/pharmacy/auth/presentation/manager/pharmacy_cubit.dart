@@ -1,8 +1,5 @@
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:chefaa/core/utils/username_generator.dart';
 import 'package:chefaa/features/pharmacy/auth/domain/repositories/pharmacy_repo.dart';

@@ -1,7 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/facility/profile/data/data_sources/profile_remote_source.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProfileRemoteSource)
 class ProfileRemoteSourceImpl implements ProfileRemoteSource {

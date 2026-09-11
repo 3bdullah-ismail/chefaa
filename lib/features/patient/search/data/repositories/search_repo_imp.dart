@@ -1,10 +1,9 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/search/data/data_sources/local_data_source/search_local_data_source.dart';
 import 'package:chefaa/features/patient/search/data/data_sources/remote_data_source/search_remote_data_source.dart';
 import 'package:chefaa/features/patient/search/data/models/search_response.dart';
 import 'package:chefaa/features/patient/search/domain/repositories/search_repo.dart';
 import 'package:chefaa/features/patient/search/domain/entities/clinic_model.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 

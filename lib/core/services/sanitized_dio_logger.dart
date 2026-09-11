@@ -1,6 +1,5 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 class SanitizedDioLogger extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

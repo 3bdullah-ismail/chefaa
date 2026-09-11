@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/medicines/data/models/medicine_model.dart';
 import 'package:chefaa/features/patient/cart/presentation/manager/cart_cubit.dart';
 import 'add_to_cart_button.dart';

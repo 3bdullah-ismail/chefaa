@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
@@ -9,10 +10,6 @@ import 'package:chefaa/core/widgets/validators.dart';
 import 'package:chefaa/features/facility/dashboard/presentation/manager/dashboard_cubit.dart';
 import 'package:chefaa/features/facility/services/data/models/service_model.dart';
 import 'package:chefaa/features/facility/services/presentation/manager/services_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class CreatePatientRequestPage extends StatelessWidget {
   const CreatePatientRequestPage({super.key});

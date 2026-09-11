@@ -1,10 +1,8 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/features/patient/appointment/domain/repositories/appointment_repo.dart';
 import 'package:chefaa/features/patient/appointment/presentation/manager/appointment_state.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class AppointmentCubit extends Cubit<AppointmentState> {

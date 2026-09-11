@@ -1,12 +1,6 @@
-import 'dart:async';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';

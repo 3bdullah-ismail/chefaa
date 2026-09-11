@@ -1,11 +1,9 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/doctor/chatbot/data/data_sources/doc_chatbot_data_source.dart';
 import 'package:chefaa/features/doctor/chatbot/data/models/chat_history.dart';
 import 'package:chefaa/features/doctor/chatbot/data/models/chatbot_doc.dart';
 import 'package:chefaa/features/doctor/chatbot/domain/repositories/doc_chatbot_repo.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: DocChatbotRepo)
 class DocChatbotRepoImp implements DocChatbotRepo {

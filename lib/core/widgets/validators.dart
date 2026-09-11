@@ -1,5 +1,5 @@
-import 'package:email_validator/email_validator.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 class Validators {
   static String? nameValidator(String? value) {
     if (value == null || value.isEmpty) return 'Name cannot be empty';

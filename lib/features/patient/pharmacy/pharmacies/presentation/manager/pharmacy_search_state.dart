@@ -1,4 +1,4 @@
-﻿part of 'pharmacy_search_cubit.dart';
+part of 'pharmacy_search_cubit.dart';
 
 abstract class PharmacySearchState {}
 

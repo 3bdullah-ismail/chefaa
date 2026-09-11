@@ -1,10 +1,9 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/features/doctor/home/presentation/widgets/clinic_days_avaliable.dart';
 import 'package:chefaa/features/doctor/home/presentation/widgets/clinic_status.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/features/doctor/home/data/models/clinics.dart';
 

@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -6,15 +7,11 @@ import 'package:chefaa/core/widgets/custom_text_field.dart';
 import 'package:chefaa/core/widgets/inspector_bottom_sheet_container.dart';
 import 'package:chefaa/features/doctor/home/presentation/widgets/custom_outline_button.dart';
 import 'package:chefaa/features/patient/medication/presentation/widgets/medication_calender.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/features/doctor/patients/data/models/patients/prescription.dart';
 import 'package:chefaa/features/doctor/patients/presentation/manager/patients_cubit.dart';
 import 'package:chefaa/features/doctor/patients/presentation/manager/patients_state.dart';
 import 'medicine_addition_card.dart';
-import 'package:go_router/go_router.dart';
 
 class AddPrescriptionBottomSheet extends StatefulWidget {
   final bool isEdit;

@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/search/data/models/search_query.dart';
 import 'package:chefaa/features/patient/search/domain/repositories/search_repo.dart';
 import 'package:chefaa/features/patient/search/domain/entities/clinic_model.dart';

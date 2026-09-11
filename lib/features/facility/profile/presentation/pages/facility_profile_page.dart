@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -11,10 +12,6 @@ import 'package:chefaa/features/facility/profile/presentation/widgets/location_s
 import 'package:chefaa/features/facility/profile/presentation/widgets/profile_stats_section.dart';
 import 'package:chefaa/features/facility/profile/presentation/widgets/update_profile_bottom_sheet.dart';
 import 'package:chefaa/features/patient/profile/presentation/pages/profile_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class FacilityProfilePage extends StatefulWidget {
   const FacilityProfilePage({super.key});

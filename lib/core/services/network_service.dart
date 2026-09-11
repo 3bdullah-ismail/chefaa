@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'auth_interceptor.dart';
 import 'sanitized_dio_logger.dart';
 

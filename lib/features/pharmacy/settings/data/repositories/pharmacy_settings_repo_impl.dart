@@ -1,11 +1,8 @@
-import 'dart:convert';
-import 'dart:isolate';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/pharmacy/settings/data/data_sources/pharmacy_settings_data_source.dart';
 import 'package:chefaa/features/pharmacy/settings/data/models/pharmacy_status_response.dart';
 import 'package:chefaa/features/pharmacy/settings/domain/repositories/pharmacy_settings_repo.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: PharmacySettingsRepo)
 class PharmacySettingsRepoImpl implements PharmacySettingsRepo {

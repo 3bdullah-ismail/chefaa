@@ -1,5 +1,5 @@
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/home/data/data_sources/home_data_source.dart';
 import 'package:chefaa/features/patient/home/domain/repositories/home_repo.dart';
 

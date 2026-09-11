@@ -1,7 +1,6 @@
-﻿import 'package:chefaa/core/services/network_service.dart';
+import 'package:chefaa/core/imports/imports.dart';
+import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/doctor/patients/data/data_sources/patients_data_source.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: PatientsDataSource)
 class PatientsDataSourceImp implements PatientsDataSource {

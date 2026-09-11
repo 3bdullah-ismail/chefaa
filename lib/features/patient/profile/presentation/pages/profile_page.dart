@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
@@ -6,12 +7,6 @@ import 'package:chefaa/core/services/storage_service.dart';
 import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';
 import 'package:chefaa/features/patient/medication/presentation/manager/medication_cubit.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/values_manager.dart';
@@ -26,7 +21,6 @@ import '../widgets/item_column.dart';
 import '../widgets/item_container.dart';
 import '../widgets/item_content.dart';
 import '../widgets/location_helper.dart';
-import 'package:go_router/go_router.dart';
 
 class PatientProfilePage extends StatefulWidget {
   const PatientProfilePage({super.key});

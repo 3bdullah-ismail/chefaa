@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/doctor/home/data/data_sources/clinic_data_source.dart';
 import 'package:chefaa/features/doctor/home/data/models/clinic_response.dart';
@@ -5,8 +6,6 @@ import 'package:chefaa/features/doctor/home/data/models/clinics_response.dart';
 import 'package:chefaa/features/doctor/home/domain/repositories/clinic_repo.dart';
 import 'package:chefaa/features/patient/appointment/data/models/appointment_model.dart';
 import 'package:chefaa/features/patient/appointment/data/models/appointment_response_model.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: ClinicRepo)
 class ClinicRepoImp implements ClinicRepo {

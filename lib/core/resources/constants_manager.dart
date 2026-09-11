@@ -1,5 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
-import 'package:intl/intl.dart';
 
 import 'package:chefaa/core/routes/app_routes_names.dart';
 

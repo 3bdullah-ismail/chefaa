@@ -1,6 +1,5 @@
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'get_config.config.dart';
 
 final getIt = GetIt.instance;

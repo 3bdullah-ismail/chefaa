@@ -1,7 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/payment/data/models/online_payment_response.dart';
 import 'package:chefaa/features/patient/payment/domain/repositories/online_payment_repo.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 part 'payment_state.dart';
 

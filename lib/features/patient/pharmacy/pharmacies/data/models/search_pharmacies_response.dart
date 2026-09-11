@@ -1,4 +1,4 @@
-﻿class SearchPharmaciesResponse {
+class SearchPharmaciesResponse {
   final bool? success;
   final int? count;
   final List<SearchPharmacyData>? data;

@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 abstract class PatientDataSource {
   Future<Response> patientSignUp({
     required String name,

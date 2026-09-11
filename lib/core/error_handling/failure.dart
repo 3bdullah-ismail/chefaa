@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'api_error_model.dart';
 
 abstract class Failure {

@@ -1,11 +1,9 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/hive_service.dart';
 import 'package:chefaa/features/patient/ai_lab/data/models/report_analysis.dart';
 import 'package:chefaa/features/patient/ai_lab/presentation/manager/ai_report_cubit.dart';
 import 'package:chefaa/features/patient/ai_lab/presentation/widgets/analysis_app_bar.dart';
 import 'package:chefaa/features/patient/ai_lab/presentation/widgets/history_report_card.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../../../core/routes/app_routes_names.dart';
 

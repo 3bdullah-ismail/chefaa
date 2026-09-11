@@ -1,12 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:permission_handler/permission_handler.dart'
-    as permission_handler;
+import 'package:chefaa/core/imports/imports.dart';
+import 'package:permission_handler/permission_handler.dart' as permission_handler;
 
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/services/permissions_service.dart';
-import 'package:go_router/go_router.dart';
 
 class PermissionsRequestDialog extends StatefulWidget {
   final Function(Map<String, permission_handler.PermissionStatus>)?

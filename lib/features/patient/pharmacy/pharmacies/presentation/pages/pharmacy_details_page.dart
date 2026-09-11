@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -13,10 +14,6 @@ import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/widgets
 import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/widgets/premium_card_decoration.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/widgets/section_title.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/widgets/service_row.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 
 class PharmacyDetailsPage extends StatelessWidget {

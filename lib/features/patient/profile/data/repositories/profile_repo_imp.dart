@@ -1,8 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 
-import 'package:dart_either/dart_either.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../domain/entities/address_entity.dart';
 import '../../domain/entities/user_profile_entity.dart';

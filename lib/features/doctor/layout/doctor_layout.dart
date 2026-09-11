@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/manager/doc_chatbot_cubit.dart';
 import 'package:chefaa/features/doctor/chatbot/presentation/pages/doc_chatbot_page.dart';
 import 'package:chefaa/features/doctor/daily_brief/presentation/pages/daily_brief_page.dart';
@@ -5,10 +6,6 @@ import 'package:chefaa/features/doctor/home/presentation/manager/clinic_cubit.da
 import 'package:chefaa/features/doctor/home/presentation/pages/doctor_home.dart';
 import 'package:chefaa/features/doctor/patients/presentation/manager/patients_cubit.dart';
 import 'package:chefaa/features/doctor/patients/presentation/pages/patients_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';

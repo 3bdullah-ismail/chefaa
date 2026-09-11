@@ -1,8 +1,5 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 
 class AnimatedBotMessage extends StatefulWidget {

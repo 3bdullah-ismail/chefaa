@@ -1,4 +1,4 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -11,11 +11,6 @@ import 'package:chefaa/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:chefaa/features/auth/presentation/widgets/custom_outline_btn.dart';
 import 'package:chefaa/features/auth/presentation/widgets/not_have_account.dart';
 import 'package:chefaa/features/auth/presentation/widgets/role_based_nav.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   final String? role;

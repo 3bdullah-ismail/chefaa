@@ -1,7 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/patient/lab_search/data/data_sources/lab_search_remote_data_source.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: LabSearchRemoteDataSource)
 class LabSearchRemoteDataSourceImpl implements LabSearchRemoteDataSource {

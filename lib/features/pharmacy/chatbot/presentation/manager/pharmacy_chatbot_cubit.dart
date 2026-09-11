@@ -1,8 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/pharmacy/chatbot/data/models/chat_context_response.dart';
 import 'package:chefaa/features/pharmacy/chatbot/data/models/chat_response.dart';
 import 'package:chefaa/features/pharmacy/chatbot/domain/repositories/pharmacy_chatbot_repo.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 part 'pharmacy_chatbot_state.dart';
 

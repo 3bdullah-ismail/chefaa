@@ -1,5 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/pharmacy/profile/domain/repositories/pharmacy_profile_repo.dart';
 import 'package:chefaa/features/pharmacy/settings/domain/repositories/pharmacy_settings_repo.dart';
 import 'package:chefaa/features/pharmacy/settings/data/models/pharmacy_status_response.dart';

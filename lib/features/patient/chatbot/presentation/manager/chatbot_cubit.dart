@@ -1,7 +1,5 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/chatbot/data/models/chat_message_model.dart';
 import 'package:chefaa/features/patient/chatbot/domain/repositories/chatbot_repo.dart';
 import 'chatbot_state.dart';

@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
@@ -9,10 +10,6 @@ import 'package:chefaa/features/patient/booking/presentation/widgets/confirm_boo
 import 'package:chefaa/features/patient/booking/presentation/widgets/confirm_booking/payment_methods_card.dart';
 import 'package:chefaa/features/patient/booking/presentation/widgets/sub_text.dart';
 import 'package:chefaa/features/patient/booking/presentation/widgets/title_text.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class ConfirmBooking extends StatelessWidget {
   const ConfirmBooking({super.key});

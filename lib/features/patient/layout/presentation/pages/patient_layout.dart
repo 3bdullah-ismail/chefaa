@@ -1,12 +1,10 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/features/patient/chatbot/presentation/pages/chat_page.dart';
 import 'package:chefaa/features/patient/home/presentation/pages/home_page.dart';
 import 'package:chefaa/features/patient/notification/presentation/manager/patient_notification_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/features/patient/ai_lab/presentation/pages/ai_lab_page.dart';

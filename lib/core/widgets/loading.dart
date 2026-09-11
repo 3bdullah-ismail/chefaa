@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
-import 'package:go_router/go_router.dart';
 
 class Loading {
   static bool _isLoading = false;

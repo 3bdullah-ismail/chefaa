@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/constants_manager.dart';
@@ -9,9 +10,6 @@ import 'package:chefaa/core/widgets/app_bar_content.dart';
 import 'package:chefaa/core/widgets/custom_app_bar.dart';
 import 'package:chefaa/features/onboarding/presentation/widgets/next_button.dart';
 import 'package:chefaa/features/onboarding/presentation/widgets/option_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class OptionScreen extends StatefulWidget {
   const OptionScreen({super.key});

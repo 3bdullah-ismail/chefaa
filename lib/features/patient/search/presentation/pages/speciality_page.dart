@@ -1,8 +1,8 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/constants_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
 import 'package:chefaa/features/patient/search/presentation/widgets/speciality_card.dart';
-import 'package:flutter/material.dart';
 
 class SpecialityPage extends StatelessWidget {
   const SpecialityPage({super.key});

@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 abstract class MedicationDataSource {
   Future<Response> getMedicationList();
 

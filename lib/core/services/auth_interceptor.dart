@@ -1,7 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/routes/routes.dart';
 import 'package:chefaa/core/services/storage_service.dart';
-import 'package:dio/dio.dart';
 
 class AuthInterceptor extends Interceptor {
   @override

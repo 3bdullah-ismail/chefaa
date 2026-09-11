@@ -1,11 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:widget_to_marker/widget_to_marker.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -13,7 +7,6 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/features/patient/profile/presentation/widgets/bottom_sheet.dart';
 import 'package:chefaa/features/patient/search/domain/entities/clinic_model.dart';
 import 'package:chefaa/features/patient/search/presentation/widgets/search_card.dart';
-import 'package:go_router/go_router.dart';
 
 class LocationFilter extends StatefulWidget {
   const LocationFilter({super.key});

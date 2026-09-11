@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -7,10 +8,6 @@ import 'package:chefaa/features/doctor/home/presentation/manager/clinic_cubit.da
 import 'package:chefaa/features/doctor/home/presentation/widgets/clinic_card.dart';
 import 'package:chefaa/features/doctor/home/presentation/widgets/empty_clinic_state.dart';
 import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class DoctorHome extends StatefulWidget {
   const DoctorHome({super.key});

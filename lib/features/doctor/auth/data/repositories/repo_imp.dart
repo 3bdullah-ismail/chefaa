@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:isolate';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/auth/data/data_sources/data_source.dart';
 import 'package:chefaa/features/doctor/auth/domain/repositories/repo.dart';
-import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/auth/data/models/auth_response.dart';

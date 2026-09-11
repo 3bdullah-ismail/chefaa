@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/lab_results/domain/repositories/lab_results_repository.dart';
 import 'lab_results_state.dart';
 

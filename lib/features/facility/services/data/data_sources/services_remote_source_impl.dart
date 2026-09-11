@@ -1,7 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/facility/services/data/data_sources/services_remote_source.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
 @Injectable(as: ServicesRemoteSource)
 class ServicesRemoteSourceImpl extends ServicesRemoteSource {

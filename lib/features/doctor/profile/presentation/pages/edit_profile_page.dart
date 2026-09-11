@@ -1,11 +1,9 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/widgets/custom_btn.dart';
 import 'package:chefaa/core/widgets/custom_text_field.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
 import 'package:chefaa/core/widgets/validators.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
@@ -14,7 +12,6 @@ import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/widgets/custom_dropdown_btn.dart';
 import 'package:chefaa/features/doctor/profile/domain/entities/doctor_profile_entity.dart';
 import 'package:chefaa/features/doctor/profile/presentation/manager/doctor_profile_cubit.dart';
-import 'package:go_router/go_router.dart';
 
 class EditProfilePage extends StatefulWidget {
   final DoctorProfileEntity? doctorData;

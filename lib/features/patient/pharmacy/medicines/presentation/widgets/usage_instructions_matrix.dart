@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'dosage_metric_item.dart';
 import 'indication_chip.dart';

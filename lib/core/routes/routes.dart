@@ -1,4 +1,5 @@
 import 'package:chefaa/core/config/get_config.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/widgets/error_page.dart';
 import 'package:chefaa/features/auth/presentation/pages/forget_password_page.dart';
 import 'package:chefaa/features/auth/presentation/pages/login_page.dart';
@@ -59,8 +60,6 @@ import 'package:chefaa/features/pharmacy/profile/data/models/pharmacy_profile_re
 import 'package:chefaa/features/pharmacy/profile/presentation/manager/pharmacy_profile_cubit.dart';
 import 'package:chefaa/features/pharmacy/profile/presentation/pages/edit_pharmacy_profile_page.dart';
 import 'package:chefaa/features/pharmacy/settings/presentation/pages/pharmacy_settings_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/pages/reset_password_page.dart';
 
@@ -71,7 +70,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutesNames.appEntryRoute,
     errorBuilder: (context, state) =>
-        const ErrorPage(message: '404 Route Not Found'),
+    const ErrorPage(message: '404 Route Not Found'),
     routes: [
       GoRoute(
         path: AppRoutesNames.login,
@@ -243,10 +242,11 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.patientSearch,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<SearchCubit>(),
-          child: const SearchPage(),
-        ),
+        builder: (context, state) =>
+            BlocProvider(
+              create: (_) => getIt<SearchCubit>(),
+              child: const SearchPage(),
+            ),
       ),
       GoRoute(
         path: AppRoutesNames.medicationPage,
@@ -258,10 +258,11 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.patientDetailsPage,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<PatientsCubit>(),
-          child: const PatientDetailsPage(),
-        ),
+        builder: (context, state) =>
+            BlocProvider(
+              create: (_) => getIt<PatientsCubit>(),
+              child: const PatientDetailsPage(),
+            ),
       ),
       GoRoute(
         path: AppRoutesNames.facilityResults,
@@ -281,10 +282,11 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.labResultsPage,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<LabResultsCubit>(),
-          child: const LabResultsPage(),
-        ),
+        builder: (context, state) =>
+            BlocProvider(
+              create: (_) => getIt<LabResultsCubit>(),
+              child: const LabResultsPage(),
+            ),
       ),
       GoRoute(
         path: AppRoutesNames.editPharmacyProfile,
@@ -319,10 +321,11 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.patientNotification,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<PatientNotificationCubit>(),
-          child: const PatientNotificationPage(),
-        ),
+        builder: (context, state) =>
+            BlocProvider(
+              create: (_) => getIt<PatientNotificationCubit>(),
+              child: const PatientNotificationPage(),
+            ),
       ),
       GoRoute(
         path: AppRoutesNames.pharmacyDetails,
@@ -347,7 +350,7 @@ class AppRouter {
             price: args?['price'] as String? ?? '0',
             medicineId: medicineId ?? '',
             pharmacyId:
-                state.pathParameters['pharmacyId'] ??
+            state.pathParameters['pharmacyId'] ??
                 args?['pharmacyId'] as String?,
           );
         },

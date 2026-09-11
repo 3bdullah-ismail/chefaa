@@ -1,8 +1,6 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/medication/domain/repositories/medication_repo.dart';
 import 'package:chefaa/features/patient/medication/presentation/manager/medication_state.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class MedicationCubit extends Cubit<MedicationState> {

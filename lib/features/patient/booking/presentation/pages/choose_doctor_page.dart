@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/search/presentation/manager/search_cubit.dart';
 import 'package:chefaa/features/patient/search/presentation/widgets/filter_bar.dart';
 import 'package:chefaa/features/patient/search/presentation/widgets/results_list.dart';

@@ -1,9 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/doctor/profile/domain/entities/doctor_profile_entity.dart';
 import 'package:chefaa/features/doctor/profile/domain/use_cases/get_doctor_data_use_case.dart';
 import 'package:chefaa/features/doctor/profile/domain/use_cases/update_doctor_data_use_case.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 
 part 'doctor_profile_state.dart';
 

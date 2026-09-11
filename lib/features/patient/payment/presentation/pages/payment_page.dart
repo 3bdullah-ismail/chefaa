@@ -1,4 +1,4 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/constants_manager.dart';
@@ -7,10 +7,6 @@ import 'package:chefaa/core/widgets/loading.dart';
 import 'package:chefaa/features/patient/cart/presentation/widgets/order_summary_card.dart';
 import 'package:chefaa/features/patient/payment/presentation/manager/payment_cubit.dart';
 import 'package:chefaa/features/patient/payment/presentation/widgets/card_details.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/routes/app_routes_names.dart';
 

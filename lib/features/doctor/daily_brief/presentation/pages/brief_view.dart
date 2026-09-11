@@ -1,3 +1,4 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -9,9 +10,6 @@ import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/finance_
 import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/motivation_card.dart';
 import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/section_card.dart';
 import 'package:chefaa/features/doctor/daily_brief/presentation/widgets/state_card.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BriefView extends StatelessWidget {
   const BriefView({super.key});

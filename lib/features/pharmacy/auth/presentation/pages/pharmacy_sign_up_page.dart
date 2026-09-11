@@ -1,4 +1,4 @@
-import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -15,12 +15,6 @@ import 'package:chefaa/core/widgets/terms_of_service.dart';
 import 'package:chefaa/core/widgets/upload_container.dart';
 import 'package:chefaa/core/widgets/validators.dart';
 import 'package:chefaa/features/pharmacy/auth/presentation/manager/pharmacy_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/file_handler/file_handler_cubit.dart';
 

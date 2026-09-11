@@ -1,7 +1,7 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/features/patient/cart/presentation/pages/cart_page.dart';
-import 'package:flutter/material.dart';
 
 import '../../../../order/presentation/pages/orders_list_page.dart';
 import 'pharmacy_page.dart';

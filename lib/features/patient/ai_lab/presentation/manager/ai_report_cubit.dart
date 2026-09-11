@@ -1,9 +1,5 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/hive_service.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:injectable/injectable.dart';
 
 import 'package:chefaa/features/patient/ai_lab/domain/repositories/ai_report_repo.dart';
 import 'ai_report_state.dart';

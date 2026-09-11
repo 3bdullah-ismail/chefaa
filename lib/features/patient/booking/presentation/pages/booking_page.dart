@@ -1,12 +1,10 @@
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/features/patient/booking/presentation/manager/booking_cubit.dart';
 import 'package:chefaa/features/patient/booking/presentation/manager/booking_state.dart';
 import 'package:chefaa/features/patient/booking/presentation/pages/choose_doctor_page.dart';
 import 'package:chefaa/features/patient/booking/presentation/pages/choose_visit_time_page.dart';
 import 'package:chefaa/features/patient/booking/presentation/widgets/stepper_header.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:chefaa/core/extensions/build_ex.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
