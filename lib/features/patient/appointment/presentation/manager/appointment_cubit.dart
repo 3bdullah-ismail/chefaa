@@ -18,16 +18,20 @@ class AppointmentCubit extends Cubit<AppointmentState> {
   Future<void> getMyAppointments({bool forceRefresh = false}) async {
     if (state is GetAppointmentsLoadingState) return;
     if (appointments.isNotEmpty && !forceRefresh) return;
-      if (!isClosed) emit(GetAppointmentsLoadingState());
+    if (!isClosed) emit(GetAppointmentsLoadingState());
 
     try {
       appointments = await appointmentRepo.getMyAppointments();
-      if (!isClosed) emit(GetAppointmentsSuccessState(appointments: appointments));
+      if (!isClosed) {
+        emit(GetAppointmentsSuccessState(appointments: appointments));
+      }
     } catch (e) {
       if (e is ServerFailure) {
-      if (!isClosed) emit(GetAppointmentsErrorState(error: e.message));
+        if (!isClosed) emit(GetAppointmentsErrorState(error: e.message));
       } else {
-      if (!isClosed) emit(GetAppointmentsErrorState(error: ServerFailure.unexpectedError));
+        if (!isClosed) {
+          emit(GetAppointmentsErrorState(error: ServerFailure.unexpectedError));
+        }
       }
     }
   }
@@ -39,7 +43,7 @@ class AppointmentCubit extends Cubit<AppointmentState> {
     required String slotEnd,
     required String timeChosed,
   }) async {
-      if (!isClosed) emit(RescheduleLoadingState());
+    if (!isClosed) emit(RescheduleLoadingState());
 
     try {
       final updated = await appointmentRepo.rescheduleAppointment(
@@ -75,15 +79,17 @@ class AppointmentCubit extends Cubit<AppointmentState> {
       if (!isClosed) emit(RescheduleSuccessState(appointment: updated));
     } catch (e) {
       if (e is ServerFailure) {
-      if (!isClosed) emit(RescheduleErrorState(error: e.message));
+        if (!isClosed) emit(RescheduleErrorState(error: e.message));
       } else {
-      if (!isClosed) emit(RescheduleErrorState(error: ServerFailure.unexpectedError));
+        if (!isClosed) {
+          emit(RescheduleErrorState(error: ServerFailure.unexpectedError));
+        }
       }
     }
   }
 
   Future<void> cancelAppointment({required String appointmentId}) async {
-      if (!isClosed) emit(CancelAppointmentLoadingState());
+    if (!isClosed) emit(CancelAppointmentLoadingState());
 
     try {
       final updated = await appointmentRepo.cancelAppointment(
@@ -115,9 +121,13 @@ class AppointmentCubit extends Cubit<AppointmentState> {
       if (!isClosed) emit(CancelAppointmentSuccessState(appointment: updated));
     } catch (e) {
       if (e is ServerFailure) {
-      if (!isClosed) emit(CancelAppointmentErrorState(error: e.message));
+        if (!isClosed) emit(CancelAppointmentErrorState(error: e.message));
       } else {
-      if (!isClosed) emit(CancelAppointmentErrorState(error: ServerFailure.unexpectedError));
+        if (!isClosed) {
+          emit(
+            CancelAppointmentErrorState(error: ServerFailure.unexpectedError),
+          );
+        }
       }
     }
   }

@@ -8,17 +8,15 @@ class TrendCard extends StatelessWidget {
   final String value;
   final String title;
 
-  const TrendCard({
-    super.key,
-    required this.value,
-    required this.title,
-  });
+  const TrendCard({super.key, required this.value, required this.title});
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      padding:const  EdgeInsets.symmetric(vertical: AppPadding.p14, horizontal: AppPadding.p8),
+      padding: const EdgeInsets.symmetric(
+        vertical: AppPadding.p14,
+        horizontal: AppPadding.p8,
+      ),
       decoration: BoxDecoration(
         color: ColorManager.white,
         borderRadius: BorderRadius.circular(14.r),
@@ -40,7 +38,7 @@ class TrendCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: getSemiBoldStyle(color: ColorManager.gray, fontSize: 11.sp)
+            style: getSemiBoldStyle(color: ColorManager.gray, fontSize: 11.sp),
           ),
         ],
       ),

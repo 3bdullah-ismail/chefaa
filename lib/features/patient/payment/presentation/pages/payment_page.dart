@@ -67,7 +67,12 @@ class _PaymentPageState extends State<PaymentPage> {
                 type: AnimatedSnackBarType.success,
                 brightness: Brightness.dark,
               ).show(context);
-              context.go(AppRoutesNames.trackOrderPage.replaceFirst(':orderId', widget.orderId));
+              context.go(
+                AppRoutesNames.trackOrderPage.replaceFirst(
+                  ':orderId',
+                  widget.orderId,
+                ),
+              );
             } else if (state is PaymentFailure) {
               Loading.hide(context);
               if (state.message == "This order is already paid.") {
@@ -77,7 +82,12 @@ class _PaymentPageState extends State<PaymentPage> {
                   type: AnimatedSnackBarType.success,
                   brightness: Brightness.dark,
                 ).show(context);
-                context.go(AppRoutesNames.trackOrderPage.replaceFirst(':orderId', widget.orderId));
+                context.go(
+                  AppRoutesNames.trackOrderPage.replaceFirst(
+                    ':orderId',
+                    widget.orderId,
+                  ),
+                );
               } else {
                 AnimatedSnackBar.rectangle(
                   AppConstants.error,

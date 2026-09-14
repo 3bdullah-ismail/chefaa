@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
@@ -65,92 +64,92 @@ class _ResetCodeState extends State<ResetCode> {
                   children: [
                     const BackBtn(),
                     36.verticalSpace,
-                  Text(
-                    "Enter Verification Code",
-                    style: getBoldStyle(
-                      color: ColorManager.black,
-                      fontSize: FontSize.s24,
-                    ),
-                  ),
-                  16.verticalSpace,
-                  RichText(
-                    text: TextSpan(
-                      style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: 14,
+                    Text(
+                      "Enter Verification Code",
+                      style: getBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: FontSize.s24,
                       ),
-                      children: [
-                        const TextSpan(
-                          text: "Enter code that we have sent to your\n",
+                    ),
+                    16.verticalSpace,
+                    RichText(
+                      text: TextSpan(
+                        style: getMediumStyle(
+                          color: ColorManager.gray,
+                          fontSize: 14,
                         ),
-                        TextSpan(
-                          text: widget.index == 0 ? "email " : "number ",
-                        ),
-                        TextSpan(
-                          text: widget.index == 0
-                              ? cubit.emailController.text
-                              : cubit.phoneController.text,
-                          style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: 16,
+                        children: [
+                          const TextSpan(
+                            text: "Enter code that we have sent to your\n",
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  62.verticalSpace,
-                  OtpTextField(
-                    numberOfFields: 4,
-                    fieldWidth: 50.w,
-                    fieldHeight: 50.h,
-                    contentPadding: const EdgeInsets.all(8),
-                    margin: EdgeInsets.symmetric(horizontal: 8.w),
-                    borderColor: ColorManager.gray,
-                    focusedBorderColor: ColorManager.primary,
-                    cursorColor: ColorManager.primary,
-                    enabledBorderColor: ColorManager.gray,
-                    borderRadius: BorderRadius.circular(16.r),
-                    borderWidth: 2.w,
-                    showFieldAsBox: true,
-                    showCursor: false,
-                    textStyle: getSemiBoldStyle(
-                      fontSize: 20.sp,
-                      color: Colors.black,
-                    ),
-                    handleControllers: (controllers) {
-                      cubit.setOtpControllers(controllers);
-                    },
-                    onSubmit: (String verificationCode) {},
-                  ),
-                  56.verticalSpace,
-                  CustomBtn(
-                    text: "Verify",
-                    onPressed: () => cubit.resetCode(widget.index),
-                  ),
-                  16.verticalSpace,
-                  RichText(
-                    text: TextSpan(
-                      style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: 14,
+                          TextSpan(
+                            text: widget.index == 0 ? "email " : "number ",
+                          ),
+                          TextSpan(
+                            text: widget.index == 0
+                                ? cubit.emailController.text
+                                : cubit.phoneController.text,
+                            style: getMediumStyle(
+                              color: ColorManager.black,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
                       ),
-                      children: [
-                        const TextSpan(text: "Didn't receive the code? "),
-                        TextSpan(
-                          text: "Resend",
-                          style: getBoldStyle(
-                            color: ColorManager.primary,
-                            fontSize: 14,
-                          ).copyWith(decoration: TextDecoration.underline),
-                        ),
-                      ],
                     ),
-                  ),
-                ],
+                    62.verticalSpace,
+                    OtpTextField(
+                      numberOfFields: 4,
+                      fieldWidth: 50.w,
+                      fieldHeight: 50.h,
+                      contentPadding: const EdgeInsets.all(8),
+                      margin: EdgeInsets.symmetric(horizontal: 8.w),
+                      borderColor: ColorManager.gray,
+                      focusedBorderColor: ColorManager.primary,
+                      cursorColor: ColorManager.primary,
+                      enabledBorderColor: ColorManager.gray,
+                      borderRadius: BorderRadius.circular(16.r),
+                      borderWidth: 2.w,
+                      showFieldAsBox: true,
+                      showCursor: false,
+                      textStyle: getSemiBoldStyle(
+                        fontSize: 20.sp,
+                        color: Colors.black,
+                      ),
+                      handleControllers: (controllers) {
+                        cubit.setOtpControllers(controllers);
+                      },
+                      onSubmit: (String verificationCode) {},
+                    ),
+                    56.verticalSpace,
+                    CustomBtn(
+                      text: "Verify",
+                      onPressed: () => cubit.resetCode(widget.index),
+                    ),
+                    16.verticalSpace,
+                    RichText(
+                      text: TextSpan(
+                        style: getMediumStyle(
+                          color: ColorManager.gray,
+                          fontSize: 14,
+                        ),
+                        children: [
+                          const TextSpan(text: "Didn't receive the code? "),
+                          TextSpan(
+                            text: "Resend",
+                            style: getBoldStyle(
+                              color: ColorManager.primary,
+                              fontSize: 14,
+                            ).copyWith(decoration: TextDecoration.underline),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
         ),
       ),
     );

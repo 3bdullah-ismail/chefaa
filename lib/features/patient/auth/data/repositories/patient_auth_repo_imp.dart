@@ -1,11 +1,9 @@
-
-import 'package:chefaa/core/imports/imports.dart';
-import 'package:chefaa/features/auth/data/models/auth_response.dart';
-import 'package:chefaa/features/patient/auth/domain/repositories/patient_repo.dart';
-
 import 'package:chefaa/core/error_handling/failure.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/storage_service.dart';
-import 'package:chefaa/features/patient/auth/data/data_sources/patient_data_source.dart';
+import 'package:chefaa/features/auth/data/models/auth_response.dart';
+import 'package:chefaa/features/patient/auth/data/data_sources/patient_auth_data_source.dart';
+import 'package:chefaa/features/patient/auth/data/repositories/patient_auth_repo.dart';
 
 @Injectable(as: PatientRepo)
 class PatientRepoImp implements PatientRepo {

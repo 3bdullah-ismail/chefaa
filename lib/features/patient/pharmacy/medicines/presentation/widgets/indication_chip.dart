@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class IndicationChip extends StatelessWidget {
   final String text;
   final IconData icon;

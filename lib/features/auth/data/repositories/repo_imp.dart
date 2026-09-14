@@ -1,11 +1,10 @@
-import 'package:chefaa/core/imports/imports.dart';
-import 'package:chefaa/features/auth/domain/repositories/repo.dart';
-
 import 'package:chefaa/core/error_handling/failure.dart';
-import 'package:chefaa/features/auth/data/models/auth_response.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/storage_service.dart';
 import 'package:chefaa/features/auth/data/data_sources/data_source.dart';
+import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:chefaa/features/auth/data/models/reset_password_response.dart';
+import 'package:chefaa/features/auth/data/repositories/repo.dart';
 
 @Injectable(as: AuthRepo)
 class AuthRepoImp implements AuthRepo {
@@ -35,19 +34,19 @@ class AuthRepoImp implements AuthRepo {
     }
   }
 
-  @override
-  Future<AuthResponse> googleSignIn(String idToken) async {
-    try {
-      debugPrint('AuthRepoImp.googleSignIn calling data source');
-      var res = await authDataSource.googleSignIn(idToken);
-      debugPrint('AuthRepoImp.googleSignIn response data=${res.data}');
-      return AuthResponse.fromJson(res.data);
-    } on DioException catch (e) {
-      throw ServerFailure.fromDioError(e).message;
-    } catch (e) {
-      throw 'Social login failed';
-    }
-  }
+  // @override
+  // Future<AuthResponse> googleSignIn(String idToken) async {
+  //   try {
+  //     debugPrint('AuthRepoImp.googleSignIn calling data source');
+  //     var res = await authDataSource.googleSignIn(idToken);
+  //     debugPrint('AuthRepoImp.googleSignIn response data=${res.data}');
+  //     return AuthResponse.fromJson(res.data);
+  //   } on DioException catch (e) {
+  //     throw ServerFailure.fromDioError(e).message;
+  //   } catch (e) {
+  //     throw 'Social login failed';
+  //   }
+  // }
 
   @override
   Future<ResetPasswordResponse> forgotPass({required String identity}) async {

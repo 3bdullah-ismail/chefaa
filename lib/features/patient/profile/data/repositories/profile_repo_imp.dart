@@ -1,7 +1,6 @@
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 
-
 import '../../domain/entities/address_entity.dart';
 import '../../domain/entities/user_profile_entity.dart';
 import '../../domain/repositories/profile_repo.dart';
@@ -36,7 +35,7 @@ class ProfileRepoImpl implements ProfileRepo {
     num? age,
     num? height,
     num? weight,
-      AddressEntity address,
+    AddressEntity address,
   ) async {
     try {
       var response = await profileRemoteDataSource.updateProfileData(
@@ -45,8 +44,7 @@ class ProfileRepoImpl implements ProfileRepo {
         age,
         height,
         weight,
-        address
-
+        address,
       );
       var data = UpdateResponse.fromJson(response.data);
       return Right(data);

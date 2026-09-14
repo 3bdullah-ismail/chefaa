@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class RiskLevel {
   final String title;
   final String description;

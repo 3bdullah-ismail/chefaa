@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 abstract class ClinicDataSource {
   Future<Response> getClinics({required String doctorID});
 

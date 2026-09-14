@@ -12,7 +12,7 @@ class LabResultsCubit extends Cubit<LabResultsState> {
       BlocProvider.of<LabResultsCubit>(context);
 
   Future<void> getLabResults() async {
-      if (!isClosed) emit(LabResultsLoadingState());
+    if (!isClosed) emit(LabResultsLoadingState());
     try {
       final response = await _repository.getLabResults();
       final results = response.results ?? [];

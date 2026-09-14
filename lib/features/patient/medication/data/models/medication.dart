@@ -15,7 +15,9 @@ class Medication {
   });
 
   Medication.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     name = json['name'];
     dosage = json['dosage'];
     form = json['form'];

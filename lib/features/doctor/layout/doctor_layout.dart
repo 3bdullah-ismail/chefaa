@@ -24,20 +24,23 @@ class DoctorLayout extends StatefulWidget {
 class _DoctorLayoutState extends State<DoctorLayout> {
   int _selectedIndex = 0;
 
-  final List<Widget> _tabs =  [
+  final List<Widget> _tabs = [
     const DoctorHome(),
     BlocProvider(
-        create: (_) =>getIt<PatientsCubit>(),
-        child: const PatientsPage()),
-  BlocProvider(
-  create: (_) =>getIt<BriefCubit>(),
-  child: const DailyBriefPage()),
+      create: (_) => getIt<PatientsCubit>(),
+      child: const PatientsPage(),
+    ),
+    BlocProvider(
+      create: (_) => getIt<BriefCubit>(),
+      child: const DailyBriefPage(),
+    ),
 
-  BlocProvider(
-  create: (_) =>getIt<DocChatbotCubit>(),
-  child: const DocChatbotPage()),
+    BlocProvider(
+      create: (_) => getIt<DocChatbotCubit>(),
+      child: const DocChatbotPage(),
+    ),
 
-     const DoctorProfile(),
+    const DoctorProfile(),
   ];
 
   @override
@@ -59,17 +62,37 @@ class _DoctorLayoutState extends State<DoctorLayout> {
           items: [
             BottomNavigationBarItem(
               icon: SvgPicture.asset(SvgAssets.home, width: 20, height: 20),
-              activeIcon: SvgPicture.asset(SvgAssets.homeActive, width: 20, height: 20),
+              activeIcon: SvgPicture.asset(
+                SvgAssets.homeActive,
+                width: 20,
+                height: 20,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(SvgAssets.patient, width: 32.w, height: 32.h),
-              activeIcon: SvgPicture.asset(SvgAssets.patientActive, width: 32.w, height: 32.h),
+              icon: SvgPicture.asset(
+                SvgAssets.patient,
+                width: 32.w,
+                height: 32.h,
+              ),
+              activeIcon: SvgPicture.asset(
+                SvgAssets.patientActive,
+                width: 32.w,
+                height: 32.h,
+              ),
               label: 'Patients',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(SvgAssets.docBrief, width: 32.w, height: 32.h),
-              activeIcon: SvgPicture.asset(SvgAssets.docBriefActive, width: 32.w, height: 32.h),
+              icon: SvgPicture.asset(
+                SvgAssets.docBrief,
+                width: 32.w,
+                height: 32.h,
+              ),
+              activeIcon: SvgPicture.asset(
+                SvgAssets.docBriefActive,
+                width: 32.w,
+                height: 32.h,
+              ),
               label: 'Briefing',
             ),
             BottomNavigationBarItem(

@@ -58,9 +58,7 @@ class _PharmacyChatbotPageState extends State<PharmacyChatbotPage> {
 
             if (state is LoadingContext) {
               return const Center(
-                child: CircularProgressIndicator(
-                  color: ColorManager.primary,
-                ),
+                child: CircularProgressIndicator(color: ColorManager.primary),
               );
             }
 
@@ -112,7 +110,8 @@ class _PharmacyChatbotPageState extends State<PharmacyChatbotPage> {
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(16),
-                    itemCount: cubit.messages.length + (isInputDisabled ? 1 : 0),
+                    itemCount:
+                        cubit.messages.length + (isInputDisabled ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index == cubit.messages.length) {
                         return const ChatMessageBubble(

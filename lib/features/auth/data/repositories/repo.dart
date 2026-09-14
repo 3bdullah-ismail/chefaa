@@ -1,6 +1,5 @@
-import 'package:chefaa/features/auth/data/models/reset_password_response.dart';
-
 import 'package:chefaa/features/auth/data/models/auth_response.dart';
+import 'package:chefaa/features/auth/data/models/reset_password_response.dart';
 
 abstract class AuthRepo {
   Future<AuthResponse> login({
@@ -8,7 +7,7 @@ abstract class AuthRepo {
     required String password,
   });
 
-  Future<AuthResponse> googleSignIn(String idToken);
+  /*  Future<AuthResponse> googleSignIn(String idToken);*/
 
   Future<ResetPasswordResponse> forgotPass({required String identity});
 

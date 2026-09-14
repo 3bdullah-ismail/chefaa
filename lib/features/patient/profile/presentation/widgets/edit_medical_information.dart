@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -55,7 +54,8 @@ class _EditMedicalInformationState extends State<EditMedicalInformation> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: BlocListener<ProfileCubit, ProfileState>(
-                listenWhen: (previous, current) => current is GetProfileDataSuccessState,
+                listenWhen: (previous, current) =>
+                    current is GetProfileDataSuccessState,
                 listener: (context, state) {
                   if (state is GetProfileDataSuccessState) {
                     var user = state.profileData;

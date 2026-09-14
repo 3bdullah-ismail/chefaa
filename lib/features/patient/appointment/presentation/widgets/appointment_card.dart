@@ -216,7 +216,12 @@ class DoctorCard extends StatelessWidget {
                   color: ColorManager.primary,
                   onPressed: onReschedule,
                 ),
-                CustomBtn(text: 'Join Now', onPressed: () {}, isSmall: true, isDisabled: true,),
+                CustomBtn(
+                  text: 'Join Now',
+                  onPressed: () {},
+                  isSmall: true,
+                  isDisabled: true,
+                ),
               ],
             ),
           ],

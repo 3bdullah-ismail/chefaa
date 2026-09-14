@@ -7,10 +7,7 @@ import 'package:chefaa/core/resources/color_manager.dart';
 class OrderTimelineStepper extends StatelessWidget {
   final StatusTimeline timeline;
 
-  const OrderTimelineStepper({
-    super.key,
-    required this.timeline,
-  });
+  const OrderTimelineStepper({super.key, required this.timeline});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +23,15 @@ class OrderTimelineStepper extends StatelessWidget {
 
     // Active = the first incomplete step in sequence
     final bool isConfirmedActive = !isConfirmedCompleted;
-    final bool isPreparingActive = isConfirmedCompleted && !isPreparingCompleted;
-    final bool isPickedUpActive = isConfirmedCompleted && isPreparingCompleted && !isPickedUpCompleted;
-    final bool isOnWayActive = isConfirmedCompleted && isPreparingCompleted && isPickedUpCompleted && !isOnWayCompleted;
+    final bool isPreparingActive =
+        isConfirmedCompleted && !isPreparingCompleted;
+    final bool isPickedUpActive =
+        isConfirmedCompleted && isPreparingCompleted && !isPickedUpCompleted;
+    final bool isOnWayActive =
+        isConfirmedCompleted &&
+        isPreparingCompleted &&
+        isPickedUpCompleted &&
+        !isOnWayCompleted;
 
     return Container(
       padding: const EdgeInsets.all(20),

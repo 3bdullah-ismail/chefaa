@@ -22,9 +22,10 @@ class PatientLayout extends StatefulWidget {
 class _PatientLayoutState extends State<PatientLayout> {
   int _selectedIndex = 0;
   List<Widget> tabs = [
-  BlocProvider(
-  create: (_) => getIt<PatientNotificationCubit>(),
-  child: const  HomePage()),
+    BlocProvider(
+      create: (_) => getIt<PatientNotificationCubit>(),
+      child: const HomePage(),
+    ),
     BlocProvider(
       create: (_) => getIt<BookingCubit>(),
       child: const BookingPage(),

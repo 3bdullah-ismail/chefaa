@@ -1,12 +1,12 @@
-import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/extensions/build_ex.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/services/storage_service.dart';
-import 'package:chefaa/features/onboarding/data/models/onboarding_model.dart';
+import 'package:chefaa/features/onboarding/models/onboarding_model.dart';
 
 import 'next_button.dart';
 

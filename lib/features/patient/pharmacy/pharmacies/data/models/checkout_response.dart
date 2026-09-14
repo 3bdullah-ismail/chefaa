@@ -3,11 +3,7 @@ class CheckoutResponse {
   final String message;
   final CheckoutResponseData? data;
 
-  CheckoutResponse({
-    required this.success,
-    required this.message,
-    this.data,
-  });
+  CheckoutResponse({required this.success, required this.message, this.data});
 
   factory CheckoutResponse.fromJson(Map<String, dynamic> json) {
     return CheckoutResponse(
@@ -20,11 +16,7 @@ class CheckoutResponse {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'message': message,
-      'data': data?.toJson(),
-    };
+    return {'success': success, 'message': message, 'data': data?.toJson()};
   }
 }
 

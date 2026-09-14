@@ -12,13 +12,14 @@ class LabSearchCubit extends Cubit<LabSearchState> {
     String? requiredServices,
     bool? homeService,
   }) async {
-      if (!isClosed) emit(LabSearchLoading());
+    if (!isClosed) emit(LabSearchLoading());
     final result = await _repo.searchCenters(
       requiredServices: requiredServices,
       homeService: homeService,
     );
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(LabSearchError(failure.message)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(LabSearchError(failure.message)),
       ifRight: (response) => isClosed ? null : emit(LabSearchSuccess(response)),
     );
   }

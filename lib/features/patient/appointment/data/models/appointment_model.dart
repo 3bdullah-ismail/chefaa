@@ -40,7 +40,9 @@ class AppointmentModel {
   });
 
   factory AppointmentModel.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     final patientJson = json['patient'];
     AppointmentPatientModel? patient;
     if (patientJson is Map<String, dynamic>) {

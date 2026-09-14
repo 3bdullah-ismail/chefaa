@@ -10,7 +10,7 @@ abstract class ProfileRemoteDataSource {
     num? age,
     num? height,
     num? weight,
-      AddressEntity address,
+    AddressEntity address,
   );
 
   Future<Response<dynamic>> updateMedicalData({

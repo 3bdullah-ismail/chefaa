@@ -9,10 +9,7 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 class OrderContentCard extends StatelessWidget {
   final OrderContents contents;
 
-  const OrderContentCard({
-    super.key,
-    required this.contents,
-  });
+  const OrderContentCard({super.key, required this.contents});
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +44,13 @@ class OrderContentCard extends StatelessWidget {
             ],
           ),
           16.verticalSpace,
-          ...contents.items.map((item) => MedicineItemCard(
-                name: item.medicineName,
-                quantity: item.quantity,
-                price: "EGP ${item.price.toStringAsFixed(2)}",
-              )),
+          ...contents.items.map(
+            (item) => MedicineItemCard(
+              name: item.medicineName,
+              quantity: item.quantity,
+              price: "EGP ${item.price.toStringAsFixed(2)}",
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: AppPadding.p12),
             child: Divider(color: ColorManager.input, thickness: 0.8),

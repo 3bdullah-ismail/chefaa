@@ -4,7 +4,9 @@ class Booking {
   Booking({this.message, this.appointment});
 
   Booking.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     message = json['message'];
     appointment = json['appointment'] != null
         ? Appointment.fromJson(json['appointment'])
@@ -22,4 +24,3 @@ class Booking {
     return map;
   }
 }
-

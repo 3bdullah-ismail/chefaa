@@ -57,4 +57,3 @@ class MedicalLeadershipCard extends StatelessWidget {
     );
   }
 }
-

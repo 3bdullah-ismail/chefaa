@@ -33,7 +33,8 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
   Widget build(BuildContext context) {
     return BlocProvider<PharmacyMedicinesCubit>(
       create: (context) =>
-          getIt<PharmacyMedicinesCubit>()..getPharmacyMedicines(widget.pharmacyId),
+          getIt<PharmacyMedicinesCubit>()
+            ..getPharmacyMedicines(widget.pharmacyId),
       child: Scaffold(
         backgroundColor: const Color(0xffF6F8FA),
         appBar: PreferredSize(
@@ -47,9 +48,7 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
           builder: (context, state) {
             if (state is PharmacyMedicinesLoading) {
               return const Center(
-                child: CircularProgressIndicator(
-                  color: ColorManager.primary,
-                ),
+                child: CircularProgressIndicator(color: ColorManager.primary),
               );
             } else if (state is PharmacyMedicinesFailure) {
               return Center(
@@ -137,7 +136,8 @@ class _PharmacyMedicinesPageState extends State<PharmacyMedicinesPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (searchQuery.isEmpty && mostOrdered.isNotEmpty) ...[
+                          if (searchQuery.isEmpty &&
+                              mostOrdered.isNotEmpty) ...[
                             Text(
                               "Most Ordered",
                               style: getBoldStyle(

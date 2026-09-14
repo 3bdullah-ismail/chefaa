@@ -4,7 +4,9 @@ class ConfirmMedication {
   ConfirmMedication({this.message, this.adherenceRate, this.medication});
 
   ConfirmMedication.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     message = json['message'];
     adherenceRate = json['adherenceRate'];
     medication = json['medication'] != null

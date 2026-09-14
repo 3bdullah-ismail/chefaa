@@ -1,11 +1,10 @@
 class Brief {
-  Brief({
-      this.generatedAt, 
-      this.lang, 
-      this.brief,});
+  Brief({this.generatedAt, this.lang, this.brief});
 
   Brief.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     generatedAt = json['generatedAt'];
     lang = json['lang'];
     brief = json['brief'];
@@ -21,5 +20,4 @@ class Brief {
     map['brief'] = brief;
     return map;
   }
-
 }

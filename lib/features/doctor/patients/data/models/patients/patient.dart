@@ -2,7 +2,9 @@ class Patient {
   Patient({this.id, this.userId, this.age, this.gender});
 
   Patient.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     userId = json['userId'];
     age = json['age'];

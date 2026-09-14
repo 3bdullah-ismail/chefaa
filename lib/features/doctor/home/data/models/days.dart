@@ -13,7 +13,9 @@ class Days {
   });
 
   Days.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     day = json['day'];
     isActive = json['isActive'];
     open = json['open'];

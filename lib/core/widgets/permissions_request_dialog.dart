@@ -1,5 +1,6 @@
 import 'package:chefaa/core/imports/imports.dart';
-import 'package:permission_handler/permission_handler.dart' as permission_handler;
+import 'package:permission_handler/permission_handler.dart'
+    as permission_handler;
 
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -213,19 +214,21 @@ class _PermissionsRequestDialogState extends State<PermissionsRequestDialog> {
                         onPressed: isLoading
                             ? null
                             : () async {
-                          final messenger = ScaffoldMessenger.of(context);
-                          try {
-                            await PermissionsService.openAppSettings();
-                          } catch (e) {
-                            if (mounted) {
-                              messenger.showSnackBar(
-                                SnackBar(
-                                  content: Text('Error opening settings: $e'),
-                                ),
-                              );
-                            }
-                          }
-                        },
+                                final messenger = ScaffoldMessenger.of(context);
+                                try {
+                                  await PermissionsService.openAppSettings();
+                                } catch (e) {
+                                  if (mounted) {
+                                    messenger.showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Error opening settings: $e',
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
                         child: Text(
                           'Open Settings',
                           style: getMediumStyle(
@@ -242,8 +245,8 @@ class _PermissionsRequestDialogState extends State<PermissionsRequestDialog> {
                         onPressed: isLoading
                             ? null
                             : () {
-                          context.pop(permissionsStatus);
-                        },
+                                context.pop(permissionsStatus);
+                              },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: ColorManager.primary,
                           shape: RoundedRectangleBorder(
@@ -267,7 +270,8 @@ class _PermissionsRequestDialogState extends State<PermissionsRequestDialog> {
                       ),
                     ),
                   ],
-                ),              ],
+                ),
+              ],
             ),
           ),
         ),

@@ -2,8 +2,7 @@ import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
-import
-'package:chefaa/features/doctor/home/presentation/widgets/custom_outline_button.dart';
+import 'package:chefaa/features/doctor/home/presentation/widgets/custom_outline_button.dart';
 import 'package:chefaa/features/patient/cart/presentation/manager/cart_cubit.dart';
 import 'package:chefaa/features/patient/cart/presentation/widgets/cart_item_card.dart';
 import 'package:chefaa/features/patient/cart/presentation/widgets/order_summary_card.dart';

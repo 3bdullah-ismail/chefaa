@@ -1,12 +1,15 @@
 class Trends {
   Trends({
-      this.completionRate, 
-      this.cancellationRate, 
-      this.avgRevenuePerSession, 
-      this.assessment,});
+    this.completionRate,
+    this.cancellationRate,
+    this.avgRevenuePerSession,
+    this.assessment,
+  });
 
   Trends.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     completionRate = json['completionRate'];
     cancellationRate = json['cancellationRate'];
     avgRevenuePerSession = json['avgRevenuePerSession'];
@@ -25,5 +28,4 @@ class Trends {
     map['assessment'] = assessment;
     return map;
   }
-
 }

@@ -11,19 +11,21 @@ class PharmacySettingsCubit extends Cubit<PharmacySettingsState> {
   final PharmacySettingsRepo pharmacySettingsRepo;
 
   PharmacySettingsCubit(this.pharmacyProfileRepo, this.pharmacySettingsRepo)
-      : super(PharmacySettingsInitial());
+    : super(PharmacySettingsInitial());
 
   Future<void> loadSettingsStatus() async {
-      if (!isClosed) emit(PharmacySettingsLoadLoading());
+    if (!isClosed) emit(PharmacySettingsLoadLoading());
     try {
       final profile = await pharmacyProfileRepo.getPharmacyProfile();
       final openNow = profile.data?.openNow ?? false;
       final deliveryAvailable = profile.data?.deliveryAvailable ?? false;
       if (!isClosed) {
-        emit(PharmacySettingsLoadSuccess(
-        openNow: openNow,
-        deliveryAvailable: deliveryAvailable,
-      ));
+        emit(
+          PharmacySettingsLoadSuccess(
+            openNow: openNow,
+            deliveryAvailable: deliveryAvailable,
+          ),
+        );
       }
     } catch (e) {
       if (!isClosed) emit(PharmacySettingsLoadError(e.toString()));
@@ -36,25 +38,30 @@ class PharmacySettingsCubit extends Cubit<PharmacySettingsState> {
     if (currentState is PharmacySettingsLoadSuccess) {
       currentDeliveryAvailable = currentState.deliveryAvailable;
     }
-      if (!isClosed) emit(PharmacySettingsUpdateLoading());
+    if (!isClosed) emit(PharmacySettingsUpdateLoading());
     try {
       final response = await pharmacySettingsRepo.updateStatus({
         "openNow": openNow,
       });
       if (!isClosed) emit(PharmacySettingsUpdateSuccess(response));
       if (!isClosed) {
-        emit(PharmacySettingsLoadSuccess(
-        openNow: response.data?.openNow ?? openNow,
-        deliveryAvailable: response.data?.deliveryAvailable ?? currentDeliveryAvailable,
-      ));
+        emit(
+          PharmacySettingsLoadSuccess(
+            openNow: response.data?.openNow ?? openNow,
+            deliveryAvailable:
+                response.data?.deliveryAvailable ?? currentDeliveryAvailable,
+          ),
+        );
       }
     } catch (e) {
       if (!isClosed) emit(PharmacySettingsUpdateError(e.toString()));
       if (!isClosed) {
-        emit(PharmacySettingsLoadSuccess(
-        openNow: !openNow,
-        deliveryAvailable: currentDeliveryAvailable,
-      ));
+        emit(
+          PharmacySettingsLoadSuccess(
+            openNow: !openNow,
+            deliveryAvailable: currentDeliveryAvailable,
+          ),
+        );
       }
     }
   }

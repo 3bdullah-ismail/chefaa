@@ -20,9 +20,7 @@ class ChatMessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isBot) {
       return Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppMargin.m5,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: AppMargin.m5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,16 +29,10 @@ class ChatMessageBubble extends StatelessWidget {
               height: 45.h,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: ColorManager.primary,
-                  width: 2,
-                ),
+                border: Border.all(color: ColorManager.primary, width: 2),
               ),
               child: ClipOval(
-                child: Image.asset(
-                  ImageAssets.chatbot,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.asset(ImageAssets.chatbot, fit: BoxFit.cover),
               ),
             ),
 
@@ -48,9 +40,7 @@ class ChatMessageBubble extends StatelessWidget {
 
             Flexible(
               child: Container(
-                padding: const EdgeInsets.all(
-                  AppPadding.p14,
-                ),
+                padding: const EdgeInsets.all(AppPadding.p14),
                 decoration: BoxDecoration(
                   color: ColorManager.white,
                   borderRadius: BorderRadius.only(
@@ -66,9 +56,7 @@ class ChatMessageBubble extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: AnimatedBotMessage(
-                  message: message,
-                ),
+                child: AnimatedBotMessage(message: message),
               ),
             ),
           ],
@@ -80,15 +68,10 @@ class ChatMessageBubble extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth:
-          MediaQuery.of(context).size.width * .75,
+          maxWidth: MediaQuery.of(context).size.width * .75,
         ),
-        margin: const EdgeInsets.symmetric(
-          vertical: AppMargin.m5,
-        ),
-        padding: const EdgeInsets.all(
-          AppPadding.p14,
-        ),
+        margin: const EdgeInsets.symmetric(vertical: AppMargin.m5),
+        padding: const EdgeInsets.all(AppPadding.p14),
         decoration: BoxDecoration(
           color: ColorManager.primary,
           borderRadius: BorderRadius.only(
@@ -100,10 +83,7 @@ class ChatMessageBubble extends StatelessWidget {
         ),
         child: Text(
           message,
-          style: getBoldStyle(
-            color: ColorManager.white,
-            fontSize: 15.sp,
-          ),
+          style: getBoldStyle(color: ColorManager.white, fontSize: 15.sp),
         ),
       ),
     );

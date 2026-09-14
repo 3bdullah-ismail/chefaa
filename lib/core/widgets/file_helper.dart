@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class FileHelper {
   static Future<PlatformFile?> pickSingleFile({
     List<String> allowedExtensions = const ['jpg', 'png', 'jpeg', 'pdf'],

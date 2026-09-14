@@ -1,13 +1,14 @@
 class PromptTokensDetails {
-  PromptTokensDetails({
-      this.audioTokens, 
-      this.cachedTokens,});
+  PromptTokensDetails({this.audioTokens, this.cachedTokens});
 
   PromptTokensDetails.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     audioTokens = json['audio_tokens'];
     cachedTokens = json['cached_tokens'];
   }
+
   num? audioTokens;
   num? cachedTokens;
 
@@ -17,5 +18,4 @@ class PromptTokensDetails {
     map['cached_tokens'] = cachedTokens;
     return map;
   }
-
 }

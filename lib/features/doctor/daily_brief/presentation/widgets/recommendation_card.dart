@@ -42,13 +42,19 @@ class RecommendationsCard extends StatelessWidget {
                 ),
                 child: Text(
                   "${index + 1}",
-                  style: getSemiBoldStyle(color: ColorManager.white, fontSize: 12.sp)
+                  style: getSemiBoldStyle(
+                    color: ColorManager.white,
+                    fontSize: 12.sp,
+                  ),
                 ),
               ),
               Expanded(
                 child: Text(
                   recommendations[index],
-                  style: getRegularStyle(color: ColorManager.darkGray, fontSize: 13.sp)
+                  style: getRegularStyle(
+                    color: ColorManager.darkGray,
+                    fontSize: 13.sp,
+                  ),
                 ),
               ),
             ],

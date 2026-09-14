@@ -6,5 +6,7 @@ import 'package:chefaa/features/patient/order/data/models/confirm_receipt_respon
 
 abstract class TrackOrderRepo {
   Future<Either<Failure, TrackOrderResponse>> getOrderTracking(String orderId);
-  Future<Either<Failure, ConfirmReceiptResponse>> confirmOrderReceipt(String orderId);
+  Future<Either<Failure, ConfirmReceiptResponse>> confirmOrderReceipt(
+    String orderId,
+  );
 }

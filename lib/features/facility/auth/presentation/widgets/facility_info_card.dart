@@ -132,4 +132,3 @@ class _FacilityInfoCardState extends State<FacilityInfoCard> {
     );
   }
 }
-

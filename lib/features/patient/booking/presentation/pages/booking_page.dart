@@ -16,7 +16,8 @@ class BookingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BookingCubit, BookingState>(
-      buildWhen: (previous, current) => current is ChangeStepState || current is BookingInitialState,
+      buildWhen: (previous, current) =>
+          current is ChangeStepState || current is BookingInitialState,
       builder: (context, state) {
         final cubit = context.read<BookingCubit>();
 
@@ -102,4 +103,3 @@ class BookingPage extends StatelessWidget {
     );
   }
 }
-

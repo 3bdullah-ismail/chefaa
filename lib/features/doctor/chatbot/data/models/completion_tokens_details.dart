@@ -1,17 +1,21 @@
 class CompletionTokensDetails {
   CompletionTokensDetails({
-      this.acceptedPredictionTokens, 
-      this.audioTokens, 
-      this.reasoningTokens, 
-      this.rejectedPredictionTokens,});
+    this.acceptedPredictionTokens,
+    this.audioTokens,
+    this.reasoningTokens,
+    this.rejectedPredictionTokens,
+  });
 
   CompletionTokensDetails.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     acceptedPredictionTokens = json['accepted_prediction_tokens'];
     audioTokens = json['audio_tokens'];
     reasoningTokens = json['reasoning_tokens'];
     rejectedPredictionTokens = json['rejected_prediction_tokens'];
   }
+
   num? acceptedPredictionTokens;
   num? audioTokens;
   num? reasoningTokens;
@@ -25,5 +29,4 @@ class CompletionTokensDetails {
     map['rejected_prediction_tokens'] = rejectedPredictionTokens;
     return map;
   }
-
 }

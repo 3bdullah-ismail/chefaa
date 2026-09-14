@@ -11,10 +11,10 @@ class PharmacyInventoryCubit extends Cubit<PharmacyInventoryState> {
   final PharmacyInventoryRepo pharmacyInventoryRepo;
 
   PharmacyInventoryCubit(this.pharmacyInventoryRepo)
-      : super(PharmacyInventoryInitial());
+    : super(PharmacyInventoryInitial());
 
   Future<void> addMedicine(Map<String, dynamic> body) async {
-      if (!isClosed) emit(AddMedicineLoading());
+    if (!isClosed) emit(AddMedicineLoading());
     try {
       final response = await pharmacyInventoryRepo.addMedicine(body);
       if (!isClosed) emit(AddMedicineSuccess(response));
@@ -24,22 +24,24 @@ class PharmacyInventoryCubit extends Cubit<PharmacyInventoryState> {
   }
 
   Future<void> getMedicines({String? search, String? filter}) async {
-      if (!isClosed) emit(GetMedicinesLoading());
+    if (!isClosed) emit(GetMedicinesLoading());
     try {
       if (search != null && search.trim().isNotEmpty) {
-        final response = await pharmacyInventoryRepo.searchMedicines(search.trim());
-      if (!isClosed) emit(GetMedicinesSuccess(response));
+        final response = await pharmacyInventoryRepo.searchMedicines(
+          search.trim(),
+        );
+        if (!isClosed) emit(GetMedicinesSuccess(response));
       } else if (filter == "low") {
         final response = await pharmacyInventoryRepo.getLowStock(
           search: search,
         );
-      if (!isClosed) emit(GetLowStockSuccess(response));
+        if (!isClosed) emit(GetLowStockSuccess(response));
       } else {
         final response = await pharmacyInventoryRepo.getMedicines(
           search: search,
           filter: filter,
         );
-      if (!isClosed) emit(GetMedicinesSuccess(response));
+        if (!isClosed) emit(GetMedicinesSuccess(response));
       }
     } catch (e) {
       if (!isClosed) emit(GetMedicinesError(e.toString()));

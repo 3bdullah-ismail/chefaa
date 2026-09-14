@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import '../manager/profile_cubit.dart';
 
@@ -14,8 +13,7 @@ class LocationHelper {
         return;
       }
 
-      LocationPermission permission =
-      await Geolocator.checkPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
@@ -25,9 +23,7 @@ class LocationHelper {
           permission == LocationPermission.deniedForever) {
         if (!context.mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Location permission denied"),
-          ),
+          const SnackBar(content: Text("Location permission denied")),
         );
         return;
       }
@@ -69,27 +65,24 @@ class LocationHelper {
       if (!context.mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Location saved successfully"),
-        ),
+        const SnackBar(content: Text("Location saved successfully")),
       );
     } catch (e) {
       if (!context.mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
+
   static Future<void> showLocationDialog(BuildContext context) async {
     await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
         title: const Text("Location Required"),
-        content: const Text(
-          "Please allow your location to continue.",
-        ),
+        content: const Text("Please allow your location to continue."),
         actions: [
           ElevatedButton(
             onPressed: () async {

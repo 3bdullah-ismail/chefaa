@@ -16,7 +16,9 @@ class GetServicesResponse {
   });
 
   factory GetServicesResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     final data = json['data'];
     List<ServiceModel> parsedLabTests = [];
     List<ServiceModel> parsedRadiology = [];
@@ -24,16 +26,12 @@ class GetServicesResponse {
     if (data is Map<String, dynamic>) {
       if (data['labTests'] is List) {
         parsedLabTests = (data['labTests'] as List)
-            .map(
-              (item) => ServiceModel.fromJson(item as Map<String, dynamic>),
-            )
+            .map((item) => ServiceModel.fromJson(item as Map<String, dynamic>))
             .toList();
       }
       if (data['radiology'] is List) {
         parsedRadiology = (data['radiology'] as List)
-            .map(
-              (item) => ServiceModel.fromJson(item as Map<String, dynamic>),
-            )
+            .map((item) => ServiceModel.fromJson(item as Map<String, dynamic>))
             .toList();
       }
     }

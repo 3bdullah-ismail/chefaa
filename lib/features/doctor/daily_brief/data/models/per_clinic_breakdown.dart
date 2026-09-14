@@ -1,13 +1,16 @@
 class PerClinicBreakdown {
   PerClinicBreakdown({
-      this.clinicName, 
-      this.completed, 
-      this.upcoming, 
-      this.estimatedRevenue, 
-      this.shareOfTotal,});
+    this.clinicName,
+    this.completed,
+    this.upcoming,
+    this.estimatedRevenue,
+    this.shareOfTotal,
+  });
 
   PerClinicBreakdown.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     clinicName = json['clinicName'];
     completed = json['completed'];
     upcoming = json['upcoming'];
@@ -29,5 +32,4 @@ class PerClinicBreakdown {
     map['shareOfTotal'] = shareOfTotal;
     return map;
   }
-
 }

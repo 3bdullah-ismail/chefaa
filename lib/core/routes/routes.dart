@@ -1,68 +1,66 @@
-import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/imports/imports.dart';
-import 'package:chefaa/core/widgets/error_page.dart';
-import 'package:chefaa/features/auth/presentation/pages/forget_password_page.dart';
-import 'package:chefaa/features/auth/presentation/pages/login_page.dart';
-import 'package:chefaa/features/auth/presentation/pages/reset_code_page.dart';
-import 'package:chefaa/features/doctor/auth/presentation/pages/doctor_sign_up_page.dart';
-import 'package:chefaa/features/doctor/home/presentation/pages/clinic_details_page.dart';
-import 'package:chefaa/features/doctor/home/presentation/pages/clinics_page.dart';
-import 'package:chefaa/features/doctor/layout/doctor_layout.dart';
-import 'package:chefaa/features/doctor/patients/presentation/manager/patients_cubit.dart';
-import 'package:chefaa/features/doctor/patients/presentation/pages/patient_details.dart';
-import 'package:chefaa/features/doctor/profile/presentation/manager/doctor_profile_cubit.dart';
-import 'package:chefaa/features/doctor/profile/presentation/pages/edit_profile_page.dart';
-import 'package:chefaa/features/entry/presentation/pages/chefaa_entry_page.dart';
-import 'package:chefaa/features/facility/auth/presentation/pages/facility_sign_up_page.dart';
-import 'package:chefaa/features/facility/dashboard/presentation/pages/create_patient_request_page.dart';
-import 'package:chefaa/features/facility/dashboard/presentation/pages/facility_results_page.dart';
-import 'package:chefaa/features/facility/layout/presentation/pages/facility_layout_page.dart';
-import 'package:chefaa/features/onboarding/presentation/pages/facility_option.dart';
-import 'package:chefaa/features/onboarding/presentation/pages/onboarding_page.dart';
-import 'package:chefaa/features/onboarding/presentation/pages/option_screen.dart';
-import 'package:chefaa/features/patient/ai_lab/data/models/report_analysis.dart';
-import 'package:chefaa/features/patient/ai_lab/presentation/pages/ai_lab_analysis.dart';
-import 'package:chefaa/features/patient/ai_lab/presentation/pages/history_report_page.dart';
-import 'package:chefaa/features/patient/ai_lab/presentation/pages/report_details_page.dart';
-import 'package:chefaa/features/patient/appointment/presentation/pages/appointment_page.dart';
-import 'package:chefaa/features/patient/auth/presentation/pages/patient_sign_up_page.dart';
-import 'package:chefaa/features/patient/booking/presentation/pages/choose_doctor_page.dart';
-import 'package:chefaa/features/patient/cart/presentation/pages/cart_page.dart';
-import 'package:chefaa/features/patient/checkout_order/presentation/pages/checkout_page.dart';
-import 'package:chefaa/features/patient/complete_auth_data/presentation/manager/complete_cubit.dart';
-import 'package:chefaa/features/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
-import 'package:chefaa/features/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
-import 'package:chefaa/features/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
-import 'package:chefaa/features/patient/lab_results/presentation/manager/lab_results_cubit.dart';
-import 'package:chefaa/features/patient/lab_results/presentation/pages/lab_results_page.dart';
-import 'package:chefaa/features/patient/lab_search/presentation/pages/find_lab_page.dart';
-import 'package:chefaa/features/patient/layout/presentation/pages/patient_layout.dart';
-import 'package:chefaa/features/patient/medication/presentation/pages/medication_page.dart';
-import 'package:chefaa/features/patient/notification/presentation/manager/patient_notification_cubit.dart';
-import 'package:chefaa/features/patient/notification/presentation/pages/patient_notification_page.dart';
-import 'package:chefaa/features/patient/order/presentation/pages/orders_list_page.dart';
-import 'package:chefaa/features/patient/order/presentation/pages/track_order_page.dart';
-import 'package:chefaa/features/patient/payment/presentation/pages/payment_page.dart';
-import 'package:chefaa/features/patient/pharmacy/medicines/presentation/pages/medicine_details_page.dart';
-import 'package:chefaa/features/patient/pharmacy/medicines/presentation/pages/pharmacy_medicines_page.dart';
-import 'package:chefaa/features/patient/pharmacy/pharmacies/data/models/pharmacy_card_model.dart';
-import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/pages/pharmacy_details_page.dart';
-import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart'
-as p_layout;
-import 'package:chefaa/features/patient/search/presentation/manager/search_cubit.dart';
-import 'package:chefaa/features/patient/search/presentation/pages/location_filter.dart';
-import 'package:chefaa/features/patient/search/presentation/pages/search_page.dart';
-import 'package:chefaa/features/patient/search/presentation/pages/speciality_page.dart';
-import 'package:chefaa/features/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
-import 'package:chefaa/features/pharmacy/inventory/presentation/pages/add_medicine_page.dart';
-import 'package:chefaa/features/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
-import 'package:chefaa/features/pharmacy/profile/data/models/pharmacy_profile_response.dart';
-import 'package:chefaa/features/pharmacy/profile/presentation/manager/pharmacy_profile_cubit.dart';
-import 'package:chefaa/features/pharmacy/profile/presentation/pages/edit_pharmacy_profile_page.dart';
-import 'package:chefaa/features/pharmacy/settings/presentation/pages/pharmacy_settings_page.dart';
 
+import '../../features/auth/presentation/pages/forget_password_page.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/auth/presentation/pages/reset_code_page.dart';
 import '../../features/auth/presentation/pages/reset_password_page.dart';
-
+import '../../features/doctor/auth/presentation/pages/doctor_sign_up_page.dart';
+import '../../features/doctor/home/presentation/pages/clinic_details_page.dart';
+import '../../features/doctor/home/presentation/pages/clinics_page.dart';
+import '../../features/doctor/layout/doctor_layout.dart';
+import '../../features/doctor/patients/presentation/manager/patients_cubit.dart';
+import '../../features/doctor/patients/presentation/pages/patient_details.dart';
+import '../../features/doctor/profile/presentation/manager/doctor_profile_cubit.dart';
+import '../../features/doctor/profile/presentation/pages/edit_profile_page.dart';
+import '../../features/entry/presentation/pages/chefaa_entry_page.dart';
+import '../../features/facility/auth/presentation/pages/facility_sign_up_page.dart';
+import '../../features/facility/dashboard/presentation/pages/create_patient_request_page.dart';
+import '../../features/facility/dashboard/presentation/pages/facility_results_page.dart';
+import '../../features/facility/layout/presentation/pages/facility_layout_page.dart';
+import '../../features/onboarding/presentation/pages/facility_option.dart';
+import '../../features/onboarding/presentation/pages/onboarding_page.dart';
+import '../../features/onboarding/presentation/pages/option_screen.dart';
+import '../../features/patient/ai_lab/data/models/report_analysis.dart';
+import '../../features/patient/ai_lab/presentation/pages/ai_lab_analysis.dart';
+import '../../features/patient/ai_lab/presentation/pages/history_report_page.dart';
+import '../../features/patient/ai_lab/presentation/pages/report_details_page.dart';
+import '../../features/patient/appointment/presentation/pages/appointment_page.dart';
+import '../../features/patient/auth/presentation/pages/patient_sign_up_page.dart';
+import '../../features/patient/booking/presentation/pages/choose_doctor_page.dart';
+import '../../features/patient/cart/presentation/pages/cart_page.dart';
+import '../../features/patient/checkout_order/presentation/pages/checkout_page.dart';
+import '../../features/patient/complete_auth_data/presentation/manager/complete_cubit.dart';
+import '../../features/patient/complete_auth_data/presentation/pages/first_complete_page.dart';
+import '../../features/patient/complete_auth_data/presentation/pages/last_complete_data.dart';
+import '../../features/patient/complete_auth_data/presentation/pages/second_complete_page.dart';
+import '../../features/patient/lab_results/presentation/manager/lab_results_cubit.dart';
+import '../../features/patient/lab_results/presentation/pages/lab_results_page.dart';
+import '../../features/patient/lab_search/presentation/pages/find_lab_page.dart';
+import '../../features/patient/layout/presentation/pages/patient_layout.dart';
+import '../../features/patient/medication/presentation/pages/medication_page.dart';
+import '../../features/patient/notification/presentation/manager/patient_notification_cubit.dart';
+import '../../features/patient/notification/presentation/pages/patient_notification_page.dart';
+import '../../features/patient/order/presentation/pages/orders_list_page.dart';
+import '../../features/patient/order/presentation/pages/track_order_page.dart';
+import '../../features/patient/payment/presentation/pages/payment_page.dart';
+import '../../features/patient/pharmacy/medicines/presentation/pages/medicine_details_page.dart';
+import '../../features/patient/pharmacy/medicines/presentation/pages/pharmacy_medicines_page.dart';
+import '../../features/patient/pharmacy/pharmacies/data/models/pharmacy_card_model.dart';
+import '../../features/patient/pharmacy/pharmacies/presentation/manager/pharmacy_profile_cubit.dart';
+import '../../features/patient/pharmacy/pharmacies/presentation/pages/pharmacy_details_page.dart';
+import '../../features/patient/pharmacy/pharmacies/presentation/pages/pharmacy_layout.dart';
+import '../../features/patient/search/presentation/manager/search_cubit.dart';
+import '../../features/patient/search/presentation/pages/location_filter.dart';
+import '../../features/patient/search/presentation/pages/search_page.dart';
+import '../../features/patient/search/presentation/pages/speciality_page.dart';
+import '../../features/pharmacy/auth/presentation/pages/pharmacy_sign_up_page.dart';
+import '../../features/pharmacy/inventory/presentation/pages/add_medicine_page.dart';
+import '../../features/pharmacy/layout/presentation/pages/pharmacy_layout.dart';
+import '../../features/pharmacy/profile/data/models/pharmacy_profile_response.dart';
+import '../../features/pharmacy/profile/presentation/pages/edit_pharmacy_profile_page.dart';
+import '../../features/pharmacy/settings/presentation/pages/pharmacy_settings_page.dart';
+import '../config/get_config.dart';
+import '../widgets/error_page.dart';
 import '../widgets/map_picker.dart';
 import 'app_routes_names.dart';
 
@@ -70,13 +68,12 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: AppRoutesNames.appEntryRoute,
     errorBuilder: (context, state) =>
-    const ErrorPage(message: '404 Route Not Found'),
+        const ErrorPage(message: '404 Route Not Found'),
     routes: [
       GoRoute(
         path: AppRoutesNames.login,
         builder: (context, state) {
-          final role = state.extra as String?;
-          return LoginPage(role: role);
+          return const LoginPage();
         },
       ),
       GoRoute(
@@ -101,7 +98,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.searchPharmacy,
-        builder: (context, state) => const p_layout.MainLayout(),
+        builder: (context, state) => const MainLayout(),
       ),
       GoRoute(
         path: AppRoutesNames.option,
@@ -163,19 +160,9 @@ class AppRouter {
       GoRoute(
         path: AppRoutesNames.patientSignUp,
         builder: (context, state) {
-          final role = state.pathParameters['role'];
-          if (role == null) {
-            return const ErrorPage(
-              message: 'Missing/invalid route argument: role',
-            );
-          }
-          return PatientSignUpPage(role: role);
+          return const PatientSignUpPage();
         },
       ),
-
-      // ----------------------------------------------------
-      // COMPLETE WIZARD FLOW (SHELL ROUTE FOR CUBIT SHARING)
-      // ----------------------------------------------------
       ShellRoute(
         builder: (context, state, child) {
           return BlocProvider(
@@ -242,11 +229,10 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.patientSearch,
-        builder: (context, state) =>
-            BlocProvider(
-              create: (_) => getIt<SearchCubit>(),
-              child: const SearchPage(),
-            ),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<SearchCubit>(),
+          child: const SearchPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutesNames.medicationPage,
@@ -258,11 +244,10 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.patientDetailsPage,
-        builder: (context, state) =>
-            BlocProvider(
-              create: (_) => getIt<PatientsCubit>(),
-              child: const PatientDetailsPage(),
-            ),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<PatientsCubit>(),
+          child: const PatientDetailsPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutesNames.facilityResults,
@@ -282,11 +267,10 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.labResultsPage,
-        builder: (context, state) =>
-            BlocProvider(
-              create: (_) => getIt<LabResultsCubit>(),
-              child: const LabResultsPage(),
-            ),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<LabResultsCubit>(),
+          child: const LabResultsPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutesNames.editPharmacyProfile,
@@ -321,11 +305,10 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutesNames.patientNotification,
-        builder: (context, state) =>
-            BlocProvider(
-              create: (_) => getIt<PatientNotificationCubit>(),
-              child: const PatientNotificationPage(),
-            ),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<PatientNotificationCubit>(),
+          child: const PatientNotificationPage(),
+        ),
       ),
       GoRoute(
         path: AppRoutesNames.pharmacyDetails,
@@ -350,7 +333,7 @@ class AppRouter {
             price: args?['price'] as String? ?? '0',
             medicineId: medicineId ?? '',
             pharmacyId:
-            state.pathParameters['pharmacyId'] ??
+                state.pathParameters['pharmacyId'] ??
                 args?['pharmacyId'] as String?,
           );
         },

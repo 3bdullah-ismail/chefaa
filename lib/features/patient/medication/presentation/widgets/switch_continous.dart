@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class SwitchContinous extends StatelessWidget {
   final Color color;
   final AlignmentGeometry alignment;

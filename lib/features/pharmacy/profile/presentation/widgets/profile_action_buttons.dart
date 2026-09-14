@@ -40,11 +40,7 @@ class ProfileActionButton extends StatelessWidget {
                     color: baseColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  child: Icon(
-                    icon,
-                    color: baseColor,
-                    size: 22.sp,
-                  ),
+                  child: Icon(icon, color: baseColor, size: 22.sp),
                 ),
                 SizedBox(width: 16.w),
                 Expanded(

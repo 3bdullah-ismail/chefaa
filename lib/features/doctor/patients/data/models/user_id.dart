@@ -2,7 +2,9 @@ class UserId {
   UserId({this.id, this.name, this.email, this.phoneNumber});
 
   UserId.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     name = json['name'];
     email = json['email'];

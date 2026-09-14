@@ -33,12 +33,12 @@ class ProfileResponse extends UserProfileEntity {
     final userId = userIdValue is Map<String, dynamic>
         ? UserId.fromJson(userIdValue)
         : userIdValue != null
-            ? UserId(
-                id: userIdValue.toString(),
-                name: json['name']?.toString(),
-                email: json['email']?.toString(),
-              )
-            : null;
+        ? UserId(
+            id: userIdValue.toString(),
+            name: json['name']?.toString(),
+            email: json['email']?.toString(),
+          )
+        : null;
     return ProfileResponse(
       id: json['_id']?.toString(),
       userId: userId,

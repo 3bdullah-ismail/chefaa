@@ -1,14 +1,17 @@
 class Summary {
   Summary({
-      this.confirmedRevenue, 
-      this.platformFee, 
-      this.netRevenue, 
-      this.expectedFromUpcoming, 
-      this.totalProjected, 
-      this.currency,});
+    this.confirmedRevenue,
+    this.platformFee,
+    this.netRevenue,
+    this.expectedFromUpcoming,
+    this.totalProjected,
+    this.currency,
+  });
 
   Summary.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     confirmedRevenue = json['confirmedRevenue'];
     platformFee = json['platformFee'];
     netRevenue = json['netRevenue'];
@@ -33,5 +36,4 @@ class Summary {
     map['currency'] = currency;
     return map;
   }
-
 }

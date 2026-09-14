@@ -41,12 +41,15 @@ class ClinicPerformanceCard extends StatelessWidget {
                 child: Text(
                   clinicName,
                   overflow: TextOverflow.ellipsis,
-                  style: getBoldStyle(color: ColorManager.black, fontSize: 14.sp)
+                  style: getBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
               Text(
                 "${revenue.toStringAsFixed(0)} EGP",
-                style: getBoldStyle(color: accentColor, fontSize: 14.sp)
+                style: getBoldStyle(color: accentColor, fontSize: 14.sp),
               ),
             ],
           ),
@@ -67,7 +70,10 @@ class ClinicPerformanceCard extends StatelessWidget {
               const Spacer(),
               Text(
                 "${percentage.toStringAsFixed(0)}% of revenue",
-                style: getSemiBoldStyle(color: ColorManager.error, fontSize: 12.sp)
+                style: getSemiBoldStyle(
+                  color: ColorManager.error,
+                  fontSize: 12.sp,
+                ),
               ),
             ],
           ),
@@ -101,7 +107,10 @@ class _StatChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppPadding.p8,
+        vertical: AppPadding.p4,
+      ),
       decoration: BoxDecoration(
         color: color.withAlpha(20),
         borderRadius: BorderRadius.circular(20.r),
@@ -112,11 +121,11 @@ class _StatChip extends StatelessWidget {
         children: [
           Text(
             value,
-            style: getBoldStyle(color: color, fontSize: 12.sp)
+            style: getBoldStyle(color: color, fontSize: 12.sp),
           ),
           Text(
             label,
-            style: getRegularStyle(color: color, fontSize: 12.sp)
+            style: getRegularStyle(color: color, fontSize: 12.sp),
           ),
         ],
       ),

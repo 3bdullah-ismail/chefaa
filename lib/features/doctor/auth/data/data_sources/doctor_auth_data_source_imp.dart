@@ -1,7 +1,7 @@
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/network_service.dart';
 
-import 'data_source.dart';
+import 'doctor_auth_data_source.dart';
 
 @Injectable(as: DoctorAuthDataSource)
 class DoctorAuthDataSourceImp implements DoctorAuthDataSource {

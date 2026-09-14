@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class UsernameGenerator {
   static final Random _random = Random();
 

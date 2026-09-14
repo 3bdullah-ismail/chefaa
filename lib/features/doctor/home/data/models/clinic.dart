@@ -23,7 +23,9 @@ class Clinic {
   });
 
   Clinic.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     doctorId = json['doctorId'];
     name = json['name'];
@@ -91,4 +93,3 @@ class Clinic {
     return map;
   }
 }
-

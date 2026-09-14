@@ -13,7 +13,9 @@ class TrackOrderRepoImpl implements TrackOrderRepo {
   TrackOrderRepoImpl(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, TrackOrderResponse>> getOrderTracking(String orderId) async {
+  Future<Either<Failure, TrackOrderResponse>> getOrderTracking(
+    String orderId,
+  ) async {
     try {
       final response = await remoteDataSource.getOrderTracking(orderId);
       final model = TrackOrderResponse.fromJson(response.data);
@@ -26,7 +28,9 @@ class TrackOrderRepoImpl implements TrackOrderRepo {
   }
 
   @override
-  Future<Either<Failure, ConfirmReceiptResponse>> confirmOrderReceipt(String orderId) async {
+  Future<Either<Failure, ConfirmReceiptResponse>> confirmOrderReceipt(
+    String orderId,
+  ) async {
     try {
       final response = await remoteDataSource.confirmOrderReceipt(orderId);
       final model = ConfirmReceiptResponse.fromJson(response.data);

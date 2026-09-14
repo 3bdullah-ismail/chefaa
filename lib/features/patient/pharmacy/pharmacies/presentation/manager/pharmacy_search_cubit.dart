@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/data/models/search_pharmacies_response.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart';
@@ -9,17 +8,19 @@ part 'pharmacy_search_state.dart';
 class PharmacySearchCubit extends Cubit<PharmacySearchState> {
   final PharmacyProfileRepo pharmacyProfileRepo;
 
-  PharmacySearchCubit(this.pharmacyProfileRepo) : super(PharmacySearchInitial());
+  PharmacySearchCubit(this.pharmacyProfileRepo)
+    : super(PharmacySearchInitial());
 
   Future<void> searchPharmacies(String query) async {
-      if (!isClosed) emit(PharmacySearchLoading());
+    if (!isClosed) emit(PharmacySearchLoading());
 
     final result = await pharmacyProfileRepo.searchPharmacies(query);
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(PharmacySearchFailure(failure.message)),
-      ifRight: (response) => isClosed ? null : emit(PharmacySearchSuccess(response)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(PharmacySearchFailure(failure.message)),
+      ifRight: (response) =>
+          isClosed ? null : emit(PharmacySearchSuccess(response)),
     );
   }
 }
-

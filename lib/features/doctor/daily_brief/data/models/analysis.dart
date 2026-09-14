@@ -1,24 +1,31 @@
-import 'summary.dart';
-import 'profit_loss.dart';
 import 'per_clinic_breakdown.dart';
-import 'trends.dart';
 import 'predictions.dart';
+import 'profit_loss.dart';
+import 'summary.dart';
+import 'trends.dart';
 
 class Analysis {
   Analysis({
-      this.summary, 
-      this.profitLoss, 
-      this.perClinicBreakdown, 
-      this.trends, 
-      this.predictions, 
-      this.recommendations, 
-      this.riskFlags, 
-      this.aiNarrative,});
+    this.summary,
+    this.profitLoss,
+    this.perClinicBreakdown,
+    this.trends,
+    this.predictions,
+    this.recommendations,
+    this.riskFlags,
+    this.aiNarrative,
+  });
 
   Analysis.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
-    summary = json['summary'] != null ? Summary.fromJson(json['summary']) : null;
-    profitLoss = json['profitLoss'] != null ? ProfitLoss.fromJson(json['profitLoss']) : null;
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
+    summary = json['summary'] != null
+        ? Summary.fromJson(json['summary'])
+        : null;
+    profitLoss = json['profitLoss'] != null
+        ? ProfitLoss.fromJson(json['profitLoss'])
+        : null;
     if (json['perClinicBreakdown'] != null) {
       perClinicBreakdown = [];
       json['perClinicBreakdown'].forEach((v) {
@@ -26,11 +33,18 @@ class Analysis {
       });
     }
     trends = json['trends'] != null ? Trends.fromJson(json['trends']) : null;
-    predictions = json['predictions'] != null ? Predictions.fromJson(json['predictions']) : null;
-    recommendations = json['recommendations'] != null ? json['recommendations'].cast<String>() : [];
-    riskFlags = json['riskFlags'] != null ? json['riskFlags'].cast<String>() : [];
+    predictions = json['predictions'] != null
+        ? Predictions.fromJson(json['predictions'])
+        : null;
+    recommendations = json['recommendations'] != null
+        ? json['recommendations'].cast<String>()
+        : [];
+    riskFlags = json['riskFlags'] != null
+        ? json['riskFlags'].cast<String>()
+        : [];
     aiNarrative = json['aiNarrative'];
   }
+
   Summary? summary;
   ProfitLoss? profitLoss;
   List<PerClinicBreakdown>? perClinicBreakdown;
@@ -49,7 +63,9 @@ class Analysis {
       map['profitLoss'] = profitLoss?.toJson();
     }
     if (perClinicBreakdown != null) {
-      map['perClinicBreakdown'] = perClinicBreakdown?.map((v) => v.toJson()).toList();
+      map['perClinicBreakdown'] = perClinicBreakdown
+          ?.map((v) => v.toJson())
+          .toList();
     }
     if (trends != null) {
       map['trends'] = trends?.toJson();
@@ -62,5 +78,4 @@ class Analysis {
     map['aiNarrative'] = aiNarrative;
     return map;
   }
-
 }

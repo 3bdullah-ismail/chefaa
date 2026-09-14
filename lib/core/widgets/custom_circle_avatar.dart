@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class CustomCircleAvatar extends StatelessWidget {
   final String imagePath;
   final double radius;

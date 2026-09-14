@@ -2,7 +2,9 @@ class Stats {
   Stats({this.avgAdherence, this.activeMedications});
 
   Stats.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     avgAdherence = json['avgAdherence'];
     activeMedications = json['activeMedications'];
   }

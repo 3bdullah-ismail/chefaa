@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
@@ -333,7 +332,9 @@ class _FacilityResultsPageState extends State<FacilityResultsPage> {
                               if (result != null && result.files.isNotEmpty) {
                                 final filePath = result.files.first.path;
                                 if (filePath != null && mounted) {
-                                  debugPrint("UI upload requestId = ${item.id}");
+                                  debugPrint(
+                                    "UI upload requestId = ${item.id}",
+                                  );
                                   cubit.uploadResult(
                                     requestId: "6a3019112eb20b02387e784a",
                                     filePath: filePath,

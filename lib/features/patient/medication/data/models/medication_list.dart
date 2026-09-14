@@ -5,7 +5,9 @@ class MedicationList {
   MedicationList({this.stats, this.medications});
 
   MedicationList.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     stats = json['stats'] != null ? Stats.fromJson(json['stats']) : null;
     if (json['medications'] != null) {
       medications = [];

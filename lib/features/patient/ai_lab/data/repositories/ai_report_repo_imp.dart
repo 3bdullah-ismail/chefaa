@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/ai_lab/data/data_sources/ai_report_data_source.dart';
 import 'package:chefaa/features/patient/ai_lab/data/models/report_analysis.dart';
@@ -29,4 +28,3 @@ class AiReportRepoImp implements AIReportRepo {
     }
   }
 }
-

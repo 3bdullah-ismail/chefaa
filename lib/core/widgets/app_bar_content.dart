@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class AppBarContent extends StatelessWidget {
   const AppBarContent({super.key});
 

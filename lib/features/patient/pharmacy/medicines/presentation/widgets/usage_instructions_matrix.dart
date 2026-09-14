@@ -76,10 +76,7 @@ class UsageInstructionsMatrix extends StatelessWidget {
             spacing: 8,
             runSpacing: 8,
             children: list.map((ind) {
-              return IndicationChip(
-                text: ind,
-                icon: Icons.healing_rounded,
-              );
+              return IndicationChip(text: ind, icon: Icons.healing_rounded);
             }).toList(),
           ),
           if (dosageInstructions.isNotEmpty) ...[

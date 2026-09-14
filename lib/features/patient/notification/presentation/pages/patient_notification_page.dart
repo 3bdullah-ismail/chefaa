@@ -45,7 +45,9 @@ class PatientNotificationPage extends StatelessWidget {
                   isRead: notification.isRead ?? false,
                   type: notification.type ?? "",
                   onTap: () {
-                    context.read<PatientNotificationCubit>().markAsRead(notification);
+                    context.read<PatientNotificationCubit>().markAsRead(
+                      notification,
+                    );
                   },
                   dateTime: DateTime.parse(notification.createdAt ?? ""),
                 );
@@ -59,4 +61,3 @@ class PatientNotificationPage extends StatelessWidget {
     );
   }
 }
-

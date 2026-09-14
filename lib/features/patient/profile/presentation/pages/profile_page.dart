@@ -326,8 +326,7 @@ class LogOutBtn extends StatelessWidget {
           context.read<MedicationCubit>().reset();
         }
         if (context.mounted) {
-          context.go(AppRoutesNames.login,
-          );
+          context.go(AppRoutesNames.login);
         }
       },
       child: ItemContainer(

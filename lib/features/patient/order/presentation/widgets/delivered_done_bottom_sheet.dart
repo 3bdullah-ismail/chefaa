@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/routes/app_routes_names.dart';
@@ -102,8 +101,7 @@ class DeliveredDoneBottomSheet extends StatelessWidget {
             height: 50,
             child: ElevatedButton(
               onPressed: () {
-                context.go(AppRoutesNames.appEntryRoute,
-                );
+                context.go(AppRoutesNames.appEntryRoute);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: ColorManager.primary,

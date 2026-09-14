@@ -16,11 +16,7 @@ class PharmacyPatientDataSourceImp implements PharmacyPatientDataSource {
   }) {
     return networkService.dio.post(
       "patient/pharmacies/review",
-      data: {
-        "pharmacy_id": pharmacyId,
-        "rating": rating,
-        "comment": comment,
-      },
+      data: {"pharmacy_id": pharmacyId, "rating": rating, "comment": comment},
     );
   }
 
@@ -39,12 +35,9 @@ class PharmacyPatientDataSourceImp implements PharmacyPatientDataSource {
     required String searchQuery,
     required int type,
   }) {
-  return networkService.dio.get(
+    return networkService.dio.get(
       "/patient/pharmacies/search",
-      queryParameters: {
-        "type": type,
-        "search": searchQuery,
-      },
+      queryParameters: {"type": type, "search": searchQuery},
     );
   }
 }

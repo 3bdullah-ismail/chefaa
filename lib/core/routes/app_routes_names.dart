@@ -6,7 +6,7 @@ class AppRoutesNames {
   static const String option = '/option';
 
   static const String docSignUp = '/docSignUp';
-  static const String patientSignUp = '/patientSignUp/:role';
+  static const String patientSignUp = '/patientSignUp';
   static const String patientSignUpCompleteData = '/patientSignUpCompleteData';
   static const String patientSignUpCompleteChronicDiseases =
       '/patientSignUpCompleteChronicDiseases';

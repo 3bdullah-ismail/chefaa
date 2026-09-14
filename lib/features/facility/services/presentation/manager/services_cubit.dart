@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/facility/services/data/models/get_services_response.dart';
 import 'package:chefaa/features/facility/services/data/models/service_model.dart';
@@ -24,7 +23,7 @@ class ServicesCubit extends Cubit<ServicesState> {
   static ServicesCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future<void> getMyServices({String? search}) async {
-      if (!isClosed) emit(GetServicesLoading());
+    if (!isClosed) emit(GetServicesLoading());
     try {
       final response = await _servicesRepository.getMyServices(search: search);
       labTests = response.labTests ?? [];
@@ -55,18 +54,18 @@ class ServicesCubit extends Cubit<ServicesState> {
         return (item.name ?? '').toLowerCase().contains(lowercaseQuery);
       }).toList();
     }
-      if (!isClosed) {
-        emit(
-      GetServicesSuccess(
-        GetServicesResponse(
-          success: true,
-          labTests: labTests,
-          radiology: radiologyScans,
-          aiInsight: aiInsight,
+    if (!isClosed) {
+      emit(
+        GetServicesSuccess(
+          GetServicesResponse(
+            success: true,
+            labTests: labTests,
+            radiology: radiologyScans,
+            aiInsight: aiInsight,
+          ),
         ),
-      ),
-    );
-      }
+      );
+    }
   }
 
   Future<void> addService({
@@ -78,7 +77,7 @@ class ServicesCubit extends Cubit<ServicesState> {
     String? instructions,
     String? imagePath,
   }) async {
-      if (!isClosed) emit(AddServiceLoading());
+    if (!isClosed) emit(AddServiceLoading());
     try {
       final response = await _servicesRepository.addService(
         name: name,
@@ -118,7 +117,7 @@ class ServicesCubit extends Cubit<ServicesState> {
   }
 
   Future<void> toggleService(String serviceId) async {
-      if (!isClosed) emit(ToggleServiceLoading());
+    if (!isClosed) emit(ToggleServiceLoading());
     try {
       final response = await _servicesRepository.toggleService(serviceId);
       final updatedService = response.service;
@@ -150,13 +149,14 @@ class ServicesCubit extends Cubit<ServicesState> {
             allRadiologyScans[allIndex] = updatedService;
           }
         }
-      if (!isClosed) emit(ToggleServiceSuccess(updatedService));
+        if (!isClosed) emit(ToggleServiceSuccess(updatedService));
       } else {
-      if (!isClosed) emit(ToggleServiceFailure("Failed to toggle service status"));
+        if (!isClosed) {
+          emit(ToggleServiceFailure("Failed to toggle service status"));
+        }
       }
     } catch (e) {
       if (!isClosed) emit(ToggleServiceFailure(e.toString()));
     }
   }
 }
-

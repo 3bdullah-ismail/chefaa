@@ -37,19 +37,14 @@ class SectionCard extends StatelessWidget {
               Text(
                 title,
                 style: getBoldStyle(
-                  color: isAlert
-                      ? ColorManager.error
-                      : ColorManager.lightGreen,
+                  color: isAlert ? ColorManager.error : ColorManager.lightGreen,
                   fontSize: 18.sp,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: children,
-          ),
+          Column(mainAxisSize: MainAxisSize.min, children: children),
         ],
       ),
     );

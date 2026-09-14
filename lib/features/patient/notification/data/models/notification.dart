@@ -1,16 +1,19 @@
 class Notification {
   Notification({
-      this.id, 
-      this.recipient, 
-      this.title, 
-      this.message, 
-      this.type, 
-      this.isRead, 
-      this.createdAt, 
-      this.v,});
+    this.id,
+    this.recipient,
+    this.title,
+    this.message,
+    this.type,
+    this.isRead,
+    this.createdAt,
+    this.v,
+  });
 
   Notification.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     recipient = json['recipient'];
     title = json['title'];
@@ -41,5 +44,4 @@ class Notification {
     map['__v'] = v;
     return map;
   }
-
 }

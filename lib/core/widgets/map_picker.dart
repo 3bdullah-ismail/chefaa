@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/font_manager.dart';
@@ -48,7 +47,10 @@ class _MapPickerState extends State<MapPicker> {
   bool _canShowMyLocation = false;
 
   final TextEditingController _searchController = TextEditingController();
-  static const LatLng _fallbackPosition = LatLng(30.0444, 31.2357); // Cairo fallback
+  static const LatLng _fallbackPosition = LatLng(
+    30.0444,
+    31.2357,
+  ); // Cairo fallback
 
   @override
   void dispose() {
@@ -88,14 +90,15 @@ class _MapPickerState extends State<MapPicker> {
   }
 
   Future<void> _loadMarkerIcon() async {
-    _customIcon = await const Icon(
-      Icons.location_on,
-      color: ColorManager.primary,
-      size: 50,
-    ).toBitmapDescriptor(
-      logicalSize: const Size(150, 150),
-      imageSize: const Size(300, 300),
-    );
+    _customIcon =
+        await const Icon(
+          Icons.location_on,
+          color: ColorManager.primary,
+          size: 50,
+        ).toBitmapDescriptor(
+          logicalSize: const Size(150, 150),
+          imageSize: const Size(300, 300),
+        );
     if (mounted) setState(() {});
   }
 
@@ -176,8 +179,9 @@ class _MapPickerState extends State<MapPicker> {
           p.locality,
           p.administrativeArea,
         ].where((e) => e != null && e.trim().isNotEmpty).join(", ");
-        final city = p.locality ?? p.subAdministrativeArea ?? p.administrativeArea ?? "";
-        
+        final city =
+            p.locality ?? p.subAdministrativeArea ?? p.administrativeArea ?? "";
+
         setState(() {
           _selectedAddress = address;
           _selectedCity = city;
@@ -192,7 +196,8 @@ class _MapPickerState extends State<MapPicker> {
       }
     } catch (e) {
       setState(() {
-        _selectedAddress = "Location at ${position.latitude.toStringAsFixed(4)}, ${position.longitude.toStringAsFixed(4)}";
+        _selectedAddress =
+            "Location at ${position.latitude.toStringAsFixed(4)}, ${position.longitude.toStringAsFixed(4)}";
         _selectedCity = "";
         _isResolving = false;
       });
@@ -335,10 +340,7 @@ class _MapPickerState extends State<MapPicker> {
                         _searchLocation(query);
                       }
                     },
-                    icon: const Icon(
-                      Icons.search,
-                      color: ColorManager.primary,
-                    ),
+                    icon: const Icon(Icons.search, color: ColorManager.primary),
                   ),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(
@@ -432,7 +434,8 @@ class _MapPickerState extends State<MapPicker> {
                     isDisabled: _selectedPosition == null || _isResolving,
                     onPressed: () {
                       if (_selectedPosition != null) {
-                        context.pop(MapPickerResult(
+                        context.pop(
+                          MapPickerResult(
                             address: _selectedAddress,
                             latitude: _selectedPosition!.latitude,
                             longitude: _selectedPosition!.longitude,

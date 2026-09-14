@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -114,7 +113,9 @@ class LabDetailsBottomSheet extends StatelessWidget {
                                 vertical: 4.h,
                               ),
                               decoration: BoxDecoration(
-                                color: ColorManager.lightBlue.withValues(alpha: 0.5),
+                                color: ColorManager.lightBlue.withValues(
+                                  alpha: 0.5,
+                                ),
                                 borderRadius: BorderRadius.circular(8.r),
                               ),
                               child: Text(
@@ -133,7 +134,7 @@ class LabDetailsBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             20.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -149,7 +150,10 @@ class LabDetailsBottomSheet extends StatelessWidget {
                 children: [
                   Text(
                     "About Center",
-                    style: getBoldStyle(color: ColorManager.black, fontSize: 16.sp),
+                    style: getBoldStyle(
+                      color: ColorManager.black,
+                      fontSize: 16.sp,
+                    ),
                   ),
                   12.verticalSpace,
                   Row(
@@ -176,27 +180,31 @@ class LabDetailsBottomSheet extends StatelessWidget {
                       _buildInfoItem(
                         icon: Icons.home_repair_service_rounded,
                         title: "Home Visit",
-                        subtitle: (centerData.homeServiceAvailable == true) 
-                            ? "Available" 
+                        subtitle: (centerData.homeServiceAvailable == true)
+                            ? "Available"
                             : "Not Available",
                         iconColor: ColorManager.purple600,
                       ),
                       _buildInfoItem(
                         icon: Icons.health_and_safety_rounded,
                         title: "Insurance",
-                        subtitle: (centerData.insuranceAccepted == true) 
-                            ? "Accepted" 
+                        subtitle: (centerData.insuranceAccepted == true)
+                            ? "Accepted"
                             : "Not Accepted",
                         iconColor: ColorManager.mint600,
                       ),
                     ],
                   ),
-                  
-                  if (centerData.availableTags != null && centerData.availableTags!.isNotEmpty) ...[
+
+                  if (centerData.availableTags != null &&
+                      centerData.availableTags!.isNotEmpty) ...[
                     20.verticalSpace,
                     Text(
                       "Available Services",
-                      style: getBoldStyle(color: ColorManager.black, fontSize: 16.sp),
+                      style: getBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: 16.sp,
+                      ),
                     ),
                     12.verticalSpace,
                     Wrap(
@@ -204,7 +212,10 @@ class LabDetailsBottomSheet extends StatelessWidget {
                       runSpacing: 8.h,
                       children: centerData.availableTags!.map((tag) {
                         return Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12.w,
+                            vertical: 8.h,
+                          ),
                           decoration: BoxDecoration(
                             color: ColorManager.white,
                             border: Border.all(color: ColorManager.input),
@@ -224,11 +235,15 @@ class LabDetailsBottomSheet extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             32.verticalSpace,
             // Action Button
             Padding(
-              padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: MediaQuery.of(context).padding.bottom + 20.h),
+              padding: EdgeInsets.only(
+                left: 20.w,
+                right: 20.w,
+                bottom: MediaQuery.of(context).padding.bottom + 20.h,
+              ),
               child: SizedBox(
                 width: double.infinity,
                 height: 54.h,

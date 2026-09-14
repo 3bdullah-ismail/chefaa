@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 part "clinic_model.g.dart";
 

@@ -72,8 +72,10 @@ class WorkingHoursSection extends StatelessWidget {
                   (item is Map ? item["days"] : null)?.toString() ?? "";
               final String time =
                   (item is Map ? item["time"] : null)?.toString() ?? "";
-              
-              final isToday = days.toLowerCase().contains(currentDay.toLowerCase());
+
+              final isToday = days.toLowerCase().contains(
+                currentDay.toLowerCase(),
+              );
 
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +86,9 @@ class WorkingHoursSection extends StatelessWidget {
                         width: 4.w,
                         height: 24.h,
                         decoration: BoxDecoration(
-                          color: isToday ? ColorManager.primary : Colors.transparent,
+                          color: isToday
+                              ? ColorManager.primary
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(2.r),
                         ),
                       ),
@@ -92,14 +96,19 @@ class WorkingHoursSection extends StatelessWidget {
                       Text(
                         days,
                         style: getSemiBoldStyle(
-                          color: isToday ? ColorManager.primary : Colors.black87,
+                          color: isToday
+                              ? ColorManager.primary
+                              : Colors.black87,
                           fontSize: FontSize.s14.sp,
                         ),
                       ),
                       if (isToday) ...[
                         SizedBox(width: 8.w),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 6.w,
+                            vertical: 2.h,
+                          ),
                           decoration: BoxDecoration(
                             color: ColorManager.primary,
                             borderRadius: BorderRadius.circular(4.r),

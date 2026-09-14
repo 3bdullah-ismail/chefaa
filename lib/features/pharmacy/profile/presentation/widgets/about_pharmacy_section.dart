@@ -103,7 +103,7 @@ class _AboutPharmacySectionState extends State<AboutPharmacySection> {
                 ),
               ),
             ),
-          ]
+          ],
         ],
       ),
     );

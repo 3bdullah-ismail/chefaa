@@ -4,22 +4,32 @@ import 'prompt_tokens_details.dart';
 
 class Usage {
   Usage({
-      this.completionTokens, 
-      this.completionTokensDetails, 
-      this.latencyCheckpoint, 
-      this.promptTokens, 
-      this.promptTokensDetails, 
-      this.totalTokens,});
+    this.completionTokens,
+    this.completionTokensDetails,
+    this.latencyCheckpoint,
+    this.promptTokens,
+    this.promptTokensDetails,
+    this.totalTokens,
+  });
 
   Usage.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     completionTokens = json['completion_tokens'];
-    completionTokensDetails = json['completion_tokens_details'] != null ? CompletionTokensDetails.fromJson(json['completion_tokens_details']) : null;
-    latencyCheckpoint = json['latency_checkpoint'] != null ? LatencyCheckpoint.fromJson(json['latency_checkpoint']) : null;
+    completionTokensDetails = json['completion_tokens_details'] != null
+        ? CompletionTokensDetails.fromJson(json['completion_tokens_details'])
+        : null;
+    latencyCheckpoint = json['latency_checkpoint'] != null
+        ? LatencyCheckpoint.fromJson(json['latency_checkpoint'])
+        : null;
     promptTokens = json['prompt_tokens'];
-    promptTokensDetails = json['prompt_tokens_details'] != null ? PromptTokensDetails.fromJson(json['prompt_tokens_details']) : null;
+    promptTokensDetails = json['prompt_tokens_details'] != null
+        ? PromptTokensDetails.fromJson(json['prompt_tokens_details'])
+        : null;
     totalTokens = json['total_tokens'];
   }
+
   num? completionTokens;
   CompletionTokensDetails? completionTokensDetails;
   LatencyCheckpoint? latencyCheckpoint;
@@ -43,5 +53,4 @@ class Usage {
     map['total_tokens'] = totalTokens;
     return map;
   }
-
 }

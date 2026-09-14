@@ -60,7 +60,9 @@ class SearchResponse extends ClinicModel {
        );
 
   factory SearchResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     final clinicsList = json['clinics'] != null
         ? (json['clinics'] as List).map((v) => Clinics.fromJson(v)).toList()
         : <Clinics>[];
@@ -168,14 +170,13 @@ class SearchResponse extends ClinicModel {
 
     final dates = List.generate(
       7,
-          (i) => start.add(Duration(days: i)),
-    ).where(
-          (date) => weekDays.contains(date.weekday),
-    ).toList(growable: false);
-
+      (i) => start.add(Duration(days: i)),
+    ).where((date) => weekDays.contains(date.weekday)).toList(growable: false);
 
     return dates;
-  }  static bool _isActiveDay(bool? isActive) {
+  }
+
+  static bool _isActiveDay(bool? isActive) {
     return isActive == true;
   }
 
@@ -253,7 +254,9 @@ class Clinics {
   });
 
   Clinics.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     doctorId = json['doctorId'];
     name = json['name'];
@@ -316,7 +319,9 @@ class DefaultSchedule {
   });
 
   DefaultSchedule.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     if (json['days'] != null) {
       days = (json['days'] as List).map((v) => Days.fromJson(v)).toList();
     }
@@ -363,7 +368,9 @@ class Days {
   });
 
   Days.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     day = json['day'];
     isActive = json['isActive'] == true || json['isActive'] == 1;
     open = json['open'];
@@ -404,7 +411,9 @@ class Breaks {
   Breaks({this.start, this.end, this.label});
 
   Breaks.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     start = json['start'];
     end = json['end'];
     label = json['label'];
@@ -426,7 +435,9 @@ class Location {
   Location({this.type, this.coordinates});
 
   Location.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     type = json['type'];
     coordinates = json['coordinates'] != null
         ? json['coordinates'].cast<num>()

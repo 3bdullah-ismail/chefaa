@@ -1,8 +1,6 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
-
 
 class DocChatInputBar extends StatelessWidget {
   final TextEditingController controller;
@@ -25,9 +23,7 @@ class DocChatInputBar extends StatelessWidget {
       ),
       decoration: const BoxDecoration(
         color: ColorManager.white,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(24),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       child: Row(
         children: [
@@ -59,12 +55,9 @@ class DocChatInputBar extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: onSend,
-              icon: const Icon(
-                Icons.send_rounded,
-                color: ColorManager.white,
-              ),
+              icon: const Icon(Icons.send_rounded, color: ColorManager.white),
             ),
-          )
+          ),
         ],
       ),
     );

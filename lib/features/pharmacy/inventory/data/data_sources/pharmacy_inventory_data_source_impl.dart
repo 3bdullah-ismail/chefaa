@@ -38,9 +38,7 @@ class PharmacyInventoryDataSourceImpl implements PharmacyInventoryDataSource {
   Future<Response> searchMedicines(String query) {
     return _networkService.dio.get(
       "/pharmacy/inventory/search",
-      queryParameters: {
-        "q": query,
-      },
+      queryParameters: {"q": query},
     );
   }
 }

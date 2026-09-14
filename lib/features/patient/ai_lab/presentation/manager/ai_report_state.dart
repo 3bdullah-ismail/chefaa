@@ -34,4 +34,3 @@ final class HistoryLoadedState extends AiReportState {
 }
 
 final class HistoryRefreshState extends AiReportState {}
-

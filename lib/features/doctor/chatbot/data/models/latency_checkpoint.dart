@@ -1,17 +1,20 @@
 class LatencyCheckpoint {
   LatencyCheckpoint({
-      this.engineTbtMs, 
-      this.engineTtftMs, 
-      this.engineTtltMs, 
-      this.preInferenceMs, 
-      this.serviceTbtMs, 
-      this.serviceTtftMs, 
-      this.serviceTtltMs, 
-      this.totalDurationMs, 
-      this.userVisibleTtftMs,});
+    this.engineTbtMs,
+    this.engineTtftMs,
+    this.engineTtltMs,
+    this.preInferenceMs,
+    this.serviceTbtMs,
+    this.serviceTtftMs,
+    this.serviceTtltMs,
+    this.totalDurationMs,
+    this.userVisibleTtftMs,
+  });
 
   LatencyCheckpoint.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     engineTbtMs = json['engine_tbt_ms'];
     engineTtftMs = json['engine_ttft_ms'];
     engineTtltMs = json['engine_ttlt_ms'];
@@ -22,6 +25,7 @@ class LatencyCheckpoint {
     totalDurationMs = json['total_duration_ms'];
     userVisibleTtftMs = json['user_visible_ttft_ms'];
   }
+
   num? engineTbtMs;
   num? engineTtftMs;
   num? engineTtltMs;
@@ -45,5 +49,4 @@ class LatencyCheckpoint {
     map['user_visible_ttft_ms'] = userVisibleTtftMs;
     return map;
   }
-
 }

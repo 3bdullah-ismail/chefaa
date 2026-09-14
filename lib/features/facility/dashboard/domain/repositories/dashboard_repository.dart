@@ -16,4 +16,3 @@ abstract class DashboardRepository {
     required bool viaAI,
   });
 }
-

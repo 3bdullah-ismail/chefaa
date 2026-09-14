@@ -54,7 +54,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               Loading.show(context);
             } else if (state is ForgotPassSuccessState) {
               Loading.hide(context);
-              context.push(AppRoutesNames.resetCode.replaceFirst(':index', currentIndex.toString()));
+              context.push(
+                AppRoutesNames.resetCode.replaceFirst(
+                  ':index',
+                  currentIndex.toString(),
+                ),
+              );
             } else if (state is ForgotPassErrorState) {
               Loading.hide(context);
               _showErrorDialog(context, state.message!);
@@ -62,85 +67,85 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           },
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
-              child: Form(
-                key: cubit.forgotPassFormKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const BackBtn(),
-                    36.verticalSpace,
-                    Text(
-                      "Forgot Your Password?",
-                      style: getBoldStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s24,
-                      ),
+            child: Form(
+              key: cubit.forgotPassFormKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const BackBtn(),
+                  36.verticalSpace,
+                  Text(
+                    "Forgot Your Password?",
+                    style: getBoldStyle(
+                      color: ColorManager.black,
+                      fontSize: FontSize.s24,
                     ),
-                    16.verticalSpace,
-                    Text(
-                      "Enter your email or phone number,\nwe will send you confirmation codes",
-                      style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: 16,
-                      ),
+                  ),
+                  16.verticalSpace,
+                  Text(
+                    "Enter your email or phone number,\nwe will send you confirmation codes",
+                    style: getMediumStyle(
+                      color: ColorManager.gray,
+                      fontSize: 16,
                     ),
-                    32.verticalSpace,
-                    AnimatedHorizontalToggle(
-                      taps: const ['Email', 'Phone'],
-                      width: context.width * .85,
-                      height: 55,
-                      duration: const Duration(milliseconds: 100),
-                      initialIndex: 0,
-                      background: ColorManager.input,
-                      activeColor: ColorManager.white,
-                      activeTextStyle: getSemiBoldStyle(
-                        color: ColorManager.primary,
-                        fontSize: 16,
-                      ),
-                      inActiveTextStyle: getSemiBoldStyle(
-                        color: ColorManager.gray,
-                        fontSize: 16,
-                      ),
-                      horizontalPadding: 4,
-                      verticalPadding: 4,
-                      activeHorizontalPadding: 2,
-                      activeVerticalPadding: 4,
-                      radius: 32,
-                      activeButtonRadius: 32,
-                      onChange: (int index, int targetIndex) {
-                        setState(() => currentIndex = index);
-                      },
-                      showActiveButtonColor: true,
-                      local: 'en',
+                  ),
+                  32.verticalSpace,
+                  AnimatedHorizontalToggle(
+                    taps: const ['Email', 'Phone'],
+                    width: context.width * .85,
+                    height: 55,
+                    duration: const Duration(milliseconds: 100),
+                    initialIndex: 0,
+                    background: ColorManager.input,
+                    activeColor: ColorManager.white,
+                    activeTextStyle: getSemiBoldStyle(
+                      color: ColorManager.primary,
+                      fontSize: 16,
                     ),
-                    16.verticalSpace,
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 100),
-                      child: currentIndex == 0
-                          ? CustomTextField(
-                              key: const ValueKey('email'),
-                              validator: Validators.validateEmail,
-                              controller: cubit.emailController,
-                              text: AppConstants.enterEmail,
-                              prefixIcon: IconsAssets.emailIcon,
-                            )
-                          : CustomTextField(
-                              key: const ValueKey('phone'),
-                              validator: Validators.validatePhone,
-                              controller: cubit.phoneController,
-                              text: AppConstants.enterPhone,
-                              prefixIcon: IconsAssets.phoneIcon,
-                            ),
+                    inActiveTextStyle: getSemiBoldStyle(
+                      color: ColorManager.gray,
+                      fontSize: 16,
                     ),
-                    56.verticalSpace,
-                    CustomBtn(
-                      text: "Reset your password",
-                      onPressed: () => cubit.forgotPass(currentIndex),
-                    ),
-                  ],
-                ),
+                    horizontalPadding: 4,
+                    verticalPadding: 4,
+                    activeHorizontalPadding: 2,
+                    activeVerticalPadding: 4,
+                    radius: 32,
+                    activeButtonRadius: 32,
+                    onChange: (int index, int targetIndex) {
+                      setState(() => currentIndex = index);
+                    },
+                    showActiveButtonColor: true,
+                    local: 'en',
+                  ),
+                  16.verticalSpace,
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 100),
+                    child: currentIndex == 0
+                        ? CustomTextField(
+                            key: const ValueKey('email'),
+                            validator: Validators.validateEmail,
+                            controller: cubit.emailController,
+                            text: AppConstants.enterEmail,
+                            prefixIcon: IconsAssets.emailIcon,
+                          )
+                        : CustomTextField(
+                            key: const ValueKey('phone'),
+                            validator: Validators.validatePhone,
+                            controller: cubit.phoneController,
+                            text: AppConstants.enterPhone,
+                            prefixIcon: IconsAssets.phoneIcon,
+                          ),
+                  ),
+                  56.verticalSpace,
+                  CustomBtn(
+                    text: "Reset your password",
+                    onPressed: () => cubit.forgotPass(currentIndex),
+                  ),
+                ],
               ),
             ),
+          ),
         ),
       ),
     );

@@ -1,11 +1,10 @@
 class ProfitLoss {
-  ProfitLoss({
-      this.status, 
-      this.amount, 
-      this.note,});
+  ProfitLoss({this.status, this.amount, this.note});
 
   ProfitLoss.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     status = json['status'];
     amount = json['amount'];
     note = json['note'];
@@ -21,5 +20,4 @@ class ProfitLoss {
     map['note'] = note;
     return map;
   }
-
 }

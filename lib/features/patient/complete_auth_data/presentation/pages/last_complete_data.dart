@@ -41,8 +41,7 @@ class _LastCompleteDataState extends State<LastCompleteData> {
               ).showSnackBar(SnackBar(content: Text(message)));
             } else if (state.status == CompleteStatus.success) {
               Loading.hide(context);
-              context.go(AppRoutesNames.patientLayout,
-              );
+              context.go(AppRoutesNames.patientLayout);
             }
           },
           child: Padding(
@@ -64,70 +63,78 @@ class _LastCompleteDataState extends State<LastCompleteData> {
                     isList: false,
                     child: Padding(
                       padding: const EdgeInsets.only(top: AppPadding.p8),
-                      child: BlocSelector<CompleteCubit, CompleteState, List<String>>(
-                        selector: (state) => state.allergies,
-                        builder: (context, allergies) {
-                          return ListView.separated(
-                            itemCount: AppConstants.allergies.length,
-                            separatorBuilder: (context, index) => Divider(
-                              indent: 10.w,
-                              endIndent: 12.w,
-                              color: Colors.grey.shade300,
-                              thickness: 2,
-                              height: 0.h,
-                            ),
-                            itemBuilder: (context, index) {
-                              final allergy = AppConstants.allergies[index];
-                              final isSelected = allergies.contains(
-                                allergy,
-                              );
-
-                              return GestureDetector(
-                                onTap: () => context
-                                    .read<CompleteCubit>()
-                                    .toggleAllergy(allergy),
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50.h,
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: 10.h,
-                                    horizontal: 16.w,
-                                  ),
-                                  margin: EdgeInsets.symmetric(vertical: 3.h),
-                                  decoration: BoxDecoration(
-                                    color: isSelected
-                                        ? ColorManager.gray.withValues(
-                                            alpha: 0.2,
-                                          )
-                                        : ColorManager.transparent,
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    boxShadow: isSelected
-                                        ? [
-                                            BoxShadow(
-                                              color: Colors.black.withValues(
-                                                alpha: 0.2,
-                                              ),
-                                              blurRadius: 4,
-                                              offset: const Offset(0, 4),
-                                            ),
-                                          ]
-                                        : [],
-                                  ),
-                                  child: Text(
-                                    allergy,
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: ColorManager.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
+                      child:
+                          BlocSelector<
+                            CompleteCubit,
+                            CompleteState,
+                            List<String>
+                          >(
+                            selector: (state) => state.allergies,
+                            builder: (context, allergies) {
+                              return ListView.separated(
+                                itemCount: AppConstants.allergies.length,
+                                separatorBuilder: (context, index) => Divider(
+                                  indent: 10.w,
+                                  endIndent: 12.w,
+                                  color: Colors.grey.shade300,
+                                  thickness: 2,
+                                  height: 0.h,
                                 ),
+                                itemBuilder: (context, index) {
+                                  final allergy = AppConstants.allergies[index];
+                                  final isSelected = allergies.contains(
+                                    allergy,
+                                  );
+
+                                  return GestureDetector(
+                                    onTap: () => context
+                                        .read<CompleteCubit>()
+                                        .toggleAllergy(allergy),
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 50.h,
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 10.h,
+                                        horizontal: 16.w,
+                                      ),
+                                      margin: EdgeInsets.symmetric(
+                                        vertical: 3.h,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? ColorManager.gray.withValues(
+                                                alpha: 0.2,
+                                              )
+                                            : ColorManager.transparent,
+                                        borderRadius: BorderRadius.circular(
+                                          12.r,
+                                        ),
+                                        boxShadow: isSelected
+                                            ? [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withValues(alpha: 0.2),
+                                                  blurRadius: 4,
+                                                  offset: const Offset(0, 4),
+                                                ),
+                                              ]
+                                            : [],
+                                      ),
+                                      child: Text(
+                                        allergy,
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
+                                          fontWeight: FontWeight.w700,
+                                          color: ColorManager.black,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
-                      ),
+                          ),
                     ),
                   ),
                 ),

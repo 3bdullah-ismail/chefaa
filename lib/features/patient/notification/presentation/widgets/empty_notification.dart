@@ -21,19 +21,13 @@ class EmptyNotificationState extends StatelessWidget {
             20.verticalSpace,
             Text(
               "No Notifications",
-              style: getBoldStyle(
-                color: ColorManager.black,
-                fontSize: 18.sp,
-              ),
+              style: getBoldStyle(color: ColorManager.black, fontSize: 18.sp),
             ),
             8.verticalSpace,
             Text(
               "You're all caught up.\nNew notifications will appear here.",
               textAlign: TextAlign.center,
-              style: getMediumStyle(
-                color: ColorManager.gray,
-                fontSize: 14.sp,
-              ),
+              style: getMediumStyle(color: ColorManager.gray, fontSize: 14.sp),
             ),
           ],
         ),

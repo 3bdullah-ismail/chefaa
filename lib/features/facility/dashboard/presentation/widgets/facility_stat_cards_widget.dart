@@ -17,7 +17,7 @@ class FacilityStatCardsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           child: _FacilityStatCardWidget(

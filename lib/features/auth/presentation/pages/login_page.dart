@@ -7,15 +7,15 @@ import 'package:chefaa/core/widgets/custom_btn.dart';
 import 'package:chefaa/core/widgets/custom_text_field.dart';
 import 'package:chefaa/core/widgets/loading.dart';
 import 'package:chefaa/core/widgets/validators.dart';
+import 'package:chefaa/core/widgets/custom_snackbar.dart';
 import 'package:chefaa/features/auth/presentation/manager/auth_cubit.dart';
 import 'package:chefaa/features/auth/presentation/widgets/custom_outline_btn.dart';
 import 'package:chefaa/features/auth/presentation/widgets/not_have_account.dart';
-import 'package:chefaa/features/auth/presentation/widgets/role_based_nav.dart';
+
+import 'package:chefaa/core/resources/constants_manager.dart';
 
 class LoginPage extends StatefulWidget {
-  final String? role;
-
-  const LoginPage({super.key, this.role});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -23,24 +23,22 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late RoleNavigationService _navigationService;
+  TextEditingController identityController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    _navigationService = RoleNavigationService(context);
+  void dispose() {
+    identityController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   void _showSuccessAndNavigate(dynamic user) {
-    AnimatedSnackBar.rectangle(
-      'Success',
-      'Welcome back ${user.name}!',
-      type: AnimatedSnackBarType.success,
-      brightness: Brightness.dark,
-      duration: const Duration(seconds: 3),
-    ).show(context);
-
-    _navigationService.toLayout(user.role!);
+    CustomSnackBar.showSuccess(
+      context: context,
+      message: 'Welcome back ${user.name}!',
+    );
+    context.go(AppConstants.getLayoutFromRole(user.role!));
   }
 
   @override
@@ -63,23 +61,18 @@ class _LoginPageState extends State<LoginPage> {
                     Loading.show(context);
                   } else if (state is LoginErrorState) {
                     Loading.hide(context);
-                    AnimatedSnackBar.rectangle(
-                      'Error',
-                      state.message,
-                      type: AnimatedSnackBarType.error,
-                      brightness: Brightness.dark,
-                      duration: const Duration(seconds: 3),
-                    ).show(context);
+                    CustomSnackBar.showError(
+                      context: context,
+                      message: state.message,
+                    );
                   } else if (state is GoogleSignInErrorState) {
                     Loading.hide(context);
-                    AnimatedSnackBar.rectangle(
-                      'Error',
-                      state.message ??
+                    CustomSnackBar.showError(
+                      context: context,
+                      message:
+                          state.message ??
                           'An error occurred during Google sign-in',
-                      type: AnimatedSnackBarType.error,
-                      brightness: Brightness.dark,
-                      duration: const Duration(seconds: 3),
-                    ).show(context);
+                    );
                   } else if (state is LoginSuccessState) {
                     Loading.hide(context);
                     _showSuccessAndNavigate(state.user);
@@ -105,13 +98,14 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           70.verticalSpace,
                           CustomTextField(
-                            controller: loginCubit.identityController,
+                            controller: identityController,
                             text: "Enter your Email or Phone",
                             prefixIcon: IconsAssets.emailIcon,
+                            validator: Validators.validateEmailOrPhone,
                           ),
                           20.verticalSpace,
                           CustomTextField(
-                            controller: loginCubit.passwordController,
+                            controller: passwordController,
                             text: "Enter your Password",
                             prefixIcon: IconsAssets.passwordIcon,
                             validator: Validators.validateLoginPassword,
@@ -136,62 +130,17 @@ class _LoginPageState extends State<LoginPage> {
                             text: "Login",
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
-                                loginCubit.login();
+                                loginCubit.login(
+                                  identity: identityController.text,
+                                  password: passwordController.text,
+                                );
                               }
                             },
                           ),
                           50.verticalSpace,
                           CustomOutlineBtn(
-                            onPressed: () async {
-                              debugPrint('Google sign-in button pressed');
-                              try {
-                                debugPrint(
-                                  'Calling GoogleSignIn.instance.authenticate()',
-                                );
-                                final result = await GoogleSignIn.instance
-                                    .authenticate();
-                                debugPrint(
-                                  'Google account selected: ${result.authentication}',
-                                );
-                                final String? idToken =
-                                    result.authentication.idToken;
-                                debugPrint('Google idToken: $idToken');
-
-                                if (idToken != null) {
-                                  if (context.mounted) {
-                                    debugPrint(
-                                      'Calling AuthCubit.signInWithGoogle()',
-                                    );
-                                    context.read<AuthCubit>().signInWithGoogle(
-                                      idToken,
-                                    );
-                                  }
-                                } else if (context.mounted) {
-                                  debugPrint(
-                                    'Google idToken is null, backend will not be called',
-                                  );
-                                  AnimatedSnackBar.rectangle(
-                                    'Error',
-                                    'Failed to retrieve Google ID token.',
-                                    type: AnimatedSnackBarType.error,
-                                    brightness: Brightness.dark,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                }
-                              } catch (e) {
-                                debugPrint('Google sign-in exception: $e');
-                                if (context.mounted &&
-                                    (e is! Exception ||
-                                        !e.toString().contains('cancel'))) {
-                                  AnimatedSnackBar.rectangle(
-                                    'Error',
-                                    e.toString(),
-                                    type: AnimatedSnackBarType.error,
-                                    brightness: Brightness.dark,
-                                    duration: const Duration(seconds: 3),
-                                  ).show(context);
-                                }
-                              }
+                            onPressed: () {
+                              // TODO: Implement Google Sign-in
                             },
                             prefixImage: SvgAssets.google,
                             title: "Sign in with Google",
@@ -199,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                           20.verticalSpace,
                           NotHaveAccount(
                             onPressed: () {
-                              _navigationService.toSignUp(widget.role);
+                              context.pushReplacement(AppRoutesNames.option);
                             },
                           ),
                         ],

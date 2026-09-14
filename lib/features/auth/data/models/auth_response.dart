@@ -12,7 +12,9 @@ class AuthResponse {
   }
 
   AuthResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     _message = json['message'];
     _accessToken = json['accessToken'];
     _refreshToken = json['refreshToken'];
@@ -64,7 +66,9 @@ class User {
   }
 
   User.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     _id = json['id'];
     _name = json['name'];
     _role = json['role'];

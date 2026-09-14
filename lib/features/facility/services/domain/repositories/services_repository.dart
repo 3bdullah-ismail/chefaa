@@ -16,4 +16,3 @@ abstract class ServicesRepository {
 
   Future<AddServiceResponse> toggleService(String serviceId);
 }
-

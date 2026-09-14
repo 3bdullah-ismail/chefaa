@@ -16,7 +16,9 @@ class Patient {
   });
 
   Patient.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     final addr = json['address'];
 
     if (addr is String) {

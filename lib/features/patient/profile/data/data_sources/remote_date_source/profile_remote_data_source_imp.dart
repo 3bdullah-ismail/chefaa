@@ -3,7 +3,6 @@ import 'package:chefaa/core/services/network_service.dart';
 import 'package:chefaa/features/patient/profile/data/data_sources/remote_date_source/profile_remote_data_source.dart';
 import '../../../domain/entities/address_entity.dart';
 
-
 @Injectable(as: ProfileRemoteDataSource)
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   NetworkService networkService;
@@ -38,7 +37,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     num? age,
     num? height,
     num? weight,
-      AddressEntity address,
+    AddressEntity address,
   ) {
     return networkService.dio.put(
       "/patient/profile/basic-info",

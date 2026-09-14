@@ -72,24 +72,25 @@ class MedicineTile extends StatelessWidget {
           Row(
             spacing: 10.w,
             children: [
-              Expanded(child:
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppPadding.p4,
-                  vertical: AppPadding.p2,
-                ),
-                decoration: BoxDecoration(
-                  color: ColorManager.primary.withAlpha(50),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "Stock: $stock / $totalStock",
-                  style: getMediumStyle(
-                    color: ColorManager.primary,
-                    fontSize: 14.sp,
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p4,
+                    vertical: AppPadding.p2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: ColorManager.primary.withAlpha(50),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    "Stock: $stock / $totalStock",
+                    style: getMediumStyle(
+                      color: ColorManager.primary,
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ),
-              )),
+              ),
               Text(
                 "Price: $price EGP",
                 style: getBoldStyle(color: ColorManager.black, fontSize: 14.sp),

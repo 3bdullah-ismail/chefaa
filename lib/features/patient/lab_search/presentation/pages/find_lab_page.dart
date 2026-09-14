@@ -1,7 +1,6 @@
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/widgets/inside_app_bar.dart';
 
-
 import 'package:chefaa/core/config/get_config.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -92,7 +91,7 @@ class _FindLabViewState extends State<_FindLabView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PreferredSize(
-        preferredSize:  Size.fromHeight(100),
+        preferredSize: Size.fromHeight(100),
         child: InsideAppBar(title: "Find Lab"),
       ),
       body: SafeArea(
@@ -358,9 +357,8 @@ class _FindLabViewState extends State<_FindLabView> {
               context: context,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
-              builder: (context) => LabDetailsBottomSheet(
-                centerData: centers[index],
-              ),
+              builder: (context) =>
+                  LabDetailsBottomSheet(centerData: centers[index]),
             );
           },
         );

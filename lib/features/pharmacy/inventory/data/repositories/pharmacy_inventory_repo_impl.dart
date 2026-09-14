@@ -20,9 +20,7 @@ class PharmacyInventoryRepoImpl implements PharmacyInventoryRepo {
       AddMedicineResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = AddMedicineResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = AddMedicineResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
         data = AddMedicineResponse.fromJson(
           responseBody as Map<String, dynamic>,
@@ -37,7 +35,10 @@ class PharmacyInventoryRepoImpl implements PharmacyInventoryRepo {
   }
 
   @override
-  Future<GetMedicinesResponse> getMedicines({String? search, String? filter}) async {
+  Future<GetMedicinesResponse> getMedicines({
+    String? search,
+    String? filter,
+  }) async {
     try {
       final response = await pharmacyInventoryDataSource.getMedicines(
         search: search,
@@ -47,9 +48,7 @@ class PharmacyInventoryRepoImpl implements PharmacyInventoryRepo {
       GetMedicinesResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = GetMedicinesResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = GetMedicinesResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
         data = GetMedicinesResponse.fromJson(
           responseBody as Map<String, dynamic>,
@@ -66,14 +65,14 @@ class PharmacyInventoryRepoImpl implements PharmacyInventoryRepo {
   @override
   Future<GetLowStockResponse> getLowStock({String? search}) async {
     try {
-      final response = await pharmacyInventoryDataSource.getLowStock(search: search);
+      final response = await pharmacyInventoryDataSource.getLowStock(
+        search: search,
+      );
       final responseBody = response.data;
       GetLowStockResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = GetLowStockResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = GetLowStockResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
         data = GetLowStockResponse.fromJson(
           responseBody as Map<String, dynamic>,
@@ -95,9 +94,7 @@ class PharmacyInventoryRepoImpl implements PharmacyInventoryRepo {
       GetMedicinesResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = GetMedicinesResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = GetMedicinesResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
         data = GetMedicinesResponse.fromJson(
           responseBody as Map<String, dynamic>,

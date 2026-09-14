@@ -2,7 +2,9 @@ class AdherenceHistory {
   AdherenceHistory({this.date, this.status, this.id});
 
   AdherenceHistory.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     date = json['date'];
     status = json['status'];
     id = json['_id'];

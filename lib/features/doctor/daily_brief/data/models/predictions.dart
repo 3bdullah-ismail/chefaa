@@ -1,11 +1,10 @@
 class Predictions {
-  Predictions({
-      this.next30DaysEstimate, 
-      this.basis, 
-      this.confidence,});
+  Predictions({this.next30DaysEstimate, this.basis, this.confidence});
 
   Predictions.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     next30DaysEstimate = json['next30DaysEstimate'];
     basis = json['basis'];
     confidence = json['confidence'];
@@ -21,5 +20,4 @@ class Predictions {
     map['confidence'] = confidence;
     return map;
   }
-
 }

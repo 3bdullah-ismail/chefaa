@@ -2,8 +2,8 @@ import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/facility/dashboard/data/models/create_patient_request_response.dart';
 import 'package:chefaa/features/facility/dashboard/data/models/get_dashboard_response.dart';
 import 'package:chefaa/features/facility/dashboard/data/models/upload_result_response.dart';
-import 'package:chefaa/features/facility/dashboard/domain/repositories/dashboard_repository.dart' show DashboardRepository;
-
+import 'package:chefaa/features/facility/dashboard/domain/repositories/dashboard_repository.dart'
+    show DashboardRepository;
 
 part 'dashboard_state.dart';
 
@@ -18,7 +18,7 @@ class DashboardCubit extends Cubit<DashboardState> {
   static DashboardCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future<void> getDashboard() async {
-      if (!isClosed) emit(GetDashboardLoading());
+    if (!isClosed) emit(GetDashboardLoading());
     try {
       final response = await _dashboardRepository.getDashboard();
       dashboardResponse = response;
@@ -32,8 +32,8 @@ class DashboardCubit extends Cubit<DashboardState> {
     required String requestId,
     required String filePath,
   }) async {
-      debugPrint("Cubit upload requestId = $requestId");
-      if (!isClosed) emit(UploadResultLoading(requestId: requestId));
+    debugPrint("Cubit upload requestId = $requestId");
+    if (!isClosed) emit(UploadResultLoading(requestId: requestId));
     try {
       final response = await _dashboardRepository.uploadResult(
         requestId: requestId,
@@ -50,7 +50,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     required List<String> serviceIds,
     required bool viaAI,
   }) async {
-      if (!isClosed) emit(CreatePatientRequestLoading());
+    if (!isClosed) emit(CreatePatientRequestLoading());
     try {
       final response = await _dashboardRepository.createPatientRequest(
         patientPhone: patientPhone,
@@ -63,4 +63,3 @@ class DashboardCubit extends Cubit<DashboardState> {
     }
   }
 }
-

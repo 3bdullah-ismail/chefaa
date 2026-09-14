@@ -13,29 +13,33 @@ class PatientNotificationCubit extends Cubit<PatientNotificationState> {
 
   static PatientNotificationCubit get(BuildContext context) =>
       BlocProvider.of<PatientNotificationCubit>(context);
-  Future<void>getNotification()async {
-      if (!isClosed) emit(PatientNotificationLoadingState());
+  Future<void> getNotification() async {
+    if (!isClosed) emit(PatientNotificationLoadingState());
     try {
       final notification = await patientNotificatorRepo.getNotifications();
-      if (!isClosed) emit(PatientNotificationSuccessState(notification: notification));
+      if (!isClosed) {
+        emit(PatientNotificationSuccessState(notification: notification));
+      }
     } catch (e) {
-      if (!isClosed) emit(PatientNotificationErrorState(errorMessage: e.toString()));
+      if (!isClosed) {
+        emit(PatientNotificationErrorState(errorMessage: e.toString()));
+      }
     }
   }
-  Future<void> markAsRead(Notification notification ) async {
+
+  Future<void> markAsRead(Notification notification) async {
     notification.isRead = true;
 
     if (state is PatientNotificationSuccessState) {
       if (!isClosed) {
         emit(
-        PatientNotificationSuccessState(
-          notification: List.from(
-            (state as PatientNotificationSuccessState).notification,
+          PatientNotificationSuccessState(
+            notification: List.from(
+              (state as PatientNotificationSuccessState).notification,
+            ),
           ),
-        ),
-      );
+        );
       }
     }
   }
 }
-

@@ -49,7 +49,8 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TrackOrderCubit>(
-      create: (context) => getIt<TrackOrderCubit>()..getOrderTracking(_orderId!),
+      create: (context) =>
+          getIt<TrackOrderCubit>()..getOrderTracking(_orderId!),
       child: Scaffold(
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(100),
@@ -79,9 +80,7 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                 backgroundColor: ColorManager.white,
                 isScrollControlled: true,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(28),
-                  ),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
                 ),
                 builder: (_) => DeliveredDoneBottomSheet(items: _items),
               );
@@ -95,9 +94,7 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
           builder: (context, state) {
             if (state is TrackOrderLoading) {
               return const Center(
-                child: CircularProgressIndicator(
-                  color: ColorManager.primary,
-                ),
+                child: CircularProgressIndicator(color: ColorManager.primary),
               );
             } else if (state is TrackOrderFailure) {
               return Center(
@@ -115,7 +112,9 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                     16.verticalSpace,
                     ElevatedButton(
                       onPressed: () {
-                        context.read<TrackOrderCubit>().getOrderTracking(_orderId!);
+                        context.read<TrackOrderCubit>().getOrderTracking(
+                          _orderId!,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: ColorManager.primary,
@@ -142,10 +141,14 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
               }
 
               // Update the items cache for DeliveredDoneBottomSheet
-              _items = (orderData.orderContents?.items ?? []).map((item) => {
-                'name': item.medicineName,
-                'quantity': item.quantity,
-              }).toList();
+              _items = (orderData.orderContents?.items ?? [])
+                  .map(
+                    (item) => {
+                      'name': item.medicineName,
+                      'quantity': item.quantity,
+                    },
+                  )
+                  .toList();
 
               // Determine details for live status card — show the latest completed step
               String liveStatusTitle = orderData.orderStatus;
@@ -159,15 +162,19 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                   liveStatusDesc = timeline.onTheWay?.description ?? "";
                   liveStatusTime = timeline.onTheWay?.time;
                 } else if (timeline.riderPickedUp?.isCompleted == true) {
-                  liveStatusTitle = timeline.riderPickedUp?.title ?? "Picked Up";
+                  liveStatusTitle =
+                      timeline.riderPickedUp?.title ?? "Picked Up";
                   liveStatusDesc = timeline.riderPickedUp?.description ?? "";
                   liveStatusTime = timeline.riderPickedUp?.time;
                 } else if (timeline.pharmacyPreparing?.isCompleted == true) {
-                  liveStatusTitle = timeline.pharmacyPreparing?.title ?? "Preparing";
-                  liveStatusDesc = timeline.pharmacyPreparing?.description ?? "";
+                  liveStatusTitle =
+                      timeline.pharmacyPreparing?.title ?? "Preparing";
+                  liveStatusDesc =
+                      timeline.pharmacyPreparing?.description ?? "";
                   liveStatusTime = timeline.pharmacyPreparing?.time;
                 } else if (timeline.orderConfirmed?.isCompleted == true) {
-                  liveStatusTitle = timeline.orderConfirmed?.title ?? "Order Confirmed";
+                  liveStatusTitle =
+                      timeline.orderConfirmed?.title ?? "Order Confirmed";
                   liveStatusDesc = timeline.orderConfirmed?.description ?? "";
                   liveStatusTime = timeline.orderConfirmed?.time;
                 }
@@ -193,9 +200,15 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                             const SizedBox(height: 16),
                             OrderInfoCard(
                               orderNumber: orderData.orderNumber,
-                              itemsCount: orderData.orderContents?.items.length ?? 0,
+                              itemsCount:
+                                  orderData.orderContents?.items.length ?? 0,
                               placedTime: confirmedTime,
-                              paymentMethod: orderData.orderContents?.summary?.paymentMethod ?? "Cash",
+                              paymentMethod:
+                                  orderData
+                                      .orderContents
+                                      ?.summary
+                                      ?.paymentMethod ??
+                                  "Cash",
                             ),
                             const SizedBox(height: 16),
                             if (orderData.riderInfo != null) ...[
@@ -207,11 +220,15 @@ class _TrackOrderPageState extends State<TrackOrderPage> {
                               const SizedBox(height: 16),
                             ],
                             if (orderData.orderContents != null)
-                              OrderContentCard(contents: orderData.orderContents!),
+                              OrderContentCard(
+                                contents: orderData.orderContents!,
+                              ),
                             const SizedBox(height: 24),
                             ConfirmOrderButton(
                               onPressed: () {
-                                context.read<TrackOrderCubit>().confirmOrderReceipt(_orderId!);
+                                context
+                                    .read<TrackOrderCubit>()
+                                    .confirmOrderReceipt(_orderId!);
                               },
                             ),
                             30.verticalSpace,

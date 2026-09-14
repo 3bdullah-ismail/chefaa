@@ -62,72 +62,72 @@ class _PharmacyPageState extends State<PharmacyPage> {
       value: _searchCubit,
       child: Scaffold(
         appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: InsideAppBar(
-          title: 'Pharmacy',
-          subtitle: 'Find the best pharmacies and medicines near you',
+          preferredSize: Size.fromHeight(120),
+          child: InsideAppBar(
+            title: 'Pharmacy',
+            subtitle: 'Find the best pharmacies and medicines near you',
+          ),
+        ),
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p20,
+                vertical: AppPadding.p16,
+              ),
+              child: Column(
+                children: [
+                  PharmacySearchBar(
+                    controller: _searchController,
+                    onChanged: (value) {
+                      _searchCubit.searchPharmacies(value);
+                    },
+                  ),
+                  15.verticalSpace,
+
+                  PharmacyFilters(
+                    filters: _filters,
+                    selectedIndex: _selectedFilterIndex,
+                    onChanged: (index) {
+                      setState(() {
+                        _selectedFilterIndex = index;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            Expanded(
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: ColorManager.lightGray,
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.all(AppPadding.p20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PharmacyHeader(title: _filters[_selectedFilterIndex]),
+
+                      20.verticalSpace,
+
+                      PharmacyDynamicList(
+                        selectedIndex: _selectedFilterIndex,
+                        medicines: medicines,
+                        pharmacyId: "",
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p20,
-              vertical: AppPadding.p16,
-            ),
-            child: Column(
-              children: [
-                PharmacySearchBar(
-                  controller: _searchController,
-                  onChanged: (value) {
-                    _searchCubit.searchPharmacies(value);
-                  },
-                ),
-                15.verticalSpace,
-
-                PharmacyFilters(
-                  filters: _filters,
-                  selectedIndex: _selectedFilterIndex,
-                  onChanged: (index) {
-                    setState(() {
-                      _selectedFilterIndex = index;
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: ColorManager.lightGray,
-                borderRadius: BorderRadius.circular(30.r),
-              ),
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.all(AppPadding.p20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    PharmacyHeader(title: _filters[_selectedFilterIndex]),
-
-                    20.verticalSpace,
-
-                    PharmacyDynamicList(
-                      selectedIndex: _selectedFilterIndex,
-                      medicines: medicines,
-                      pharmacyId: "",
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
     );
   }
 }

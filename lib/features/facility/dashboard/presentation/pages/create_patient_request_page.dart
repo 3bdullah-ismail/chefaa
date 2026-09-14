@@ -538,4 +538,3 @@ class _CreatePatientRequestPageBodyState
     );
   }
 }
-

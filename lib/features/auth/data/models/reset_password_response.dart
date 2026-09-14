@@ -4,7 +4,9 @@ class ResetPasswordResponse {
   }
 
   ResetPasswordResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     _message = json['message'];
   }
 

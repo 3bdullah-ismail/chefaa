@@ -46,7 +46,9 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
               Loading.hide(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(state.response.message ?? 'Status updated successfully'),
+                  content: Text(
+                    state.response.message ?? 'Status updated successfully',
+                  ),
                   backgroundColor: ColorManager.lightGreen,
                 ),
               );
@@ -61,11 +63,10 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
             }
           },
           builder: (context, state) {
-            if (state is PharmacySettingsLoadLoading || state is PharmacySettingsInitial) {
+            if (state is PharmacySettingsLoadLoading ||
+                state is PharmacySettingsInitial) {
               return const Center(
-                child: CircularProgressIndicator(
-                  color: ColorManager.primary,
-                ),
+                child: CircularProgressIndicator(color: ColorManager.primary),
               );
             } else if (state is PharmacySettingsLoadError) {
               return Center(
@@ -91,7 +92,9 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
                       ),
                       const SizedBox(height: 24),
                       ElevatedButton.icon(
-                        onPressed: () => context.read<PharmacySettingsCubit>().loadSettingsStatus(),
+                        onPressed: () => context
+                            .read<PharmacySettingsCubit>()
+                            .loadSettingsStatus(),
                         icon: const Icon(Icons.refresh_rounded),
                         label: const Text("Retry"),
                         style: ElevatedButton.styleFrom(
@@ -122,7 +125,10 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
                 children: [
                   Text(
                     "Store Status Settings",
-                    style: getBoldStyle(color: ColorManager.black, fontSize: 18.sp),
+                    style: getBoldStyle(
+                      color: ColorManager.black,
+                      fontSize: 18.sp,
+                    ),
                   ),
                   16.verticalSpace,
 
@@ -131,7 +137,10 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
                     decoration: BoxDecoration(
                       color: ColorManager.white,
                       borderRadius: BorderRadius.circular(24.r),
-                      border: Border.all(color: Colors.grey.shade100, width: 1.2),
+                      border: Border.all(
+                        color: Colors.grey.shade100,
+                        width: 1.2,
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.02),
@@ -167,7 +176,9 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
                                   Text(
                                     openNow ? "Open Now" : "Closed Now",
                                     style: getBoldStyle(
-                                      color: openNow ? Colors.green : Colors.red,
+                                      color: openNow
+                                          ? Colors.green
+                                          : Colors.red,
                                       fontSize: 18.sp,
                                     ),
                                   ),
@@ -185,9 +196,13 @@ class _PharmacySettingsPageState extends State<PharmacySettingsPage> {
                             Switch.adaptive(
                               value: openNow,
                               activeThumbColor: Colors.green,
-                              activeTrackColor: Colors.green.withValues(alpha: 0.5),
+                              activeTrackColor: Colors.green.withValues(
+                                alpha: 0.5,
+                              ),
                               onChanged: (val) {
-                                context.read<PharmacySettingsCubit>().updateStatus(val);
+                                context
+                                    .read<PharmacySettingsCubit>()
+                                    .updateStatus(val);
                               },
                             ),
                           ],

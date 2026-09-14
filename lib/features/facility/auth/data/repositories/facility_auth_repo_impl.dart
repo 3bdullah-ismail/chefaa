@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:chefaa/features/facility/auth/data/data_sources/facility_auth_source.dart';
@@ -54,4 +53,3 @@ class FacilityAuthRepoImpl implements FacilityAuthRepo {
     }
   }
 }
-

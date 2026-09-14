@@ -66,7 +66,7 @@ class NotificationCard extends StatelessWidget {
                 color: Colors.black.withValues(alpha: .04),
                 blurRadius: 15,
                 offset: const Offset(0, 5),
-              )
+              ),
             ],
           ),
           child: Row(
@@ -79,11 +79,7 @@ class NotificationCard extends StatelessWidget {
                   color: ColorManager.primary.withValues(alpha: .12),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
-                  icon,
-                  color: ColorManager.primary,
-                  size: 26.sp,
-                ),
+                child: Icon(icon, color: ColorManager.primary, size: 26.sp),
               ),
 
               15.horizontalSpace,
@@ -92,10 +88,8 @@ class NotificationCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     Row(
                       children: [
-
                         Expanded(
                           child: Text(
                             title,

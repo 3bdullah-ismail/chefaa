@@ -19,9 +19,7 @@ class PharmacyChatbotRepoImpl implements PharmacyChatbotRepo {
       ChatContextResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = ChatContextResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = ChatContextResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
         data = ChatContextResponse.fromJson(
           responseBody as Map<String, dynamic>,
@@ -49,13 +47,9 @@ class PharmacyChatbotRepoImpl implements PharmacyChatbotRepo {
       ChatResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = ChatResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = ChatResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
-        data = ChatResponse.fromJson(
-          responseBody as Map<String, dynamic>,
-        );
+        data = ChatResponse.fromJson(responseBody as Map<String, dynamic>);
       }
       return data;
     } on DioException catch (e) {

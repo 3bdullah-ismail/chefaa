@@ -132,8 +132,12 @@ class _MedicationBottomSheetState extends State<MedicationBottomSheet> {
   Widget build(BuildContext context) {
     return BlocConsumer<MedicationCubit, MedicationState>(
       buildWhen: (previous, current) {
-        final prevLoading = previous is MedicationAdditionLoadingState || previous is MedicationUpdateLoadingState;
-        final currLoading = current is MedicationAdditionLoadingState || current is MedicationUpdateLoadingState;
+        final prevLoading =
+            previous is MedicationAdditionLoadingState ||
+            previous is MedicationUpdateLoadingState;
+        final currLoading =
+            current is MedicationAdditionLoadingState ||
+            current is MedicationUpdateLoadingState;
         return prevLoading != currLoading;
       },
       listenWhen: (previous, current) =>

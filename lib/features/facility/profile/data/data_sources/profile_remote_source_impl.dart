@@ -18,4 +18,3 @@ class ProfileRemoteSourceImpl implements ProfileRemoteSource {
     return _networkService.dio.patch("/lab/update-profile", data: body);
   }
 }
-

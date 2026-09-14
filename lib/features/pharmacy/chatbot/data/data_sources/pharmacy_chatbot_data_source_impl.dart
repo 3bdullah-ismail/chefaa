@@ -20,10 +20,7 @@ class PharmacyChatbotDataSourceImpl implements PharmacyChatbotDataSource {
   }) {
     return _networkService.dio.post(
       "/pharmacy/ai/chat",
-      data: {
-        "question": question,
-        "context": context,
-      },
+      data: {"question": question, "context": context},
     );
   }
 }

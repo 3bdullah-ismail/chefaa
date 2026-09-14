@@ -2,7 +2,9 @@ class Appointment {
   Appointment({this.id, this.clinic, this.date, this.slotStart, this.slotEnd});
 
   Appointment.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     clinic = json['clinic'];
     date = json['date'];

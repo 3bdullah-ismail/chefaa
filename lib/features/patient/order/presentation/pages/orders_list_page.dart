@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -26,7 +25,9 @@ class _OrdersListPageState extends State<OrdersListPage>
       status: 'On The Way',
       totalPrice: 250.50,
       paymentMethod: 'Cash',
-      createdAt: DateTime.now().subtract(const Duration(hours: 1)).toIso8601String(),
+      createdAt: DateTime.now()
+          .subtract(const Duration(hours: 1))
+          .toIso8601String(),
       itemsCount: 3,
       pharmacyName: 'El-Ezaby Pharmacy',
     ),
@@ -36,7 +37,9 @@ class _OrdersListPageState extends State<OrdersListPage>
       status: 'Preparing',
       totalPrice: 120.00,
       paymentMethod: 'Credit Card',
-      createdAt: DateTime.now().subtract(const Duration(minutes: 30)).toIso8601String(),
+      createdAt: DateTime.now()
+          .subtract(const Duration(minutes: 30))
+          .toIso8601String(),
       itemsCount: 1,
       pharmacyName: 'Seif Pharmacy',
     ),
@@ -46,7 +49,9 @@ class _OrdersListPageState extends State<OrdersListPage>
       status: 'Delivered',
       totalPrice: 450.00,
       paymentMethod: 'Cash',
-      createdAt: DateTime.now().subtract(const Duration(days: 2)).toIso8601String(),
+      createdAt: DateTime.now()
+          .subtract(const Duration(days: 2))
+          .toIso8601String(),
       itemsCount: 5,
       pharmacyName: 'Roshdy Pharmacy',
     ),
@@ -56,7 +61,9 @@ class _OrdersListPageState extends State<OrdersListPage>
       status: 'Cancelled',
       totalPrice: 85.00,
       paymentMethod: 'Credit Card',
-      createdAt: DateTime.now().subtract(const Duration(days: 5)).toIso8601String(),
+      createdAt: DateTime.now()
+          .subtract(const Duration(days: 5))
+          .toIso8601String(),
       itemsCount: 2,
       pharmacyName: 'El-Tartoushy Pharmacy',
     ),
@@ -192,10 +199,7 @@ class _OrdersListPageState extends State<OrdersListPage>
                 await Future.delayed(const Duration(seconds: 1));
               },
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                  vertical: 20.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
                 itemCount: filtered.length,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
@@ -203,7 +207,12 @@ class _OrdersListPageState extends State<OrdersListPage>
                   return OrderListCard(
                     order: order,
                     onTrack: () {
-                      context.push(AppRoutesNames.trackOrderPage.replaceFirst(':orderId', order.id.toString()));
+                      context.push(
+                        AppRoutesNames.trackOrderPage.replaceFirst(
+                          ':orderId',
+                          order.id.toString(),
+                        ),
+                      );
                     },
                   );
                 },

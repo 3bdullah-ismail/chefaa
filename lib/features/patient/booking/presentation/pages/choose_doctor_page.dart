@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/search/presentation/manager/search_cubit.dart';
 import 'package:chefaa/features/patient/search/presentation/widgets/filter_bar.dart';

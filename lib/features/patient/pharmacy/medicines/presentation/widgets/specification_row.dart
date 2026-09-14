@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class SpecificationRow extends StatelessWidget {
   final String label;
   final String value;

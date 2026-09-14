@@ -1,9 +1,9 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget child;
+
   final Color? backgroundColor;
   final double? elevation;
   final double? preferredHeight;

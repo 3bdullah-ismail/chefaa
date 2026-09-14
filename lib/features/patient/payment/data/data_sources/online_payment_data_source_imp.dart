@@ -9,7 +9,12 @@ class OnlinePaymentDataSourceImp implements OnlinePaymentDataSource {
   OnlinePaymentDataSourceImp(this.networkService);
 
   @override
-  Future<Response<dynamic>> processOnlinePayment(Map<String, dynamic> paymentData) {
-    return networkService.dio.post('/patient/cart/payment-online', data: paymentData);
+  Future<Response<dynamic>> processOnlinePayment(
+    Map<String, dynamic> paymentData,
+  ) {
+    return networkService.dio.post(
+      '/patient/cart/payment-online',
+      data: paymentData,
+    );
   }
 }

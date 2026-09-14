@@ -98,7 +98,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 );
               } else {
                 context.pushReplacement(
-                  AppRoutesNames.trackOrderPage.replaceFirst(':orderId', orderId),
+                  AppRoutesNames.trackOrderPage.replaceFirst(
+                    ':orderId',
+                    orderId,
+                  ),
                 );
               }
             } else if (state is PharmacyCheckoutFailure) {

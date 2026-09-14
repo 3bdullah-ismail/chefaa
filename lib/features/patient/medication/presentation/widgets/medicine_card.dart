@@ -60,61 +60,71 @@ class MedicineCardState extends State<MedicineCard> {
             physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(right: AppPadding.p8),
             separatorBuilder: (_, _) => const Divider(),
-              itemBuilder: (_, index) {
-                final med = widget.medications[index];
+            itemBuilder: (_, index) {
+              final med = widget.medications[index];
 
-                // أول حاجة: شوف هل فيه override محلي (بعد ما المستخدم ضغط Confirm في نفس الجلسة)
-                final localOverride = _confirmed[med.id ?? ''];
+              // أول حاجة: شوف هل فيه override محلي (بعد ما المستخدم ضغط Confirm في نفس الجلسة)
+              final localOverride = _confirmed[med.id ?? ''];
 
-                // لو مفيش override، اتأكد من آخر سجل في adherenceHistory القادم من السيرفر
-                final lastHistoryStatus = med.adherenceHistory?.isNotEmpty == true
-                    ? med.adherenceHistory!.last.status
-                    : null;
+              // لو مفيش override، اتأكد من آخر سجل في adherenceHistory القادم من السيرفر
+              final lastHistoryStatus = med.adherenceHistory?.isNotEmpty == true
+                  ? med.adherenceHistory!.last.status
+                  : null;
 
-                final isAlreadyTakenFromServer =
-                    lastHistoryStatus?.toLowerCase() == 'taken';
+              final isAlreadyTakenFromServer =
+                  lastHistoryStatus?.toLowerCase() == 'taken';
 
-                final displayConfirmed = localOverride != null || isAlreadyTakenFromServer;
+              final displayConfirmed =
+                  localOverride != null || isAlreadyTakenFromServer;
 
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            med.name?.isNotEmpty == true
-                                ? med.name![0].toUpperCase() +
-                                med.name!.substring(1).toLowerCase()
-                                : 'Medication Name',
-                            style: getBoldStyle(
-                              color: ColorManager.black,
-                            ).copyWith(fontSize: 18),
-                          ),
-                          5.verticalSpace,
-                          Text(
-                            '${med.dosage} - ${med.schedule?.join(', ')}',
-                            style: getMediumStyle(
-                              color: ColorManager.gray,
-                            ).copyWith(fontSize: 16),
-                          ),
-                        ],
-                      ),
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          med.name?.isNotEmpty == true
+                              ? med.name![0].toUpperCase() +
+                                    med.name!.substring(1).toLowerCase()
+                              : 'Medication Name',
+                          style: getBoldStyle(
+                            color: ColorManager.black,
+                          ).copyWith(fontSize: 18),
+                        ),
+                        5.verticalSpace,
+                        Text(
+                          '${med.dosage} - ${med.schedule?.join(', ')}',
+                          style: getMediumStyle(
+                            color: ColorManager.gray,
+                          ).copyWith(fontSize: 16),
+                        ),
+                      ],
                     ),
-                    12.horizontalSpace,
-                    displayConfirmed
-                        ? _ConfirmedStatus(
-                      statusText: localOverride != null
-                          ? (localOverride.medication?.adherenceHistory?.isNotEmpty == true
-                          ? localOverride.medication!.adherenceHistory!.last.status ?? 'Taken'
-                          : 'Taken')
-                          : lastHistoryStatus ?? 'Taken'
-                    )
-                        : _ConfirmActions(onConfirm: () => widget.onPressed(med)),
-                  ],
-                );
-              },
+                  ),
+                  12.horizontalSpace,
+                  displayConfirmed
+                      ? _ConfirmedStatus(
+                          statusText: localOverride != null
+                              ? (localOverride
+                                            .medication
+                                            ?.adherenceHistory
+                                            ?.isNotEmpty ==
+                                        true
+                                    ? localOverride
+                                              .medication!
+                                              .adherenceHistory!
+                                              .last
+                                              .status ??
+                                          'Taken'
+                                    : 'Taken')
+                              : lastHistoryStatus ?? 'Taken',
+                        )
+                      : _ConfirmActions(onConfirm: () => widget.onPressed(med)),
+                ],
+              );
+            },
           ),
         ),
       ),

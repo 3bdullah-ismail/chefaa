@@ -58,15 +58,15 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
     degreeControllers = degrees.isEmpty
         ? [TextEditingController()]
         : degrees
-        .map((e) => TextEditingController(text: e.toString()))
-        .toList();
+              .map((e) => TextEditingController(text: e.toString()))
+              .toList();
 
     final preNums = d?.prePaymentNumbers ?? [];
     prePaymentNumberControllers = preNums.isEmpty
         ? [TextEditingController()]
         : preNums
-        .map((e) => TextEditingController(text: e.toString()))
-        .toList();
+              .map((e) => TextEditingController(text: e.toString()))
+              .toList();
 
     if (emitState) {
       if (!isClosed) emit(DoctorProfileControllersInitializedState());
@@ -75,17 +75,17 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
 
   void changeGender(String? value) {
     selectedGender = value;
-      if (!isClosed) emit(DoctorProfileUIUpdatedState());
+    if (!isClosed) emit(DoctorProfileUIUpdatedState());
   }
 
   void changePaymentOption(String? value) {
     selectedPaymentOption = value;
-      if (!isClosed) emit(DoctorProfileUIUpdatedState());
+    if (!isClosed) emit(DoctorProfileUIUpdatedState());
   }
 
   void addDegreeField() {
     degreeControllers.add(TextEditingController());
-      if (!isClosed) emit(DoctorProfileUIUpdatedState());
+    if (!isClosed) emit(DoctorProfileUIUpdatedState());
   }
 
   void removeDegreeField(int index) {
@@ -98,7 +98,7 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
 
   void addPrePaymentField() {
     prePaymentNumberControllers.add(TextEditingController());
-      if (!isClosed) emit(DoctorProfileUIUpdatedState());
+    if (!isClosed) emit(DoctorProfileUIUpdatedState());
   }
 
   void removePrePaymentField(int index) {
@@ -110,23 +110,24 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
   }
 
   Future<void> getDoctorData() async {
-      if (!isClosed) emit(GetDoctorDataLoadingState());
+    if (!isClosed) emit(GetDoctorDataLoadingState());
     final result = await getDoctorDataUseCase();
 
     if (isClosed) return;
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(GetDoctorDataErrorState(failure.message)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(GetDoctorDataErrorState(failure.message)),
       ifRight: (data) {
         initializeControllers(data, emitState: false);
-      if (!isClosed) {
-        emit(
-          GetDoctorDataSuccessState(
-            data,
-            profileCompleted: data.isProfileCompleted(),
-          ),
-        );
-      }
+        if (!isClosed) {
+          emit(
+            GetDoctorDataSuccessState(
+              data,
+              profileCompleted: data.isProfileCompleted(),
+            ),
+          );
+        }
       },
     );
   }
@@ -168,17 +169,18 @@ class DoctorProfileCubit extends Cubit<DoctorProfileState> {
       if (isClosed) return;
 
       result.fold(
-        ifLeft: (failure) => isClosed ? null : emit(UpdateDoctorDataErrorState(failure.message)),
+        ifLeft: (failure) =>
+            isClosed ? null : emit(UpdateDoctorDataErrorState(failure.message)),
         ifRight: (data) {
           initializeControllers(data, emitState: false);
-      if (!isClosed) {
-        emit(
-            UpdateDoctorDataSuccessState(
-              data,
-              profileCompleted: data.isProfileCompleted(),
-            ),
-          );
-      }
+          if (!isClosed) {
+            emit(
+              UpdateDoctorDataSuccessState(
+                data,
+                profileCompleted: data.isProfileCompleted(),
+              ),
+            );
+          }
         },
       );
     }

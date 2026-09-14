@@ -15,27 +15,27 @@ class CompleteCubit extends Cubit<CompleteState> {
       BlocProvider.of<CompleteCubit>(context);
 
   void updateGender(String? gender) {
-      if (!isClosed) {
-        emit(
-      state.copyWith(
-        status: CompleteStatus.initial,
-        gender: gender,
-        message: null,
-      ),
-    );
-      }
+    if (!isClosed) {
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          gender: gender,
+          message: null,
+        ),
+      );
+    }
   }
 
   void updateBirthDate(DateTime? birthDate) {
-      if (!isClosed) {
-        emit(
-      state.copyWith(
-        status: CompleteStatus.initial,
-        birthDate: birthDate,
-        message: null,
-      ),
-    );
-      }
+    if (!isClosed) {
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          birthDate: birthDate,
+          message: null,
+        ),
+      );
+    }
   }
 
   String? captureBasicInfo({
@@ -65,17 +65,17 @@ class CompleteCubit extends Cubit<CompleteState> {
     if (bloodType.isEmpty) {
       return 'Please enter your blood type';
     }
-      if (!isClosed) {
-        emit(
-      state.copyWith(
-        status: CompleteStatus.initial,
-        weight: weight,
-        height: height,
-        bloodType: bloodType,
-        message: null,
-      ),
-    );
-      }
+    if (!isClosed) {
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          weight: weight,
+          height: height,
+          bloodType: bloodType,
+          message: null,
+        ),
+      );
+    }
 
     return null;
   }
@@ -87,15 +87,15 @@ class CompleteCubit extends Cubit<CompleteState> {
     } else {
       updated.add(disease);
     }
-      if (!isClosed) {
-        emit(
-      state.copyWith(
-        status: CompleteStatus.initial,
-        chronicConditions: updated,
-        message: null,
-      ),
-    );
-      }
+    if (!isClosed) {
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          chronicConditions: updated,
+          message: null,
+        ),
+      );
+    }
   }
 
   void addCustomChronicDisease(String input) {
@@ -107,12 +107,12 @@ class CompleteCubit extends Cubit<CompleteState> {
       updated.add(value);
       if (!isClosed) {
         emit(
-        state.copyWith(
-          status: CompleteStatus.initial,
-          chronicConditions: updated,
-          message: null,
-        ),
-      );
+          state.copyWith(
+            status: CompleteStatus.initial,
+            chronicConditions: updated,
+            message: null,
+          ),
+        );
       }
     }
   }
@@ -124,15 +124,15 @@ class CompleteCubit extends Cubit<CompleteState> {
     } else {
       updated.add(allergy);
     }
-      if (!isClosed) {
-        emit(
-      state.copyWith(
-        status: CompleteStatus.initial,
-        allergies: updated,
-        message: null,
-      ),
-    );
-      }
+    if (!isClosed) {
+      emit(
+        state.copyWith(
+          status: CompleteStatus.initial,
+          allergies: updated,
+          message: null,
+        ),
+      );
+    }
   }
 
   void addCustomAllergy(String input) {
@@ -144,12 +144,12 @@ class CompleteCubit extends Cubit<CompleteState> {
       updated.add(value);
       if (!isClosed) {
         emit(
-        state.copyWith(
-          status: CompleteStatus.initial,
-          allergies: updated,
-          message: null,
-        ),
-      );
+          state.copyWith(
+            status: CompleteStatus.initial,
+            allergies: updated,
+            message: null,
+          ),
+        );
       }
     }
   }
@@ -169,15 +169,17 @@ class CompleteCubit extends Cubit<CompleteState> {
     if (!state.isStep1Complete) {
       if (!isClosed) {
         emit(
-        state.copyWith(
-          status: CompleteStatus.error,
-          message: 'Please complete your basic information first',
-        ),
-      );
+          state.copyWith(
+            status: CompleteStatus.error,
+            message: 'Please complete your basic information first',
+          ),
+        );
       }
       return;
     }
-      if (!isClosed) emit(state.copyWith(status: CompleteStatus.loading, message: null));
+    if (!isClosed) {
+      emit(state.copyWith(status: CompleteStatus.loading, message: null));
+    }
     try {
       final age = calculateAge(state.birthDate!);
 
@@ -192,20 +194,23 @@ class CompleteCubit extends Cubit<CompleteState> {
       );
       if (!isClosed) {
         emit(
-        state.copyWith(
-          status: CompleteStatus.success,
-          message: response.message,
-          patient: response.patient,
-        ),
-      );
+          state.copyWith(
+            status: CompleteStatus.success,
+            message: response.message,
+            patient: response.patient,
+          ),
+        );
       }
     } catch (e) {
-      if (!isClosed) emit(state.copyWith(status: CompleteStatus.error, message: e.toString()));
+      if (!isClosed) {
+        emit(
+          state.copyWith(status: CompleteStatus.error, message: e.toString()),
+        );
+      }
     }
   }
 
   void reset() {
-      if (!isClosed) emit(const CompleteState());
+    if (!isClosed) emit(const CompleteState());
   }
 }
-

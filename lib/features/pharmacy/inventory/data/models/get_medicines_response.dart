@@ -40,13 +40,17 @@ class GetMedicinesData {
     return GetMedicinesData(
       medicines: json['medicines'] != null
           ? (json['medicines'] as List)
-              .map((item) => MedicineData.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map(
+                  (item) => MedicineData.fromJson(item as Map<String, dynamic>),
+                )
+                .toList()
           : null,
       lowStockItems: json['lowStockItems'] != null
           ? (json['lowStockItems'] as List)
-              .map((item) => MedicineData.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map(
+                  (item) => MedicineData.fromJson(item as Map<String, dynamic>),
+                )
+                .toList()
           : null,
       summary: json['summary'] != null
           ? SummaryData.fromJson(json['summary'] as Map<String, dynamic>)

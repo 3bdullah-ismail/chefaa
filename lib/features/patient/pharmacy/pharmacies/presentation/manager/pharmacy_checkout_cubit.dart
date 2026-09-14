@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/data/models/checkout_response.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart';
@@ -10,16 +9,18 @@ class PharmacyCheckoutCubit extends Cubit<PharmacyCheckoutState> {
   final PharmacyProfileRepo pharmacyProfileRepo;
 
   PharmacyCheckoutCubit(this.pharmacyProfileRepo)
-      : super(PharmacyCheckoutInitial());
+    : super(PharmacyCheckoutInitial());
 
   Future<void> checkoutOrder(Map<String, dynamic> checkoutData) async {
-      if (!isClosed) emit(PharmacyCheckoutLoading());
+    if (!isClosed) emit(PharmacyCheckoutLoading());
 
     final result = await pharmacyProfileRepo.checkoutOrder(checkoutData);
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(PharmacyCheckoutFailure(failure.message)),
-      ifRight: (response) => isClosed ? null : emit(PharmacyCheckoutSuccess(response)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(PharmacyCheckoutFailure(failure.message)),
+      ifRight: (response) =>
+          isClosed ? null : emit(PharmacyCheckoutSuccess(response)),
     );
   }
 }

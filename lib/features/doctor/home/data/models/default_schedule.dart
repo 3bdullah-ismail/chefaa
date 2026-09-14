@@ -9,7 +9,9 @@ class DefaultSchedule {
   });
 
   DefaultSchedule.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     if (json['days'] != null) {
       days = [];
       json['days'].forEach((v) {

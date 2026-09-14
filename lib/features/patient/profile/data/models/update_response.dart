@@ -21,10 +21,10 @@ class UpdateResponse extends UserProfileEntity {
     final data = json['updatedData'] != null
         ? UpdatedData.fromJson(json['updatedData'])
         : json['patient'] != null
-            ? UpdatedData.fromJson(json['patient'])
-            : json['data'] != null
-                ? UpdatedData.fromJson(json['data'])
-                : null;
+        ? UpdatedData.fromJson(json['patient'])
+        : json['data'] != null
+        ? UpdatedData.fromJson(json['data'])
+        : null;
 
     return UpdateResponse(message: json['message'], updatedData: data);
   }
@@ -49,7 +49,9 @@ class UpdatedData {
   UpdatedData({this.name, this.age, this.gender, this.height, this.weight});
 
   UpdatedData.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     name = json['name'];
     age = json['age'];
     gender = json['gender'];

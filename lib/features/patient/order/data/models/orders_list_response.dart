@@ -2,27 +2,21 @@ class OrdersListResponse {
   final bool success;
   final List<OrderSummaryItem> data;
 
-  OrdersListResponse({
-    required this.success,
-    required this.data,
-  });
+  OrdersListResponse({required this.success, required this.data});
 
   factory OrdersListResponse.fromJson(Map<String, dynamic> json) {
     return OrdersListResponse(
       success: json['success'] ?? false,
       data: json['data'] != null
           ? (json['data'] as List)
-              .map((e) => OrderSummaryItem.fromJson(e))
-              .toList()
+                .map((e) => OrderSummaryItem.fromJson(e))
+                .toList()
           : [],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data.map((e) => e.toJson()).toList(),
-    };
+    return {'success': success, 'data': data.map((e) => e.toJson()).toList()};
   }
 }
 
@@ -57,7 +51,8 @@ class OrderSummaryItem {
       paymentMethod: json['paymentMethod'] ?? 'Cash',
       createdAt: json['createdAt'] ?? '',
       itemsCount: json['itemsCount'] ?? items.length,
-      pharmacyName: json['pharmacyName'] ??
+      pharmacyName:
+          json['pharmacyName'] ??
           (json['pharmacy'] is Map ? json['pharmacy']['name'] ?? '' : ''),
     );
   }

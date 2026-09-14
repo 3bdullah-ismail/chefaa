@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart';
@@ -16,7 +15,9 @@ class PharmacyProfileRepoImp implements PharmacyProfileRepo {
   PharmacyProfileRepoImp(this.remoteDataSource);
 
   @override
-  Future<Either<Failure, PharmacyProfileModel>> getPharmacyProfile(String pharmacyId) async {
+  Future<Either<Failure, PharmacyProfileModel>> getPharmacyProfile(
+    String pharmacyId,
+  ) async {
     try {
       final response = await remoteDataSource.getPharmacyProfile(pharmacyId);
       final model = PharmacyProfileModel.fromJson(response.data['data']);
@@ -29,7 +30,9 @@ class PharmacyProfileRepoImp implements PharmacyProfileRepo {
   }
 
   @override
-  Future<Either<Failure, SearchPharmaciesResponse>> searchPharmacies(String query) async {
+  Future<Either<Failure, SearchPharmaciesResponse>> searchPharmacies(
+    String query,
+  ) async {
     try {
       final response = await remoteDataSource.searchPharmacies(query);
       final model = SearchPharmaciesResponse.fromJson(response.data);
@@ -42,7 +45,9 @@ class PharmacyProfileRepoImp implements PharmacyProfileRepo {
   }
 
   @override
-  Future<Either<Failure, PharmacyMedicinesResponse>> getPharmacyMedicines(String pharmacyId) async {
+  Future<Either<Failure, PharmacyMedicinesResponse>> getPharmacyMedicines(
+    String pharmacyId,
+  ) async {
     try {
       final response = await remoteDataSource.getPharmacyMedicines(pharmacyId);
       final model = PharmacyMedicinesResponse.fromJson(response.data);
@@ -55,7 +60,9 @@ class PharmacyProfileRepoImp implements PharmacyProfileRepo {
   }
 
   @override
-  Future<Either<Failure, MedicineDetailsModel>> getMedicineDetails(String medicineId) async {
+  Future<Either<Failure, MedicineDetailsModel>> getMedicineDetails(
+    String medicineId,
+  ) async {
     try {
       final response = await remoteDataSource.getMedicineDetails(medicineId);
       final model = MedicineDetailsModel.fromJson(response.data['data']);

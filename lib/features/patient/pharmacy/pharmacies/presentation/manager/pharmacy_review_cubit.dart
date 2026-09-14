@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart';
 
@@ -9,20 +8,24 @@ class PharmacyReviewCubit extends Cubit<PharmacyReviewState> {
   final PharmacyProfileRepo pharmacyProfileRepo;
 
   PharmacyReviewCubit(this.pharmacyProfileRepo)
-      : super(PharmacyReviewInitial());
+    : super(PharmacyReviewInitial());
 
   Future<void> addPharmacyReview(
     String pharmacyId,
     int rating,
     String comment,
   ) async {
-      if (!isClosed) emit(PharmacyReviewLoading());
+    if (!isClosed) emit(PharmacyReviewLoading());
 
-    final result =
-        await pharmacyProfileRepo.addPharmacyReview(pharmacyId, rating, comment);
+    final result = await pharmacyProfileRepo.addPharmacyReview(
+      pharmacyId,
+      rating,
+      comment,
+    );
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(PharmacyReviewFailure(failure.message)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(PharmacyReviewFailure(failure.message)),
       ifRight: (_) => isClosed ? null : emit(PharmacyReviewSuccess()),
     );
   }

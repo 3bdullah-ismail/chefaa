@@ -421,4 +421,3 @@ class _UpdateProfileBottomSheetState extends State<_UpdateProfileBottomSheet> {
     );
   }
 }
-

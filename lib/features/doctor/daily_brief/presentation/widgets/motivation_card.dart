@@ -25,7 +25,7 @@ class MotivationCard extends StatelessWidget {
           Expanded(
             child: Text(
               message,
-              style: getBoldStyle(color: ColorManager.white, fontSize: 14.sp)
+              style: getBoldStyle(color: ColorManager.white, fontSize: 14.sp),
             ),
           ),
         ],

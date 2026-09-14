@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/facility/profile/data/models/get_profile_response.dart';
 import 'package:chefaa/features/facility/profile/domain/repositories/profile_repository.dart';
@@ -18,7 +17,7 @@ class FacilityProfileCubit extends Cubit<FacilityProfileState> {
       BlocProvider.of(context);
 
   Future<void> getProfile() async {
-      if (!isClosed) emit(GetProfileLoading());
+    if (!isClosed) emit(GetProfileLoading());
     try {
       final response = await _profileRepository.getProfile();
       profileData = response.profileData;
@@ -29,7 +28,7 @@ class FacilityProfileCubit extends Cubit<FacilityProfileState> {
   }
 
   Future<void> updateProfile(Map<String, dynamic> body) async {
-      if (!isClosed) emit(UpdateProfileLoading());
+    if (!isClosed) emit(UpdateProfileLoading());
     try {
       final response = await _profileRepository.updateProfile(body);
       profileData = response.profileData;

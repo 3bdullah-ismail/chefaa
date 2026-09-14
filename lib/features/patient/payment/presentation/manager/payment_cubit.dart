@@ -16,7 +16,8 @@ class PaymentCubit extends Cubit<PaymentState> {
     final result = await onlinePaymentRepo.processOnlinePayment(paymentData);
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(PaymentFailure(failure.message)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(PaymentFailure(failure.message)),
       ifRight: (response) => isClosed ? null : emit(PaymentSuccess(response)),
     );
   }

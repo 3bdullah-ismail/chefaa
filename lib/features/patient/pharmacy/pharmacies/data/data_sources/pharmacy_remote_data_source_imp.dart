@@ -17,10 +17,7 @@ class PharmacyRemoteDataSourceImp implements PharmacyRemoteDataSource {
   Future<Response<dynamic>> searchPharmacies(String query) {
     return networkService.dio.get(
       '/patient/pharmacies/search',
-      queryParameters: {
-        'type': 'pharmacy',
-        'query': query,
-      },
+      queryParameters: {'type': 'pharmacy', 'query': query},
     );
   }
 
@@ -42,16 +39,15 @@ class PharmacyRemoteDataSourceImp implements PharmacyRemoteDataSource {
   ) {
     return networkService.dio.post(
       '/patient/pharmacies/review',
-      data: {
-        'pharmacyId': pharmacyId,
-        'rating': rating,
-        'comment': comment,
-      },
+      data: {'pharmacyId': pharmacyId, 'rating': rating, 'comment': comment},
     );
   }
 
   @override
   Future<Response<dynamic>> checkoutOrder(Map<String, dynamic> checkoutData) {
-    return networkService.dio.post('/patient/cart/checkout', data: checkoutData);
+    return networkService.dio.post(
+      '/patient/cart/checkout',
+      data: checkoutData,
+    );
   }
 }

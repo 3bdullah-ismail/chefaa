@@ -39,16 +39,16 @@ class SummaryCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style:getBoldStyle(color: ColorManager.black, fontSize: 13.sp)
+            style: getBoldStyle(color: ColorManager.black, fontSize: 13.sp),
           ),
           Text(
             value,
-            style: getBoldStyle(color: color, fontSize: 20.sp)
+            style: getBoldStyle(color: color, fontSize: 20.sp),
           ),
 
           Text(
             subtitle,
-            style: getRegularStyle(color: ColorManager.gray, fontSize: 13.sp)
+            style: getRegularStyle(color: ColorManager.gray, fontSize: 13.sp),
           ),
         ],
       ),

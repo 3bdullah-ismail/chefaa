@@ -14,7 +14,7 @@ class NextEstimateCard extends StatelessWidget {
     this.estimate = "1,600 EGP",
     this.confidence = "Medium confidence",
     this.description =
-    "Based on the revenue expected from upcoming appointments and the current average revenue per session.",
+        "Based on the revenue expected from upcoming appointments and the current average revenue per session.",
   });
 
   @override
@@ -47,30 +47,44 @@ class NextEstimateCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         "NEXT 30 DAYS ESTIMATE",
-                        style: getSemiBoldStyle(color: ColorManager.black, fontSize: 12.sp)
+                        style: getSemiBoldStyle(
+                          color: ColorManager.black,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ),
                     Container(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p4),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p8,
+                        vertical: AppPadding.p4,
+                      ),
                       decoration: BoxDecoration(
                         color: ColorManager.error.withAlpha(40),
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       child: Text(
                         confidence,
-                        style: getBoldStyle(color: ColorManager.error, fontSize: 10.sp)
+                        style: getBoldStyle(
+                          color: ColorManager.error,
+                          fontSize: 10.sp,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 Text(
                   estimate,
-                  style: getBoldStyle(color: ColorManager.primary, fontSize: 18.sp)
+                  style: getBoldStyle(
+                    color: ColorManager.primary,
+                    fontSize: 18.sp,
+                  ),
                 ),
                 Text(
                   description,
-                  style: getRegularStyle(color: ColorManager.gray, fontSize: 12.sp)
+                  style: getRegularStyle(
+                    color: ColorManager.gray,
+                    fontSize: 12.sp,
+                  ),
                 ),
               ],
             ),

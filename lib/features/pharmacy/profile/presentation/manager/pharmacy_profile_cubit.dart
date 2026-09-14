@@ -12,7 +12,7 @@ class PharmacyProfileCubit extends Cubit<PharmacyProfileState> {
     : super(PharmacyProfileInitial());
 
   Future<void> getPharmacyProfile() async {
-      if (!isClosed) emit(PharmacyProfileLoading());
+    if (!isClosed) emit(PharmacyProfileLoading());
     try {
       final response = await pharmacyProfileRepo.getPharmacyProfile();
       if (!isClosed) emit(PharmacyProfileSuccess(response));
@@ -22,7 +22,7 @@ class PharmacyProfileCubit extends Cubit<PharmacyProfileState> {
   }
 
   Future<void> updatePharmacyProfile(Map<String, dynamic> body) async {
-      if (!isClosed) emit(PharmacyProfileUpdateLoading());
+    if (!isClosed) emit(PharmacyProfileUpdateLoading());
     try {
       final response = await pharmacyProfileRepo.updatePharmacyProfile(body);
       if (!isClosed) emit(PharmacyProfileUpdateSuccess(response));

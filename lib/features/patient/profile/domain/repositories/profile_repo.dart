@@ -1,5 +1,3 @@
-
-
 import 'package:chefaa/core/imports/imports.dart';
 import '../../../../../core/error_handling/failure.dart';
 import '../entities/address_entity.dart';
@@ -14,7 +12,7 @@ abstract class ProfileRepo {
     num? age,
     num? height,
     num? weight,
-      AddressEntity address,
+    AddressEntity address,
   );
 
   Future<Either<Failure, UserProfileEntity>> updateMedicalData({

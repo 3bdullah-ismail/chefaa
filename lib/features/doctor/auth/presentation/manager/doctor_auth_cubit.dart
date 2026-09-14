@@ -1,8 +1,7 @@
 import 'package:chefaa/core/imports/imports.dart';
-import 'package:chefaa/features/doctor/auth/domain/repositories/repo.dart';
-import 'package:chefaa/core/utils/username_generator.dart';
-
 import 'package:chefaa/core/services/storage_service.dart';
+import 'package:chefaa/core/utils/username_generator.dart';
+import 'package:chefaa/features/doctor/auth/data/repositories/doctor_auth_repo.dart';
 import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';
 
 part 'doctor_auth_state.dart';
@@ -11,14 +10,6 @@ part 'doctor_auth_state.dart';
 class DoctorAuthCubit extends Cubit<DoctorAuthState> {
   DoctorAuthRepo doctorAuthRepo;
 
-  TextEditingController name = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController lastName = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController phoneNumber = TextEditingController();
-  TextEditingController specialization = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
   bool _isSigningUp = false;
 
   final UsersCubit usersCubit;
@@ -33,7 +24,15 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
     required this.usersCubit,
   }) : super(DoctorAuthInitial());
 
-  Future<void> signUp({required PlatformFile? membershipFile}) async {
+  Future<void> signUp({
+    required PlatformFile? membershipFile,
+    required String name,
+    required String lastName,
+    required String email,
+    required String password,
+    required String phoneNumber,
+    required String specialization,
+  }) async {
     if (_isSigningUp) return;
     _isSigningUp = true;
     if (membershipFile == null) {
@@ -41,16 +40,16 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
       _isSigningUp = false;
       return;
     }
-      if (!isClosed) emit(SingUpLoading());
+    if (!isClosed) emit(SingUpLoading());
     try {
-      final String fullName = "${name.text} ${lastName.text}".trim();
+      final String fullName = "$name $lastName".trim();
       final response = await doctorAuthRepo.signUp(
         name: fullName,
-        email: email.text,
+        email: email,
         username: UsernameGenerator.generate(fullName),
-        password: password.text,
-        phoneNumber: phoneNumber.text,
-        specialization: specialization.text,
+        password: password,
+        phoneNumber: phoneNumber,
+        specialization: specialization,
         membership: membershipFile,
       );
       if (response.user != null) {
@@ -66,17 +65,5 @@ class DoctorAuthCubit extends Cubit<DoctorAuthState> {
     } finally {
       _isSigningUp = false;
     }
-  }
-
-  @override
-  Future<void> close() {
-    name.dispose();
-    email.dispose();
-    lastName.dispose();
-    password.dispose();
-    phoneNumber.dispose();
-    specialization.dispose();
-    confirmPasswordController.dispose();
-    return super.close();
   }
 }

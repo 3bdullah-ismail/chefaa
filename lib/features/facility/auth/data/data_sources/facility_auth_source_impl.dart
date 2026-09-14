@@ -49,4 +49,3 @@ class FacilityAuthDataSourceImpl extends FacilityAuthDataSource {
     );
   }
 }
-

@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/values_manager.dart';
@@ -16,7 +15,10 @@ class NextButton extends StatelessWidget {
       child: Container(
         width: 50.w,
         height: 50.h,
-        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppPadding.p8,
+          vertical: AppPadding.p8,
+        ),
         decoration: BoxDecoration(
           color: isEnabled
               ? ColorManager.primary

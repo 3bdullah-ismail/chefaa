@@ -15,4 +15,3 @@ class PharmacySearchFailure extends PharmacySearchState {
   final String message;
   PharmacySearchFailure(this.message);
 }
-

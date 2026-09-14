@@ -4,7 +4,9 @@ class CompletePatientDataResponse {
   CompletePatientDataResponse({this.message, this.patient});
 
   CompletePatientDataResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     message = json['message'];
     patient = json['patient'] != null
         ? Patient.fromJson(json['patient'])
@@ -23,4 +25,3 @@ class CompletePatientDataResponse {
     return map;
   }
 }
-

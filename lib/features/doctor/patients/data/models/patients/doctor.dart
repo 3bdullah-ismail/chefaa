@@ -2,7 +2,9 @@ class Doctor {
   Doctor({this.id, this.specialization});
 
   Doctor.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     specialization = json['specialization'];
   }

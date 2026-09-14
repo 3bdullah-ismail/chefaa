@@ -4,7 +4,9 @@ class ClinicResponse {
   ClinicResponse({this.message, this.clinic});
 
   ClinicResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     message = json['message'];
     clinic = json['clinic'] != null ? Clinic.fromJson(json['clinic']) : null;
   }

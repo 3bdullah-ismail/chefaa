@@ -4,7 +4,9 @@ class ClinicsResponse {
   ClinicsResponse({this.doctorId, this.totalClinics, this.clinics});
 
   ClinicsResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     doctorId = json['doctorId'];
     totalClinics = json['totalClinics'];
     if (json['clinics'] != null) {

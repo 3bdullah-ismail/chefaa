@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 abstract class PharmacyDataSource {
   Future<Response> pharmacySignUp({
     required String name,

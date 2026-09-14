@@ -1,11 +1,9 @@
-
-import 'package:chefaa/core/imports/imports.dart';
-import 'package:chefaa/features/doctor/auth/data/data_sources/data_source.dart';
-import 'package:chefaa/features/doctor/auth/domain/repositories/repo.dart';
-
 import 'package:chefaa/core/error_handling/failure.dart';
-import 'package:chefaa/features/auth/data/models/auth_response.dart';
+import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/services/storage_service.dart';
+import 'package:chefaa/features/auth/data/models/auth_response.dart';
+import 'package:chefaa/features/doctor/auth/data/data_sources/doctor_auth_data_source.dart';
+import 'package:chefaa/features/doctor/auth/data/repositories/doctor_auth_repo.dart';
 
 @Injectable(as: DoctorAuthRepo)
 class DoctorAuthRepoImp extends DoctorAuthRepo {

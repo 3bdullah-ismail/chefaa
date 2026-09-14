@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 abstract class ColorManager {
   static const Color primary = Color(0xff0065A3);
   static const Color lightBlue = Color(0xffD7EAFA);

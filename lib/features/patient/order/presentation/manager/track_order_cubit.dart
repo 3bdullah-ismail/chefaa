@@ -17,8 +17,10 @@ class TrackOrderCubit extends Cubit<TrackOrderState> {
     final result = await trackOrderRepo.getOrderTracking(orderId);
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(TrackOrderFailure(failure.message)),
-      ifRight: (response) => isClosed ? null : emit(TrackOrderSuccess(response)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(TrackOrderFailure(failure.message)),
+      ifRight: (response) =>
+          isClosed ? null : emit(TrackOrderSuccess(response)),
     );
   }
 
@@ -28,8 +30,10 @@ class TrackOrderCubit extends Cubit<TrackOrderState> {
     final result = await trackOrderRepo.confirmOrderReceipt(orderId);
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(ConfirmReceiptFailure(failure.message)),
-      ifRight: (response) => isClosed ? null : emit(ConfirmReceiptSuccess(response)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(ConfirmReceiptFailure(failure.message)),
+      ifRight: (response) =>
+          isClosed ? null : emit(ConfirmReceiptSuccess(response)),
     );
   }
 }

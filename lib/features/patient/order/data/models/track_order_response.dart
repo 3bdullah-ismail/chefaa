@@ -2,10 +2,7 @@ class TrackOrderResponse {
   final bool success;
   final TrackOrderData? data;
 
-  TrackOrderResponse({
-    required this.success,
-    this.data,
-  });
+  TrackOrderResponse({required this.success, this.data});
 
   factory TrackOrderResponse.fromJson(Map<String, dynamic> json) {
     return TrackOrderResponse(
@@ -15,10 +12,7 @@ class TrackOrderResponse {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'data': data?.toJson(),
-    };
+    return {'success': success, 'data': data?.toJson()};
   }
 }
 
@@ -41,9 +35,15 @@ class TrackOrderData {
     return TrackOrderData(
       orderNumber: json['orderNumber'] ?? '',
       orderStatus: json['orderStatus'] ?? '',
-      riderInfo: json['riderInfo'] != null ? RiderInfo.fromJson(json['riderInfo']) : null,
-      statusTimeline: json['statusTimeline'] != null ? StatusTimeline.fromJson(json['statusTimeline']) : null,
-      orderContents: json['orderContents'] != null ? OrderContents.fromJson(json['orderContents']) : null,
+      riderInfo: json['riderInfo'] != null
+          ? RiderInfo.fromJson(json['riderInfo'])
+          : null,
+      statusTimeline: json['statusTimeline'] != null
+          ? StatusTimeline.fromJson(json['statusTimeline'])
+          : null,
+      orderContents: json['orderContents'] != null
+          ? OrderContents.fromJson(json['orderContents'])
+          : null,
     );
   }
 
@@ -78,11 +78,7 @@ class RiderInfo {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'phoneNumber': phoneNumber,
-      'rating': rating,
-    };
+    return {'name': name, 'phoneNumber': phoneNumber, 'rating': rating};
   }
 }
 
@@ -101,10 +97,18 @@ class StatusTimeline {
 
   factory StatusTimeline.fromJson(Map<String, dynamic> json) {
     return StatusTimeline(
-      orderConfirmed: json['orderConfirmed'] != null ? TimelineStep.fromJson(json['orderConfirmed']) : null,
-      pharmacyPreparing: json['pharmacyPreparing'] != null ? TimelineStep.fromJson(json['pharmacyPreparing']) : null,
-      riderPickedUp: json['riderPickedUp'] != null ? TimelineStep.fromJson(json['riderPickedUp']) : null,
-      onTheWay: json['onTheWay'] != null ? TimelineStep.fromJson(json['onTheWay']) : null,
+      orderConfirmed: json['orderConfirmed'] != null
+          ? TimelineStep.fromJson(json['orderConfirmed'])
+          : null,
+      pharmacyPreparing: json['pharmacyPreparing'] != null
+          ? TimelineStep.fromJson(json['pharmacyPreparing'])
+          : null,
+      riderPickedUp: json['riderPickedUp'] != null
+          ? TimelineStep.fromJson(json['riderPickedUp'])
+          : null,
+      onTheWay: json['onTheWay'] != null
+          ? TimelineStep.fromJson(json['onTheWay'])
+          : null,
     );
   }
 
@@ -154,17 +158,16 @@ class OrderContents {
   final List<OrderItem> items;
   final OrderSummary? summary;
 
-  OrderContents({
-    required this.items,
-    this.summary,
-  });
+  OrderContents({required this.items, this.summary});
 
   factory OrderContents.fromJson(Map<String, dynamic> json) {
     return OrderContents(
       items: json['items'] != null
           ? (json['items'] as List).map((i) => OrderItem.fromJson(i)).toList()
           : [],
-      summary: json['summary'] != null ? OrderSummary.fromJson(json['summary']) : null,
+      summary: json['summary'] != null
+          ? OrderSummary.fromJson(json['summary'])
+          : null,
     );
   }
 

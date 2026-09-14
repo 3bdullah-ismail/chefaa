@@ -42,16 +42,22 @@ class ChatContextData {
           ? PharmacyProfile.fromJson(json['profile'] as Map<String, dynamic>)
           : null,
       inventory: json['inventory'] != null
-          ? PharmacyInventory.fromJson(json['inventory'] as Map<String, dynamic>)
+          ? PharmacyInventory.fromJson(
+              json['inventory'] as Map<String, dynamic>,
+            )
           : null,
       orders: json['orders'] != null
           ? PharmacyOrders.fromJson(json['orders'] as Map<String, dynamic>)
           : null,
       deliveryMen: json['deliveryMen'] != null
-          ? PharmacyDeliveryMen.fromJson(json['deliveryMen'] as Map<String, dynamic>)
+          ? PharmacyDeliveryMen.fromJson(
+              json['deliveryMen'] as Map<String, dynamic>,
+            )
           : null,
       financials: json['financials'] != null
-          ? PharmacyFinancials.fromJson(json['financials'] as Map<String, dynamic>)
+          ? PharmacyFinancials.fromJson(
+              json['financials'] as Map<String, dynamic>,
+            )
           : null,
     );
   }
@@ -103,8 +109,10 @@ class PharmacyProfile {
       rating: json['rating'] as num?,
       workingHours: json['workingHours'] != null
           ? (json['workingHours'] as List)
-              .map((item) => WorkingHour.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map(
+                  (item) => WorkingHour.fromJson(item as Map<String, dynamic>),
+                )
+                .toList()
           : null,
       deliveryArea: json['deliveryArea'] != null
           ? (json['deliveryArea'] as List).map((e) => e.toString()).toList()
@@ -183,8 +191,10 @@ class PharmacyInventory {
       totalStockValue: json['totalStockValue'] as num?,
       lowStockItems: json['lowStockItems'] != null
           ? (json['lowStockItems'] as List)
-              .map((item) => LowStockItem.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map(
+                  (item) => LowStockItem.fromJson(item as Map<String, dynamic>),
+                )
+                .toList()
           : null,
       outOfStockItems: json['outOfStockItems'] as List<dynamic>?,
       expiringSoon: json['expiringSoon'] as List<dynamic>?,
@@ -198,8 +208,8 @@ class PharmacyInventory {
           : null,
       medicines: json['medicines'] != null
           ? (json['medicines'] as List)
-              .map((item) => Medicine.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map((item) => Medicine.fromJson(item as Map<String, dynamic>))
+                .toList()
           : null,
     );
   }
@@ -213,7 +223,9 @@ class PharmacyInventory {
       if (outOfStockItems != null) 'outOfStockItems': outOfStockItems,
       if (expiringSoon != null) 'expiringSoon': expiringSoon,
       if (categoriesBreakdown != null)
-        'categoriesBreakdown': categoriesBreakdown!.map((k, v) => MapEntry(k, v.toJson())),
+        'categoriesBreakdown': categoriesBreakdown!.map(
+          (k, v) => MapEntry(k, v.toJson()),
+        ),
       if (medicines != null)
         'medicines': medicines!.map((item) => item.toJson()).toList(),
     };
@@ -310,7 +322,8 @@ class Medicine {
       if (quantity != null) 'quantity': quantity,
       if (minThreshold != null) 'minThreshold': minThreshold,
       if (inStock != null) 'inStock': inStock,
-      if (requiresPrescription != null) 'requiresPrescription': requiresPrescription,
+      if (requiresPrescription != null)
+        'requiresPrescription': requiresPrescription,
       if (expiryDate != null) 'expiryDate': expiryDate,
     };
   }

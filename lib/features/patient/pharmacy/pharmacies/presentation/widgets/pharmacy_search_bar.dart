@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
@@ -7,11 +6,7 @@ class PharmacySearchBar extends StatelessWidget {
   final TextEditingController? controller;
   final Function(String)? onChanged;
 
-  const PharmacySearchBar({
-    super.key,
-    this.controller,
-    this.onChanged,
-  });
+  const PharmacySearchBar({super.key, this.controller, this.onChanged});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/chatbot/data/models/chat_message_model.dart';
 import 'package:chefaa/features/patient/chatbot/domain/repositories/chatbot_repo.dart';
@@ -29,7 +28,7 @@ class ChatbotCubit extends Cubit<ChatbotState> {
     final previousHistory = state.conversationHistory;
     final updatedHistory = List<ChatMessageModel>.from(previousHistory)
       ..add(ChatMessageModel(role: 'user', content: trimmedText));
-      if (!isClosed) emit(ChatbotLoading(updatedHistory));
+    if (!isClosed) emit(ChatbotLoading(updatedHistory));
 
     try {
       final response = await chatbotRepo.sendMessage(

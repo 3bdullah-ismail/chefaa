@@ -13,7 +13,9 @@ class Slots {
   });
 
   Slots.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     index = json['index'];
     start = json['start'];
     end = json['end'];

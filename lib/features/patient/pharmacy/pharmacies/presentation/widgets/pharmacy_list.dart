@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/data/models/pharmacy_card_model.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/presentation/manager/pharmacy_search_cubit.dart';
@@ -21,7 +20,7 @@ class PharmacyList extends StatelessWidget {
 
         if (state is PharmacySearchSuccess) {
           final pharmacies = state.response.data ?? [];
-          
+
           if (pharmacies.isEmpty) {
             return const Center(child: Text('No pharmacies found'));
           }
@@ -37,7 +36,9 @@ class PharmacyList extends StatelessWidget {
                 pharmacy: PharmacyCardModel(
                   id: pharmacy.id ?? '',
                   name: pharmacy.pharmacyName ?? 'Unknown',
-                  location: pharmacy.addresses != null && pharmacy.addresses!.isNotEmpty
+                  location:
+                      pharmacy.addresses != null &&
+                          pharmacy.addresses!.isNotEmpty
                       ? pharmacy.addresses!.first.addressText ?? 'Unknown'
                       : 'Unknown',
                   distance: '${pharmacy.distanceKm ?? 0} km',
@@ -45,7 +46,8 @@ class PharmacyList extends StatelessWidget {
                   medicinesCount: pharmacy.availableMedicinesCount ?? 0,
                   rating: (pharmacy.rating ?? 0).toDouble(),
                   reviewsCount: 0, // API doesn't return this
-                  isOpen: true, // Assuming true since search results don't indicate openNow
+                  isOpen:
+                      true, // Assuming true since search results don't indicate openNow
                   acceptsRx: true, // Assuming true
                 ),
               );

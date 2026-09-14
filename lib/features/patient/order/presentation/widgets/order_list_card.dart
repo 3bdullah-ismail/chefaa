@@ -7,11 +7,7 @@ class OrderListCard extends StatelessWidget {
   final OrderSummaryItem order;
   final VoidCallback onTrack;
 
-  const OrderListCard({
-    super.key,
-    required this.order,
-    required this.onTrack,
-  });
+  const OrderListCard({super.key, required this.order, required this.onTrack});
 
   Color _statusColor(String status) {
     switch (status.toLowerCase()) {
@@ -81,8 +77,18 @@ class OrderListCard extends StatelessWidget {
     try {
       final dt = DateTime.parse(raw).toLocal();
       const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ];
       final hour = dt.hour > 12 ? dt.hour - 12 : (dt.hour == 0 ? 12 : dt.hour);
       final amPm = dt.hour >= 12 ? 'PM' : 'AM';
@@ -181,10 +187,7 @@ class OrderListCard extends StatelessWidget {
                       ),
                       child: Text(
                         order.status,
-                        style: getSemiBoldStyle(
-                          color: color,
-                          fontSize: 11.sp,
-                        ),
+                        style: getSemiBoldStyle(color: color, fontSize: 11.sp),
                       ),
                     ),
                   ],
@@ -294,10 +297,7 @@ class _InfoChip extends StatelessWidget {
         4.horizontalSpace,
         Text(
           label,
-          style: getMediumStyle(
-            color: ColorManager.darkGray,
-            fontSize: 12.sp,
-          ),
+          style: getMediumStyle(color: ColorManager.darkGray, fontSize: 12.sp),
         ),
       ],
     );

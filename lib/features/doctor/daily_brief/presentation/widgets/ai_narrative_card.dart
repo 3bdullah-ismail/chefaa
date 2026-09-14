@@ -10,7 +10,7 @@ class AiNarrativeCard extends StatelessWidget {
   const AiNarrativeCard({
     super.key,
     this.narrative =
-    "Dr. Sara Ahmed's financial performance shows a positive net revenue of 591 EGP this month, with an additional 1600 EGP expected from upcoming sessions. However, the low completion rate and high cancellation rate indicate potential risks to sustained revenue growth.",
+        "Dr. Sara Ahmed's financial performance shows a positive net revenue of 591 EGP this month, with an additional 1600 EGP expected from upcoming sessions. However, the low completion rate and high cancellation rate indicate potential risks to sustained revenue growth.",
   });
 
   @override
@@ -30,7 +30,10 @@ class AiNarrativeCard extends StatelessWidget {
           Expanded(
             child: Text(
               narrative,
-              style: getRegularStyle(color: ColorManager.black, fontSize: 13.sp)
+              style: getRegularStyle(
+                color: ColorManager.black,
+                fontSize: 13.sp,
+              ),
             ),
           ),
         ],

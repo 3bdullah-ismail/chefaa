@@ -16,7 +16,7 @@ class PharmacyChatbotCubit extends Cubit<PharmacyChatbotState> {
   ];
 
   PharmacyChatbotCubit(this.pharmacyChatbotRepo)
-      : super(PharmacyChatbotInitial());
+    : super(PharmacyChatbotInitial());
 
   Future<void> getChatContext() async {
     if (!isClosed) emit(LoadingContext());

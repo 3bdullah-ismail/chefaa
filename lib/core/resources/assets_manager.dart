@@ -12,6 +12,7 @@ abstract class ImageAssets {
   static const String doctor = "$imagePath/doctor.png";
   static const String patient = "$imagePath/patient.png";
   static const String drugs = "$imagePath/drugs.png";
+  static const String lab = "$imagePath/lab.png";
   static const String loginLogo = "$imagePath/login_logo.png";
   static const String cardiology = "$imagePath/Cardiology.png";
   static const String dentistry = "$imagePath/Dentistry.png";

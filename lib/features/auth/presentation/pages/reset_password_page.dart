@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -41,8 +40,7 @@ class ResetPassword extends StatelessWidget {
             Loading.show(context);
           } else if (state is ResetPassSuccessState) {
             Loading.hide(context);
-            context.go(AppRoutesNames.login,
-            );
+            context.go(AppRoutesNames.login);
           } else if (state is ResetPassErrorState) {
             Loading.hide(context);
             _showErrorDialog(
@@ -57,57 +55,57 @@ class ResetPassword extends StatelessWidget {
             final cubit = AuthCubit.get(context);
             return SingleChildScrollView(
               padding: const EdgeInsets.all(24),
-            child: Form(
-              key: cubit.resetPassFormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const BackBtn(),
-                  36.verticalSpace,
-                  Text(
-                    "Create New Password",
-                    style: getBoldStyle(
-                      color: ColorManager.black,
-                      fontSize: FontSize.s24,
+              child: Form(
+                key: cubit.resetPassFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const BackBtn(),
+                    36.verticalSpace,
+                    Text(
+                      "Create New Password",
+                      style: getBoldStyle(
+                        color: ColorManager.black,
+                        fontSize: FontSize.s24,
+                      ),
                     ),
-                  ),
-                  16.verticalSpace,
-                  Text(
-                    "Create your new password to login",
-                    style: getMediumStyle(
-                      color: ColorManager.gray,
-                      fontSize: 16,
+                    16.verticalSpace,
+                    Text(
+                      "Create your new password to login",
+                      style: getMediumStyle(
+                        color: ColorManager.gray,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
-                  62.verticalSpace,
-                  CustomTextField(
-                    validator: Validators.validatePassword,
-                    controller: cubit.password,
-                    text: "Enter your new password",
-                    prefixIcon: IconsAssets.passwordIcon,
-                    isPass: true,
-                  ),
-                  8.verticalSpace,
-                  CustomTextField(
-                    validator: (value) => Validators.validateConfirmPassword(
-                      value,
-                      cubit.password.text,
+                    62.verticalSpace,
+                    CustomTextField(
+                      validator: Validators.validatePassword,
+                      controller: cubit.password,
+                      text: "Enter your new password",
+                      prefixIcon: IconsAssets.passwordIcon,
+                      isPass: true,
                     ),
-                    controller: cubit.confirmPasswordController,
-                    text: "Confirm password",
-                    prefixIcon: IconsAssets.passwordIcon,
-                    isPass: true,
-                  ),
-                  56.verticalSpace,
-                  CustomBtn(
-                    text: "Reset Password",
-                    onPressed: () => cubit.resetPass(),
-                  ),
-                ],
+                    8.verticalSpace,
+                    CustomTextField(
+                      validator: (value) => Validators.validateConfirmPassword(
+                        value,
+                        cubit.password.text,
+                      ),
+                      controller: cubit.confirmPasswordController,
+                      text: "Confirm password",
+                      prefixIcon: IconsAssets.passwordIcon,
+                      isPass: true,
+                    ),
+                    56.verticalSpace,
+                    CustomBtn(
+                      text: "Reset Password",
+                      onPressed: () => cubit.resetPass(),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
         ),
       ),
     );

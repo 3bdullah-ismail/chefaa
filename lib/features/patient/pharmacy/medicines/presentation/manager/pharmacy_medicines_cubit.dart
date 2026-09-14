@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/data/models/pharmacy_medicines_response.dart';
 import 'package:chefaa/features/patient/pharmacy/pharmacies/domain/repositories/pharmacy_profile_repo.dart';
@@ -10,16 +9,18 @@ class PharmacyMedicinesCubit extends Cubit<PharmacyMedicinesState> {
   final PharmacyProfileRepo pharmacyProfileRepo;
 
   PharmacyMedicinesCubit(this.pharmacyProfileRepo)
-      : super(PharmacyMedicinesInitial());
+    : super(PharmacyMedicinesInitial());
 
   Future<void> getPharmacyMedicines(String pharmacyId) async {
-      if (!isClosed) emit(PharmacyMedicinesLoading());
+    if (!isClosed) emit(PharmacyMedicinesLoading());
 
     final result = await pharmacyProfileRepo.getPharmacyMedicines(pharmacyId);
 
     result.fold(
-      ifLeft: (failure) => isClosed ? null : emit(PharmacyMedicinesFailure(failure.message)),
-      ifRight: (response) => isClosed ? null : emit(PharmacyMedicinesSuccess(response)),
+      ifLeft: (failure) =>
+          isClosed ? null : emit(PharmacyMedicinesFailure(failure.message)),
+      ifRight: (response) =>
+          isClosed ? null : emit(PharmacyMedicinesSuccess(response)),
     );
   }
 }

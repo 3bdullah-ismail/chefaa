@@ -130,10 +130,7 @@ class OperatingSettingsSection extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             subtitle,
-            style: getBoldStyle(
-              color: itemColor,
-              fontSize: FontSize.s16.sp,
-            ),
+            style: getBoldStyle(color: itemColor, fontSize: FontSize.s16.sp),
           ),
         ],
       ),

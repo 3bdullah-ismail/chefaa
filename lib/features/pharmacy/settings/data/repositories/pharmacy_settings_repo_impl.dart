@@ -18,9 +18,7 @@ class PharmacySettingsRepoImpl implements PharmacySettingsRepo {
       PharmacyStatusResponse data;
       if (responseBody is String) {
         final decoded = await Isolate.run(() => jsonDecode(responseBody));
-        data = PharmacyStatusResponse.fromJson(
-          decoded as Map<String, dynamic>,
-        );
+        data = PharmacyStatusResponse.fromJson(decoded as Map<String, dynamic>);
       } else {
         data = PharmacyStatusResponse.fromJson(
           responseBody as Map<String, dynamic>,

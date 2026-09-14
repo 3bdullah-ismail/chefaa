@@ -1,5 +1,3 @@
-
-
 import 'package:chefaa/core/imports/imports.dart';
 import '../../features/auth/data/models/auth_response.dart';
 
@@ -22,6 +20,7 @@ class StorageService {
     token = value;
     return value;
   }
+
   static Future<void> saveUser(User value) async {
     user = value;
     final jsonString = jsonEncode(value.toJson());

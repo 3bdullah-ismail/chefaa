@@ -6,15 +6,13 @@ import 'package:chefaa/features/patient/booking/data/models/slots.dart';
 import 'package:chefaa/features/patient/booking/domain/repositories/booking_repo.dart';
 import 'booking_state.dart';
 
-
 @injectable
 class BookingCubit extends Cubit<BookingState> {
   final BookingRepo bookingRepo;
 
   BookingCubit(this.bookingRepo) : super(BookingInitialState());
 
-  static BookingCubit get(BuildContext context) =>
-      BlocProvider.of(context);
+  static BookingCubit get(BuildContext context) => BlocProvider.of(context);
 
   ClinicModel? selectedClinic;
 
@@ -38,18 +36,16 @@ class BookingCubit extends Cubit<BookingState> {
   final expiryDateController = TextEditingController();
   final cvvController = TextEditingController();
 
-
   void selectClinic(ClinicModel clinic) {
     selectedClinic = clinic;
     slots.clear();
     selectedDate = null;
     selectedTime = null;
     selectedDay = null;
-      if (!isClosed) emit(ChangeStepState());
+    if (!isClosed) emit(ChangeStepState());
   }
 
   bool get canChooseTime => selectedClinic != null;
-
 
   void updateSelectedDate(DateTime date) {
     selectedDay = date;
@@ -57,23 +53,19 @@ class BookingCubit extends Cubit<BookingState> {
     final clinicId = selectedClinic?.clinicId;
     if (clinicId == null) return;
 
-    getDaySlots(
-      clinicId: clinicId,
-      date: date,
-    );
-      if (!isClosed) emit(ChangeStepState());
+    getDaySlots(clinicId: clinicId, date: date);
+    if (!isClosed) emit(ChangeStepState());
   }
 
   void selectDay(DateTime date) {
     updateSelectedDate(date);
   }
 
-
   Future<void> getDaySlots({
     required String clinicId,
     required DateTime date,
   }) async {
-      if (!isClosed) emit(GetSlotsLoadingState());
+    if (!isClosed) emit(GetSlotsLoadingState());
 
     try {
       selectedDate = DateFormat('yyyy-MM-dd').format(date);
@@ -83,29 +75,26 @@ class BookingCubit extends Cubit<BookingState> {
         date: selectedDate!,
       );
       if (!isClosed) emit(GetSlotsSuccessState(slots));
-    }catch (e) {
+    } catch (e) {
       if (e is ServerFailure) {
-      if (!isClosed) emit(GetSlotsErrorState(e.message));
+        if (!isClosed) emit(GetSlotsErrorState(e.message));
       } else {
-      if (!isClosed) emit(GetSlotsErrorState(ServerFailure.unexpectedError));
+        if (!isClosed) emit(GetSlotsErrorState(ServerFailure.unexpectedError));
       }
     }
   }
 
-
   void selectTime(String time) {
     selectedTime = time;
-      if (!isClosed) emit(TimeSelectedState(time));
+    if (!isClosed) emit(TimeSelectedState(time));
   }
-
 
   void selectPaymentMethod(PaymentMethod method) {
     selectedPaymentMethod = method;
-      if (!isClosed) emit(ChangeStepState());
+    if (!isClosed) emit(ChangeStepState());
   }
 
-  bool get needsCard =>
-      selectedPaymentMethod == PaymentMethod.creditCard;
+  bool get needsCard => selectedPaymentMethod == PaymentMethod.creditCard;
 
   bool onConfirmBookingPressed() {
     if (needsCard) {
@@ -113,7 +102,6 @@ class BookingCubit extends Cubit<BookingState> {
     }
     return true;
   }
-
 
   Future<void> bookAppointment({
     required String clinicId,
@@ -126,10 +114,12 @@ class BookingCubit extends Cubit<BookingState> {
     String? cardholderName,
   }) async {
     if (selectedDate == null || selectedTime == null) {
-      if (!isClosed) emit(BookingErrorState(error: "Please select date and time first."));
+      if (!isClosed) {
+        emit(BookingErrorState(error: "Please select date and time first."));
+      }
       return;
     }
-      if (!isClosed) emit(BookingLoadingState());
+    if (!isClosed) emit(BookingLoadingState());
 
     try {
       final result = await bookingRepo.bookAppointment(
@@ -149,15 +139,16 @@ class BookingCubit extends Cubit<BookingState> {
 
       booking = result;
       if (!isClosed) emit(BookingSuccessState(message: booking!.message));
-    }catch (e) {
+    } catch (e) {
       if (e is ServerFailure) {
-      if (!isClosed) emit(BookingErrorState(error: e.message));
+        if (!isClosed) emit(BookingErrorState(error: e.message));
       } else {
-      if (!isClosed) emit(BookingErrorState(error: ServerFailure.unexpectedError));
+        if (!isClosed) {
+          emit(BookingErrorState(error: ServerFailure.unexpectedError));
+        }
       }
     }
   }
-
 
   void nextStep() {
     if (activeStep < 3) {
@@ -185,12 +176,8 @@ class BookingCubit extends Cubit<BookingState> {
 
   void goToStep(int index) {
     activeStep = index;
-      if (!isClosed) emit(ChangeStepState());
+    if (!isClosed) emit(ChangeStepState());
   }
 }
 
-enum PaymentMethod {
-
-  creditCard,
-  cash,
-}
+enum PaymentMethod { creditCard, cash }

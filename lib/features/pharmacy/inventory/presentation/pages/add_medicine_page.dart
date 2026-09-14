@@ -45,7 +45,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
     "gastrointestinal",
     "dermatology",
     "supplements",
-    "other"
+    "other",
   ];
 
   @override
@@ -84,7 +84,8 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
     if (picked != null) {
       setState(() {
         // Format date as yyyy-MM-dd
-        _expiryController.text = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+        _expiryController.text =
+            "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
       });
     }
   }
@@ -158,7 +159,10 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
               children: [
                 Text(
                   "Medicine Details",
-                  style: getBoldStyle(color: ColorManager.black, fontSize: 18.sp),
+                  style: getBoldStyle(
+                    color: ColorManager.black,
+                    fontSize: 18.sp,
+                  ),
                 ),
                 16.verticalSpace,
 
@@ -193,19 +197,31 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.r),
-                      borderSide: const BorderSide(color: ColorManager.gray, width: 1.2),
+                      borderSide: const BorderSide(
+                        color: ColorManager.gray,
+                        width: 1.2,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.r),
-                      borderSide: const BorderSide(color: ColorManager.primary, width: 1.5),
+                      borderSide: const BorderSide(
+                        color: ColorManager.primary,
+                        width: 1.5,
+                      ),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.r),
-                      borderSide: const BorderSide(color: ColorManager.error, width: 1.2),
+                      borderSide: const BorderSide(
+                        color: ColorManager.error,
+                        width: 1.2,
+                      ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(50.r),
-                      borderSide: const BorderSide(color: ColorManager.error, width: 1.5),
+                      borderSide: const BorderSide(
+                        color: ColorManager.error,
+                        width: 1.5,
+                      ),
                     ),
                   ),
                   dropdownColor: ColorManager.white,
@@ -214,11 +230,15 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                       value: category,
                       child: Text(
                         category[0].toUpperCase() + category.substring(1),
-                        style: getRegularStyle(color: ColorManager.black, fontSize: 16.sp),
+                        style: getRegularStyle(
+                          color: ColorManager.black,
+                          fontSize: 16.sp,
+                        ),
                       ),
                     );
                   }).toList(),
-                  validator: (value) => value == null ? 'Category is required' : null,
+                  validator: (value) =>
+                      value == null ? 'Category is required' : null,
                   onChanged: (newValue) {
                     setState(() {
                       _selectedCategory = newValue;
@@ -248,7 +268,9 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                       child: CustomTextField(
                         controller: _priceController,
                         text: "Price (EGP)",
-                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                        ),
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return "Required";
@@ -352,10 +374,7 @@ class _AddMedicinePageState extends State<AddMedicinePage> {
                 32.verticalSpace,
 
                 // Submit Button
-                CustomBtn(
-                  text: "Add Medicine",
-                  onPressed: _submitForm,
-                ),
+                CustomBtn(text: "Add Medicine", onPressed: _submitForm),
               ],
             ),
           ),

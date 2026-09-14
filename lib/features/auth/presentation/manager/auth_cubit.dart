@@ -1,9 +1,8 @@
-
 import 'package:chefaa/core/imports/imports.dart';
-import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:chefaa/core/services/storage_service.dart';
+import 'package:chefaa/features/auth/data/models/auth_response.dart';
+import 'package:chefaa/features/auth/data/repositories/repo.dart';
 import 'package:chefaa/features/patient/home/presentation/manager/users_cubit.dart';
-import 'package:chefaa/features/auth/domain/repositories/repo.dart';
 
 part 'auth_state.dart';
 
@@ -17,8 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthCubit.initial({required this.repo, required this.usersCubit})
     : super(AuthInitial());
-  TextEditingController identityController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController password = TextEditingController();
@@ -43,17 +41,22 @@ class AuthCubit extends Cubit<AuthState> {
   String _getIdentity(int index) =>
       index == 0 ? emailController.text.trim() : phoneController.text.trim();
 
-  Future<void> login() async {
+  Future<void> login({
+    required String identity,
+    required String password,
+  }) async {
     if (_isSubmitting) return;
     _isSubmitting = true;
-    debugPrint('AuthCubit.login entered identity="${identityController.text.trim()}"');
-      if (!isClosed) emit(LoginLoadingState());
+    debugPrint('AuthCubit.login entered identity="${identity.trim()}"');
+    if (!isClosed) emit(LoginLoadingState());
     try {
       final res = await repo.login(
-        identity: identityController.text.trim(),
-        password: passwordController.text.trim(),
+        identity: identity.trim(),
+        password: password.trim(),
       );
-      debugPrint('AuthCubit.login repo returned accessToken=${res.accessToken} user=${res.user?.name} role=${res.user?.role}');
+      debugPrint(
+        'AuthCubit.login repo returned accessToken=${res.accessToken} user=${res.user?.name} role=${res.user?.role}',
+      );
 
       if (res.accessToken != null) {
         await StorageService.saveToken(res.accessToken!);
@@ -65,14 +68,14 @@ class AuthCubit extends Cubit<AuthState> {
         }
       }
       await usersCubit.setUser(res);
-      _clearLoginControllers();
+
       if (!isClosed) {
         emit(
-        LoginSuccessState(
-          user: res.user!,
-          message: res.message ?? 'Login successful',
-        ),
-      );
+          LoginSuccessState(
+            user: res.user!,
+            message: res.message ?? 'Login successful',
+          ),
+        );
       }
     } catch (e) {
       if (!isClosed) emit(LoginErrorState(e.toString()));
@@ -81,48 +84,52 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> signInWithGoogle(String idToken) async {
-    if (_isSubmitting) return;
-    _isSubmitting = true;
-    debugPrint('AuthCubit.signInWithGoogle entered idToken=${idToken.isEmpty ? "empty" : "present"}');
-      if (!isClosed) emit(GoogleSignInLoadingState());
-
-    try {
-      final res = await repo.googleSignIn(idToken);
-      debugPrint('AuthCubit.signInWithGoogle repo returned accessToken=${res.accessToken} user=${res.user?.name} role=${res.user?.role}');
-
-      if (res.accessToken != null) {
-        await StorageService.saveToken(res.accessToken!);
-      }
-      if (res.user != null) {
-        await StorageService.saveUser(res.user!);
-        if (res.user!.role != null) {
-          await StorageService.saveRole(res.user!.role!);
-        }
-      }
-      await usersCubit.setUser(res);
-      _clearLoginControllers();
-      if (!isClosed) {
-        emit(
-        GoogleSignInSuccessState(
-          user: res.user!,
-          message: res.message ?? "Login successful",
-        ),
-      );
-      }
-    } catch (e) {
-      debugPrint('AuthCubit.signInWithGoogle error=$e');
-      if (!isClosed) emit(GoogleSignInErrorState(e.toString()));
-    } finally {
-      _isSubmitting = false;
-    }
-  }
+  // Future<void> signInWithGoogle(String idToken) async {
+  //   if (_isSubmitting) return;
+  //   _isSubmitting = true;
+  //   debugPrint(
+  //     'AuthCubit.signInWithGoogle entered idToken=${idToken.isEmpty ? "empty" : "present"}',
+  //   );
+  //   if (!isClosed) emit(GoogleSignInLoadingState());
+  //
+  //   try {
+  //     final res = await repo.googleSignIn(idToken);
+  //     debugPrint(
+  //       'AuthCubit.signInWithGoogle repo returned accessToken=${res.accessToken} user=${res.user?.name} role=${res.user?.role}',
+  //     );
+  //
+  //     if (res.accessToken != null) {
+  //       await StorageService.saveToken(res.accessToken!);
+  //     }
+  //     if (res.user != null) {
+  //       await StorageService.saveUser(res.user!);
+  //       if (res.user!.role != null) {
+  //         await StorageService.saveRole(res.user!.role!);
+  //       }
+  //     }
+  //     await usersCubit.setUser(res);
+  //     _clearLoginControllers();
+  //     if (!isClosed) {
+  //       emit(
+  //         GoogleSignInSuccessState(
+  //           user: res.user!,
+  //           message: res.message ?? "Login successful",
+  //         ),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     debugPrint('AuthCubit.signInWithGoogle error=$e');
+  //     if (!isClosed) emit(GoogleSignInErrorState(e.toString()));
+  //   } finally {
+  //     _isSubmitting = false;
+  //   }
+  // }
 
   Future<void> forgotPass(int index) async {
     if (!forgotPassFormKey.currentState!.validate()) return;
 
     _identity = _getIdentity(index);
-      if (!isClosed) emit(ForgotPassLoadingState());
+    if (!isClosed) emit(ForgotPassLoadingState());
 
     try {
       final response = await repo.forgotPass(identity: _identity);
@@ -136,12 +143,16 @@ class AuthCubit extends Cubit<AuthState> {
     final code = otpControllers.map((e) => e?.text ?? '').join();
 
     if (code.length < 4) {
-      if (!isClosed) emit(ResetCodeErrorState(message: "Please enter the full 4-digit code."));
+      if (!isClosed) {
+        emit(
+          ResetCodeErrorState(message: "Please enter the full 4-digit code."),
+        );
+      }
       return;
     }
 
     _identity = _getIdentity(index);
-      if (!isClosed) emit(ResetCodeLoadingState());
+    if (!isClosed) emit(ResetCodeLoadingState());
 
     try {
       final response = await repo.resetCode(code: code, identity: _identity);
@@ -155,7 +166,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> resetPass() async {
     if (!resetPassFormKey.currentState!.validate()) return;
-      if (!isClosed) emit(ResetPassLoadingState());
+    if (!isClosed) emit(ResetPassLoadingState());
 
     try {
       await repo.resetPass(
@@ -182,15 +193,8 @@ class AuthCubit extends Cubit<AuthState> {
     confirmPasswordController.clear();
   }
 
-  void _clearLoginControllers() {
-    identityController.clear();
-    passwordController.clear();
-  }
-
   @override
   Future<void> close() {
-    identityController.dispose();
-    passwordController.dispose();
     emailController.dispose();
     phoneController.dispose();
     password.dispose();

@@ -76,4 +76,3 @@ class ServicesRemoteSourceImpl extends ServicesRemoteSource {
     return _networkService.dio.patch("/lab/toggle-service/$serviceId");
   }
 }
-

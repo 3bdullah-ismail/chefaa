@@ -38,10 +38,7 @@ class StatCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: getSemiBoldStyle(
-              color: ColorManager.gray,
-              fontSize: 12.sp,
-            ),
+            style: getSemiBoldStyle(color: ColorManager.gray, fontSize: 12.sp),
           ),
         ],
       ),

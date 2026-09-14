@@ -1,5 +1,3 @@
-
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/error_handling/failure.dart';
 import 'package:chefaa/core/services/hive_service.dart';
@@ -112,4 +110,3 @@ class DashboardRepositoryImpl implements DashboardRepository {
     }
   }
 }
-

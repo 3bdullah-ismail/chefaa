@@ -33,8 +33,10 @@ class GetLowStockData {
     return GetLowStockData(
       lowStockItems: json['lowStockItems'] != null
           ? (json['lowStockItems'] as List)
-              .map((item) => MedicineData.fromJson(item as Map<String, dynamic>))
-              .toList()
+                .map(
+                  (item) => MedicineData.fromJson(item as Map<String, dynamic>),
+                )
+                .toList()
           : null,
       count: json['count'] as num?,
     );

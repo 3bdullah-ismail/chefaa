@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -94,7 +93,7 @@ class CustomAppBarLayout extends StatelessWidget {
                   ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

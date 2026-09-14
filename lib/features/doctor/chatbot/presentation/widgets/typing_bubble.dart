@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/assets_manager.dart';
 import 'package:chefaa/core/resources/color_manager.dart';
@@ -61,35 +60,26 @@ class _TypingBubbleState extends State<TypingBubble>
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-              Container(
-                width: 45.w,
-                height: 45.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: ColorManager.primary,
-                    width: 2,
-                  ),
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    ImageAssets.chatbot,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+          Container(
+            width: 45.w,
+            height: 45.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: ColorManager.primary, width: 2),
+            ),
+            child: ClipOval(
+              child: Image.asset(ImageAssets.chatbot, fit: BoxFit.cover),
+            ),
           ),
           const SizedBox(width: 8),
 
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(18).copyWith(
-                bottomLeft: const Radius.circular(4),
-              ),
+              borderRadius: BorderRadius.circular(
+                18,
+              ).copyWith(bottomLeft: const Radius.circular(4)),
               boxShadow: [
                 BoxShadow(
                   color: ColorManager.black.withAlpha(80),
@@ -100,11 +90,7 @@ class _TypingBubbleState extends State<TypingBubble>
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
-                dot(0),
-                dot(.2),
-                dot(.4),
-              ],
+              children: [dot(0), dot(.2), dot(.4)],
             ),
           ),
         ],

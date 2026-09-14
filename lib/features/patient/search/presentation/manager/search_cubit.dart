@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/patient/search/data/models/search_query.dart';
 import 'package:chefaa/features/patient/search/domain/repositories/search_repo.dart';
@@ -41,7 +40,7 @@ class SearchCubit extends Cubit<SearchState> {
     if (draftQuery.searchText == value) return;
 
     draftQuery = draftQuery.copyWith(searchText: value);
-      if (!isClosed) emit(SearchDraftChanged(draftQuery));
+    if (!isClosed) emit(SearchDraftChanged(draftQuery));
   }
 
   Future<void> setSearchTextAndSearch(String value) async {
@@ -59,7 +58,7 @@ class SearchCubit extends Cubit<SearchState> {
       gender: gender,
       location: location,
     );
-      if (!isClosed) emit(SearchDraftChanged(draftQuery));
+    if (!isClosed) emit(SearchDraftChanged(draftQuery));
   }
 
   Future<void> updateAndSearch({
@@ -123,7 +122,7 @@ class SearchCubit extends Cubit<SearchState> {
     if (_isSearching) return;
     _isSearching = true;
     appliedQuery = draftQuery;
-      if (!isClosed) emit(SearchLoading(isRefreshing: _lastClinics.isNotEmpty));
+    if (!isClosed) emit(SearchLoading(isRefreshing: _lastClinics.isNotEmpty));
 
     try {
       final result = await searchRepo.filterSearch(
@@ -134,7 +133,7 @@ class SearchCubit extends Cubit<SearchState> {
       );
 
       if (result == null) {
-      if (!isClosed) emit(SearchError('No response from server'));
+        if (!isClosed) emit(SearchError('No response from server'));
         return;
       }
 
@@ -150,14 +149,14 @@ class SearchCubit extends Cubit<SearchState> {
   void resetToApplied() {
     draftQuery = appliedQuery;
     searchController.text = appliedQuery.searchText;
-      if (!isClosed) emit(SearchDraftChanged(draftQuery));
+    if (!isClosed) emit(SearchDraftChanged(draftQuery));
   }
 
   void clearFilters() {
     appliedQuery = const SearchQuery();
     draftQuery = const SearchQuery();
     searchController.text = '';
-      if (!isClosed) emit(SearchDraftChanged(draftQuery));
+    if (!isClosed) emit(SearchDraftChanged(draftQuery));
   }
 
   String _capitalize(String value) {

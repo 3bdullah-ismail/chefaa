@@ -51,7 +51,9 @@ class SearchPharmacyData {
       rating: json['rating'] as num?,
       deliveryTime: json['deliveryTime'] as String?,
       addresses: (json['addresses'] as List<dynamic>?)
-          ?.map((e) => SearchPharmacyAddress.fromJson(e as Map<String, dynamic>))
+          ?.map(
+            (e) => SearchPharmacyAddress.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
       phone: json['phone'] as String?,
       pharmacyName: json['pharmacyName'] as String?,
@@ -65,11 +67,13 @@ class SearchPharmacyData {
       if (id != null) '_id': id,
       if (rating != null) 'rating': rating,
       if (deliveryTime != null) 'deliveryTime': deliveryTime,
-      if (addresses != null) 'addresses': addresses?.map((e) => e.toJson()).toList(),
+      if (addresses != null)
+        'addresses': addresses?.map((e) => e.toJson()).toList(),
       if (phone != null) 'phone': phone,
       if (pharmacyName != null) 'pharmacyName': pharmacyName,
       if (distanceKm != null) 'distanceKm': distanceKm,
-      if (availableMedicinesCount != null) 'availableMedicinesCount': availableMedicinesCount,
+      if (availableMedicinesCount != null)
+        'availableMedicinesCount': availableMedicinesCount,
     };
   }
 }
@@ -94,4 +98,3 @@ class SearchPharmacyAddress {
     };
   }
 }
-

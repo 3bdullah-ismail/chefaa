@@ -20,11 +20,7 @@ class ConfirmReceiptResponse {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'success': success,
-      'message': message,
-      'data': data?.toJson(),
-    };
+    return {'success': success, 'message': message, 'data': data?.toJson()};
   }
 }
 
@@ -63,8 +59,8 @@ class ConfirmReceiptData {
       transactionId: json['transactionId'] ?? '',
       verifiedItems: json['verifiedItems'] != null
           ? (json['verifiedItems'] as List)
-              .map((i) => VerifiedItem.fromJson(i))
-              .toList()
+                .map((i) => VerifiedItem.fromJson(i))
+                .toList()
           : [],
     );
   }

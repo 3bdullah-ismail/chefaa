@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:chefaa/features/patient/home/domain/entities/user_entity.dart';
@@ -17,19 +16,19 @@ class UsersCubit extends Cubit<UsersState> {
   Future<void> setUser(AuthResponse authResponse) async {
     final user = _userUseCase.fromAuthResponse(authResponse);
     await _userUseCase.saveUserToPrefs(user);
-      if (!isClosed) emit(UserLoaded(user: user));
+    if (!isClosed) emit(UserLoaded(user: user));
   }
 
   Future<void> loadUserFromPrefs() async {
-      if (!isClosed) emit(UsersLoading());
+    if (!isClosed) emit(UsersLoading());
 
     try {
       final user = await _userUseCase.loadUserFromPrefs();
 
       if (user != null) {
-      if (!isClosed) emit(UserLoaded(user: user));
+        if (!isClosed) emit(UserLoaded(user: user));
       } else {
-      if (!isClosed) emit(UsersError(error: "User not found"));
+        if (!isClosed) emit(UsersError(error: "User not found"));
       }
     } catch (e) {
       if (!isClosed) emit(UsersError(error: e.toString()));
@@ -38,7 +37,7 @@ class UsersCubit extends Cubit<UsersState> {
 
   Future<void> logout() async {
     await _userUseCase.clearUserFromPrefs();
-      if (!isClosed) emit(UserLoggedOut());
+    if (!isClosed) emit(UserLoggedOut());
   }
 
   Future<void> getAppointments() async {}

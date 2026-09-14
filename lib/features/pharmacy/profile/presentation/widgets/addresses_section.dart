@@ -106,7 +106,9 @@ class AddressesSection extends StatelessWidget {
                                 Icon(
                                   Icons.gps_fixed_rounded,
                                   size: 14.sp,
-                                  color: ColorManager.primary.withValues(alpha: 0.6),
+                                  color: ColorManager.primary.withValues(
+                                    alpha: 0.6,
+                                  ),
                                 ),
                                 SizedBox(width: 4.w),
                                 Text(

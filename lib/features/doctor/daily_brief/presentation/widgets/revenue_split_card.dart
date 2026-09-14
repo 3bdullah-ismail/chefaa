@@ -70,7 +70,9 @@ class RevenueSplitCard extends StatelessWidget {
             children: shares
                 .map(
                   (s) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: AppPadding.p4),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppPadding.p4,
+                    ),
                     child: Row(
                       children: [
                         Container(
@@ -88,7 +90,8 @@ class RevenueSplitCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: getRegularStyle(
                               color: ColorManager.black,
-                              fontSize: 14.sp,)
+                              fontSize: 14.sp,
+                            ),
                           ),
                         ),
                       ],

@@ -4,7 +4,9 @@ class Prescription {
   Prescription({this.success, this.message, this.data});
 
   Prescription.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     success = json['success'];
     message = json['message'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
@@ -23,4 +25,3 @@ class Prescription {
     return map;
   }
 }
-

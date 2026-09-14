@@ -33,8 +33,9 @@ class MedicineDetailsModel {
       inStock: json['inStock'] ?? false,
       availableQuantity: json['availableQuantity'] ?? 0,
       medicineInfo: MedicineInfoModel.fromJson(json['medicineInfo'] ?? {}),
-      usageInstructions:
-          UsageInstructionsModel.fromJson(json['usageInstructions'] ?? {}),
+      usageInstructions: UsageInstructionsModel.fromJson(
+        json['usageInstructions'] ?? {},
+      ),
       pharmacyName: json['pharmacyName'] ?? '',
     );
   }

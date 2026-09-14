@@ -1,22 +1,16 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/core/resources/styles_manager.dart';
 
 class AnimatedBotMessage extends StatefulWidget {
   final String message;
 
-  const AnimatedBotMessage({
-    super.key,
-    required this.message,
-  });
+  const AnimatedBotMessage({super.key, required this.message});
 
   @override
-  State<AnimatedBotMessage> createState() =>
-      _AnimatedBotMessageState();
+  State<AnimatedBotMessage> createState() => _AnimatedBotMessageState();
 }
 
-class _AnimatedBotMessageState
-    extends State<AnimatedBotMessage> {
+class _AnimatedBotMessageState extends State<AnimatedBotMessage> {
   String displayedText = '';
   Timer? timer;
   int currentIndex = 0;
@@ -27,32 +21,24 @@ class _AnimatedBotMessageState
   void initState() {
     super.initState();
 
-    chars = _cleanMessage(widget.message)
-        .characters
-        .toList();
+    chars = _cleanMessage(widget.message).characters.toList();
 
-    timer = Timer.periodic(
-      const Duration(milliseconds: 15),
-          (_) {
-        if (!mounted) return;
+    timer = Timer.periodic(const Duration(milliseconds: 15), (_) {
+      if (!mounted) return;
 
-        if (currentIndex < chars.length) {
-          setState(() {
-            displayedText += chars[currentIndex];
-            currentIndex++;
-          });
-        } else {
-          timer?.cancel();
-        }
-      },
-    );
+      if (currentIndex < chars.length) {
+        setState(() {
+          displayedText += chars[currentIndex];
+          currentIndex++;
+        });
+      } else {
+        timer?.cancel();
+      }
+    });
   }
 
   String _cleanMessage(String text) {
-    return text
-        .replaceAll('\u0000', '')
-        .replaceAll('\uFFFD', '')
-        .trim();
+    return text.replaceAll('\u0000', '').replaceAll('\uFFFD', '').trim();
   }
 
   @override
@@ -67,14 +53,8 @@ class _AnimatedBotMessageState
       data: displayedText,
       selectable: true,
       styleSheet: MarkdownStyleSheet(
-        p: getSemiBoldStyle(
-          color: Colors.black,
-          fontSize: 15.sp,
-        ),
-        strong: getBoldStyle(
-          color: Colors.black,
-          fontSize: 16.sp,
-        ),
+        p: getSemiBoldStyle(color: Colors.black, fontSize: 15.sp),
+        strong: getBoldStyle(color: Colors.black, fontSize: 16.sp),
       ),
     );
   }

@@ -2,7 +2,9 @@ class Clinic {
   Clinic({this.id, this.name, this.address, this.price});
 
   Clinic.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     id = json['_id'];
     name = json['name'];
     address = json['address'];

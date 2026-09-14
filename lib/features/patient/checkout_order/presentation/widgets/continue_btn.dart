@@ -3,7 +3,6 @@ import 'package:chefaa/core/resources/styles_manager.dart';
 
 import 'package:chefaa/core/resources/color_manager.dart';
 
-
 class ContinueBtn extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;

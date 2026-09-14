@@ -90,7 +90,8 @@ class MedicineData {
       if (quantity != null) 'quantity': quantity,
       if (minThreshold != null) 'minThreshold': minThreshold,
       if (inStock != null) 'inStock': inStock,
-      if (requiresPrescription != null) 'requiresPrescription': requiresPrescription,
+      if (requiresPrescription != null)
+        'requiresPrescription': requiresPrescription,
       if (expiryDate != null) 'expiryDate': expiryDate,
       if (image != null) 'image': image,
       if (id != null) '_id': id,

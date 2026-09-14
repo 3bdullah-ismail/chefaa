@@ -12,7 +12,9 @@ class AppointmentPatientUserModel {
   });
 
   factory AppointmentPatientUserModel.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     return AppointmentPatientUserModel(
       id: json['_id'],
       name: json['name'],
@@ -59,7 +61,9 @@ class AppointmentPatientModel {
   });
 
   factory AppointmentPatientModel.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
 
     final userJson = json['userId'];
     return AppointmentPatientModel(
@@ -105,7 +109,9 @@ class AppointmentDoctorModel {
   const AppointmentDoctorModel({this.id, this.specialization});
 
   factory AppointmentDoctorModel.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     return AppointmentDoctorModel(
       id: json['_id'],
       specialization: json['specialization'],
@@ -126,7 +132,9 @@ class AppointmentClinicModel {
   const AppointmentClinicModel({this.id, this.name, this.address, this.price});
 
   factory AppointmentClinicModel.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     return AppointmentClinicModel(
       id: json['_id'],
       name: json['name'],

@@ -31,15 +31,19 @@ class RiskFlagsCard extends StatelessWidget {
             spacing: 10.w,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.warning_amber_rounded,
-                  color: ColorManager.error, size: 16.sp),
+              Icon(
+                Icons.warning_amber_rounded,
+                color: ColorManager.error,
+                size: 16.sp,
+              ),
               Expanded(
                 child: Text(
                   risk,
                   style: getRegularStyle(
                     color: ColorManager.darkGray,
                     fontSize: 14.sp,
-                )),
+                  ),
+                ),
               ),
             ],
           ),

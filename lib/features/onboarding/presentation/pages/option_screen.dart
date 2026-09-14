@@ -64,21 +64,12 @@ class _OptionScreenState extends State<OptionScreen> {
                   isSelected: selectedRole == AppConstants.patient,
                   onTap: () => onSelect(AppConstants.patient),
                 ),
-
                 32.verticalSpace,
-
                 OptionCard(
-                  title: AppConstants.pharmacy,
+                  title: "Facility",
                   image: ImageAssets.drugs,
-                  isSelected: selectedRole == AppConstants.pharmacy,
-                  onTap: () => onSelect(AppConstants.pharmacy),
-                ),
-                32.verticalSpace,
-                OptionCard(
-                  title: "Medical Lab /\nRadiology Center",
-                  image: "assets/images/lab.png",
-                  isSelected: selectedRole == AppConstants.lab,
-                  onTap: () => onSelect(AppConstants.lab),
+                  isSelected: selectedRole == AppConstants.facility,
+                  onTap: () => onSelect(AppConstants.facility),
                 ),
 
                 Padding(
@@ -93,18 +84,11 @@ class _OptionScreenState extends State<OptionScreen> {
                         isEnabled: selectedRole != null,
                         onTap: () {
                           if (selectedRole == AppConstants.doctor) {
-                            context.pushReplacement(
-                              AppRoutesNames.docSignUp,
-                              extra: AppConstants.doctor.toLowerCase(),
-                            );
+                            context.push(AppRoutesNames.docSignUp);
                           } else if (selectedRole == AppConstants.patient) {
-                            context.pushReplacement(
-                              AppRoutesNames.patientSignUp.replaceFirst(':role', AppConstants.patient.toLowerCase()),
-                            );
-                          } else if (selectedRole == AppConstants.lab) {
-                            context.pushReplacement(AppRoutesNames.facilitySignUp, extra: AppConstants.lab.toLowerCase());
-                          } else if (selectedRole == AppConstants.pharmacy) {
-                            context.pushReplacement(AppRoutesNames.pharmacySignUp, extra: AppConstants.pharmacy.toLowerCase());
+                            context.push(AppRoutesNames.patientSignUp);
+                          } else if (selectedRole == AppConstants.facility) {
+                            context.push(AppRoutesNames.facilityOption);
                           }
                         },
                       ),

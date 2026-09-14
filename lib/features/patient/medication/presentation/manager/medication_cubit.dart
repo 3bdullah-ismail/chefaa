@@ -51,7 +51,7 @@ class MedicationCubit extends Cubit<MedicationState> {
   }
 
   Future<void> addMedication() async {
-      if (!isClosed) emit(MedicationAdditionLoadingState());
+    if (!isClosed) emit(MedicationAdditionLoadingState());
 
     try {
       final medicationResponse = await medicationRepo.addMedication(
@@ -70,11 +70,15 @@ class MedicationCubit extends Cubit<MedicationState> {
       );
       if (!isClosed) {
         emit(
-        MedicationAdditionSuccessState(medicationResponse: medicationResponse),
-      );
+          MedicationAdditionSuccessState(
+            medicationResponse: medicationResponse,
+          ),
+        );
       }
     } catch (e) {
-      if (!isClosed) emit(MedicationAdditionErrorState(errorMessage: e.toString()));
+      if (!isClosed) {
+        emit(MedicationAdditionErrorState(errorMessage: e.toString()));
+      }
     }
   }
 
@@ -83,12 +87,14 @@ class MedicationCubit extends Cubit<MedicationState> {
     if (_hasLoadedMedicationList && !forceRefresh) return;
 
     _isMedicationListLoading = true;
-      if (!isClosed) emit(MedicationListLoadingState());
+    if (!isClosed) emit(MedicationListLoadingState());
 
     try {
       final medicationList = await medicationRepo.getMedicationList();
       _hasLoadedMedicationList = true;
-      if (!isClosed) emit(MedicationListSuccessState(medications: medicationList));
+      if (!isClosed) {
+        emit(MedicationListSuccessState(medications: medicationList));
+      }
     } catch (e) {
       if (!isClosed) emit(MedicationListErrorState(errorMessage: e.toString()));
     } finally {
@@ -97,7 +103,7 @@ class MedicationCubit extends Cubit<MedicationState> {
   }
 
   Future<void> updateMedication({required String medicationId}) async {
-      if (!isClosed) emit(MedicationUpdateLoadingState());
+    if (!isClosed) emit(MedicationUpdateLoadingState());
 
     try {
       final medicationResponse = await medicationRepo.updateMedication(
@@ -117,16 +123,18 @@ class MedicationCubit extends Cubit<MedicationState> {
       );
       if (!isClosed) {
         emit(
-        MedicationUpdateSuccessState(medicationResponse: medicationResponse),
-      );
+          MedicationUpdateSuccessState(medicationResponse: medicationResponse),
+        );
       }
     } catch (e) {
-      if (!isClosed) emit(MedicationUpdateErrorState(errorMessage: e.toString()));
+      if (!isClosed) {
+        emit(MedicationUpdateErrorState(errorMessage: e.toString()));
+      }
     }
   }
 
   Future<void> deleteMedication(String medicationId) async {
-      if (!isClosed) emit(MedicationDeleteLoadingState());
+    if (!isClosed) emit(MedicationDeleteLoadingState());
 
     try {
       final medicationResponse = await medicationRepo.deleteMedication(
@@ -134,16 +142,18 @@ class MedicationCubit extends Cubit<MedicationState> {
       );
       if (!isClosed) {
         emit(
-        MedicationDeleteSuccessState(medicationResponse: medicationResponse),
-      );
+          MedicationDeleteSuccessState(medicationResponse: medicationResponse),
+        );
       }
     } catch (e) {
-      if (!isClosed) emit(MedicationDeleteErrorState(errorMessage: e.toString()));
+      if (!isClosed) {
+        emit(MedicationDeleteErrorState(errorMessage: e.toString()));
+      }
     }
   }
 
   Future<void> confirmMedication(String medicationId) async {
-      if (!isClosed) emit(MedicationConfirmLoadingState());
+    if (!isClosed) emit(MedicationConfirmLoadingState());
 
     try {
       final confirmResult = await medicationRepo.confirmMedication(
@@ -163,19 +173,23 @@ class MedicationCubit extends Cubit<MedicationState> {
                   : med,
             )
             .toList();
-      if (!isClosed) {
-        emit(
-          MedicationListSuccessState(
-            medications: currentState.medications.copyWith(
-              medications: updatedMedications,
+        if (!isClosed) {
+          emit(
+            MedicationListSuccessState(
+              medications: currentState.medications.copyWith(
+                medications: updatedMedications,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
+      if (!isClosed) {
+        emit(MedicationConfirmSuccessState(confirmMedication: confirmResult));
       }
-      if (!isClosed) emit(MedicationConfirmSuccessState(confirmMedication: confirmResult));
     } catch (e) {
-      if (!isClosed) emit(MedicationConfirmErrorState(errorMessage: e.toString()));
+      if (!isClosed) {
+        emit(MedicationConfirmErrorState(errorMessage: e.toString()));
+      }
     }
   }
 
@@ -196,7 +210,7 @@ class MedicationCubit extends Cubit<MedicationState> {
     _hasLoadedMedicationList = false;
     _isMedicationListLoading = false;
     clearControllers();
-      if (!isClosed) emit(MedicationInitialState());
+    if (!isClosed) emit(MedicationInitialState());
   }
 
   @override

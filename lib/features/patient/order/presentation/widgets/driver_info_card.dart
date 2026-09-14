@@ -7,10 +7,7 @@ import 'circle_button.dart';
 class DriverInfoCard extends StatelessWidget {
   final RiderInfo rider;
 
-  const DriverInfoCard({
-    super.key,
-    required this.rider,
-  });
+  const DriverInfoCard({super.key, required this.rider});
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +85,7 @@ class DriverInfoCard extends StatelessWidget {
                 icon: Icons.call_rounded,
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Phone: ${rider.phoneNumber}'),
-                    ),
+                    SnackBar(content: Text('Phone: ${rider.phoneNumber}')),
                   );
                 },
                 color: ColorManager.lightGreen,

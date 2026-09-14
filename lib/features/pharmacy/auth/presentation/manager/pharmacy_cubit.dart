@@ -1,4 +1,3 @@
-
 import 'package:chefaa/core/imports/imports.dart';
 import 'package:chefaa/features/auth/data/models/auth_response.dart';
 import 'package:chefaa/core/utils/username_generator.dart';
@@ -28,11 +27,13 @@ class PharmacyCubit extends Cubit<PharmacyState> {
     if (_isSigningUp) return;
     _isSigningUp = true;
     if (medicalLicence == null) {
-      if (!isClosed) emit(PharmacyErrorState("Please upload your medical licence"));
+      if (!isClosed) {
+        emit(PharmacyErrorState("Please upload your medical licence"));
+      }
       _isSigningUp = false;
       return;
     }
-      if (!isClosed) emit(PharmacyLoadingState());
+    if (!isClosed) emit(PharmacyLoadingState());
     try {
       final response = await pharmacyRepo.pharmacySignUp(
         name: name.text,
@@ -44,11 +45,15 @@ class PharmacyCubit extends Cubit<PharmacyState> {
         medicalLicence: medicalLicence,
         commercialRegisterNumber: registerNumber.text,
       );
-      
+
       if (response.user == null) {
         throw 'User data is missing from the response.';
       }
-      if (!isClosed) emit(PharmacySuccessState(response.user!, response.message ?? 'Success'));
+      if (!isClosed) {
+        emit(
+          PharmacySuccessState(response.user!, response.message ?? 'Success'),
+        );
+      }
     } catch (e) {
       if (!isClosed) emit(PharmacyErrorState(e.toString()));
     } finally {

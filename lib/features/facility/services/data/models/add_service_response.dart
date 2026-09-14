@@ -7,15 +7,15 @@ class AddServiceResponse {
   AddServiceResponse({this.message, this.service});
 
   factory AddServiceResponse.fromJson(dynamic json) {
-    if (json is! Map<String, dynamic>) throw const FormatException('Invalid JSON');
+    if (json is! Map<String, dynamic>) {
+      throw const FormatException('Invalid JSON');
+    }
     return AddServiceResponse(
       message: json['message'] as String?,
       service: json['newService'] != null
           ? ServiceModel.fromJson(json['newService'] as Map<String, dynamic>)
           : (json['service'] != null
-                ? ServiceModel.fromJson(
-                    json['service'] as Map<String, dynamic>,
-                  )
+                ? ServiceModel.fromJson(json['service'] as Map<String, dynamic>)
                 : (json['data'] != null && json['data']['service'] != null
                       ? ServiceModel.fromJson(
                           json['data']['service'] as Map<String, dynamic>,

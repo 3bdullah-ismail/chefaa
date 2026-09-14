@@ -15,7 +15,9 @@ class CartManager {
     int quantity = 1,
   }) {
     this.pharmacyId = pharmacyId;
-    final index = cartItems.indexWhere((item) => item['medicineId'] == medicineId);
+    final index = cartItems.indexWhere(
+      (item) => item['medicineId'] == medicineId,
+    );
     if (index != -1) {
       cartItems[index]['quantity'] += quantity;
     } else {

@@ -183,10 +183,7 @@ class ProfileHeader extends StatelessWidget {
           SizedBox(width: 4.w),
           Text(
             isActive ? activeText : inactiveText,
-            style: getSemiBoldStyle(
-              color: color,
-              fontSize: FontSize.s12.sp,
-            ),
+            style: getSemiBoldStyle(color: color, fontSize: FontSize.s12.sp),
           ),
         ],
       ),

@@ -1,5 +1,5 @@
-
 import 'package:chefaa/core/imports/imports.dart';
+
 class MedicineSearchBar extends StatelessWidget {
   final TextEditingController controller;
   final String query;
